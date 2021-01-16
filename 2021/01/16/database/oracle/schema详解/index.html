@@ -4,15 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Archives: 2021 | 李飞杰的个人博客</title>
+  <title>李飞杰的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="李飞杰的个人博客">
-<meta property="og:type" content="website">
+  <meta name="description" content="简介 A schema is a collection of database objects (used by a user.). Schema objects are the logical structures that directly refer to the database’s data. A user is a name defined in the database that c">
+<meta property="og:type" content="article">
 <meta property="og:title" content="李飞杰的个人博客">
-<meta property="og:url" content="https://lifeijie.gitee.io/blog/archives/2021/index.html">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/2021/01/16/database/oracle/schema%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="李飞杰的个人博客">
-<meta property="og:description" content="李飞杰的个人博客">
+<meta property="og:description" content="简介 A schema is a collection of database objects (used by a user.). Schema objects are the logical structures that directly refer to the database’s data. A user is a name defined in the database that c">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-16T14:27:35.889Z">
+<meta property="article:modified_time" content="2021-01-16T14:27:35.889Z">
 <meta property="article:author" content="lifeijie">
 <meta name="twitter:card" content="summary">
   
@@ -71,71 +73,54 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/01/16/database/oracle/schema%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-01-16T14:27:35.889Z" itemprop="datePublished">Jan 16</time>
+        <section id="main"><article id="post-database/oracle/schema详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/blog/2021/01/16/database/oracle/schema%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2021-01-16T14:27:35.889Z" itemprop="datePublished">2021-01-16</time>
 </a>
-      
-    </header>
+    
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/01/16/hello-world/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-01-16T12:24:48.284Z" itemprop="datePublished">Jan 16</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/01/16/hello-world/">Hello World</a>
-    </h1>
-  
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>A schema is a collection of database objects (used by a user.).</li>
+<li>Schema objects are the logical structures that directly refer to the database’s data.</li>
+<li>A user is a name defined in the database that can connect to and access objects.</li>
+<li>Schemas and users help database administrators manage database security.</li>
+</ul>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
+<li>一个用户一般对应一个schema,该用户的schema名等于用户名，并作为该用户缺省schema。</li>
+<li> Oracle 数据库中不能新创建一个schema，要想创建一个schema，只能通过创建一个用户的方法解决。</li>
+<li> 一个用户有一个缺省的schema，其schema名就等于用户名，当然一个用户还可以使用其他的schema。</li>
+<li> 如果我们访问一个表时，没有指明该表属于哪一个schema中的，系统就会自动给我们在表上加上缺省的schema名。</li>
+</ul>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/01/16/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-01-16T12:01:14.000Z" itemprop="datePublished">Jan 16</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/01/16/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/">数据库设计范式</a>
-    </h1>
-  
-
-    </header>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://lifeijie.gitee.io/blog/2021/01/16/database/oracle/schema%E8%AF%A6%E8%A7%A3/" data-id="ckjzt83it0002isw28surezwv" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2021/01/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>

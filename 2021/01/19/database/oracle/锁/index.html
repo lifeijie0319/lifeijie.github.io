@@ -79,13 +79,15 @@
 
 
 
-<meta name="description" content="李飞杰的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="李飞杰的个人博客">
-<meta property="og:url" content="https://lifeijie.gitee.io/blog/page/6/index.html">
+<meta name="description" content="锁分类根据保护的对象不同分 DML锁（data locks，数据锁），用于保护数据的完整性。 DDL锁（dictionary locks，字典锁），用于保护数据库对象的结构，如表、索引等的结构定义。 内部锁和闩（internal locks and latches），保护数据库的内部结构。按锁级别划分 排它锁（Exclusive  Locks，即X锁）  事务设置排它锁后，该事务单独获得此资源，另">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle锁">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/2021/01/19/database/oracle/%E9%94%81/index.html">
 <meta property="og:site_name" content="李飞杰的个人博客">
-<meta property="og:description" content="李飞杰的个人博客">
+<meta property="og:description" content="锁分类根据保护的对象不同分 DML锁（data locks，数据锁），用于保护数据的完整性。 DDL锁（dictionary locks，字典锁），用于保护数据库对象的结构，如表、索引等的结构定义。 内部锁和闩（internal locks and latches），保护数据库的内部结构。按锁级别划分 排它锁（Exclusive  Locks，即X锁）  事务设置排它锁后，该事务单独获得此资源，另">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-01-19T13:47:58.053Z">
+<meta property="article:modified_time" content="2021-01-19T13:47:58.053Z">
 <meta property="article:author" content="lifeijie">
 <meta name="twitter:card" content="summary">
 
@@ -117,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://lifeijie.gitee.io/blog/page/6/"/>
+  <link rel="canonical" href="https://lifeijie.gitee.io/blog/2021/01/19/database/oracle/锁/"/>
 
 
 
 
 
-  <title>李飞杰的个人博客</title>
+  <title>Oracle锁 | 李飞杰的个人博客</title>
   
 
 
@@ -142,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -226,9 +227,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -241,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/mysql/mysql%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/19/database/oracle/%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -258,9 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2021/01/17/database/mysql/mysql%E5%AE%89%E8%A3%85/" itemprop="url">mysql安装</a></h1>
+          <h1 class="post-title" itemprop="name headline">Oracle锁</h1>
         
 
         <div class="post-meta">
@@ -272,8 +271,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-17T15:29:32+08:00">
-                2021-01-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-19T21:47:58+08:00">
+                2021-01-19
               </time>
             
 
@@ -306,8 +305,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/blog/categories/database/oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">oracle</span>
                   </a>
                 </span>
 
@@ -343,18 +342,18 @@
       
 
       
-        
-          
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
-<li>centos下使用yum安装<br>sudo yum install -y mysql-server mysql mysql-devel</li>
+        <h1 id="锁分类"><a href="#锁分类" class="headerlink" title="锁分类"></a>锁分类</h1><h2 id="根据保护的对象不同分"><a href="#根据保护的对象不同分" class="headerlink" title="根据保护的对象不同分"></a>根据保护的对象不同分</h2><ul>
+<li>DML锁（data locks，数据锁），用于保护数据的完整性。</li>
+<li>DDL锁（dictionary locks，字典锁），用于保护数据库对象的结构，如表、索引等的结构定义。</li>
+<li>内部锁和闩（internal locks and latches），保护数据库的内部结构。<h2 id="按锁级别划分"><a href="#按锁级别划分" class="headerlink" title="按锁级别划分"></a>按锁级别划分</h2></li>
+<li>排它锁（Exclusive  Locks，即X锁）<br>  事务设置排它锁后，该事务单独获得此资源，另一事务不能在此事务提交之前获得相同对象的共享锁或排它锁。 X锁上不能加其它任何锁。</li>
+<li>共享锁（Share Locks，即S锁）<br>　  共享锁使一个事务对特定数据库资源进行共享访问——另一事务也可对此资源进行访问或获得相同共享锁。共享锁为事务提供高并发性，但如拙劣的事务设计+共享锁容易造成死锁或数据更新丢失。S锁上可以加S锁，不能加X锁。</li>
 </ul>
-<h1 id="二、设置开机自启动"><a href="#二、设置开机自启动" class="headerlink" title="二、设置开机自启动"></a>二、设置开机自启动</h1><p>设置：sudo chkconfig mysqld on<br>查看：chkconfig –list | grep mysqld</p>
-<h1 id="三、启动"><a href="#三、启动" class="headerlink" title="三、启动"></a>三、启动</h1><p>sudo service mysqld start</p>
-<h1 id="四、设置数据库root用户密码"><a href="#四、设置数据库root用户密码" class="headerlink" title="四、设置数据库root用户密码"></a>四、设置数据库root用户密码</h1><p>（一）、新密码：/usr/bin/mysqladmin -u root password ‘new-password’<br>（二）、重设密码：<br>1、mysqladmin -u root -p password ‘new-password’<br>2、# mysql<br>mysql&gt; USE mysql;<br>mysql&gt; UPDATE user SET Password = password ( ‘new-password’ ) WHERE User = ‘root’;<br>mysql&gt; flush privileges;<br>mysql&gt; quit</p>
-<h1 id="五、mysql的目录设置"><a href="#五、mysql的目录设置" class="headerlink" title="五、mysql的目录设置"></a>五、mysql的目录设置</h1><p>1./etc/my.cnf 这是mysql的主配置文件<br>2./var/lib/mysql   mysql数据库的数据库文件存放位置<br>3./var/log mysql数据库的日志输出存放位置</p>
+<h1 id="DML锁"><a href="#DML锁" class="headerlink" title="DML锁"></a>DML锁</h1><p>DML锁主要包括TM锁和TX锁，其中TM锁称为意向锁或表级锁，TX锁称为行级锁或事务锁。当Oracle执行DML语句时，系统自动在所要操作的表上申请TM类型的锁。当TM锁获得后，系统再自动申请TX类型的锁，<br>并将实际锁定的数据行的锁标志位进行置位。这样在事务加锁前检查TX锁相容性时就不用再逐行检查锁标志，而只需检查TM锁模式的相容性即可，大大提高了系统的效率。</p>
+<h2 id="TX锁"><a href="#TX锁" class="headerlink" title="TX锁"></a>TX锁</h2><p>TX锁只包含一种类型的锁，即X锁。</p>
+<h2 id="TM锁"><a href="#TM锁" class="headerlink" title="TM锁"></a>TM锁</h2><h3 id="TM锁的兼容性"><a href="#TM锁的兼容性" class="headerlink" title="TM锁的兼容性"></a>TM锁的兼容性</h3><p>锁模式|锁描述|解释|SQL操作<br>|—|—|—|—|<br>0|none|||<br>1|NULL|空|Select<br>2|SS(Row-S)|行级共享锁，其他对象只能查询这些数据行|Select for update、Lock for update、Lock row share<br>3|SX(Row-X)|行级排它锁，在提交前不允许做DML操作|Insert、Update、Delete、Lock row share<br>4|S(Share)|共享锁|Create index、Lock share<br>5|SSX(S/Row-X)|共享行级排它锁|Lock share row exclusive<br>6|X(Exclusive)|排它锁|Alter table、Drop able、Drop index、Truncate table 、Lock exclusive</p>
+<h3 id="TM锁的兼容性-1"><a href="#TM锁的兼容性-1" class="headerlink" title="TM锁的兼容性"></a>TM锁的兼容性</h3><p>\ |RS|Rx|S|SRX|X<br>|—|—|—|—|—|—|<br>RS|可|可|可|可|否<br>RX|可|可|否|否|否<br>S|可|否|可|否|否<br>SRX|可|否|否|否|否<br>X|否|否|否|否|否</p>
 
-          
-        
       
     </div>
     
@@ -371,12 +370,28 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2021/01/18/database/MVCC/" rel="next" title="数据库事务ACID特性与MVCC">
+                <i class="fa fa-chevron-left"></i> 数据库事务ACID特性与MVCC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -386,14 +401,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/5/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/12/">12</a><a class="extend next" rel="next" href="/blog/page/7/">&gt;</a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -401,6 +413,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -421,8 +437,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -473,6 +498,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%81%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">锁分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E4%BF%9D%E6%8A%A4%E7%9A%84%E5%AF%B9%E8%B1%A1%E4%B8%8D%E5%90%8C%E5%88%86"><span class="nav-number">1.1.</span> <span class="nav-text">根据保护的对象不同分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%89%E9%94%81%E7%BA%A7%E5%88%AB%E5%88%92%E5%88%86"><span class="nav-number">1.2.</span> <span class="nav-text">按锁级别划分</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DML%E9%94%81"><span class="nav-number">2.</span> <span class="nav-text">DML锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TX%E9%94%81"><span class="nav-number">2.1.</span> <span class="nav-text">TX锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TM%E9%94%81"><span class="nav-number">2.2.</span> <span class="nav-text">TM锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TM%E9%94%81%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-number">2.2.1.</span> <span class="nav-text">TM锁的兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TM%E9%94%81%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">TM锁的兼容性</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -606,6 +647,10 @@
   
 
   
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

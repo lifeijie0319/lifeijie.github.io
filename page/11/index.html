@@ -82,7 +82,7 @@
 <meta name="description" content="李飞杰的个人博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="李飞杰的个人博客">
-<meta property="og:url" content="https://lifeijie.gitee.io/blog/page/6/index.html">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/page/11/index.html">
 <meta property="og:site_name" content="李飞杰的个人博客">
 <meta property="og:description" content="李飞杰的个人博客">
 <meta property="og:locale">
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="https://lifeijie.gitee.io/blog/page/6/"/>
+  <link rel="canonical" href="https://lifeijie.gitee.io/blog/page/11/"/>
 
 
 
@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/mysql/mysql%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/16/database/oracle/schema%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/17/database/mysql/mysql%E5%AE%89%E8%A3%85/" itemprop="url">mysql安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/01/16/database/oracle/schema%E8%AF%A6%E8%A7%A3/" itemprop="url">schema详解</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-17T15:29:32+08:00">
-                2021-01-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-16T22:50:58+08:00">
+                2021-01-16
               </time>
             
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/blog/categories/database/oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">oracle</span>
                   </a>
                 </span>
 
@@ -345,13 +345,18 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
-<li>centos下使用yum安装<br>sudo yum install -y mysql-server mysql mysql-devel</li>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>A schema is a collection of database objects (used by a user.).</li>
+<li>Schema objects are the logical structures that directly refer to the database’s data.</li>
+<li>A user is a name defined in the database that can connect to and access objects.</li>
+<li>Schemas and users help database administrators manage database security.</li>
 </ul>
-<h1 id="二、设置开机自启动"><a href="#二、设置开机自启动" class="headerlink" title="二、设置开机自启动"></a>二、设置开机自启动</h1><p>设置：sudo chkconfig mysqld on<br>查看：chkconfig –list | grep mysqld</p>
-<h1 id="三、启动"><a href="#三、启动" class="headerlink" title="三、启动"></a>三、启动</h1><p>sudo service mysqld start</p>
-<h1 id="四、设置数据库root用户密码"><a href="#四、设置数据库root用户密码" class="headerlink" title="四、设置数据库root用户密码"></a>四、设置数据库root用户密码</h1><p>（一）、新密码：/usr/bin/mysqladmin -u root password ‘new-password’<br>（二）、重设密码：<br>1、mysqladmin -u root -p password ‘new-password’<br>2、# mysql<br>mysql&gt; USE mysql;<br>mysql&gt; UPDATE user SET Password = password ( ‘new-password’ ) WHERE User = ‘root’;<br>mysql&gt; flush privileges;<br>mysql&gt; quit</p>
-<h1 id="五、mysql的目录设置"><a href="#五、mysql的目录设置" class="headerlink" title="五、mysql的目录设置"></a>五、mysql的目录设置</h1><p>1./etc/my.cnf 这是mysql的主配置文件<br>2./var/lib/mysql   mysql数据库的数据库文件存放位置<br>3./var/log mysql数据库的日志输出存放位置</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
+<li>一个用户一般对应一个schema,该用户的schema名等于用户名，并作为该用户缺省schema。</li>
+<li> Oracle 数据库中不能新创建一个schema，要想创建一个schema，只能通过创建一个用户的方法解决。</li>
+<li> 一个用户有一个缺省的schema，其schema名就等于用户名，当然一个用户还可以使用其他的schema。</li>
+<li> 如果我们访问一个表时，没有指明该表属于哪一个schema中的，系统就会自动给我们在表上加上缺省的schema名。</li>
+</ul>
 
           
         
@@ -391,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/5/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/12/">12</a><a class="extend next" rel="next" href="/blog/page/7/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/10/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/blog/page/12/">12</a><a class="extend next" rel="next" href="/blog/page/12/">&gt;</a>
   </nav>
 
 

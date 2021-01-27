@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/mysql/mysql%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/mysql/date_format%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/17/database/mysql/mysql%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" itemprop="url">mysql用户管理与远程连接</a></h1>
+                <a class="post-title-link" href="/blog/2021/01/17/database/mysql/date_format%E5%87%BD%E6%95%B0/" itemprop="url">date_format函数</a></h1>
         
 
         <div class="post-meta">
@@ -345,11 +345,40 @@
       
         
           
-            <h1 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户:"></a>创建用户:</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;username&#x27;</span>@<span class="string">&#x27;host&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;password&#x27;</span>; </span><br></pre></td></tr></table></figure>
-<h1 id="授权"><a href="#授权" class="headerlink" title="授权:"></a>授权:</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> privileges <span class="keyword">ON</span> databasename.tablename <span class="keyword">TO</span> <span class="string">&#x27;username&#x27;</span>@<span class="string">&#x27;host&#x27;</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<p>注意:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;monty&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>   IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;some_pass&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;monty&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;some_pass&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>• 前两个帐户名称都是monty，而且都是拥有所有权限和密码。但是两者的区别在于，第一个帐户（monty@localhost）只能通过本地登录，而第二个账户（monty@%）可以通过任意主机登录。值得注意的是，为了能够使用monty帐户在任何地方进行登录，这两个账户同时存在则是必要的。因为，如果没有本地帐户（monty@localhost），使用monty帐户登录时，mysql_install_db将优先考虑创建一个本地的匿名帐户。那么结果将是monty账户会被当作一个匿名帐户来处理。原因则在于，匿名帐户拥有一个比nonty@%账户更加具体的host字段值，从而在user表排序的时候会相对出现的更早。也就是说同一个账户要同时存在%帐号或者localhost帐号时， %帐号才起作用。</p>
+            <h1 id="日期格式化函数："><a href="#日期格式化函数：" class="headerlink" title="日期格式化函数："></a>日期格式化函数：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATE_FORMAT(<span class="type">date</span>,format)</span><br></pre></td></tr></table></figure>
+<h1 id="format参数"><a href="#format参数" class="headerlink" title="format参数"></a>format参数</h1><ul>
+<li>%a    缩写星期名</li>
+<li>%b    缩写月名</li>
+<li>%c    月，数值</li>
+<li>%D    带有英文前缀的月中的天</li>
+<li>%d    月的天，数值(00-31)</li>
+<li>%e    月的天，数值(0-31)</li>
+<li>%f    微秒</li>
+<li>%H    小时 (00-23)</li>
+<li>%h    小时 (01-12)</li>
+<li>%I    小时 (01-12)</li>
+<li>%i    分钟，数值(00-59)</li>
+<li>%j    年的天 (001-366)</li>
+<li>%k    小时 (0-23)</li>
+<li>%l    小时 (1-12)</li>
+<li>%M    月名</li>
+<li>%m    月，数值(00-12)</li>
+<li>%p    AM 或 PM</li>
+<li>%r    时间，12-小时（hh:mm:ss AM 或 PM）</li>
+<li>%S    秒(00-59)</li>
+<li>%s    秒(00-59)</li>
+<li>%T    时间, 24-小时 (hh:mm:ss)</li>
+<li>%U    周 (00-53) 星期日是一周的第一天</li>
+<li>%u    周 (00-53) 星期一是一周的第一天</li>
+<li>%V    周 (01-53) 星期日是一周的第一天，与 %X 使用</li>
+<li>%v    周 (01-53) 星期一是一周的第一天，与 %x 使用</li>
+<li>%W    星期名</li>
+<li>%w    周的天 （0=星期日, 6=星期六）</li>
+<li>%X    年，其中的星期日是周的第一天，4 位，与 %V 使用</li>
+<li>%x    年，其中的星期一是周的第一天，4 位，与 %v 使用</li>
+<li>%Y    年，4 位</li>
+<li>%y    年，2 位</li>
+</ul>
 
           
         
@@ -389,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/4/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="extend next" rel="next" href="/blog/page/6/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/4/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/12/">12</a><a class="extend next" rel="next" href="/blog/page/6/">&gt;</a>
   </nav>
 
 
@@ -435,7 +464,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -79,15 +79,13 @@
 
 
 
-<meta name="description" content="一、查看字符编码1、全局查看进入mysql数据库 1show variables like &amp;#x27;character%&amp;#x27;； 2、查看特定数据库编码进入指定数据库 1show variables like &amp;#x27;character%&amp;#x27;； 二、设置全局编码为utf-81、编辑mysql配置文件，默认是&#x2F;etc&#x2F;my.cnf在[client]下添加default-char">
-<meta property="og:type" content="article">
-<meta property="og:title" content="mysql数据库编码问题">
-<meta property="og:url" content="https://lifeijie.gitee.io/blog/2021/01/17/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/index.html">
+<meta name="description" content="李飞杰的个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="李飞杰的个人博客">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/page/26/index.html">
 <meta property="og:site_name" content="李飞杰的个人博客">
-<meta property="og:description" content="一、查看字符编码1、全局查看进入mysql数据库 1show variables like &amp;#x27;character%&amp;#x27;； 2、查看特定数据库编码进入指定数据库 1show variables like &amp;#x27;character%&amp;#x27;； 二、设置全局编码为utf-81、编辑mysql配置文件，默认是&#x2F;etc&#x2F;my.cnf在[client]下添加default-char">
+<meta property="og:description" content="李飞杰的个人博客">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-01-17T07:29:32.873Z">
-<meta property="article:modified_time" content="2021-01-17T07:29:32.873Z">
 <meta property="article:author" content="lifeijie">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="https://lifeijie.gitee.io/blog/2021/01/17/database/mysql/mysql数据库编码问题/"/>
+  <link rel="canonical" href="https://lifeijie.gitee.io/blog/page/26/"/>
 
 
 
 
 
-  <title>mysql数据库编码问题 | 李飞杰的个人博客</title>
+  <title>李飞杰的个人博客</title>
   
 
 
@@ -144,7 +142,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -227,9 +226,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -242,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/mysql/mysql%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -259,7 +258,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql数据库编码问题</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2021/01/17/database/mysql/mysql%E5%AE%89%E8%A3%85/" itemprop="url">mysql安装</a></h1>
         
 
         <div class="post-meta">
@@ -342,18 +343,18 @@
       
 
       
-        <h1 id="一、查看字符编码"><a href="#一、查看字符编码" class="headerlink" title="一、查看字符编码"></a>一、查看字符编码</h1><h2 id="1、全局查看"><a href="#1、全局查看" class="headerlink" title="1、全局查看"></a>1、全局查看</h2><p>进入mysql数据库</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span>；</span><br></pre></td></tr></table></figure>
-<h2 id="2、查看特定数据库编码"><a href="#2、查看特定数据库编码" class="headerlink" title="2、查看特定数据库编码"></a>2、查看特定数据库编码</h2><p>进入指定数据库</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span>；</span><br></pre></td></tr></table></figure>
-<h1 id="二、设置全局编码为utf-8"><a href="#二、设置全局编码为utf-8" class="headerlink" title="二、设置全局编码为utf-8"></a>二、设置全局编码为utf-8</h1><h2 id="1、编辑mysql配置文件，默认是-etc-my-cnf"><a href="#1、编辑mysql配置文件，默认是-etc-my-cnf" class="headerlink" title="1、编辑mysql配置文件，默认是/etc/my.cnf"></a>1、编辑mysql配置文件，默认是/etc/my.cnf</h2><p>在[client]下添加<br>default-character-set=utf8<br>在[mysqld]下添加<br>default-character-set=utf8</p>
-<h2 id="2、重启数据库"><a href="#2、重启数据库" class="headerlink" title="2、重启数据库"></a>2、重启数据库</h2><p>sudo service mysqld restart</p>
-<h1 id="三、修改特定数据库编码"><a href="#三、修改特定数据库编码" class="headerlink" title="三、修改特定数据库编码"></a>三、修改特定数据库编码</h1><p>alter database mydb CHARACTER SET utf8;</p>
-<h1 id="四、修改表的编码格式"><a href="#四、修改表的编码格式" class="headerlink" title="四、修改表的编码格式"></a>四、修改表的编码格式</h1><h2 id="1、查看数据表的编码格式"><a href="#1、查看数据表的编码格式" class="headerlink" title="1、查看数据表的编码格式"></a>1、查看数据表的编码格式</h2><p>mysql&gt; show create table &lt;表名&gt;;</p>
-<h2 id="2、修改数据表格编码格式"><a href="#2、修改数据表格编码格式" class="headerlink" title="2、修改数据表格编码格式"></a>2、修改数据表格编码格式</h2><p>mysql&gt;alter table &lt;表名&gt; character set utf8;</p>
-<h2 id="3、修改字段编码格式"><a href="#3、修改字段编码格式" class="headerlink" title="3、修改字段编码格式"></a>3、修改字段编码格式</h2><p>ALTER TABLE <code>tablename</code> CHANGE <code>字段名1</code> <code>字段名2</code> VARCHAR(36) CHARACTER SET utf8 NOT NULL; </p>
-<h2 id="4、修改全表及字段编码格式"><a href="#4、修改全表及字段编码格式" class="headerlink" title="4、修改全表及字段编码格式"></a>4、修改全表及字段编码格式</h2><p>alter table <code>tablename</code> convert to character set utf8;</p>
+        
+          
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
+<li>centos下使用yum安装<br>sudo yum install -y mysql-server mysql mysql-devel</li>
+</ul>
+<h1 id="二、设置开机自启动"><a href="#二、设置开机自启动" class="headerlink" title="二、设置开机自启动"></a>二、设置开机自启动</h1><p>设置：sudo chkconfig mysqld on<br>查看：chkconfig –list | grep mysqld</p>
+<h1 id="三、启动"><a href="#三、启动" class="headerlink" title="三、启动"></a>三、启动</h1><p>sudo service mysqld start</p>
+<h1 id="四、设置数据库root用户密码"><a href="#四、设置数据库root用户密码" class="headerlink" title="四、设置数据库root用户密码"></a>四、设置数据库root用户密码</h1><p>（一）、新密码：/usr/bin/mysqladmin -u root password ‘new-password’<br>（二）、重设密码：<br>1、mysqladmin -u root -p password ‘new-password’<br>2、# mysql<br>mysql&gt; USE mysql;<br>mysql&gt; UPDATE user SET Password = password ( ‘new-password’ ) WHERE User = ‘root’;<br>mysql&gt; flush privileges;<br>mysql&gt; quit</p>
+<h1 id="五、mysql的目录设置"><a href="#五、mysql的目录设置" class="headerlink" title="五、mysql的目录设置"></a>五、mysql的目录设置</h1><p>1./etc/my.cnf 这是mysql的主配置文件<br>2./var/lib/mysql   mysql数据库的数据库文件存放位置<br>3./var/log mysql数据库的日志输出存放位置</p>
 
+          
+        
       
     </div>
     
@@ -370,32 +371,12 @@
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/blog/2021/01/17/database/mysql/mysql%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" rel="next" title="mysql用户管理与远程连接">
-                <i class="fa fa-chevron-left"></i> mysql用户管理与远程连接
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2021/01/17/database/mysql/mysql%E5%AE%89%E8%A3%85/" rel="prev" title="mysql安装">
-                mysql安装 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -405,11 +386,14 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/page/25/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/29/">29</a><a class="extend next" rel="next" href="/blog/page/27/">&gt;</a>
+  </nav>
+
 
 
           </div>
@@ -417,10 +401,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -441,17 +421,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -466,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -502,22 +473,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9F%A5%E7%9C%8B%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">一、查看字符编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%85%A8%E5%B1%80%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1、全局查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E6%9F%A5%E7%9C%8B%E7%89%B9%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81"><span class="nav-number">1.2.</span> <span class="nav-text">2、查看特定数据库编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%AE%BE%E7%BD%AE%E5%85%A8%E5%B1%80%E7%BC%96%E7%A0%81%E4%B8%BAutf-8"><span class="nav-number">2.</span> <span class="nav-text">二、设置全局编码为utf-8</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%BC%96%E8%BE%91mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E9%BB%98%E8%AE%A4%E6%98%AF-etc-my-cnf"><span class="nav-number">2.1.</span> <span class="nav-text">1、编辑mysql配置文件，默认是&#x2F;etc&#x2F;my.cnf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E9%87%8D%E5%90%AF%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">2、重启数据库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BF%AE%E6%94%B9%E7%89%B9%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">三、修改特定数据库编码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">四、修改表的编码格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">1、查看数据表的编码格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%A0%BC%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">2、修改数据表格编码格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E4%BF%AE%E6%94%B9%E5%AD%97%E6%AE%B5%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">3、修改字段编码格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E4%BF%AE%E6%94%B9%E5%85%A8%E8%A1%A8%E5%8F%8A%E5%AD%97%E6%AE%B5%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">4、修改全表及字段编码格式</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -651,10 +606,6 @@
   
 
   
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

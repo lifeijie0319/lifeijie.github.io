@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/01/database/mysql/index/mysql%E7%B4%A2%E5%BC%95%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
+                <a class="post-title-link" href="/blog/2021/02/01/database/mysql/index/mysql%E7%B4%A2%E5%BC%95%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/" itemprop="url">索引速查手册</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-27T21:44:02+08:00">
-                2021-01-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-01T22:04:05+08:00">
+                2021-02-01
               </time>
             
 
@@ -282,50 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
-                    <span itemprop="name">index</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -356,8 +312,13 @@
       
         
           
-            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
-<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
+            <h1 id="增"><a href="#增" class="headerlink" title="增"></a>增</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :table_name <span class="keyword">add</span> [<span class="keyword">unique</span>] index :index_name(:column1[, column2...]);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>table_name: 表名</li>
+<li>:index_name：索引名</li>
+<li>:column 列名<h1 id="删"><a href="#删" class="headerlink" title="删"></a>删</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :table_name <span class="keyword">add</span> [<span class="keyword">unique</span>] index :index_name；</span><br></pre></td></tr></table></figure>
+<h1 id="查"><a href="#查" class="headerlink" title="查"></a>查</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> index <span class="keyword">from</span> :table_name;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -397,7 +358,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/5/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/7/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/5/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/29/">29</a><a class="extend next" rel="next" href="/blog/page/7/">&gt;</a>
   </nav>
 
 
@@ -443,7 +404,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

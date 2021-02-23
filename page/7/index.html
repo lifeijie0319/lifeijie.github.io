@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/31/database/mysql/mysql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/31/database/mysql/mysql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/" itemprop="url">mysql执行计划</a></h1>
+                <a class="post-title-link" href="/blog/2021/02/06/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">mysql配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-31T15:07:30+08:00">
-                2021-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-06T17:25:54+08:00">
+                2021-02-06
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,22 +345,11 @@
       
         
           
-            <h1 id="执行计划查看"><a href="#执行计划查看" class="headerlink" title="执行计划查看"></a>执行计划查看</h1><h2 id="如何查看"><a href="#如何查看" class="headerlink" title="如何查看"></a>如何查看</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DESC</span><span class="operator">/</span>EXPLAIN :<span class="keyword">sql</span>;</span><br></pre></td></tr></table></figure>
-<p>sql: 要查看执行计划的sql</p>
-<h2 id="查询结果分析"><a href="#查询结果分析" class="headerlink" title="查询结果分析"></a>查询结果分析</h2><h3 id="查询结果列"><a href="#查询结果列" class="headerlink" title="查询结果列"></a>查询结果列</h3><ul>
-<li>table: 查询的表</li>
-<li>type: 查询的类型（全表/索引）</li>
-<li>possible_keys: 可选索引</li>
-<li>key: 选择索引</li>
-<li>key_len：索引匹配长度（联合索引时可能只走了部分部分列）</li>
-<li>extra: 额外信息<h3 id="type类型详解"><a href="#type类型详解" class="headerlink" title="type类型详解"></a>type类型详解</h3>type包含以下类型：</li>
-<li>ALL：全表扫描，不走索引。注意，即使列上有索引，但是如果使用&lt;&gt;，not in, like 等可能走的还全表扫描。</li>
-<li>index： 全索引扫描。比如查询列为索引列，没有where条件时。</li>
-<li>range：索引范围扫描，索引列上使用where范围搜索条件。比如&gt;,&gt;=,&lt;,&lt;=,between,in,and,or等。</li>
-<li>ref: 非唯一性索引，等值查询。</li>
-<li>eq_ref：多表连接时，连接条件使用了唯一索引。</li>
-<li>system,const：唯一键等值查询。</li>
-<li>null：唯一键等值查询，但是没有对应结果。<h3 id="extra-filesort"><a href="#extra-filesort" class="headerlink" title="extra filesort"></a>extra filesort</h3>当extra字段里面出现filesort时，说明数据库需要对结果进行额外的排序操作，如果可以使用联合索引使查询结果自动有序，可以进行优化。</li>
+            <h1 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h1><p>一般/etc/my.cnf ，本地~/.my.cnf可以覆盖全局配置</p>
+<h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>[标签]<br>配置项=xxx</p>
+<h1 id="常见标签"><a href="#常见标签" class="headerlink" title="常见标签"></a>常见标签</h1><ul>
+<li>服务端<br>[mysqld]<br>[mysqld_safe]<br>[server]</li>
+<li>客户端<br>[mysql]<br>[mysqldump]<br>[client]</li>
 </ul>
 
           
@@ -368,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/6/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/29/">29</a><a class="extend next" rel="next" href="/blog/page/8/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/6/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><a class="extend next" rel="next" href="/blog/page/8/">&gt;</a>
   </nav>
 
 
@@ -414,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -425,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

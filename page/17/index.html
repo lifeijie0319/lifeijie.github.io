@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/22/network/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/27/database/mysql/index/%E4%B8%BB%E9%94%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/22/network/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" itemprop="url">TCP四次挥手</a></h1>
+                <a class="post-title-link" href="/blog/2021/01/27/database/mysql/index/%E4%B8%BB%E9%94%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" itemprop="url">主键相关问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-22T21:20:34+08:00">
-                2021-01-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-27T21:44:02+08:00">
+                2021-01-27
               </time>
             
 
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
                   </a>
                 </span>
 
@@ -334,18 +356,8 @@
       
         
           
-            <h1 id="什么是四次挥手"><a href="#什么是四次挥手" class="headerlink" title="什么是四次挥手"></a>什么是四次挥手</h1><p>四次挥手指的是TCP连接断开的四次通信过程。</p>
-<h1 id="四次挥手的具体过程"><a href="#四次挥手的具体过程" class="headerlink" title="四次挥手的具体过程"></a>四次挥手的具体过程</h1><h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><ul>
-<li>客户端想要断开连接，向服务端发送报文，标志位FIN，序号u。客户端进入FIN-WAIT-1阶段，停止向服务端发送数据，但是仍然可以接收服务端数据。</li>
-<li>服务端收到报文，进入CLOSE-WAIT阶段，但是此时服务端还是可能在向客户端发送数据。<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2></li>
-<li>服务端向客户端发送确认报文，标志位ACK，序号v，确认号u+1。</li>
-<li>客户端收到ACK报文，进入FIN-WAIT-2阶段。<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2></li>
-<li>服务端完成剩余的数据传输，准备完成，向客户端发送报文，标志位FIN/ACK，序号w，确认号u+1。服务端进入LAST-ACK阶段。</li>
-<li>客户端收到报文，进入TIME-WAIT阶段。<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2></li>
-<li>客户端向服务端发送确认报文，标志位ACK，序号u+1，确认号w+1。等待2MSL后关闭连接。</li>
-<li>服务端收到确认报文，关闭连接，进入CLOSED状态。</li>
-</ul>
-<h1 id="为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间"><a href="#为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间" class="headerlink" title="为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间"></a>为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间</h1><p>是为了确认服务端收到了ACK确认报文。<br>MSL(Max Segment Lifetime)是指一个TCP报文在传输过程中的最大生命周期。如果2MSL时间内，客户端收到了服务端的重发报文，说明服务端没有收到客户端ACK报文，客户端计时器重置，重新等待2MSL时间。如果客户端2MSL没有收到服务端的重发报文，说明服务端正常接收了ACK报文。</p>
+            <h1 id="为什么建议要建主键"><a href="#为什么建议要建主键" class="headerlink" title="为什么建议要建主键"></a>为什么建议要建主键</h1><p>因为MySQL底层使用B+树结构存储数据，主键索引是天然的构建依据。如果没有建立主键，mysql内部会建立隐藏主键。</p>
+<h1 id="主键为什么建议用自增整型数据"><a href="#主键为什么建议用自增整型数据" class="headerlink" title="主键为什么建议用自增整型数据"></a>主键为什么建议用自增整型数据</h1><p>首先，整型便于比较，在B+树的数据操作中，数据比较是最常见的操作，整型数据在比较的时候比其他类型都快。而且一般来说，整型数据的存储空间较小。<br>自增又有什么好处？索引值自增时，插入的数据永远在B+树的最右侧子节点。如果不自增，插入的数据可能在树的中间，导致叶子节点页分裂（页已经被原有数据占满），有一个再平衡的过程，效率不高。所以自增索引减少了B+树的结构调整，提高了存储效率。</p>
 
           
         
@@ -385,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/16/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/blog/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/29/">29</a><a class="extend next" rel="next" href="/blog/page/18/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/16/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/blog/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><a class="extend next" rel="next" href="/blog/page/18/">&gt;</a>
   </nav>
 
 
@@ -431,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +454,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

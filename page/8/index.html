@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/31/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/31/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" itemprop="url">mysql数据库编码问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/02/06/database/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-31T10:03:26+08:00">
-                2021-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-06T17:25:54+08:00">
+                2021-02-06
               </time>
             
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,18 +345,15 @@
       
         
           
-            <h1 id="一、查看字符编码"><a href="#一、查看字符编码" class="headerlink" title="一、查看字符编码"></a>一、查看字符编码</h1><h2 id="1、全局查看"><a href="#1、全局查看" class="headerlink" title="1、全局查看"></a>1、全局查看</h2><p>进入mysql数据库</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span>；</span><br></pre></td></tr></table></figure>
-<h2 id="2、查看特定数据库编码"><a href="#2、查看特定数据库编码" class="headerlink" title="2、查看特定数据库编码"></a>2、查看特定数据库编码</h2><p>进入指定数据库</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span>；</span><br></pre></td></tr></table></figure>
-<h1 id="二、设置全局编码为utf-8"><a href="#二、设置全局编码为utf-8" class="headerlink" title="二、设置全局编码为utf-8"></a>二、设置全局编码为utf-8</h1><h2 id="1、编辑mysql配置文件，默认是-etc-my-cnf"><a href="#1、编辑mysql配置文件，默认是-etc-my-cnf" class="headerlink" title="1、编辑mysql配置文件，默认是/etc/my.cnf"></a>1、编辑mysql配置文件，默认是/etc/my.cnf</h2><p>在[client]下添加<br>default-character-set=utf8<br>在[mysqld]下添加<br>default-character-set=utf8</p>
-<h2 id="2、重启数据库"><a href="#2、重启数据库" class="headerlink" title="2、重启数据库"></a>2、重启数据库</h2><p>sudo service mysqld restart</p>
-<h1 id="三、修改特定数据库编码"><a href="#三、修改特定数据库编码" class="headerlink" title="三、修改特定数据库编码"></a>三、修改特定数据库编码</h1><p>alter database mydb CHARACTER SET utf8;</p>
-<h1 id="四、修改表的编码格式"><a href="#四、修改表的编码格式" class="headerlink" title="四、修改表的编码格式"></a>四、修改表的编码格式</h1><h2 id="1、查看数据表的编码格式"><a href="#1、查看数据表的编码格式" class="headerlink" title="1、查看数据表的编码格式"></a>1、查看数据表的编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="2、修改数据表格编码格式"><a href="#2、修改数据表格编码格式" class="headerlink" title="2、修改数据表格编码格式"></a>2、修改数据表格编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span><span class="keyword">alter</span> <span class="keyword">table</span> <span class="operator">&lt;</span>表名<span class="operator">&gt;</span> <span class="type">character</span> <span class="keyword">set</span> utf8;</span><br></pre></td></tr></table></figure>
-<h2 id="3、修改字段编码格式"><a href="#3、修改字段编码格式" class="headerlink" title="3、修改字段编码格式"></a>3、修改字段编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `tablename` CHANGE `字段名<span class="number">1</span>` `字段名<span class="number">2</span>` <span class="type">VARCHAR</span>(<span class="number">36</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">NOT</span> <span class="keyword">NULL</span>; </span><br></pre></td></tr></table></figure>
-<h2 id="4、修改全表及字段编码格式"><a href="#4、修改全表及字段编码格式" class="headerlink" title="4、修改全表及字段编码格式"></a>4、修改全表及字段编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> `tablename` <span class="keyword">convert</span> <span class="keyword">to</span> <span class="type">character</span> <span class="keyword">set</span> utf8;</span><br></pre></td></tr></table></figure>
-<h1 id="utf8和utf8mb4"><a href="#utf8和utf8mb4" class="headerlink" title="utf8和utf8mb4"></a>utf8和utf8mb4</h1><p>utf8mb4支持emoji表情，utf8不支持</p>
+            <hr>
+<h2 id="title：redis数据类型"><a href="#title：redis数据类型" class="headerlink" title="title：redis数据类型"></a>title：redis数据类型</h2><p>redis支持五种数据类型，分别是string（字符串）、hash（字典）、list（列表）、set（集合）、zset（有序集合）。</p>
+<ul>
+<li>string<br>基本类型，一个键最多存储512M数据。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set a &quot;hello&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get a</span><br><span class="line">&quot;hello&quot;</span><br></pre></td></tr></table></figure></li>
+<li>hash<br>pyhton里的字典，java里的HashMap。每个 hash 可以存储 2^32 -1 个键值对（40多亿）。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmset hello_map key1 &quot;lala&quot; key2 14</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; hget hello_map key1</span><br><span class="line">&quot;lala&quot;</span><br><span class="line">127.0.0.1:6379&gt; hget hello_map key2</span><br><span class="line">&quot;14&quot;</span><br></pre></td></tr></table></figure></li>
+<li>list<br>双向有序列表<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; lpush hello_list 14</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; lpush hello_list &quot;ddw&quot;</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; lpush hello_list 1.23</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 -1</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">3) &quot;14&quot;</span><br><span class="line">2) &quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 2</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">3) &quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 1</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 0</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">127.0.0.1:6379&gt; lpop hello_list</span><br><span class="line">&quot;1.23&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 -1</span><br><span class="line">1) &quot;ddw&quot;</span><br><span class="line">2) &quot;14&quot;</span><br></pre></td></tr></table></figure></li>
+<li>set<br>string无序集合，通过hash实现，增删改查时间复杂度为O(1)。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd hello_set a</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd hello_set a</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; sadd hello_set 13</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers hello_set</span><br><span class="line">1) &quot;13&quot;</span><br><span class="line">2) &quot;a&quot;</span><br></pre></td></tr></table></figure></li>
+<li>zset<br>string有序集合，每个元素会关联一个double类型的分数，可以据此进行排序。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd hello_zset 0 candy</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset 1 buffer</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset 2 date</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset -1 hello</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zrange hello_zset 0 -1</span><br><span class="line">1) &quot;hello&quot;</span><br><span class="line">2) &quot;candy&quot;</span><br><span class="line">3) &quot;buffer&quot;</span><br><span class="line">4) &quot;date&quot;</span><br><span class="line">127.0.0.1:6379&gt; zrangebyscore hello_zset 0  100</span><br><span class="line">1) &quot;candy&quot;</span><br><span class="line">2) &quot;buffer&quot;</span><br><span class="line">3) &quot;date&quot;</span><br><span class="line">127.0.0.1:6379&gt; zscore hello_zset buffer</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -396,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/7/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/blog/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/29/">29</a><a class="extend next" rel="next" href="/blog/page/9/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/7/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/blog/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><a class="extend next" rel="next" href="/blog/page/9/">&gt;</a>
   </nav>
 
 
@@ -442,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

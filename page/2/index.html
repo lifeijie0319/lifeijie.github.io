@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/data_structure/B-tree/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/tcp/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/data_structure/B-tree/" itemprop="url">B-树</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/network/tcp/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" itemprop="url">TCP三次握手</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:51:29+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
                 2021-04-04
               </time>
             
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
+                    <span itemprop="name">tcp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,20 +345,17 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>B-树是二叉平衡树的推广，是一种多叉平衡树。B-树其实就是B-tree，不是“B减树”。</p>
-<h1 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h1><h2 id="一棵m阶B-tree（m叉树）满足如下特征："><a href="#一棵m阶B-tree（m叉树）满足如下特征：" class="headerlink" title="一棵m阶B-tree（m叉树）满足如下特征："></a>一棵m阶B-tree（m叉树）满足如下特征：</h2><ul>
-<li>树中每个节点最多含有m个孩子（m&gt;=2）</li>
-<li>如果根节点不是叶子节点，则根节点至少包括两个孩子</li>
-<li>除根节点和叶节点外，其他每个节点至少有ceil(m/2)个孩子（ceil()为向上取整）</li>
-<li>所有叶子节点都位于同一层，叶子节点不包含关键字，所以可以把叶子节点看成在树里实际上并不存在的外部节点，指向这些外部节点的指针为空。</li>
-<li>每个非叶节点包括n个关键字信息(n，P0，K1，P1，K2，P2，……，Kn，Pn)，其中<ul>
-<li>Ki(i=1…n)为关键字，且关键字的顺序按照升序排列</li>
-<li>Pi(i=0…n)为指向子树的指针，满足K(i-1) &lt; P(i-1) &lt; Ki</li>
-<li>ceil(m/2)-1 &lt;= n &lt;= m-1<h2 id="B树的叶子节点的个数是所有关键字个数的总和加一"><a href="#B树的叶子节点的个数是所有关键字个数的总和加一" class="headerlink" title="B树的叶子节点的个数是所有关键字个数的总和加一"></a>B树的叶子节点的个数是所有关键字个数的总和加一</h2>证明如下：<br>假设第i层的节点数是$M_i$，关键字个数是$N_i$，i行第j个节点的关键字数是$N_i^j$。根据节点子树数量与节点关键字数目的关系，$M_i$=$\sum_{j=1}^{N_i}(N_i^j+1)$=M<sub>i-1</sub>+N<sub>i-1</sub>=M<sub>i-2</sub>+N<sub>i-2</sub>+N<sub>i-1</sub>=…=M<sub>1</sub>+N<sub>1</sub>+…+N<sub>i-1</sub>=1+N<br>这里N是指i层以前所以关键字的和。</li>
+            <h1 id="什么是TCP三次握手"><a href="#什么是TCP三次握手" class="headerlink" title="什么是TCP三次握手"></a>什么是TCP三次握手</h1><ul>
+<li>TCP三次握手指的是TCP建立连接的三次通信过程。<h2 id="三次握手的具体描述："><a href="#三次握手的具体描述：" class="headerlink" title="三次握手的具体描述："></a>三次握手的具体描述：</h2></li>
+<li>第一次，客户端向服务端发起建立连接的请求。TCP报文中SYN字段为1，表示报文是一个同步性质的报文。另外TCP报文中会带上一个序列号x。客户端进入SYNC_SENT状态。</li>
+<li>第二次，服务端收到客户端发送的SYN类型的TCP报文后，向客户端返回一个TCP报文，报文同时标记ACK和SYN标志位，代表这个报文兼具确认客户端报文和服务端同步的性质。此时TCP报文中会带上两个序列号，确认序列号x+1和服务端自身的序列号y。服务端此时进入SYNC_RCVD状态。</li>
+<li>第三次，客户端收到服务端的响应报文后，进入ESTABLISHED状态。然后客户端向服务端发送TCP报文，标记ACK标志位。TCP报文中带上的序列号为y+1。服务端收到此报文，进入ESTABLISHED状态。TCP连接建立。<h2 id="TCP报文中的序列号是什么"><a href="#TCP报文中的序列号是什么" class="headerlink" title="TCP报文中的序列号是什么"></a>TCP报文中的序列号是什么</h2>TCP序列号是TCP报文中一方持续增长的序号，因为有了这个序号，报文才是有序传输，这是TCP连接可靠性的基石。举例说明，在网络中，由于网络传输的不可靠，可能导致先发送的报文后到达，如果没有序号，就会导致报文乱序。</li>
 </ul>
-</li>
+<h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><p>显然，确认TCP连接通道畅通至少需要两次，一来一回。</p>
+<h2 id="为什么不是两次"><a href="#为什么不是两次" class="headerlink" title="为什么不是两次"></a>为什么不是两次</h2><ul>
+<li>主要是为了防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。<br>如果两次就建立连接，存在以下的异常情况：假设客户端第一次传输的报文延迟到达，此时客户端通过超时重传并且两次握手正常建立连接。然后服务端收到了同一个客户端由于延迟而后到达的SYN报文，客户端收到服务端响应的报文后比较seq发现这是个已经放弃的SYN请求，就会丢弃。由于两次握手的情况下，服务端是一响应SYN请求就进入ESTABLISHED状态，这样客户端关闭，服务端ESTABLISHED，导致了服务端资源的浪费。<br>那么三次握手怎么避免重复连接的问题？当客户端收到过期SYN请求引起的ACK回传报文时，会发送RST复位报文给服务端，告知其取消连接。</li>
+<li>TCP连接握手本质上是客户端和服务端相互告知各自的ISN(Initial Sequence Number)，两次握手只能确认客户端的ISN被服务端接受存储，服务端没有确认自己的序列号被客户端接受存储。<h2 id="为什么不是四次或者更多"><a href="#为什么不是四次或者更多" class="headerlink" title="为什么不是四次或者更多"></a>为什么不是四次或者更多</h2>在三次连接基本能保证连接通畅的情况下，更多的报文传递是无意义的。</li>
 </ul>
-<h1 id="搜索性能"><a href="#搜索性能" class="headerlink" title="搜索性能"></a>搜索性能</h1><p>B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为空，或已经是叶子结点。<br>B-树的性能总是等价于二分查找（与阶数m值无关），为O($log_2{n}$)，其中n为关键字的总数。</p>
 
           
         
@@ -422,7 +452,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/17/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/03/17/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/" itemprop="url">在django系统外使用django的ORM</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-17T20:47:49+08:00">
-                2021-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
+                2021-04-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,11 +345,10 @@
       
         
           
-            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
-<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>相当于：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+            <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><p>django.core.exceptions.ImproperlyConfigured: Requested setting DEFAULT_INDEX_TABLESPACE, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.</p>
+<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error">http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error</a></p>
+<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1dbd3a22da10">http://www.jianshu.com/p/1dbd3a22da10</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/orangleliu/article/details/21722725">http://blog.csdn.net/orangleliu/article/details/21722725</a>  </p>
+
           
         
       
@@ -412,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

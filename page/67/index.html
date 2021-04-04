@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/16/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/03/16/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/" itemprop="url">json数据的获取</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/" itemprop="url">print生产部署OSError</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-16T22:33:27+08:00">
-                2021-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
+                2021-04-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,7 +345,12 @@
       
         
           
-            <p>后台要用request.json获得前台的json数据，需要使用完整的$.ajax()，设置contentType: ‘application/json’<br><a target="_blank" rel="noopener" href="https://www.zybuluo.com/harpsword/note/209162">https://www.zybuluo.com/harpsword/note/209162</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhu_free/article/details/50396616">http://blog.csdn.net/zhu_free/article/details/50396616</a></p>
+            <h1 id="错误描述："><a href="#错误描述：" class="headerlink" title="错误描述："></a>错误描述：</h1><p>生产部署简单tornado服务之后，退出控制台，外部访问执行到print出错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSError: [Error 5] Input&#x2F;output error</span><br></pre></td></tr></table></figure>
+<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python xx.py &amp; </span><br></pre></td></tr></table></figure>
+<p>方式部署python服务，ssh断开之后，print语句没地方输出，就error了</p>
+<h1 id="处理方式："><a href="#处理方式：" class="headerlink" title="处理方式："></a>处理方式：</h1><p>1、使用shell重定向，或者nohup<br>2、删除替换所有的print语句</p>
 
           
         
@@ -409,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

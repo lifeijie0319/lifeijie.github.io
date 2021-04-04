@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/16/python/libs/db/redis/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/email/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/03/16/python/libs/db/redis/" itemprop="url">redis</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/email/" itemprop="url">email发送和接收</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-16T22:37:32+08:00">
-                2021-03-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
+                2021-04-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,8 +345,49 @@
       
         
           
-            <h1 id="一、说明"><a href="#一、说明" class="headerlink" title="一、说明"></a>一、说明</h1><p>python与redis的连接件</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h2 id="1、离线安装"><a href="#1、离线安装" class="headerlink" title="1、离线安装"></a>1、离线安装</h2><p>pip install –no-index -f /home/nanxun/packages/ redis-2.10.5-py2.py3-none-any.whl</p>
+            <p>参考：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0</a></p>
+<h1 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h1><p>需要手动对发送方邮箱配置SMTP协议，此时可能需要设置客户端授权码，即为登录第三方邮件客户端的专用口令，以下是常用邮箱SMTP端口及登录说明：  </p>
+<table>
+<thead>
+<tr>
+<th>邮箱</th>
+<th>SMTP服务器</th>
+<th>登录口令</th>
+<th>支持加密方式</th>
+<th>对应端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>163</td>
+<td>smtp.163.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>126</td>
+<td>smtp.126.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>smtp.qq.com</td>
+<td>系统分配授权码</td>
+<td>明文/SSL加密/TLS加密</td>
+<td>25/465/587</td>
+</tr>
+<tr>
+<td>Gmail</td>
+<td>smtp.gmail.com</td>
+<td>邮箱登录密码</td>
+<td>TLS加密</td>
+<td>587</td>
+</tr>
+</tbody></table>
+<h1 id="2、加密问题"><a href="#2、加密问题" class="headerlink" title="2、加密问题"></a>2、加密问题</h1><p>SMTP协议发送邮件，如果想要加密，有如下几种方式：<br>1）明文传输:　端口号是25；<br>2）SSL加密: 端口号是465，通信过程加密，邮件数据安全；<br>3）TLS加密: 端口号是587，通信过程加密，邮件数据安全，使用正常的smtp端口。对于TLS加密方式需要先建立SSL连接，然后再发送邮件。</p>
+<h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3 遇到的问题"></a>3 遇到的问题</h1><p>3.1 使用qq向foxmail发送带附件的邮件时，如果不用加密，程序报错，连接中断。<br>3.2 如果使用POP3收邮件，必须使用ssl加密的方式登录服务器。</p>
 
           
         
@@ -410,7 +484,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

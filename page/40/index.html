@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/24/python/basic/random/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/03/24/python/basic/random/" itemprop="url">python random模块</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-24T22:21:08+08:00">
-                2021-03-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
+                2021-04-04
               </time>
             
 
@@ -282,6 +282,61 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlalchemy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,11 +367,11 @@
       
         
           
-            <h1 id="多进程random不随机问题"><a href="#多进程random不随机问题" class="headerlink" title="多进程random不随机问题"></a>多进程random不随机问题</h1><h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>ForkingTCPServer每次生成新的进程处理请求，在每个进程中使用random.randint方法生成随机数，每次请求返回的random值都是同一个。</p>
-<h2 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h2><p>random是伪随机数，按照种子依次生成伪随机数序列的各项，每次进程启动调用random，用的是相同的种子，所以生成的随机数序列是一样的。如果单独使用python解释器进入交互界面执行，可以发现，不同的进程调用random.randint获取的随机数不同。所以这里推测是由于random模块在主进程导入时确定种子，fork时复制了相同的随机数对象导致。这个推测是下面解决方法三的思路来源。</p>
-<h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p>方法一：使用进程间通信，随机数在公共区域生成，其它进程都从这个进程里面取。<br>方法二：每次调用random.randint，先用random.seed()重置种子。<br>方法三：在Handler的handle方法中import random。</p>
-<p>注：python2有上述问题，python3没有。</p>
-
+            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
+<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -412,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

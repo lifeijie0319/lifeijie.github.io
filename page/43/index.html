@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/17/python/libs/env/setuptools/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/rabbitmq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/03/17/python/libs/env/setuptools/" itemprop="url">python setuptools</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/database/rabbitmq/" itemprop="url">rabbitmq常见问题汇总</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-17T22:43:57+08:00">
-                2021-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
+                2021-04-04
               </time>
             
 
@@ -282,6 +282,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,12 +334,17 @@
       
         
           
-            <h1 id="一、setuptools源码编译安装"><a href="#一、setuptools源码编译安装" class="headerlink" title="一、setuptools源码编译安装"></a>一、setuptools源码编译安装</h1><ul>
-<li>（一）、下载解压，进入目录</li>
-<li>（二）、sudo python2.7 setup.py build</li>
-<li>（三）、sudo python2.7 setup.py install</li>
+            <h1 id="rabbitmq任务分发机制"><a href="#rabbitmq任务分发机制" class="headerlink" title="rabbitmq任务分发机制"></a>rabbitmq任务分发机制</h1><p>rabbitmq请求到达服务端经过这几个组件：</p>
+<ul>
+<li>exchange<br>exchange分为以下四种：<ul>
+<li>direct：根据key与对应的queue绑定</li>
+<li>fanout：广播，所有queue均能收到消息</li>
+<li>topic：key是一个通配表示，符合条件的queue均能收到消息</li>
+<li>head</li>
 </ul>
-<h1 id="二、setuptools使用"><a href="#二、setuptools使用" class="headerlink" title="二、setuptools使用"></a>二、setuptools使用</h1><p>不联网，在当前目录下安装包<br>easy_install -N none -f ./ </p>
+</li>
+<li>queue<br>消息队列，有消费者绑定在队列上进行处理<br>注意：任务分发是在队列上才进行分发，即多个消息绑定到同一个队列上才会分发，而exchange即使发消息到多个队列，其实消息是每个绑定队列都会收到，而不是分发。</li>
+</ul>
 
           
         
@@ -414,7 +441,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/20/database/oracle/%E7%B4%A2%E5%BC%95%E3%80%81%E7%BA%A6%E6%9D%9F%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/28/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/20/database/oracle/%E7%B4%A2%E5%BC%95%E3%80%81%E7%BA%A6%E6%9D%9F%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/" itemprop="url">ORACLE索引、约束速查手册</a></h1>
+                <a class="post-title-link" href="/blog/2021/03/28/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/" itemprop="url">centos7安装Redis的经历</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-20T19:03:32+08:00">
-                2021-01-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T14:04:58+08:00">
+                2021-03-28
               </time>
             
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">oracle</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,41 +345,12 @@
       
         
           
-            <h2 id="索引创建"><a href="#索引创建" class="headerlink" title="索引创建"></a>索引创建</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>] INDEX [:schema.]index_name <span class="keyword">ON</span> [:schema.]table_name (:column_name1[, :column_name2...]) tablespace :table_space [online];</span><br></pre></td></tr></table></figure>
+            <h1 id="下载编译安装"><a href="#下载编译安装" class="headerlink" title="下载编译安装"></a>下载编译安装</h1><p>1 redis官网下载，解压后进入目录<br>2 make &amp; make install<br>注：make install如果不支持可以手动操作，实际上做了如下动作：</p>
 <ul>
-<li>UNIQUE 可选，添加UNIQUE表明索引是唯一索引。</li>
-<li>:schema 参考<strong>schema详解</strong></li>
-<li>:column_name1 需要加索引的数据表列名，可以有多个，多个的话就是联合索引</li>
-<li>:table_space 表空间名称，索引所在的表空间可以和数据表不同</li>
-<li>online 这里有作用么，待深入 #TODO<h2 id="索引查询"><a href="#索引查询" class="headerlink" title="索引查询"></a>索引查询</h2><h3 id="查看单个数据表包含的索引"><a href="#查看单个数据表包含的索引" class="headerlink" title="查看单个数据表包含的索引"></a>查看单个数据表包含的索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_indexes <span class="keyword">where</span> table_name<span class="operator">=</span><span class="built_in">upper</span>(:table_name);</span><br><span class="line"><span class="operator">-</span> :table_name 表名，注意两边加上单引号</span><br></pre></td></tr></table></figure>
-<h3 id="按照索引名字查询索引"><a href="#按照索引名字查询索引" class="headerlink" title="按照索引名字查询索引"></a>按照索引名字查询索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_objects <span class="keyword">where</span> object_type <span class="operator">=</span> <span class="string">&#x27;INDEX&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> created <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="查询指定索引创建语句"><a href="#查询指定索引创建语句" class="headerlink" title="查询指定索引创建语句"></a>查询指定索引创建语句</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dbms_metadata.get_ddl(<span class="string">&#x27;INDEX&#x27;</span>, :index_name, :user_name) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li>:index_name 索引名，注意两边加上单引号</li>
-<li>:user_name 数据库用户名，注意两边加上单引号<h3 id="根据索引名查看索引包含的字段"><a href="#根据索引名查看索引包含的字段" class="headerlink" title="根据索引名查看索引包含的字段"></a>根据索引名查看索引包含的字段</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_ind_columns <span class="keyword">where</span> index_name <span class="operator">=</span> :index_name;</span><br></pre></td></tr></table></figure></li>
-<li>:user_name 数据库用户名，注意两边加上单引号<h2 id="索引删除"><a href="#索引删除" class="headerlink" title="索引删除"></a>索引删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> INDEX [:schema.]INDEXNAME;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li>:schema 参考<strong>schema详解</strong></li>
-</ul>
-<h2 id="约束创建"><a href="#约束创建" class="headerlink" title="约束创建"></a>约束创建</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> :table_name <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> :constraint_name <span class="keyword">UNIQUE</span> (:column_name1[, :column_name2...]);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>:table_name 要创建约束的表名</li>
-<li>:constraint_name 约束名</li>
-<li>:column_name1 创建约束的列名，可以有多个列，建立联合约束</li>
-<li>创建唯一约束会自动创建对应的唯一索引，但是反之不然。</li>
-</ul>
-<h2 id="约束查询"><a href="#约束查询" class="headerlink" title="约束查询"></a>约束查询</h2><h3 id="查找索引对应的约束"><a href="#查找索引对应的约束" class="headerlink" title="查找索引对应的约束"></a>查找索引对应的约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> OWNER, CONSTRAINT_NAME, CONSTRAINT_TYPE,</span><br><span class="line"> TABLE_NAME, INDEX_OWNER, INDEX_NAME</span><br><span class="line"><span class="keyword">FROM</span> ALL_CONSTRAINTS</span><br><span class="line"><span class="keyword">WHERE</span> INDEX_NAME <span class="operator">=</span> :index_name;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>:index_name 索引名，注意两边加上单引号<h2 id="约束删除"><a href="#约束删除" class="headerlink" title="约束删除"></a>约束删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> :table_name <span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> :constraint_name;</span><br></pre></td></tr></table></figure></li>
-<li>:table_name 要创建约束的表名</li>
-<li>:constraint_name 约束名<h3 id="删除约束同时删除索引"><a href="#删除约束同时删除索引" class="headerlink" title="删除约束同时删除索引"></a>删除约束同时删除索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :table_name <span class="keyword">drop</span> <span class="keyword">constraint</span> :constraint_name cascade <span class="keyword">drop</span> index;</span><br></pre></td></tr></table></figure>
-注：对于在创建唯一约束后自动生成的唯一索引，验证过“cascade drop index”不加也会自动删除。</li>
-</ul>
-<h2 id="唯一索引和唯一约束的区别"><a href="#唯一索引和唯一约束的区别" class="headerlink" title="唯一索引和唯一约束的区别"></a>唯一索引和唯一约束的区别</h2><ul>
-<li>首先是语义上的区别，约束是一种限制，索引是一种加快数据库查询的手段。</li>
-<li>其次，一个表的外键必须是另一个表的唯一约束的列，唯一索引不满足条件。</li>
+<li>删除源文件及目标文件以方便后续copy生成可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] rm -f src&#x2F;*.c *.h *.o</span><br></pre></td></tr></table></figure></li>
+<li>copy可执行文件至环境变量目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis] cp src&#x2F;redis-* &#x2F;usr&#x2F;local&#x2F;bin   </span><br></pre></td></tr></table></figure></li>
+<li>copy配置文件至系统配置文件目录,如果是集群安装，文件最好以端口作为文件名称<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] cp redis.conf &#x2F;etc&#x2F;</span><br></pre></td></tr></table></figure>
+<h1 id="配置redis为系统服务"><a href="#配置redis为系统服务" class="headerlink" title="配置redis为系统服务"></a>配置redis为系统服务</h1><h2 id="使用service命令启停"><a href="#使用service命令启停" class="headerlink" title="使用service命令启停"></a>使用service命令启停</h2>可以将redis解压后的目录下的utils/redis_init_script文件拷贝到/etc/init.d/目录下，这个是redis预设的初始化脚本，加好之后就可以用sevice来启停服务了。<h2 id="使用systemd启停"><a href="#使用systemd启停" class="headerlink" title="使用systemd启停"></a>使用systemd启停</h2>编写/usr/lib/systemd/system/redis.service，使用systemd管理服务。redis.service示例如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">#描述信息</span><br><span class="line">Description&#x3D;Redis Server 3.0.4</span><br><span class="line">#启动时机,开机启动最好在网络服务启动后即启动</span><br><span class="line">After&#x3D;network.target</span><br><span class="line">[Service]</span><br><span class="line">#此处为命令行启动redis的命令及参数,可参考官方文档</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-server &#x2F;etc&#x2F;redis.conf --daemonize no  </span><br><span class="line">#停止redis服务器命令</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-cli -h 127.0.0.1 -p 6379 shutdown </span><br><span class="line">User&#x3D;redis</span><br><span class="line">#运行reddis用户</span><br><span class="line">Group&#x3D;redis</span><br><span class="line">#所属组</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target #字符界面下启动</span><br></pre></td></tr></table></figure></li>
 </ul>
 
           
@@ -420,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/22/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><a class="extend next" rel="next" href="/blog/page/24/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/22/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/24/">&gt;</a>
   </nav>
 
 
@@ -466,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">103</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -477,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

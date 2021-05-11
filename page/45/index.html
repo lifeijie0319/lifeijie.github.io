@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/rabbitmq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/database/rabbitmq/" itemprop="url">rabbitmq常见问题汇总</a></h1>
         
 
         <div class="post-meta">
@@ -334,10 +334,16 @@
       
         
           
-            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
+            <h1 id="rabbitmq任务分发机制"><a href="#rabbitmq任务分发机制" class="headerlink" title="rabbitmq任务分发机制"></a>rabbitmq任务分发机制</h1><p>rabbitmq请求到达服务端经过这几个组件：</p>
 <ul>
-<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
-<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
+<li>exchange<br>exchange分为以下四种：<ul>
+<li>direct：根据key与对应的queue绑定</li>
+<li>fanout：广播，所有queue均能收到消息</li>
+<li>topic：key是一个通配表示，符合条件的queue均能收到消息</li>
+<li>head</li>
+</ul>
+</li>
+<li>queue<br>消息队列，有消费者绑定在队列上进行处理<br>注意：任务分发是在队列上才进行分发，即多个消息绑定到同一个队列上才会分发，而exchange即使发消息到多个队列，其实消息是每个绑定队列都会收到，而不是分发。</li>
 </ul>
 
           
@@ -378,7 +384,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/44/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/46/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/44/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/46/">&gt;</a>
   </nav>
 
 
@@ -424,7 +430,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

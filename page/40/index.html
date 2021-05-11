@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/visual/pygraphviz/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/visual/pygraphviz/" itemprop="url">pygraphviz安装</a></h1>
         
 
         <div class="post-meta">
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
-                    <span itemprop="name">sqlalchemy</span>
+                  <a href="/blog/categories/python/libs/visual/" itemprop="url" rel="index">
+                    <span itemprop="name">visual</span>
                   </a>
                 </span>
 
@@ -367,11 +356,13 @@
       
         
           
-            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
-<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>相当于：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Graphviz 是一个几何图形可视化软件，能够将数据的结构信息表示为抽象图形和网络图的方式。PyGraphviz 主要对数据量大、可任意定制的图形上具有强大优势。</p>
+<h1 id="pygraphviz安装问题"><a href="#pygraphviz安装问题" class="headerlink" title="pygraphviz安装问题"></a>pygraphviz安装问题</h1><h2 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h2><p>python setup.py install</p>
+<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>安装pygraphviz失败</p>
+<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><p>需要先安装graphviz和pygraphviz-devel。因为yum没有配置，所以需要先在官网下载yum源配置文件。之后可以用yum安装。然而yum源安装获取的版本（2.40）与网站提供的版本（2.38）不一致，所以需要先下载rpm包，然后sudo yum localinstall graphviz-devel-2.38.0-1.el7.x86_64.rpm graphviz-2.38.0-1.el7.x86_64.rpm</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html">http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html</a></p>
+<h2 id="注：在ubuntu下面安装-graphviz"><a href="#注：在ubuntu下面安装-graphviz" class="headerlink" title="注：在ubuntu下面安装 graphviz"></a>注：在ubuntu下面安装 graphviz</h2><p>sudo apt-get install graphviz, graphviz-dev<br>注意graphiviz-dev是pygraphviz所依赖的必须安装。<br>pip install pygraphviz</p>
+
           
         
       
@@ -410,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/39/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/blog/page/41/">41</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/41/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/39/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/39/">39</a><span class="page-number current">40</span><a class="page-number" href="/blog/page/41/">41</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/41/">&gt;</a>
   </nav>
 
 
@@ -456,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

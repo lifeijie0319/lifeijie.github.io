@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/17/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" itemprop="url">数据库隔离级别</a></h1>
+                <a class="post-title-link" href="/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-17T21:35:44+08:00">
-                2021-01-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-27T21:44:02+08:00">
+                2021-01-27
               </time>
             
 
@@ -297,6 +297,28 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/blog/categories/database/" itemprop="url" rel="index">
                     <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
                   </a>
                 </span>
 
@@ -334,20 +356,8 @@
       
         
           
-            <h1 id="与隔离级别相关的三种数据库读取异常"><a href="#与隔离级别相关的三种数据库读取异常" class="headerlink" title="与隔离级别相关的三种数据库读取异常"></a>与隔离级别相关的三种数据库读取异常</h1><ul>
-<li>脏读<br>脏读指的是本事务中可以读到其它事务未提交的部分。</li>
-<li>不可重复读<br>不可重复读是指，使用同样的SQL查询，对于某条记录而言，本次读取的结果和上一次不同，比如记录的字段值更新了。</li>
-<li>幻读<br>幻读指的是，使用同样的SQL查询，得到的结果集记录数目与上次不同。<blockquote>
-<p>不可重复读与幻读有类似之处，按照网上资料来看，不可重复读强调更新和删除，幻读强调插入，但是有待商榷。<br>另一种说法是和多版本并发控制MVCC机制以及快照读、当前读相关，具体原因待深入学习。</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="数据库的四种隔离级别"><a href="#数据库的四种隔离级别" class="headerlink" title="数据库的四种隔离级别"></a>数据库的四种隔离级别</h1><ul>
-<li>读未提交(Read Uncommited)<br>本事务可以读取其它事务未提交的改变。该隔离级别可能导致脏读、不可重复读、幻读。</li>
-<li>读已提交(Read Commited)<br>本事务只能读取其它事务已提交的改变。该隔离级别可能导致不可重复读、幻读。<br>oracle默认使用该隔离级别。</li>
-<li>可重复读(Repeatable Read)<br>本事务只能读取其它事务已提交的改变，且使用同样的SQL查询，每次读取的结果中，对于某条记录而言，它是不变的。该隔离级别可能导致幻读。<br>mysql默认使用该隔离级别。</li>
-<li>序列化(Serializable)<br>事务只能串行执行，因而不会出现脏读、不可重复读、幻读，但是效率极低。</li>
-</ul>
+            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
+<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
 
           
         
@@ -387,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/99/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/blog/page/101/">101</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/101/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/99/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/blog/page/101/">101</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/101/">&gt;</a>
   </nav>
 
 
@@ -433,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

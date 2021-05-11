@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/data_structure/B-tree/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/data_structure/B-tree/" itemprop="url">B-树</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,41 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/data-structure/" itemprop="url" rel="index">
-                    <span itemprop="name">data_structure</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlalchemy</span>
                   </a>
                 </span>
 
@@ -334,21 +367,11 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>B-树是二叉平衡树的推广，是一种多叉平衡树。B-树其实就是B-tree，不是“B减树”。</p>
-<h1 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h1><h2 id="一棵m阶B-tree（m叉树）满足如下特征："><a href="#一棵m阶B-tree（m叉树）满足如下特征：" class="headerlink" title="一棵m阶B-tree（m叉树）满足如下特征："></a>一棵m阶B-tree（m叉树）满足如下特征：</h2><ul>
-<li>树中每个节点最多含有m个孩子（m&gt;=2）</li>
-<li>如果根节点不是叶子节点，则根节点至少包括两个孩子</li>
-<li>除根节点和叶节点外，其他每个节点至少有ceil(m/2)个孩子（ceil()为向上取整）</li>
-<li>所有叶子节点都位于同一层，叶子节点不包含关键字，所以可以把叶子节点看成在树里实际上并不存在的外部节点，指向这些外部节点的指针为空。</li>
-<li>每个非叶节点包括n个关键字信息(n，P0，K1，P1，K2，P2，……，Kn，Pn)，其中<ul>
-<li>Ki(i=1…n)为关键字，且关键字的顺序按照升序排列</li>
-<li>Pi(i=0…n)为指向子树的指针，满足K(i-1) &lt; P(i-1) &lt; Ki</li>
-<li>ceil(m/2)-1 &lt;= n &lt;= m-1<h2 id="B树的叶子节点的个数是所有关键字个数的总和加一"><a href="#B树的叶子节点的个数是所有关键字个数的总和加一" class="headerlink" title="B树的叶子节点的个数是所有关键字个数的总和加一"></a>B树的叶子节点的个数是所有关键字个数的总和加一</h2>证明如下：<br>假设第i层的节点数是$M_i$，关键字个数是$N_i$，i行第j个节点的关键字数是$N_i^j$。根据节点子树数量与节点关键字数目的关系，$M_i$=$\sum_{j=1}^{N_i}(N_i^j+1)$=M<sub>i-1</sub>+N<sub>i-1</sub>=M<sub>i-2</sub>+N<sub>i-2</sub>+N<sub>i-1</sub>=…=M<sub>1</sub>+N<sub>1</sub>+…+N<sub>i-1</sub>=1+N<br>这里N是指i层以前所以关键字的和。</li>
-</ul>
-</li>
-</ul>
-<h1 id="搜索性能"><a href="#搜索性能" class="headerlink" title="搜索性能"></a>搜索性能</h1><p>B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为空，或已经是叶子结点。<br>B-树的性能总是等价于二分查找（与阶数m值无关），为O($log_2{n}$)，其中n为关键字的总数。</p>
-
+            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
+<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -387,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/41/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/blog/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/43/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/41/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/blog/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/43/">&gt;</a>
   </nav>
 
 
@@ -433,7 +456,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

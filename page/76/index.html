@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/engine/Innodb%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/tornado/websocket/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/engine/Innodb%E8%AF%A6%E8%A7%A3/" itemprop="url">InnoDB详解</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/tornado/websocket/" itemprop="url">tornado里面实现websocket</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
+                  <a href="/blog/categories/python/tornado/" itemprop="url" rel="index">
+                    <span itemprop="name">tornado</span>
                   </a>
                 </span>
 
@@ -356,13 +345,10 @@
       
         
           
-            <h1 id="物理存储结构"><a href="#物理存储结构" class="headerlink" title="物理存储结构"></a>物理存储结构</h1><ul>
-<li>ibdata1：系统数据字典信息（统计信息），undo表空间等</li>
-<li>ib_logfile0/ib_logfile1：redo系统日志，事务日志文件</li>
-<li>ibtmp1：临时表空间磁盘空间，存储临时表</li>
-<li>.frm：存储表的列信息</li>
-<li>.ibd：表的数据行与索引</li>
-</ul>
+            <h1 id="1、js建立websocket错误404："><a href="#1、js建立websocket错误404：" class="headerlink" title="1、js建立websocket错误404："></a>1、js建立websocket错误404：</h1><p>原因：服务器路由设置不正确，tornado.web.Application的handlers参数类似于Django的urls，只不过Django里面是view来处理，tornado是handler来处理。</p>
+<h1 id="2、js建立websocket错误403"><a href="#2、js建立websocket错误403" class="headerlink" title="2、js建立websocket错误403"></a>2、js建立websocket错误403</h1><p>原因：同源检查问题，在handler类里面添加方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_origin</span>(<span class="params">self, origin</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>可以暂时解决这个问题。</p>
 
           
         
@@ -402,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/75/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/75/">75</a><span class="page-number current">76</span><a class="page-number" href="/blog/page/77/">77</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/77/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/75/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/75/">75</a><span class="page-number current">76</span><a class="page-number" href="/blog/page/77/">77</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/77/">&gt;</a>
   </nav>
 
 
@@ -448,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

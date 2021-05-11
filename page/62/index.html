@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/" itemprop="url">django杂记</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url">django基本环境配置</a></h1>
         
 
         <div class="post-meta">
@@ -345,18 +345,15 @@
       
         
           
-            <h1 id="一、模板-过滤器"><a href="#一、模板-过滤器" class="headerlink" title="一、模板-过滤器"></a>一、模板-过滤器</h1><ul>
-<li>1、if和for循环不能在同一句话。</li>
-<li>2、取整过滤器phone2numeric </li>
-<li>3、字符截取过滤器：slice</li>
-</ul>
-<h1 id="二、静态文件"><a href="#二、静态文件" class="headerlink" title="二、静态文件"></a>二、静态文件</h1><p>（一）开发时<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files">https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files</a><br>主要是django.contrib.staticfiles内置默认处理。<br>（二）生产时需要改变<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/">https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/</a></p>
-<h1 id="三、中文编码问题"><a href="#三、中文编码问题" class="headerlink" title="三、中文编码问题"></a>三、中文编码问题</h1><p>python2.7不能直接支持Unicode，解决办法：<br>from django.utils.encoding import python_2_unicode_compatible<br>在模型类定义之前加上装饰器：<br>@python_2_unicode_compatible</p>
-<h1 id="四、将从数据库获取的queryset转化成json返回。"><a href="#四、将从数据库获取的queryset转化成json返回。" class="headerlink" title="四、将从数据库获取的queryset转化成json返回。"></a>四、将从数据库获取的queryset转化成json返回。</h1><p>from django.core import serializers<br>data = serializers.serialize(“xml”, SomeModel.objects.all())</p>
-<h1 id="五、解决由于csrf保护启用导致的图片上传bug。"><a href="#五、解决由于csrf保护启用导致的图片上传bug。" class="headerlink" title="五、解决由于csrf保护启用导致的图片上传bug。"></a>五、解决由于csrf保护启用导致的图片上传bug。</h1><h2 id="1、ajax头"><a href="#1、ajax头" class="headerlink" title="1、ajax头"></a>1、ajax头</h2><p>xhr.setRequestHeader(“X-CSRFToken”, get_cookie(‘csrftoken’));</p>
-<h2 id="2、post中传cookie"><a href="#2、post中传cookie" class="headerlink" title="2、post中传cookie"></a>2、post中传cookie</h2><p>task.addData(‘csrfmiddlewaretoken’, get_cookie(‘csrftoken’))</p>
-<h1 id="六、request-POST取不到数据的原因"><a href="#六、request-POST取不到数据的原因" class="headerlink" title="六、request.POST取不到数据的原因"></a>六、request.POST取不到数据的原因</h1><p>只有ajax请求添加参数’Content-Type’：’application/x-www-form-urlencoded’才会填充request.POST。</p>
-
+            <h1 id="一、新建项目"><a href="#一、新建项目" class="headerlink" title="一、新建项目"></a>一、新建项目</h1><p>django-admin startproject nanxun_pro</p>
+<h1 id="二、建立app"><a href="#二、建立app" class="headerlink" title="二、建立app"></a>二、建立app</h1><p>cd nanxun_pro/<br>python manage.py startapp nanxun<br>修改配置添加app名字</p>
+<h1 id="三、django连接psql"><a href="#三、django连接psql" class="headerlink" title="三、django连接psql"></a>三、django连接psql</h1><p><a target="_blank" rel="noopener" href="http://luct.blogbus.com/logs/111257414.html">http://luct.blogbus.com/logs/111257414.html</a></p>
+<h2 id="1、修改配置"><a href="#1、修改配置" class="headerlink" title="1、修改配置"></a>1、修改配置</h2><p>默认：<br>修改后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,</span><br><span class="line">        &#39;NAME&#39;: &#39;nanxundb&#39;,</span><br><span class="line">        &#39;USER&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;PASSWORD&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;HOST&#39;: &#39;localhost&#39;,</span><br><span class="line">        &#39;PORT&#39;: &#39;5432&#39;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装psycopg2，psql在python中运行的中间件。"><a href="#2、安装psycopg2，psql在python中运行的中间件。" class="headerlink" title="2、安装psycopg2，psql在python中运行的中间件。"></a>2、安装psycopg2，psql在python中运行的中间件。</h2><p>pip install psycopg2</p>
+<h2 id="3、初始化数据库，载入django自带的数据模型"><a href="#3、初始化数据库，载入django自带的数据模型" class="headerlink" title="3、初始化数据库，载入django自带的数据模型"></a>3、初始化数据库，载入django自带的数据模型</h2><p>python manage.py migrate</p>
+<h1 id="四、配置admin账户"><a href="#四、配置admin账户" class="headerlink" title="四、配置admin账户"></a>四、配置admin账户</h1><p>python manage.py createsuperuser</p>
+<h1 id="五、创建模板与静态文件目录。"><a href="#五、创建模板与静态文件目录。" class="headerlink" title="五、创建模板与静态文件目录。"></a>五、创建模板与静态文件目录。</h1>
           
         
       
@@ -395,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
   </nav>
 
 
@@ -441,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

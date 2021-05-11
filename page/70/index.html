@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/random/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/" itemprop="url">json数据的获取</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/random/" itemprop="url">python random模块</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/flask/" itemprop="url" rel="index">
-                    <span itemprop="name">flask</span>
+                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -345,7 +345,10 @@
       
         
           
-            <p>后台要用request.json获得前台的json数据，需要使用完整的$.ajax()，设置contentType: ‘application/json’<br><a target="_blank" rel="noopener" href="https://www.zybuluo.com/harpsword/note/209162">https://www.zybuluo.com/harpsword/note/209162</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhu_free/article/details/50396616">http://blog.csdn.net/zhu_free/article/details/50396616</a></p>
+            <h1 id="多进程random不随机问题"><a href="#多进程random不随机问题" class="headerlink" title="多进程random不随机问题"></a>多进程random不随机问题</h1><h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>ForkingTCPServer每次生成新的进程处理请求，在每个进程中使用random.randint方法生成随机数，每次请求返回的random值都是同一个。</p>
+<h2 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h2><p>random是伪随机数，按照种子依次生成伪随机数序列的各项，每次进程启动调用random，用的是相同的种子，所以生成的随机数序列是一样的。如果单独使用python解释器进入交互界面执行，可以发现，不同的进程调用random.randint获取的随机数不同。所以这里推测是由于random模块在主进程导入时确定种子，fork时复制了相同的随机数对象导致。这个推测是下面解决方法三的思路来源。</p>
+<h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p>方法一：使用进程间通信，随机数在公共区域生成，其它进程都从这个进程里面取。<br>方法二：每次调用random.randint，先用random.seed()重置种子。<br>方法三：在Handler的handle方法中import random。</p>
+<p>注：python2有上述问题，python3没有。</p>
 
           
         
@@ -385,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/69/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/blog/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/71/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/69/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/blog/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/71/">&gt;</a>
   </nav>
 
 
@@ -431,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

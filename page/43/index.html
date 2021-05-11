@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/rabbitmq/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/data_structure/B+tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/rabbitmq/" itemprop="url">rabbitmq常见问题汇总</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/data_structure/B+tree/" itemprop="url">B+树</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
                   </a>
                 </span>
 
@@ -334,16 +334,12 @@
       
         
           
-            <h1 id="rabbitmq任务分发机制"><a href="#rabbitmq任务分发机制" class="headerlink" title="rabbitmq任务分发机制"></a>rabbitmq任务分发机制</h1><p>rabbitmq请求到达服务端经过这几个组件：</p>
+            <h1 id="B-树的定义"><a href="#B-树的定义" class="headerlink" title="B+树的定义"></a>B+树的定义</h1><p>B+树的定义有两种，其中一种基本和B树等价，关键字个数比孩子节点数小1；另一种关键字个数和孩子节点数相等。我们按照第一种定义展开学习，这种情况下，B+树在B树的基础上做了如下调整：</p>
 <ul>
-<li>exchange<br>exchange分为以下四种：<ul>
-<li>direct：根据key与对应的queue绑定</li>
-<li>fanout：广播，所有queue均能收到消息</li>
-<li>topic：key是一个通配表示，符合条件的queue均能收到消息</li>
-<li>head</li>
-</ul>
-</li>
-<li>queue<br>消息队列，有消费者绑定在队列上进行处理<br>注意：任务分发是在队列上才进行分发，即多个消息绑定到同一个队列上才会分发，而exchange即使发消息到多个队列，其实消息是每个绑定队列都会收到，而不是分发。</li>
+<li>B+树分为两种节点，内部节点（也称索引节点）和叶子节点。根节点可以是内部节点，也可以是叶子节点。</li>
+<li>B+树的内部节点不保存数据，所有数据都保存在叶子节点。</li>
+<li>对于内部节点的一个key，左子树中的所有key值小于它，右子树中的key都大于等于它。内部节点的key值和叶子节点的key值都按升序排列。</li>
+<li>每个叶子节点有相邻叶子节点的指针，叶子节点之间自小而大顺序排列。</li>
 </ul>
 
           
@@ -384,7 +380,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/42/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/blog/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/44/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/42/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/blog/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/44/">&gt;</a>
   </nav>
 
 
@@ -430,7 +426,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

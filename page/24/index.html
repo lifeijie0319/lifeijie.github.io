@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/postgresql/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/ibm_db_django/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/postgresql/" itemprop="url">postgresql</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/ibm_db_django/" itemprop="url">ibm_db_django</a></h1>
         
 
         <div class="post-meta">
@@ -356,8 +356,8 @@
       
         
           
-            <h1 id="现象：安装psycopg2出错"><a href="#现象：安装psycopg2出错" class="headerlink" title="现象：安装psycopg2出错"></a>现象：安装psycopg2出错</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: pg_config executable not found</span><br><span class="line">pg_config is in postgresql-dev</span><br></pre></td></tr></table></figure>
-<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libpq-dev python-dev</span><br><span class="line">pip install psycopg2、</span><br></pre></td></tr></table></figure>
+            <h1 id="一、说明："><a href="#一、说明：" class="headerlink" title="一、说明："></a>一、说明：</h1><p>Django要连接db2，除了ibm_db这个Python和db2的连接件，还需要安装ibm_db_django包。</p>
+<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1>
           
         
       
@@ -396,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/23/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/blog/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/25/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/23/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/blog/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/25/">&gt;</a>
   </nav>
 
 
@@ -442,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/virtualenv/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/setuptools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/virtualenv/" itemprop="url">virtualenv</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/setuptools/" itemprop="url">python setuptools</a></h1>
         
 
         <div class="post-meta">
@@ -356,15 +356,13 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
-<li>1、sudo pip install virtualenv</li>
-<li>2、virtualenv wxenv</li>
+            <h1 id="一、setuptools源码编译安装"><a href="#一、setuptools源码编译安装" class="headerlink" title="一、setuptools源码编译安装"></a>一、setuptools源码编译安装</h1><ul>
+<li>（一）、下载解压，进入目录</li>
+<li>（二）、sudo python2.7 setup.py build</li>
+<li>（三）、sudo python2.7 setup.py install</li>
 </ul>
-<h1 id="二、设置打开终端进入虚拟环境"><a href="#二、设置打开终端进入虚拟环境" class="headerlink" title="二、设置打开终端进入虚拟环境"></a>二、设置打开终端进入虚拟环境</h1><p>vi .bash_profile<br>添加”source wxenv/bin/activate”</p>
-<h1 id="三、windows下安装报错"><a href="#三、windows下安装报错" class="headerlink" title="三、windows下安装报错"></a>三、windows下安装报错</h1><h2 id="1、问题："><a href="#1、问题：" class="headerlink" title="1、问题："></a>1、问题：</h2><p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xc0 in position 7: ordinal not in range(128)</p>
-<h2 id="2、原因："><a href="#2、原因：" class="headerlink" title="2、原因："></a>2、原因：</h2><p>pip安装python包会加载当前用户的用户目录，我的用户目录恰好是含有中文的，ascii不能进行编码。</p>
-<h2 id="3、解决："><a href="#3、解决：" class="headerlink" title="3、解决："></a>3、解决：</h2><p>修改python安装目录 Python27\Lib\目录下的mimetypes.py文件。添加如下代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> sys.getdefaultncoding() != <span class="string">&#x27;gbk&#x27;</span>:</span><br><span class="line">    reload(sys)</span><br><span class="line">    sys.setdefaultencoding(<span class="string">&#x27;gbk&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="二、setuptools使用"><a href="#二、setuptools使用" class="headerlink" title="二、setuptools使用"></a>二、setuptools使用</h1><p>不联网，在当前目录下安装包<br>easy_install -N none -f ./ </p>
+
           
         
       
@@ -403,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/32/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/blog/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/34/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/32/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/blog/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/34/">&gt;</a>
   </nav>
 
 
@@ -449,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

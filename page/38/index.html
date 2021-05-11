@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/visual/pygraphviz/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/security/M2Crypto/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/visual/pygraphviz/" itemprop="url">pygraphviz安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/security/M2Crypto/" itemprop="url">M2Crypto安装问题</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/visual/" itemprop="url" rel="index">
-                    <span itemprop="name">visual</span>
+                  <a href="/blog/categories/python/libs/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -356,12 +356,10 @@
       
         
           
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Graphviz 是一个几何图形可视化软件，能够将数据的结构信息表示为抽象图形和网络图的方式。PyGraphviz 主要对数据量大、可任意定制的图形上具有强大优势。</p>
-<h1 id="pygraphviz安装问题"><a href="#pygraphviz安装问题" class="headerlink" title="pygraphviz安装问题"></a>pygraphviz安装问题</h1><h2 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h2><p>python setup.py install</p>
-<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>安装pygraphviz失败</p>
-<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><p>需要先安装graphviz和pygraphviz-devel。因为yum没有配置，所以需要先在官网下载yum源配置文件。之后可以用yum安装。然而yum源安装获取的版本（2.40）与网站提供的版本（2.38）不一致，所以需要先下载rpm包，然后sudo yum localinstall graphviz-devel-2.38.0-1.el7.x86_64.rpm graphviz-2.38.0-1.el7.x86_64.rpm</p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html">http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html</a></p>
-<h2 id="注：在ubuntu下面安装-graphviz"><a href="#注：在ubuntu下面安装-graphviz" class="headerlink" title="注：在ubuntu下面安装 graphviz"></a>注：在ubuntu下面安装 graphviz</h2><p>sudo apt-get install graphviz, graphviz-dev<br>注意graphiviz-dev是pygraphviz所依赖的必须安装。<br>pip install pygraphviz</p>
+            <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>问题：SWIG/_m2crypto_wrap.c:3557:25: 致命错误：openssl/err.h：没有那个文件或目录<br>原因：没有安装swig<br>解决：yum install swig  </p>
+<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>问题：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SWIG&#x2F;_m2crypto.i</span><br><span class="line">SWIG&#x2F;_m2crypto.i:54: Error: Unable to find &#39;openssl&#x2F;opensslv.h&#39;</span><br><span class="line">SWIG&#x2F;_m2crypto.i:60: Error: Unable to find &#39;openssl&#x2F;safestack.h&#39;</span><br><span class="line">SWIG&#x2F;_evp.i:12: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_rc4.i:5: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_ec.i:7: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br></pre></td></tr></table></figure>
+<p>解决：yum install openssl-devel</p>
 
           
         
@@ -401,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/37/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/blog/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><a class="extend next" rel="next" href="/blog/page/39/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/37/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/blog/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/39/">&gt;</a>
   </nav>
 
 
@@ -447,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">103</span>
+                  <span class="site-state-item-count">105</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

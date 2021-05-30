@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="什么是JWTJWT(JSON Web Token)是一种认证方式，常用于web场景下服务端对客户端身份的验证。 JWT的原理JWT一般分为两个步骤，一是客户端到服务端获取token并储存，二是客户端再发起请求，此时需要在请求参数或者请求头中带上token，服务端对token进行验证，验证通过才能返回请求数据。 token的组成token由header&#x2F;payload&#x2F;signature三部分组成，">
+<meta name="description" content="参考文档https:&#x2F;&#x2F;www.postgresql.org&#x2F;download&#x2F;linux&#x2F;redhat&#x2F;http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;2013&#x2F;12&#x2F;getting_started_with_postgresql.html 安装方式sudo yum install postgresql-server postgresql 报错与解决1现象： 12345.&amp;#x2F">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JWT理解">
-<meta property="og:url" content="https://lifeijie.gitee.io/blog/2021/04/17/web/JWT/index.html">
+<meta property="og:title" content="postgresql安装与常见问题">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/2021/05/14/database/postgresql/%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="李飞杰的个人博客">
-<meta property="og:description" content="什么是JWTJWT(JSON Web Token)是一种认证方式，常用于web场景下服务端对客户端身份的验证。 JWT的原理JWT一般分为两个步骤，一是客户端到服务端获取token并储存，二是客户端再发起请求，此时需要在请求参数或者请求头中带上token，服务端对token进行验证，验证通过才能返回请求数据。 token的组成token由header&#x2F;payload&#x2F;signature三部分组成，">
+<meta property="og:description" content="参考文档https:&#x2F;&#x2F;www.postgresql.org&#x2F;download&#x2F;linux&#x2F;redhat&#x2F;http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;2013&#x2F;12&#x2F;getting_started_with_postgresql.html 安装方式sudo yum install postgresql-server postgresql 报错与解决1现象： 12345.&amp;#x2F">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-04-17T01:36:04.387Z">
-<meta property="article:modified_time" content="2021-04-17T01:36:04.387Z">
+<meta property="article:published_time" content="2021-05-14T03:39:31.818Z">
+<meta property="article:modified_time" content="2021-05-14T03:39:31.818Z">
 <meta property="article:author" content="lifeijie">
 <meta name="twitter:card" content="summary">
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://lifeijie.gitee.io/blog/2021/04/17/web/JWT/"/>
+  <link rel="canonical" href="https://lifeijie.gitee.io/blog/2021/05/14/database/postgresql/安装/"/>
 
 
 
 
 
-  <title>JWT理解 | 李飞杰的个人博客</title>
+  <title>postgresql安装与常见问题 | 李飞杰的个人博客</title>
   
 
 
@@ -242,7 +242,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/17/web/JWT/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/14/database/postgresql/%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -259,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JWT理解</h1>
+          <h1 class="post-title" itemprop="name headline">postgresql安装与常见问题</h1>
         
 
         <div class="post-meta">
@@ -271,8 +271,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-17T09:36:04+08:00">
-                2021-04-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-14T11:39:31+08:00">
+                2021-05-14
               </time>
             
 
@@ -309,21 +309,18 @@
       
 
       
-        <h1 id="什么是JWT"><a href="#什么是JWT" class="headerlink" title="什么是JWT"></a>什么是JWT</h1><p>JWT(JSON Web Token)是一种认证方式，常用于web场景下服务端对客户端身份的验证。</p>
-<h1 id="JWT的原理"><a href="#JWT的原理" class="headerlink" title="JWT的原理"></a>JWT的原理</h1><p>JWT一般分为两个步骤，一是客户端到服务端获取token并储存，二是客户端再发起请求，此时需要在请求参数或者请求头中带上token，服务端对token进行验证，验证通过才能返回请求数据。</p>
-<h2 id="token的组成"><a href="#token的组成" class="headerlink" title="token的组成"></a>token的组成</h2><p>token由header/payload/signature三部分组成，格式为header.payload.signature。</p>
-<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p>header指明token的类型和使用的算法，一般形式为</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line">    &#x27;alg&#x27;: &#x27;HS256&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用base64编码后成为token里面的第一部分。<br>注：一般使用HS256（即HMAC SHA256）签名算法。</p>
-<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>payload包含负载信息，按照标准，有以下内容（也可以添加自定义的内容）：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;iss&#x27;: &#x27;jwt签发者&#x27;</span><br><span class="line">    &#x27;sub&#x27;: &#x27;jwt所面向的用户&#x27;</span><br><span class="line">    &#x27;aud&#x27;: &#x27;接收jwt的一方&#x27;</span><br><span class="line">    &#x27;exp&#x27;: &#x27;jwt的过期时间，这个过期时间必须要大于签发时间&#x27;</span><br><span class="line">    &#x27;nbf&#x27;: &#x27;定义在什么时间之前，该jwt都是不可用的&#x27;</span><br><span class="line">    &#x27;iat&#x27;: &#x27;jwt的签发时间&#x27;</span><br><span class="line">    &#x27;jti&#x27;: &#x27;jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用base64编码后成为token里面的第二部分。<br>注：一般使用HS256（即HMAC SHA256）签名算法。</p>
-<h3 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h3><p>signature是之前信息的签名，防止header和payload被篡改。生成算法为：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> encodeString = base64UrlEncode(header) + <span class="string">&#x27;.&#x27;</span> + base64UrlEncode(payload)</span><br><span class="line"><span class="keyword">var</span> signature = HMACSHA256(, secrect)</span><br></pre></td></tr></table></figure>
-<p>其中secrect为服务端存储的秘钥</p>
-<h2 id="验证的方式"><a href="#验证的方式" class="headerlink" title="验证的方式"></a>验证的方式</h2><p>一般有两层验证，一是验证signature的正确性，确定token没有被篡改；二是解出payload，查看是否过期。</p>
-<h1 id="JWT与session验证"><a href="#JWT与session验证" class="headerlink" title="JWT与session验证"></a>JWT与session验证</h1><p>早期，session验证客户端身份是主流，客户端发起请求，服务端生成session，存储在内存中。返回的http响应给客户端的cookie中存储了sessionid，用于和服务端的session对应。<br>session验证存在分布式服务器难以协调的问题，因为session存储在服务器内存，多台服务器难以协调一致。JWT服务端不存储token，解决了这个问题。</p>
-<h1 id="JWT没有解决的问题"><a href="#JWT没有解决的问题" class="headerlink" title="JWT没有解决的问题"></a>JWT没有解决的问题</h1><p>JWT没有解决中间人攻击的问题，如果劫持者使用客户端的token，可以伪装客户端与服务端进行通信。一般要求使用https来处理请求被劫持的情况。</p>
+        <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://www.postgresql.org/download/linux/redhat/">https://www.postgresql.org/download/linux/redhat/</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html</a></p>
+<h1 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h1><p>sudo yum install postgresql-server postgresql</p>
+<h1 id="报错与解决"><a href="#报错与解决" class="headerlink" title="报错与解决"></a>报错与解决</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>现象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;psycopg&#x2F;psycopg.h:30:20: fatal error: Python.h: No such file or directory</span><br><span class="line">     #include &lt;Python.h&gt;</span><br><span class="line">                        ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#39;gcc&#39; failed with exit status 1</span><br></pre></td></tr></table></figure>
+<p>解决：sudo yum install python-devel</p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>现象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;psycopg&#x2F;psycopg.h:31:22: fatal error: libpq-fe.h: No such file or directory</span><br><span class="line">     #include &lt;libpq-fe.h&gt;</span><br><span class="line">                          ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#39;gcc&#39; failed with exit status 1</span><br></pre></td></tr></table></figure>
+<p>解决：sudo yum install postgresql-devel</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>现象：启动postgresql报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">● postgresql-9.2.service - PostgreSQL 9.2 database server</span><br><span class="line">   Loaded: loaded (&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;postgresql-9.2.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: failed (Result: exit-code) since Mon 2017-06-26 21:06:23 CST; 9s ago</span><br><span class="line">  Process: 20274 ExecStartPre&#x3D;&#x2F;usr&#x2F;pgsql-9.2&#x2F;bin&#x2F;postgresql92-check-db-dir $&#123;PGDATA&#125; (code&#x3D;exited, status&#x3D;1&#x2F;FAILURE)</span><br></pre></td></tr></table></figure>
+<p>原因：没有初始化数据库<br>解决：/usr/pgsql-9.2/bin/postgresql92-setup initdb</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>现象：Django连接postgresql出错：<br>django.db.utils.OperationalError: FATAL:  Ident authentication failed for user “lifeijie”<br>原因：连接权限受限制<br>解决：<br>（1）在/var/lib/…./pg_hba.conf文件中添加一行：host all all 0.0.0.0/0 trust，其它所有的认证方式改成trust。<br>（2）重启postgresql  </p>
 
       
     </div>
@@ -348,8 +345,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2021/04/04/java/j2ee/servlet%E8%B7%AF%E7%94%B1/" rel="next" title="servlet路由">
-                <i class="fa fa-chevron-left"></i> servlet路由
+              <a href="/blog/2021/05/14/java/maven/maven%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="next" title="maven常识">
+                <i class="fa fa-chevron-left"></i> maven常识
               </a>
             
           </div>
@@ -358,8 +355,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2021/05/11/linux/ulimit/" rel="prev" title="ulimit">
-                ulimit <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2021/05/14/erlang/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" rel="prev" title="源码安装erlang环境">
+                源码安装erlang环境 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -437,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -483,7 +480,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFJWT"><span class="nav-number">1.</span> <span class="nav-text">什么是JWT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">JWT的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#token%E7%9A%84%E7%BB%84%E6%88%90"><span class="nav-number">2.1.</span> <span class="nav-text">token的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#header"><span class="nav-number">2.1.1.</span> <span class="nav-text">header</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload"><span class="nav-number">2.1.2.</span> <span class="nav-text">payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#signature"><span class="nav-number">2.1.3.</span> <span class="nav-text">signature</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">验证的方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E4%B8%8Esession%E9%AA%8C%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">JWT与session验证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT%E6%B2%A1%E6%9C%89%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">JWT没有解决的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="nav-number">1.</span> <span class="nav-text">参考文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">安装方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%B8%8E%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">报错与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1"><span class="nav-number">3.1.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2"><span class="nav-number">3.2.</span> <span class="nav-text">2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3"><span class="nav-number">3.3.</span> <span class="nav-text">3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4"><span class="nav-number">3.4.</span> <span class="nav-text">4</span></a></li></ol></li></ol></div>
             
 
           </div>

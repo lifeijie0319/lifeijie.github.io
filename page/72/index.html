@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/" itemprop="url">json数据的获取</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/" itemprop="url">django静态文件</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/flask/" itemprop="url" rel="index">
-                    <span itemprop="name">flask</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -345,7 +345,8 @@
       
         
           
-            <p>后台要用request.json获得前台的json数据，需要使用完整的$.ajax()，设置contentType: ‘application/json’<br><a target="_blank" rel="noopener" href="https://www.zybuluo.com/harpsword/note/209162">https://www.zybuluo.com/harpsword/note/209162</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhu_free/article/details/50396616">http://blog.csdn.net/zhu_free/article/details/50396616</a></p>
+            <h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><p>执行python manage.py collectstatic出错：<br>django collectstatic OSError: [Errno 2] No such file or directory</p>
+<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>collectstatic汇集所有app和STATICFILES_DIRS配置路径下的静态文件到一个目录STATIC_ROOT下，这里报错是因为STATICFILES_DIRS配置的路径是不存在的。</p>
 
           
         
@@ -385,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/71/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/blog/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/73/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/71/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/blog/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/73/">&gt;</a>
   </nav>
 
 
@@ -431,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

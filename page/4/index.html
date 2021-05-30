@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/tcp/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/14/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/network/tcp/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" itemprop="url">TCP三次握手</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/14/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" itemprop="url">使用kerl安装erlang环境</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-14T12:01:52+08:00">
+                2021-05-14
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
-                    <span itemprop="name">tcp</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,17 +312,15 @@
       
         
           
-            <h1 id="什么是TCP三次握手"><a href="#什么是TCP三次握手" class="headerlink" title="什么是TCP三次握手"></a>什么是TCP三次握手</h1><ul>
-<li>TCP三次握手指的是TCP建立连接的三次通信过程。<h2 id="三次握手的具体描述："><a href="#三次握手的具体描述：" class="headerlink" title="三次握手的具体描述："></a>三次握手的具体描述：</h2></li>
-<li>第一次，客户端向服务端发起建立连接的请求。TCP报文中SYN字段为1，表示报文是一个同步性质的报文。另外TCP报文中会带上一个序列号x。客户端进入SYNC_SENT状态。</li>
-<li>第二次，服务端收到客户端发送的SYN类型的TCP报文后，向客户端返回一个TCP报文，报文同时标记ACK和SYN标志位，代表这个报文兼具确认客户端报文和服务端同步的性质。此时TCP报文中会带上两个序列号，确认序列号x+1和服务端自身的序列号y。服务端此时进入SYNC_RCVD状态。</li>
-<li>第三次，客户端收到服务端的响应报文后，进入ESTABLISHED状态。然后客户端向服务端发送TCP报文，标记ACK标志位。TCP报文中带上的序列号为y+1。服务端收到此报文，进入ESTABLISHED状态。TCP连接建立。<h2 id="TCP报文中的序列号是什么"><a href="#TCP报文中的序列号是什么" class="headerlink" title="TCP报文中的序列号是什么"></a>TCP报文中的序列号是什么</h2>TCP序列号是TCP报文中一方持续增长的序号，因为有了这个序号，报文才是有序传输，这是TCP连接可靠性的基石。举例说明，在网络中，由于网络传输的不可靠，可能导致先发送的报文后到达，如果没有序号，就会导致报文乱序。</li>
-</ul>
-<h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><p>显然，确认TCP连接通道畅通至少需要两次，一来一回。</p>
-<h2 id="为什么不是两次"><a href="#为什么不是两次" class="headerlink" title="为什么不是两次"></a>为什么不是两次</h2><ul>
-<li>主要是为了防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。<br>如果两次就建立连接，存在以下的异常情况：假设客户端第一次传输的报文延迟到达，此时客户端通过超时重传并且两次握手正常建立连接。然后服务端收到了同一个客户端由于延迟而后到达的SYN报文，客户端收到服务端响应的报文后比较seq发现这是个已经放弃的SYN请求，就会丢弃。由于两次握手的情况下，服务端是一响应SYN请求就进入ESTABLISHED状态，这样客户端关闭，服务端ESTABLISHED，导致了服务端资源的浪费。<br>那么三次握手怎么避免重复连接的问题？当客户端收到过期SYN请求引起的ACK回传报文时，会发送RST复位报文给服务端，告知其取消连接。</li>
-<li>TCP连接握手本质上是客户端和服务端相互告知各自的ISN(Initial Sequence Number)，两次握手只能确认客户端的ISN被服务端接受存储，服务端没有确认自己的序列号被客户端接受存储。<h2 id="为什么不是四次或者更多"><a href="#为什么不是四次或者更多" class="headerlink" title="为什么不是四次或者更多"></a>为什么不是四次或者更多</h2>在三次连接基本能保证连接通畅的情况下，更多的报文传递是无意义的。</li>
-</ul>
+            <p>参考： kancloud.cn</p>
+<h1 id="kerl说明"><a href="#kerl说明" class="headerlink" title="kerl说明"></a>kerl说明</h1><p>kerl是一个OTP版本管理工具，可以在不同的OTP版本间随意切换。</p>
+<h1 id="安装kerl"><a href="#安装kerl" class="headerlink" title="安装kerl"></a>安装kerl</h1><p>curl -O <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod">https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod</a> a+x kerl</p>
+<h1 id="查看所有可用的版本"><a href="#查看所有可用的版本" class="headerlink" title="查看所有可用的版本"></a>查看所有可用的版本</h1><p>./kerl list releases</p>
+<h1 id="下载编译"><a href="#下载编译" class="headerlink" title="下载编译"></a>下载编译</h1><p>./kerl build $版本 </p>
+<h1 id="安装OTP"><a href="#安装OTP" class="headerlink" title="安装OTP"></a>安装OTP</h1><p>./kerl install $版本 $安装路径</p>
+<h1 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h1><p>. $安装路径/activate</p>
+<h1 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h1><p>kerl_deactivate</p>
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>./kerl delete installation/build $版本</p>
 
           
         
@@ -395,7 +360,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/3/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/5/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/3/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/5/">&gt;</a>
   </nav>
 
 
@@ -441,7 +406,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +417,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

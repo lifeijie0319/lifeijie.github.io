@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/" itemprop="url">django杂记</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/" itemprop="url">jvm错误日志信号分析</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/java/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
                   </a>
                 </span>
 
@@ -345,17 +345,25 @@
       
         
           
-            <h1 id="一、模板-过滤器"><a href="#一、模板-过滤器" class="headerlink" title="一、模板-过滤器"></a>一、模板-过滤器</h1><ul>
-<li>1、if和for循环不能在同一句话。</li>
-<li>2、取整过滤器phone2numeric </li>
-<li>3、字符截取过滤器：slice</li>
+            <h1 id="SIGSEGV"><a href="#SIGSEGV" class="headerlink" title="SIGSEGV"></a>SIGSEGV</h1><p>SIGSEGV — Segment Fault. The possible cases of your encountering this error are: </p>
+<ul>
+<li>buffer overflow — usually caused by a pointer reference out of range.</li>
+<li>stack overflow — please keep in mind that the default stack size is 8192K.</li>
+<li>illegal file access — file operations are forbidden on our judge system.</li>
 </ul>
-<h1 id="二、静态文件"><a href="#二、静态文件" class="headerlink" title="二、静态文件"></a>二、静态文件</h1><p>（一）开发时<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files">https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files</a><br>主要是django.contrib.staticfiles内置默认处理。<br>（二）生产时需要改变<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/">https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/</a></p>
-<h1 id="三、中文编码问题"><a href="#三、中文编码问题" class="headerlink" title="三、中文编码问题"></a>三、中文编码问题</h1><p>python2.7不能直接支持Unicode，解决办法：<br>from django.utils.encoding import python_2_unicode_compatible<br>在模型类定义之前加上装饰器：<br>@python_2_unicode_compatible</p>
-<h1 id="四、将从数据库获取的queryset转化成json返回。"><a href="#四、将从数据库获取的queryset转化成json返回。" class="headerlink" title="四、将从数据库获取的queryset转化成json返回。"></a>四、将从数据库获取的queryset转化成json返回。</h1><p>from django.core import serializers<br>data = serializers.serialize(“xml”, SomeModel.objects.all())</p>
-<h1 id="五、解决由于csrf保护启用导致的图片上传bug。"><a href="#五、解决由于csrf保护启用导致的图片上传bug。" class="headerlink" title="五、解决由于csrf保护启用导致的图片上传bug。"></a>五、解决由于csrf保护启用导致的图片上传bug。</h1><h2 id="1、ajax头"><a href="#1、ajax头" class="headerlink" title="1、ajax头"></a>1、ajax头</h2><p>xhr.setRequestHeader(“X-CSRFToken”, get_cookie(‘csrftoken’));</p>
-<h2 id="2、post中传cookie"><a href="#2、post中传cookie" class="headerlink" title="2、post中传cookie"></a>2、post中传cookie</h2><p>task.addData(‘csrfmiddlewaretoken’, get_cookie(‘csrftoken’))</p>
-<h1 id="六、request-POST取不到数据的原因"><a href="#六、request-POST取不到数据的原因" class="headerlink" title="六、request.POST取不到数据的原因"></a>六、request.POST取不到数据的原因</h1><p>只有ajax请求添加参数’Content-Type’：’application/x-www-form-urlencoded’才会填充request.POST。</p>
+<h1 id="SIGBUS"><a href="#SIGBUS" class="headerlink" title="SIGBUS:"></a>SIGBUS:</h1><p>导致SIGBUS信号的可能原因: </p>
+<ul>
+<li>硬件故障，不用说，程序猿最常碰上的肯定不是这样的情形。 </li>
+<li>Linux平台上运行malloc()，假设没有足够的RAM。Linux不是让malloc()失败返回。 而是向当前进程分发SIGBUS信号。<br>  注: 对该点执怀疑态度，有机会可自行測试确认当前系统反应。 </li>
+<li>某些架构上訪问数据时有对齐的要求，比方仅仅能从4字节边界上读取一个4字节的 数据类型。IA-32架构没有硬性要求对齐，虽然未对齐的訪问减少运行效率。另外一些架构，比方SPARC、m68k，要求对齐訪问，否则向当前进程分发SIGBUS信号。 </li>
+<li>试图訪问一块无文件内容相应的内存区域，比方超过文件尾的内存区域，或者以前有文件内容相应，如今为还有一进程截断过的内存区域。</li>
+</ul>
+<h1 id="SIGBUS与SIGSEGV信号的一般差别"><a href="#SIGBUS与SIGSEGV信号的一般差别" class="headerlink" title="SIGBUS与SIGSEGV信号的一般差别"></a>SIGBUS与SIGSEGV信号的一般差别</h1><ul>
+<li>SIGBUS(Bus error)意味着指针所相应的地址是有效地址，但总线不能正常使用该指针。一般是未对齐的数据訪问所致。</li>
+<li>SIGSEGV(Segment fault)意味着指针所相应的地址是无效地址。没有物理内存相应该地址。 </li>
+</ul>
+<h1 id="EXCEPTION-ACCESS-VIOLATION"><a href="#EXCEPTION-ACCESS-VIOLATION" class="headerlink" title="EXCEPTION_ACCESS_VIOLATION"></a>EXCEPTION_ACCESS_VIOLATION</h1><p>意味着Java应用Crash的时候，正在运行JVM自己的代码，而不是外部的Java代码或其他类库代码。这种情况很可能是JVM的Bug，但是也不一定。</p>
+<h1 id="EXCEPTION-STACK-OVERFLOW"><a href="#EXCEPTION-STACK-OVERFLOW" class="headerlink" title="EXCEPTION_STACK_OVERFLOW"></a>EXCEPTION_STACK_OVERFLOW</h1><p>意味着这是个栈溢出的错误。</p>
 
           
         
@@ -395,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/63/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/blog/page/65/">65</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/65/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/63/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/blog/page/65/">65</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/65/">&gt;</a>
   </nav>
 
 
@@ -441,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

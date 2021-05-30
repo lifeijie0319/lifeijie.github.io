@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/sqllte3/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/sqllte3/" itemprop="url">django使用sqlite</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" itemprop="url">mysql存储引擎</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
+                    <span itemprop="name">engine</span>
                   </a>
                 </span>
 
@@ -356,8 +356,24 @@
       
         
           
-            <p>测试时创建数据库、销毁数据库速度慢，可以使用内存数据库sqlite。<br>在setting里面的DATABASE设置下面添加：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;test&#x27;</span> <span class="keyword">in</span> sys.argv:</span><br><span class="line">    DATABASES[<span class="string">&#x27;default&#x27;</span>] = &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.sqlite3&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;:memory:&#x27;</span>,</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="存储引擎查看"><a href="#存储引擎查看" class="headerlink" title="存储引擎查看"></a>存储引擎查看</h1><ul>
+<li>查看所有支持的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> engines;</span><br></pre></td></tr></table></figure></li>
+<li>查看默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @<span class="variable">@default</span>_storage_engine;</span><br></pre></td></tr></table></figure></li>
+<li>查看某个库的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">table</span> status <span class="keyword">from</span> :db;</span><br></pre></td></tr></table></figure>
+:db 数据库名</li>
+<li>查看某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_schema, table_name, engine <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema <span class="operator">=</span> :schema <span class="keyword">and</span> table_name <span class="operator">=</span> :<span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
+或者<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> :<span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+:schema 数据库名<br>:table 表名</li>
+</ul>
+<h1 id="存储引擎修改"><a href="#存储引擎修改" class="headerlink" title="存储引擎修改"></a>存储引擎修改</h1><ul>
+<li>设置默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> default_storage_engine<span class="operator">=</span>:engine;</span><br></pre></td></tr></table></figure>
+:engine 存储引擎名称</li>
+<li>修改某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :schema.:<span class="keyword">table</span> engine[<span class="operator">=</span>]:engine;</span><br></pre></td></tr></table></figure>
+:schema 数据库名<br>:table 表名<br>:engine 引擎名称</li>
+</ul>
+<h1 id="MyISAM和InnoDB索引原理"><a href="#MyISAM和InnoDB索引原理" class="headerlink" title="MyISAM和InnoDB索引原理"></a>MyISAM和InnoDB索引原理</h1><h2 id="存储原理"><a href="#存储原理" class="headerlink" title="存储原理"></a>存储原理</h2><p>在索引存储上，MyISAM和InnoDB都使用B+树，区别在于，MyISAM底层叶子节点存储的数据是实际数据记录的磁盘地址（索引和数据分开存储，一般有.MYI索引文件和.MYD数据文件），InnoDB底层叶子节点存储的就是实际数据（索引和数据放在一起，一般是.ibd文件）。</p>
+<h2 id="聚集（簇）索引和非聚集（簇）索引"><a href="#聚集（簇）索引和非聚集（簇）索引" class="headerlink" title="聚集（簇）索引和非聚集（簇）索引"></a>聚集（簇）索引和非聚集（簇）索引</h2><p>关键在于其它数据和索引是否放在一起，放在一起的是聚集（簇）索引，比如InnoDB这种存储方式，不放在一起的是非聚集（簇）索引，比如MyISAM这种存储方式。</p>
+
           
         
       
@@ -396,7 +412,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/14/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/blog/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/16/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/14/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/blog/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/16/">&gt;</a>
   </nav>
 
 
@@ -442,7 +458,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +469,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/experience/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/engine/innodb%E5%92%8Cmyisam%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/experience/" itemprop="url">记一次使用django的migration建表报错</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/engine/innodb%E5%92%8Cmyisam%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">innodb和myisam的区别</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
+                    <span itemprop="name">engine</span>
                   </a>
                 </span>
 
@@ -356,14 +356,11 @@
       
         
           
-            <h1 id="报错：创建初始化默认数据表时报错"><a href="#报错：创建初始化默认数据表时报错" class="headerlink" title="报错：创建初始化默认数据表时报错"></a>报错：创建初始化默认数据表时报错</h1><p>django.db.migrations.exceptions.MigrationSchemaMissing：Unable to create the django_migrations table (Statement Execute Failed: [IBM][CLI Driver][DB2/LINUXX8664] SQL0574N  DEFAULT value or IDENTITY attribute value is not valid for column “APPLIED” in table “NANXUN.DJANGO_MIGRATIONS”.  Reason code: “1”.  SQLSTATE=42894 SQLCODE=-574)</p>
-<h1 id="（1）可能：用户缺乏在schema上的权限。"><a href="#（1）可能：用户缺乏在schema上的权限。" class="headerlink" title="（1）可能：用户缺乏在schema上的权限。"></a>（1）可能：用户缺乏在schema上的权限。</h1><h2 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h2><p>删除schema里面的表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 <span class="keyword">drop</span> <span class="keyword">table</span> test</span><br></pre></td></tr></table></figure>
-<p>删除schema</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 <span class="keyword">drop</span> schema nanxun restrict</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/cui_xing_tian/article/details/51622065">http://blog.csdn.net/cui_xing_tian/article/details/51622065</a><br>成为数据库连接用户，创建schema</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 <span class="keyword">create</span> schema nanxun</span><br></pre></td></tr></table></figure>
-<h2 id="结果：无效"><a href="#结果：无效" class="headerlink" title="结果：无效"></a>结果：无效</h2><h1 id="（2）进一步可能：权限不够"><a href="#（2）进一步可能：权限不够" class="headerlink" title="（2）进一步可能：权限不够"></a>（2）进一步可能：权限不够</h1><h2 id="操作：授权，schema授权、db授权"><a href="#操作：授权，schema授权、db授权" class="headerlink" title="操作：授权，schema授权、db授权"></a>操作：授权，schema授权、db授权</h2><h2 id="结果：无效-1"><a href="#结果：无效-1" class="headerlink" title="结果：无效"></a>结果：无效</h2><h1 id="（3）请教：时区设置故障"><a href="#（3）请教：时区设置故障" class="headerlink" title="（3）请教：时区设置故障"></a>（3）请教：时区设置故障</h1><p>解决：修改settings文件，设置USE_TZ = False解决</p>
+            <h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="1-InnoDB支持事务，MyISAM不支持"><a href="#1-InnoDB支持事务，MyISAM不支持" class="headerlink" title="1 InnoDB支持事务，MyISAM不支持"></a>1 InnoDB支持事务，MyISAM不支持</h2><p>对于InnoDB每一条SQL语言都默认封装成事务，自动提交，这样会影响速度，所以最好把多条SQL语言放在begin和commit之间，组成一个事务。</p>
+<h2 id="2-InnoDB支持外键，而MyISAM不支持"><a href="#2-InnoDB支持外键，而MyISAM不支持" class="headerlink" title="2 InnoDB支持外键，而MyISAM不支持"></a>2 InnoDB支持外键，而MyISAM不支持</h2><h2 id="3-InnoDB是聚集索引，而MyISAM不是聚集索引"><a href="#3-InnoDB是聚集索引，而MyISAM不是聚集索引" class="headerlink" title="3 InnoDB是聚集索引，而MyISAM不是聚集索引"></a>3 InnoDB是聚集索引，而MyISAM不是聚集索引</h2><p>同样适用B+树存储索引，对于主键索引，InnoDB的叶子节点存储的是数据，MyISAM存储的是数据的地址；对于辅助索引InnoDB的叶子节点存储的是主键id，MyISAM存储的是数据的地址，和主键索引一致。</p>
+<h2 id="4-InnoDB支持表、行-默认-级锁，而MyISAM支持表级锁"><a href="#4-InnoDB支持表、行-默认-级锁，而MyISAM支持表级锁" class="headerlink" title="4 InnoDB支持表、行(默认)级锁，而MyISAM支持表级锁"></a>4 InnoDB支持表、行(默认)级锁，而MyISAM支持表级锁</h2><p>InnoDB的行锁是实现在索引上的，而不是锁在物理行记录上。潜台词是，如果访问没有命中索引，也无法使用行锁，将要退化为表锁。</p>
+<h2 id="5-Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI"><a href="#5-Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI" class="headerlink" title="5 Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI"></a>5 Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI</h2><p>可以看到</p>
+<h2 id="6-InnoDB不保存表的具体行数，执行select-count-from-table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）"><a href="#6-InnoDB不保存表的具体行数，执行select-count-from-table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）" class="headerlink" title="6 InnoDB不保存表的具体行数，执行select count(*) from table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）"></a>6 InnoDB不保存表的具体行数，执行select count(*) from table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）</h2><h2 id="7-MyISAM支持全文类型索引，而InnoDB不支持全文索引"><a href="#7-MyISAM支持全文类型索引，而InnoDB不支持全文索引" class="headerlink" title="7 MyISAM支持全文类型索引，而InnoDB不支持全文索引"></a>7 MyISAM支持全文类型索引，而InnoDB不支持全文索引</h2><h1 id="选择策略："><a href="#选择策略：" class="headerlink" title="选择策略："></a>选择策略：</h1><p>1 MyISAM管理非事务表，提供高速存储和检索以及全文搜索能力，如果再应用中执行大量select操作，应该选择MyISAM<br>2 InnoDB用于事务处理，具有ACID事务支持等特性，如果在应用中执行大量insert和update操作，应该选择InnoDB</p>
 
           
         
@@ -403,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/13/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/blog/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><a class="extend next" rel="next" href="/blog/page/15/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/13/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/blog/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/15/">&gt;</a>
   </nav>
 
 
@@ -449,7 +446,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

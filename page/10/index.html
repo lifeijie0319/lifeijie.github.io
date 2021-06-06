@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/11/web/JWT/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/14/network/tcp/ftp/ftp%E4%B8%BB%E5%8A%A8%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/05/11/web/JWT/" itemprop="url">JWT理解</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/14/network/tcp/ftp/ftp%E4%B8%BB%E5%8A%A8%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-11T08:29:52+08:00">
-                2021-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-14T10:52:30+08:00">
+                2021-05-14
               </time>
             
 
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
+                    <span itemprop="name">tcp</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/network/tcp/ftp/" itemprop="url" rel="index">
+                    <span itemprop="name">ftp</span>
                   </a>
                 </span>
 
@@ -334,21 +356,16 @@
       
         
           
-            <h1 id="什么是JWT"><a href="#什么是JWT" class="headerlink" title="什么是JWT"></a>什么是JWT</h1><p>JWT(JSON Web Token)是一种认证方式，常用于web场景下服务端对客户端身份的验证。</p>
-<h1 id="JWT的原理"><a href="#JWT的原理" class="headerlink" title="JWT的原理"></a>JWT的原理</h1><p>JWT一般分为两个步骤，一是客户端到服务端获取token并储存，二是客户端再发起请求，此时需要在请求参数或者请求头中带上token，服务端对token进行验证，验证通过才能返回请求数据。</p>
-<h2 id="token的组成"><a href="#token的组成" class="headerlink" title="token的组成"></a>token的组成</h2><p>token由header/payload/signature三部分组成，格式为header.payload.signature。</p>
-<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p>header指明token的类型和使用的算法，一般形式为</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line">    &#x27;alg&#x27;: &#x27;HS256&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用base64编码后成为token里面的第一部分。<br>注：一般使用HS256（即HMAC SHA256）签名算法。</p>
-<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>payload包含负载信息，按照标准，有以下内容（也可以添加自定义的内容）：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;iss&#x27;: &#x27;jwt签发者&#x27;</span><br><span class="line">    &#x27;sub&#x27;: &#x27;jwt所面向的用户&#x27;</span><br><span class="line">    &#x27;aud&#x27;: &#x27;接收jwt的一方&#x27;</span><br><span class="line">    &#x27;exp&#x27;: &#x27;jwt的过期时间，这个过期时间必须要大于签发时间&#x27;</span><br><span class="line">    &#x27;nbf&#x27;: &#x27;定义在什么时间之前，该jwt都是不可用的&#x27;</span><br><span class="line">    &#x27;iat&#x27;: &#x27;jwt的签发时间&#x27;</span><br><span class="line">    &#x27;jti&#x27;: &#x27;jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用base64编码后成为token里面的第二部分。<br>注：一般使用HS256（即HMAC SHA256）签名算法。</p>
-<h3 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h3><p>signature是之前信息的签名，防止header和payload被篡改。生成算法为：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> encodeString = base64UrlEncode(header) + <span class="string">&#x27;.&#x27;</span> + base64UrlEncode(payload)</span><br><span class="line"><span class="keyword">var</span> signature = HMACSHA256(, secrect)</span><br></pre></td></tr></table></figure>
-<p>其中secrect为服务端存储的秘钥</p>
-<h2 id="验证的方式"><a href="#验证的方式" class="headerlink" title="验证的方式"></a>验证的方式</h2><p>一般有两层验证，一是验证signature的正确性，确定token没有被篡改；二是解出payload，查看是否过期。</p>
-<h1 id="JWT与session验证"><a href="#JWT与session验证" class="headerlink" title="JWT与session验证"></a>JWT与session验证</h1><p>早期，session验证客户端身份是主流，客户端发起请求，服务端生成session，存储在内存中。返回的http响应给客户端的cookie中存储了sessionid，用于和服务端的session对应。<br>session验证存在分布式服务器难以协调的问题，因为session存储在服务器内存，多台服务器难以协调一致。JWT服务端不存储token，解决了这个问题。</p>
-<h1 id="JWT没有解决的问题"><a href="#JWT没有解决的问题" class="headerlink" title="JWT没有解决的问题"></a>JWT没有解决的问题</h1><p>JWT没有解决中间人攻击的问题，如果劫持者使用客户端的token，可以伪装客户端与服务端进行通信。一般要求使用https来处理请求被劫持的情况。</p>
+            <h1 id="1-基本介绍"><a href="#1-基本介绍" class="headerlink" title="1 基本介绍"></a>1 基本介绍</h1><h2 id="1-1-初步认识"><a href="#1-1-初步认识" class="headerlink" title="1.1 初步认识"></a>1.1 初步认识</h2><p>已知ftp只基于tcp，不基于udp，而且命令链路和数据链路分离。<br>ftp主动被动模式判断的关键在于建立数据链路的时候，服务端是不是主动发起的一方。</p>
+<h2 id="1-2-主动-FTP-："><a href="#1-2-主动-FTP-：" class="headerlink" title="1.2 主动 FTP ："></a>1.2 主动 FTP ：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　　　命令连接：客户端 &gt;1024 端口 → 服务器 21 端口</span><br><span class="line">　　　　数据连接：客户端 &gt;1024 端口 ← 服务器 20 端口 </span><br></pre></td></tr></table></figure>
+<p>主动模式，在第 1 步中，客户端的命令端口与 FTP 服务器的命令端口建立连接，并发送命令 “PORT 1027” 。然后在第 2 步中， FTP 服务器给客户端的命令端口返回一个 “ACK” 。在第 3 步中， FTP 服务器发起一个从它自己的数据端口（ 20 ）到客户端先前指定的数据端口（ 1027 ）的连接，最后客户端在第 4 步中给 服务器端返回一个 “ACK” 。可以看到，服务器主动发起对客户端的连接。</p>
+<h2 id="1-3-被动-FTP-："><a href="#1-3-被动-FTP-：" class="headerlink" title="1.3 被动 FTP ："></a>1.3 被动 FTP ：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　　　命令连接：客户端 &gt;1024 端口 → 服务器 21 端口</span><br><span class="line">　　　　数据连接：客户端 &gt;1024 端口 ← 服务器 &gt;1024 端口</span><br></pre></td></tr></table></figure>
+<p>被动模式，在第 1 步中，客户端的命令端口与 服务器的命令端口建立连接，并发送命令 “PASV” 。然后在第 2 步中， 服务器返回命令 “PORT 2024” ，告诉客户端（ 服务器）用哪个端口侦听数据连接 。在第 3 步中，客户端初始化一个从自己的数据端口到 服务器端指定的数据端口的数据连接 。最后 服务器在第 4 步中给客户端的数据端口返回一个 “ACK” 响应 。可以看到，客户端主动发起对服务器的连接。</p>
+<h1 id="2-为什么要有被动模式"><a href="#2-为什么要有被动模式" class="headerlink" title="2 为什么要有被动模式"></a>2 为什么要有被动模式</h1><p>可以看到，主动模式是服务器主动向客户端建立数据链路连接。对于客户端的防火墙来说，这是从外部系统建立到内部客户端的连接，这是通常会被阻塞的 。</p>
+<h1 id="3-被动模式的注意点"><a href="#3-被动模式的注意点" class="headerlink" title="3 被动模式的注意点"></a>3 被动模式的注意点</h1><p>最大的问题是需要允许从任意远程终端到 服务器高位端口的连接 。幸运的是，许多 FTP 守护程序，包括流行的 WU-FTPD 允许管理员指定 FTP 服务器使用的端口范围 。</p>
+<h1 id="4-主动被动模式的优缺点总结"><a href="#4-主动被动模式的优缺点总结" class="headerlink" title="4 主动被动模式的优缺点总结"></a>4 主动被动模式的优缺点总结</h1><p>主动 FTP 对 FTP 服务器的管理有利，但对客户端的管理不利 。因为 FTP 服务器企图与客户端的高位随机端口建立连接，而这个端口很有可能被客户端的防火墙阻塞掉 。被动 FTP 对 FTP 客户端的管理有利，但对 服务器端的管理不利 。因为客户端要与 服务器端建立两个连接，其中一个连到一个高位随机端口，而这个端口很有可能被 服务器端的防火墙阻塞掉 。<br>　　幸运的是，有折衷的办法 。既然 FTP 服务器的管理员需要他们的 服务器有最多的客户连接，那么必须得支持被动 FTP 。我们可以通过为 FTP 服务器指定一个有限的端口范围来减小 服务器高位端口的暴露 。这样，不在这个范围的任何端口会被 服务器的防火墙阻塞 。虽然这没有消除所有针对服务器的危险，但它大大减少了危险 。</p>
+<h1 id="5-主动被动模式的切换"><a href="#5-主动被动模式的切换" class="headerlink" title="5 主动被动模式的切换"></a>5 主动被动模式的切换</h1><h2 id="5-1-vsFTPd"><a href="#5-1-vsFTPd" class="headerlink" title="5.1 vsFTPd"></a>5.1 vsFTPd</h2><p>在命令行登录之后，可以通过输入passive切换模式</p>
+<h2 id="5-1-ftplib"><a href="#5-1-ftplib" class="headerlink" title="5.1 ftplib"></a>5.1 ftplib</h2><p>可以使用FTP实例的set_pasv(bool)函数来切换模式</p>
 
           
         
@@ -388,7 +405,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/9/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/blog/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/11/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/9/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/blog/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/11/">&gt;</a>
   </nav>
 
 
@@ -434,7 +451,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +462,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

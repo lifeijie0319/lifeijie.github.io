@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/mysql/MySQL%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/02/06/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">redis配置文件</a></h1>
+                <a class="post-title-link" href="/blog/2021/02/06/database/mysql/MySQL%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/" itemprop="url">MySQL基本架构</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,14 +345,21 @@
       
         
           
-            <h1 id="配置文件地址"><a href="#配置文件地址" class="headerlink" title="配置文件地址"></a>配置文件地址</h1><p>默认地址：/etc/redis.conf</p>
-<h1 id="常用配置项"><a href="#常用配置项" class="headerlink" title="常用配置项"></a>常用配置项</h1><ul>
-<li><p>daemonize<br>daemonize表示是否后台启动redis，默认是no，表示前台启动。如果要改成后台启动，no要改成yes</p>
-</li>
-<li><p>bind<br>先说一句精华的话：bind配置了什么ip，别人就得访问bind里面配置的ip才访问到redis服务。<br>一台主机，可能会有多张网卡，或者对应多网段内网的Ip，公网IP等，也就意味着其他机器可以通过多个IP地址访问到这台主机。假如 有ip1，ip2，ip3可以访问到一台服务器。但是redis bind只配置了</p>
-</li>
+            <h1 id="MySQL基本结构"><a href="#MySQL基本结构" class="headerlink" title="MySQL基本结构"></a>MySQL基本结构</h1><ul>
+<li>客户端</li>
+<li>Server层<ul>
+<li>连接器：管理连接，权限校验等</li>
+<li>语法分析器：对SQL语句进行语法校验，语法解析</li>
+<li>优化器：对SQL执行进行可能的优化</li>
+<li>执行器：调用引擎，执行SQL，获取结果</li>
 </ul>
-<p><em>bind ip1 ip2</em><br>那如果是远程连接redis服务的话就只能通过ip1和ip2来访问。ip3不行。即使你可以ping得通。<br>注：这里的ip不是能访问redis的客户端的ip，而是能访问redis的本机网卡的ip</p>
+</li>
+<li>存储引擎层</li>
+</ul>
+<h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h2><h3 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h3><p>一般用TCP/IP协议连接，本地也可以选择socket连接。<br>连接使用线程模式，可以使用命令查看当前连接线程：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> processlist;</span><br></pre></td></tr></table></figure>
+<h3 id="权限校验的基本流程"><a href="#权限校验的基本流程" class="headerlink" title="权限校验的基本流程"></a>权限校验的基本流程</h3><p>mysql从mysql数据库user表查询用户相关权限，加载到内存的连接管理对象。</p>
+<h3 id="权限加载是否是即时生效"><a href="#权限加载是否是即时生效" class="headerlink" title="权限加载是否是即时生效"></a>权限加载是否是即时生效</h3><p>否，需要重新连接。</p>
 
           
         
@@ -392,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/104/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/blog/page/106/">106</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/106/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/104/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/blog/page/106/">106</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/106/">&gt;</a>
   </nav>
 
 
@@ -438,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/database/mysql/mysql%E4%BA%8B%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/05/30/database/mysql/mysql%E4%BA%8B%E5%8A%A1/" itemprop="url">mysql事务</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/30/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" itemprop="url">使用kerl安装erlang环境</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T20:37:38+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
                 2021-05-30
               </time>
             
@@ -282,6 +282,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/erlang/" itemprop="url" rel="index">
+                    <span itemprop="name">erlang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,8 +334,16 @@
       
         
           
-            <h1 id="mysql客户端开启事务的方式"><a href="#mysql客户端开启事务的方式" class="headerlink" title="mysql客户端开启事务的方式"></a>mysql客户端开启事务的方式</h1><h2 id="显式启动事务"><a href="#显式启动事务" class="headerlink" title="显式启动事务"></a>显式启动事务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">begin&#x2F;start transaction;</span><br></pre></td></tr></table></figure>
-<h2 id="修改客户端autocommit值"><a href="#修改客户端autocommit值" class="headerlink" title="修改客户端autocommit值"></a>修改客户端autocommit值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%autocommit%&#39;;</span><br><span class="line">set autocommit&#x3D;0;</span><br><span class="line">show variables like &#39;%autocommit%&#39;;</span><br></pre></td></tr></table></figure>
+            <p>参考： kancloud.cn</p>
+<h1 id="kerl说明"><a href="#kerl说明" class="headerlink" title="kerl说明"></a>kerl说明</h1><p>kerl是一个OTP版本管理工具，可以在不同的OTP版本间随意切换。</p>
+<h1 id="安装kerl"><a href="#安装kerl" class="headerlink" title="安装kerl"></a>安装kerl</h1><p>curl -O <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod">https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod</a> a+x kerl</p>
+<h1 id="查看所有可用的版本"><a href="#查看所有可用的版本" class="headerlink" title="查看所有可用的版本"></a>查看所有可用的版本</h1><p>./kerl list releases</p>
+<h1 id="下载编译"><a href="#下载编译" class="headerlink" title="下载编译"></a>下载编译</h1><p>./kerl build $版本 </p>
+<h1 id="安装OTP"><a href="#安装OTP" class="headerlink" title="安装OTP"></a>安装OTP</h1><p>./kerl install $版本 $安装路径</p>
+<h1 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h1><p>. $安装路径/activate</p>
+<h1 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h1><p>kerl_deactivate</p>
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>./kerl delete installation/build $版本</p>
+
           
         
       
@@ -352,7 +382,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/">&lt;</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/4/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/">&lt;</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/4/">&gt;</a>
   </nav>
 
 
@@ -398,7 +428,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -409,7 +439,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

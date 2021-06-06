@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/virtual/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/pycharm/%E9%85%8D%E7%BD%AEsvn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/virtual/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/" itemprop="url">virtualbox迁移踩坑</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/pycharm/%E9%85%8D%E7%BD%AEsvn/" itemprop="url">配置svn</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/virtual/" itemprop="url" rel="index">
-                    <span itemprop="name">virtual</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/virtual/virtualbox/" itemprop="url" rel="index">
-                    <span itemprop="name">virtualbox</span>
+                  <a href="/blog/categories/python/pycharm/" itemprop="url" rel="index">
+                    <span itemprop="name">pycharm</span>
                   </a>
                 </span>
 
@@ -345,12 +345,9 @@
       
         
           
-            <h1 id="1-vdi无法使用"><a href="#1-vdi无法使用" class="headerlink" title="1 vdi无法使用"></a>1 vdi无法使用</h1><p>问题： VD: error VERR_PATH_NOT_FOUND opening image file<br>处理 ：settings-Storage-Controller<br>先把原来的vdi remove，然后重新添加vdi</p>
-<h1 id="2-vdi无法添加"><a href="#2-vdi无法添加" class="headerlink" title="2 vdi无法添加"></a>2 vdi无法添加</h1><p>问题：Cannot register the hard disk … with UUID … already exists<br>处理：</p>
-<h2 id="2-1-进入virtualbox安装目录"><a href="#2-1-进入virtualbox安装目录" class="headerlink" title="2.1 进入virtualbox安装目录"></a>2.1 进入virtualbox安装目录</h2><h2 id="2-2-打开cmd，执行"><a href="#2-2-打开cmd，执行" class="headerlink" title="2.2 打开cmd，执行"></a>2.2 打开cmd，执行</h2><p>VBoxManage internalcommands sethduuid $vdi路径</p>
-<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>问题： VT-x is not available (VERR_VMX_NO_VMX).  返回 代码: E_FAIL (0x80004005) 组件: ConsoleWrap 界面: IConsole {872da645-4a9b-1727-bee2-5585105b9eed}<br>原因： Hyper-V与virtualbox冲突<br>解决：<br>首先，管理员身份打开提示符。<br>输入 bcdedit 并回车，找到hypervisorlaunchtype选项发现为auto<br>输入命令bcdedit /set hypervisorlaunchtype off<br>重启电脑<br>补充： bcdedit是什么？<br>bcdedit 是一个启动选项编辑工具，用来管理启动设置。</p>
-<p>BCDEdit 不是一个运行于图形界面下的程序，而是一个命令行工具，该文件 (Bcdedit.exe) 位于 “\Windows\System32” 目录下。通过命令行工具 Bcdedit ，我们可以添加、删除及修改 BCD (Boot Configuration Data) 中的对象。在 BCD 中，每个对象均具有唯一的 GUID (Globally Unique Identifier : 全局唯一标识符 ) ，如系统中的每块硬盘、每个分区的 GUID ( 全局唯一标识符 ) 均不相同。</p>
-<p>Hyper-V 是什么？<br>Hyper-V是微软的一款虚拟化产品，是微软第一个采用类似Vmware和Citrix开源Xen一样的基于hypervisor的技术。这也意味着微软会更加直接地与市场先行者VMware展开竞争，但竞争的方式会有所不同。<br>Hyper-V是微软提出的一种系统管理程序虚拟化技术，能够实现桌面虚拟化 [1] 。</p>
+            <p>1、安装tortoise<br>注意：安装的时候选择command line client tools</p>
+<p>2、配置svn可执行程序路径<br>Settings - Subversion - 顶部</p>
+<p>3、添加svn远程服务器地址<br>VCS - Browse    VCS Repository - Browse Subversion Repository<br>新建repository</p>
 
           
         
@@ -390,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/83/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/83/">83</a><span class="page-number current">84</span><a class="page-number" href="/blog/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/85/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/83/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/83/">83</a><span class="page-number current">84</span><a class="page-number" href="/blog/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/85/">&gt;</a>
   </nav>
 
 
@@ -436,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

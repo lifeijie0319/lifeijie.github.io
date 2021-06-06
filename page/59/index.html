@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/VCS/git/git%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/question/q1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/VCS/git/git%E5%AE%89%E8%A3%85/" itemprop="url">Centos下安装git记录</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/question/q1/" itemprop="url">servlet转发乱码问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
+                  <a href="/blog/categories/question/" itemprop="url" rel="index">
+                    <span itemprop="name">question</span>
                   </a>
                 </span>
 
@@ -345,11 +334,8 @@
       
         
           
-            <h1 id="1-背景"><a href="#1-背景" class="headerlink" title="1 背景"></a>1 背景</h1><p>linux使用yum安装的git下载时显示git版本过低，但是yum下载显示已经是最新版本1.7.1</p>
-<h1 id="2-卸载当前git"><a href="#2-卸载当前git" class="headerlink" title="2 卸载当前git"></a>2 卸载当前git</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br></pre></td></tr></table></figure>
-<h1 id="3-下载源码包，解压"><a href="#3-下载源码包，解压" class="headerlink" title="3 下载源码包，解压"></a>3 下载源码包，解压</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;www.kernel.org&#x2F;pub&#x2F;software&#x2F;scm&#x2F;git&#x2F;git-2.15.1.tar.xz</span><br><span class="line">tar -vxf git-2.15.1.tar.xz</span><br></pre></td></tr></table></figure>
-<h1 id="4-安装依赖包"><a href="#4-安装依赖包" class="headerlink" title="4 安装依赖包"></a>4 安装依赖包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tk zlib-devel openssl-devel perl cpio expat-devel gettext-devel </span><br></pre></td></tr></table></figure>
-<h1 id="5-编译安装"><a href="#5-编译安装" class="headerlink" title="5 编译安装"></a>5 编译安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp; make install</span><br></pre></td></tr></table></figure>
+            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>servlet使用request.getRequestDispatcher(“success.html”).forward(request, response)做服务端重定向，如果在这条语句之前进行response.setContentType(“text/html; charset=UTF-8”)或者response.setCharacterEncoding(“UTF-8”)，会导致中文乱码。</p>
+
           
         
       
@@ -388,7 +374,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/58/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/58/">58</a><span class="page-number current">59</span><a class="page-number" href="/blog/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/60/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/58/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/58/">58</a><span class="page-number current">59</span><a class="page-number" href="/blog/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/60/">&gt;</a>
   </nav>
 
 
@@ -434,7 +420,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +431,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

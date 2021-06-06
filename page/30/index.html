@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/ibm_db/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/install/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85Python2.7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/ibm_db/" itemprop="url">ibm_db</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/install/linux%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85Python2.7/" itemprop="url">linux环境下安装Python2.7</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
+                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/python/basic/install/" itemprop="url" rel="index">
+                    <span itemprop="name">install</span>
                   </a>
                 </span>
 
@@ -356,9 +356,12 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><p><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html</a></p>
-<h2 id="（一）离线安装"><a href="#（一）离线安装" class="headerlink" title="（一）离线安装"></a>（一）离线安装</h2><p>1、解压linuxx64_odbc_cli.tar.gz（实际上是IBM Data Server Driver for ODBC and CLI），将解压得到的处理driver移动到适当位置<br>2、设置环境变量：<br>export IBM_DB_HOME：文件夹ibm_db-2.0.7所在路径<br>3、解压ibm_db-2.0.7.tar.gz，得到解压后的文件夹ibm_db-2.0.7<br>4、进入文件夹ibm_db-2.0.7，执行<br>python2.7 setup.py build<br>python2.7 setup.py install<br>5、执行python，进入python环境，执行如下指令：<br>import ibm_db<br>没有报错说明包安装成功<br>6、Ensure that the Python driver can access the libdb2.so CLI driver file:<br>For 64-bit Linux and UNIX operating systems other than the AIX operating system, set the LD_LIBRARY_PATH variable to the IBM_DB_HOME/lib64 directory by issuing the export command:<br>export LD_LIBRARY_PATH=IBM_DB_HOME/lib64<br>这一步是设置环境变量，如果包下面没有这个lib64文件夹，可以将clidriver下面的db2profile执行设置环境变量。为了长期使用，可以把执行db2profiel的命令加到.bash_profilel或者.bashrc下面。</p>
-<h1 id="（二）在线安装"><a href="#（二）在线安装" class="headerlink" title="（二）在线安装"></a>（二）在线安装</h1><p>pip install ibm_db</p>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="1、下载解压进入目录"><a href="#1、下载解压进入目录" class="headerlink" title="1、下载解压进入目录"></a>1、下载解压进入目录</h2><p>解压.tgz或者.tar.gz文件：tar -zxvf<br>解压.tar.bz2格式文件：tar   -jxvf</p>
+<h2 id="2、编译安装"><a href="#2、编译安装" class="headerlink" title="2、编译安装"></a>2、编译安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure  </span><br><span class="line">make all             </span><br><span class="line">sudo make install  </span><br><span class="line">make clean  </span><br><span class="line">make distclean</span><br></pre></td></tr></table></figure>
+<h2 id="3、设置软连接"><a href="#3、设置软连接" class="headerlink" title="3、设置软连接"></a>3、设置软连接</h2><p>sudo ln -s /usr/local/bin/python2.7 /usr/bin/python2.7</p>
+<h1 id="安装错误："><a href="#安装错误：" class="headerlink" title="安装错误："></a>安装错误：</h1><p>1、zipimport.ZipImportError: can’t decompress data; zlib not available<br>原因：安装zlib组件<br>2、zlib安装完成后进入python源码目录执行：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make clean</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>注意：<br>安装之后重新编译安装Python2.7。</p>
 
           
         
@@ -398,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/29/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/blog/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/31/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/29/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/29/">29</a><span class="page-number current">30</span><a class="page-number" href="/blog/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/31/">&gt;</a>
   </nav>
 
 
@@ -444,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -455,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

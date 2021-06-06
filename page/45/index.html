@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/security/M2Crypto/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/network/requests/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/security/M2Crypto/" itemprop="url">M2Crypto安装问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/network/requests/" itemprop="url">requests离线安装</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/blog/categories/python/libs/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -356,11 +356,8 @@
       
         
           
-            <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>问题：SWIG/_m2crypto_wrap.c:3557:25: 致命错误：openssl/err.h：没有那个文件或目录<br>原因：没有安装swig<br>解决：yum install swig  </p>
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>问题：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SWIG&#x2F;_m2crypto.i</span><br><span class="line">SWIG&#x2F;_m2crypto.i:54: Error: Unable to find &#39;openssl&#x2F;opensslv.h&#39;</span><br><span class="line">SWIG&#x2F;_m2crypto.i:60: Error: Unable to find &#39;openssl&#x2F;safestack.h&#39;</span><br><span class="line">SWIG&#x2F;_evp.i:12: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_rc4.i:5: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_ec.i:7: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br></pre></td></tr></table></figure>
-<p>解决：yum install openssl-devel</p>
-
+            <p>pip install –no-index -f ~/packages/ requests-2.18.1-py2.py3-none-any.whl<br>注意：要预先安装好需求宝或者同事在目录下放置需求包，requests的需求包有以下几个：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Processing .&#x2F;requests-2.18.1-py2.py3-none-any.whl</span><br><span class="line">Requirement already satisfied: chardet&lt;3.1.0,&gt;&#x3D;3.0.2 in &#x2F;home&#x2F;nanxun&#x2F;wxenv&#x2F;lib&#x2F;python2.7&#x2F;site-packages (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Requirement already satisfied: certifi&gt;&#x3D;2017.4.17 in &#x2F;home&#x2F;nanxun&#x2F;wxenv&#x2F;lib&#x2F;python2.7&#x2F;site-packages (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Collecting idna&lt;2.6,&gt;&#x3D;2.5 (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Collecting urllib3&lt;1.22,&gt;&#x3D;1.21.1 (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Installing collected packages: idna, urllib3, requests</span><br><span class="line">Successfully installed idna-2.5 requests-2.18.1 urllib3-1.21.1</span><br></pre></td></tr></table></figure>
           
         
       
@@ -399,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/44/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><a class="extend next" rel="next" href="/blog/page/46/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/44/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/46/">&gt;</a>
   </nav>
 
 
@@ -445,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

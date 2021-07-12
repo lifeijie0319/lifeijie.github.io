@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/j2ee/servlet%E8%B7%AF%E7%94%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" itemprop="url">mysql存储引擎</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/java/j2ee/servlet%E8%B7%AF%E7%94%B1/" itemprop="url">servlet路由</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
+                  <a href="/blog/categories/java/j2ee/" itemprop="url" rel="index">
+                    <span itemprop="name">j2ee</span>
                   </a>
                 </span>
 
@@ -356,23 +345,14 @@
       
         
           
-            <h1 id="存储引擎查看"><a href="#存储引擎查看" class="headerlink" title="存储引擎查看"></a>存储引擎查看</h1><ul>
-<li>查看所有支持的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> engines;</span><br></pre></td></tr></table></figure></li>
-<li>查看默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @<span class="variable">@default</span>_storage_engine;</span><br></pre></td></tr></table></figure></li>
-<li>查看某个库的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">table</span> status <span class="keyword">from</span> :db;</span><br></pre></td></tr></table></figure>
-:db 数据库名</li>
-<li>查看某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_schema, table_name, engine <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema <span class="operator">=</span> :schema <span class="keyword">and</span> table_name <span class="operator">=</span> :<span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
-或者<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> :<span class="keyword">table</span></span><br></pre></td></tr></table></figure>
-:schema 数据库名<br>:table 表名</li>
+            <h1 id="web-xml配置-、-、-do的区别"><a href="#web-xml配置-、-、-do的区别" class="headerlink" title="web.xml配置/、/、.do的区别"></a>web.xml配置/、/<em>、</em>.do的区别</h1><ul>
+<li>“/‘表示匹配所有请求（其中包含除.jsp和.jspx外的所有后缀）。<br>jsp和jspx使用tomcat默认的JspServlet进行处理，至于其它带后缀的请求，如果没有配置静态资源匹配，会默认去掉后缀，当做控制器路由进行处理。</li>
+<li>“/*”表示匹配所有请求（包含所有后缀）。<br>这个路由控制会导致静态资源也无法访问。</li>
+<li><em>.do表示匹配所有以.do结尾的请求<br>控制器路由统一使用</em>.do结尾，省去了静态资源配置的麻烦，但是不符合restful风格。</li>
 </ul>
-<h1 id="存储引擎修改"><a href="#存储引擎修改" class="headerlink" title="存储引擎修改"></a>存储引擎修改</h1><ul>
-<li>设置默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> default_storage_engine<span class="operator">=</span>:engine;</span><br></pre></td></tr></table></figure>
-:engine 存储引擎名称</li>
-<li>修改某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :schema.:<span class="keyword">table</span> engine[<span class="operator">=</span>]:engine;</span><br></pre></td></tr></table></figure>
-:schema 数据库名<br>:table 表名<br>:engine 引擎名称</li>
-</ul>
-<h1 id="MyISAM和InnoDB索引原理"><a href="#MyISAM和InnoDB索引原理" class="headerlink" title="MyISAM和InnoDB索引原理"></a>MyISAM和InnoDB索引原理</h1><h2 id="存储原理"><a href="#存储原理" class="headerlink" title="存储原理"></a>存储原理</h2><p>在索引存储上，MyISAM和InnoDB都使用B+树，区别在于，MyISAM底层叶子节点存储的数据是实际数据记录的磁盘地址（索引和数据分开存储，一般有.MYI索引文件和.MYD数据文件），InnoDB底层叶子节点存储的就是实际数据（索引和数据放在一起，一般是.ibd文件）。</p>
-<h2 id="聚集（簇）索引和非聚集（簇）索引"><a href="#聚集（簇）索引和非聚集（簇）索引" class="headerlink" title="聚集（簇）索引和非聚集（簇）索引"></a>聚集（簇）索引和非聚集（簇）索引</h2><p>关键在于其它数据和索引是否放在一起，放在一起的是聚集（簇）索引，比如InnoDB这种存储方式，不放在一起的是非聚集（簇）索引，比如MyISAM这种存储方式。</p>
+<h1 id="web-xml静态资源配置"><a href="#web-xml静态资源配置" class="headerlink" title="web.xml静态资源配置"></a>web.xml静态资源配置</h1><p>tomcat有默认的DefaultServlet处理静态资源，DefaultServlet对应的id为default，在用户web.xml中配置静态资源指向default即可，访问js文件配置如下，其它同理：  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.js<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意: WEB-INF目录不允许直接访问，静态资源一般建立WEB-INF同级目录进行访问。</p>
 
           
         
@@ -412,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/16/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/blog/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/18/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/16/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/blog/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/18/">&gt;</a>
   </nav>
 
 
@@ -458,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

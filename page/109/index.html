@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/mysql/MySQL%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
+                <a class="post-title-link" href="/blog/2021/02/06/database/mysql/MySQL%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/" itemprop="url">MySQL基本架构</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-27T21:44:02+08:00">
-                2021-01-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-06T17:25:54+08:00">
+                2021-02-06
               </time>
             
 
@@ -313,17 +313,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
-                    <span itemprop="name">index</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -356,8 +345,21 @@
       
         
           
-            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
-<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
+            <h1 id="MySQL基本结构"><a href="#MySQL基本结构" class="headerlink" title="MySQL基本结构"></a>MySQL基本结构</h1><ul>
+<li>客户端</li>
+<li>Server层<ul>
+<li>连接器：管理连接，权限校验等</li>
+<li>语法分析器：对SQL语句进行语法校验，语法解析</li>
+<li>优化器：对SQL执行进行可能的优化</li>
+<li>执行器：调用引擎，执行SQL，获取结果</li>
+</ul>
+</li>
+<li>存储引擎层</li>
+</ul>
+<h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h2><h3 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h3><p>一般用TCP/IP协议连接，本地也可以选择socket连接。<br>连接使用线程模式，可以使用命令查看当前连接线程：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> processlist;</span><br></pre></td></tr></table></figure>
+<h3 id="权限校验的基本流程"><a href="#权限校验的基本流程" class="headerlink" title="权限校验的基本流程"></a>权限校验的基本流程</h3><p>mysql从mysql数据库user表查询用户相关权限，加载到内存的连接管理对象。</p>
+<h3 id="权限加载是否是即时生效"><a href="#权限加载是否是即时生效" class="headerlink" title="权限加载是否是即时生效"></a>权限加载是否是即时生效</h3><p>否，需要重新连接。</p>
 
           
         
@@ -397,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/108/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/blog/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/110/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/108/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/blog/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/110/">&gt;</a>
   </nav>
 
 
@@ -443,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

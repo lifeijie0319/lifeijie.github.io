@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/performance/memory_profiler/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/setuptools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/performance/memory_profiler/" itemprop="url">memory_profiler</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/setuptools/" itemprop="url">python setuptools</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/performance/" itemprop="url" rel="index">
-                    <span itemprop="name">performance</span>
+                  <a href="/blog/categories/python/libs/env/" itemprop="url" rel="index">
+                    <span itemprop="name">env</span>
                   </a>
                 </span>
 
@@ -356,20 +356,12 @@
       
         
           
-            <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p>一个可以按照代码逐行显示内存变化的内存监控工具</p>
-<h1 id="2-使用方法"><a href="#2-使用方法" class="headerlink" title="2 使用方法"></a>2 使用方法</h1><h2 id="2-1-方法一"><a href="#2-1-方法一" class="headerlink" title="2.1 方法一"></a>2.1 方法一</h2><p>1）在要监控的函数前添加 @profile，注意使用前需要import<br>2）python -m memory_profiler memory_profiler_test.py </p>
-<h2 id="2-2-方法二"><a href="#2-2-方法二" class="headerlink" title="2.2 方法二"></a>2.2 方法二</h2><h3 id="1）函数前加装饰器"><a href="#1）函数前加装饰器" class="headerlink" title="1）函数前加装饰器"></a>1）函数前加装饰器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span>,stream=<span class="built_in">open</span>(<span class="params"><span class="string">&#x27;memory_profiler.log&#x27;</span>,<span class="string">&#x27;w+&#x27;</span></span>)</span>)</span></span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<ul>
-<li>precision:精确到小数点后几位  </li>
-<li>stream:此模块分析结果保存到 ‘memory_profiler.log’ 日志文件。如果没有此参数，分析结果会在控制台输出<h3 id="2）python-memory-profiler-test-py"><a href="#2）python-memory-profiler-test-py" class="headerlink" title="2）python memory_profiler_test.py"></a>2）python memory_profiler_test.py</h3></li>
+            <h1 id="一、setuptools源码编译安装"><a href="#一、setuptools源码编译安装" class="headerlink" title="一、setuptools源码编译安装"></a>一、setuptools源码编译安装</h1><ul>
+<li>（一）、下载解压，进入目录</li>
+<li>（二）、sudo python2.7 setup.py build</li>
+<li>（三）、sudo python2.7 setup.py install</li>
 </ul>
-<h1 id="2-3-方法三："><a href="#2-3-方法三：" class="headerlink" title="2.3 方法三："></a>2.3 方法三：</h1><p>脚本代码和方法二一样，但是 运行方式不同  </p>
-<ul>
-<li>mprof run memory_profiler_test.py: 分析结果会保存到一个.dat格式文件中  </li>
-<li>mprof plot: 把结果以图片到方式显示出来（直接在本目录下运行此命令即可，程序会自动找出.dat文件（要安装matplotlib）</li>
-<li>mprof clean: 清空所有 .dat文件</li>
-</ul>
+<h1 id="二、setuptools使用"><a href="#二、setuptools使用" class="headerlink" title="二、setuptools使用"></a>二、setuptools使用</h1><p>不联网，在当前目录下安装包<br>easy_install -N none -f ./ </p>
 
           
         
@@ -409,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/45/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/blog/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/47/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/45/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/blog/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/47/">&gt;</a>
   </nav>
 
 
@@ -455,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -466,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

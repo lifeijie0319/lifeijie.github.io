@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/java/maven/maven%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/erlang/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/05/30/java/maven/maven%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url">maven常识</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/30/erlang/%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" itemprop="url">源码安装erlang环境</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/maven/" itemprop="url" rel="index">
-                    <span itemprop="name">maven</span>
+                  <a href="/blog/categories/erlang/" itemprop="url" rel="index">
+                    <span itemprop="name">erlang</span>
                   </a>
                 </span>
 
@@ -345,10 +334,16 @@
       
         
           
-            <h1 id="maven是什么"><a href="#maven是什么" class="headerlink" title="maven是什么"></a>maven是什么</h1><p>maven是java包管理工具，通过pom.xml配置文件可以指明项目依赖的jar包，并且可以通过maven提供的工具对这些依赖包进行管理。</p>
-<h1 id="maven库如何管理"><a href="#maven库如何管理" class="headerlink" title="maven库如何管理"></a>maven库如何管理</h1><p>maven库默认放在用户目录下的.m2/repository/下面，这个路径可以通过配置文件进行配置。</p>
-<h1 id="maven配置文件"><a href="#maven配置文件" class="headerlink" title="maven配置文件"></a>maven配置文件</h1><h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p>maven配置文件默认路径为maven安装目录下的conf/settings.xml，可以创建用户目录下的.m2/settings.xml，优先级更高。</p>
-<h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="pluginGroups"><a href="#pluginGroups" class="headerlink" title="pluginGroups"></a>pluginGroups</h3><p>搜索插件时, 如果 groupId 没有显式提供时, 则以此处配置的 groupId 为默认值, 可以简单理解为默认导入这些 groupId 下的所有 artifact（需要时才下载）</p>
+            <h1 id="安装包下载"><a href="#安装包下载" class="headerlink" title="安装包下载"></a>安装包下载</h1><p>官网大坑，安装包下载不下来，在另一篇博客里面看到正确地址<br><a target="_blank" rel="noopener" href="http://s3.amazonaws.com/downloads.basho.com/erlang/otp_src_R16B02-basho10.tar.gz">http://s3.amazonaws.com/downloads.basho.com/erlang/otp_src_R16B02-basho10.tar.gz</a></p>
+<h1 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h1><p>tar -zxvf otp_src_R16B02-basho10.tar.gz</p>
+<h1 id="配置编译"><a href="#配置编译" class="headerlink" title="配置编译"></a>配置编译</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd OTP_R16B02_basho10</span><br><span class="line">.&#x2F;otp_build autoconf</span><br><span class="line">.&#x2F;configure &amp;&amp; make &amp;&amp; sudo make install</span><br></pre></td></tr></table></figure>
+<h1 id="问题与解决"><a href="#问题与解决" class="headerlink" title="问题与解决"></a>问题与解决</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>命令：./otp_build autoconf<br>现象：./otp_build: line 329: autoconf: command not found<br>解决：安装新版本的autoconf</p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>命令：./otp_build autoconf<br>现象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">checking for tgetent in ltermlib... no</span><br><span class="line">configure error: No such library functions found</span><br><span class="line">configure error: &#x2F;opt&#x2F;erlang&#x2F;OTP_R16B02_basho10&#x2F;erts&#x2F;configure failed for erts</span><br></pre></td></tr></table></figure>
+<p>解决：安装新版本的autoconf</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>命令：./otp_build autoconf<br>现象：ODBC library - link check failed<br>解决：yum install unixODBC-devel</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>命令：./otp_build autoconf<br>现象：No C++ compiler found<br>解决：yum install gcc-c++</p>
+<h2 id="4-1"><a href="#4-1" class="headerlink" title="4"></a>4</h2><p>命令：./otp_build autoconf<br>现象：No usable OpenSSL found<br>解决：yum install openssl-devel</p>
 
           
         
@@ -388,7 +383,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/7/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/blog/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/9/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/7/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/blog/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/9/">&gt;</a>
   </nav>
 
 
@@ -434,7 +429,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +440,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

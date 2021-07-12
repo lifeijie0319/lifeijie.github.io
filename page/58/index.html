@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/other/chrome/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/rabbitmq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/other/chrome/" itemprop="url">chrome知识点</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/database/rabbitmq/" itemprop="url">rabbitmq常见问题汇总</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -334,7 +334,17 @@
       
         
           
-            <h1 id="一、console-log"><a href="#一、console-log" class="headerlink" title="一、console.log"></a>一、console.log</h1><p>console.log是异步执行的。<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/23429203/">https://stackoverflow.com/questions/23429203/</a> weird-behavior-with-objects-console-log<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20507212">https://www.zhihu.com/question/20507212</a>  </p>
+            <h1 id="rabbitmq任务分发机制"><a href="#rabbitmq任务分发机制" class="headerlink" title="rabbitmq任务分发机制"></a>rabbitmq任务分发机制</h1><p>rabbitmq请求到达服务端经过这几个组件：</p>
+<ul>
+<li>exchange<br>exchange分为以下四种：<ul>
+<li>direct：根据key与对应的queue绑定</li>
+<li>fanout：广播，所有queue均能收到消息</li>
+<li>topic：key是一个通配表示，符合条件的queue均能收到消息</li>
+<li>head</li>
+</ul>
+</li>
+<li>queue<br>消息队列，有消费者绑定在队列上进行处理<br>注意：任务分发是在队列上才进行分发，即多个消息绑定到同一个队列上才会分发，而exchange即使发消息到多个队列，其实消息是每个绑定队列都会收到，而不是分发。</li>
+</ul>
 
           
         
@@ -374,7 +384,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/57/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/blog/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/59/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/57/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/blog/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/59/">&gt;</a>
   </nav>
 
 
@@ -420,7 +430,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -431,7 +441,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/email/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/email/" itemprop="url">email发送和接收</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/" itemprop="url">django杂记</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -345,49 +345,17 @@
       
         
           
-            <p>参考：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0</a></p>
-<h1 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h1><p>需要手动对发送方邮箱配置SMTP协议，此时可能需要设置客户端授权码，即为登录第三方邮件客户端的专用口令，以下是常用邮箱SMTP端口及登录说明：  </p>
-<table>
-<thead>
-<tr>
-<th>邮箱</th>
-<th>SMTP服务器</th>
-<th>登录口令</th>
-<th>支持加密方式</th>
-<th>对应端口号</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>163</td>
-<td>smtp.163.com</td>
-<td>个人设置授权码</td>
-<td>明文/SSL加密</td>
-<td>25/465</td>
-</tr>
-<tr>
-<td>126</td>
-<td>smtp.126.com</td>
-<td>个人设置授权码</td>
-<td>明文/SSL加密</td>
-<td>25/465</td>
-</tr>
-<tr>
-<td>QQ</td>
-<td>smtp.qq.com</td>
-<td>系统分配授权码</td>
-<td>明文/SSL加密/TLS加密</td>
-<td>25/465/587</td>
-</tr>
-<tr>
-<td>Gmail</td>
-<td>smtp.gmail.com</td>
-<td>邮箱登录密码</td>
-<td>TLS加密</td>
-<td>587</td>
-</tr>
-</tbody></table>
-<h1 id="2、加密问题"><a href="#2、加密问题" class="headerlink" title="2、加密问题"></a>2、加密问题</h1><p>SMTP协议发送邮件，如果想要加密，有如下几种方式：<br>1）明文传输:　端口号是25；<br>2）SSL加密: 端口号是465，通信过程加密，邮件数据安全；<br>3）TLS加密: 端口号是587，通信过程加密，邮件数据安全，使用正常的smtp端口。对于TLS加密方式需要先建立SSL连接，然后再发送邮件。</p>
-<h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3 遇到的问题"></a>3 遇到的问题</h1><p>3.1 使用qq向foxmail发送带附件的邮件时，如果不用加密，程序报错，连接中断。<br>3.2 如果使用POP3收邮件，必须使用ssl加密的方式登录服务器。</p>
+            <h1 id="一、模板-过滤器"><a href="#一、模板-过滤器" class="headerlink" title="一、模板-过滤器"></a>一、模板-过滤器</h1><ul>
+<li>1、if和for循环不能在同一句话。</li>
+<li>2、取整过滤器phone2numeric </li>
+<li>3、字符截取过滤器：slice</li>
+</ul>
+<h1 id="二、静态文件"><a href="#二、静态文件" class="headerlink" title="二、静态文件"></a>二、静态文件</h1><p>（一）开发时<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files">https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files</a><br>主要是django.contrib.staticfiles内置默认处理。<br>（二）生产时需要改变<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/">https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/</a></p>
+<h1 id="三、中文编码问题"><a href="#三、中文编码问题" class="headerlink" title="三、中文编码问题"></a>三、中文编码问题</h1><p>python2.7不能直接支持Unicode，解决办法：<br>from django.utils.encoding import python_2_unicode_compatible<br>在模型类定义之前加上装饰器：<br>@python_2_unicode_compatible</p>
+<h1 id="四、将从数据库获取的queryset转化成json返回。"><a href="#四、将从数据库获取的queryset转化成json返回。" class="headerlink" title="四、将从数据库获取的queryset转化成json返回。"></a>四、将从数据库获取的queryset转化成json返回。</h1><p>from django.core import serializers<br>data = serializers.serialize(“xml”, SomeModel.objects.all())</p>
+<h1 id="五、解决由于csrf保护启用导致的图片上传bug。"><a href="#五、解决由于csrf保护启用导致的图片上传bug。" class="headerlink" title="五、解决由于csrf保护启用导致的图片上传bug。"></a>五、解决由于csrf保护启用导致的图片上传bug。</h1><h2 id="1、ajax头"><a href="#1、ajax头" class="headerlink" title="1、ajax头"></a>1、ajax头</h2><p>xhr.setRequestHeader(“X-CSRFToken”, get_cookie(‘csrftoken’));</p>
+<h2 id="2、post中传cookie"><a href="#2、post中传cookie" class="headerlink" title="2、post中传cookie"></a>2、post中传cookie</h2><p>task.addData(‘csrfmiddlewaretoken’, get_cookie(‘csrftoken’))</p>
+<h1 id="六、request-POST取不到数据的原因"><a href="#六、request-POST取不到数据的原因" class="headerlink" title="六、request.POST取不到数据的原因"></a>六、request.POST取不到数据的原因</h1><p>只有ajax请求添加参数’Content-Type’：’application/x-www-form-urlencoded’才会填充request.POST。</p>
 
           
         
@@ -427,7 +395,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/76/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/blog/page/78/">78</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/78/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/76/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/blog/page/78/">78</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/78/">&gt;</a>
   </nav>
 
 
@@ -473,7 +441,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -484,7 +452,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/data_structure/B+tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/data_structure/B+tree/" itemprop="url">B+树</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
                   </a>
                 </span>
 
@@ -334,10 +334,12 @@
       
         
           
-            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
+            <h1 id="B-树的定义"><a href="#B-树的定义" class="headerlink" title="B+树的定义"></a>B+树的定义</h1><p>B+树的定义有两种，其中一种基本和B树等价，关键字个数比孩子节点数小1；另一种关键字个数和孩子节点数相等。我们按照第一种定义展开学习，这种情况下，B+树在B树的基础上做了如下调整：</p>
 <ul>
-<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
-<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
+<li>B+树分为两种节点，内部节点（也称索引节点）和叶子节点。根节点可以是内部节点，也可以是叶子节点。</li>
+<li>B+树的内部节点不保存数据，所有数据都保存在叶子节点。</li>
+<li>对于内部节点的一个key，左子树中的所有key值小于它，右子树中的key都大于等于它。内部节点的key值和叶子节点的key值都按升序排列。</li>
+<li>每个叶子节点有相邻叶子节点的指针，叶子节点之间自小而大顺序排列。</li>
 </ul>
 
           
@@ -378,7 +380,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/55/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/blog/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/57/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/55/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/blog/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/57/">&gt;</a>
   </nav>
 
 
@@ -424,7 +426,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -435,7 +437,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/db2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/" itemprop="url">concurrent.futures模块中的submit和map</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/db2/" itemprop="url">Django使用db2数据库</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/concurrent-futures/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent.futures</span>
+                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
                   </a>
                 </span>
 
@@ -356,8 +356,35 @@
       
         
           
-            <p>1 concurrent.futures的父类Executor定义了两个执行任务的方法，submit和map<br>ThreadPoolExecutor和ProcessPoolExecutor继承Executor</p>
-<p>2 需要注意，submit执行的任务直接返回concurrent.futures.Future对象，返回的futures列表中的future对象状态可能处于中间状态。<br>map则阻塞到所有任务完成。</p>
+            <h1 id="Django与db2字段类型的对应关系"><a href="#Django与db2字段类型的对应关系" class="headerlink" title="Django与db2字段类型的对应关系"></a>Django与db2字段类型的对应关系</h1><table>
+<thead>
+<tr>
+<th>Django字段类型</th>
+<th>db2对应字段类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EmailField()/CharField(max_length=16)</td>
+<td>varchar(16)</td>
+</tr>
+<tr>
+<td>DateTimeField()</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>TextField()</td>
+<td>clob</td>
+</tr>
+<tr>
+<td>BooleanField()/PositiveSmallIntegerField()</td>
+<td>smallint</td>
+</tr>
+<tr>
+<td>AutoField()/ForeignKey()</td>
+<td>integer</td>
+</tr>
+</tbody></table>
+<h1 id="CharField字段长度中文问题"><a href="#CharField字段长度中文问题" class="headerlink" title="CharField字段长度中文问题"></a>CharField字段长度中文问题</h1><p>Django的orm连接db2数据库。配置CharField的时候，要注意对于中文，CharField的maxlength要3倍于实际值。<br>举例：想要设计一个8个中文字符的字段，那么数据库里实际的类型至少应该是varchar(24)，同样的，CharField的maxlength属性也至少是24.</p>
 
           
         
@@ -397,7 +424,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/25/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><a class="extend next" rel="next" href="/blog/page/27/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/25/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/27/">&gt;</a>
   </nav>
 
 
@@ -443,7 +470,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">118</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +481,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

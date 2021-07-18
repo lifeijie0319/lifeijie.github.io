@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/database/postgresql/%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" itemprop="url">mysql存储引擎</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/30/database/postgresql/%E5%AE%89%E8%A3%85/" itemprop="url">postgresql安装与常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
+                2021-05-30
               </time>
             
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
+                  <a href="/blog/categories/database/postgresql/" itemprop="url" rel="index">
+                    <span itemprop="name">postgresql</span>
                   </a>
                 </span>
 
@@ -356,23 +345,18 @@
       
         
           
-            <h1 id="存储引擎查看"><a href="#存储引擎查看" class="headerlink" title="存储引擎查看"></a>存储引擎查看</h1><ul>
-<li>查看所有支持的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> engines;</span><br></pre></td></tr></table></figure></li>
-<li>查看默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @<span class="variable">@default</span>_storage_engine;</span><br></pre></td></tr></table></figure></li>
-<li>查看某个库的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">table</span> status <span class="keyword">from</span> :db;</span><br></pre></td></tr></table></figure>
-:db 数据库名</li>
-<li>查看某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_schema, table_name, engine <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema <span class="operator">=</span> :schema <span class="keyword">and</span> table_name <span class="operator">=</span> :<span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
-或者<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> :<span class="keyword">table</span></span><br></pre></td></tr></table></figure>
-:schema 数据库名<br>:table 表名</li>
-</ul>
-<h1 id="存储引擎修改"><a href="#存储引擎修改" class="headerlink" title="存储引擎修改"></a>存储引擎修改</h1><ul>
-<li>设置默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> default_storage_engine<span class="operator">=</span>:engine;</span><br></pre></td></tr></table></figure>
-:engine 存储引擎名称</li>
-<li>修改某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :schema.:<span class="keyword">table</span> engine[<span class="operator">=</span>]:engine;</span><br></pre></td></tr></table></figure>
-:schema 数据库名<br>:table 表名<br>:engine 引擎名称</li>
-</ul>
-<h1 id="MyISAM和InnoDB索引原理"><a href="#MyISAM和InnoDB索引原理" class="headerlink" title="MyISAM和InnoDB索引原理"></a>MyISAM和InnoDB索引原理</h1><h2 id="存储原理"><a href="#存储原理" class="headerlink" title="存储原理"></a>存储原理</h2><p>在索引存储上，MyISAM和InnoDB都使用B+树，区别在于，MyISAM底层叶子节点存储的数据是实际数据记录的磁盘地址（索引和数据分开存储，一般有.MYI索引文件和.MYD数据文件），InnoDB底层叶子节点存储的就是实际数据（索引和数据放在一起，一般是.ibd文件）。</p>
-<h2 id="聚集（簇）索引和非聚集（簇）索引"><a href="#聚集（簇）索引和非聚集（簇）索引" class="headerlink" title="聚集（簇）索引和非聚集（簇）索引"></a>聚集（簇）索引和非聚集（簇）索引</h2><p>关键在于其它数据和索引是否放在一起，放在一起的是聚集（簇）索引，比如InnoDB这种存储方式，不放在一起的是非聚集（簇）索引，比如MyISAM这种存储方式。</p>
+            <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://www.postgresql.org/download/linux/redhat/">https://www.postgresql.org/download/linux/redhat/</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html</a></p>
+<h1 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h1><p>sudo yum install postgresql-server postgresql</p>
+<h1 id="报错与解决"><a href="#报错与解决" class="headerlink" title="报错与解决"></a>报错与解决</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>现象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;psycopg&#x2F;psycopg.h:30:20: fatal error: Python.h: No such file or directory</span><br><span class="line">     #include &lt;Python.h&gt;</span><br><span class="line">                        ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#39;gcc&#39; failed with exit status 1</span><br></pre></td></tr></table></figure>
+<p>解决：sudo yum install python-devel</p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>现象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;psycopg&#x2F;psycopg.h:31:22: fatal error: libpq-fe.h: No such file or directory</span><br><span class="line">     #include &lt;libpq-fe.h&gt;</span><br><span class="line">                          ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#39;gcc&#39; failed with exit status 1</span><br></pre></td></tr></table></figure>
+<p>解决：sudo yum install postgresql-devel</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>现象：启动postgresql报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">● postgresql-9.2.service - PostgreSQL 9.2 database server</span><br><span class="line">   Loaded: loaded (&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;postgresql-9.2.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: failed (Result: exit-code) since Mon 2017-06-26 21:06:23 CST; 9s ago</span><br><span class="line">  Process: 20274 ExecStartPre&#x3D;&#x2F;usr&#x2F;pgsql-9.2&#x2F;bin&#x2F;postgresql92-check-db-dir $&#123;PGDATA&#125; (code&#x3D;exited, status&#x3D;1&#x2F;FAILURE)</span><br></pre></td></tr></table></figure>
+<p>原因：没有初始化数据库<br>解决：/usr/pgsql-9.2/bin/postgresql92-setup initdb</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>现象：Django连接postgresql出错：<br>django.db.utils.OperationalError: FATAL:  Ident authentication failed for user “lifeijie”<br>原因：连接权限受限制<br>解决：<br>（1）在/var/lib/…./pg_hba.conf文件中添加一行：host all all 0.0.0.0/0 trust，其它所有的认证方式改成trust。<br>（2）重启postgresql  </p>
 
           
         
@@ -412,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/20/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/blog/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/22/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/20/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/blog/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/22/">&gt;</a>
   </nav>
 
 
@@ -458,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

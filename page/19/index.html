@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/database/mysql/mysql%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/" itemprop="url">python使用signal模块实现函数超时控制</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/30/database/mysql/mysql%E4%BA%8B%E5%8A%A1/" itemprop="url">mysql事务</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
+                2021-05-30
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,8 +345,8 @@
       
         
           
-            <p>signal模块可以实现函数超时控制，但是windows平台不支持。   </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_limit</span>(<span class="params">interval</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wraps</span>(<span class="params">func</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">handler</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            <span class="keyword">raise</span> RuntimeError()</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">deco</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            signal.signal(signal.SIGALRM, handler) <span class="comment"># 注册监听事件</span></span><br><span class="line">            signal.alarm(interval) <span class="comment"># 设置闹钟时间为interval秒</span></span><br><span class="line">            res = func(*args, **kwargs)</span><br><span class="line">            signal.alarm(<span class="number">0</span>) <span class="comment"># 关闭闹钟</span></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">return</span> deco</span><br><span class="line">    <span class="keyword">return</span> wraps</span><br></pre></td></tr></table></figure>
+            <h1 id="mysql客户端开启事务的方式"><a href="#mysql客户端开启事务的方式" class="headerlink" title="mysql客户端开启事务的方式"></a>mysql客户端开启事务的方式</h1><h2 id="显式启动事务"><a href="#显式启动事务" class="headerlink" title="显式启动事务"></a>显式启动事务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">begin&#x2F;start transaction;</span><br></pre></td></tr></table></figure>
+<h2 id="修改客户端autocommit值"><a href="#修改客户端autocommit值" class="headerlink" title="修改客户端autocommit值"></a>修改客户端autocommit值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%autocommit%&#39;;</span><br><span class="line">set autocommit&#x3D;0;</span><br><span class="line">show variables like &#39;%autocommit%&#39;;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -385,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/18/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/blog/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/20/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/18/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/blog/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/20/">&gt;</a>
   </nav>
 
 
@@ -431,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

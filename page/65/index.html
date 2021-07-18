@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/VCS/git/git%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/VCS/git/git%E5%AE%89%E8%A3%85/" itemprop="url">Centos下安装git记录</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlalchemy</span>
                   </a>
                 </span>
 
@@ -345,11 +367,11 @@
       
         
           
-            <h1 id="1-背景"><a href="#1-背景" class="headerlink" title="1 背景"></a>1 背景</h1><p>linux使用yum安装的git下载时显示git版本过低，但是yum下载显示已经是最新版本1.7.1</p>
-<h1 id="2-卸载当前git"><a href="#2-卸载当前git" class="headerlink" title="2 卸载当前git"></a>2 卸载当前git</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br></pre></td></tr></table></figure>
-<h1 id="3-下载源码包，解压"><a href="#3-下载源码包，解压" class="headerlink" title="3 下载源码包，解压"></a>3 下载源码包，解压</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;www.kernel.org&#x2F;pub&#x2F;software&#x2F;scm&#x2F;git&#x2F;git-2.15.1.tar.xz</span><br><span class="line">tar -vxf git-2.15.1.tar.xz</span><br></pre></td></tr></table></figure>
-<h1 id="4-安装依赖包"><a href="#4-安装依赖包" class="headerlink" title="4 安装依赖包"></a>4 安装依赖包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tk zlib-devel openssl-devel perl cpio expat-devel gettext-devel </span><br></pre></td></tr></table></figure>
-<h1 id="5-编译安装"><a href="#5-编译安装" class="headerlink" title="5 编译安装"></a>5 编译安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp; make install</span><br></pre></td></tr></table></figure>
+            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
+<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -388,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/64/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/blog/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/66/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/64/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/64/">64</a><span class="page-number current">65</span><a class="page-number" href="/blog/page/66/">66</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/66/">&gt;</a>
   </nav>
 
 
@@ -434,7 +456,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

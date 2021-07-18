@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/pip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/pip/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
-                    <span itemprop="name">sqlalchemy</span>
+                  <a href="/blog/categories/python/libs/env/" itemprop="url" rel="index">
+                    <span itemprop="name">env</span>
                   </a>
                 </span>
 
@@ -367,11 +356,22 @@
       
         
           
-            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
-<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>相当于：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="（一）yum安装"><a href="#（一）yum安装" class="headerlink" title="（一）yum安装"></a>（一）yum安装</h2><p>sudo yum install python-pip<br>报错: 没有可用软件包 pip。<br>错误：无须任何处理<br>解决：sudo yum -y install epel-release</p>
+<h2 id="（二）源码编译安装"><a href="#（二）源码编译安装" class="headerlink" title="（二）源码编译安装"></a>（二）源码编译安装</h2><p>1、下载解压，进入目录<br>2、sudo python2.7 setup.py install<br>报错：<br>pip is configured with locations that require TLS/SSL, however the ssl module in python is not available.<br>原因：没有安装openssl、openssl-devel<br>解决：sudo yum install openssl openssl-devel</p>
+<h1 id="二、修改pip源。"><a href="#二、修改pip源。" class="headerlink" title="二、修改pip源。"></a>二、修改pip源。</h1><h2 id="（一）、全局配置"><a href="#（一）、全局配置" class="headerlink" title="（一）、全局配置"></a>（一）、全局配置</h2><p>linux:<br>修改文件：/etc/pip.conf<br>windows:<br>新建文件：%APPDATA%/pip/pip.conf</p>
+<h2 id="（二）、用户配置"><a href="#（二）、用户配置" class="headerlink" title="（二）、用户配置"></a>（二）、用户配置</h2><p>修改文件：~/.pip/pip.conf</p>
+<h2 id="（三）、文件内容更"><a href="#（三）、文件内容更" class="headerlink" title="（三）、文件内容更"></a>（三）、文件内容更</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;pypi.doubanio.com&#x2F;simple&#x2F;</span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;pypi.doubanio.com</span><br><span class="line">disable-pip-version-check &#x3D; true</span><br><span class="line">#取消pip版本检查，排除每次都报最新的pip</span><br></pre></td></tr></table></figure>
+<h2 id="（四）、其它国内源网址"><a href="#（四）、其它国内源网址" class="headerlink" title="（四）、其它国内源网址"></a>（四）、其它国内源网址</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://pypi.v2ex.com/simple/">http://pypi.v2ex.com/simple/</a></li>
+<li><a target="_blank" rel="noopener" href="http://pypi.douban.com/">http://pypi.douban.com/</a>  豆瓣</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></li>
+<li><a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a>  清华</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.hustunique.com/">http://pypi.hustunique.com/</a>  华中理工大学</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.sdutlinux.org/">http://pypi.sdutlinux.org/</a>  山东理工大学</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.mirrors.ustc.edu.cn/">http://pypi.mirrors.ustc.edu.cn/</a>  中国科学技术大学</li>
+</ul>
+<h1 id="三、常用技巧"><a href="#三、常用技巧" class="headerlink" title="三、常用技巧"></a>三、常用技巧</h1><h2 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h2><p>pip install –no-index -f /home/nanxun/packages/ redis-2.10.5-py2.py3-none-any.whl</p>
+
           
         
       
@@ -410,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/54/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/blog/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/56/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/54/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/blog/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/56/">&gt;</a>
   </nav>
 
 
@@ -456,7 +456,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -467,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

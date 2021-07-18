@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/jvm/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%94%9F%E4%BA%A7jvm%E5%B4%A9%E6%BA%83/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/args/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/java/jvm/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%94%9F%E4%BA%A7jvm%E5%B4%A9%E6%BA%83/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/java/args/" itemprop="url">java参数详解</a></h1>
         
 
         <div class="post-meta">
@@ -302,17 +302,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -345,12 +334,17 @@
       
         
           
-            <hr>
-<h2 id="title-记一次生产jvm崩溃"><a href="#title-记一次生产jvm崩溃" class="headerlink" title="title:记一次生产jvm崩溃"></a>title:记一次生产jvm崩溃</h2><h1 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h1><p>查看hs_err_pid13355.log</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>Most of the times, the crashes in ZIP_GetEntry occur when the jar file being accessed has been modified/overwritten while the JVM instance was running. For performance reasons, HotSpot JVM memory maps each Jar file’s central directory structure using mmap. This is done so as to avoid reading the central directory structure data from the disk every time it needs to read entries from the Jar file. When a Jar file is modified or overwritten on the disk, the JVM’s copy of the data read earlier becomes inconsistent with the jar file on the disk, and any attempt to read and load entries from the modified jar can result in an application crash.</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>Since 1.6.0_23, a property can be used to disable the memory mapping of the central directory structure of the Jar files:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsun.zip.disableMemoryMapping&#x3D;true</span><br></pre></td></tr></table></figure>
-<p>Please note that enabling this property would have some performance impact on the application as the JVM needs to read the central directory structure from the Jar files on the disk again and again whenever it reads a Jar file entry. So, it is best to ensure that the jar files are not modified or overwritten while the JVM has an image of them loaded.<br>In Java 9, this ZIP crash has been resolved with the following enhancement:JDK-8142508: To bring j.u.z.ZipFile’s native implementation to Java to remove the expensive jni cost and mmap crash risk. This enhancement replaces the ZIP file native implementation that used mmap with the Java implementation, and that removes the risk of application crashes described above. </p>
+            <h1 id="D参数与args"><a href="#D参数与args" class="headerlink" title="-D参数与args"></a>-D参数与args</h1><p>-D参数属于-options，而不是args，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Djava.ext.dirs&#x3D;&#x2F;home&#x2F;LeoJava&#x2F;libs -Dpara&#x3D;1 HelloWorld a&#x3D;1 b</span><br></pre></td></tr></table></figure>
+<p>按照java命令行规范</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java [-options] class [args...]</span><br></pre></td></tr></table></figure>
+<p>“-Djava.ext.dirs=/home/LeoJava/libs -Dpara=1”属于options，而”a=1 b”属于args。-D参数可以再代码中使用System.getProperty获取参数值，args就是main方法中的args字符串数组。参考如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.getProperty(<span class="string">&quot;java.ext.dirs&quot;</span>));</span><br><span class="line">        System.out.println(System.getProperty(<span class="string">&quot;para&quot;</span>));</span><br><span class="line">        System.out.println(Arrays.asList(args));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="cp和–classpath"><a href="#cp和–classpath" class="headerlink" title="-cp和–classpath"></a>-cp和–classpath</h1><p>-cp和–classpath是一样的，指定包搜索路径，有如下几点需要注意：</p>
+<ul>
+<li>不同路径需要分开，linux上分隔符是:，windows下分隔符是;</li>
+<li>注意包含当前路径，一般入口类在当前路径，如果不加当前路径，会找不到主类。当前路径用.代表。</li>
+</ul>
 
           
         
@@ -390,7 +384,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
   </nav>
 
 
@@ -436,7 +430,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +441,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/rabbitmq/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/virtualenv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/rabbitmq/" itemprop="url">rabbitmq常见问题汇总</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/virtualenv/" itemprop="url">virtualenv</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/env/" itemprop="url" rel="index">
+                    <span itemprop="name">env</span>
                   </a>
                 </span>
 
@@ -334,18 +356,15 @@
       
         
           
-            <h1 id="rabbitmq任务分发机制"><a href="#rabbitmq任务分发机制" class="headerlink" title="rabbitmq任务分发机制"></a>rabbitmq任务分发机制</h1><p>rabbitmq请求到达服务端经过这几个组件：</p>
-<ul>
-<li>exchange<br>exchange分为以下四种：<ul>
-<li>direct：根据key与对应的queue绑定</li>
-<li>fanout：广播，所有queue均能收到消息</li>
-<li>topic：key是一个通配表示，符合条件的queue均能收到消息</li>
-<li>head</li>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
+<li>1、sudo pip install virtualenv</li>
+<li>2、virtualenv wxenv</li>
 </ul>
-</li>
-<li>queue<br>消息队列，有消费者绑定在队列上进行处理<br>注意：任务分发是在队列上才进行分发，即多个消息绑定到同一个队列上才会分发，而exchange即使发消息到多个队列，其实消息是每个绑定队列都会收到，而不是分发。</li>
-</ul>
-
+<h1 id="二、设置打开终端进入虚拟环境"><a href="#二、设置打开终端进入虚拟环境" class="headerlink" title="二、设置打开终端进入虚拟环境"></a>二、设置打开终端进入虚拟环境</h1><p>vi .bash_profile<br>添加”source wxenv/bin/activate”</p>
+<h1 id="三、windows下安装报错"><a href="#三、windows下安装报错" class="headerlink" title="三、windows下安装报错"></a>三、windows下安装报错</h1><h2 id="1、问题："><a href="#1、问题：" class="headerlink" title="1、问题："></a>1、问题：</h2><p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xc0 in position 7: ordinal not in range(128)</p>
+<h2 id="2、原因："><a href="#2、原因：" class="headerlink" title="2、原因："></a>2、原因：</h2><p>pip安装python包会加载当前用户的用户目录，我的用户目录恰好是含有中文的，ascii不能进行编码。</p>
+<h2 id="3、解决："><a href="#3、解决：" class="headerlink" title="3、解决："></a>3、解决：</h2><p>修改python安装目录 Python27\Lib\目录下的mimetypes.py文件。添加如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> sys.getdefaultncoding() != <span class="string">&#x27;gbk&#x27;</span>:</span><br><span class="line">    reload(sys)</span><br><span class="line">    sys.setdefaultencoding(<span class="string">&#x27;gbk&#x27;</span>)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -384,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/57/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/blog/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/59/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/57/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/57/">57</a><span class="page-number current">58</span><a class="page-number" href="/blog/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/59/">&gt;</a>
   </nav>
 
 
@@ -430,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -441,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

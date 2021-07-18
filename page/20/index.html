@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/engine/innodb%E5%92%8Cmyisam%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/database/mysql/mysql%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/engine/innodb%E5%92%8Cmyisam%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">innodb和myisam的区别</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/30/database/mysql/mysql%E9%94%81/" itemprop="url">mysql锁</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
+                2021-05-30
               </time>
             
 
@@ -313,17 +313,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -356,12 +345,7 @@
       
         
           
-            <h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="1-InnoDB支持事务，MyISAM不支持"><a href="#1-InnoDB支持事务，MyISAM不支持" class="headerlink" title="1 InnoDB支持事务，MyISAM不支持"></a>1 InnoDB支持事务，MyISAM不支持</h2><p>对于InnoDB每一条SQL语言都默认封装成事务，自动提交，这样会影响速度，所以最好把多条SQL语言放在begin和commit之间，组成一个事务。</p>
-<h2 id="2-InnoDB支持外键，而MyISAM不支持"><a href="#2-InnoDB支持外键，而MyISAM不支持" class="headerlink" title="2 InnoDB支持外键，而MyISAM不支持"></a>2 InnoDB支持外键，而MyISAM不支持</h2><h2 id="3-InnoDB是聚集索引，而MyISAM不是聚集索引"><a href="#3-InnoDB是聚集索引，而MyISAM不是聚集索引" class="headerlink" title="3 InnoDB是聚集索引，而MyISAM不是聚集索引"></a>3 InnoDB是聚集索引，而MyISAM不是聚集索引</h2><p>同样适用B+树存储索引，对于主键索引，InnoDB的叶子节点存储的是数据，MyISAM存储的是数据的地址；对于辅助索引InnoDB的叶子节点存储的是主键id，MyISAM存储的是数据的地址，和主键索引一致。</p>
-<h2 id="4-InnoDB支持表、行-默认-级锁，而MyISAM支持表级锁"><a href="#4-InnoDB支持表、行-默认-级锁，而MyISAM支持表级锁" class="headerlink" title="4 InnoDB支持表、行(默认)级锁，而MyISAM支持表级锁"></a>4 InnoDB支持表、行(默认)级锁，而MyISAM支持表级锁</h2><p>InnoDB的行锁是实现在索引上的，而不是锁在物理行记录上。潜台词是，如果访问没有命中索引，也无法使用行锁，将要退化为表锁。</p>
-<h2 id="5-Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI"><a href="#5-Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI" class="headerlink" title="5 Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI"></a>5 Innodb存储文件有frm、ibd，而Myisam是frm、MYD、MYI</h2><p>可以看到</p>
-<h2 id="6-InnoDB不保存表的具体行数，执行select-count-from-table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）"><a href="#6-InnoDB不保存表的具体行数，执行select-count-from-table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）" class="headerlink" title="6 InnoDB不保存表的具体行数，执行select count(*) from table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）"></a>6 InnoDB不保存表的具体行数，执行select count(*) from table时需要全表扫描。而MyISAM用一个变量保存了整个表的行数，执行上述语句时只需要读出该变量即可，速度很快（注意不能加有任何WHERE条件）</h2><h2 id="7-MyISAM支持全文类型索引，而InnoDB不支持全文索引"><a href="#7-MyISAM支持全文类型索引，而InnoDB不支持全文索引" class="headerlink" title="7 MyISAM支持全文类型索引，而InnoDB不支持全文索引"></a>7 MyISAM支持全文类型索引，而InnoDB不支持全文索引</h2><h1 id="选择策略："><a href="#选择策略：" class="headerlink" title="选择策略："></a>选择策略：</h1><p>1 MyISAM管理非事务表，提供高速存储和检索以及全文搜索能力，如果再应用中执行大量select操作，应该选择MyISAM<br>2 InnoDB用于事务处理，具有ACID事务支持等特性，如果在应用中执行大量insert和update操作，应该选择InnoDB</p>
-
+            <h1 id="mysql锁等待时间查看"><a href="#mysql锁等待时间查看" class="headerlink" title="mysql锁等待时间查看"></a>mysql锁等待时间查看</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;innodb_lock_wait_timeout&#39;;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -400,7 +384,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/19/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/blog/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/21/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/19/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/blog/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/21/">&gt;</a>
   </nav>
 
 
@@ -446,7 +430,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +441,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

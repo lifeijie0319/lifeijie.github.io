@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/" itemprop="url">jvm错误日志信号分析</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -345,25 +334,11 @@
       
         
           
-            <h1 id="SIGSEGV"><a href="#SIGSEGV" class="headerlink" title="SIGSEGV"></a>SIGSEGV</h1><p>SIGSEGV — Segment Fault. The possible cases of your encountering this error are: </p>
+            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
 <ul>
-<li>buffer overflow — usually caused by a pointer reference out of range.</li>
-<li>stack overflow — please keep in mind that the default stack size is 8192K.</li>
-<li>illegal file access — file operations are forbidden on our judge system.</li>
+<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
+<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
 </ul>
-<h1 id="SIGBUS"><a href="#SIGBUS" class="headerlink" title="SIGBUS:"></a>SIGBUS:</h1><p>导致SIGBUS信号的可能原因: </p>
-<ul>
-<li>硬件故障，不用说，程序猿最常碰上的肯定不是这样的情形。 </li>
-<li>Linux平台上运行malloc()，假设没有足够的RAM。Linux不是让malloc()失败返回。 而是向当前进程分发SIGBUS信号。<br>  注: 对该点执怀疑态度，有机会可自行測试确认当前系统反应。 </li>
-<li>某些架构上訪问数据时有对齐的要求，比方仅仅能从4字节边界上读取一个4字节的 数据类型。IA-32架构没有硬性要求对齐，虽然未对齐的訪问减少运行效率。另外一些架构，比方SPARC、m68k，要求对齐訪问，否则向当前进程分发SIGBUS信号。 </li>
-<li>试图訪问一块无文件内容相应的内存区域，比方超过文件尾的内存区域，或者以前有文件内容相应，如今为还有一进程截断过的内存区域。</li>
-</ul>
-<h1 id="SIGBUS与SIGSEGV信号的一般差别"><a href="#SIGBUS与SIGSEGV信号的一般差别" class="headerlink" title="SIGBUS与SIGSEGV信号的一般差别"></a>SIGBUS与SIGSEGV信号的一般差别</h1><ul>
-<li>SIGBUS(Bus error)意味着指针所相应的地址是有效地址，但总线不能正常使用该指针。一般是未对齐的数据訪问所致。</li>
-<li>SIGSEGV(Segment fault)意味着指针所相应的地址是无效地址。没有物理内存相应该地址。 </li>
-</ul>
-<h1 id="EXCEPTION-ACCESS-VIOLATION"><a href="#EXCEPTION-ACCESS-VIOLATION" class="headerlink" title="EXCEPTION_ACCESS_VIOLATION"></a>EXCEPTION_ACCESS_VIOLATION</h1><p>意味着Java应用Crash的时候，正在运行JVM自己的代码，而不是外部的Java代码或其他类库代码。这种情况很可能是JVM的Bug，但是也不一定。</p>
-<h1 id="EXCEPTION-STACK-OVERFLOW"><a href="#EXCEPTION-STACK-OVERFLOW" class="headerlink" title="EXCEPTION_STACK_OVERFLOW"></a>EXCEPTION_STACK_OVERFLOW</h1><p>意味着这是个栈溢出的错误。</p>
 
           
         
@@ -403,7 +378,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/69/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/blog/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/71/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/69/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/blog/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/71/">&gt;</a>
   </nav>
 
 
@@ -449,7 +424,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +435,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

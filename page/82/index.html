@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/" itemprop="url">print生产部署OSError</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/" itemprop="url">sftp服务器搭建一</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
                   </a>
                 </span>
 
@@ -345,13 +345,15 @@
       
         
           
-            <h1 id="错误描述："><a href="#错误描述：" class="headerlink" title="错误描述："></a>错误描述：</h1><p>生产部署简单tornado服务之后，退出控制台，外部访问执行到print出错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSError: [Error 5] Input&#x2F;output error</span><br></pre></td></tr></table></figure>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python xx.py &amp; </span><br></pre></td></tr></table></figure>
-<p>方式部署python服务，ssh断开之后，print语句没地方输出，就error了</p>
-<h1 id="处理方式："><a href="#处理方式：" class="headerlink" title="处理方式："></a>处理方式：</h1><p>1、使用shell重定向，或者nohup<br>2、删除替换所有的print语句</p>
-
+            <h1 id="1-说明"><a href="#1-说明" class="headerlink" title="1 说明"></a>1 说明</h1><p>sftp是Secure File Transfer Protocol的缩写，安全文件传送协议。可以为传输文件提供一种安全的加密方法。<br>sftp 与 ftp有着几乎一样的语法和功能。SFTP 为 SSH的一部份，和vsftpd一点关系没有，是一种传输档案至 Blogger 伺服器的安全方式。本身没有守护进程，是包含在ssh中，端口也是22</p>
+<h1 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2 搭建"></a>2 搭建</h1><h2 id="2-1-新建用户"><a href="#2-1-新建用户" class="headerlink" title="2.1 新建用户"></a>2.1 新建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# userdel ftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser|passwd --stdin sftpuser </span><br><span class="line">Changing password for user sftpuser.</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-配置-etc-ssh-sshd-config"><a href="#2-2-配置-etc-ssh-sshd-config" class="headerlink" title="2.2 配置/etc/ssh/sshd_config"></a>2.2 配置/etc/ssh/sshd_config</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># override default of no subsystems</span><br><span class="line">#Subsystem sftp &#x2F;usr&#x2F;libexec&#x2F;openssh&#x2F;sftp-server</span><br><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match User sftpuser</span><br><span class="line">ChrootDirectory &#x2F;</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no </span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
+<p>【注】：</p>
+<ul>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，属主和属组必须是root；</li>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，只有属主能拥有写权限，也就是说权限最大设置只能是755</li>
+</ul>
+<h2 id="2-3-重启服务"><a href="#2-3-重启服务" class="headerlink" title="2.3 重启服务"></a>2.3 重启服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# systemctl restart sshd</span><br></pre></td></tr></table></figure>
           
         
       
@@ -390,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/81/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/blog/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/83/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/81/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/81/">81</a><span class="page-number current">82</span><a class="page-number" href="/blog/page/83/">83</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/83/">&gt;</a>
   </nav>
 
 
@@ -436,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

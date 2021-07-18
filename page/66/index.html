@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/VCS/svn/svn%20up%20401%E6%95%85%E9%9A%9C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/data_structure/B+tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/VCS/svn/svn%20up%20401%E6%95%85%E9%9A%9C/" itemprop="url">svn up 401故障</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/data_structure/B+tree/" itemprop="url">B+树</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
-                    <span itemprop="name">svn</span>
+                  <a href="/blog/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
                   </a>
                 </span>
 
@@ -345,9 +334,13 @@
       
         
           
-            <h1 id="报错信息："><a href="#报错信息：" class="headerlink" title="报错信息："></a>报错信息：</h1><p>401 Authorization Required</p>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>密码过期</p>
-<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><p>ssh登录，会提示输入旧密码，修改新密码，修改成功即可</p>
+            <h1 id="B-树的定义"><a href="#B-树的定义" class="headerlink" title="B+树的定义"></a>B+树的定义</h1><p>B+树的定义有两种，其中一种基本和B树等价，关键字个数比孩子节点数小1；另一种关键字个数和孩子节点数相等。我们按照第一种定义展开学习，这种情况下，B+树在B树的基础上做了如下调整：</p>
+<ul>
+<li>B+树分为两种节点，内部节点（也称索引节点）和叶子节点。根节点可以是内部节点，也可以是叶子节点。</li>
+<li>B+树的内部节点不保存数据，所有数据都保存在叶子节点。</li>
+<li>对于内部节点的一个key，左子树中的所有key值小于它，右子树中的key都大于等于它。内部节点的key值和叶子节点的key值都按升序排列。</li>
+<li>每个叶子节点有相邻叶子节点的指针，叶子节点之间自小而大顺序排列。</li>
+</ul>
 
           
         
@@ -387,7 +380,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/65/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/65/">65</a><span class="page-number current">66</span><a class="page-number" href="/blog/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/67/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/65/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/65/">65</a><span class="page-number current">66</span><a class="page-number" href="/blog/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/67/">&gt;</a>
   </nav>
 
 
@@ -433,7 +426,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +437,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

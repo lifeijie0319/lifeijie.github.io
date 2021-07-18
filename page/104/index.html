@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/28/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/String/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/03/28/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/" itemprop="url">centos7安装Redis的经历</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/java/String/" itemprop="url">JAVA String</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T14:04:58+08:00">
-                2021-03-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:15:16+08:00">
+                2021-04-04
               </time>
             
 
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
+                  <a href="/blog/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -345,13 +334,10 @@
       
         
           
-            <h1 id="下载编译安装"><a href="#下载编译安装" class="headerlink" title="下载编译安装"></a>下载编译安装</h1><p>1 redis官网下载，解压后进入目录<br>2 make &amp; make install<br>注：make install如果不支持可以手动操作，实际上做了如下动作：</p>
-<ul>
-<li>删除源文件及目标文件以方便后续copy生成可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] rm -f src&#x2F;*.c *.h *.o</span><br></pre></td></tr></table></figure></li>
-<li>copy可执行文件至环境变量目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis] cp src&#x2F;redis-* &#x2F;usr&#x2F;local&#x2F;bin   </span><br></pre></td></tr></table></figure></li>
-<li>copy配置文件至系统配置文件目录,如果是集群安装，文件最好以端口作为文件名称<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] cp redis.conf &#x2F;etc&#x2F;</span><br></pre></td></tr></table></figure>
-<h1 id="配置redis为系统服务"><a href="#配置redis为系统服务" class="headerlink" title="配置redis为系统服务"></a>配置redis为系统服务</h1><h2 id="使用service命令启停"><a href="#使用service命令启停" class="headerlink" title="使用service命令启停"></a>使用service命令启停</h2>可以将redis解压后的目录下的utils/redis_init_script文件拷贝到/etc/init.d/目录下，这个是redis预设的初始化脚本，加好之后就可以用sevice来启停服务了。<h2 id="使用systemd启停"><a href="#使用systemd启停" class="headerlink" title="使用systemd启停"></a>使用systemd启停</h2>编写/usr/lib/systemd/system/redis.service，使用systemd管理服务。redis.service示例如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">#描述信息</span><br><span class="line">Description&#x3D;Redis Server 3.0.4</span><br><span class="line">#启动时机,开机启动最好在网络服务启动后即启动</span><br><span class="line">After&#x3D;network.target</span><br><span class="line">[Service]</span><br><span class="line">#此处为命令行启动redis的命令及参数,可参考官方文档</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-server &#x2F;etc&#x2F;redis.conf --daemonize no  </span><br><span class="line">#停止redis服务器命令</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-cli -h 127.0.0.1 -p 6379 shutdown </span><br><span class="line">User&#x3D;redis</span><br><span class="line">#运行reddis用户</span><br><span class="line">Group&#x3D;redis</span><br><span class="line">#所属组</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target #字符界面下启动</span><br></pre></td></tr></table></figure></li>
-</ul>
+            <h1 id="String的存储"><a href="#String的存储" class="headerlink" title="String的存储"></a>String的存储</h1><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">String s3 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>), s4 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(s1 == s2);</span><br><span class="line">System.out.println(s1 == s3);</span><br><span class="line">System.out.println(s4 == s3);</span><br><span class="line">System.out.println(s1.equals(s3));</span><br><span class="line">System.out.println(s4.equals(s3));</span><br></pre></td></tr></table></figure>
+<h3 id="打印结果："><a href="#打印结果：" class="headerlink" title="打印结果："></a>打印结果：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">false</span><br><span class="line">false</span><br><span class="line">true</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>java中的String有两种定义方式，对应的存储原理不同。<br>一种是s1和s2这样，字符串定义在堆中的常量区，s1生成常量对象，s2定义时，jvm发现常量区已有该字符串，直接返回对应地址。<br>另一种是s3和s4这样，等于实例化一个普通类，每次实例化返回的地址不同，在堆中生成了不同的实例。<br>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36653524/article/details/100730394">https://blog.csdn.net/qq_36653524/article/details/100730394</a> </p>
+<h3 id="“-”和equals方法进行字符串比较时的不同"><a href="#“-”和equals方法进行字符串比较时的不同" class="headerlink" title="“==”和equals方法进行字符串比较时的不同"></a>“==”和equals方法进行字符串比较时的不同</h3><p>java中的非基本类型都是引用（指针），”==”实际上是引用（指针存储的地址）的比较。而equals方法比较的是字符串内容是否相等。</p>
 
           
         
@@ -391,7 +377,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/103/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/105/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/103/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/105/">&gt;</a>
   </nav>
 
 
@@ -437,7 +423,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +434,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

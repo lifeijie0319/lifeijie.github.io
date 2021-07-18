@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/java/maven/maven%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/12/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/05/30/java/maven/maven%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url">maven常识</a></h1>
+                <a class="post-title-link" href="/blog/2021/07/12/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">sed常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
-                2021-05-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-12T08:57:03+08:00">
+                2021-07-12
               </time>
             
 
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/maven/" itemprop="url" rel="index">
-                    <span itemprop="name">maven</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,10 +334,8 @@
       
         
           
-            <h1 id="maven是什么"><a href="#maven是什么" class="headerlink" title="maven是什么"></a>maven是什么</h1><p>maven是java包管理工具，通过pom.xml配置文件可以指明项目依赖的jar包，并且可以通过maven提供的工具对这些依赖包进行管理。</p>
-<h1 id="maven库如何管理"><a href="#maven库如何管理" class="headerlink" title="maven库如何管理"></a>maven库如何管理</h1><p>maven库默认放在用户目录下的.m2/repository/下面，这个路径可以通过配置文件进行配置。</p>
-<h1 id="maven配置文件"><a href="#maven配置文件" class="headerlink" title="maven配置文件"></a>maven配置文件</h1><h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p>maven配置文件默认路径为maven安装目录下的conf/settings.xml，可以创建用户目录下的.m2/settings.xml，优先级更高。</p>
-<h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="pluginGroups"><a href="#pluginGroups" class="headerlink" title="pluginGroups"></a>pluginGroups</h3><p>搜索插件时, 如果 groupId 没有显式提供时, 则以此处配置的 groupId 为默认值, 可以简单理解为默认导入这些 groupId 下的所有 artifact（需要时才下载）</p>
+            <h1 id="基本替换模式"><a href="#基本替换模式" class="headerlink" title="基本替换模式"></a>基本替换模式</h1><p>sed -i :expression :file<br>:expression 一般是替换的表达式，参考vi中的替换。注意，与vi不同之处，一是用s而非%s，二是替换时忽略大小写，参考下文<br>:file 文件名</p>
+<h1 id="替换时忽略大小写"><a href="#替换时忽略大小写" class="headerlink" title="替换时忽略大小写"></a>替换时忽略大小写</h1><p>在:expression的最后加上I代表忽略大小写</p>
 
           
         
@@ -388,7 +375,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/11/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/blog/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/13/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/11/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/blog/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/13/">&gt;</a>
   </nav>
 
 
@@ -434,7 +421,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +432,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/ibm_db_django/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/experience/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/ibm_db_django/" itemprop="url">ibm_db_django</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/experience/" itemprop="url">记一次使用django的migration建表报错</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -317,7 +317,7 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
                     <span itemprop="name">db</span>
                   </a>
                 </span>
@@ -356,8 +356,15 @@
       
         
           
-            <h1 id="一、说明："><a href="#一、说明：" class="headerlink" title="一、说明："></a>一、说明：</h1><p>Django要连接db2，除了ibm_db这个Python和db2的连接件，还需要安装ibm_db_django包。</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1>
+            <h1 id="报错：创建初始化默认数据表时报错"><a href="#报错：创建初始化默认数据表时报错" class="headerlink" title="报错：创建初始化默认数据表时报错"></a>报错：创建初始化默认数据表时报错</h1><p>django.db.migrations.exceptions.MigrationSchemaMissing：Unable to create the django_migrations table (Statement Execute Failed: [IBM][CLI Driver][DB2/LINUXX8664] SQL0574N  DEFAULT value or IDENTITY attribute value is not valid for column “APPLIED” in table “NANXUN.DJANGO_MIGRATIONS”.  Reason code: “1”.  SQLSTATE=42894 SQLCODE=-574)</p>
+<h1 id="（1）可能：用户缺乏在schema上的权限。"><a href="#（1）可能：用户缺乏在schema上的权限。" class="headerlink" title="（1）可能：用户缺乏在schema上的权限。"></a>（1）可能：用户缺乏在schema上的权限。</h1><h2 id="操作："><a href="#操作：" class="headerlink" title="操作："></a>操作：</h2><p>删除schema里面的表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 <span class="keyword">drop</span> <span class="keyword">table</span> test</span><br></pre></td></tr></table></figure>
+<p>删除schema</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 <span class="keyword">drop</span> schema nanxun restrict</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/cui_xing_tian/article/details/51622065">http://blog.csdn.net/cui_xing_tian/article/details/51622065</a><br>成为数据库连接用户，创建schema</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 <span class="keyword">create</span> schema nanxun</span><br></pre></td></tr></table></figure>
+<h2 id="结果：无效"><a href="#结果：无效" class="headerlink" title="结果：无效"></a>结果：无效</h2><h1 id="（2）进一步可能：权限不够"><a href="#（2）进一步可能：权限不够" class="headerlink" title="（2）进一步可能：权限不够"></a>（2）进一步可能：权限不够</h1><h2 id="操作：授权，schema授权、db授权"><a href="#操作：授权，schema授权、db授权" class="headerlink" title="操作：授权，schema授权、db授权"></a>操作：授权，schema授权、db授权</h2><h2 id="结果：无效-1"><a href="#结果：无效-1" class="headerlink" title="结果：无效"></a>结果：无效</h2><h1 id="（3）请教：时区设置故障"><a href="#（3）请教：时区设置故障" class="headerlink" title="（3）请教：时区设置故障"></a>（3）请教：时区设置故障</h1><p>解决：修改settings文件，设置USE_TZ = False解决</p>
+
           
         
       
@@ -396,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/36/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/blog/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/38/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/36/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/blog/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/38/">&gt;</a>
   </nav>
 
 
@@ -442,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

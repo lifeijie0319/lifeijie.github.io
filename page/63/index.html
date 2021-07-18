@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/question/q1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/visual/pygraphviz/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/question/q1/" itemprop="url">servlet转发乱码问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/visual/pygraphviz/" itemprop="url">pygraphviz安装</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/question/" itemprop="url" rel="index">
-                    <span itemprop="name">question</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/visual/" itemprop="url" rel="index">
+                    <span itemprop="name">visual</span>
                   </a>
                 </span>
 
@@ -334,7 +356,12 @@
       
         
           
-            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>servlet使用request.getRequestDispatcher(“success.html”).forward(request, response)做服务端重定向，如果在这条语句之前进行response.setContentType(“text/html; charset=UTF-8”)或者response.setCharacterEncoding(“UTF-8”)，会导致中文乱码。</p>
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Graphviz 是一个几何图形可视化软件，能够将数据的结构信息表示为抽象图形和网络图的方式。PyGraphviz 主要对数据量大、可任意定制的图形上具有强大优势。</p>
+<h1 id="pygraphviz安装问题"><a href="#pygraphviz安装问题" class="headerlink" title="pygraphviz安装问题"></a>pygraphviz安装问题</h1><h2 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h2><p>python setup.py install</p>
+<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>安装pygraphviz失败</p>
+<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><p>需要先安装graphviz和pygraphviz-devel。因为yum没有配置，所以需要先在官网下载yum源配置文件。之后可以用yum安装。然而yum源安装获取的版本（2.40）与网站提供的版本（2.38）不一致，所以需要先下载rpm包，然后sudo yum localinstall graphviz-devel-2.38.0-1.el7.x86_64.rpm graphviz-2.38.0-1.el7.x86_64.rpm</p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html">http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html</a></p>
+<h2 id="注：在ubuntu下面安装-graphviz"><a href="#注：在ubuntu下面安装-graphviz" class="headerlink" title="注：在ubuntu下面安装 graphviz"></a>注：在ubuntu下面安装 graphviz</h2><p>sudo apt-get install graphviz, graphviz-dev<br>注意graphiviz-dev是pygraphviz所依赖的必须安装。<br>pip install pygraphviz</p>
 
           
         
@@ -374,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/62/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/62/">62</a><span class="page-number current">63</span><a class="page-number" href="/blog/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/64/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/62/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/62/">62</a><span class="page-number current">63</span><a class="page-number" href="/blog/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/64/">&gt;</a>
   </nav>
 
 
@@ -420,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -431,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

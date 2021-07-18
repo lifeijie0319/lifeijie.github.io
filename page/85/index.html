@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/" itemprop="url">json数据的获取</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url">django基本环境配置</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/flask/" itemprop="url" rel="index">
-                    <span itemprop="name">flask</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -345,8 +345,15 @@
       
         
           
-            <p>后台要用request.json获得前台的json数据，需要使用完整的$.ajax()，设置contentType: ‘application/json’<br><a target="_blank" rel="noopener" href="https://www.zybuluo.com/harpsword/note/209162">https://www.zybuluo.com/harpsword/note/209162</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhu_free/article/details/50396616">http://blog.csdn.net/zhu_free/article/details/50396616</a></p>
-
+            <h1 id="一、新建项目"><a href="#一、新建项目" class="headerlink" title="一、新建项目"></a>一、新建项目</h1><p>django-admin startproject nanxun_pro</p>
+<h1 id="二、建立app"><a href="#二、建立app" class="headerlink" title="二、建立app"></a>二、建立app</h1><p>cd nanxun_pro/<br>python manage.py startapp nanxun<br>修改配置添加app名字</p>
+<h1 id="三、django连接psql"><a href="#三、django连接psql" class="headerlink" title="三、django连接psql"></a>三、django连接psql</h1><p><a target="_blank" rel="noopener" href="http://luct.blogbus.com/logs/111257414.html">http://luct.blogbus.com/logs/111257414.html</a></p>
+<h2 id="1、修改配置"><a href="#1、修改配置" class="headerlink" title="1、修改配置"></a>1、修改配置</h2><p>默认：<br>修改后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,</span><br><span class="line">        &#39;NAME&#39;: &#39;nanxundb&#39;,</span><br><span class="line">        &#39;USER&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;PASSWORD&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;HOST&#39;: &#39;localhost&#39;,</span><br><span class="line">        &#39;PORT&#39;: &#39;5432&#39;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装psycopg2，psql在python中运行的中间件。"><a href="#2、安装psycopg2，psql在python中运行的中间件。" class="headerlink" title="2、安装psycopg2，psql在python中运行的中间件。"></a>2、安装psycopg2，psql在python中运行的中间件。</h2><p>pip install psycopg2</p>
+<h2 id="3、初始化数据库，载入django自带的数据模型"><a href="#3、初始化数据库，载入django自带的数据模型" class="headerlink" title="3、初始化数据库，载入django自带的数据模型"></a>3、初始化数据库，载入django自带的数据模型</h2><p>python manage.py migrate</p>
+<h1 id="四、配置admin账户"><a href="#四、配置admin账户" class="headerlink" title="四、配置admin账户"></a>四、配置admin账户</h1><p>python manage.py createsuperuser</p>
+<h1 id="五、创建模板与静态文件目录。"><a href="#五、创建模板与静态文件目录。" class="headerlink" title="五、创建模板与静态文件目录。"></a>五、创建模板与静态文件目录。</h1>
           
         
       
@@ -385,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/84/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/blog/page/86/">86</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/118/">118</a><a class="extend next" rel="next" href="/blog/page/86/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/84/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/blog/page/86/">86</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/86/">&gt;</a>
   </nav>
 
 
@@ -431,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">118</span>
+                  <span class="site-state-item-count">128</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

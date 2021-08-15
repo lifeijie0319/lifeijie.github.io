@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/11/linux/ulimit/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/18/tools/nginx/nginx%E4%B8%AD%E7%9A%84localtion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/05/11/linux/ulimit/" itemprop="url">ulimit</a></h1>
+                <a class="post-title-link" href="/blog/2021/07/18/tools/nginx/nginx%E4%B8%AD%E7%9A%84localtion/" itemprop="url">nginx中的location</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-11T08:29:52+08:00">
-                2021-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-18T18:33:26+08:00">
+                2021-07-18
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -334,18 +345,44 @@
       
         
           
-            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>ulimt是一个linux自带应用工具，用于控制资源的可用性</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>ulimit  [-HSTabcdefilmnpqrstuvx  [limit]]</p>
-<h2 id="H-和-S"><a href="#H-和-S" class="headerlink" title="-H 和 -S"></a>-H 和 -S</h2><p>-H选项和-S选项分别表示对给定资源的硬限制（hard limit）和软限制（soft limit）进行设置。硬限制（hard limit）一旦被设置以后就不能被非root用户修改，软限制（soft limit）可以增长达到硬限制（hard limit）。如果既没有指定-H选项也没有指定-S选项，那么硬限制（hard limit）和软限制（soft limit）都会被设置。limit的值可以是一个数值，也可以是一些特定的值，比如：hard，soft，unlimited，分别代表当前硬件限制、当前软件限制、不限制。</p>
-<h2 id="查看进程打开文件的最大限制"><a href="#查看进程打开文件的最大限制" class="headerlink" title="查看进程打开文件的最大限制"></a>查看进程打开文件的最大限制</h2><h3 id="系统级最大限制"><a href="#系统级最大限制" class="headerlink" title="系统级最大限制"></a>系统级最大限制</h3><p>cat /proc/sys/fs/file-max</p>
-<h3 id="用户级限制"><a href="#用户级限制" class="headerlink" title="用户级限制"></a>用户级限制</h3><p>ulimit -n</p>
-<h2 id="查看进程已经打开的文件数"><a href="#查看进程已经打开的文件数" class="headerlink" title="查看进程已经打开的文件数"></a>查看进程已经打开的文件数</h2><h3 id="查看进程资源限制"><a href="#查看进程资源限制" class="headerlink" title="查看进程资源限制"></a>查看进程资源限制</h3><p>cat /proc/$pid/limits</p>
-<h3 id="查看实际打开文件数"><a href="#查看实际打开文件数" class="headerlink" title="查看实际打开文件数"></a>查看实际打开文件数</h3><p>ls /proc/$pid/fd|wc -l</p>
-<h2 id="修改限制"><a href="#修改限制" class="headerlink" title="修改限制"></a>修改限制</h2><h3 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h3><p>ulimit -n $num</p>
-<h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a>永久修改</h3><p>vi /etc/security/limits.conf<br>参考文档内说明配置限制项</p>
-<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="20210510-riak服务异常"><a href="#20210510-riak服务异常" class="headerlink" title="20210510 riak服务异常"></a>20210510 riak服务异常</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>客户端连接riak服务端超时。检查发现进程打开的文件数已经超过用户设置的限制50000。另外top命令显示系统cpu资源占用率400%以上。</p>
-<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>修改riak用户的打开文件数限制，增加到65535。重启riak服务。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>riak为什么打开文件数这么多还有待研究。</p>
+            <p><a target="_blank" rel="noopener" href="http://www.jb51.net/article/47761.htm">http://www.jb51.net/article/47761.htm</a></p>
+<h1 id="匹配规则"><a href="#匹配规则" class="headerlink" title="匹配规则"></a>匹配规则</h1><ol>
+<li>= 开头表示精确匹配</li>
+<li>^~ 开头表示uri以某个常规字符串开头，理解为匹配 url路径即可。nginx不对url做编码，因此请求为/static/20%/aa，可以被规则^~ /static/ /aa匹配到（注意是空格）。</li>
+<li>~ 开头表示区分大小写的正则匹配</li>
+<li>~*  开头表示不区分大小写的正则匹配</li>
+<li>!<del>和!</del>*分别为区分大小写不匹配及不区分大小写不匹配 的正则</li>
+<li>/ 通用匹配，任何请求都会匹配到。</li>
+<li>多个location配置的情况下匹配顺序为（参考资料而来，还未实际验证，试试就知道了，不必拘泥，仅供参考）:<br>首先匹配 =，其次匹配^~, 其次是按文件中顺序的正则匹配，最后是交给 / 通用匹配。当有匹配成功时候，停止匹配，按当前匹配规则处理请求。</li>
+</ol>
+<h1 id="Location处理逻辑"><a href="#Location处理逻辑" class="headerlink" title="Location处理逻辑"></a>Location处理逻辑</h1><ol>
+<li>用uri测试所有的prefix string;</li>
+<li>Uri精确匹配到=定义的loacation，使用这个location，停止搜索；</li>
+<li>匹配最长prefix string，如果这个最长prefix string带有^~修饰符，使用这个location，停止搜索，否则：</li>
+<li>存储这个最长匹配；</li>
+<li>然后匹配正则表达；</li>
+<li>匹配到第一条正则表达式，使用这个location，停止搜索；</li>
+<li>没有匹配到正则表达式，使用#4步存储的prefix string的location。</li>
+</ol>
+<h1 id="location末尾斜杠"><a href="#location末尾斜杠" class="headerlink" title="location末尾斜杠"></a>location末尾斜杠</h1><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>访问路由127.0.0.1:8080/test/index.html</p>
+<ol>
+<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 /test/index.html  </li>
+<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 /test/index.html  </li>
+<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 //index.html  </li>
+<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 /index.html  </li>
+<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 /app/index.html  </li>
+<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 /appindex.html  </li>
+<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 /app//index.html  </li>
+<li>配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+接收 /app/index.html<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>proxy_pass端口后面如果不跟斜杠，路径是非消耗匹配，否则会消耗url字符，消耗剩下的字符拼接都proxypass后面。</li>
+</ol>
 
           
         
@@ -385,7 +422,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/24/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/26/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/24/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/26/">&gt;</a>
   </nav>
 
 
@@ -431,7 +468,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +479,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

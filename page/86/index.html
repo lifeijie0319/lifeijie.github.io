@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E5%92%8Cfork%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/" itemprop="url">在django系统外使用django的ORM</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E5%92%8Cfork%E5%A4%9A%E8%BF%9B%E7%A8%8B/" itemprop="url">sqlalchemy和fork多进程</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlalchemy</span>
                   </a>
                 </span>
 
@@ -345,9 +367,11 @@
       
         
           
-            <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><p>django.core.exceptions.ImproperlyConfigured: Requested setting DEFAULT_INDEX_TABLESPACE, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.</p>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error">http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error</a></p>
-<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1dbd3a22da10">http://www.jianshu.com/p/1dbd3a22da10</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/orangleliu/article/details/21722725">http://blog.csdn.net/orangleliu/article/details/21722725</a>  </p>
+            <h1 id="1-问题出现："><a href="#1-问题出现：" class="headerlink" title="1 问题出现："></a>1 问题出现：</h1><p>下载美团合同太慢，改成multiprocessing多进程下载，发现无法全部下载成功。</p>
+<h1 id="2-第一次处理："><a href="#2-第一次处理：" class="headerlink" title="2 第一次处理："></a>2 第一次处理：</h1><p>考虑是不是子进程函数里面用的是主进程初始化的session，改成在子进程中创建session。</p>
+<h2 id="第一次处理结果："><a href="#第一次处理结果：" class="headerlink" title="第一次处理结果："></a>第一次处理结果：</h2><p>还是不行，报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cx_Oracle.DatabaseError: ORA-3306: fatal two-task communicationo protocol error</span><br><span class="line">cx_Oracle.DatabaseError: ORA-03113: end-of-file on communication channel</span><br><span class="line">cx_Oracle.DatabaseError: ORA-03135: connection lost contact</span><br><span class="line">sqlalchemy.exc.InvalidRequestError: Can&#39;t reconnect until invalid transaction is rolled back</span><br></pre></td></tr></table></figure>
+<h1 id="3-第二次处理"><a href="#3-第二次处理" class="headerlink" title="3 第二次处理"></a>3 第二次处理</h1><p>根据上述情况，考虑session的问题，<br>3.1 使用python的id方法打印子进程的session的内存地址，发现子进程中的session的内存地址一样。<br>3.2 查询sqlalchemy，发现他的session对多线程scoped_session有threadlocal的控制，但是本质上不支持并发使用同一个session。<br>3.3 查看<a target="_blank" rel="noopener" href="https://docs.sqlalchemy.org/en/13/faq/connections.html#how-do-i-use-engines-connections-sessions-with-python-multiprocessing-or-os-fork%E8%AF%81%E5%AE%9E%E7%BB%93%E6%9E%9C%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B8%8D%E4%BD%86session%E4%B8%8D%E8%83%BD%E5%85%B1%E7%94%A8%EF%BC%8C%E8%BF%9Eengine%E9%83%BD%E4%B8%8D%E8%83%BD%E5%85%B1%E7%94%A8%E3%80%82">https://docs.sqlalchemy.org/en/13/faq/connections.html#how-do-i-use-engines-connections-sessions-with-python-multiprocessing-or-os-fork证实结果，多进程不但session不能共用，连engine都不能共用。</a></p>
 
           
         
@@ -387,7 +411,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/85/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/blog/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/87/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/85/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/blog/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/87/">&gt;</a>
   </nav>
 
 
@@ -433,7 +457,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +468,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

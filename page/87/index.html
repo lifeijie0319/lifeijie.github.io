@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E6%9D%82%E8%AE%B0/" itemprop="url">django杂记</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlalchemy</span>
                   </a>
                 </span>
 
@@ -345,18 +367,11 @@
       
         
           
-            <h1 id="一、模板-过滤器"><a href="#一、模板-过滤器" class="headerlink" title="一、模板-过滤器"></a>一、模板-过滤器</h1><ul>
-<li>1、if和for循环不能在同一句话。</li>
-<li>2、取整过滤器phone2numeric </li>
-<li>3、字符截取过滤器：slice</li>
-</ul>
-<h1 id="二、静态文件"><a href="#二、静态文件" class="headerlink" title="二、静态文件"></a>二、静态文件</h1><p>（一）开发时<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files">https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files</a><br>主要是django.contrib.staticfiles内置默认处理。<br>（二）生产时需要改变<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/">https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/</a></p>
-<h1 id="三、中文编码问题"><a href="#三、中文编码问题" class="headerlink" title="三、中文编码问题"></a>三、中文编码问题</h1><p>python2.7不能直接支持Unicode，解决办法：<br>from django.utils.encoding import python_2_unicode_compatible<br>在模型类定义之前加上装饰器：<br>@python_2_unicode_compatible</p>
-<h1 id="四、将从数据库获取的queryset转化成json返回。"><a href="#四、将从数据库获取的queryset转化成json返回。" class="headerlink" title="四、将从数据库获取的queryset转化成json返回。"></a>四、将从数据库获取的queryset转化成json返回。</h1><p>from django.core import serializers<br>data = serializers.serialize(“xml”, SomeModel.objects.all())</p>
-<h1 id="五、解决由于csrf保护启用导致的图片上传bug。"><a href="#五、解决由于csrf保护启用导致的图片上传bug。" class="headerlink" title="五、解决由于csrf保护启用导致的图片上传bug。"></a>五、解决由于csrf保护启用导致的图片上传bug。</h1><h2 id="1、ajax头"><a href="#1、ajax头" class="headerlink" title="1、ajax头"></a>1、ajax头</h2><p>xhr.setRequestHeader(“X-CSRFToken”, get_cookie(‘csrftoken’));</p>
-<h2 id="2、post中传cookie"><a href="#2、post中传cookie" class="headerlink" title="2、post中传cookie"></a>2、post中传cookie</h2><p>task.addData(‘csrfmiddlewaretoken’, get_cookie(‘csrftoken’))</p>
-<h1 id="六、request-POST取不到数据的原因"><a href="#六、request-POST取不到数据的原因" class="headerlink" title="六、request.POST取不到数据的原因"></a>六、request.POST取不到数据的原因</h1><p>只有ajax请求添加参数’Content-Type’：’application/x-www-form-urlencoded’才会填充request.POST。</p>
-
+            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
+<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -395,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/86/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/86/">86</a><span class="page-number current">87</span><a class="page-number" href="/blog/page/88/">88</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/88/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/86/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/86/">86</a><span class="page-number current">87</span><a class="page-number" href="/blog/page/88/">88</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/88/">&gt;</a>
   </nav>
 
 
@@ -441,7 +456,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

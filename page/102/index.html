@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/experience1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/experience1/" itemprop="url">记一次事务未及时提交导致的bug</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/" itemprop="url">jvm错误日志信号分析</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:51:34+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
                 2021-04-04
               </time>
             
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/blog/categories/java/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
                   </a>
                 </span>
 
@@ -345,15 +345,25 @@
       
         
           
-            <h1 id="背景描述"><a href="#背景描述" class="headerlink" title="背景描述"></a>背景描述</h1><h2 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h2><p>公司维护了一个合同电子签章平台。每次客户端发送合同到平台进行签章。</p>
-<h2 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h2><p>数据库使用mysql，合同电子签章平台由tornado搭建，使用aiomysql库访问mysql。签章平台的逻辑是，如果数据库里没查到记录或者记录状态为失败，就发送合同到签章服务提供商进行签章，否则，返回数据库里面的记录状态。</p>
-<h2 id="bug现象"><a href="#bug现象" class="headerlink" title="bug现象"></a>bug现象</h2><p>每天签章几万份合同，有少量合同会出现重复成功签署的奇怪现象。比如合同A到平台请求签章，看到数据库记录签署成功。而后过了几分钟，客户端进行重试（第一次客户端获得的结果是处理中，通过重试确定合同状态），查询sql没有查到上次入库的记录，重新发起签章流程，导致了数据库有了同一合同的第二条成功记录。</p>
-<h1 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h1><ul>
-<li>初步思考是否同一个合同并发请求到签章平台（客户端没有设置轮询间隔），导致同时查询数据库，因为查询没有加排他锁，因而都没有查到记录。但是查看发现即使过了一段时间（足以结束请求，完成提交），仍然有bug现象。</li>
-<li>在github的aiomysql项目托管处的issue里面查到原因，即aiomysql使用连接池的时候，连接关闭实际上是把连接放回连接池，并没有关闭连接，也没有提交事务。而默认模式下，select会自动开启事务，如果事务没有及时提交，会导致下一次使用该连接的时候继续上次的事务。按照mysql的默认可重复读的隔离级别，同一个合同如果上次查询没有记录，这次仍然查不到。  </li>
-<li>那么为什么这个现象是偶发的？因为系统其它地方会有提交操作。那么只要不是同一个连接重复被同一个合同的请求使用到，这个连接的查询事务会被其它各种情况commit掉。</li>
+            <h1 id="SIGSEGV"><a href="#SIGSEGV" class="headerlink" title="SIGSEGV"></a>SIGSEGV</h1><p>SIGSEGV — Segment Fault. The possible cases of your encountering this error are: </p>
+<ul>
+<li>buffer overflow — usually caused by a pointer reference out of range.</li>
+<li>stack overflow — please keep in mind that the default stack size is 8192K.</li>
+<li>illegal file access — file operations are forbidden on our judge system.</li>
 </ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>非autocommit的模式下，select一般会默认开启事务，而且很容易忽略，一定要注意。之前还有过这样的经历，由于select开启事务没有及时关闭，后面有进行了耗时操作（比如http请求外部服务），导致数据库连接池耗尽。</p>
+<h1 id="SIGBUS"><a href="#SIGBUS" class="headerlink" title="SIGBUS:"></a>SIGBUS:</h1><p>导致SIGBUS信号的可能原因: </p>
+<ul>
+<li>硬件故障，不用说，程序猿最常碰上的肯定不是这样的情形。 </li>
+<li>Linux平台上运行malloc()，假设没有足够的RAM。Linux不是让malloc()失败返回。 而是向当前进程分发SIGBUS信号。<br>  注: 对该点执怀疑态度，有机会可自行測试确认当前系统反应。 </li>
+<li>某些架构上訪问数据时有对齐的要求，比方仅仅能从4字节边界上读取一个4字节的 数据类型。IA-32架构没有硬性要求对齐，虽然未对齐的訪问减少运行效率。另外一些架构，比方SPARC、m68k，要求对齐訪问，否则向当前进程分发SIGBUS信号。 </li>
+<li>试图訪问一块无文件内容相应的内存区域，比方超过文件尾的内存区域，或者以前有文件内容相应，如今为还有一进程截断过的内存区域。</li>
+</ul>
+<h1 id="SIGBUS与SIGSEGV信号的一般差别"><a href="#SIGBUS与SIGSEGV信号的一般差别" class="headerlink" title="SIGBUS与SIGSEGV信号的一般差别"></a>SIGBUS与SIGSEGV信号的一般差别</h1><ul>
+<li>SIGBUS(Bus error)意味着指针所相应的地址是有效地址，但总线不能正常使用该指针。一般是未对齐的数据訪问所致。</li>
+<li>SIGSEGV(Segment fault)意味着指针所相应的地址是无效地址。没有物理内存相应该地址。 </li>
+</ul>
+<h1 id="EXCEPTION-ACCESS-VIOLATION"><a href="#EXCEPTION-ACCESS-VIOLATION" class="headerlink" title="EXCEPTION_ACCESS_VIOLATION"></a>EXCEPTION_ACCESS_VIOLATION</h1><p>意味着Java应用Crash的时候，正在运行JVM自己的代码，而不是外部的Java代码或其他类库代码。这种情况很可能是JVM的Bug，但是也不一定。</p>
+<h1 id="EXCEPTION-STACK-OVERFLOW"><a href="#EXCEPTION-STACK-OVERFLOW" class="headerlink" title="EXCEPTION_STACK_OVERFLOW"></a>EXCEPTION_STACK_OVERFLOW</h1><p>意味着这是个栈溢出的错误。</p>
 
           
         
@@ -393,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/101/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/101/">101</a><span class="page-number current">102</span><a class="page-number" href="/blog/page/103/">103</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/103/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/101/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/101/">101</a><span class="page-number current">102</span><a class="page-number" href="/blog/page/103/">103</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/103/">&gt;</a>
   </nav>
 
 
@@ -439,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

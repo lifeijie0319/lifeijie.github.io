@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/technique/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/technique/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/30/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" itemprop="url">使用kerl安装erlang环境</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
+                2021-05-30
               </time>
             
 
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/erlang/" itemprop="url" rel="index">
+                    <span itemprop="name">erlang</span>
                   </a>
                 </span>
 
@@ -356,14 +334,15 @@
       
         
           
-            <p>一、使用字典传入关键字参数是可以的。注意传入时字典之前要加上**<br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/Commence/p/5578215.html">http://www.cnblogs.com/Commence/p/5578215.html</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/luckytanggu/article/details/51714757">http://blog.csdn.net/luckytanggu/article/details/51714757</a><br><a target="_blank" rel="noopener" href="http://www.yihaomen.com/article/python/342.htm">http://www.yihaomen.com/article/python/342.htm</a></p>
-<p>二、Django ORM 中的批量操作<br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/6vMf2iN">http://www.tuicool.com/articles/6vMf2iN</a></p>
-<p>三、Django数据库的与查询：用，隔开查询条件</p>
-<p>四、两个querySet合并<br>1、QuerySet = QuerySet1 | QuerySet2。<br>问题：在设置指定商户的时候碰到问题<br>代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sticked_shops = Shop.objects.<span class="built_in">filter</span>(stick=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sticked_shops) &lt; <span class="number">4</span>:</span><br><span class="line">    added_shops = Shop.objects.<span class="built_in">filter</span>(stick=<span class="literal">False</span>).order_by(<span class="string">&#x27;-trade_times&#x27;</span>)[:<span class="number">4</span>-<span class="built_in">len</span>(sticked_shops)]</span><br><span class="line">logger.debug(<span class="built_in">len</span>(sticked_shops))<span class="comment">#结果为0</span></span><br><span class="line">logger.debug(<span class="built_in">len</span>(added_shops))<span class="comment">#结果为4</span></span><br><span class="line">recommended_shops = sticked_shops | added_shops</span><br><span class="line">logger.debug(<span class="built_in">len</span>(recommended_shops))<span class="comment">#结果为6</span></span><br></pre></td></tr></table></figure>
-<p>2、QuerySet = chain(QuerySet1， QuerySet2)</p>
-<p>五、新建项目执行数据库迁移No migrations to apply.<br>原因：没有在设置里面添加app。</p>
-<p>六、使用cursor注意<br>cursor.execute(sql, param)注意sql中的占位符</p>
+            <p>参考： kancloud.cn</p>
+<h1 id="kerl说明"><a href="#kerl说明" class="headerlink" title="kerl说明"></a>kerl说明</h1><p>kerl是一个OTP版本管理工具，可以在不同的OTP版本间随意切换。</p>
+<h1 id="安装kerl"><a href="#安装kerl" class="headerlink" title="安装kerl"></a>安装kerl</h1><p>curl -O <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod">https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod</a> a+x kerl</p>
+<h1 id="查看所有可用的版本"><a href="#查看所有可用的版本" class="headerlink" title="查看所有可用的版本"></a>查看所有可用的版本</h1><p>./kerl list releases</p>
+<h1 id="下载编译"><a href="#下载编译" class="headerlink" title="下载编译"></a>下载编译</h1><p>./kerl build $版本 </p>
+<h1 id="安装OTP"><a href="#安装OTP" class="headerlink" title="安装OTP"></a>安装OTP</h1><p>./kerl install $版本 $安装路径</p>
+<h1 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h1><p>. $安装路径/activate</p>
+<h1 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h1><p>kerl_deactivate</p>
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>./kerl delete installation/build $版本</p>
 
           
         
@@ -403,7 +382,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/40/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/40/">&gt;</a>
   </nav>
 
 
@@ -449,7 +428,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +439,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

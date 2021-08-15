@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/tools/office%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/tools/office%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86/" itemprop="url">office文档处理</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/" itemprop="url">concurrent.futures模块中的submit和map</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
+                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/python/basic/concurrent-futures/" itemprop="url" rel="index">
+                    <span itemprop="name">concurrent.futures</span>
                   </a>
                 </span>
 
@@ -356,7 +356,8 @@
       
         
           
-            <h1 id="excel处理"><a href="#excel处理" class="headerlink" title="excel处理"></a>excel处理</h1><p>pip install xlrd，xlwt, xlutils</p>
+            <p>1 concurrent.futures的父类Executor定义了两个执行任务的方法，submit和map<br>ThreadPoolExecutor和ProcessPoolExecutor继承Executor</p>
+<p>2 需要注意，submit执行的任务直接返回concurrent.futures.Future对象，返回的futures列表中的future对象状态可能处于中间状态。<br>map则阻塞到所有任务完成。</p>
 
           
         
@@ -396,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
   </nav>
 
 
@@ -442,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +454,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

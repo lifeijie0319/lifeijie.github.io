@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/ibm_db_django/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/11/linux/ulimit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/ibm_db_django/" itemprop="url">ibm_db_django</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/11/linux/ulimit/" itemprop="url">ulimit</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-11T08:29:52+08:00">
+                2021-05-11
               </time>
             
 
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -356,8 +334,19 @@
       
         
           
-            <h1 id="一、说明："><a href="#一、说明：" class="headerlink" title="一、说明："></a>一、说明：</h1><p>Django要连接db2，除了ibm_db这个Python和db2的连接件，还需要安装ibm_db_django包。</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1>
+            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>ulimt是一个linux自带应用工具，用于控制资源的可用性</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>ulimit  [-HSTabcdefilmnpqrstuvx  [limit]]</p>
+<h2 id="H-和-S"><a href="#H-和-S" class="headerlink" title="-H 和 -S"></a>-H 和 -S</h2><p>-H选项和-S选项分别表示对给定资源的硬限制（hard limit）和软限制（soft limit）进行设置。硬限制（hard limit）一旦被设置以后就不能被非root用户修改，软限制（soft limit）可以增长达到硬限制（hard limit）。如果既没有指定-H选项也没有指定-S选项，那么硬限制（hard limit）和软限制（soft limit）都会被设置。limit的值可以是一个数值，也可以是一些特定的值，比如：hard，soft，unlimited，分别代表当前硬件限制、当前软件限制、不限制。</p>
+<h2 id="查看进程打开文件的最大限制"><a href="#查看进程打开文件的最大限制" class="headerlink" title="查看进程打开文件的最大限制"></a>查看进程打开文件的最大限制</h2><h3 id="系统级最大限制"><a href="#系统级最大限制" class="headerlink" title="系统级最大限制"></a>系统级最大限制</h3><p>cat /proc/sys/fs/file-max</p>
+<h3 id="用户级限制"><a href="#用户级限制" class="headerlink" title="用户级限制"></a>用户级限制</h3><p>ulimit -n</p>
+<h2 id="查看进程已经打开的文件数"><a href="#查看进程已经打开的文件数" class="headerlink" title="查看进程已经打开的文件数"></a>查看进程已经打开的文件数</h2><h3 id="查看进程资源限制"><a href="#查看进程资源限制" class="headerlink" title="查看进程资源限制"></a>查看进程资源限制</h3><p>cat /proc/$pid/limits</p>
+<h3 id="查看实际打开文件数"><a href="#查看实际打开文件数" class="headerlink" title="查看实际打开文件数"></a>查看实际打开文件数</h3><p>ls /proc/$pid/fd|wc -l</p>
+<h2 id="修改限制"><a href="#修改限制" class="headerlink" title="修改限制"></a>修改限制</h2><h3 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h3><p>ulimit -n $num</p>
+<h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a>永久修改</h3><p>vi /etc/security/limits.conf<br>参考文档内说明配置限制项</p>
+<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="20210510-riak服务异常"><a href="#20210510-riak服务异常" class="headerlink" title="20210510 riak服务异常"></a>20210510 riak服务异常</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>客户端连接riak服务端超时。检查发现进程打开的文件数已经超过用户设置的限制50000。另外top命令显示系统cpu资源占用率400%以上。</p>
+<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>修改riak用户的打开文件数限制，增加到65535。重启riak服务。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>riak为什么打开文件数这么多还有待研究。</p>
+
           
         
       
@@ -396,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/46/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/blog/page/48/">48</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/48/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/46/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/46/">46</a><span class="page-number current">47</span><a class="page-number" href="/blog/page/48/">48</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/48/">&gt;</a>
   </nav>
 
 
@@ -442,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

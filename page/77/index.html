@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/pip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">svn常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/pip/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
-                    <span itemprop="name">svn</span>
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/env/" itemprop="url" rel="index">
+                    <span itemprop="name">env</span>
                   </a>
                 </span>
 
@@ -345,21 +356,21 @@
       
         
           
-            <h1 id="一、客户端安装"><a href="#一、客户端安装" class="headerlink" title="一、客户端安装"></a>一、客户端安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1、sudo yum install -y subversion</span><br></pre></td></tr></table></figure>
-<h1 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h1><h2 id="1、检出代码"><a href="#1、检出代码" class="headerlink" title="1、检出代码"></a>1、检出代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn co https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br></pre></td></tr></table></figure>
-<p>这样得到的是django_pros文件夹</p>
-<h2 id="2、版本回退"><a href="#2、版本回退" class="headerlink" title="2、版本回退"></a>2、版本回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn merge -r 751:750 https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br><span class="line">svn ci -m &#39;back to 750 from 751&#39;</span><br></pre></td></tr></table></figure>
-<p>说明：上述版本</p>
-<h2 id="3、将未纳入版本控制的文件夹加入到svn服务器"><a href="#3、将未纳入版本控制的文件夹加入到svn服务器" class="headerlink" title="3、将未纳入版本控制的文件夹加入到svn服务器"></a>3、将未纳入版本控制的文件夹加入到svn服务器</h2><p>语法：svn import PATH URL -m LOG</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn import weixin_inner&#x2F; https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;weixin_inner&#x2F; -m &#39;create weixin_inner&#39;</span><br></pre></td></tr></table></figure>
-<h2 id="4、删除目录时提示过期"><a href="#4、删除目录时提示过期" class="headerlink" title="4、删除目录时提示过期"></a>4、删除目录时提示过期</h2><p>解决：先update，然后删除</p>
-<h2 id="5、获取当前目录对应的url信息"><a href="#5、获取当前目录对应的url信息" class="headerlink" title="5、获取当前目录对应的url信息"></a>5、获取当前目录对应的url信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn info | grep URL</span><br></pre></td></tr></table></figure>
-<h2 id="6、解除目录版本控制"><a href="#6、解除目录版本控制" class="headerlink" title="6、解除目录版本控制"></a>6、解除目录版本控制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name &#39;.svn&#39;|xargs rm -rf</span><br></pre></td></tr></table></figure>
-<p>找到.svn目录，删除该目录即可</p>
-<h2 id="7、撤销目录的add状态"><a href="#7、撤销目录的add状态" class="headerlink" title="7、撤销目录的add状态"></a>7、撤销目录的add状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert --recursive doc&#x2F;</span><br></pre></td></tr></table></figure>
-<h2 id="8、打包时忽略svn版本控制文件"><a href="#8、打包时忽略svn版本控制文件" class="headerlink" title="8、打包时忽略svn版本控制文件"></a>8、打包时忽略svn版本控制文件</h2><p>加参数–exclude-vcs</p>
-<h1 id="三、svn版本号的困惑"><a href="#三、svn版本号的困惑" class="headerlink" title="三、svn版本号的困惑"></a>三、svn版本号的困惑</h1><p><a target="_blank" rel="noopener" href="http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html">http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html</a></p>
-<h1 id="四、svn冲突与解决"><a href="#四、svn冲突与解决" class="headerlink" title="四、svn冲突与解决"></a>四、svn冲突与解决</h1><p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_640531380102vyr1.html">http://blog.sina.com.cn/s/blog_640531380102vyr1.html</a></p>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="（一）yum安装"><a href="#（一）yum安装" class="headerlink" title="（一）yum安装"></a>（一）yum安装</h2><p>sudo yum install python-pip<br>报错: 没有可用软件包 pip。<br>错误：无须任何处理<br>解决：sudo yum -y install epel-release</p>
+<h2 id="（二）源码编译安装"><a href="#（二）源码编译安装" class="headerlink" title="（二）源码编译安装"></a>（二）源码编译安装</h2><p>1、下载解压，进入目录<br>2、sudo python2.7 setup.py install<br>报错：<br>pip is configured with locations that require TLS/SSL, however the ssl module in python is not available.<br>原因：没有安装openssl、openssl-devel<br>解决：sudo yum install openssl openssl-devel</p>
+<h1 id="二、修改pip源。"><a href="#二、修改pip源。" class="headerlink" title="二、修改pip源。"></a>二、修改pip源。</h1><h2 id="（一）、全局配置"><a href="#（一）、全局配置" class="headerlink" title="（一）、全局配置"></a>（一）、全局配置</h2><p>linux:<br>修改文件：/etc/pip.conf<br>windows:<br>新建文件：%APPDATA%/pip/pip.conf</p>
+<h2 id="（二）、用户配置"><a href="#（二）、用户配置" class="headerlink" title="（二）、用户配置"></a>（二）、用户配置</h2><p>修改文件：~/.pip/pip.conf</p>
+<h2 id="（三）、文件内容更"><a href="#（三）、文件内容更" class="headerlink" title="（三）、文件内容更"></a>（三）、文件内容更</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;pypi.doubanio.com&#x2F;simple&#x2F;</span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;pypi.doubanio.com</span><br><span class="line">disable-pip-version-check &#x3D; true</span><br><span class="line">#取消pip版本检查，排除每次都报最新的pip</span><br></pre></td></tr></table></figure>
+<h2 id="（四）、其它国内源网址"><a href="#（四）、其它国内源网址" class="headerlink" title="（四）、其它国内源网址"></a>（四）、其它国内源网址</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://pypi.v2ex.com/simple/">http://pypi.v2ex.com/simple/</a></li>
+<li><a target="_blank" rel="noopener" href="http://pypi.douban.com/">http://pypi.douban.com/</a>  豆瓣</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></li>
+<li><a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a>  清华</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.hustunique.com/">http://pypi.hustunique.com/</a>  华中理工大学</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.sdutlinux.org/">http://pypi.sdutlinux.org/</a>  山东理工大学</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.mirrors.ustc.edu.cn/">http://pypi.mirrors.ustc.edu.cn/</a>  中国科学技术大学</li>
+</ul>
+<h1 id="三、常用技巧"><a href="#三、常用技巧" class="headerlink" title="三、常用技巧"></a>三、常用技巧</h1><h2 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h2><p>pip install –no-index -f /home/nanxun/packages/ redis-2.10.5-py2.py3-none-any.whl</p>
 
           
         
@@ -399,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/76/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/blog/page/78/">78</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/78/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/76/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/76/">76</a><span class="page-number current">77</span><a class="page-number" href="/blog/page/78/">78</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/78/">&gt;</a>
   </nav>
 
 
@@ -445,7 +456,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

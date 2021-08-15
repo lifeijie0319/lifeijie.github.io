@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/python%E4%BD%BF%E7%94%A8pyodbc%E3%80%81unixODBC%E5%92%8Cfreetds%E8%BF%9E%E6%8E%A5MSSQLServer/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/python%E4%BD%BF%E7%94%A8pyodbc%E3%80%81unixODBC%E5%92%8Cfreetds%E8%BF%9E%E6%8E%A5MSSQLServer/" itemprop="url">python使用pyodbc、unixODBC和freetds连接MSSQLServer</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/" itemprop="url">python使用signal模块实现函数超时控制</a></h1>
         
 
         <div class="post-meta">
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -356,22 +345,8 @@
       
         
           
-            <h1 id="一、安装freetds"><a href="#一、安装freetds" class="headerlink" title="一、安装freetds"></a>一、安装freetds</h1><p>freetds是linux下连接MSSQLServer的中间件。</p>
-<h2 id="源码编译安装"><a href="#源码编译安装" class="headerlink" title="源码编译安装"></a>源码编译安装</h2><p>（1）解压，进入目录<br>（2）./configure –prefix=/usr/local/freetds –with-tdsver=8.0 –enable-msdblib，注意，–enable-msdblib使得MSSQLServer可以使用，–with-tdsver指定版本，按照帮助的说明：    –with-tdsver=VERSION   TDS protocol version (4.2/4.6/5.0/7.0/7.1) [5.0]。如果按照网上的填写8.0，其实使用的也是5.0版本。<br>（3）make<br>（4）sudo make install<br>（5）修改配置文件，按照默认路径安装，那么配置文件是/usr/local/etc/freetds.conf，常见配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ser2008]#数据源名称</span><br><span class="line">host &#x3D; 192.168.2.22#数据源地址</span><br><span class="line">port &#x3D; 1433#数据源端口</span><br><span class="line">tds version &#x3D; 8.0#tds协议版本</span><br><span class="line">client chaeset &#x3D; UTF-8</span><br></pre></td></tr></table></figure>
-<p>（6）测试数据库连接：<br>Stql –S ser2008</p>
-<h1 id="二、安装unixODBC"><a href="#二、安装unixODBC" class="headerlink" title="二、安装unixODBC"></a>二、安装unixODBC</h1><p>1、rpm安装，安装rpm：</p>
-<ul>
-<li>libtool-ltdl-2.4.2-20.el7.x86_64.rpm</li>
-<li>unixODBC-2.3.1-11.el7.x86_64.rpm</li>
-<li>unixODBC-devel-2.3.1-11.el7.x86_64.rpm</li>
-</ul>
-<h1 id="三、pyodbc"><a href="#三、pyodbc" class="headerlink" title="三、pyodbc"></a>三、pyodbc</h1><h2 id="1、离线安装"><a href="#1、离线安装" class="headerlink" title="1、离线安装"></a>1、离线安装</h2><p>（1）下载安装包<br>（2）pip离线安装<br>问题：g++没有安装，导致报错，g++安装查看linux-常见程序-gcc和g++</p>
-<h1 id="四、配置odbc"><a href="#四、配置odbc" class="headerlink" title="四、配置odbc"></a>四、配置odbc</h1><p>默认安装的话配置文件路径是/etc/odbcinst.ini，配置内容示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[FreeTDS]</span><br><span class="line">Description&#x3D;TDS driver (Sybase&#x2F;MS SQL)</span><br><span class="line">Driver&#x3D;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libtdsodbc.so</span><br></pre></td></tr></table></figure>
-<h1 id="五、配置DSN"><a href="#五、配置DSN" class="headerlink" title="五、配置DSN"></a>五、配置DSN</h1><h2 id="1-全局DSN："><a href="#1-全局DSN：" class="headerlink" title="1. 全局DSN："></a>1. 全局DSN：</h2><p>cat &gt;&gt; /etc/odbc.ini</p>
-<h2 id="2-用户级DSN："><a href="#2-用户级DSN：" class="headerlink" title="2. 用户级DSN："></a>2. 用户级DSN：</h2><p>cat &gt;&gt; ~/.odbc.ini<br>内容示例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[TESTDSN]</span><br><span class="line">Driver      &#x3D; FreeTDS</span><br><span class="line">Description &#x3D; MSSQL database for my nice app</span><br><span class="line">Servername  &#x3D; egServer80</span><br><span class="line">Database    &#x3D; DB_Customsms</span><br></pre></td></tr></table></figure>
+            <p>signal模块可以实现函数超时控制，但是windows平台不支持。   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_limit</span>(<span class="params">interval</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wraps</span>(<span class="params">func</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">handler</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            <span class="keyword">raise</span> RuntimeError()</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">deco</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            signal.signal(signal.SIGALRM, handler) <span class="comment"># 注册监听事件</span></span><br><span class="line">            signal.alarm(interval) <span class="comment"># 设置闹钟时间为interval秒</span></span><br><span class="line">            res = func(*args, **kwargs)</span><br><span class="line">            signal.alarm(<span class="number">0</span>) <span class="comment"># 关闭闹钟</span></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">return</span> deco</span><br><span class="line">    <span class="keyword">return</span> wraps</span><br></pre></td></tr></table></figure>
           
         
       
@@ -410,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/50/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/50/">50</a><span class="page-number current">51</span><a class="page-number" href="/blog/page/52/">52</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/52/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/50/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/50/">50</a><span class="page-number current">51</span><a class="page-number" href="/blog/page/52/">52</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/52/">&gt;</a>
   </nav>
 
 
@@ -456,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -467,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/tornado/websocket/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/tornado/websocket/" itemprop="url">tornado里面实现websocket</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">svn常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/tornado/" itemprop="url" rel="index">
-                    <span itemprop="name">tornado</span>
+                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
+                    <span itemprop="name">svn</span>
                   </a>
                 </span>
 
@@ -345,10 +345,21 @@
       
         
           
-            <h1 id="1、js建立websocket错误404："><a href="#1、js建立websocket错误404：" class="headerlink" title="1、js建立websocket错误404："></a>1、js建立websocket错误404：</h1><p>原因：服务器路由设置不正确，tornado.web.Application的handlers参数类似于Django的urls，只不过Django里面是view来处理，tornado是handler来处理。</p>
-<h1 id="2、js建立websocket错误403"><a href="#2、js建立websocket错误403" class="headerlink" title="2、js建立websocket错误403"></a>2、js建立websocket错误403</h1><p>原因：同源检查问题，在handler类里面添加方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_origin</span>(<span class="params">self, origin</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-<p>可以暂时解决这个问题。</p>
+            <h1 id="一、客户端安装"><a href="#一、客户端安装" class="headerlink" title="一、客户端安装"></a>一、客户端安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1、sudo yum install -y subversion</span><br></pre></td></tr></table></figure>
+<h1 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h1><h2 id="1、检出代码"><a href="#1、检出代码" class="headerlink" title="1、检出代码"></a>1、检出代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn co https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br></pre></td></tr></table></figure>
+<p>这样得到的是django_pros文件夹</p>
+<h2 id="2、版本回退"><a href="#2、版本回退" class="headerlink" title="2、版本回退"></a>2、版本回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn merge -r 751:750 https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br><span class="line">svn ci -m &#39;back to 750 from 751&#39;</span><br></pre></td></tr></table></figure>
+<p>说明：上述版本</p>
+<h2 id="3、将未纳入版本控制的文件夹加入到svn服务器"><a href="#3、将未纳入版本控制的文件夹加入到svn服务器" class="headerlink" title="3、将未纳入版本控制的文件夹加入到svn服务器"></a>3、将未纳入版本控制的文件夹加入到svn服务器</h2><p>语法：svn import PATH URL -m LOG</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn import weixin_inner&#x2F; https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;weixin_inner&#x2F; -m &#39;create weixin_inner&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="4、删除目录时提示过期"><a href="#4、删除目录时提示过期" class="headerlink" title="4、删除目录时提示过期"></a>4、删除目录时提示过期</h2><p>解决：先update，然后删除</p>
+<h2 id="5、获取当前目录对应的url信息"><a href="#5、获取当前目录对应的url信息" class="headerlink" title="5、获取当前目录对应的url信息"></a>5、获取当前目录对应的url信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn info | grep URL</span><br></pre></td></tr></table></figure>
+<h2 id="6、解除目录版本控制"><a href="#6、解除目录版本控制" class="headerlink" title="6、解除目录版本控制"></a>6、解除目录版本控制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name &#39;.svn&#39;|xargs rm -rf</span><br></pre></td></tr></table></figure>
+<p>找到.svn目录，删除该目录即可</p>
+<h2 id="7、撤销目录的add状态"><a href="#7、撤销目录的add状态" class="headerlink" title="7、撤销目录的add状态"></a>7、撤销目录的add状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert --recursive doc&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="8、打包时忽略svn版本控制文件"><a href="#8、打包时忽略svn版本控制文件" class="headerlink" title="8、打包时忽略svn版本控制文件"></a>8、打包时忽略svn版本控制文件</h2><p>加参数–exclude-vcs</p>
+<h1 id="三、svn版本号的困惑"><a href="#三、svn版本号的困惑" class="headerlink" title="三、svn版本号的困惑"></a>三、svn版本号的困惑</h1><p><a target="_blank" rel="noopener" href="http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html">http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html</a></p>
+<h1 id="四、svn冲突与解决"><a href="#四、svn冲突与解决" class="headerlink" title="四、svn冲突与解决"></a>四、svn冲突与解决</h1><p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_640531380102vyr1.html">http://blog.sina.com.cn/s/blog_640531380102vyr1.html</a></p>
 
           
         
@@ -388,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/98/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/98/">98</a><span class="page-number current">99</span><a class="page-number" href="/blog/page/100/">100</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/100/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/98/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/98/">98</a><span class="page-number current">99</span><a class="page-number" href="/blog/page/100/">100</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/100/">&gt;</a>
   </nav>
 
 
@@ -434,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/tcp/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/tools/office%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/network/tcp/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" itemprop="url">TCP四次挥手</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/tools/office%E6%96%87%E6%A1%A3%E5%A4%84%E7%90%86/" itemprop="url">office文档处理</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
-                    <span itemprop="name">tcp</span>
+                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/python/libs/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,19 +356,7 @@
       
         
           
-            <h1 id="什么是四次挥手"><a href="#什么是四次挥手" class="headerlink" title="什么是四次挥手"></a>什么是四次挥手</h1><p>四次挥手指的是TCP连接断开的四次通信过程。</p>
-<h1 id="四次挥手的具体过程"><a href="#四次挥手的具体过程" class="headerlink" title="四次挥手的具体过程"></a>四次挥手的具体过程</h1><h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><ul>
-<li>客户端想要断开连接，向服务端发送报文，标志位FIN，序号u。客户端进入FIN-WAIT-1阶段，停止向服务端发送数据，但是仍然可以接收服务端数据。</li>
-<li>服务端收到报文，进入CLOSE-WAIT阶段，但是此时服务端还是可能在向客户端发送数据。<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2></li>
-<li>服务端向客户端发送确认报文，标志位ACK，序号v，确认号u+1。</li>
-<li>客户端收到ACK报文，进入FIN-WAIT-2阶段。<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2></li>
-<li>服务端完成剩余的数据传输，准备完成，向客户端发送报文，标志位FIN/ACK，序号w，确认号u+1。服务端进入LAST-ACK阶段。</li>
-<li>客户端收到报文，进入TIME-WAIT阶段。<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2></li>
-<li>客户端向服务端发送确认报文，标志位ACK，序号u+1，确认号w+1。等待2MSL后关闭连接。</li>
-<li>服务端收到确认报文，关闭连接，进入CLOSED状态。</li>
-</ul>
-<h1 id="为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间"><a href="#为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间" class="headerlink" title="为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间"></a>为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间</h1><p>是为了确认服务端收到了ACK确认报文。<br>MSL(Max Segment Lifetime)是指一个TCP报文在传输过程中的最大生命周期。如果2MSL时间内，客户端收到了服务端的重发报文，说明服务端没有收到客户端ACK报文，客户端计时器重置，重新等待2MSL时间。如果客户端2MSL没有收到服务端的重发报文，说明服务端正常接收了ACK报文。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在使用socket的过程中，我们发现，没有设置SO_REUSEADDR选项的情况下，socket服务重启往往会报错端口已被占用，这是因为此时服务器端口处于TIME-WAIT阶段，一般2MSL约为2分钟。这里我们要纠正前面的认识，即进入TIME-WAIT的不一定是客户端，实际上是发起四次挥手的一段，比如在scoket服务端重启的场景下，是服务端进入TIME-WAIT。<br>看到另一个理由，等待2MSL是为了<em>允许老的重复分节在网络中消逝</em>。结合socket重启的例子可以这样理解：如果服务端收到最终客户端的FIN/ACK报文并发出最终ACK报文后直接断开连接。然后服务端重启了，重新和客户端三次握手建立连接，会和之前断开连接的最终ACK报文混淆导致混乱。</p>
+            <h1 id="excel处理"><a href="#excel处理" class="headerlink" title="excel处理"></a>excel处理</h1><p>pip install xlrd，xlwt, xlutils</p>
 
           
         
@@ -397,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/83/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/83/">83</a><span class="page-number current">84</span><a class="page-number" href="/blog/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/128/">128</a><a class="extend next" rel="next" href="/blog/page/85/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/83/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/83/">83</a><span class="page-number current">84</span><a class="page-number" href="/blog/page/85/">85</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/85/">&gt;</a>
   </nav>
 
 
@@ -443,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-count">150</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/jvm/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%94%9F%E4%BA%A7jvm%E5%B4%A9%E6%BA%83/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/java/jvm/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%94%9F%E4%BA%A7jvm%E5%B4%A9%E6%BA%83/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/database/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -345,12 +334,11 @@
       
         
           
-            <hr>
-<h2 id="title-记一次生产jvm崩溃"><a href="#title-记一次生产jvm崩溃" class="headerlink" title="title:记一次生产jvm崩溃"></a>title:记一次生产jvm崩溃</h2><h1 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h1><p>查看hs_err_pid13355.log</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>Most of the times, the crashes in ZIP_GetEntry occur when the jar file being accessed has been modified/overwritten while the JVM instance was running. For performance reasons, HotSpot JVM memory maps each Jar file’s central directory structure using mmap. This is done so as to avoid reading the central directory structure data from the disk every time it needs to read entries from the Jar file. When a Jar file is modified or overwritten on the disk, the JVM’s copy of the data read earlier becomes inconsistent with the jar file on the disk, and any attempt to read and load entries from the modified jar can result in an application crash.</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>Since 1.6.0_23, a property can be used to disable the memory mapping of the central directory structure of the Jar files:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsun.zip.disableMemoryMapping&#x3D;true</span><br></pre></td></tr></table></figure>
-<p>Please note that enabling this property would have some performance impact on the application as the JVM needs to read the central directory structure from the Jar files on the disk again and again whenever it reads a Jar file entry. So, it is best to ensure that the jar files are not modified or overwritten while the JVM has an image of them loaded.<br>In Java 9, this ZIP crash has been resolved with the following enhancement:JDK-8142508: To bring j.u.z.ZipFile’s native implementation to Java to remove the expensive jni cost and mmap crash risk. This enhancement replaces the ZIP file native implementation that used mmap with the Java implementation, and that removes the risk of application crashes described above. </p>
+            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
+<ul>
+<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
+<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
+</ul>
 
           
         
@@ -390,7 +378,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/102/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/blog/page/104/">104</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/104/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/102/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/blog/page/104/">104</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/104/">&gt;</a>
   </nav>
 
 
@@ -436,7 +424,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +435,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

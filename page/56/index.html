@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/tcp/ssl/openssl%E7%94%9F%E6%88%90%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/software_enginering/practice/%E9%98%B2%E6%AD%A2%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/network/tcp/ssl/openssl%E7%94%9F%E6%88%90%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/" itemprop="url">openssl生成数字证书</a></h1>
+                <a class="post-title-link" href="/blog/2021/05/30/software_enginering/practice/%E9%98%B2%E6%AD%A2%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8/" itemprop="url">防止短信轰炸的解决方案</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
+                2021-05-30
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/software-enginering/" itemprop="url" rel="index">
+                    <span itemprop="name">software_enginering</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
-                    <span itemprop="name">tcp</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/ssl/" itemprop="url" rel="index">
-                    <span itemprop="name">ssl</span>
+                  <a href="/blog/categories/software-enginering/practice/" itemprop="url" rel="index">
+                    <span itemprop="name">practice</span>
                   </a>
                 </span>
 
@@ -356,13 +345,11 @@
       
         
           
-            <h1 id="1-生成CA证书"><a href="#1-生成CA证书" class="headerlink" title="1 生成CA证书"></a>1 生成CA证书</h1><h2 id="1-1-生成-ca-key-CA-私钥"><a href="#1-1-生成-ca-key-CA-私钥" class="headerlink" title="1.1 生成 ca.key CA 私钥"></a>1.1 生成 ca.key CA 私钥</h2><p>openssl genrsa -out ca.key 4096</p>
-<h2 id="1-2-生成-ca-crt-CA-根证书（公钥）："><a href="#1-2-生成-ca-crt-CA-根证书（公钥）：" class="headerlink" title="1.2 生成 ca.crt CA 根证书（公钥）："></a>1.2 生成 ca.crt CA 根证书（公钥）：</h2><p>openssl req -new -x509 -days 7304 -key ca.key -out ca.crt</p>
-<h1 id="2-生成网站证书并用CA签名"><a href="#2-生成网站证书并用CA签名" class="headerlink" title="2 生成网站证书并用CA签名"></a>2 生成网站证书并用CA签名</h1><h2 id="2-1-创建公私钥对"><a href="#2-1-创建公私钥对" class="headerlink" title="2.1 创建公私钥对"></a>2.1 创建公私钥对</h2><p>openssl genrsa -out private.pem 1024<br>openssl rsa -in private.pem -pubout -out public.pem</p>
-<h2 id="2-2-生成证书签名请求"><a href="#2-2-生成证书签名请求" class="headerlink" title="2.2 生成证书签名请求"></a>2.2 生成证书签名请求</h2><p>openssl req -new -key private.pem -out web.csr<br>这里会让你填入各种信息，注意Common Name必填<br>查看scr中的信息<br>openssl req -in web.csr -noout -text</p>
-<h2 id="2-3-CA对csr文件进行签名"><a href="#2-3-CA对csr文件进行签名" class="headerlink" title="2.3 CA对csr文件进行签名"></a>2.3 CA对csr文件进行签名</h2><p>openssl ca -days 1460 -cert ca.crt -keyfile ca.key -in web.csr -out web.crt</p>
-<h3 id="2-3-1-错误：I-am-unable-to-access-the-demoCA-newcerts-directory"><a href="#2-3-1-错误：I-am-unable-to-access-the-demoCA-newcerts-directory" class="headerlink" title="2.3.1 错误：I am unable to access the ./demoCA/newcerts directory"></a>2.3.1 错误：I am unable to access the ./demoCA/newcerts directory</h3><p>解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1).mkdir -p .&#x2F;demoCA&#x2F;newcerts </span><br><span class="line">2).touch demoCA&#x2F;index.txt </span><br><span class="line">3).touch demoCA&#x2F;serial </span><br><span class="line">4).echo 01 &gt; demoCA&#x2F;serial</span><br></pre></td></tr></table></figure>
+            <h1 id="背景描述"><a href="#背景描述" class="headerlink" title="背景描述"></a>背景描述</h1><p>有一个短信系统，功能很简单，负责发送短信验证码和验证短信验证码。现在需要出一个方案，预防可能的短信轰炸问题。假设要求一分钟内同一个手机号不能接受3次以上的短信发送请求。<br>系统是tornado多进程处理框架，使用SQLAlchemy连接mysql数据库。</p>
+<h1 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h1><p>描述：来一笔短信发送请求，查询一分钟内登记的短信发送明细记录，如果小于3笔，本次可以发送，否则不能发送。<br>分析：最简单的思路，但是有并发问题，导致实际发送的数量多于3笔。假设数据库中本没有某手机号的记录，此时同时接受100笔请求，100笔请求同时查数据库，发现1分钟内短信发送条数都是0，导致最后发送了100笔短信验证码，不符合要求。</p>
+<h1 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h1><p>描述：使用乐观锁。另加一张表A，以手机号为唯一主键phone，另有字段次数count，一分钟起始时间start_time和最后更新时间last_modified。每次请求过来入库，如果违反唯一约束，说明已有记录，捕捉异常忽略。查看当前时间now，如果now-start_time &lt; 1分钟，查看count，如果count &lt; 3，使用乐观锁更新count=count+1，失败重试；如果count &gt;= 3，拒绝此交易。如果now-start_time &gt;= 1分钟，使用乐观锁更新当前记录的start_time和last_modified为now，成功发送记录，失败重试。<br>分析：能够解决并发的问题。但是一是逻辑较为复杂，存在多次重试与失败的可能；二是其实这是把时间分段，即以第一次入库或者更新start_time为起点的一分钟，并不是任意的一分钟。更新start_time的前后各取30s，可能发送的次数就超过3。</p>
+<h1 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h1><p>描述：使用悲观锁。另加一张表A，以手机号为唯一主键phone。每次请求过来入库，如果违反唯一约束，说明已有记录，捕捉异常忽略。入库完成之后，使用select…for update语句对手机号对应记录加排他锁，其它同样手机号的请求处理到这里需排队等候。加锁之后查看一分钟内的明细记录条目，如果超过3就拒绝发送，否则新增明细入库，提交事务，然后发送短信验证码。<br>分析：悲观锁效率较乐观锁低，但是因为是对手机号记录加行锁，不对其它手机号记录造成影响，正常情况下并发不高，而且逻辑比乐观锁简单清晰，因而目前来看这是更加合适的解决方案。</p>
+
           
         
       
@@ -401,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/55/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/blog/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/57/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/55/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/blog/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/57/">&gt;</a>
   </nav>
 
 
@@ -447,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -458,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

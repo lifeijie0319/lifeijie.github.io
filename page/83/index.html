@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/security/M2Crypto/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/virtualenv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/security/M2Crypto/" itemprop="url">M2Crypto安装问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/virtualenv/" itemprop="url">virtualenv</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/blog/categories/python/libs/env/" itemprop="url" rel="index">
+                    <span itemprop="name">env</span>
                   </a>
                 </span>
 
@@ -356,11 +356,15 @@
       
         
           
-            <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>问题：SWIG/_m2crypto_wrap.c:3557:25: 致命错误：openssl/err.h：没有那个文件或目录<br>原因：没有安装swig<br>解决：yum install swig  </p>
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>问题：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SWIG&#x2F;_m2crypto.i</span><br><span class="line">SWIG&#x2F;_m2crypto.i:54: Error: Unable to find &#39;openssl&#x2F;opensslv.h&#39;</span><br><span class="line">SWIG&#x2F;_m2crypto.i:60: Error: Unable to find &#39;openssl&#x2F;safestack.h&#39;</span><br><span class="line">SWIG&#x2F;_evp.i:12: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_rc4.i:5: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_ec.i:7: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br></pre></td></tr></table></figure>
-<p>解决：yum install openssl-devel</p>
-
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
+<li>1、sudo pip install virtualenv</li>
+<li>2、virtualenv wxenv</li>
+</ul>
+<h1 id="二、设置打开终端进入虚拟环境"><a href="#二、设置打开终端进入虚拟环境" class="headerlink" title="二、设置打开终端进入虚拟环境"></a>二、设置打开终端进入虚拟环境</h1><p>vi .bash_profile<br>添加”source wxenv/bin/activate”</p>
+<h1 id="三、windows下安装报错"><a href="#三、windows下安装报错" class="headerlink" title="三、windows下安装报错"></a>三、windows下安装报错</h1><h2 id="1、问题："><a href="#1、问题：" class="headerlink" title="1、问题："></a>1、问题：</h2><p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xc0 in position 7: ordinal not in range(128)</p>
+<h2 id="2、原因："><a href="#2、原因：" class="headerlink" title="2、原因："></a>2、原因：</h2><p>pip安装python包会加载当前用户的用户目录，我的用户目录恰好是含有中文的，ascii不能进行编码。</p>
+<h2 id="3、解决："><a href="#3、解决：" class="headerlink" title="3、解决："></a>3、解决：</h2><p>修改python安装目录 Python27\Lib\目录下的mimetypes.py文件。添加如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> sys.getdefaultncoding() != <span class="string">&#x27;gbk&#x27;</span>:</span><br><span class="line">    reload(sys)</span><br><span class="line">    sys.setdefaultencoding(<span class="string">&#x27;gbk&#x27;</span>)</span><br></pre></td></tr></table></figure>
           
         
       
@@ -399,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/82/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/blog/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/84/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/82/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/blog/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/84/">&gt;</a>
   </nav>
 
 
@@ -445,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

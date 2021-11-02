@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/ibm_db_django/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/db2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/ibm_db_django/" itemprop="url">ibm_db_django</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/db2/" itemprop="url">Django使用db2数据库</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -317,7 +317,7 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
                     <span itemprop="name">db</span>
                   </a>
                 </span>
@@ -356,8 +356,36 @@
       
         
           
-            <h1 id="一、说明："><a href="#一、说明：" class="headerlink" title="一、说明："></a>一、说明：</h1><p>Django要连接db2，除了ibm_db这个Python和db2的连接件，还需要安装ibm_db_django包。</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1>
+            <h1 id="Django与db2字段类型的对应关系"><a href="#Django与db2字段类型的对应关系" class="headerlink" title="Django与db2字段类型的对应关系"></a>Django与db2字段类型的对应关系</h1><table>
+<thead>
+<tr>
+<th>Django字段类型</th>
+<th>db2对应字段类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EmailField()/CharField(max_length=16)</td>
+<td>varchar(16)</td>
+</tr>
+<tr>
+<td>DateTimeField()</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>TextField()</td>
+<td>clob</td>
+</tr>
+<tr>
+<td>BooleanField()/PositiveSmallIntegerField()</td>
+<td>smallint</td>
+</tr>
+<tr>
+<td>AutoField()/ForeignKey()</td>
+<td>integer</td>
+</tr>
+</tbody></table>
+<h1 id="CharField字段长度中文问题"><a href="#CharField字段长度中文问题" class="headerlink" title="CharField字段长度中文问题"></a>CharField字段长度中文问题</h1><p>Django的orm连接db2数据库。配置CharField的时候，要注意对于中文，CharField的maxlength要3倍于实际值。<br>举例：想要设计一个8个中文字符的字段，那么数据库里实际的类型至少应该是varchar(24)，同样的，CharField的maxlength属性也至少是24.</p>
+
           
         
       
@@ -396,7 +424,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/68/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/blog/page/70/">70</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/70/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/68/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/blog/page/70/">70</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/70/">&gt;</a>
   </nav>
 
 
@@ -442,7 +470,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +481,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

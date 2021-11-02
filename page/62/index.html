@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/" itemprop="url">concurrent.futures模块中的submit和map</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/" itemprop="url">python使用signal模块实现函数超时控制</a></h1>
         
 
         <div class="post-meta">
@@ -313,17 +313,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/concurrent-futures/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent.futures</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -356,9 +345,8 @@
       
         
           
-            <p>1 concurrent.futures的父类Executor定义了两个执行任务的方法，submit和map<br>ThreadPoolExecutor和ProcessPoolExecutor继承Executor</p>
-<p>2 需要注意，submit执行的任务直接返回concurrent.futures.Future对象，返回的futures列表中的future对象状态可能处于中间状态。<br>map则阻塞到所有任务完成。</p>
-
+            <p>signal模块可以实现函数超时控制，但是windows平台不支持。   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_limit</span>(<span class="params">interval</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wraps</span>(<span class="params">func</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">handler</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            <span class="keyword">raise</span> RuntimeError()</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">deco</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            signal.signal(signal.SIGALRM, handler) <span class="comment"># 注册监听事件</span></span><br><span class="line">            signal.alarm(interval) <span class="comment"># 设置闹钟时间为interval秒</span></span><br><span class="line">            res = func(*args, **kwargs)</span><br><span class="line">            signal.alarm(<span class="number">0</span>) <span class="comment"># 关闭闹钟</span></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">return</span> deco</span><br><span class="line">    <span class="keyword">return</span> wraps</span><br></pre></td></tr></table></figure>
           
         
       
@@ -397,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
   </nav>
 
 
@@ -443,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

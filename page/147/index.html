@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/17/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/28/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/17/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/" itemprop="url">数据库隔离级别</a></h1>
+                <a class="post-title-link" href="/blog/2021/03/28/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/" itemprop="url">centos7安装Redis的经历</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-17T21:35:44+08:00">
-                2021-01-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T14:04:58+08:00">
+                2021-03-28
               </time>
             
 
@@ -297,6 +297,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/blog/categories/database/" itemprop="url" rel="index">
                     <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -334,19 +345,12 @@
       
         
           
-            <h1 id="与隔离级别相关的三种数据库读取异常"><a href="#与隔离级别相关的三种数据库读取异常" class="headerlink" title="与隔离级别相关的三种数据库读取异常"></a>与隔离级别相关的三种数据库读取异常</h1><ul>
-<li>脏读<br>脏读指的是本事务中可以读到其它事务未提交的部分。</li>
-<li>不可重复读<br>不可重复读是指，使用同样的SQL查询，对于某条记录而言，本次读取的结果和上一次不同，比如记录的字段值更新了。</li>
-<li>幻读<br>幻读指的是，使用同样的SQL查询，得到的结果集记录数目与上次不同。<blockquote>
-<p>不可重复读与幻读有类似之处，按照网上资料来看，不可重复读强调更新和删除，幻读强调插入，但是有待商榷。<br>另一种说法是和多版本并发控制MVCC机制以及快照读、当前读相关，具体原因待深入学习。</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="数据库的四种隔离级别"><a href="#数据库的四种隔离级别" class="headerlink" title="数据库的四种隔离级别"></a>数据库的四种隔离级别</h1><ul>
-<li>读未提交(Read Uncommited)<br>本事务可以读取其它事务未提交的改变。该隔离级别可能导致脏读、不可重复读、幻读。</li>
-<li>读已提交(Read Commited)<br>本事务只能读取其它事务已提交的改变。该隔离级别可能导致不可重复读、幻读。<br>oracle默认使用该隔离级别。</li>
-<li>可重复读(Repeatable Read)<br>本事务只能读取其它事务已提交的改变，且使用同样的SQL查询，每次读取的结果中，对于某条记录而言，它是不变的。该隔离级别可能导致幻读。<br>mysql默认使用该隔离级别。</li>
-<li>序列化(Serializable)<br>事务只能串行执行，因而不会出现脏读、不可重复读、幻读，但是效率极低。</li>
+            <h1 id="下载编译安装"><a href="#下载编译安装" class="headerlink" title="下载编译安装"></a>下载编译安装</h1><p>1 redis官网下载，解压后进入目录<br>2 make &amp; make install<br>注：make install如果不支持可以手动操作，实际上做了如下动作：</p>
+<ul>
+<li>删除源文件及目标文件以方便后续copy生成可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] rm -f src&#x2F;*.c *.h *.o</span><br></pre></td></tr></table></figure></li>
+<li>copy可执行文件至环境变量目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis] cp src&#x2F;redis-* &#x2F;usr&#x2F;local&#x2F;bin   </span><br></pre></td></tr></table></figure></li>
+<li>copy配置文件至系统配置文件目录,如果是集群安装，文件最好以端口作为文件名称<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] cp redis.conf &#x2F;etc&#x2F;</span><br></pre></td></tr></table></figure>
+<h1 id="配置redis为系统服务"><a href="#配置redis为系统服务" class="headerlink" title="配置redis为系统服务"></a>配置redis为系统服务</h1><h2 id="使用service命令启停"><a href="#使用service命令启停" class="headerlink" title="使用service命令启停"></a>使用service命令启停</h2>可以将redis解压后的目录下的utils/redis_init_script文件拷贝到/etc/init.d/目录下，这个是redis预设的初始化脚本，加好之后就可以用sevice来启停服务了。<h2 id="使用systemd启停"><a href="#使用systemd启停" class="headerlink" title="使用systemd启停"></a>使用systemd启停</h2>编写/usr/lib/systemd/system/redis.service，使用systemd管理服务。redis.service示例如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">#描述信息</span><br><span class="line">Description&#x3D;Redis Server 3.0.4</span><br><span class="line">#启动时机,开机启动最好在网络服务启动后即启动</span><br><span class="line">After&#x3D;network.target</span><br><span class="line">[Service]</span><br><span class="line">#此处为命令行启动redis的命令及参数,可参考官方文档</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-server &#x2F;etc&#x2F;redis.conf --daemonize no  </span><br><span class="line">#停止redis服务器命令</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-cli -h 127.0.0.1 -p 6379 shutdown </span><br><span class="line">User&#x3D;redis</span><br><span class="line">#运行reddis用户</span><br><span class="line">Group&#x3D;redis</span><br><span class="line">#所属组</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target #字符界面下启动</span><br></pre></td></tr></table></figure></li>
 </ul>
 
           
@@ -387,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/146/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/146/">146</a><span class="page-number current">147</span><a class="page-number" href="/blog/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/148/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/146/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/146/">146</a><span class="page-number current">147</span><a class="page-number" href="/blog/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/148/">&gt;</a>
   </nav>
 
 
@@ -433,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/05/30/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/18/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/05/30/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" itemprop="url">使用kerl安装erlang环境</a></h1>
+                <a class="post-title-link" href="/blog/2021/07/18/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url">nginx常用指令</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-30T21:18:54+08:00">
-                2021-05-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-18T18:33:26+08:00">
+                2021-07-18
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/erlang/" itemprop="url" rel="index">
-                    <span itemprop="name">erlang</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -334,15 +345,12 @@
       
         
           
-            <p>参考： kancloud.cn</p>
-<h1 id="kerl说明"><a href="#kerl说明" class="headerlink" title="kerl说明"></a>kerl说明</h1><p>kerl是一个OTP版本管理工具，可以在不同的OTP版本间随意切换。</p>
-<h1 id="安装kerl"><a href="#安装kerl" class="headerlink" title="安装kerl"></a>安装kerl</h1><p>curl -O <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod">https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod</a> a+x kerl</p>
-<h1 id="查看所有可用的版本"><a href="#查看所有可用的版本" class="headerlink" title="查看所有可用的版本"></a>查看所有可用的版本</h1><p>./kerl list releases</p>
-<h1 id="下载编译"><a href="#下载编译" class="headerlink" title="下载编译"></a>下载编译</h1><p>./kerl build $版本 </p>
-<h1 id="安装OTP"><a href="#安装OTP" class="headerlink" title="安装OTP"></a>安装OTP</h1><p>./kerl install $版本 $安装路径</p>
-<h1 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h1><p>. $安装路径/activate</p>
-<h1 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h1><p>kerl_deactivate</p>
-<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>./kerl delete installation/build $版本</p>
+            <h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><ol>
+<li>./nginx -s quit:此方式停止步骤是待nginx进程处理任务完毕进行停止。</li>
+<li>./nginx -s stop:此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程。</li>
+<li>对 nginx 进行重启相当于先停止再启动，即先执行停止命令再执行启动命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -s quit</span><br><span class="line">.&#x2F;nginx</span><br></pre></td></tr></table></figure></li>
+<li>./nginx -s reload不停止nginx的情况下重新加载配置文件。</li>
+</ol>
 
           
         
@@ -382,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/40/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/40/">&gt;</a>
   </nav>
 
 
@@ -428,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -439,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

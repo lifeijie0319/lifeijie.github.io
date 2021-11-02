@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/VCS/git/git%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/" itemprop="url">在django系统外使用django的ORM</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/VCS/git/git%E5%AE%89%E8%A3%85/" itemprop="url">Centos下安装git记录</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/VCS/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -345,10 +345,11 @@
       
         
           
-            <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><p>django.core.exceptions.ImproperlyConfigured: Requested setting DEFAULT_INDEX_TABLESPACE, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.</p>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error">http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error</a></p>
-<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1dbd3a22da10">http://www.jianshu.com/p/1dbd3a22da10</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/orangleliu/article/details/21722725">http://blog.csdn.net/orangleliu/article/details/21722725</a>  </p>
-
+            <h1 id="1-背景"><a href="#1-背景" class="headerlink" title="1 背景"></a>1 背景</h1><p>linux使用yum安装的git下载时显示git版本过低，但是yum下载显示已经是最新版本1.7.1</p>
+<h1 id="2-卸载当前git"><a href="#2-卸载当前git" class="headerlink" title="2 卸载当前git"></a>2 卸载当前git</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br></pre></td></tr></table></figure>
+<h1 id="3-下载源码包，解压"><a href="#3-下载源码包，解压" class="headerlink" title="3 下载源码包，解压"></a>3 下载源码包，解压</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;www.kernel.org&#x2F;pub&#x2F;software&#x2F;scm&#x2F;git&#x2F;git-2.15.1.tar.xz</span><br><span class="line">tar -vxf git-2.15.1.tar.xz</span><br></pre></td></tr></table></figure>
+<h1 id="4-安装依赖包"><a href="#4-安装依赖包" class="headerlink" title="4 安装依赖包"></a>4 安装依赖包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tk zlib-devel openssl-devel perl cpio expat-devel gettext-devel </span><br></pre></td></tr></table></figure>
+<h1 id="5-编译安装"><a href="#5-编译安装" class="headerlink" title="5 编译安装"></a>5 编译安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp; make install</span><br></pre></td></tr></table></figure>
           
         
       
@@ -387,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/107/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/blog/page/109/">109</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/109/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/107/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/blog/page/109/">109</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/109/">&gt;</a>
   </nav>
 
 
@@ -433,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="什么是数据库范式  数据库范式，英文NF，代表Normal Form，是指数据库表设计一般遵循的原则。数据库范式基本的有第一到第三范式（1NF、2NF、3NF），还有BCNF和4NF以及5NF等。今天这边只整理一下基本的三个范式。 1NF  属性（这里属性对应数据表的列）的原子性。即属性不可分割为两个独立的子属性。 2NF  在满足1NF的前提下，属性完全依赖于主属性（主属性对应数据表的主键）。这">
+<meta name="description" content="什么是数据库范式  数据库范式，英文NF，代表Normal Form，是指数据库表设计一般遵循的原则。数据库范式基本的有第一到第三范式（1NF、2NF、3NF），还有BCNF和4NF以及5NF等。今天这边只整理一下基本的三个范式。 1NF  属性（这里属性对应数据表的列）的原子性。即属性不可分割为两个独立的子属性。 2NF  在满足1NF的前提下，非主属性完全依赖于主属性（主属性对应数据表的主键）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库设计范式">
 <meta property="og:url" content="https://lifeijie.gitee.io/blog/2021/01/16/database/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E8%8C%83%E5%BC%8F/index.html">
 <meta property="og:site_name" content="李飞杰的个人博客">
-<meta property="og:description" content="什么是数据库范式  数据库范式，英文NF，代表Normal Form，是指数据库表设计一般遵循的原则。数据库范式基本的有第一到第三范式（1NF、2NF、3NF），还有BCNF和4NF以及5NF等。今天这边只整理一下基本的三个范式。 1NF  属性（这里属性对应数据表的列）的原子性。即属性不可分割为两个独立的子属性。 2NF  在满足1NF的前提下，属性完全依赖于主属性（主属性对应数据表的主键）。这">
+<meta property="og:description" content="什么是数据库范式  数据库范式，英文NF，代表Normal Form，是指数据库表设计一般遵循的原则。数据库范式基本的有第一到第三范式（1NF、2NF、3NF），还有BCNF和4NF以及5NF等。今天这边只整理一下基本的三个范式。 1NF  属性（这里属性对应数据表的列）的原子性。即属性不可分割为两个独立的子属性。 2NF  在满足1NF的前提下，非主属性完全依赖于主属性（主属性对应数据表的主键）">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-01-16T12:01:14.000Z">
-<meta property="article:modified_time" content="2021-02-23T12:30:00.190Z">
+<meta property="article:modified_time" content="2021-08-22T01:33:44.872Z">
 <meta property="article:author" content="lifeijie">
 <meta name="twitter:card" content="summary">
 
@@ -331,12 +331,18 @@
       
 
       
-        <h2 id="什么是数据库范式"><a href="#什么是数据库范式" class="headerlink" title="什么是数据库范式"></a>什么是数据库范式</h2><p>  数据库范式，英文NF，代表Normal Form，是指数据库表设计一般遵循的原则。数据库范式基本的有第一到第三范式（1NF、2NF、3NF），还有BCNF和4NF以及5NF等。今天这边只整理一下基本的三个范式。</p>
-<h2 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h2><p>  属性（这里属性对应数据表的列）的原子性。即属性不可分割为两个独立的子属性。</p>
-<h2 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h2><p>  在满足1NF的前提下，属性完全依赖于主属性（主属性对应数据表的主键）。这里要理解一下完全依赖，指的是联合主键的情况下，其它属性不能依赖于主键属性的一部分。</p>
-<h2 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h2><p>  在满足2NF的前提下，属性不能传递依赖于主属性。比如属性B依赖于主属性A，属性C依赖于属性B，那么C到A属于传递依赖，这种情况是不符合3NF的。</p>
-<h2 id="2NF和3NF的区别"><a href="#2NF和3NF的区别" class="headerlink" title="2NF和3NF的区别"></a>2NF和3NF的区别</h2><p>  第二范式（2NF）和第三范式（3NF）的概念很容易混淆，区分它们的关键点在于，2NF：非主键列是否完全依赖于主键，还是依赖于主键的一部分；3NF：非主键列是直接依赖于主键，还是直接依赖于非主键列。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>  数据库的三个基本范式可以作为数据表设计的参考原则，但是不排除特殊业务场景需要违背三个原则（这个场景我没见过，有机会会做一些记录），最终还是以实践为准。</p>
+        <h1 id="什么是数据库范式"><a href="#什么是数据库范式" class="headerlink" title="什么是数据库范式"></a>什么是数据库范式</h1><p>  数据库范式，英文NF，代表Normal Form，是指数据库表设计一般遵循的原则。数据库范式基本的有第一到第三范式（1NF、2NF、3NF），还有BCNF和4NF以及5NF等。今天这边只整理一下基本的三个范式。</p>
+<h1 id="1NF"><a href="#1NF" class="headerlink" title="1NF"></a>1NF</h1><p>  属性（这里属性对应数据表的列）的原子性。即属性不可分割为两个独立的子属性。</p>
+<h1 id="2NF"><a href="#2NF" class="headerlink" title="2NF"></a>2NF</h1><p>  在满足1NF的前提下，非主属性完全依赖于主属性（主属性对应数据表的主键）。这里要理解一下完全依赖，指的是联合主键的情况下，其它属性不能依赖于主键属性的一部分。</p>
+<h1 id="3NF"><a href="#3NF" class="headerlink" title="3NF"></a>3NF</h1><p>  在满足2NF的前提下，非主属性不能传递依赖于主属性。比如属性B依赖于主属性A，属性C依赖于属性B，那么C到A属于传递依赖，这种情况是不符合3NF的。</p>
+<h1 id="2NF和3NF的区别"><a href="#2NF和3NF的区别" class="headerlink" title="2NF和3NF的区别"></a>2NF和3NF的区别</h1><p>  第二范式（2NF）和第三范式（3NF）的概念很容易混淆，区分它们的关键点在于，2NF：非主键列是否完全依赖于主键，还是依赖于主键的一部分；3NF：非主键列是直接依赖于主键，还是直接依赖于非主键列。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>  数据库的三个基本范式可以作为数据表设计的参考原则，但是不排除特殊业务场景需要违背三个原则（这个场景我没见过，有机会会做一些记录），最终还是以实践为准。</p>
+<h1 id="BCNF-Boyce-Codd-Normal-Form"><a href="#BCNF-Boyce-Codd-Normal-Form" class="headerlink" title="BCNF(Boyce Codd Normal Form)"></a>BCNF(Boyce Codd Normal Form)</h1><h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><h3 id="候选码"><a href="#候选码" class="headerlink" title="候选码"></a>候选码</h3><p>唯一确定一条记录的属性集，候选码是候选的主键。</p>
+<h3 id="超码"><a href="#超码" class="headerlink" title="超码"></a>超码</h3><p>候选码的超集</p>
+<h3 id="主属性"><a href="#主属性" class="headerlink" title="主属性"></a>主属性</h3><p>候选码的并集</p>
+<h3 id="非主属性"><a href="#非主属性" class="headerlink" title="非主属性"></a>非主属性</h3><p>主属性之外的其它属性</p>
+<h2 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h2><p>1 满足3NF<br>2 对于所有的函数依赖A-&gt;B，A必须是超码。</p>
+<h2 id="经典案例"><a href="#经典案例" class="headerlink" title="经典案例"></a>经典案例</h2><p>已知表有这些属性：仓库号，存储物品号，管理员号，数量。其中仓库号-&gt;管理员号;管理员号-&gt;仓库号;(仓库号，存储物品号)-&gt;数量;(存储物品号，管理员号)-&gt;数量。<br>分析：候选码有(仓库号，存储物品号)，(存储物品号，管理员号)。主属性有(仓库号，存储物品号，管理员号)，非主属性有（数量）。对于函数依赖仓库号-&gt;管理员号，仓库号并不是超码，不符合BCNF范式。</p>
 
       
     </div>
@@ -446,7 +452,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +463,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -492,7 +498,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">什么是数据库范式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1NF"><span class="nav-number">2.</span> <span class="nav-text">1NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2NF"><span class="nav-number">3.</span> <span class="nav-text">2NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3NF"><span class="nav-number">4.</span> <span class="nav-text">3NF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2NF%E5%92%8C3NF%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text">2NF和3NF的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">什么是数据库范式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1NF"><span class="nav-number">2.</span> <span class="nav-text">1NF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2NF"><span class="nav-number">3.</span> <span class="nav-text">2NF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3NF"><span class="nav-number">4.</span> <span class="nav-text">3NF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2NF%E5%92%8C3NF%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">5.</span> <span class="nav-text">2NF和3NF的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BCNF-Boyce-Codd-Normal-Form"><span class="nav-number">7.</span> <span class="nav-text">BCNF(Boyce Codd Normal Form)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="nav-number">7.1.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%99%E9%80%89%E7%A0%81"><span class="nav-number">7.1.1.</span> <span class="nav-text">候选码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E7%A0%81"><span class="nav-number">7.1.2.</span> <span class="nav-text">超码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">7.1.3.</span> <span class="nav-text">主属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E4%B8%BB%E5%B1%9E%E6%80%A7"><span class="nav-number">7.1.4.</span> <span class="nav-text">非主属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6"><span class="nav-number">7.2.</span> <span class="nav-text">条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B"><span class="nav-number">7.3.</span> <span class="nav-text">经典案例</span></a></li></ol></li></ol></div>
             
 
           </div>

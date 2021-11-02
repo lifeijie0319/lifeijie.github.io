@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/random/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/random/" itemprop="url">python random模块</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/" itemprop="url">sftp服务器搭建一</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
                   </a>
                 </span>
 
@@ -345,11 +345,15 @@
       
         
           
-            <h1 id="多进程random不随机问题"><a href="#多进程random不随机问题" class="headerlink" title="多进程random不随机问题"></a>多进程random不随机问题</h1><h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>ForkingTCPServer每次生成新的进程处理请求，在每个进程中使用random.randint方法生成随机数，每次请求返回的random值都是同一个。</p>
-<h2 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h2><p>random是伪随机数，按照种子依次生成伪随机数序列的各项，每次进程启动调用random，用的是相同的种子，所以生成的随机数序列是一样的。如果单独使用python解释器进入交互界面执行，可以发现，不同的进程调用random.randint获取的随机数不同。所以这里推测是由于random模块在主进程导入时确定种子，fork时复制了相同的随机数对象导致。这个推测是下面解决方法三的思路来源。</p>
-<h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p>方法一：使用进程间通信，随机数在公共区域生成，其它进程都从这个进程里面取。<br>方法二：每次调用random.randint，先用random.seed()重置种子。<br>方法三：在Handler的handle方法中import random。</p>
-<p>注：python2有上述问题，python3没有。</p>
-
+            <h1 id="1-说明"><a href="#1-说明" class="headerlink" title="1 说明"></a>1 说明</h1><p>sftp是Secure File Transfer Protocol的缩写，安全文件传送协议。可以为传输文件提供一种安全的加密方法。<br>sftp 与 ftp有着几乎一样的语法和功能。SFTP 为 SSH的一部份，和vsftpd一点关系没有，是一种传输档案至 Blogger 伺服器的安全方式。本身没有守护进程，是包含在ssh中，端口也是22</p>
+<h1 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2 搭建"></a>2 搭建</h1><h2 id="2-1-新建用户"><a href="#2-1-新建用户" class="headerlink" title="2.1 新建用户"></a>2.1 新建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# userdel ftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser|passwd --stdin sftpuser </span><br><span class="line">Changing password for user sftpuser.</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-配置-etc-ssh-sshd-config"><a href="#2-2-配置-etc-ssh-sshd-config" class="headerlink" title="2.2 配置/etc/ssh/sshd_config"></a>2.2 配置/etc/ssh/sshd_config</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># override default of no subsystems</span><br><span class="line">#Subsystem sftp &#x2F;usr&#x2F;libexec&#x2F;openssh&#x2F;sftp-server</span><br><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match User sftpuser</span><br><span class="line">ChrootDirectory &#x2F;</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no </span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
+<p>【注】：</p>
+<ul>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，属主和属组必须是root；</li>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，只有属主能拥有写权限，也就是说权限最大设置只能是755</li>
+</ul>
+<h2 id="2-3-重启服务"><a href="#2-3-重启服务" class="headerlink" title="2.3 重启服务"></a>2.3 重启服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# systemctl restart sshd</span><br></pre></td></tr></table></figure>
           
         
       
@@ -388,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
   </nav>
 
 
@@ -434,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

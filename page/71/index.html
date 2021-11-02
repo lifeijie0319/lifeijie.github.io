@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/postgresql/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/sqllte3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/postgresql/" itemprop="url">postgresql</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/sqllte3/" itemprop="url">django使用sqlite</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -317,7 +317,7 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
+                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
                     <span itemprop="name">db</span>
                   </a>
                 </span>
@@ -356,8 +356,8 @@
       
         
           
-            <h1 id="现象：安装psycopg2出错"><a href="#现象：安装psycopg2出错" class="headerlink" title="现象：安装psycopg2出错"></a>现象：安装psycopg2出错</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: pg_config executable not found</span><br><span class="line">pg_config is in postgresql-dev</span><br></pre></td></tr></table></figure>
-<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libpq-dev python-dev</span><br><span class="line">pip install psycopg2、</span><br></pre></td></tr></table></figure>
+            <p>测试时创建数据库、销毁数据库速度慢，可以使用内存数据库sqlite。<br>在setting里面的DATABASE设置下面添加：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;test&#x27;</span> <span class="keyword">in</span> sys.argv:</span><br><span class="line">    DATABASES[<span class="string">&#x27;default&#x27;</span>] = &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.sqlite3&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;:memory:&#x27;</span>,</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -396,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
   </nav>
 
 
@@ -442,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

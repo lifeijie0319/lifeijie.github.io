@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/08/15/tools/rabbitmq/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%81%9C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/10/16/go/gotour%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/08/15/tools/rabbitmq/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%81%9C/" itemprop="url">rabbitmq安装与启停</a></h1>
+                <a class="post-title-link" href="/blog/2021/10/16/go/gotour%E5%AE%89%E8%A3%85/" itemprop="url">gotour安装</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-15T16:38:14+08:00">
-                2021-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-10-16T14:02:12+08:00">
+                2021-10-16
               </time>
             
 
@@ -312,9 +312,16 @@
       
         
           
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h1 id="启停"><a href="#启停" class="headerlink" title="启停"></a>启停</h1><h2 id="前台启动"><a href="#前台启动" class="headerlink" title="前台启动"></a>前台启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server</span><br></pre></td></tr></table></figure>
-<h2 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server -detached</span><br></pre></td></tr></table></figure>
-<h1 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl stop</span><br></pre></td></tr></table></figure>
+            <h1 id="安装步骤："><a href="#安装步骤：" class="headerlink" title="安装步骤："></a>安装步骤：</h1><ol>
+<li>下载gotour项目，测试可用的项目是bitbucket.org/mikespook/go-tour-zh</li>
+<li>添加依赖，包括github.com/yuin/goldmark，golang.org\x\sys，golang.org\x\net，golang.org\x\tools<br>注：安装的方式如下：<br>方法一：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE&#x3D;off</span><br><span class="line">go get :path</span><br></pre></td></tr></table></figure>
+方法二：手动git下载或者直接下载源码包，然后安装到:GOPATH/src目录下</li>
+<li>安装可执行程序<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE&#x3D;off</span><br><span class="line">go install bitbucket.org&#x2F;mikespook&#x2F;go-tour-zh&#x2F;gotour</span><br></pre></td></tr></table></figure>
+<h1 id="资源整合："><a href="#资源整合：" class="headerlink" title="资源整合："></a>资源整合：</h1>由于部分资源受限，整理了这些资源到gitee上，地址是<a target="_blank" rel="noopener" href="https://gitee.com/lifeijie/go-tour-zh.git">https://gitee.com/lifeijie/go-tour-zh.git</a></li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43983266/article/details/108716743">https://blog.csdn.net/weixin_43983266/article/details/108716743</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/198069131">https://zhuanlan.zhihu.com/p/198069131</a></p>
+<h1 id="习题答案"><a href="#习题答案" class="headerlink" title="习题答案"></a>习题答案</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/z159158/article/details/117821386">https://blog.csdn.net/z159158/article/details/117821386</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yjf512/archive/2012/12/09/2810302.html">https://www.cnblogs.com/yjf512/archive/2012/12/09/2810302.html</a></p>
+
           
         
       
@@ -353,7 +360,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/">&lt;</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/4/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/">&lt;</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/4/">&gt;</a>
   </nav>
 
 
@@ -399,7 +406,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -410,7 +417,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

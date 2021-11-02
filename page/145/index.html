@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/03/28/database/mysql/mysql%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
+                <a class="post-title-link" href="/blog/2021/03/28/database/mysql/mysql%E5%AE%89%E8%A3%85/" itemprop="url">mysql安装</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-27T21:44:02+08:00">
-                2021-01-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T14:35:36+08:00">
+                2021-03-28
               </time>
             
 
@@ -313,17 +313,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
-                    <span itemprop="name">index</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -356,8 +345,14 @@
       
         
           
-            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
-<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
+<li>centos下使用yum安装<br>sudo yum install -y mysql-server mysql mysql-devel</li>
+</ul>
+<h1 id="二、设置开机自启动"><a href="#二、设置开机自启动" class="headerlink" title="二、设置开机自启动"></a>二、设置开机自启动</h1><p>设置：sudo chkconfig mysqld on<br>查看：chkconfig –list | grep mysqld</p>
+<h1 id="三、启动"><a href="#三、启动" class="headerlink" title="三、启动"></a>三、启动</h1><p>sudo service mysqld start</p>
+<h1 id="四、设置数据库root用户密码"><a href="#四、设置数据库root用户密码" class="headerlink" title="四、设置数据库root用户密码"></a>四、设置数据库root用户密码</h1><p>（一）、新密码：/usr/bin/mysqladmin -u root password ‘new-password’<br>（二）、重设密码：<br>1、mysqladmin -u root -p password ‘new-password’<br>2、# mysql </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE mysql; </span><br><span class="line">mysql&gt; UPDATE user SET Password &#x3D; password ( &#39;new-password&#39; ) WHERE User &#x3D; &#39;root&#39;; </span><br><span class="line">mysql&gt; flush privileges; </span><br><span class="line">mysql&gt; quit</span><br></pre></td></tr></table></figure>
+<h1 id="五、mysql的目录设置"><a href="#五、mysql的目录设置" class="headerlink" title="五、mysql的目录设置"></a>五、mysql的目录设置</h1><p>1./etc/my.cnf 这是mysql的主配置文件<br>2./var/lib/mysql mysql数据库的数据库文件存放位置<br>3./var/log mysql数据库的日志输出存放位置</p>
 
           
         
@@ -397,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/144/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/blog/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/146/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/144/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/blog/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/146/">&gt;</a>
   </nav>
 
 
@@ -443,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

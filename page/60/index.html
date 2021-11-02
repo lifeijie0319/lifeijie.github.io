@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/db/sqllte3/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/j2ee/servlet%E8%B7%AF%E7%94%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/Django/db/sqllte3/" itemprop="url">django使用sqlite</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/java/j2ee/servlet%E8%B7%AF%E7%94%B1/" itemprop="url">servlet路由</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/Django/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/java/j2ee/" itemprop="url" rel="index">
+                    <span itemprop="name">j2ee</span>
                   </a>
                 </span>
 
@@ -356,8 +345,15 @@
       
         
           
-            <p>测试时创建数据库、销毁数据库速度慢，可以使用内存数据库sqlite。<br>在setting里面的DATABASE设置下面添加：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;test&#x27;</span> <span class="keyword">in</span> sys.argv:</span><br><span class="line">    DATABASES[<span class="string">&#x27;default&#x27;</span>] = &#123;</span><br><span class="line">        <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.db.backends.sqlite3&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;:memory:&#x27;</span>,</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="web-xml配置-、-、-do的区别"><a href="#web-xml配置-、-、-do的区别" class="headerlink" title="web.xml配置/、/、.do的区别"></a>web.xml配置/、/<em>、</em>.do的区别</h1><ul>
+<li>“/‘表示匹配所有请求（其中包含除.jsp和.jspx外的所有后缀）。<br>jsp和jspx使用tomcat默认的JspServlet进行处理，至于其它带后缀的请求，如果没有配置静态资源匹配，会默认去掉后缀，当做控制器路由进行处理。</li>
+<li>“/*”表示匹配所有请求（包含所有后缀）。<br>这个路由控制会导致静态资源也无法访问。</li>
+<li><em>.do表示匹配所有以.do结尾的请求<br>控制器路由统一使用</em>.do结尾，省去了静态资源配置的麻烦，但是不符合restful风格。</li>
+</ul>
+<h1 id="web-xml静态资源配置"><a href="#web-xml静态资源配置" class="headerlink" title="web.xml静态资源配置"></a>web.xml静态资源配置</h1><p>tomcat有默认的DefaultServlet处理静态资源，DefaultServlet对应的id为default，在用户web.xml中配置静态资源指向default即可，访问js文件配置如下，其它同理：  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.js<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意: WEB-INF目录不允许直接访问，静态资源一般建立WEB-INF同级目录进行访问。</p>
+
           
         
       
@@ -396,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/59/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/blog/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="extend next" rel="next" href="/blog/page/61/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/59/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/blog/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/61/">&gt;</a>
   </nav>
 
 
@@ -442,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">150</span>
+                  <span class="site-state-item-count">161</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

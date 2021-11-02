@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/08/15/tools/openvpn/openvpn%E6%90%AD%E5%BB%BA/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/08/15/tools/rabbitmq/%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/08/15/tools/openvpn/openvpn%E6%90%AD%E5%BB%BA/" itemprop="url">openvpn搭建</a></h1>
+                <a class="post-title-link" href="/blog/2021/08/15/tools/rabbitmq/%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C/" itemprop="url">rabbitmq基本用户操作</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/openvpn/" itemprop="url" rel="index">
-                    <span itemprop="name">openvpn</span>
+                  <a href="/blog/categories/tools/rabbitmq/" itemprop="url" rel="index">
+                    <span itemprop="name">rabbitmq</span>
                   </a>
                 </span>
 
@@ -345,21 +345,9 @@
       
         
           
-            <h1 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h1><p><a target="_blank" rel="noopener" href="http://www.zhangblog.com/2020/05/09/openvpn01/">http://www.zhangblog.com/2020/05/09/openvpn01/</a><br><a target="_blank" rel="noopener" href="https://www.bbsmax.com/A/kPzOX038Jx/">https://www.bbsmax.com/A/kPzOX038Jx/</a></p>
-<h1 id="问题与讨论"><a href="#问题与讨论" class="headerlink" title="问题与讨论"></a>问题与讨论</h1><h2 id="什么是easy-rsa"><a href="#什么是easy-rsa" class="headerlink" title="什么是easy-rsa"></a>什么是easy-rsa</h2><p>easy-rsa是一个证书制作工具，简化了openvpn搭建过程中秘钥证书相关的步骤。这部分后续结合vpn原理学习。</p>
-<h1 id="配置文件comp-lzo选项"><a href="#配置文件comp-lzo选项" class="headerlink" title="配置文件comp-lzo选项"></a>配置文件comp-lzo选项</h1><p>openvpn2.4版本使用–compress [algorithm]代替–comp-lzo [mode]，未来版本移除–comp-lzo [mode]，具体来说，新版本配置可以用compress lzo代替老版本comp-lzo。老版本不支持compress，客户端配置中使用compress无法正常解析，连接不上服务器。</p>
-<h1 id="网络策略开通"><a href="#网络策略开通" class="headerlink" title="网络策略开通"></a>网络策略开通</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 10.8.0.0&#x2F;24 -o eth0 -j MASQUERADE</span><br></pre></td></tr></table></figure>
-<ul>
-<li>-t nat 配置nat表规则</li>
-<li>-A 添加规则</li>
-<li>POSTROUTING 配置POSTROUTING链的规则，此链一般用于处理即将离开本机的数据包</li>
-<li>-s 10.8.0.0/24 对源地址是10.8.0.0/24网段的包处理</li>
-<li>-o eth0 出口网卡是eth0</li>
-<li>-j MASQUERADE 添加规则是MASQUERADE，地址伪装</li>
-<li>其它详细内容参考iptables基础知识</li>
-</ul>
-<p>为什么这里要开通策略？不开似乎也能连接vpn服务器，待学习</p>
-
+            <h1 id="vhost操作"><a href="#vhost操作" class="headerlink" title="vhost操作"></a>vhost操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#添加vhost</span><br><span class="line">rabbitmqctl add_vhost &#x2F;testhost</span><br><span class="line">#列出vhost</span><br><span class="line">rabbitmqctl list_vhosts</span><br><span class="line">#删除vhost</span><br><span class="line">rabbitmqctl delete_vhost &#x2F;testhost</span><br></pre></td></tr></table></figure>
+<h1 id="用户操作"><a href="#用户操作" class="headerlink" title="用户操作"></a>用户操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 添加用户</span><br><span class="line">rabbitmqctl add_user admin 123456</span><br><span class="line"># 修改用户密码</span><br><span class="line">rabbitmqctl change_password admin 1234567</span><br><span class="line"># 验证用户密码</span><br><span class="line">rabbitmqctl authenticate_user admin 123456</span><br><span class="line"># 删除用户</span><br><span class="line">rabbitmqctl delete_user admin</span><br><span class="line"># 列出用户</span><br><span class="line">rabbitmqctl list_users</span><br><span class="line"># 给用户设置标签</span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br></pre></td></tr></table></figure>
+<h1 id="给用户赋权限"><a href="#给用户赋权限" class="headerlink" title="给用户赋权限"></a>给用户赋权限</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># rabbitmqctl set_permissions [-p host] &#123;user&#125; &#123;conf&#125; &#123;write&#125; &#123;read&#125;</span><br><span class="line"># vhost 授予用户访问权限的vhost名称 默认 &#x2F;</span><br><span class="line"># user 可以访问指定vhost的用户名</span><br><span class="line"># conf 一个用于匹配用户在那些资源上拥有可配置的正则表达式</span><br><span class="line"># write 一个用于匹配用户在那些资源上拥有可写的正则表达式</span><br><span class="line"># read 一个用于匹配用户在那些资源上拥有可读的正则表达式</span><br><span class="line"></span><br><span class="line"># 授予admin用户可访问虚拟主机testhost，并在所有的资源上具备可配置、可写及可读的权限</span><br><span class="line">rabbitmqctl set_permissions -p &#x2F;testhost admin &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"> </span><br><span class="line"># 授予admin用户可访问虚拟主机testhost1，在以queue开头的资源上具备可配置权限、并在所有的资源上可写及可读的权限</span><br><span class="line">rabbitmqctl set_permissions -p &#x2F;testhost1 admin &quot;^queue.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"># 清除权限</span><br><span class="line">rabbitmqctl clear_permissions -p &#x2F;testhost admin</span><br><span class="line"># 查看虚拟主机的权限</span><br><span class="line">rabbitmqctl list_permissions -p &#x2F;testhost</span><br><span class="line"># 查看用户权限</span><br><span class="line">rabbitmqctl list_user_permissions admin</span><br></pre></td></tr></table></figure>
           
         
       
@@ -398,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/27/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/blog/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/29/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/27/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/blog/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/29/">&gt;</a>
   </nav>
 
 
@@ -444,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -455,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

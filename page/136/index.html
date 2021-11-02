@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/database/mysql/index/%E4%B8%BB%E9%94%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/String/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/database/mysql/index/%E4%B8%BB%E9%94%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" itemprop="url">主键相关问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/java/String/" itemprop="url">JAVA String</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:51:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:15:16+08:00">
                 2021-04-04
               </time>
             
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
-                    <span itemprop="name">index</span>
+                  <a href="/blog/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -356,8 +334,10 @@
       
         
           
-            <h1 id="为什么建议要建主键"><a href="#为什么建议要建主键" class="headerlink" title="为什么建议要建主键"></a>为什么建议要建主键</h1><p>因为MySQL底层使用B+树结构存储数据，主键索引是天然的构建依据。如果没有建立主键，mysql内部会建立隐藏主键。</p>
-<h1 id="主键为什么建议用自增整型数据"><a href="#主键为什么建议用自增整型数据" class="headerlink" title="主键为什么建议用自增整型数据"></a>主键为什么建议用自增整型数据</h1><p>首先，整型便于比较，在B+树的数据操作中，数据比较是最常见的操作，整型数据在比较的时候比其他类型都快。而且一般来说，整型数据的存储空间较小。<br>自增又有什么好处？索引值自增时，插入的数据永远在B+树的最右侧子节点。如果不自增，插入的数据可能在树的中间，导致叶子节点页分裂（页已经被原有数据占满），有一个再平衡的过程，效率不高。所以自增索引减少了B+树的结构调整，提高了存储效率。</p>
+            <h1 id="String的存储"><a href="#String的存储" class="headerlink" title="String的存储"></a>String的存储</h1><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">String s3 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>), s4 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(s1 == s2);</span><br><span class="line">System.out.println(s1 == s3);</span><br><span class="line">System.out.println(s4 == s3);</span><br><span class="line">System.out.println(s1.equals(s3));</span><br><span class="line">System.out.println(s4.equals(s3));</span><br></pre></td></tr></table></figure>
+<h3 id="打印结果："><a href="#打印结果：" class="headerlink" title="打印结果："></a>打印结果：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">false</span><br><span class="line">false</span><br><span class="line">true</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>java中的String有两种定义方式，对应的存储原理不同。<br>一种是s1和s2这样，字符串定义在堆中的常量区，s1生成常量对象，s2定义时，jvm发现常量区已有该字符串，直接返回对应地址。<br>另一种是s3和s4这样，等于实例化一个普通类，每次实例化返回的地址不同，在堆中生成了不同的实例。<br>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36653524/article/details/100730394">https://blog.csdn.net/qq_36653524/article/details/100730394</a> </p>
+<h3 id="“-”和equals方法进行字符串比较时的不同"><a href="#“-”和equals方法进行字符串比较时的不同" class="headerlink" title="“==”和equals方法进行字符串比较时的不同"></a>“==”和equals方法进行字符串比较时的不同</h3><p>java中的非基本类型都是引用（指针），”==”实际上是引用（指针存储的地址）的比较。而equals方法比较的是字符串内容是否相等。</p>
 
           
         
@@ -397,7 +377,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/135/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/135/">135</a><span class="page-number current">136</span><a class="page-number" href="/blog/page/137/">137</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/137/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/135/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/135/">135</a><span class="page-number current">136</span><a class="page-number" href="/blog/page/137/">137</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/137/">&gt;</a>
   </nav>
 
 
@@ -443,7 +423,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +434,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

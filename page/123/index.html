@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/OOP/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/email/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/OOP/" itemprop="url">python实例方法、类方法和静态方法</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/email/" itemprop="url">email发送和接收</a></h1>
         
 
         <div class="post-meta">
@@ -345,11 +345,49 @@
       
         
           
-            <p>示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    data = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span>  <span class="title">f</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.data</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f1</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="keyword">return</span> cls.data</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f2</span>():</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h2 id="1、普通方法："><a href="#1、普通方法：" class="headerlink" title="1、普通方法："></a>1、普通方法：</h2><p>只有实例可以调用，实例作为第一个参数传入方法。</p>
-<h2 id="2、classmethod类方法"><a href="#2、classmethod类方法" class="headerlink" title="2、classmethod类方法"></a>2、classmethod类方法</h2><p>类和实例都可以调用，自动传入类作为方法的第一个参数。</p>
-<h2 id="3、staticmethod静态方法"><a href="#3、staticmethod静态方法" class="headerlink" title="3、staticmethod静态方法"></a>3、staticmethod静态方法</h2><p>类和实例都可以调用，与普通函数类似。</p>
+            <p>参考：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0</a></p>
+<h1 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h1><p>需要手动对发送方邮箱配置SMTP协议，此时可能需要设置客户端授权码，即为登录第三方邮件客户端的专用口令，以下是常用邮箱SMTP端口及登录说明：  </p>
+<table>
+<thead>
+<tr>
+<th>邮箱</th>
+<th>SMTP服务器</th>
+<th>登录口令</th>
+<th>支持加密方式</th>
+<th>对应端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>163</td>
+<td>smtp.163.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>126</td>
+<td>smtp.126.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>smtp.qq.com</td>
+<td>系统分配授权码</td>
+<td>明文/SSL加密/TLS加密</td>
+<td>25/465/587</td>
+</tr>
+<tr>
+<td>Gmail</td>
+<td>smtp.gmail.com</td>
+<td>邮箱登录密码</td>
+<td>TLS加密</td>
+<td>587</td>
+</tr>
+</tbody></table>
+<h1 id="2、加密问题"><a href="#2、加密问题" class="headerlink" title="2、加密问题"></a>2、加密问题</h1><p>SMTP协议发送邮件，如果想要加密，有如下几种方式：<br>1）明文传输:　端口号是25；<br>2）SSL加密: 端口号是465，通信过程加密，邮件数据安全；<br>3）TLS加密: 端口号是587，通信过程加密，邮件数据安全，使用正常的smtp端口。对于TLS加密方式需要先建立SSL连接，然后再发送邮件。</p>
+<h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3 遇到的问题"></a>3 遇到的问题</h1><p>3.1 使用qq向foxmail发送带附件的邮件时，如果不用加密，程序报错，连接中断。<br>3.2 如果使用POP3收邮件，必须使用ssl加密的方式登录服务器。</p>
 
           
         
@@ -389,7 +427,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/122/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/122/">122</a><span class="page-number current">123</span><a class="page-number" href="/blog/page/124/">124</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/124/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/122/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/122/">122</a><span class="page-number current">123</span><a class="page-number" href="/blog/page/124/">124</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/124/">&gt;</a>
   </nav>
 
 
@@ -435,7 +473,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -446,7 +484,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

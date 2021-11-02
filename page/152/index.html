@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/mysql/MySQL%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/02/06/database/mysql/MySQL%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84/" itemprop="url">MySQL基本架构</a></h1>
+                <a class="post-title-link" href="/blog/2021/02/06/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">mysql配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -345,21 +345,12 @@
       
         
           
-            <h1 id="MySQL基本结构"><a href="#MySQL基本结构" class="headerlink" title="MySQL基本结构"></a>MySQL基本结构</h1><ul>
-<li>客户端</li>
-<li>Server层<ul>
-<li>连接器：管理连接，权限校验等</li>
-<li>语法分析器：对SQL语句进行语法校验，语法解析</li>
-<li>优化器：对SQL执行进行可能的优化</li>
-<li>执行器：调用引擎，执行SQL，获取结果</li>
+            <h1 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h1><p>一般/etc/my.cnf ，本地~/.my.cnf可以覆盖全局配置</p>
+<h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>[标签]<br>配置项=xxx</p>
+<h1 id="常见标签"><a href="#常见标签" class="headerlink" title="常见标签"></a>常见标签</h1><ul>
+<li>服务端<br>[mysqld]<br>[mysqld_safe]<br>[server]</li>
+<li>客户端<br>[mysql]<br>[mysqldump]<br>[client]</li>
 </ul>
-</li>
-<li>存储引擎层</li>
-</ul>
-<h2 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h2><h3 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h3><p>一般用TCP/IP协议连接，本地也可以选择socket连接。<br>连接使用线程模式，可以使用命令查看当前连接线程：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> processlist;</span><br></pre></td></tr></table></figure>
-<h3 id="权限校验的基本流程"><a href="#权限校验的基本流程" class="headerlink" title="权限校验的基本流程"></a>权限校验的基本流程</h3><p>mysql从mysql数据库user表查询用户相关权限，加载到内存的连接管理对象。</p>
-<h3 id="权限加载是否是即时生效"><a href="#权限加载是否是即时生效" class="headerlink" title="权限加载是否是即时生效"></a>权限加载是否是即时生效</h3><p>否，需要重新连接。</p>
 
           
         
@@ -399,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/151/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/blog/page/153/">153</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/153/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/151/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/blog/page/153/">153</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/153/">&gt;</a>
   </nav>
 
 
@@ -445,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/25/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/18/tools/nginx/nginx%20tls%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/07/25/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">sed常用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/07/18/tools/nginx/nginx%20tls%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B/" itemprop="url">nginx tls版本检测</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-25T23:03:48+08:00">
-                2021-07-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-18T18:33:26+08:00">
+                2021-07-18
               </time>
             
 
@@ -297,6 +297,17 @@
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/blog/categories/tools/" itemprop="url" rel="index">
                     <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -334,18 +345,8 @@
       
         
           
-            <h1 id="基本替换模式"><a href="#基本替换模式" class="headerlink" title="基本替换模式"></a>基本替换模式</h1><p>sed -i :expression :file<br>:expression 一般是替换的表达式，参考vi中的替换。注意，与vi不同之处，一是用s而非%s，二是替换时忽略大小写，参考下文<br>:file 文件名<br>-i: sed处理过的输出是直接输出到屏幕上的,使用参数”i”直接在文件中替换。</p>
-<h1 id="expression详解"><a href="#expression详解" class="headerlink" title=":expression详解"></a>:expression详解</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>‘s/原字符串/替换字符串/‘<br>单引号里面,s表示替换,三根斜线中间是替换的样式,特殊字符需要使用反斜线”\”进行转义。</p>
-<h2 id="“-“处理"><a href="#“-“处理" class="headerlink" title="“/“处理"></a>“/“处理</h2><p>命令中的三根斜线分隔符可以换成别的符号,有时候替换目录字符串的时候有较多斜线，这个时候换成其它的分割符是较为方便,只需要紧跟s定义即可。</p>
-<h2 id="全局匹配"><a href="#全局匹配" class="headerlink" title="全局匹配"></a>全局匹配</h2><p>可以在末尾加g替换每一个匹配的关键字,否则只替换每行的第一个。</p>
-<h2 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h2><p>单引号” ‘ ’”是没有办法用反斜线”\”转义的,这时候只要把命令中的单引号改为双引号就行了,格式如下：<br>sed “s/原字符串包含’/替换字符串包含’/“ </p>
-<h2 id="替换时忽略大小写"><a href="#替换时忽略大小写" class="headerlink" title="替换时忽略大小写"></a>替换时忽略大小写</h2><p>在:expression的最后加上I代表忽略大小写</p>
-<h1 id="多条替换规则"><a href="#多条替换规则" class="headerlink" title="多条替换规则"></a>多条替换规则</h1><p>多个替换可以在同一条命令中执行,用分号”;”分隔，其格式为:<br>sed ‘s/^/添加的头部&amp;/g；s/$/&amp;添加的尾部/g’ </p>
-<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><ul>
-<li>”^”表示行首  </li>
-<li>”$”符号如果在引号中表示行尾，但是在引号外却表示末行(最后一行)  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sed &#39;s&#x2F;^&#x2F;添加的头部&amp;&#x2F;g&#39; 　　　　 #在所有行首添加  </span><br><span class="line">sed &#39;s&#x2F;$&#x2F;&amp;添加的尾部&#x2F;g&#39; 　　　　 #在所有行末添加  </span><br><span class="line">sed &#39;2s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39;　 #替换第2行  </span><br><span class="line">sed &#39;$s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39;   #替换最后一行  </span><br><span class="line">sed &#39;2,5s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39; #替换2到5行  </span><br><span class="line">sed &#39;2,$s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39; #替换2到最后一行  </span><br></pre></td></tr></table></figure>
-注意这里的 “ &amp; “ 符号，如果没有 “&amp;”，就会直接将匹配到的字符串替换掉</li>
-</ul>
+            <h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><p>1 Chrome浏览器F12，security选项卡<br>2 查看Connection选项</p>
+<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><p><a target="_blank" rel="noopener" href="https://www.ssllabs.com/ssltest/index.html">https://www.ssllabs.com/ssltest/index.html</a><br>这是一个可以分析ssl服务器的在线工具，可以知道自己的服务器是否已经开启了哪个版本的TSL。进入这个网站，输入自己服务器的ip或者域名,查询可能等个几分钟。</p>
 
           
         
@@ -385,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/33/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/blog/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/35/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/33/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/blog/page/35/">35</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/35/">&gt;</a>
   </nav>
 
 
@@ -431,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

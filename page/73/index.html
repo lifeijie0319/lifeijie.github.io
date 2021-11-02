@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/basic/import/import%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/basic/concurrent.futures/submit%E5%92%8Cmap/" itemprop="url">concurrent.futures模块中的submit和map</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/basic/import/import%E6%9C%BA%E5%88%B6/" itemprop="url">import机制</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/concurrent-futures/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent.futures</span>
+                  <a href="/blog/categories/python/basic/import/" itemprop="url" rel="index">
+                    <span itemprop="name">import</span>
                   </a>
                 </span>
 
@@ -356,8 +356,11 @@
       
         
           
-            <p>1 concurrent.futures的父类Executor定义了两个执行任务的方法，submit和map<br>ThreadPoolExecutor和ProcessPoolExecutor继承Executor</p>
-<p>2 需要注意，submit执行的任务直接返回concurrent.futures.Future对象，返回的futures列表中的future对象状态可能处于中间状态。<br>map则阻塞到所有任务完成。</p>
+            <h1 id="一、import的模块存在sys-modules字典中"><a href="#一、import的模块存在sys-modules字典中" class="headerlink" title="一、import的模块存在sys.modules字典中"></a>一、import的模块存在sys.modules字典中</h1><h1 id="二、from-module-import-g和import-module的区别"><a href="#二、from-module-import-g和import-module的区别" class="headerlink" title="二、from module import g和import module的区别"></a>二、from module import g和import module的区别</h1><p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/4344016/blog/3833716">https://my.oschina.net/u/4344016/blog/3833716</a><br>import module方式操作module的变量时，本地不会创建新变量，操作的是目标模块的变量！<br>from module import *方式操作module变量时，实质上是在本地创建一个与目标模块相同的变量名，并且默认与目标模块变量指向同一个内存空间。</p>
+<h1 id="三、重载模块"><a href="#三、重载模块" class="headerlink" title="三、重载模块"></a>三、重载模块</h1><p>python2.7 中内置reload函数<br>python3.7 中可以使用imp(deprecated)或者importlib中的reload函数</p>
+<h1 id="四、import路径问题"><a href="#四、import路径问题" class="headerlink" title="四、import路径问题"></a>四、import路径问题</h1><p>现象：使用signal实现超时控制的时候，总是报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: module &#39;signal&#39; has no attribute &#39;SIGALRM&#39;</span><br></pre></td></tr></table></figure>
+<p>原因：根据python搜索路径，会优先搜索当前路径。由于我们的测试文件名字与signal模块一样，导致导入signal的时候实际导入的是当前路径的signal测试文件 ，而不是python内置模块，自然找不到对应的参数SIGALARM。</p>
 
           
         
@@ -397,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/72/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/72/">72</a><span class="page-number current">73</span><a class="page-number" href="/blog/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/74/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/72/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/72/">72</a><span class="page-number current">73</span><a class="page-number" href="/blog/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/74/">&gt;</a>
   </nav>
 
 
@@ -443,7 +446,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

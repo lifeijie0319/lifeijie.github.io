@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/ibm_db/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/supervisor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/ibm_db/" itemprop="url">ibm_db</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/supervisor/" itemprop="url">supervisor</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/python/libs/env/" itemprop="url" rel="index">
+                    <span itemprop="name">env</span>
                   </a>
                 </span>
 
@@ -356,9 +356,15 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><p><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html</a></p>
-<h2 id="（一）离线安装"><a href="#（一）离线安装" class="headerlink" title="（一）离线安装"></a>（一）离线安装</h2><p>1、解压linuxx64_odbc_cli.tar.gz（实际上是IBM Data Server Driver for ODBC and CLI），将解压得到的处理driver移动到适当位置<br>2、设置环境变量：<br>export IBM_DB_HOME：文件夹ibm_db-2.0.7所在路径<br>3、解压ibm_db-2.0.7.tar.gz，得到解压后的文件夹ibm_db-2.0.7<br>4、进入文件夹ibm_db-2.0.7，执行<br>python2.7 setup.py build<br>python2.7 setup.py install<br>5、执行python，进入python环境，执行如下指令：<br>import ibm_db<br>没有报错说明包安装成功<br>6、Ensure that the Python driver can access the libdb2.so CLI driver file:<br>For 64-bit Linux and UNIX operating systems other than the AIX operating system, set the LD_LIBRARY_PATH variable to the IBM_DB_HOME/lib64 directory by issuing the export command:<br>export LD_LIBRARY_PATH=IBM_DB_HOME/lib64<br>这一步是设置环境变量，如果包下面没有这个lib64文件夹，可以将clidriver下面的db2profile执行设置环境变量。为了长期使用，可以把执行db2profiel的命令加到.bash_profilel或者.bashrc下面。</p>
-<h1 id="（二）在线安装"><a href="#（二）在线安装" class="headerlink" title="（二）在线安装"></a>（二）在线安装</h1><p>pip install ibm_db</p>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="1、pip安装"><a href="#1、pip安装" class="headerlink" title="1、pip安装"></a>1、pip安装</h2><p>pip install supervisor</p>
+<h2 id="2、离线安装"><a href="#2、离线安装" class="headerlink" title="2、离线安装"></a>2、离线安装</h2><p>依赖：meld3</p>
+<h1 id="二、使用配置"><a href="#二、使用配置" class="headerlink" title="二、使用配置"></a>二、使用配置</h1><p><a target="_blank" rel="noopener" href="http://www.ttlsa.com/linux/using-supervisor-control-program/">http://www.ttlsa.com/linux/using-supervisor-control-program/</a></p>
+<h1 id="三、常见错误与解决"><a href="#三、常见错误与解决" class="headerlink" title="三、常见错误与解决"></a>三、常见错误与解决</h1><p>1、unix:///tmp/supervisor.sock no such file<br>原因：<br>（1）在supervisor默认配置中，其启动的sock等都会放到tmp目录，而tmp目录会自动清理导致无法使用supervisorctl命令<br>（2）没有启动supervisord服务  </p>
+<p>2、ERROR (no such process)<br>原因：<br>没有正确读取program部分的配置文件。再supervisor主配置文件最后是这样的：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">;[include]</span><br><span class="line">;files &#x3D; &#x2F;home&#x2F;nanxun&#x2F;etc&#x2F;supervisor_programs.conf</span><br></pre></td></tr></table></figure>
+<p>如果要生效，两行的注释（；）都要去掉。</p>
+<p>3、supervisorctl status<br><a target="_blank" rel="noopener" href="http://localhost:9001/">http://localhost:9001</a> refused connection<br>原因：执行supervisorctl 需要指定配置文件路径</p>
+<p>4、supervisorctl stop某个程序之后发现事实上没有关掉<br>原因：supervisor配置问题，导致stop时只关闭了父进程，没有关掉子进程。<br>典型例子：Django 的内置服务器启动，multiprocessing多进程程序。<br>解决：修改配置项 stopasgroup 和 killasgroup; 默认为 false，如果设置为 true，当进程收到 stop 信号时，会自动将该信号发给该进程的子进程。如果这个配置项为 true，那么也隐含 killasgroup 为 true。例如在 Debug 模式使用 Flask 时，Flask 不会将接收到的 stop 信号也传递给它的子进程，因此就需要设置这个配置项。</p>
 
           
         
@@ -398,7 +404,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/88/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/88/">88</a><span class="page-number current">89</span><a class="page-number" href="/blog/page/90/">90</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/90/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/88/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/88/">88</a><span class="page-number current">89</span><a class="page-number" href="/blog/page/90/">90</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/90/">&gt;</a>
   </nav>
 
 
@@ -444,7 +450,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -455,7 +461,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

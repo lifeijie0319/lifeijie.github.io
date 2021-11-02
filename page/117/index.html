@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/tcp/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/network/tcp/TCP%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" itemprop="url">TCP四次挥手</a></h1>
+                <a class="post-title-link" href="/blog/2021/04/04/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url">django基本环境配置</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
-                    <span itemprop="name">tcp</span>
+                  <a href="/blog/categories/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -345,20 +345,15 @@
       
         
           
-            <h1 id="什么是四次挥手"><a href="#什么是四次挥手" class="headerlink" title="什么是四次挥手"></a>什么是四次挥手</h1><p>四次挥手指的是TCP连接断开的四次通信过程。</p>
-<h1 id="四次挥手的具体过程"><a href="#四次挥手的具体过程" class="headerlink" title="四次挥手的具体过程"></a>四次挥手的具体过程</h1><h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><ul>
-<li>客户端想要断开连接，向服务端发送报文，标志位FIN，序号u。客户端进入FIN-WAIT-1阶段，停止向服务端发送数据，但是仍然可以接收服务端数据。</li>
-<li>服务端收到报文，进入CLOSE-WAIT阶段，但是此时服务端还是可能在向客户端发送数据。<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2></li>
-<li>服务端向客户端发送确认报文，标志位ACK，序号v，确认号u+1。</li>
-<li>客户端收到ACK报文，进入FIN-WAIT-2阶段。<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2></li>
-<li>服务端完成剩余的数据传输，准备完成，向客户端发送报文，标志位FIN/ACK，序号w，确认号u+1。服务端进入LAST-ACK阶段。</li>
-<li>客户端收到报文，进入TIME-WAIT阶段。<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2></li>
-<li>客户端向服务端发送确认报文，标志位ACK，序号u+1，确认号w+1。等待2MSL后关闭连接。</li>
-<li>服务端收到确认报文，关闭连接，进入CLOSED状态。</li>
-</ul>
-<h1 id="为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间"><a href="#为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间" class="headerlink" title="为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间"></a>为什么客户端最后发出ACK报文后没有直接关闭，要等待2MSL时间</h1><p>是为了确认服务端收到了ACK确认报文。<br>MSL(Max Segment Lifetime)是指一个TCP报文在传输过程中的最大生命周期。如果2MSL时间内，客户端收到了服务端的重发报文，说明服务端没有收到客户端ACK报文，客户端计时器重置，重新等待2MSL时间。如果客户端2MSL没有收到服务端的重发报文，说明服务端正常接收了ACK报文。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在使用socket的过程中，我们发现，没有设置SO_REUSEADDR选项的情况下，socket服务重启往往会报错端口已被占用，这是因为此时服务器端口处于TIME-WAIT阶段，一般2MSL约为2分钟。这里我们要纠正前面的认识，即进入TIME-WAIT的不一定是客户端，实际上是发起四次挥手的一段，比如在scoket服务端重启的场景下，是服务端进入TIME-WAIT。<br>看到另一个理由，等待2MSL是为了<em>允许老的重复分节在网络中消逝</em>。结合socket重启的例子可以这样理解：如果服务端收到最终客户端的FIN/ACK报文并发出最终ACK报文后直接断开连接。然后服务端重启了，重新和客户端三次握手建立连接，会和之前断开连接的最终ACK报文混淆导致混乱。</p>
-
+            <h1 id="一、新建项目"><a href="#一、新建项目" class="headerlink" title="一、新建项目"></a>一、新建项目</h1><p>django-admin startproject nanxun_pro</p>
+<h1 id="二、建立app"><a href="#二、建立app" class="headerlink" title="二、建立app"></a>二、建立app</h1><p>cd nanxun_pro/<br>python manage.py startapp nanxun<br>修改配置添加app名字</p>
+<h1 id="三、django连接psql"><a href="#三、django连接psql" class="headerlink" title="三、django连接psql"></a>三、django连接psql</h1><p><a target="_blank" rel="noopener" href="http://luct.blogbus.com/logs/111257414.html">http://luct.blogbus.com/logs/111257414.html</a></p>
+<h2 id="1、修改配置"><a href="#1、修改配置" class="headerlink" title="1、修改配置"></a>1、修改配置</h2><p>默认：<br>修改后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,</span><br><span class="line">        &#39;NAME&#39;: &#39;nanxundb&#39;,</span><br><span class="line">        &#39;USER&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;PASSWORD&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;HOST&#39;: &#39;localhost&#39;,</span><br><span class="line">        &#39;PORT&#39;: &#39;5432&#39;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装psycopg2，psql在python中运行的中间件。"><a href="#2、安装psycopg2，psql在python中运行的中间件。" class="headerlink" title="2、安装psycopg2，psql在python中运行的中间件。"></a>2、安装psycopg2，psql在python中运行的中间件。</h2><p>pip install psycopg2</p>
+<h2 id="3、初始化数据库，载入django自带的数据模型"><a href="#3、初始化数据库，载入django自带的数据模型" class="headerlink" title="3、初始化数据库，载入django自带的数据模型"></a>3、初始化数据库，载入django自带的数据模型</h2><p>python manage.py migrate</p>
+<h1 id="四、配置admin账户"><a href="#四、配置admin账户" class="headerlink" title="四、配置admin账户"></a>四、配置admin账户</h1><p>python manage.py createsuperuser</p>
+<h1 id="五、创建模板与静态文件目录。"><a href="#五、创建模板与静态文件目录。" class="headerlink" title="五、创建模板与静态文件目录。"></a>五、创建模板与静态文件目录。</h1>
           
         
       
@@ -397,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/116/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/116/">116</a><span class="page-number current">117</span><a class="page-number" href="/blog/page/118/">118</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/118/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/116/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/116/">116</a><span class="page-number current">117</span><a class="page-number" href="/blog/page/118/">118</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/118/">&gt;</a>
   </nav>
 
 
@@ -443,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

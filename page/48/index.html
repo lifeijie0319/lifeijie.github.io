@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/06/06/database/riak/install/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/06/06/database/riak/start/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/06/06/database/riak/install/" itemprop="url">riak源码安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/06/06/database/riak/start/" itemprop="url">riak启动</a></h1>
         
 
         <div class="post-meta">
@@ -345,13 +345,14 @@
       
         
           
-            <h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>sudo yum install gcc gcc-c++ glibc-devel make git pam-devel</p>
-<h1 id="下载解压"><a href="#下载解压" class="headerlink" title="下载解压"></a>下载解压</h1><p>wget <a target="_blank" rel="noopener" href="http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz">http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz</a></p>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>make rel</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p><img src="/blog/images/database/riak/install/1.png"></p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>git版本低，不再被支持。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Please upgrade your git client.</span><br><span class="line">GitHub.com no longer supports git over dumb-http: https:&#x2F;&#x2F;github.com&#x2F;blog&#x2F;809-git-dumb-http-transport-to-be-turned-off-in-90-days</span><br></pre></td></tr></table></figure>
-<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>yum remove当前git，安装新版本git</p>
+            <p>参考文档： <a target="_blank" rel="noopener" href="https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html">https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html</a></p>
+<h1 id="停服务"><a href="#停服务" class="headerlink" title="停服务"></a>停服务</h1><p>riak stop</p>
+<h1 id="改配置"><a href="#改配置" class="headerlink" title="改配置"></a>改配置</h1><p>配置文件路径/etc/riak/riak.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listener.protobuf.internal &#x3D; 127.0.0.1:8087 #改成实际IP和端口</span><br><span class="line">nodename &#x3D; riak@127.0.0.1 #改成想改的名字，注意要唯一标识此节点</span><br></pre></td></tr></table></figure>
+<h1 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h1><p>riak start  </p>
+<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p><img src="/blog/images/database/riak/start/start1.png"></p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Riak’s Erlang VM is built with SMP support and if Riak is started on a non-SMP system, an error like this one is logged. This is commonly seen in virtualized environments configured for only one CPU core.</p>
+<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>改用4核cpu，然后还是报这个错。怀疑这个问题的真实原因。看到另一篇博客里说是因为/data/ring/下面的文件要清理掉，到是和官方文档不谋而合。处理了一下，果然，报另一个错误了：<br><img src="/blog/images/database/riak/start/start2.png"><br>看了一下，是8098默认端口被占用了，应该是指之前起的riak失败导致，重启机器之后就好了。另一次安装的时候，发现node名字也是导致此故障的原因之一，即node名字不能随意取，使用本机IP即可。</p>
 
           
         
@@ -391,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/47/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/blog/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/49/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/47/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/blog/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/49/">&gt;</a>
   </nav>
 
 
@@ -437,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

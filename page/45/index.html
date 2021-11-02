@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/12/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/12/tools/vi/vi%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/07/12/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">grep常用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/07/12/tools/vi/vi%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">vi使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -302,6 +302,17 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/vi/" itemprop="url" rel="index">
+                    <span itemprop="name">vi</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -334,9 +345,16 @@
       
         
           
-            <h1 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h1><p>grep [:options] :expression :file<br>:options 选项<br>:expression 要查找的内容，可以用正则表达式<br>:file 搜索的文件名</p>
-<h1 id="常见options"><a href="#常见options" class="headerlink" title="常见options"></a>常见options</h1><p>-l 只打印文件名，不输出匹配的行内容<br>-I 不搜索二进制二建<br>-r 递归搜索子目录下的文件<br>-n 打印匹配内容在文件中的行数</p>
-
+            <h1 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h1><p>i进入编辑模式，:进入命令模式，v进入视图模式</p>
+<h1 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h1><p>v进入视图模式，选中要转换的代码。:u或者:U转换</p>
+<h1 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h1><h2 id="单行替换"><a href="#单行替换" class="headerlink" title="单行替换"></a>单行替换</h2><p>s/欲替换的内容(可以是正则)/替换后的内容(可以是正则)/g</p>
+<h2 id="多行替换"><a href="#多行替换" class="headerlink" title="多行替换"></a>多行替换</h2><p>:start,:ends/欲替换的内容(可以是正则)/替换后的内容(可以是正则)/g<br>:start 数字，表示替换的查找起始行<br>:end 数字，表示替换的查找结束行</p>
+<h1 id="正则替换时替换后的内容使用替换前的内容"><a href="#正则替换时替换后的内容使用替换前的内容" class="headerlink" title="正则替换时替换后的内容使用替换前的内容"></a>正则替换时替换后的内容使用替换前的内容</h1><p>替换前的内容使用()包围，替换后使用:num指代替换前的第num个括号内的内容，num从1开始，比如把文中的所有字符串“abc……xyz”替换为“xyz……abc”可以有下列写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:%s&#x2F;abc\(.*\)xyz&#x2F;xyz\1abc&#x2F;g</span><br><span class="line">:%s&#x2F;\(abc\)\(.*\)\(xyz\)&#x2F;\3\2\1&#x2F;g</span><br></pre></td></tr></table></figure>
+<h1 id="查找或者替换时不区分大小写"><a href="#查找或者替换时不区分大小写" class="headerlink" title="查找或者替换时不区分大小写"></a>查找或者替换时不区分大小写</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>查找或替换时的表达式末尾添加\c</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ic</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase</span><br></pre></td></tr></table></figure>
           
         
       
@@ -375,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/44/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/46/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/44/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/46/">&gt;</a>
   </nav>
 
 
@@ -421,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -432,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

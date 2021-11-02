@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/02/06/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/02/06/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">mysql配置文件</a></h1>
+                <a class="post-title-link" href="/blog/2021/02/06/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">redis配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,12 +345,14 @@
       
         
           
-            <h1 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h1><p>一般/etc/my.cnf ，本地~/.my.cnf可以覆盖全局配置</p>
-<h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>[标签]<br>配置项=xxx</p>
-<h1 id="常见标签"><a href="#常见标签" class="headerlink" title="常见标签"></a>常见标签</h1><ul>
-<li>服务端<br>[mysqld]<br>[mysqld_safe]<br>[server]</li>
-<li>客户端<br>[mysql]<br>[mysqldump]<br>[client]</li>
+            <h1 id="配置文件地址"><a href="#配置文件地址" class="headerlink" title="配置文件地址"></a>配置文件地址</h1><p>默认地址：/etc/redis.conf</p>
+<h1 id="常用配置项"><a href="#常用配置项" class="headerlink" title="常用配置项"></a>常用配置项</h1><ul>
+<li><p>daemonize<br>daemonize表示是否后台启动redis，默认是no，表示前台启动。如果要改成后台启动，no要改成yes</p>
+</li>
+<li><p>bind<br>先说一句精华的话：bind配置了什么ip，别人就得访问bind里面配置的ip才访问到redis服务。<br>一台主机，可能会有多张网卡，或者对应多网段内网的Ip，公网IP等，也就意味着其他机器可以通过多个IP地址访问到这台主机。假如 有ip1，ip2，ip3可以访问到一台服务器。但是redis bind只配置了</p>
+</li>
 </ul>
+<p><em>bind ip1 ip2</em><br>那如果是远程连接redis服务的话就只能通过ip1和ip2来访问。ip3不行。即使你可以ping得通。<br>注：这里的ip不是能访问redis的客户端的ip，而是能访问redis的本机网卡的ip</p>
 
           
         
@@ -390,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/152/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/152/">152</a><span class="page-number current">153</span><a class="page-number" href="/blog/page/154/">154</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/154/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/152/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/152/">152</a><span class="page-number current">153</span><a class="page-number" href="/blog/page/154/">154</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/154/">&gt;</a>
   </nav>
 
 
@@ -436,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

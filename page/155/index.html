@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/27/database/mysql/MVCC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/01/27/database/mysql/MVCC/" itemprop="url">MySQL MVCC实现</a></h1>
+                <a class="post-title-link" href="/blog/2021/01/27/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-27T21:44:18+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-27T21:44:02+08:00">
                 2021-01-27
               </time>
             
@@ -313,6 +313,17 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -345,14 +356,8 @@
       
         
           
-            <h1 id="mysql的MVCC的实现"><a href="#mysql的MVCC的实现" class="headerlink" title="mysql的MVCC的实现"></a>mysql的MVCC的实现</h1><h2 id="mysql记录的结构"><a href="#mysql记录的结构" class="headerlink" title="mysql记录的结构"></a>mysql记录的结构</h2><p>mysql底层数据，除了业务数据，mysql还默认增加了两列，分别是事务id（trx_id）和指针(ptr)。事务id是每次事务开启之后首次执行sql时分配的，指针指向的是数据的历史版本（undo日志）。每次对一条记录进行增、删、改时，mysql并不直接删除记录，而是新增一条新的记录，记录的事务id为造成变动的事务id，指针指向原记录。这样，对一条记录的增、删、改实际上形成了一个版本链。</p>
-<h2 id="read-view与查询的底层逻辑"><a href="#read-view与查询的底层逻辑" class="headerlink" title="read-view与查询的底层逻辑"></a>read-view与查询的底层逻辑</h2><p>read-view称为一致性视图，是一个mysql对数据库整体的一个快照。在可重复读的情况下是第一次查询生成的，后续查询使用同一个read-view。在读已提交的隔离级别下是在每次查询时生成新的。<br>每次生成read-view的时候，实际包含两个关键数据结构。一是一个数组，存储的是当前未提交的所有事务的id，我们记作tran_v，其中最小值为min_id，另一个是当前已经生成的所有事务中的最大事务id，记为max_id。每次查询，从版本链的最上层往下比较，规则如下：</p>
-<ul>
-<li>如果记录的事务id trx_id &lt; min_id，记录可见，查询返回。</li>
-<li>如果trx_id &gt; max_id，trx_id对应的事务是在read-view生成之后才建立的，不可见，继续向下查找。</li>
-<li>如果min_id &lt;= trx_id &lt;= max_id，并且trx_id在tran_v数组中，说明read-view生成时记录还未提交，不可见，继续向下查找。</li>
-<li>如果min_id &lt;= trx_id &lt;= max_id，并且trx_id不在tran_v数组中，说明read-view生成时记录已经提交，记录可见，查询返回。</li>
-</ul>
+            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
+<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
 
           
         
@@ -392,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/154/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/blog/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/156/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/154/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/blog/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/156/">&gt;</a>
   </nav>
 
 
@@ -438,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +454,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

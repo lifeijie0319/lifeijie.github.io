@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/18/tools/nginx/nginx%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/18/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/07/18/tools/nginx/nginx%E5%AE%89%E8%A3%85/" itemprop="url">nginx安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/07/18/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url">nginx常用指令</a></h1>
         
 
         <div class="post-meta">
@@ -345,21 +345,11 @@
       
         
           
-            <h1 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h1><ol>
-<li>下载解压，进入目录  </li>
-<li>./configure<br>注：常用配置如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;opt&#x2F;nginx&#x2F; \</span><br><span class="line">--conf-path&#x3D;&#x2F;opt&#x2F;nginx&#x2F;etc&#x2F;nginx.conf  \</span><br><span class="line">--user&#x3D;nginx --group&#x3D;nginx  \</span><br><span class="line">--with-http_ssl_module  \</span><br><span class="line"># adds the HTTPS protocol support to an HTTP server</span><br><span class="line">--with-openssl&#x3D;&#x2F;root&#x2F;packages&#x2F;openssl-1.1.1g \</span><br><span class="line">--with-pcre&#x3D;&#x2F;root&#x2F;packages&#x2F;pcre-8.43 \</span><br><span class="line"># sets the path to the sources of the PCRE library. The library distribution (version 4.4 — 8.43) needs to be downloaded from the PCRE site and extracted. </span><br><span class="line"># The library is required for regular expressions support in the location directive and for the ngx_http_rewrite_module module.</span><br><span class="line">--with-zlib&#x3D;&#x2F;root&#x2F;packages&#x2F;zlib-1.2.11 \</span><br><span class="line"># sets the path to the sources of the zlib library. The library distribution (version 1.1.3 — 1.2.11) needs to be downloaded from the zlib site and extracted.</span><br><span class="line"># The library is required for the ngx_http_gzip_module module.</span><br><span class="line">--with-http_stub_status_module  \</span><br><span class="line"># provides access to basic status information</span><br><span class="line">--with-http_gzip_static_module</span><br><span class="line"># enables sending precompressed files with the “.gz” filename extension instead of regular files</span><br></pre></td></tr></table></figure></li>
-<li>sudo make</li>
-<li>sudo make install</li>
-<li>设置开机自启动<br>vi /etc/rc.local<br>增加一行/usr/local/nginx/sbin/nginx</li>
-</ol>
-<h1 id="安装报错和处理"><a href="#安装报错和处理" class="headerlink" title="安装报错和处理"></a>安装报错和处理</h1><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make: *** No rule to make target &#96;build&#39;, needed by &#96;default&#39;.  Stop.</span><br></pre></td></tr></table></figure>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>出现此种情况，是linux系统没有安装先决条件，需要事先安装GCC、PCRE库、zlib库、OpenSSL库。<a target="_blank" rel="noopener" href="http://www.cnblogs.com/zrbfree/p/6419043.html">http://www.cnblogs.com/zrbfree/p/6419043.html</a><br>注意安装之后要重新configure之后才能生效。</p>
-<h1 id="配置nginx为系统服务"><a href="#配置nginx为系统服务" class="headerlink" title="配置nginx为系统服务"></a>配置nginx为系统服务</h1><p>编辑sudo vim /lib/systemd/system/nginx.service，输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;nginx</span><br><span class="line">After&#x3D;network.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;forking</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx</span><br><span class="line">ExecReload&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s reload</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s quit</span><br><span class="line">PrivateTmp&#x3D;true</span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
-<h1 id="nginx非root启停"><a href="#nginx非root启停" class="headerlink" title="nginx非root启停"></a>nginx非root启停</h1><ol>
-<li>修改prefix目录所属用户和组为需要启停的用户和组<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R :user::group :prefix</span><br></pre></td></tr></table></figure></li>
-<li>修改nginx可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd :bin_path</span><br><span class="line">chown root:root nginx</span><br><span class="line">chmod u+s nginx</span><br></pre></td></tr></table></figure>
-<h2 id="注：s-模式的概念"><a href="#注：s-模式的概念" class="headerlink" title="注：s 模式的概念"></a>注：s 模式的概念</h2>s 模式是指：当文件被执行时， 根据 who 参数指定的用户类型设置文件的 setuid 或者 setgid 权限。通俗地讲，执行文件时将进程的属主或组 ID 设置为这个文件的属主或组 ID。<br>chmod u+s  就是给某个程序的所有者suid权限，可以像root用户那样启动。<br>s 模式只针对 u 和 g 两种文件用户类型。u+s 表示执行文件时将进程的属主 ID 设置为这个文件的属主 ID，g+s 类似，用来设置文件的属组 ID。</li>
+            <h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><ol>
+<li>./nginx -s quit:此方式停止步骤是待nginx进程处理任务完毕进行停止。</li>
+<li>./nginx -s stop:此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程。</li>
+<li>对 nginx 进行重启相当于先停止再启动，即先执行停止命令再执行启动命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -s quit</span><br><span class="line">.&#x2F;nginx</span><br></pre></td></tr></table></figure></li>
+<li>./nginx -s reload不停止nginx的情况下重新加载配置文件。</li>
 </ol>
 
           
@@ -400,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/37/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/blog/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="extend next" rel="next" href="/blog/page/39/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/37/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/37/">37</a><span class="page-number current">38</span><a class="page-number" href="/blog/page/39/">39</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/39/">&gt;</a>
   </nav>
 
 
@@ -446,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">161</span>
+                  <span class="site-state-item-count">160</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

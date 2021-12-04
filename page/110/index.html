@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/VCS/svn/svn%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/index/%E4%B8%BB%E9%94%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/VCS/svn/svn%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85/" itemprop="url">svn离线安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/index/%E4%B8%BB%E9%94%AE%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/" itemprop="url">主键相关问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
-                    <span itemprop="name">svn</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
                   </a>
                 </span>
 
@@ -345,14 +356,8 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jkko123/p/6358461.html">https://www.cnblogs.com/jkko123/p/6358461.html</a></p>
-<h1 id="1、依赖"><a href="#1、依赖" class="headerlink" title="1、依赖"></a>1、依赖</h1><ul>
-<li>1.1 apr</li>
-<li>1.2 apr-util</li>
-<li>1.3 scons：serf的依赖</li>
-<li>1.4 serf：如果没有这个，svn无法解析http和https，出现错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn: E170000: Unrecognized URL scheme for &#39;http:&#x2F;&#x2F;10.250.1.5&#x2F;svn&#x2F;src&#x2F;aif&#39;</span><br></pre></td></tr></table></figure></li>
-<li>1.5 sqlite</li>
-</ul>
+            <h1 id="为什么建议要建主键"><a href="#为什么建议要建主键" class="headerlink" title="为什么建议要建主键"></a>为什么建议要建主键</h1><p>因为MySQL底层使用B+树结构存储数据，主键索引是天然的构建依据。如果没有建立主键，mysql内部会建立隐藏主键。</p>
+<h1 id="主键为什么建议用自增整型数据"><a href="#主键为什么建议用自增整型数据" class="headerlink" title="主键为什么建议用自增整型数据"></a>主键为什么建议用自增整型数据</h1><p>首先，整型便于比较，在B+树的数据操作中，数据比较是最常见的操作，整型数据在比较的时候比其他类型都快。而且一般来说，整型数据的存储空间较小。<br>自增又有什么好处？索引值自增时，插入的数据永远在B+树的最右侧子节点。如果不自增，插入的数据可能在树的中间，导致叶子节点页分裂（页已经被原有数据占满），有一个再平衡的过程，效率不高。所以自增索引减少了B+树的结构调整，提高了存储效率。</p>
 
           
         
@@ -392,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/109/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/111/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/109/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/111/">&gt;</a>
   </nav>
 
 
@@ -438,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +454,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/08/15/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/schema/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/08/15/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/" itemprop="url">pkcs格式的相互转化</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/schema/" itemprop="url">db2 schema</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-15T16:53:20+08:00">
-                2021-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/openssl/" itemprop="url" rel="index">
-                    <span itemprop="name">openssl</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,11 +345,16 @@
       
         
           
-            <h1 id="pkcs格式基本样式"><a href="#pkcs格式基本样式" class="headerlink" title="pkcs格式基本样式"></a>pkcs格式基本样式</h1><h2 id="pkcs1格式"><a href="#pkcs1格式" class="headerlink" title="pkcs1格式"></a>pkcs1格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN RSA PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END RSA PUBLIC KEY----</span><br></pre></td></tr></table></figure>
-<h2 id="pkcs8格式"><a href="#pkcs8格式" class="headerlink" title="pkcs8格式"></a>pkcs8格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END PUBLIC KEY----</span><br></pre></td></tr></table></figure>
-<h1 id="pkcs1和pkcs8格式公钥的相互转化"><a href="#pkcs1和pkcs8格式公钥的相互转化" class="headerlink" title="pkcs1和pkcs8格式公钥的相互转化"></a>pkcs1和pkcs8格式公钥的相互转化</h1><h2 id="pkcs8公钥转pkcs1公钥"><a href="#pkcs8公钥转pkcs1公钥" class="headerlink" title="pkcs8公钥转pkcs1公钥"></a>pkcs8公钥转pkcs1公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -pubin -in public.pem -RSAPublicKey_out</span><br></pre></td></tr></table></figure>
-<h2 id="pkcs1公钥转换为pkcs8公钥"><a href="#pkcs1公钥转换为pkcs8公钥" class="headerlink" title="pkcs1公钥转换为pkcs8公钥"></a>pkcs1公钥转换为pkcs8公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -RSAPublicKey_in -in pub_pkcs1.pem -pubout</span><br></pre></td></tr></table></figure>
-<h1 id="p12即PKCS-12格式的密钥转换成pem格式"><a href="#p12即PKCS-12格式的密钥转换成pem格式" class="headerlink" title="p12即PKCS#12格式的密钥转换成pem格式"></a>p12即PKCS#12格式的密钥转换成pem格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -nocerts -nodes -in 20060400000044502.p12 -out 20060400000044502.pem</span><br></pre></td></tr></table></figure>
+            <h1 id="创建schema"><a href="#创建schema" class="headerlink" title="创建schema"></a>创建schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE SCHEMA &lt;schema-name&gt; [AUTHORIZATION &lt;schema-owner-name&gt;]</span><br></pre></td></tr></table></figure>
+<h1 id="删除schema"><a href="#删除schema" class="headerlink" title="删除schema"></a>删除schema</h1><p>schema下面没有对象的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 drop schema wxdemo restrict</span><br></pre></td></tr></table></figure>
+<p>schema下面有对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;call ADMIN_DROP_SCHEMA(&#39;wxdemo&#39;, NULL, &#39;errorschema&#39;, &#39;ERRTABLE&#39;)&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="复制schema"><a href="#复制schema" class="headerlink" title="复制schema"></a>复制schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;CALL SYSPROC.ADMIN_COPY_SCHEMA</span><br><span class="line">(&#39;TONGLIAN&#39;,&#39;WXDEMO&#39;,&#39;COPYNO&#39;,NULL,NULL,NULL,&#39;ERRORSCHEMA&#39;,&#39;ERRORTABLE&#39;);&quot;</span><br></pre></td></tr></table></figure>
+<p>注意：目标schema不能已存在，否则报错。</p>
+<h1 id="查看当前schema"><a href="#查看当前schema" class="headerlink" title="查看当前schema"></a>查看当前schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 values current schema</span><br></pre></td></tr></table></figure>
+<h1 id="查询数据库内的所有schema"><a href="#查询数据库内的所有schema" class="headerlink" title="查询数据库内的所有schema"></a>查询数据库内的所有schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from sysibm.sysschemata</span><br></pre></td></tr></table></figure>
+<h1 id="查询schem下面的所有表格"><a href="#查询schem下面的所有表格" class="headerlink" title="查询schem下面的所有表格"></a>查询schem下面的所有表格</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 list tables for schema XXX</span><br></pre></td></tr></table></figure>
           
         
       
@@ -388,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/25/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/27/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/25/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/27/">&gt;</a>
   </nav>
 
 
@@ -434,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

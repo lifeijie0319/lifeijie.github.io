@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/db/redis/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E6%97%A5%E5%BF%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/db/redis/" itemprop="url">redis</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E6%97%A5%E5%BF%97/" itemprop="url">nginx日志</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -356,8 +345,11 @@
       
         
           
-            <h1 id="一、说明"><a href="#一、说明" class="headerlink" title="一、说明"></a>一、说明</h1><p>python与redis的连接件</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h2 id="1、离线安装"><a href="#1、离线安装" class="headerlink" title="1、离线安装"></a>1、离线安装</h2><p>pip install –no-index -f /home/nanxun/packages/ redis-2.10.5-py2.py3-none-any.whl</p>
+            <h1 id="日志中的时间变量"><a href="#日志中的时间变量" class="headerlink" title="日志中的时间变量"></a>日志中的时间变量</h1><h2 id="request-time"><a href="#request-time" class="headerlink" title="$request_time"></a>$request_time</h2><p>Full request time, starting when NGINX reads the first byte from the client and ending when NGINX sends the last byte of the response body</p>
+<h2 id="upstream-connect-time"><a href="#upstream-connect-time" class="headerlink" title="$upstream_connect_time"></a>$upstream_connect_time</h2><p>Time spent establishing a connection with an upstream server</p>
+<h2 id="upstream-header-time"><a href="#upstream-header-time" class="headerlink" title="$upstream_header_time"></a>$upstream_header_time</h2><p>Time between establishing a connection to an upstream server and receiving the first byte of the response header</p>
+<h2 id="upstream-response-time"><a href="#upstream-response-time" class="headerlink" title="$upstream_response_time"></a>$upstream_response_time</h2><p>Time between establishing a connection to an upstream server and receiving the last byte of the response body</p>
+<h2 id="time-local"><a href="#time-local" class="headerlink" title="time_local"></a>time_local</h2><p>日志打印时间</p>
 
           
         
@@ -397,7 +389,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/84/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/blog/page/86/">86</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/86/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/84/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/blog/page/86/">86</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/86/">&gt;</a>
   </nav>
 
 
@@ -443,7 +435,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +446,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

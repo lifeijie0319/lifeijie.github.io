@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%BA%8C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/js/node/npm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%BA%8C/" itemprop="url">sftp服务器搭建二</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/js/node/npm/" itemprop="url">npm介绍</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
-                    <span itemprop="name">ssh</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,10 +312,12 @@
       
         
           
-            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>除了之前那样建一个sftp正常用户，还可以建立sftp组进行控制。</p>
-<h1 id="2-过程"><a href="#2-过程" class="headerlink" title="2 过程"></a>2 过程</h1><h2 id="2-1-创建用户"><a href="#2-1-创建用户" class="headerlink" title="2.1 创建用户"></a>2.1 创建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# groupadd sftp </span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser2 -g sftp -s &#x2F;sbin&#x2F;nologin -M</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser2:sftpuser2|chpasswd</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-创建目录"><a href="#2-2-创建目录" class="headerlink" title="2.2 创建目录"></a>2.2 创建目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# mkdir &#x2F;data&#x2F;sftp&#x2F;sftpuser2</span><br><span class="line">[root@VM_0_7_centos ~]# cd &#x2F;data&#x2F;sftp&#x2F;</span><br><span class="line">[root@VM_0_7_centos sftp]# ll</span><br><span class="line">total 4</span><br><span class="line">drwxr-xr-x 2 root root 4096 Jul 17 15:01 sftpuser2</span><br><span class="line">[root@VM_0_7_centos sftp]# chown sftpuser2:sftp sftpuser2&#x2F;</span><br><span class="line">[root@VM_0_7_centos sftp]# ll</span><br><span class="line">total 4</span><br><span class="line">drwxr-xr-x 2 sftpuser2 sftp 4096 Jul 17 15:01 sftpuser2</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-配置"><a href="#2-3-配置" class="headerlink" title="2.3 配置"></a>2.3 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match Group sftp</span><br><span class="line">ChrootDirectory &#x2F;data&#x2F;sftp&#x2F; 注意这个地方的目录一定是root:root的</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no</span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code>npm是nodejs的包管理工具</code></pre>
+<h1 id="npm镜像"><a href="#npm镜像" class="headerlink" title="npm镜像"></a>npm镜像</h1><pre><code>npm下载包默认从国外网站下载，为了加速，可以使用淘宝镜像cnpm，从国内下载包，安装如下：
+npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
+<h1 id="npm全局安装与本地安装"><a href="#npm全局安装与本地安装" class="headerlink" title="npm全局安装与本地安装"></a>npm全局安装与本地安装</h1><pre><code>1. npm install 将安装包放在 ./node_modules 下（运行 npm 命令时所在的目录），如果没有 node_modules 目录，会在当前执行 npm 命令的目录下生成 node_modules 目录。
+2. npm install -g 全局安装，会将安装包放在 /usr/local 下或者 node 的安装目录，使用npm root -g可以查看该路径。</code></pre>
+
           
         
       
@@ -387,7 +356,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
   </nav>
 
 
@@ -433,7 +402,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +413,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

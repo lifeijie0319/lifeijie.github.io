@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/06/06/database/riak/start/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/06/06/database/riak/start/" itemprop="url">riak启动</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">mysql配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-06-06T20:59:22+08:00">
-                2021-06-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/riak/" itemprop="url" rel="index">
-                    <span itemprop="name">riak</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,14 +345,12 @@
       
         
           
-            <p>参考文档： <a target="_blank" rel="noopener" href="https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html">https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html</a></p>
-<h1 id="停服务"><a href="#停服务" class="headerlink" title="停服务"></a>停服务</h1><p>riak stop</p>
-<h1 id="改配置"><a href="#改配置" class="headerlink" title="改配置"></a>改配置</h1><p>配置文件路径/etc/riak/riak.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listener.protobuf.internal &#x3D; 127.0.0.1:8087 #改成实际IP和端口</span><br><span class="line">nodename &#x3D; riak@127.0.0.1 #改成想改的名字，注意要唯一标识此节点</span><br></pre></td></tr></table></figure>
-<h1 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h1><p>riak start  </p>
-<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p><img src="/blog/images/database/riak/start/start1.png"></p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Riak’s Erlang VM is built with SMP support and if Riak is started on a non-SMP system, an error like this one is logged. This is commonly seen in virtualized environments configured for only one CPU core.</p>
-<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>改用4核cpu，然后还是报这个错。怀疑这个问题的真实原因。看到另一篇博客里说是因为/data/ring/下面的文件要清理掉，到是和官方文档不谋而合。处理了一下，果然，报另一个错误了：<br><img src="/blog/images/database/riak/start/start2.png"><br>看了一下，是8098默认端口被占用了，应该是指之前起的riak失败导致，重启机器之后就好了。另一次安装的时候，发现node名字也是导致此故障的原因之一，即node名字不能随意取，使用本机IP即可。</p>
+            <h1 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h1><p>一般/etc/my.cnf ，本地~/.my.cnf可以覆盖全局配置</p>
+<h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>[标签]<br>配置项=xxx</p>
+<h1 id="常见标签"><a href="#常见标签" class="headerlink" title="常见标签"></a>常见标签</h1><ul>
+<li>服务端<br>[mysqld]<br>[mysqld_safe]<br>[server]</li>
+<li>客户端<br>[mysql]<br>[mysqldump]<br>[client]</li>
+</ul>
 
           
         
@@ -392,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/47/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/blog/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/49/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/47/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/47/">47</a><span class="page-number current">48</span><a class="page-number" href="/blog/page/49/">49</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/49/">&gt;</a>
   </nav>
 
 
@@ -438,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

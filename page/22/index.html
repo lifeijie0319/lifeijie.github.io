@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/08/15/python/basic/KeyboardInterrupt/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/tar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/08/15/python/basic/KeyboardInterrupt/" itemprop="url">理解KeyboardInterrupt</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/tar/" itemprop="url">tar常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-15T16:53:20+08:00">
-                2021-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,16 +334,10 @@
       
         
           
-            <h1 id="KeyboardInterrupt是什么"><a href="#KeyboardInterrupt是什么" class="headerlink" title="KeyboardInterrupt是什么"></a>KeyboardInterrupt是什么</h1><p>KeyboardInterrupt是python内置的一个异常。当python程序收到SIGINT信号后，程序抛出该异常。</p>
-<h1 id="KeyboardInterrupt和Ctrl-C的关系"><a href="#KeyboardInterrupt和Ctrl-C的关系" class="headerlink" title="KeyboardInterrupt和Ctrl+C的关系"></a>KeyboardInterrupt和Ctrl+C的关系</h1><p>键盘操作Ctrl+C会被shell解析，发送SIGINT信号到当前shell上的前台进程。其它常见的有：</p>
-<ul>
-<li>Ctrl+\ - SIGQUIT</li>
-<li>Ctrl+Z - SIGTSTP</li>
-</ul>
-<h1 id="为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt"><a href="#为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt" class="headerlink" title="为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt"></a>为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt</h1><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/40775054/capturing-sigint-using-keyboardinterrupt-exception-works-in-terminal-not-in-scr">https://stackoverflow.com/questions/40775054/capturing-sigint-using-keyboardinterrupt-exception-works-in-terminal-not-in-scr</a><br><a target="_blank" rel="noopener" href="https://hg.python.org/cpython/file/6eefdf0fade6/Modules/signalmodule.c#l608">https://hg.python.org/cpython/file/6eefdf0fade6/Modules/signalmodule.c#l608</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>因为SIGINT对应的默认处理方法没有注册。这是由python解释器决定的，当程序开始时，如果信号掩码对SIGINT的处理方式是SIG_IGN（代表忽略），默认的处理方法就不会进行注册。对于SIG_IGN类型的信号掩码，当前进程是继承父进程的，而父进程中注册了处理方法的信号，到了子进程后会回复默认处理方法。</p>
-<h2 id="如何处理使得后台python程序也能收到KeyboardInterrupt"><a href="#如何处理使得后台python程序也能收到KeyboardInterrupt" class="headerlink" title="如何处理使得后台python程序也能收到KeyboardInterrupt"></a>如何处理使得后台python程序也能收到KeyboardInterrupt</h2><p>在代码中显示注册SIGINT的默认处理方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import signal</span><br><span class="line">signal.signal(signal.SIGINT, signal.default_int_handler)</span><br></pre></td></tr></table></figure>
+            <h1 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-c: 建立压缩档案</span><br><span class="line">-x：解压</span><br><span class="line">-t：查看内容</span><br><span class="line">-r：向压缩归档文件末尾追加文件</span><br><span class="line">-u：更新原压缩包中的文件</span><br><span class="line">-z：有gzip属性的</span><br><span class="line">-j：有bz2属性的</span><br><span class="line">-Z：有compress属性的</span><br><span class="line">-v：显示所有过程</span><br><span class="line">-O：将文件解开到标准输出</span><br></pre></td></tr></table></figure>
+<h1 id="tar-xz处理"><a href="#tar-xz处理" class="headerlink" title="tar.xz处理"></a>tar.xz处理</h1><p>习惯了 tar czvf 或 tar xzvf 的人可能碰到 tar.xz也会想用单一命令搞定解压或压缩。其实不行 tar里面没有征对xz格式的参数比如 z是针对 gzip，j是针对 bzip2。  </p>
+<h2 id="创建tar-xz文件"><a href="#创建tar-xz文件" class="headerlink" title="创建tar.xz文件"></a>创建tar.xz文件</h2><p>只要先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz<br>解压tar.xz文件：先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包。</p>
+
           
         
       
@@ -393,7 +376,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/21/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/blog/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/23/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/21/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/blog/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/23/">&gt;</a>
   </nav>
 
 
@@ -439,7 +422,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +433,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

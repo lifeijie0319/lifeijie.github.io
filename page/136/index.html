@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/java/String/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/java/String/" itemprop="url">JAVA String</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" itemprop="url">dh交换算法原理</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:15:16+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/security/dh/" itemprop="url" rel="index">
+                    <span itemprop="name">dh</span>
                   </a>
                 </span>
 
@@ -334,10 +345,9 @@
       
         
           
-            <h1 id="String的存储"><a href="#String的存储" class="headerlink" title="String的存储"></a>String的存储</h1><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">String s3 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>), s4 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(s1 == s2);</span><br><span class="line">System.out.println(s1 == s3);</span><br><span class="line">System.out.println(s4 == s3);</span><br><span class="line">System.out.println(s1.equals(s3));</span><br><span class="line">System.out.println(s4.equals(s3));</span><br></pre></td></tr></table></figure>
-<h3 id="打印结果："><a href="#打印结果：" class="headerlink" title="打印结果："></a>打印结果：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">false</span><br><span class="line">false</span><br><span class="line">true</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
-<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>java中的String有两种定义方式，对应的存储原理不同。<br>一种是s1和s2这样，字符串定义在堆中的常量区，s1生成常量对象，s2定义时，jvm发现常量区已有该字符串，直接返回对应地址。<br>另一种是s3和s4这样，等于实例化一个普通类，每次实例化返回的地址不同，在堆中生成了不同的实例。<br>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36653524/article/details/100730394">https://blog.csdn.net/qq_36653524/article/details/100730394</a> </p>
-<h3 id="“-”和equals方法进行字符串比较时的不同"><a href="#“-”和equals方法进行字符串比较时的不同" class="headerlink" title="“==”和equals方法进行字符串比较时的不同"></a>“==”和equals方法进行字符串比较时的不同</h3><p>java中的非基本类型都是引用（指针），”==”实际上是引用（指针存储的地址）的比较。而equals方法比较的是字符串内容是否相等。</p>
+            <h1 id="交换过程描述"><a href="#交换过程描述" class="headerlink" title="交换过程描述"></a>交换过程描述</h1><p>甲乙双方按照dh算法交换密钥。<br>首先，甲生成随机数x，底数为d，一个大素数p，根据算法生成A = d ^ x % p。之后甲将d、p、A传递给乙。<br>乙收到后生成随机数y，计算B = d ^ y % p, C1 = A ^ y % p，将B传回给甲。<br>甲收到B后计算C2 = B ^ x % p。<br>C1和C2就是协商得到的密钥。可以证明C1=C2。</p>
+<h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><p>按照上述过程描述，欲证C1 = C2，C1 = A ^ y % p = (d ^ x % p) ^ y % p，C2 = (d ^ y % p) ^ x % p。<br>假设d ^ x = pn + a，则<br>C1 = (d ^ x % p) ^ y % p = a ^ y % p = (d ^ x - pn) ^ y % p<br>根据二项式定理，得到C1 = d ^ (xy) % p，同理，C2 = d ^ (xy) % p = C1。</p>
+<h1 id="算法的可靠性"><a href="#算法的可靠性" class="headerlink" title="算法的可靠性"></a>算法的可靠性</h1><p>由交换过程可以知道，攻击者可以拿到d、p、A、B，要破解算法，关键要拿到x、y。以x为例，A = d ^ x % p，现在就是已知其它三个变量求x。已知在数学上，当p很大时，很难计算x（有限群的离散对数问题），这就保证了该算法的可靠性。</p>
 
           
         
@@ -377,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/135/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/135/">135</a><span class="page-number current">136</span><a class="page-number" href="/blog/page/137/">137</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/137/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/135/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/135/">135</a><span class="page-number current">136</span><a class="page-number" href="/blog/page/137/">137</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/137/">&gt;</a>
   </nav>
 
 
@@ -423,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -434,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

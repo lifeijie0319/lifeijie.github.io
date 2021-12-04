@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/08/15/windows/windows%E4%B8%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/08/15/windows/windows%E4%B8%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E5%B7%A7/" itemprop="url">windows下软件安装原理与技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">grep常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-08-15T16:53:20+08:00">
-                2021-08-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/windows/" itemprop="url" rel="index">
-                    <span itemprop="name">windows</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -334,16 +334,16 @@
       
         
           
-            <h1 id="安装基本过程"><a href="#安装基本过程" class="headerlink" title="安装基本过程"></a>安装基本过程</h1><ol>
-<li>从压缩档/目录/网络复制文件</li>
-<li>在程序清单中注册（写注册表）<br>注：注册表原理<a target="_blank" rel="noopener" href="http://blog.csdn.net/haiross/article/details/45171725">http://blog.csdn.net/haiross/article/details/45171725</a></li>
-<li>安装需要的依赖库</li>
-</ol>
-<h1 id="软件安装原则"><a href="#软件安装原则" class="headerlink" title="软件安装原则"></a>软件安装原则</h1><ol>
-<li>数据、资料放在C盘之外，以便重装系统，防止数据丢失。</li>
-<li>小型软件、常用软件装在C盘。因为一般软件都会有文件在C盘，如果软件装在其他盘重装系统之后可能会导致软件不可用。重装系统后软件重装也不麻烦。</li>
-<li>大型软件、绿色软件、难获取的软件安装在其他盘。</li>
-</ol>
+            <h1 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h1><p>grep [:options] :expression :file<br>:options 选项<br>:expression 要查找的内容，可以用正则表达式<br>:file 搜索的文件名</p>
+<h1 id="常见options"><a href="#常见options" class="headerlink" title="常见options"></a>常见options</h1><ul>
+<li>-l 只打印文件名，不输出匹配的行内容</li>
+<li>-I 不搜索二进制文件</li>
+<li>-r 递归搜索子目录下的文件</li>
+<li>-n 打印匹配内容在文件中的行数</li>
+<li>–include=GLOB 使用GLOB指定的通配符来匹配文件名</li>
+<li>-l 列出符合匹配的文件名</li>
+<li>-L参数列出不符合匹配的参数名</li>
+</ul>
 
           
         
@@ -383,7 +383,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/18/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/blog/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/20/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/18/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/blog/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/20/">&gt;</a>
   </nav>
 
 
@@ -429,7 +429,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -440,7 +440,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

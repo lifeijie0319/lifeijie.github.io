@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/07/18/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E8%84%9A%E6%9C%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/07/18/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" itemprop="url">nginx健康检查</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E8%84%9A%E6%9C%AC/" itemprop="url">db2 脚本</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-18T18:33:26+08:00">
-                2021-07-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,13 +345,13 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html">https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html</a></p>
-<h1 id="被动检查"><a href="#被动检查" class="headerlink" title="被动检查"></a>被动检查</h1><p>利用nginx自带模块ngx_http_proxy_module和ngx_http_upstream_module对后端节点做健康检查</p>
-<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><ol>
-<li>检测server失败时，请求会转到下一个正常server。</li>
-<li>测试发现，max_fails只在服务由正常状态转成down时生效，如果服务已经被标记成down，那么只会检测一次。</li>
-</ol>
-<h1 id="主动检查"><a href="#主动检查" class="headerlink" title="主动检查"></a>主动检查</h1><p>利用nginx_upstream_check_module模块对后端节点做健康检查</p>
+            <h1 id="执行sql文件"><a href="#执行sql文件" class="headerlink" title="执行sql文件"></a>执行sql文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 -tvf &lt;sql文件名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>v     代表输出结果到屏幕      </li>
+<li>t     指以；号作为每行的分隔符      </li>
+<li>f     指后面需跟脚本文件名</li>
+<li>注：如果以@符号作为存储过程的结尾，-t改成-td@</li>
+</ul>
 
           
         
@@ -391,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/35/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/blog/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/37/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/35/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/blog/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/37/">&gt;</a>
   </nav>
 
 
@@ -437,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/04/04/python/libs/env/common/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E6%AD%A3%E5%90%91https%E4%BB%A3%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/04/04/python/libs/env/common/" itemprop="url">安装第三方库通用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E6%AD%A3%E5%90%91https%E4%BB%A3%E7%90%86/" itemprop="url">正向https代理</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-04-04T14:53:36+08:00">
-                2021-04-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+                2021-12-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/python/libs/env/" itemprop="url" rel="index">
-                    <span itemprop="name">env</span>
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -356,7 +345,12 @@
       
         
           
-            <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>报错：fatal error: Python.h: No such file or directory<br>解决：sudo yum install python-devel</p>
+            <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><ol>
+<li>应用部署在内网，不能https直接访问外网，需要通过nginx机器代理，这就是https正向代理。</li>
+<li>默认nginx支持http正向代理，但是不支持https正向代理。</li>
+<li>正向代理的时候，客户端首先和代理发起connect请求，connect是建立通道，通道建立之后，客户端和目标服务器就相当于直接连通，代理变成透明的。</li>
+</ol>
+<h1 id="ngx-http-proxy-connect-module"><a href="#ngx-http-proxy-connect-module" class="headerlink" title="ngx_http_proxy_connect_module"></a>ngx_http_proxy_connect_module</h1><p>ngx_http_proxy_connect_module是nginx支持https的模块，要安装该模块，需要重新编译nginx，使其平滑升级。</p>
 
           
         
@@ -396,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/85/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/blog/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/160/">160</a><a class="extend next" rel="next" href="/blog/page/87/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/85/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/blog/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/87/">&gt;</a>
   </nav>
 
 
@@ -442,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">160</span>
+                  <span class="site-state-item-count">214</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

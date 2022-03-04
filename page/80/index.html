@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E4%B8%AD%E7%9A%84localtion/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/14/tools/docker/docker%E4%BA%A4%E4%BA%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E4%B8%AD%E7%9A%84localtion/" itemprop="url">nginx中的location</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/14/tools/docker/docker%E4%BA%A4%E4%BA%92/" itemprop="url">docker交互</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-14T21:41:45+08:00">
+                2021-12-14
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,44 +312,19 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="http://www.jb51.net/article/47761.htm">http://www.jb51.net/article/47761.htm</a></p>
-<h1 id="匹配规则"><a href="#匹配规则" class="headerlink" title="匹配规则"></a>匹配规则</h1><ol>
-<li>= 开头表示精确匹配</li>
-<li>^~ 开头表示uri以某个常规字符串开头，理解为匹配 url路径即可。nginx不对url做编码，因此请求为/static/20%/aa，可以被规则^~ /static/ /aa匹配到（注意是空格）。</li>
-<li>~ 开头表示区分大小写的正则匹配</li>
-<li>~*  开头表示不区分大小写的正则匹配</li>
-<li>!<del>和!</del>*分别为区分大小写不匹配及不区分大小写不匹配 的正则</li>
-<li>/ 通用匹配，任何请求都会匹配到。</li>
-<li>多个location配置的情况下匹配顺序为（参考资料而来，还未实际验证，试试就知道了，不必拘泥，仅供参考）:<br>首先匹配 =，其次匹配^~, 其次是按文件中顺序的正则匹配，最后是交给 / 通用匹配。当有匹配成功时候，停止匹配，按当前匹配规则处理请求。</li>
-</ol>
-<h1 id="Location处理逻辑"><a href="#Location处理逻辑" class="headerlink" title="Location处理逻辑"></a>Location处理逻辑</h1><ol>
-<li>用uri测试所有的prefix string;</li>
-<li>Uri精确匹配到=定义的loacation，使用这个location，停止搜索；</li>
-<li>匹配最长prefix string，如果这个最长prefix string带有^~修饰符，使用这个location，停止搜索，否则：</li>
-<li>存储这个最长匹配；</li>
-<li>然后匹配正则表达；</li>
-<li>匹配到第一条正则表达式，使用这个location，停止搜索；</li>
-<li>没有匹配到正则表达式，使用#4步存储的prefix string的location。</li>
-</ol>
-<h1 id="location末尾斜杠"><a href="#location末尾斜杠" class="headerlink" title="location末尾斜杠"></a>location末尾斜杠</h1><h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><p>访问路由127.0.0.1:8080/test/index.html</p>
-<ol>
-<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 /test/index.html  </li>
-<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 /test/index.html  </li>
-<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 //index.html  </li>
-<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 /index.html  </li>
-<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 /app/index.html  </li>
-<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 /appindex.html  </li>
-<li>配置 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 /app//index.html  </li>
-<li>配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;test&#x2F; &#123;</span><br><span class="line">    proxy_pass http:&#x2F;&#x2F;127.0.0.1:8888&#x2F;app&#x2F;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-接收 /app/index.html<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>proxy_pass端口后面如果不跟斜杠，路径是非消耗匹配，否则会消耗url字符，消耗剩下的字符拼接都proxypass后面。</li>
-</ol>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>docker交互一般使用docker exec和doceker attach</p>
+<h1 id="docker-exec"><a href="#docker-exec" class="headerlink" title="docker exec"></a>docker exec</h1><h2 id="进入指令"><a href="#进入指令" class="headerlink" title="进入指令"></a>进入指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec [OPTIONS] CONTAINER COMMAND [ARG...]</span><br></pre></td></tr></table></figure>
+<p>说明：Run a command in a running container</p>
+<h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><ul>
+<li>一般搭配-it使用，这样才能和容器内交互，否则只是执行命令而已</li>
+<li>使用exit可以退出</li>
+</ul>
+<h1 id="docker-attach"><a href="#docker-attach" class="headerlink" title="docker attach"></a>docker attach</h1><h2 id="进入指令-1"><a href="#进入指令-1" class="headerlink" title="进入指令"></a>进入指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach :container_id</span><br></pre></td></tr></table></figure>
+<p>说明：Attach local standard input, output, and error streams to a running container</p>
+<h2 id="特征-1"><a href="#特征-1" class="headerlink" title="特征"></a>特征</h2><ul>
+<li>如果容器运行在前台，Ctrl+C会导致容器的退出</li>
+<li>只能看一下容器的输出，没法执行啥</li>
+</ul>
 
           
         
@@ -422,7 +364,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/79/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/79/">79</a><span class="page-number current">80</span><a class="page-number" href="/blog/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/81/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/79/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/79/">79</a><span class="page-number current">80</span><a class="page-number" href="/blog/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/81/">&gt;</a>
   </nav>
 
 
@@ -468,7 +410,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -479,7 +421,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -518,7 +460,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

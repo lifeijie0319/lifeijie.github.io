@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/segmentfaut%E6%9F%A5%E7%9C%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/segmentfaut%E6%9F%A5%E7%9C%8B/" itemprop="url">segmentfaut查看</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/" itemprop="url">date_format函数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,17 +345,40 @@
       
         
           
-            <h1 id="产生core文件方法"><a href="#产生core文件方法" class="headerlink" title="产生core文件方法"></a>产生core文件方法</h1><p>产生coredump的条件，首先需要确认当前会话的ulimit –c，若为0，则不会产生对应的coredump，需要进行修改和设置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -c unlimited # 可以产生coredump且不受大小限制)</span><br></pre></td></tr></table></figure>
-<p>这种设置仅对当前生效，如果想永久生效 可以用(source /etc/profile 命令马上生效)。那么需要在/etc/profile中加入这一行</p>
-<h1 id="更改core-dump生成路径"><a href="#更改core-dump生成路径" class="headerlink" title="更改core dump生成路径"></a>更改core dump生成路径</h1><p>因为core dump默认会生成在程序的工作目录，但是有些程序存在切换目录的情况，导致core dump生成的路径没有规律，<br>所以最好是自己建立一个文件夹，存放生成的core文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x2F;data&#x2F;coredump&#x2F;core.%e.%p&gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;core_pattern</span><br></pre></td></tr></table></figure>
-<p>将更改core文件生成路径，自动放在这个/data/coredump文件夹里。<br>%e表示程序名， %p表示进程id</p>
-<h1 id="用gdb调试该core"><a href="#用gdb调试该core" class="headerlink" title="用gdb调试该core"></a>用gdb调试该core</h1><ol>
-<li>gdb 可执行程序exe</li>
-<li>进入gdb环境后<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">core-file $filename</span><br></pre></td></tr></table></figure></li>
-<li>敲命令bt可以查看准确信息</li>
-</ol>
+            <h1 id="日期格式化函数："><a href="#日期格式化函数：" class="headerlink" title="日期格式化函数："></a>日期格式化函数：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATE_FORMAT(<span class="type">date</span>,format)</span><br></pre></td></tr></table></figure>
+<h1 id="format参数"><a href="#format参数" class="headerlink" title="format参数"></a>format参数</h1><ul>
+<li>%a    缩写星期名</li>
+<li>%b    缩写月名</li>
+<li>%c    月，数值</li>
+<li>%D    带有英文前缀的月中的天</li>
+<li>%d    月的天，数值(00-31)</li>
+<li>%e    月的天，数值(0-31)</li>
+<li>%f    微秒</li>
+<li>%H    小时 (00-23)</li>
+<li>%h    小时 (01-12)</li>
+<li>%I    小时 (01-12)</li>
+<li>%i    分钟，数值(00-59)</li>
+<li>%j    年的天 (001-366)</li>
+<li>%k    小时 (0-23)</li>
+<li>%l    小时 (1-12)</li>
+<li>%M    月名</li>
+<li>%m    月，数值(00-12)</li>
+<li>%p    AM 或 PM</li>
+<li>%r    时间，12-小时（hh:mm:ss AM 或 PM）</li>
+<li>%S    秒(00-59)</li>
+<li>%s    秒(00-59)</li>
+<li>%T    时间, 24-小时 (hh:mm:ss)</li>
+<li>%U    周 (00-53) 星期日是一周的第一天</li>
+<li>%u    周 (00-53) 星期一是一周的第一天</li>
+<li>%V    周 (01-53) 星期日是一周的第一天，与 %X 使用</li>
+<li>%v    周 (01-53) 星期一是一周的第一天，与 %x 使用</li>
+<li>%W    星期名</li>
+<li>%w    周的天 （0=星期日, 6=星期六）</li>
+<li>%X    年，其中的星期日是周的第一天，4 位，与 %V 使用</li>
+<li>%x    年，其中的星期一是周的第一天，4 位，与 %v 使用</li>
+<li>%Y    年，4 位</li>
+<li>%y    年，2 位</li>
+</ul>
 
           
         
@@ -395,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/139/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/139/">139</a><span class="page-number current">140</span><a class="page-number" href="/blog/page/141/">141</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/141/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/139/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/139/">139</a><span class="page-number current">140</span><a class="page-number" href="/blog/page/141/">141</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/141/">&gt;</a>
   </nav>
 
 
@@ -441,7 +464,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +475,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -491,7 +514,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

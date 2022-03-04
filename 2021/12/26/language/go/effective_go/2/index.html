@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Datanewnew分配内存，初始化微零值，返回该内存的地址。new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. Constructors and composite literals ¶并不是所有的对象都初始化为零，可以使用组合字面量compos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="effective go 学习整理二">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/2021/12/26/language/go/effective_go/2/index.html">
+<meta property="og:site_name" content="李飞杰的个人博客">
+<meta property="og:description" content="Datanewnew分配内存，初始化微零值，返回该内存的地址。new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T. Constructors and composite literals ¶并不是所有的对象都初始化为零，可以使用组合字面量compos">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-12-26T11:24:40.933Z">
+<meta property="article:modified_time" content="2021-12-26T11:24:40.933Z">
+<meta property="article:author" content="lifeijie">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lifeijie.gitee.io/blog/2021/12/26/language/go/effective_go/2/"/>
+
+
+
+
+
+  <title>effective go 学习整理二 | 李飞杰的个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李飞杰的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/26/language/go/effective_go/2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李飞杰的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">effective go 学习整理二</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-26T19:24:40+08:00">
+                2021-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h1><h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>new分配内存，初始化微零值，返回该内存的地址。<br>new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T.</p>
+<h2 id="Constructors-and-composite-literals-¶"><a href="#Constructors-and-composite-literals-¶" class="headerlink" title="Constructors and composite literals ¶"></a>Constructors and composite literals ¶</h2><p>并不是所有的对象都初始化为零，可以使用组合字面量composite literal来初始化对象，其实不过是多个初始化语句使用{}进行简化而已。如果{}里面是值，初始化的时候{}内部的值要和结构体的域一一对应；如果{}里面是键值对，顺序就不重要，此时没有涉及的键的值为默认零值。组合字面量也可以初始化arrays, slices, and maps，对于arrays, slices，他们的键可以认为是索引，所以有以下的初始化方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a := [...]<span class="keyword">string</span>   &#123;Enone: <span class="string">&quot;no error&quot;</span>, Eio: <span class="string">&quot;Eio&quot;</span>, Einval: <span class="string">&quot;invalid argument&quot;</span>&#125; <span class="comment">// 数组</span></span><br><span class="line">s := []<span class="keyword">string</span>      &#123;Enone: <span class="string">&quot;no error&quot;</span>, Eio: <span class="string">&quot;Eio&quot;</span>, Einval: <span class="string">&quot;invalid argument&quot;</span>&#125; <span class="comment">// 切片</span></span><br></pre></td></tr></table></figure>
+<h2 id="make"><a href="#make" class="headerlink" title="make"></a>make</h2><p>make用于创建slices, maps, and channels，因为这些结构内部都有指向需要初始分配空间的指针。以slice为例，一个slice本身包括指向底层数组的指针，长度和容量，只有这些slice的属性都初始化之后，slice才不是nil。而new只能返回一个新分配的，未初始化的slice的地址。</p>
+<h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><p>go的数组与C有以下几点不同：</p>
+<ul>
+<li>数组是值，将一个数组赋值给另一个数组，会把数组的每个元素一一复制</li>
+<li>如果函数的参数是一个数组，那么函数收到的是数组的副本，不是指向原数组的指针</li>
+<li>数组的大小是数组类型的一部分，[4]int与[5]int是不同的数组。<h2 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h2>如Arrays所说，slice其实是arrays的一个封装，包括指向底层数组的指针，长度和容量。用len来获取slice长度，cap来获取slice的容量，这两个内置函数对nil都返回0。向slice添加元素用append，append接受不定长位置参数，函数标签为func append(slice []T, elements …T) []T。由于go是静态类型语言，这里要实现动态类型T支持，所以需要编译器处理，所以append是内置的函数。如果要在当前slice扩展另一个slice，可以用如下方法：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">y := []<span class="keyword">int</span>&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br><span class="line">x = <span class="built_in">append</span>(x, y...)</span><br><span class="line">fmt.Println(x)</span><br></pre></td></tr></table></figure>
+<h3 id="二维slice"><a href="#二维slice" class="headerlink" title="二维slice"></a>二维slice</h3>二维Slice有两种实现思路，如果第二维的slice是变长的，那么第二维依次分配，如下：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Allocate the top-level slice.</span></span><br><span class="line">picture := <span class="built_in">make</span>([][]<span class="keyword">uint8</span>, YSize) <span class="comment">// One row per unit of y.</span></span><br><span class="line"><span class="comment">// Loop over the rows, allocating the slice for each row.</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> picture &#123;</span><br><span class="line">	picture[i] = <span class="built_in">make</span>([]<span class="keyword">uint8</span>, XSize)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+如果第二维定长，效率更高的的办法是，一次分配，后续切割该slice，如下：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Allocate the top-level slice, the same as before.</span></span><br><span class="line">picture := <span class="built_in">make</span>([][]<span class="keyword">uint8</span>, YSize) <span class="comment">// One row per unit of y.</span></span><br><span class="line"><span class="comment">// Allocate one large slice to hold all the pixels.</span></span><br><span class="line">pixels := <span class="built_in">make</span>([]<span class="keyword">uint8</span>, XSize*YSize) <span class="comment">// Has type []uint8 even though picture is [][]uint8.</span></span><br><span class="line"><span class="comment">// Loop over the rows, slicing each row from the front of the remaining pixels slice.</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> picture &#123;</span><br><span class="line">	picture[i], pixels = pixels[:XSize], pixels[XSize:]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1>map的key需要是能比较的，slices不能作为key。如果key不存在，获取的结果会是key类型的零值。有时候需要区分key不存在和key存在但是值是零值的情况，可以如下方法：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> seconds <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> ok <span class="keyword">bool</span></span><br><span class="line">seconds, ok = timeZone[tz]</span><br></pre></td></tr></table></figure>
+删除键值对用delete(map, key)</li>
+</ul>
+<h1 id="Printing"><a href="#Printing" class="headerlink" title="Printing"></a>Printing</h1><p>go在fmt包实现了打印的许多方法。以下几行的效果相同：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Printf(<span class="string">&quot;Hello %d\n&quot;</span>, <span class="number">23</span>)</span><br><span class="line">fmt.Fprint(os.Stdout, <span class="string">&quot;Hello &quot;</span>, <span class="number">23</span>, <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">fmt.Println(<span class="string">&quot;Hello&quot;</span>, <span class="number">23</span>)</span><br><span class="line">fmt.Println(fmt.Sprint(<span class="string">&quot;Hello &quot;</span>, <span class="number">23</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="printf的几个格式"><a href="#printf的几个格式" class="headerlink" title="printf的几个格式"></a>printf的几个格式</h2><ul>
+<li>%d和C不同，在于格式（比如正负、空格）并不是由格式字符串定义，而是根据数据类型确定，比如：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">uint64</span> = <span class="number">1</span>&lt;&lt;<span class="number">64</span> - <span class="number">1</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%d %x; %d %x\n&quot;</span>, x, x, <span class="keyword">int64</span>(x), <span class="keyword">int64</span>(x))</span><br></pre></td></tr></table></figure>
+得到的结果是<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">18446744073709551615 ffffffffffffffff; -1 -1</span><br></pre></td></tr></table></figure></li>
+<li>%v Println和Print其实就是用的%v，可以打印任何对象</li>
+<li>%+v 除了打印值，还会打印键</li>
+<li>%#v 按照完整的go语法打印</li>
+<li>%q 支持string和[]byte</li>
+<li>%x 16进制，支持strings, byte arrays, byte slices, integers</li>
+<li>% x 同上，字节之间有空格</li>
+<li>%T 打印变量类型<h2 id="自定义打印内容"><a href="#自定义打印内容" class="headerlink" title="自定义打印内容"></a>自定义打印内容</h2>Sprintf will only call the String method when it wants a string<br>如果想要控制打印的格式，需要给类型添加String()方法。注意该方法内虽然可以调用Sprintf，但是要注意考虑不要引起循环调用自己的问题。比如：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyString <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m MyString)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;MyString=%s&quot;</span>, m) <span class="comment">// Error: will recur forever.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+可以这样修复：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyString <span class="keyword">string</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m MyString)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;MyString=%s&quot;</span>, <span class="keyword">string</span>(m)) <span class="comment">// OK: note conversion.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h1><h2 id="Constants"><a href="#Constants" class="headerlink" title="Constants"></a>Constants</h2>常数定义时需要用常量表达式，比如1&lt;&lt;3,而math.Sin(math.Pi/4)这种就不是。常用iota来构造枚举常量，比如：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ByteSize <span class="keyword">float64</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    _           = <span class="literal">iota</span> <span class="comment">// ignore first value by assigning to blank identifier</span></span><br><span class="line">    KB ByteSize = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">    MB</span><br><span class="line">    GB</span><br><span class="line">    TB</span><br><span class="line">    PB</span><br><span class="line">    EB</span><br><span class="line">    ZB</span><br><span class="line">    YB</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="The-init-function"><a href="#The-init-function" class="headerlink" title="The init function"></a>The init function</h2>每个源文件都可以定义init函数，这个函数在常数初始化-&gt;全局变量初始化之后执行，在此之前import的包都要初始化完毕。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2021/12/26/language/go/effective_go/1/" rel="next" title="effective go 学习整理一">
+                <i class="fa fa-chevron-left"></i> effective go 学习整理一
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2021/12/27/language/go/effective_go/3/" rel="prev" title="effective go 学习整理三">
+                effective go 学习整理三 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data"><span class="nav-number">1.</span> <span class="nav-text">Data</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#new"><span class="nav-number">1.1.</span> <span class="nav-text">new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructors-and-composite-literals-%C2%B6"><span class="nav-number">1.2.</span> <span class="nav-text">Constructors and composite literals ¶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#make"><span class="nav-number">1.3.</span> <span class="nav-text">make</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays"><span class="nav-number">1.4.</span> <span class="nav-text">Arrays</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Slices"><span class="nav-number">1.5.</span> <span class="nav-text">Slices</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4slice"><span class="nav-number">1.5.1.</span> <span class="nav-text">二维slice</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Map"><span class="nav-number">2.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Printing"><span class="nav-number">3.</span> <span class="nav-text">Printing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#printf%E7%9A%84%E5%87%A0%E4%B8%AA%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">printf的几个格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%93%E5%8D%B0%E5%86%85%E5%AE%B9"><span class="nav-number">3.2.</span> <span class="nav-text">自定义打印内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Initialization"><span class="nav-number">4.</span> <span class="nav-text">Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Constants"><span class="nav-number">4.1.</span> <span class="nav-text">Constants</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-init-function"><span class="nav-number">4.2.</span> <span class="nav-text">The init function</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifeijie</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

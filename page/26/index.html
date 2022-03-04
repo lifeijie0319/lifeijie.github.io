@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/schema/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/24/security/web/CSRF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/db2/schema/" itemprop="url">db2 schema</a></h1>
+                <a class="post-title-link" href="/blog/2022/02/24/security/web/CSRF/" itemprop="url">CSRF攻击</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-24T15:29:59+08:00">
+                2022-02-24
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,16 +312,11 @@
       
         
           
-            <h1 id="创建schema"><a href="#创建schema" class="headerlink" title="创建schema"></a>创建schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE SCHEMA &lt;schema-name&gt; [AUTHORIZATION &lt;schema-owner-name&gt;]</span><br></pre></td></tr></table></figure>
-<h1 id="删除schema"><a href="#删除schema" class="headerlink" title="删除schema"></a>删除schema</h1><p>schema下面没有对象的情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 drop schema wxdemo restrict</span><br></pre></td></tr></table></figure>
-<p>schema下面有对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;call ADMIN_DROP_SCHEMA(&#39;wxdemo&#39;, NULL, &#39;errorschema&#39;, &#39;ERRTABLE&#39;)&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="复制schema"><a href="#复制schema" class="headerlink" title="复制schema"></a>复制schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;CALL SYSPROC.ADMIN_COPY_SCHEMA</span><br><span class="line">(&#39;TONGLIAN&#39;,&#39;WXDEMO&#39;,&#39;COPYNO&#39;,NULL,NULL,NULL,&#39;ERRORSCHEMA&#39;,&#39;ERRORTABLE&#39;);&quot;</span><br></pre></td></tr></table></figure>
-<p>注意：目标schema不能已存在，否则报错。</p>
-<h1 id="查看当前schema"><a href="#查看当前schema" class="headerlink" title="查看当前schema"></a>查看当前schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 values current schema</span><br></pre></td></tr></table></figure>
-<h1 id="查询数据库内的所有schema"><a href="#查询数据库内的所有schema" class="headerlink" title="查询数据库内的所有schema"></a>查询数据库内的所有schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from sysibm.sysschemata</span><br></pre></td></tr></table></figure>
-<h1 id="查询schem下面的所有表格"><a href="#查询schem下面的所有表格" class="headerlink" title="查询schem下面的所有表格"></a>查询schem下面的所有表格</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 list tables for schema XXX</span><br></pre></td></tr></table></figure>
+            <h1 id="什么是CSRF"><a href="#什么是CSRF" class="headerlink" title="什么是CSRF"></a>什么是CSRF</h1><p>跨站脚本伪造(CROSS SITE REQUEST FORGE)，即CSRF，是指攻击者在自己的网站上伪造用户请求访问用户曾经访问的已登录认证的有CSRF漏洞的网站。由于被攻击网站只确认了请求来自于用户浏览器，而没有确认请求是否来自用户的真实意愿。</p>
+<h1 id="如何防范CSRF"><a href="#如何防范CSRF" class="headerlink" title="如何防范CSRF"></a>如何防范CSRF</h1><h2 id="验证HTTP-referer字段"><a href="#验证HTTP-referer字段" class="headerlink" title="验证HTTP referer字段"></a>验证HTTP referer字段</h2><p>HTTP头中的Referer字段记录了该HTTP请求的来源地址。referer字段告诉服务器该网页是从哪个页面链接过来的，而攻击者的网页和被攻击网站的页面并不相同。</p>
+<h2 id="使用验证码"><a href="#使用验证码" class="headerlink" title="使用验证码"></a>使用验证码</h2><p>对重要的请求，比如转账等，添加额外校验。</p>
+<h2 id="token验证"><a href="#token验证" class="headerlink" title="token验证"></a>token验证</h2><p>CSRF能够成功的关键在于用户访问攻击者网站而在未知情的情况下向缺陷网站发送了请求，这个请求带上了用户之前访问缺陷网站登录验证的cookie。所以，在cookie之外向服务端传递之前服务端产生的token，服务端将请求的token和服务端存储的token（一般在session中）比较确认请求是否来自于自己的网站页面。token可以放在报文体或者http头部中。</p>
+
           
         
       
@@ -393,7 +355,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/25/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/27/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/25/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/27/">&gt;</a>
   </nav>
 
 
@@ -439,7 +401,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +412,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -489,7 +451,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

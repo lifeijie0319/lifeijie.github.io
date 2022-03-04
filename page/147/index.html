@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/windows/windows%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/windows/windows%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/" itemprop="url">windows常见网络问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">redis配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/windows/" itemprop="url" rel="index">
-                    <span itemprop="name">windows</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,8 +345,14 @@
       
         
           
-            <h1 id="ping不通"><a href="#ping不通" class="headerlink" title="ping不通"></a>ping不通</h1><p>情景一：网络不通<br>情景二：防火墙-高级-入站规则，开启：文件和打印机共享(回显请求 - ICMPv4-In)</p>
-<h1 id="telnet不通"><a href="#telnet不通" class="headerlink" title="telnet不通"></a>telnet不通</h1><p>情景一：telnet客户端没开<br>解决：控制面板-程序和功能-启用或关闭windows功能-勾选Telnet客户端-确定<br>情景二：telnet的对象防火墙没关</p>
+            <h1 id="配置文件地址"><a href="#配置文件地址" class="headerlink" title="配置文件地址"></a>配置文件地址</h1><p>默认地址：/etc/redis.conf</p>
+<h1 id="常用配置项"><a href="#常用配置项" class="headerlink" title="常用配置项"></a>常用配置项</h1><ul>
+<li><p>daemonize<br>daemonize表示是否后台启动redis，默认是no，表示前台启动。如果要改成后台启动，no要改成yes</p>
+</li>
+<li><p>bind<br>先说一句精华的话：bind配置了什么ip，别人就得访问bind里面配置的ip才访问到redis服务。<br>一台主机，可能会有多张网卡，或者对应多网段内网的Ip，公网IP等，也就意味着其他机器可以通过多个IP地址访问到这台主机。假如 有ip1，ip2，ip3可以访问到一台服务器。但是redis bind只配置了</p>
+</li>
+</ul>
+<p><em>bind ip1 ip2</em><br>那如果是远程连接redis服务的话就只能通过ip1和ip2来访问。ip3不行。即使你可以ping得通。<br>注：这里的ip不是能访问redis的客户端的ip，而是能访问redis的本机网卡的ip</p>
 
           
         
@@ -386,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/146/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/146/">146</a><span class="page-number current">147</span><a class="page-number" href="/blog/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/148/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/146/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/146/">146</a><span class="page-number current">147</span><a class="page-number" href="/blog/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/148/">&gt;</a>
   </nav>
 
 
@@ -432,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -443,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -482,7 +488,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

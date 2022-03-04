@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/hugepage/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/hugepage/" itemprop="url">hugepage</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" itemprop="url">db2表空间管理</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,21 +345,13 @@
       
         
           
-            <h1 id="Linux-中的“大内存页”是个什么玩意？"><a href="#Linux-中的“大内存页”是个什么玩意？" class="headerlink" title="Linux 中的“大内存页”是个什么玩意？"></a>Linux 中的“大内存页”是个什么玩意？</h1><p>“大内存页”有助于 Linux 系统进行虚拟内存管理。顾名思义，除了标准的 4KB 大小的页面外，它们还能帮助管理内存中的巨大的页面。使用“大内存页”，你最大可以定义 1GB 的页面大小。</p>
-<p>在系统启动期间，你能用“大内存页”为应用程序预留一部分内存。这部分内存，即被“大内存页”占用的这些存储器永远不会被交换出内存。它会一直保留其中，除非你修改了配置。这会极大地提高像 Oracle 数据库这样的需要海量内存的应用程序的性能。</p>
-<h1 id="为什么使用“大内存页”？"><a href="#为什么使用“大内存页”？" class="headerlink" title="为什么使用“大内存页”？"></a>为什么使用“大内存页”？</h1><p>在虚拟内存管理中，内核维护一个将虚拟内存地址映射到物理地址的表，对于每个页面操作，内核都需要加载相关的映射。如果你的内存页很小，那么你需要加载的页就会很多，导致内核会加载更多的映射表。而这会降低性能。</p>
-<p>使用“大内存页”，意味着所需要的页变少了。从而大大减少由内核加载的映射表的数量。这提高了内核级别的性能最终有利于应用程序的性能。</p>
-<p>简而言之，通过启用“大内存页”，系统具只需要处理较少的页面映射表，从而减少访问/维护它们的开销！</p>
-<h1 id="如何配置“大内存页”？"><a href="#如何配置“大内存页”？" class="headerlink" title="如何配置“大内存页”？"></a>如何配置“大内存页”？</h1><p>运行下面命令来查看当前“大内存页”的详细内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep Huge &#x2F;proc&#x2F;meminfo</span><br></pre></td></tr></table></figure>
-<p>oracle有hugepages_settings.sh脚本可以知道系统当前需要多少个巨大页。<br>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kerneltalks # sh &#x2F;tmp&#x2F;hugepages_settings.sh</span><br><span class="line">Recommended setting: vm.nr_hugepages &#x3D; 124</span><br></pre></td></tr></table></figure>
-<p>这意味着，你系统需要 124 个每个 2MB 的“大内存页”！若你设置页面大小为 4MB，则结果就变成了 62。你明白了吧？</p>
-<p>本文最后一部分内容是配置上面提到的 内核参数 ，然后重新加载。将下面内容添加到 /etc/sysctl.conf 中，然后输入 sysctl -p 命令重新加载配置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.nr_hugepages&#x3D;126</span><br></pre></td></tr></table></figure>
-<p>注意我们这里多加了两个额外的页，因为我们希望在实际需要的页面数量之外多一些额外的空闲页。<br>现在，内核已经配置好了，但是要让应用能够使用这些“大内存页”还需要提高内存的使用阀值。新的内存阀值应该为 126 个页 x 每个页 2 MB = 252 MB，也就是 258048 KB。<br>你需要编辑 /etc/security/limits.conf 中的如下配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">soft memlock 258048</span><br><span class="line">hard memlock 258048</span><br></pre></td></tr></table></figure>
-<p>某些情况下，这些设置是在指定应用的文件中配置的，比如 Oracle DB 就是在 /etc/security/limits.d/99-grid-oracle-limits.conf 中配置的。<br>这就完成了！你可能还需要重启应用来让应用来使用这些新的巨大页。</p>
+            <h1 id="查看表空间"><a href="#查看表空间" class="headerlink" title="查看表空间"></a>查看表空间</h1><ol>
+<li>查看表空间概况<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES</span><br></pre></td></tr></table></figure></li>
+<li>查看表空间详情<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES SHOW DETAIL</span><br></pre></td></tr></table></figure>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2>删除表报错<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DB21034E  The command was processed as an SQL statement because it was not a </span><br><span class="line">valid Command Line Processor command.  During SQL processing it returned:</span><br><span class="line">SQL0290N  Table space access is not allowed.  SQLSTATE&#x3D;55039</span><br></pre></td></tr></table></figure>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2>表空间状态不正常，为Backup pending<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2>备份数据库或表空间。<br>备份数据库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 backup database xxxxx </span><br></pre></td></tr></table></figure>
+备份表空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 force applications all &amp; db2 backup database xxx tablespace xxx</span><br></pre></td></tr></table></figure></li>
+</ol>
 
           
         
@@ -399,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/138/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/blog/page/140/">140</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/140/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/138/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/blog/page/140/">140</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/140/">&gt;</a>
   </nav>
 
 
@@ -445,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -495,7 +487,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

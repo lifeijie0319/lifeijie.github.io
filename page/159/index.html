@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/Django/%E6%9D%82%E8%AE%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/software_enginering/practice/%E9%98%B2%E6%AD%A2%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/Django/%E6%9D%82%E8%AE%B0/" itemprop="url">django杂记</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/software_enginering/practice/%E9%98%B2%E6%AD%A2%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8/" itemprop="url">防止短信轰炸的解决方案</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/software-enginering/" itemprop="url" rel="index">
+                    <span itemprop="name">software_enginering</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/software-enginering/practice/" itemprop="url" rel="index">
+                    <span itemprop="name">practice</span>
                   </a>
                 </span>
 
@@ -356,17 +345,10 @@
       
         
           
-            <h1 id="一、模板-过滤器"><a href="#一、模板-过滤器" class="headerlink" title="一、模板-过滤器"></a>一、模板-过滤器</h1><ul>
-<li>1、if和for循环不能在同一句话。</li>
-<li>2、取整过滤器phone2numeric </li>
-<li>3、字符截取过滤器：slice</li>
-</ul>
-<h1 id="二、静态文件"><a href="#二、静态文件" class="headerlink" title="二、静态文件"></a>二、静态文件</h1><p>（一）开发时<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files">https://docs.djangoproject.com/en/1.8/howto/static-files/#configuring-static-files</a><br>主要是django.contrib.staticfiles内置默认处理。<br>（二）生产时需要改变<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/">https://docs.djangoproject.com/en/1.8/howto/static-files/deployment/</a></p>
-<h1 id="三、中文编码问题"><a href="#三、中文编码问题" class="headerlink" title="三、中文编码问题"></a>三、中文编码问题</h1><p>python2.7不能直接支持Unicode，解决办法：<br>from django.utils.encoding import python_2_unicode_compatible<br>在模型类定义之前加上装饰器：<br>@python_2_unicode_compatible</p>
-<h1 id="四、将从数据库获取的queryset转化成json返回。"><a href="#四、将从数据库获取的queryset转化成json返回。" class="headerlink" title="四、将从数据库获取的queryset转化成json返回。"></a>四、将从数据库获取的queryset转化成json返回。</h1><p>from django.core import serializers<br>data = serializers.serialize(“xml”, SomeModel.objects.all())</p>
-<h1 id="五、解决由于csrf保护启用导致的图片上传bug。"><a href="#五、解决由于csrf保护启用导致的图片上传bug。" class="headerlink" title="五、解决由于csrf保护启用导致的图片上传bug。"></a>五、解决由于csrf保护启用导致的图片上传bug。</h1><h2 id="1、ajax头"><a href="#1、ajax头" class="headerlink" title="1、ajax头"></a>1、ajax头</h2><p>xhr.setRequestHeader(“X-CSRFToken”, get_cookie(‘csrftoken’));</p>
-<h2 id="2、post中传cookie"><a href="#2、post中传cookie" class="headerlink" title="2、post中传cookie"></a>2、post中传cookie</h2><p>task.addData(‘csrfmiddlewaretoken’, get_cookie(‘csrftoken’))</p>
-<h1 id="六、request-POST取不到数据的原因"><a href="#六、request-POST取不到数据的原因" class="headerlink" title="六、request.POST取不到数据的原因"></a>六、request.POST取不到数据的原因</h1><p>只有ajax请求添加参数’Content-Type’：’application/x-www-form-urlencoded’才会填充request.POST。</p>
+            <h1 id="背景描述"><a href="#背景描述" class="headerlink" title="背景描述"></a>背景描述</h1><p>有一个短信系统，功能很简单，负责发送短信验证码和验证短信验证码。现在需要出一个方案，预防可能的短信轰炸问题。假设要求一分钟内同一个手机号不能接受3次以上的短信发送请求。<br>系统是tornado多进程处理框架，使用SQLAlchemy连接mysql数据库。</p>
+<h1 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h1><p>描述：来一笔短信发送请求，查询一分钟内登记的短信发送明细记录，如果小于3笔，本次可以发送，否则不能发送。<br>分析：最简单的思路，但是有并发问题，导致实际发送的数量多于3笔。假设数据库中本没有某手机号的记录，此时同时接受100笔请求，100笔请求同时查数据库，发现1分钟内短信发送条数都是0，导致最后发送了100笔短信验证码，不符合要求。</p>
+<h1 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h1><p>描述：使用乐观锁。另加一张表A，以手机号为唯一主键phone，另有字段次数count，一分钟起始时间start_time和最后更新时间last_modified。每次请求过来入库，如果违反唯一约束，说明已有记录，捕捉异常忽略。查看当前时间now，如果now-start_time &lt; 1分钟，查看count，如果count &lt; 3，使用乐观锁更新count=count+1，失败重试；如果count &gt;= 3，拒绝此交易。如果now-start_time &gt;= 1分钟，使用乐观锁更新当前记录的start_time和last_modified为now，成功发送记录，失败重试。<br>分析：能够解决并发的问题。但是一是逻辑较为复杂，存在多次重试与失败的可能；二是其实这是把时间分段，即以第一次入库或者更新start_time为起点的一分钟，并不是任意的一分钟。比如14:15:00发送第一笔请求，14:15:55发送第二笔，14:15:56发送第三笔，14:16:02发送第四笔，14:16:03发送第五笔，站在14:16:00这个时间点往前往后各取30s，这一分钟内发送了4笔。</p>
+<h1 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h1><p>描述：使用悲观锁。另加一张表A，以手机号为唯一主键phone。每次请求过来入库，如果违反唯一约束，说明已有记录，捕捉异常忽略。入库完成之后，使用select…for update语句对手机号对应记录加排他锁，其它同样手机号的请求处理到这里需排队等候。加锁之后在同一事务内查看一分钟内的明细记录条目（明细表B），如果超过3就拒绝发送，否则新增明细入库，提交事务，然后发送短信验证码。<br>分析：悲观锁效率较乐观锁低，但是因为是对手机号记录加行锁，不对其它手机号记录造成影响，正常情况下并发不高，而且逻辑比乐观锁简单清晰，因而目前来看这是更加合适的解决方案。</p>
 
           
         
@@ -406,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/158/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/158/">158</a><span class="page-number current">159</span><a class="page-number" href="/blog/page/160/">160</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/160/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/158/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/158/">158</a><span class="page-number current">159</span><a class="page-number" href="/blog/page/160/">160</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/160/">&gt;</a>
   </nav>
 
 
@@ -452,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -463,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -502,7 +484,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

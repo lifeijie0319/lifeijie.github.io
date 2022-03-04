@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/security/M2Crypto/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/VCS/svn/svn%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/security/M2Crypto/" itemprop="url">M2Crypto安装问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/VCS/svn/svn%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85/" itemprop="url">svn离线安装</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
+                    <span itemprop="name">svn</span>
                   </a>
                 </span>
 
@@ -367,10 +345,14 @@
       
         
           
-            <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>问题：SWIG/_m2crypto_wrap.c:3557:25: 致命错误：openssl/err.h：没有那个文件或目录<br>原因：没有安装swig<br>解决：yum install swig  </p>
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>问题：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SWIG&#x2F;_m2crypto.i</span><br><span class="line">SWIG&#x2F;_m2crypto.i:54: Error: Unable to find &#39;openssl&#x2F;opensslv.h&#39;</span><br><span class="line">SWIG&#x2F;_m2crypto.i:60: Error: Unable to find &#39;openssl&#x2F;safestack.h&#39;</span><br><span class="line">SWIG&#x2F;_evp.i:12: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_rc4.i:5: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_ec.i:7: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br></pre></td></tr></table></figure>
-<p>解决：yum install openssl-devel</p>
+            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jkko123/p/6358461.html">https://www.cnblogs.com/jkko123/p/6358461.html</a></p>
+<h1 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h1><ul>
+<li>1.1 apr</li>
+<li>1.2 apr-util</li>
+<li>1.3 scons：serf的依赖</li>
+<li>1.4 serf：如果没有这个，svn无法解析http和https，出现错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn: E170000: Unrecognized URL scheme for &#39;http:&#x2F;&#x2F;10.250.1.5&#x2F;svn&#x2F;src&#x2F;aif&#39;</span><br></pre></td></tr></table></figure></li>
+<li>1.5 sqlite</li>
+</ul>
 
           
         
@@ -410,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/205/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/205/">205</a><span class="page-number current">206</span><a class="page-number" href="/blog/page/207/">207</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/207/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/205/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/205/">205</a><span class="page-number current">206</span><a class="page-number" href="/blog/page/207/">207</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/207/">&gt;</a>
   </nav>
 
 
@@ -456,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -467,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -506,7 +488,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

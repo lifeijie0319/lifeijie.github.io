@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/email/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/kvm/kvm%E7%A9%BA%E9%97%B4%E6%89%A9%E5%B1%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/email/" itemprop="url">email发送和接收</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/kvm/kvm%E7%A9%BA%E9%97%B4%E6%89%A9%E5%B1%95/" itemprop="url">kvm空间扩展</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/tools/kvm/" itemprop="url" rel="index">
+                    <span itemprop="name">kvm</span>
                   </a>
                 </span>
 
@@ -356,50 +345,26 @@
       
         
           
-            <p>参考：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0</a></p>
-<h1 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h1><p>需要手动对发送方邮箱配置SMTP协议，此时可能需要设置客户端授权码，即为登录第三方邮件客户端的专用口令，以下是常用邮箱SMTP端口及登录说明：  </p>
-<table>
-<thead>
-<tr>
-<th>邮箱</th>
-<th>SMTP服务器</th>
-<th>登录口令</th>
-<th>支持加密方式</th>
-<th>对应端口号</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>163</td>
-<td>smtp.163.com</td>
-<td>个人设置授权码</td>
-<td>明文/SSL加密</td>
-<td>25/465</td>
-</tr>
-<tr>
-<td>126</td>
-<td>smtp.126.com</td>
-<td>个人设置授权码</td>
-<td>明文/SSL加密</td>
-<td>25/465</td>
-</tr>
-<tr>
-<td>QQ</td>
-<td>smtp.qq.com</td>
-<td>系统分配授权码</td>
-<td>明文/SSL加密/TLS加密</td>
-<td>25/465/587</td>
-</tr>
-<tr>
-<td>Gmail</td>
-<td>smtp.gmail.com</td>
-<td>邮箱登录密码</td>
-<td>TLS加密</td>
-<td>587</td>
-</tr>
-</tbody></table>
-<h1 id="2、加密问题"><a href="#2、加密问题" class="headerlink" title="2、加密问题"></a>2、加密问题</h1><p>SMTP协议发送邮件，如果想要加密，有如下几种方式：<br>1）明文传输:　端口号是25；<br>2）SSL加密: 端口号是465，通信过程加密，邮件数据安全；<br>3）TLS加密: 端口号是587，通信过程加密，邮件数据安全，使用正常的smtp端口。对于TLS加密方式需要先建立SSL连接，然后再发送邮件。</p>
-<h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3 遇到的问题"></a>3 遇到的问题</h1><p>3.1 使用qq向foxmail发送带附件的邮件时，如果不用加密，程序报错，连接中断。<br>3.2 如果使用POP3收邮件，必须使用ssl加密的方式登录服务器。</p>
-
+            <h1 id="在线添加硬盘挂载"><a href="#在线添加硬盘挂载" class="headerlink" title="在线添加硬盘挂载"></a>在线添加硬盘挂载</h1><h2 id="创建虚拟硬盘"><a href="#创建虚拟硬盘" class="headerlink" title="创建虚拟硬盘"></a>创建虚拟硬盘</h2><p>命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2 added_centos7-64.img 100G</span><br></pre></td></tr></table></figure>
+<p>说明：qemu-img是指令，create是创建指令，-f qcow2指定创建的硬盘格式，added_centos7-64.img是创建的虚拟硬盘的文件所在路径，这里是在当前目录，100G指定大小。</p>
+<h2 id="将虚拟硬盘挂载到系统中"><a href="#将虚拟硬盘挂载到系统中" class="headerlink" title="将虚拟硬盘挂载到系统中"></a>将虚拟硬盘挂载到系统中</h2><p>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh attach-disk centos7.0 &#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;images&#x2F;added_centos7-64.img vdb</span><br></pre></td></tr></table></figure>
+<p>说明：virsh attach-disk是挂载虚拟硬盘的指令，centos7.0是当前运行的虚拟机的域名，使用virsh list可以看到。/var/lib/libvirt/images/added_centos7-64.img是虚拟硬盘的根路径，注意不能用相对路径。vdb是硬盘挂载到虚拟机系统中的名称（位置）。</p>
+<h3 id="为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？"><a href="#为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？" class="headerlink" title="为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？"></a>为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？</h3><p>因为虽然创建的是qcow2格式的硬盘，但是attach的时候没有指明，系统默认将其当作raw格式来处理，应该再attach命令后加上参数–subdriver=qcow2。</p>
+<h2 id="卸载磁盘"><a href="#卸载磁盘" class="headerlink" title="卸载磁盘"></a>卸载磁盘</h2><p>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh detach-disk centos7.0 vdb</span><br></pre></td></tr></table></figure>
+<p>语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">detach-disk &lt;domain&gt; &lt;target&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="之后参考linux-centos-centos硬盘扩容"><a href="#之后参考linux-centos-centos硬盘扩容" class="headerlink" title="之后参考linux/centos/centos硬盘扩容"></a>之后参考linux/centos/centos硬盘扩容</h2><h1 id="直接修改给虚拟机分配的空间"><a href="#直接修改给虚拟机分配的空间" class="headerlink" title="直接修改给虚拟机分配的空间"></a>直接修改给虚拟机分配的空间</h1><p>方法：直接修改给虚拟机分配的空间，在线分区，加入lvm，合并到原来的逻辑分区。</p>
+<h2 id="在实体机（宿主）上修改分配的空间。"><a href="#在实体机（宿主）上修改分配的空间。" class="headerlink" title="在实体机（宿主）上修改分配的空间。"></a>在实体机（宿主）上修改分配的空间。</h2><p>命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img resize centos7.0.img +50G</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qemu-img: Can&#39;t resize an image which has snapshots</span><br><span class="line">qemu-img: This image does not support resize</span><br></pre></td></tr></table></figure>
+<p>处理 ：删除快照</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh snapshot-delete centos7.0 --current</span><br></pre></td></tr></table></figure>
+<h2 id="开启虚拟机"><a href="#开启虚拟机" class="headerlink" title="开启虚拟机"></a>开启虚拟机</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh start centos7.0</span><br></pre></td></tr></table></figure>
+<h2 id="之后参考linux-centos-centos硬盘扩容-1"><a href="#之后参考linux-centos-centos硬盘扩容-1" class="headerlink" title="之后参考linux/centos/centos硬盘扩容"></a>之后参考linux/centos/centos硬盘扩容</h2>
           
         
       
@@ -438,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/163/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/163/">163</a><span class="page-number current">164</span><a class="page-number" href="/blog/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/165/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/163/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/163/">163</a><span class="page-number current">164</span><a class="page-number" href="/blog/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/165/">&gt;</a>
   </nav>
 
 
@@ -484,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -495,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -534,7 +499,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

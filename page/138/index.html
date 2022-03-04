@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/rsa/rsa%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E8%87%AA%E5%A2%9E%E9%95%BF%E5%88%97%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/security/rsa/rsa%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" itemprop="url">rsa算法原理</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E8%87%AA%E5%A2%9E%E9%95%BF%E5%88%97%E5%B8%B8%E8%A7%81%E5%BC%82%E5%B8%B8/" itemprop="url">自增长列常见异常</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/security/rsa/" itemprop="url" rel="index">
-                    <span itemprop="name">rsa</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,27 +345,15 @@
       
         
           
-            <h1 id="准备知识"><a href="#准备知识" class="headerlink" title="准备知识"></a>准备知识</h1><h2 id="互质关系"><a href="#互质关系" class="headerlink" title="互质关系"></a>互质关系</h2><p>两个正整数除了1之外没有其它公因子，则这两个数互质。</p>
-<h2 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h2><p>对于正整数n，从1到n的所有整数，与n互质的个数，计算这个值的方法就是欧拉函数。记作$\varphi(n)$。常见的情形如下：</p>
-<ul>
-<li>n=1, $\varphi(1)$ = 1</li>
-<li>n是质数, $\varphi(n)$ = n - 1</li>
-<li>n = p ^ k (p为质数，k为大于1的整数)，$\varphi(n)$ = p ^ k - p ^ (k - 1) = (p-1) * p ^ (k - 1)。要与n互质，则该数不能是p的整数倍，[1, n]总共有p ^ (k - 1)个p的倍数，分别是1 * p, 2 * p, …, p ^ (k - 1) * p</li>
-<li>n = p1 * p2（p1、p2均为质数）$\varphi(n)$ = $\varphi(p1p2)$ = $\varphi(p1)$$\varphi(p2)$</li>
-<li>任意一个大于1的正整数，都可以写成一系列质数的积。设n = p1 ^ q1 * p2 ^ q2 * … * pm ^ qm，根据之前两个性质，$\varphi(n)$ = p1 ^ q1 * (1 - 1/p1) * p2 ^ q2 * (1 - 1/p2) * … * pm ^ qm * (1 - 1/pm) = n * $\prod_{i=1}^m (1 - \frac{1}{pi})$<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2>如果两个正整数m和n互质，那么m的$\varphi(n)$次方减去1，可以被n整除，即m ^ $\varphi(n)$ $\equiv$ 1 (mod n)<h2 id="模反元素"><a href="#模反元素" class="headerlink" title="模反元素"></a>模反元素</h2>如果两个正整数a和n互质，那么一定可以找到整数b，使得 ab-1 被n整除，或者说ab被n除的余数是1。这时，b就叫做a的”模反元素”。<h2 id="二项式定理"><a href="#二项式定理" class="headerlink" title="二项式定理"></a>二项式定理</h2>(x + y) ^ n = $\sum_{k=0}^n C^k_nx^ky^{n-k}$<h2 id="模数运算"><a href="#模数运算" class="headerlink" title="模数运算"></a>模数运算</h2></li>
-<li>如果ab = c，则 a (mod n) * b (mod n) $\equiv$ c (mod n)</li>
-<li>如果a $\equiv$ b (mod n)，则 $a^k$ $\equiv$ $b^k$ (mod n)</li>
-</ul>
-<h1 id="rsa原理说明"><a href="#rsa原理说明" class="headerlink" title="rsa原理说明"></a>rsa原理说明</h1><h2 id="生成公私钥"><a href="#生成公私钥" class="headerlink" title="生成公私钥"></a>生成公私钥</h2><ol>
-<li>随机选择两个不相等的质数p和q</li>
-<li>n = p * q</li>
-<li>$\varphi(n)$ = $\varphi(p)$ * $\varphi(q)$ = (p - 1) * (q - 1)</li>
-<li>随机选择(1, $\varphi(n)$)之间的一个与$\varphi(n)$互质的数e</li>
-<li>计算e对于$\varphi(n)$的模反元素d</li>
-<li>按照上述步骤，公钥即(n, e)，私钥即(n, d)<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2>假设消息为m，则加密后的信息c = m ^ e % n<h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2>m = c ^ d % n<h2 id="解密正确性证明"><a href="#解密正确性证明" class="headerlink" title="解密正确性证明"></a>解密正确性证明</h2>设c = m ^ e - kn, 则结果<br>I = (c ^ d) % n = ((m ^ e - kn) ^ d) % n，<br>根据二项式定理，有 I = m ^ ed % n，<br>由于d是e关于$\varphi(n)$的模反元素，所以ed = 1 + h$\varphi(n)$，所以<br>I = m ^ (1 + h$\varphi(n)$) % n = (m * m ^ (h$\varphi(n)$)) % n<br>根据模数运算规则，I = (m % n) * (m ^ $\varphi(n)$ ^ h % n)<br>根据欧拉定理，如果m与n互质，有m ^ $\varphi(n)$ $\equiv$ 1 (mod n)；如果m与n不是互质，同样可以得到上述结论，参考后续阐述。<br>再结合模数运算，m ^ $\varphi(n)$ ^ h % n = 1，所以<br>I = (m % n) * 1 = m<h3 id="注：m与n不互质时为什么上述推导成立"><a href="#注：m与n不互质时为什么上述推导成立" class="headerlink" title="注：m与n不互质时为什么上述推导成立"></a>注：m与n不互质时为什么上述推导成立</h3>考虑n = p * q，p、q为质数，且m与n不互质，则m必是p或q的倍数，不妨设m = kp，此时m与q互质，根据欧拉定理，有<br>(kp) ^ (q-1) $\equiv$ 1 (mod n)，<br>根据模数运算规律，得到<br>(kp) ^ ((q - 1)h(p - 1)) * kp $\equiv$ kp (mod n),<br>即(kp) ^ (ed) $\equiv$ (kp) (mod q)<br>,可以改写成(kp) ^ (ed) = tq + kp，其中t必是p的倍数，因为左边是p的乘方，kp是p的倍数，q与p互斥。所以可以写成(kp) ^ (ed) = $t_1$pq + kp = $t_1$n + kp，即m ^ (ed) $\equiv$ m (mod n)</li>
+            <h1 id="自增长列生成值与表中已有值冲突"><a href="#自增长列生成值与表中已有值冲突" class="headerlink" title="自增长列生成值与表中已有值冲突"></a>自增长列生成值与表中已有值冲突</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>表A含有自增长列id，但是由于码农张三手动指定了id进行了一些数据的插入，导致程序运行往表A中插入数据报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.Data.OleDb.OleDbException: [DB2&#x2F;NT] SQL0803N  INSERT 语句、UPDATE 语句或由 DELETE 语句导致的外键更新中的一个或多个值无效，因为由 &quot;1&quot; 标识的主键、唯一约束或者唯一索引将表 &quot;****&quot; 的索引键限制为不能具有重复值。  SQLSTATE&#x3D;23505</span><br></pre></td></tr></table></figure>
+<h2 id="问题排查结果与处理"><a href="#问题排查结果与处理" class="headerlink" title="问题排查结果与处理"></a>问题排查结果与处理</h2><ol>
+<li>按照问题描述搜索，得到可能的原因如下：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33736649/article/details/86408552%EF%BC%88%E7%AE%80%E5%8D%95%E6%9D%A5%E8%AF%B4%EF%BC%8C%E5%B0%B1%E6%98%AF%E5%88%97%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%E4%B8%8E%E8%AF%A5%E5%88%97%E5%AF%B9%E5%BA%94%E7%B4%A2%E5%BC%95%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC%E4%B8%8D%E4%B8%80%E8%87%B4%EF%BC%8C%E5%AF%BC%E8%87%B4%E7%B4%A2%E5%BC%95%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%80%BC%E6%97%A0%E6%B3%95%E6%8F%92%E5%85%A5%E3%80%82%E5%AE%9E%E9%99%85%E4%B8%8A%E5%B9%B6%E4%B8%8D%E6%98%AF%E8%BF%99%E4%B8%AA%E5%8E%9F%E5%9B%A0%EF%BC%8C%E4%BD%86%E6%98%AF%E4%B9%9F%E6%98%AF%E9%80%A0%E6%88%90%E4%B8%8A%E8%BF%B0%E9%94%99%E8%AF%AF%E7%9A%84%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0%E4%B9%8B%E4%B8%80%EF%BC%89">https://blog.csdn.net/weixin_33736649/article/details/86408552（简单来说，就是列的最大值与该列对应索引的最大值不一致，导致索引产生的下一个值无法插入。实际上并不是这个原因，但是也是造成上述错误的可能原因之一）</a></li>
+<li>检查建表语句，发现其中有一列id是自增长列。  </li>
+<li>1 查询自增长列当前值：IDENTITY_VAL_LOCAL()函数<br><a target="_blank" rel="noopener" href="http://www.dbatodba.com/db2/how-to-do/how-to-get-the-last-generated-value-of-an-identity-column">http://www.dbatodba.com/db2/how-to-do/how-to-get-the-last-generated-value-of-an-identity-column</a>  </li>
+<li>2 修改自增长列起始值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE &lt;table name&gt; ALTER COLUMN &lt;IDENTITY column&gt; </span><br><span class="line">RESTART WITH &lt;last counter value&gt; </span><br></pre></td></tr></table></figure>
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jason0529/p/3750093.html">https://www.cnblogs.com/jason0529/p/3750093.html</a></li>
 </ol>
-<h1 id="rsa算法的安全性"><a href="#rsa算法的安全性" class="headerlink" title="rsa算法的安全性"></a>rsa算法的安全性</h1><p>rsa算法的公钥可以被攻击者获取，即攻击者可以拿到n、e，但是要得到私钥，需要对n进行质数分解，这在数学上还是一个难题。所以rsa的的是算法安全性基于大整数的因式分解。</p>
-<h2 id="todo-安全性个人理解"><a href="#todo-安全性个人理解" class="headerlink" title="todo 安全性个人理解"></a>todo 安全性个人理解</h2><p>按照公式c = m ^ e % n，难度应该在于该式的求解？网上的资料说的都是上面的原因，没有从这个角度阐述过，待深入。</p>
 
           
         
@@ -405,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/137/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/137/">137</a><span class="page-number current">138</span><a class="page-number" href="/blog/page/139/">139</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/139/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/137/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/137/">137</a><span class="page-number current">138</span><a class="page-number" href="/blog/page/139/">139</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/139/">&gt;</a>
   </nav>
 
 
@@ -451,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -462,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -501,7 +489,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

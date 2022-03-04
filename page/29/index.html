@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E6%8C%87%E4%BB%A4-%E5%85%B6%E5%AE%83/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/24/language/java/j2ee/jsp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E6%8C%87%E4%BB%A4-%E5%85%B6%E5%AE%83/" itemprop="url">db2指令-其它</a></h1>
+                <a class="post-title-link" href="/blog/2022/02/24/language/java/j2ee/jsp/" itemprop="url">jsp</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-24T14:29:02+08:00">
+                2022-02-24
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,7 +312,25 @@
       
         
           
-            <h1 id="获取查询结果得前几条记录"><a href="#获取查询结果得前几条记录" class="headerlink" title="获取查询结果得前几条记录"></a>获取查询结果得前几条记录</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from table_name fetch first 10 rows only;</span><br></pre></td></tr></table></figure>
+            <h1 id="jsp与servlet的联系与区别"><a href="#jsp与servlet的联系与区别" class="headerlink" title="jsp与servlet的联系与区别"></a>jsp与servlet的联系与区别</h1><p>jsp本质上就是servlet，但是这是web容器编译后的情况，可以认为jsp是一种专门用来渲染页面的被简化的servlet，程序员只需要填入需要的数据，由容器完成后续编译成servlet的工作。<br>|          | jsp                                                            | servlet                         |<br>| ——– | ————————————————————– | ——————————- |<br>| 作用     | 渲染页面                                                       | 业务逻辑处理，提供jsp需要的数据 |<br>| 内置对象 | 通过HttpServletRequest/HttpServletResponse/HttpServlet对象得到 | 无                              |</p>
+<h2 id="jsp的内置对象与作用"><a href="#jsp的内置对象与作用" class="headerlink" title="jsp的内置对象与作用"></a>jsp的内置对象与作用</h2><ul>
+<li>request 客户端请求对象</li>
+<li>response 响应对象</li>
+<li>pageContext 页面上下文，可以引用到request/session/application等作用域</li>
+<li>session 用户会话对象</li>
+<li>application 服务器运行环境对象</li>
+<li>out 输出流对象</li>
+<li>config web应用的配置对象</li>
+<li>page jsp页面本身，相当于类中的this</li>
+<li>exception 封装页面抛出的异常</li>
+</ul>
+<h2 id="jsp的四种作用域"><a href="#jsp的四种作用域" class="headerlink" title="jsp的四种作用域"></a>jsp的四种作用域</h2><ul>
+<li>page 页面相关的对象和属性</li>
+<li>request 请求相关的对象和属性，一个web请求可以跨越多个page</li>
+<li>session 用户与服务器建立的会话相关的对象和属性，跨越request</li>
+<li>application 代表与整个web应用相关的对象和属性，一个全局作用域</li>
+</ul>
+
           
         
       
@@ -384,7 +369,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/28/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/30/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/28/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/30/">&gt;</a>
   </nav>
 
 
@@ -430,7 +415,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -441,7 +426,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -480,7 +465,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

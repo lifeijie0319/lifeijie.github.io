@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%20tls%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/" itemprop="url">print生产部署OSError</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%20tls%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B/" itemprop="url">nginx tls版本检测</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -356,12 +345,8 @@
       
         
           
-            <h1 id="错误描述："><a href="#错误描述：" class="headerlink" title="错误描述："></a>错误描述：</h1><p>生产部署简单tornado服务之后，退出控制台，外部访问执行到print出错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSError: [Error 5] Input&#x2F;output error</span><br></pre></td></tr></table></figure>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python xx.py &amp; </span><br></pre></td></tr></table></figure>
-<p>方式部署python服务，ssh断开之后，print语句没地方输出，就error了</p>
-<h1 id="处理方式："><a href="#处理方式：" class="headerlink" title="处理方式："></a>处理方式：</h1><p>1、使用shell重定向，或者nohup<br>2、删除替换所有的print语句</p>
+            <h1 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h1><p>1 Chrome浏览器F12，security选项卡<br>2 查看Connection选项</p>
+<h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><p><a target="_blank" rel="noopener" href="https://www.ssllabs.com/ssltest/index.html">https://www.ssllabs.com/ssltest/index.html</a><br>这是一个可以分析ssl服务器的在线工具，可以知道自己的服务器是否已经开启了哪个版本的TSL。进入这个网站，输入自己服务器的ip或者域名,查询可能等个几分钟。</p>
 
           
         
@@ -401,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/164/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/164/">164</a><span class="page-number current">165</span><a class="page-number" href="/blog/page/166/">166</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/166/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/164/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/164/">164</a><span class="page-number current">165</span><a class="page-number" href="/blog/page/166/">166</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/166/">&gt;</a>
   </nav>
 
 
@@ -447,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -458,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -497,7 +482,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

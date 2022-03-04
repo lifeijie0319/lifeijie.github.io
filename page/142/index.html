@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/ulimit/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/mysql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/ulimit/" itemprop="url">ulimit</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/mysql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/" itemprop="url">mysql执行计划</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,19 +345,23 @@
       
         
           
-            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>ulimt是一个linux自带应用工具，用于控制资源的可用性</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>ulimit  [-HSTabcdefilmnpqrstuvx  [limit]]</p>
-<h2 id="a"><a href="#a" class="headerlink" title="-a"></a>-a</h2><p>-a 显示所有的资源限制参数配置</p>
-<h2 id="H-和-S"><a href="#H-和-S" class="headerlink" title="-H 和 -S"></a>-H 和 -S</h2><p>-H选项和-S选项分别表示对给定资源的硬限制（hard limit）和软限制（soft limit）进行设置。硬限制（hard limit）一旦被设置以后就不能被非root用户修改，软限制（soft limit）可以增长达到硬限制（hard limit）。如果既没有指定-H选项也没有指定-S选项，那么硬限制（hard limit）和软限制（soft limit）都会被设置。limit的值可以是一个数值，也可以是一些特定的值，比如：hard，soft，unlimited，分别代表当前硬件限制、当前软件限制、不限制。</p>
-<h2 id="查看进程打开文件的最大限制"><a href="#查看进程打开文件的最大限制" class="headerlink" title="查看进程打开文件的最大限制"></a>查看进程打开文件的最大限制</h2><h3 id="系统级最大限制"><a href="#系统级最大限制" class="headerlink" title="系统级最大限制"></a>系统级最大限制</h3><p>cat /proc/sys/fs/file-max</p>
-<h3 id="用户级限制"><a href="#用户级限制" class="headerlink" title="用户级限制"></a>用户级限制</h3><p>ulimit -n</p>
-<h2 id="查看进程已经打开的文件数"><a href="#查看进程已经打开的文件数" class="headerlink" title="查看进程已经打开的文件数"></a>查看进程已经打开的文件数</h2><h3 id="查看进程资源限制"><a href="#查看进程资源限制" class="headerlink" title="查看进程资源限制"></a>查看进程资源限制</h3><p>cat /proc/$pid/limits</p>
-<h3 id="查看实际打开文件数"><a href="#查看实际打开文件数" class="headerlink" title="查看实际打开文件数"></a>查看实际打开文件数</h3><p>ls /proc/$pid/fd|wc -l</p>
-<h2 id="修改限制"><a href="#修改限制" class="headerlink" title="修改限制"></a>修改限制</h2><h3 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h3><p>ulimit -n $num</p>
-<h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a>永久修改</h3><p>vi /etc/security/limits.conf<br>参考文档内说明配置限制项</p>
-<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="20210510-riak服务异常"><a href="#20210510-riak服务异常" class="headerlink" title="20210510 riak服务异常"></a>20210510 riak服务异常</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>客户端连接riak服务端超时。检查发现进程打开的文件数已经超过用户设置的限制50000。另外top命令显示系统cpu资源占用率400%以上。</p>
-<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>修改riak用户的打开文件数限制，增加到65535。重启riak服务。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>riak为什么打开文件数这么多还有待研究。</p>
+            <h1 id="执行计划查看"><a href="#执行计划查看" class="headerlink" title="执行计划查看"></a>执行计划查看</h1><h2 id="如何查看"><a href="#如何查看" class="headerlink" title="如何查看"></a>如何查看</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DESC</span><span class="operator">/</span>EXPLAIN :<span class="keyword">sql</span>;</span><br></pre></td></tr></table></figure>
+<p>sql: 要查看执行计划的sql</p>
+<h2 id="查询结果分析"><a href="#查询结果分析" class="headerlink" title="查询结果分析"></a>查询结果分析</h2><h3 id="查询结果列"><a href="#查询结果列" class="headerlink" title="查询结果列"></a>查询结果列</h3><ul>
+<li>table: 查询的表</li>
+<li>type: 查询的类型（全表/索引）</li>
+<li>possible_keys: 可选索引</li>
+<li>key: 选择索引</li>
+<li>key_len：索引匹配长度（联合索引时可能只走了部分部分列）</li>
+<li>extra: 额外信息<h3 id="type类型详解"><a href="#type类型详解" class="headerlink" title="type类型详解"></a>type类型详解</h3>type包含以下类型：</li>
+<li>ALL：全表扫描，不走索引。注意，即使列上有索引，但是如果使用&lt;&gt;，not in, like 等可能走的还全表扫描。</li>
+<li>index： 全索引扫描。比如查询列为索引列，没有where条件时。</li>
+<li>range：索引范围扫描，索引列上使用where范围搜索条件。比如&gt;,&gt;=,&lt;,&lt;=,between,in,and,or等。</li>
+<li>ref: 非唯一性索引，等值查询。</li>
+<li>eq_ref：多表连接时，连接条件使用了唯一索引。</li>
+<li>system,const：唯一键等值查询。</li>
+<li>null：唯一键等值查询，但是没有对应结果。<h3 id="extra-filesort"><a href="#extra-filesort" class="headerlink" title="extra filesort"></a>extra filesort</h3>当extra字段里面出现filesort时，说明数据库需要对结果进行额外的排序操作，如果可以使用联合索引使查询结果自动有序，可以进行优化。</li>
+</ul>
 
           
         
@@ -397,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/141/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/141/">141</a><span class="page-number current">142</span><a class="page-number" href="/blog/page/143/">143</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/143/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/141/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/141/">141</a><span class="page-number current">142</span><a class="page-number" href="/blog/page/143/">143</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/143/">&gt;</a>
   </nav>
 
 
@@ -443,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -493,7 +497,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

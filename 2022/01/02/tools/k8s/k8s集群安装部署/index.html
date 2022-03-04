@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机器准备k8s集群，至少要两台机器，且按照k8s建议，至少需要2核2G内存。 确认机器唯一性kubenetes使用mac和机器uuid来确认不同节点，必须保证唯一性 确认mac地址唯一ip link 或者 ifconfig -a 确认产品uuid唯一1sudo cat &#x2F;sys&#x2F;class&#x2F;dmi&#x2F;id&#x2F;product_uuid 关闭SELINUX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="k8s集群kubeadm安装部署">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/2022/01/02/tools/k8s/k8s%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="李飞杰的个人博客">
+<meta property="og:description" content="机器准备k8s集群，至少要两台机器，且按照k8s建议，至少需要2核2G内存。 确认机器唯一性kubenetes使用mac和机器uuid来确认不同节点，必须保证唯一性 确认mac地址唯一ip link 或者 ifconfig -a 确认产品uuid唯一1sudo cat &#x2F;sys&#x2F;class&#x2F;dmi&#x2F;id&#x2F;product_uuid 关闭SELINUX">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-01-02T14:15:10.736Z">
+<meta property="article:modified_time" content="2022-01-02T14:15:10.736Z">
+<meta property="article:author" content="lifeijie">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lifeijie.gitee.io/blog/2022/01/02/tools/k8s/k8s集群安装部署/"/>
+
+
+
+
+
+  <title>k8s集群kubeadm安装部署 | 李飞杰的个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李飞杰的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/02/tools/k8s/k8s%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李飞杰的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">k8s集群kubeadm安装部署</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-02T22:15:10+08:00">
+                2022-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="机器准备"><a href="#机器准备" class="headerlink" title="机器准备"></a>机器准备</h1><p>k8s集群，至少要两台机器，且按照k8s建议，至少需要2核2G内存。</p>
+<h1 id="确认机器唯一性"><a href="#确认机器唯一性" class="headerlink" title="确认机器唯一性"></a>确认机器唯一性</h1><p>kubenetes使用mac和机器uuid来确认不同节点，必须保证唯一性</p>
+<h2 id="确认mac地址唯一"><a href="#确认mac地址唯一" class="headerlink" title="确认mac地址唯一"></a>确认mac地址唯一</h2><p>ip link 或者 ifconfig -a</p>
+<h2 id="确认产品uuid唯一"><a href="#确认产品uuid唯一" class="headerlink" title="确认产品uuid唯一"></a>确认产品uuid唯一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cat &#x2F;sys&#x2F;class&#x2F;dmi&#x2F;id&#x2F;product_uuid</span><br></pre></td></tr></table></figure>
+<h1 id="关闭SELINUX"><a href="#关闭SELINUX" class="headerlink" title="关闭SELINUX"></a>关闭SELINUX</h1><p>This is required to allow containers to access the host filesystem, which is needed by pod networks for example. You have to do this until SELinux support is improved in the kubelet.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo setenforce 0</span><br><span class="line">sudo sed -i &#39;s&#x2F;^SELINUX&#x3D;enforcing$&#x2F;SELINUX&#x3D;permissive&#x2F;&#39; &#x2F;etc&#x2F;selinux&#x2F;config</span><br></pre></td></tr></table></figure>
+<h1 id="关闭swap"><a href="#关闭swap" class="headerlink" title="关闭swap"></a>关闭swap</h1><h2 id="临时关闭"><a href="#临时关闭" class="headerlink" title="临时关闭"></a>临时关闭</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br></pre></td></tr></table></figure>
+<p>注：</p>
+<ul>
+<li>-a, –all  disable all swaps from /proc/swaps<h2 id="永久关闭"><a href="#永久关闭" class="headerlink" title="永久关闭"></a>永久关闭</h2>vi /etc/fstab注释swap相关这一行<h2 id="确认"><a href="#确认" class="headerlink" title="确认"></a>确认</h2>free -m 可以看到Swap这一行都变成了0<h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2>  为什么要关闭swap<br>  /etc/fstab是什么文件，内容的格式说明了什么</li>
+</ul>
+<h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+<h2 id="todo-1"><a href="#todo-1" class="headerlink" title="todo"></a>todo</h2><p>不关闭防火墙后面配置cni网络插件的时候coredns启动会一直处于Not ready状态，检查明细显示测试ready接口503。这里全局关闭防火墙，应该会有更精细化的管理，待研究。</p>
+<h1 id="安装docker并启动"><a href="#安装docker并启动" class="headerlink" title="安装docker并启动"></a>安装docker并启动</h1><p>详见tools/docker/docker安装</p>
+<h1 id="安装kubeadm-kubelet-kubectl"><a href="#安装kubeadm-kubelet-kubectl" class="headerlink" title="安装kubeadm,kubelet,kubectl"></a>安装kubeadm,kubelet,kubectl</h1><p>国内安装一般要设置新的源，使用系统自带的包管理工具安装。<br>注意安装好后要修改docker的cgroup，详细参考tools/docker/cgroup配置。</p>
+<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --image-repository registry.aliyuncs.com&#x2F;google_containers</span><br></pre></td></tr></table></figure>
+<ul>
+<li>–image-repository string Choose a container registry to pull control plane images from (default “k8s.gcr.io”) 容器镜像下载地址，国内无法访问k8s.gcr.io，所以这里必须指定为阿里云镜像。</li>
+<li>–pod-network-cidr string Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node. pod网络内网地址，注意该地址需要与后文安装pod网络插件CNI相互呼应，不同的网络插件对该地址可能有不同的要求</li>
+<li>–service-cidr string Use alternative range of IP address for service VIPs. (default “10.96.0.0/12”) service虚拟地址范围。</li>
+<li>–control-plane-endpoint string Specify a stable IP address or DNS name for the control plane.可以使用改配置指定dns映射，以便实现负载均衡访问多个控制台，实现集群高可用。</li>
+</ul>
+<h2 id="初始化失败清理"><a href="#初始化失败清理" class="headerlink" title="初始化失败清理"></a>初始化失败清理</h2><p>kubeadm init如果失败，重新初始化无法完成，需要使用kubeadm reset先进行清理。</p>
+<h1 id="配置授权信息"><a href="#配置授权信息" class="headerlink" title="配置授权信息"></a>配置授权信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br></pre></td></tr></table></figure>
+<h2 id="todo-深入理解"><a href="#todo-深入理解" class="headerlink" title="todo 深入理解"></a>todo 深入理解</h2><h1 id="安装pod网络插件CNI"><a href="#安装pod网络插件CNI" class="headerlink" title="安装pod网络插件CNI"></a>安装pod网络插件CNI</h1><p>You must deploy a Container Network Interface (CNI) based Pod network add-on so that your Pods can communicate with each other. Cluster DNS (CoreDNS) will not start up before a network is installed.<br>k8s有自己的网络模型，其中基本的设计理念是“IP-per-pod”，即每个pod有独立ip，另外，有两个基本要求：</p>
+<ul>
+<li>any pod-network pod on any node can communicate with all other pod-network pods on all nodes without NAT.</li>
+<li>non-pod processes on a node (the kubelet, and also for example any other system daemon) can communicate with all pods on that node.<br>有许多实现k8s网络模型的技术，flannel是其中一个。如果使用该网络插件，之前执行kubeadm init的时候需要添加参数–pod-network-cidr=10.244.0.0/16。对于Kubernetes v1.17+，可以用以下命令应用该网络插件：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml</span><br></pre></td></tr></table></figure>
+装好之后执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br></pre></td></tr></table></figure>
+直到确认所有组件状态都为：Running，这个过程要下载镜像，可能持续较长时间。注意，最后虽然所有pods都是running状态，但是coredns还是会一直会不在ready状态，原因是没有加入node，而本身control plane是不允许添加pod的（除非特殊设置）。<h2 id="设置control-plane允许pod运行"><a href="#设置control-plane允许pod运行" class="headerlink" title="设置control-plane允许pod运行"></a>设置control-plane允许pod运行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes --all node-role.kubernetes.io&#x2F;master-</span><br></pre></td></tr></table></figure>
+<h1 id="将节点加入集群"><a href="#将节点加入集群" class="headerlink" title="将节点加入集群"></a>将节点加入集群</h1>kubeadm init完成后会有node加入集群的提示命令，按照提示操作即可。<br>实际命令格式如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join --token &lt;token&gt; &lt;control-plane-host&gt;:&lt;control-plane-port&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</span><br></pre></td></tr></table></figure>
+如果kubeadm的命令没有记住，需要手动执行上述命令，其中<br><token>可以使用kubeadm token list看到，默认token24小时过期，如果过期了，可以使用kubeadm token create重新创建token进行使用。<br><hash>可以使用如下命令获取：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -pubkey -in &#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;ca.crt | openssl rsa -pubin -outform der 2&gt;&#x2F;dev&#x2F;null | \</span><br><span class="line">   openssl dgst -sha256 -hex | sed &#39;s&#x2F;^.* &#x2F;&#x2F;&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="调整coredns分布"><a href="#调整coredns分布" class="headerlink" title="调整coredns分布"></a>调整coredns分布</h2>由于集群节点是依次建立的，coredns pod一般会都跑在control plane上，为了提高可用性，可以使用如下命令对coredns pod再平衡<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n kube-system rollout restart deployment coredns</span><br></pre></td></tr></table></figure>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm">https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2022/01/02/tools/docker/docker%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" rel="next" title="docker常见问题">
+                <i class="fa fa-chevron-left"></i> docker常见问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2022/01/03/language/js/node/node%E5%AE%89%E8%A3%85/" rel="prev" title="nodesjs 安装">
+                nodesjs 安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">机器准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E6%9C%BA%E5%99%A8%E5%94%AF%E4%B8%80%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">确认机器唯一性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4mac%E5%9C%B0%E5%9D%80%E5%94%AF%E4%B8%80"><span class="nav-number">2.1.</span> <span class="nav-text">确认mac地址唯一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E4%BA%A7%E5%93%81uuid%E5%94%AF%E4%B8%80"><span class="nav-number">2.2.</span> <span class="nav-text">确认产品uuid唯一</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%97%ADSELINUX"><span class="nav-number">3.</span> <span class="nav-text">关闭SELINUX</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%97%ADswap"><span class="nav-number">4.</span> <span class="nav-text">关闭swap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%85%B3%E9%97%AD"><span class="nav-number">4.1.</span> <span class="nav-text">临时关闭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B0%B8%E4%B9%85%E5%85%B3%E9%97%AD"><span class="nav-number">4.2.</span> <span class="nav-text">永久关闭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4"><span class="nav-number">4.3.</span> <span class="nav-text">确认</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#todo"><span class="nav-number">4.4.</span> <span class="nav-text">todo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">5.</span> <span class="nav-text">关闭防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#todo-1"><span class="nav-number">5.1.</span> <span class="nav-text">todo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker%E5%B9%B6%E5%90%AF%E5%8A%A8"><span class="nav-number">6.</span> <span class="nav-text">安装docker并启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85kubeadm-kubelet-kubectl"><span class="nav-number">7.</span> <span class="nav-text">安装kubeadm,kubelet,kubectl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">8.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%A4%B1%E8%B4%A5%E6%B8%85%E7%90%86"><span class="nav-number">8.1.</span> <span class="nav-text">初始化失败清理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8E%88%E6%9D%83%E4%BF%A1%E6%81%AF"><span class="nav-number">9.</span> <span class="nav-text">配置授权信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#todo-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3"><span class="nav-number">9.1.</span> <span class="nav-text">todo 深入理解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85pod%E7%BD%91%E7%BB%9C%E6%8F%92%E4%BB%B6CNI"><span class="nav-number">10.</span> <span class="nav-text">安装pod网络插件CNI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEcontrol-plane%E5%85%81%E8%AE%B8pod%E8%BF%90%E8%A1%8C"><span class="nav-number">10.1.</span> <span class="nav-text">设置control-plane允许pod运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4"><span class="nav-number">11.</span> <span class="nav-text">将节点加入集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E6%95%B4coredns%E5%88%86%E5%B8%83"><span class="nav-number">11.1.</span> <span class="nav-text">调整coredns分布</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">12.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifeijie</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

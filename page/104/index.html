@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/07/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/" itemprop="url">virtualbox迁移踩坑</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/07/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/" itemprop="url">复杂正则理解</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-07T09:42:27+08:00">
+                2021-12-07
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/virtualbox/" itemprop="url" rel="index">
-                    <span itemprop="name">virtualbox</span>
+                  <a href="/blog/categories/other/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index">
+                    <span itemprop="name">正则</span>
                   </a>
                 </span>
 
@@ -345,21 +345,25 @@
       
         
           
-            <h1 id="1-vdi无法使用"><a href="#1-vdi无法使用" class="headerlink" title="1 vdi无法使用"></a>1 vdi无法使用</h1><pre><code>问题： VD: error VERR_PATH_NOT_FOUND opening image file
-处理 ：settings-Storage-Controller
-先把原来的vdi remove，然后重新添加vdi</code></pre>
-<h1 id="2-vdi无法添加"><a href="#2-vdi无法添加" class="headerlink" title="2 vdi无法添加"></a>2 vdi无法添加</h1><p>问题：Cannot register the hard disk … with UUID … already exists<br>处理：</p>
-<h2 id="2-1-进入virtualbox安装目录"><a href="#2-1-进入virtualbox安装目录" class="headerlink" title="2.1 进入virtualbox安装目录"></a>2.1 进入virtualbox安装目录</h2><h2 id="2-2-打开cmd，执行"><a href="#2-2-打开cmd，执行" class="headerlink" title="2.2 打开cmd，执行"></a>2.2 打开cmd，执行</h2><p>VBoxManage internalcommands sethduuid $vdi路径</p>
-<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>问题： VT-x is not available (VERR_VMX_NO_VMX).  返回 代码: E_FAIL (0x80004005) 组件: ConsoleWrap 界面: IConsole {872da645-4a9b-1727-bee2-5585105b9eed}<br>原因： Hyper-V与virtualbox冲突<br>解决：  </p>
-<ol>
-<li>首先，管理员身份打开提示符。  </li>
-<li>输入 bcdedit 并回车，找到hypervisorlaunchtype选项发现为auto</li>
-<li>输入命令bcdedit /set hypervisorlaunchtype off  </li>
-<li>重启电脑  </li>
+            <h1 id="非获取匹配"><a href="#非获取匹配" class="headerlink" title="非获取匹配"></a>非获取匹配</h1><h2 id="什么是非获取匹配"><a href="#什么是非获取匹配" class="headerlink" title="什么是非获取匹配"></a>什么是非获取匹配</h2><pre><code>在使用正则表达式的时候，我们经常会使用()把某个部分括起来，称为一个子模式。
+子模式有Capturing和Non-Capturing两种情况。
+Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配结果保存起来，供我们查找或者替换。如后向引用的使用；
+而Non-Capturing指非获取匹配 ，这时系统并不会保存子模式的匹配结果，子模式的匹配更多的只是作为一种限制条件使用，如正向预查，反向预查，负正向预查，负反向预查等。</code></pre>
+<p>参考如下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">(<span class="string">&#x27;7&#x27;</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">()</span><br></pre></td></tr></table></figure>
+<h2 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h2><p>非获取匹配，匹配pattern但不获取匹配结果，不进行存储供以后使用。这在使用或字符“(|)”来组合一个模式的各个部分是很有用。例如“industr(?:y|ies)”就是一个比“industry|industries”更简略的表达式。</p>
+<h2 id="pattern-1"><a href="#pattern-1" class="headerlink" title="(?=pattern)"></a>(?=pattern)</h2><p>非获取匹配，正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如，“Windows(?=95|98|NT|2000)”能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”。</p>
+<h2 id="预查与普通非获取匹配的区别"><a href="#预查与普通非获取匹配的区别" class="headerlink" title="预查与普通非获取匹配的区别"></a>预查与普通非获取匹配的区别</h2><p>预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。参考如下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>phone = <span class="string">&quot;1233-hfdh&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)23&#x27;</span>, phone)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">1</span>), match=<span class="string">&#x27;1&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)23&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="pattern-2"><a href="#pattern-2" class="headerlink" title="(?!pattern)"></a>(?!pattern)</h2><p>非获取匹配，正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如“Windows(?!95|98|NT|2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。</p>
+<h2 id="lt-pattern"><a href="#lt-pattern" class="headerlink" title="(?&lt;=pattern)"></a>(?&lt;=pattern)</h2><p>非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95|98|NT|2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”。另外，(?&lt;=pattern)不支持pattern变长。</p>
+<h2 id="lt-pattern-1"><a href="#lt-pattern-1" class="headerlink" title="(?&lt;!pattern)"></a>(?&lt;!pattern)</h2><p>非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如“(?&lt;!95|98|NT|2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。这个地方不正确，有问题 </p>
+<h2 id="通俗理解"><a href="#通俗理解" class="headerlink" title="通俗理解"></a>通俗理解</h2><ol>
+<li><code>?=</code> ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test(‘bab’)</li>
+<li><code>?&lt;=</code> ： 询问是否以这个东西开头  /(?&lt;=a)b/.test(‘ab’)</li>
+<li><code>?!</code> : 询问后面跟着的东西是否不是这个  /b(?!a)/.test(‘bb’)</li>
+<li><code>?&lt;!</code> ：询问是否不是以这个东西开头  /(?&lt;!=a)b/.test(‘bb’)</li>
 </ol>
-<h2 id="bcdedit是什么"><a href="#bcdedit是什么" class="headerlink" title="bcdedit是什么"></a>bcdedit是什么</h2><p>bcdedit 是一个启动选项编辑工具，用来管理启动设置。</p>
-<p>BCDEdit 不是一个运行于图形界面下的程序，而是一个命令行工具，该文件 (Bcdedit.exe) 位于 “\Windows\System32” 目录下。通过命令行工具 Bcdedit ，我们可以添加、删除及修改 BCD (Boot Configuration Data) 中的对象。在 BCD 中，每个对象均具有唯一的 GUID (Globally Unique Identifier : 全局唯一标识符 ) ，如系统中的每块硬盘、每个分区的 GUID ( 全局唯一标识符 ) 均不相同。</p>
-<h2 id="Hyper-V-是什么"><a href="#Hyper-V-是什么" class="headerlink" title="Hyper-V 是什么"></a>Hyper-V 是什么</h2><p>Hyper-V是微软的一款虚拟化产品，是微软第一个采用类似Vmware和Citrix开源Xen一样的基于hypervisor的技术。这也意味着微软会更加直接地与市场先行者VMware展开竞争，但竞争的方式会有所不同。<br>Hyper-V是微软提出的一种系统管理程序虚拟化技术，能够实现桌面虚拟化 [1] 。</p>
 
           
         
@@ -399,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/103/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/105/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/103/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/105/">&gt;</a>
   </nav>
 
 
@@ -445,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -495,7 +499,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

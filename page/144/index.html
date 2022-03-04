@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6%E5%90%8D/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6%E5%90%8D/" itemprop="url">特殊文件名</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/mysql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">mysql配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,7 +345,12 @@
       
         
           
-            <h1 id="删除转义字符文件"><a href="#删除转义字符文件" class="headerlink" title="删除转义字符文件"></a>删除转义字符文件</h1><p>linux下有个文件名字是\，要删除改文件，需要使用指令rm \</p>
+            <h1 id="配置文件位置"><a href="#配置文件位置" class="headerlink" title="配置文件位置"></a>配置文件位置</h1><p>一般/etc/my.cnf ，本地~/.my.cnf可以覆盖全局配置</p>
+<h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>[标签]<br>配置项=xxx</p>
+<h1 id="常见标签"><a href="#常见标签" class="headerlink" title="常见标签"></a>常见标签</h1><ul>
+<li>服务端<br>[mysqld]<br>[mysqld_safe]<br>[server]</li>
+<li>客户端<br>[mysql]<br>[mysqldump]<br>[client]</li>
+</ul>
 
           
         
@@ -385,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/143/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/blog/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/145/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/143/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/blog/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/145/">&gt;</a>
   </nav>
 
 
@@ -431,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -481,7 +486,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

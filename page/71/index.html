@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/24/language/python/basic/concurrent/GIL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/" itemprop="url">复杂正则理解</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/24/language/python/basic/concurrent/GIL/" itemprop="url">python GIL</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-24T15:02:26+08:00">
+                2021-12-24
               </time>
             
 
@@ -282,6 +282,50 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,25 +356,14 @@
       
         
           
-            <h1 id="非获取匹配"><a href="#非获取匹配" class="headerlink" title="非获取匹配"></a>非获取匹配</h1><h2 id="什么是非获取匹配"><a href="#什么是非获取匹配" class="headerlink" title="什么是非获取匹配"></a>什么是非获取匹配</h2><pre><code>在使用正则表达式的时候，我们经常会使用()把某个部分括起来，称为一个子模式。
-子模式有Capturing和Non-Capturing两种情况。
-Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配结果保存起来，供我们查找或者替换。如后向引用的使用；
-而Non-Capturing指非获取匹配 ，这时系统并不会保存子模式的匹配结果，子模式的匹配更多的只是作为一种限制条件使用，如正向预查，反向预查，负正向预查，负反向预查等。</code></pre>
-<p>参考如下示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">(<span class="string">&#x27;7&#x27;</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">()</span><br></pre></td></tr></table></figure>
-<h2 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h2><p>非获取匹配，匹配pattern但不获取匹配结果，不进行存储供以后使用。这在使用或字符“(|)”来组合一个模式的各个部分是很有用。例如“industr(?:y|ies)”就是一个比“industry|industries”更简略的表达式。</p>
-<h2 id="pattern-1"><a href="#pattern-1" class="headerlink" title="(?=pattern)"></a>(?=pattern)</h2><p>非获取匹配，正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如，“Windows(?=95|98|NT|2000)”能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”。</p>
-<h2 id="预查与普通非获取匹配的区别"><a href="#预查与普通非获取匹配的区别" class="headerlink" title="预查与普通非获取匹配的区别"></a>预查与普通非获取匹配的区别</h2><p>预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。参考如下示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>phone = <span class="string">&quot;1233-hfdh&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)23&#x27;</span>, phone)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">1</span>), match=<span class="string">&#x27;1&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)23&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="pattern-2"><a href="#pattern-2" class="headerlink" title="(?!pattern)"></a>(?!pattern)</h2><p>非获取匹配，正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如“Windows(?!95|98|NT|2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。</p>
-<h2 id="lt-pattern"><a href="#lt-pattern" class="headerlink" title="(?&lt;=pattern)"></a>(?&lt;=pattern)</h2><p>非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95|98|NT|2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”。另外，(?&lt;=pattern)不支持pattern变长。</p>
-<h2 id="lt-pattern-1"><a href="#lt-pattern-1" class="headerlink" title="(?&lt;!pattern)"></a>(?&lt;!pattern)</h2><p>非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如“(?&lt;!95|98|NT|2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。这个地方不正确，有问题 </p>
-<h2 id="通俗理解"><a href="#通俗理解" class="headerlink" title="通俗理解"></a>通俗理解</h2><ol>
-<li><code>?=</code> ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test(‘bab’)</li>
-<li><code>?&lt;=</code> ： 询问是否以这个东西开头  /(?&lt;=a)b/.test(‘ab’)</li>
-<li><code>?!</code> : 询问后面跟着的东西是否不是这个  /b(?!a)/.test(‘bb’)</li>
-<li><code>?&lt;!=</code> ：询问是否不是以这个东西开头  /(?&lt;!=a)b/.test(‘bb’)</li>
-</ol>
+            <h1 id="什么是GIL"><a href="#什么是GIL" class="headerlink" title="什么是GIL"></a>什么是GIL</h1><p>GIL(Global Interpreter Lock)，全局解释器锁，是指cpython中，多线程执行时，线程需要先获取GIL，才能被执行。</p>
+<h1 id="为什么说GIL不能利用多核"><a href="#为什么说GIL不能利用多核" class="headerlink" title="为什么说GIL不能利用多核"></a>为什么说GIL不能利用多核</h1><p>在单核处理器中，线程的执行是并发而不是并行的，但是多核使得线程执行可以是真正并行的。但是加了GIL锁之后，多线程的执行又变成了串行，结果退回了原来单核的情况。测试发现，使用c的pthread库开启两个线程，线程中做循环，cpu的使用率可以达到200%，但是python使用threading库开启多线程，cpu的使用率只能达到100%。</p>
+<h1 id="为什么要有GIL"><a href="#为什么要有GIL" class="headerlink" title="为什么要有GIL"></a>为什么要有GIL</h1><p>因为cpython解释器的内存管理不是线程安全的。举个例子，python中的垃圾回收是依靠对象的引用计数。如果两个线程并行（同一时刻）增加对象A的引用计数，那么可能最终A的引用计数只增加了1，导致错误。</p>
+<h1 id="GIL的改进"><a href="#GIL的改进" class="headerlink" title="GIL的改进"></a>GIL的改进</h1><p>python3.2版本之前，定义了一个tick计数器，表示当前线程在释放gil之前连续执行的多少个字节码,tick到达100或者程序碰到io会自动释放GIL。<br>python3.2以后使用时间片来切换线程，时间阈值是0.005秒。并且会动态调整线程的优先级，使得GIL不会被同一个线程长期占用。</p>
+<h1 id="如何应对GIL无法利用多核的缺陷"><a href="#如何应对GIL无法利用多核的缺陷" class="headerlink" title="如何应对GIL无法利用多核的缺陷"></a>如何应对GIL无法利用多核的缺陷</h1><ul>
+<li>使用多进程取代多进程</li>
+<li>对于计算密集型的程序，使用C扩展</li>
+</ul>
 
           
         
@@ -370,7 +403,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
   </nav>
 
 
@@ -416,7 +449,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -427,7 +460,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -466,7 +499,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

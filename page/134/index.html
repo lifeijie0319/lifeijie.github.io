@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/tomcat/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E6%8C%87%E4%BB%A4-%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/java/tomcat/" itemprop="url">windows下tomcat使用注意事项</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E6%8C%87%E4%BB%A4-%E5%88%97/" itemprop="url">指令-列</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,8 +345,19 @@
       
         
           
-            <h1 id="windows下使用tomcat常见问题"><a href="#windows下使用tomcat常见问题" class="headerlink" title="windows下使用tomcat常见问题"></a>windows下使用tomcat常见问题</h1><h2 id="1、控制台输出中文乱码"><a href="#1、控制台输出中文乱码" class="headerlink" title="1、控制台输出中文乱码"></a>1、控制台输出中文乱码</h2><p>解决方案：修改$TOMCAT_HOME\conf\logging.properties，将日志编码utf-8改成gbk。</p>
-<h2 id="2、启动异常"><a href="#2、启动异常" class="headerlink" title="2、启动异常"></a>2、启动异常</h2><p>错误：java.io.FileNotFoundException: C:\Program Files\apache-tomcat-10.0.2\logs\catalina.2021-02-20.log (拒绝访问。)<br>原因与解决方案：权限问题，修改当前用户对该目录的权限，右键属性-安全-权限-编辑，修改当前用户对该目录的权限为完全控制。</p>
+            <h1 id="添加字段"><a href="#添加字段" class="headerlink" title="添加字段"></a>添加字段</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名称 add 字段名称 类型</span><br></pre></td></tr></table></figure>
+<p>添加带默认值的字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add column column_test vachar(20) not null with default &#39;value&#39;;</span><br></pre></td></tr></table></figure>
+<h1 id="为字段添加默认值"><a href="#为字段添加默认值" class="headerlink" title="为字段添加默认值"></a>为字段添加默认值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名称 alter column 字段名 set default 值</span><br><span class="line">alter table table_name alter column column_test set default  &#39;value&#39;;</span><br></pre></td></tr></table></figure>
+<h1 id="设置字段默认时间为当前时间"><a href="#设置字段默认时间为当前时间" class="headerlink" title="设置字段默认时间为当前时间"></a>设置字段默认时间为当前时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name alter column column_test set default  current date;</span><br></pre></td></tr></table></figure>
+<h1 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名称 drop column 字段名</span><br><span class="line">alter table table_name drop column column_test;</span><br></pre></td></tr></table></figure>
+<p>注意: drop掉字段之后,可能会导致表查询/插入操作不能执行,需要执行一下reorg命令才可以（为什么，待深入）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reorg table table_name;</span><br></pre></td></tr></table></figure>
+<h1 id="修改字段类型"><a href="#修改字段类型" class="headerlink" title="修改字段类型"></a>修改字段类型</h1><p>基本语法： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table &lt;TABLE_NAME&gt; alter column &lt;COLUMN_NAME&gt; set data type &lt;NEW TYPE&gt;</span><br></pre></td></tr></table></figure>
+<p>Examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table HR.EMPLOYEE alter column HOBBY set data type varchar(300);</span><br></pre></td></tr></table></figure>
+<p>注意: 更改字段类型是有操作限制的。将字段改为比之前类型长度大的可以，如果要改小，必须先drop掉原来的column，然后再重新添加。例如我要将一个Varchar(50)的column改为Varchar(30)，这样采用以上的sql是不能成功的。 另外改为不同的类型，也需要先drop掉column。</p>
 
           
         
@@ -386,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/133/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/133/">133</a><span class="page-number current">134</span><a class="page-number" href="/blog/page/135/">135</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/135/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/133/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/133/">133</a><span class="page-number current">134</span><a class="page-number" href="/blog/page/135/">135</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/135/">&gt;</a>
   </nav>
 
 
@@ -432,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -443,7 +454,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -482,7 +493,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

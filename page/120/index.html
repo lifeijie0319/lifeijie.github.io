@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/tcp/ssl/openssl%E7%94%9F%E6%88%90%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/apache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/network/tcp/ssl/openssl%E7%94%9F%E6%88%90%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/" itemprop="url">openssl生成数字证书</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/apache/" itemprop="url">apache服务器基础</a></h1>
         
 
         <div class="post-meta">
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
-                    <span itemprop="name">tcp</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/ssl/" itemprop="url" rel="index">
-                    <span itemprop="name">ssl</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -356,13 +334,17 @@
       
         
           
-            <h1 id="1-生成CA证书"><a href="#1-生成CA证书" class="headerlink" title="1 生成CA证书"></a>1 生成CA证书</h1><h2 id="1-1-生成-ca-key-CA-私钥"><a href="#1-1-生成-ca-key-CA-私钥" class="headerlink" title="1.1 生成 ca.key CA 私钥"></a>1.1 生成 ca.key CA 私钥</h2><p>openssl genrsa -out ca.key 4096</p>
-<h2 id="1-2-生成-ca-crt-CA-根证书（公钥）："><a href="#1-2-生成-ca-crt-CA-根证书（公钥）：" class="headerlink" title="1.2 生成 ca.crt CA 根证书（公钥）："></a>1.2 生成 ca.crt CA 根证书（公钥）：</h2><p>openssl req -new -x509 -days 7304 -key ca.key -out ca.crt</p>
-<h1 id="2-生成网站证书并用CA签名"><a href="#2-生成网站证书并用CA签名" class="headerlink" title="2 生成网站证书并用CA签名"></a>2 生成网站证书并用CA签名</h1><h2 id="2-1-创建公私钥对"><a href="#2-1-创建公私钥对" class="headerlink" title="2.1 创建公私钥对"></a>2.1 创建公私钥对</h2><p>openssl genrsa -out private.pem 1024<br>openssl rsa -in private.pem -pubout -out public.pem</p>
-<h2 id="2-2-生成证书签名请求"><a href="#2-2-生成证书签名请求" class="headerlink" title="2.2 生成证书签名请求"></a>2.2 生成证书签名请求</h2><p>openssl req -new -key private.pem -out web.csr<br>这里会让你填入各种信息，注意Common Name必填<br>查看scr中的信息<br>openssl req -in web.csr -noout -text</p>
-<h2 id="2-3-CA对csr文件进行签名"><a href="#2-3-CA对csr文件进行签名" class="headerlink" title="2.3 CA对csr文件进行签名"></a>2.3 CA对csr文件进行签名</h2><p>openssl ca -days 1460 -cert ca.crt -keyfile ca.key -in web.csr -out web.crt</p>
-<h3 id="2-3-1-错误：I-am-unable-to-access-the-demoCA-newcerts-directory"><a href="#2-3-1-错误：I-am-unable-to-access-the-demoCA-newcerts-directory" class="headerlink" title="2.3.1 错误：I am unable to access the ./demoCA/newcerts directory"></a>2.3.1 错误：I am unable to access the ./demoCA/newcerts directory</h3><p>解决：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1).mkdir -p .&#x2F;demoCA&#x2F;newcerts </span><br><span class="line">2).touch demoCA&#x2F;index.txt </span><br><span class="line">3).touch demoCA&#x2F;serial </span><br><span class="line">4).echo 01 &gt; demoCA&#x2F;serial</span><br></pre></td></tr></table></figure>
+            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h2><ol>
+<li>查看httpd包是否可用：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum list | grep httpd</span><br></pre></td></tr></table></figure></li>
+<li>安装Apache和相关包<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install httpd httpd-devel</span><br></pre></td></tr></table></figure></li>
+<li>配置ServerName<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;httpd&#x2F;conf&#x2F;httpd.conf</span><br></pre></td></tr></table></figure>
+如果没有域名，则：ServerName localhost:80<h2 id="安装目录介绍"><a href="#安装目录介绍" class="headerlink" title="安装目录介绍"></a>安装目录介绍</h2>Apache默认将网站的根目录指向/var/www/html，目录默认的主配置文件是/etc/httpd/conf/httpd.conf。配置存储在的/etc/httpd/conf.d/目录</li>
+</ol>
+<h1 id="启停"><a href="#启停" class="headerlink" title="启停"></a>启停</h1><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd</span><br></pre></td></tr></table></figure>
+<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd -k stop</span><br></pre></td></tr></table></figure>
+<h2 id="设置开机自动启动："><a href="#设置开机自动启动：" class="headerlink" title="设置开机自动启动："></a>设置开机自动启动：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig httpd on</span><br></pre></td></tr></table></figure>
+
+
           
         
       
@@ -401,7 +383,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/119/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/119/">119</a><span class="page-number current">120</span><a class="page-number" href="/blog/page/121/">121</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/121/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/119/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/119/">119</a><span class="page-number current">120</span><a class="page-number" href="/blog/page/121/">121</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/121/">&gt;</a>
   </nav>
 
 
@@ -447,7 +429,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -458,7 +440,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -497,7 +479,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

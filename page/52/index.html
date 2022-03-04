@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/oracle/%E7%B4%A2%E5%BC%95%E3%80%81%E7%BA%A6%E6%9D%9F%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/11/other/%E7%BC%96%E7%A0%81/unicode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/oracle/%E7%B4%A2%E5%BC%95%E3%80%81%E7%BA%A6%E6%9D%9F%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/" itemprop="url">ORACLE索引、约束速查手册</a></h1>
+                <a class="post-title-link" href="/blog/2022/01/11/other/%E7%BC%96%E7%A0%81/unicode/" itemprop="url">理解unicode</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-11T21:38:11+08:00">
+                2022-01-11
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,42 +312,20 @@
       
         
           
-            <h2 id="索引创建"><a href="#索引创建" class="headerlink" title="索引创建"></a>索引创建</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>] INDEX [:schema.]index_name <span class="keyword">ON</span> [:schema.]table_name (:column_name1[, :column_name2...]) tablespace :table_space [online];</span><br></pre></td></tr></table></figure>
-<ul>
-<li>UNIQUE 可选，添加UNIQUE表明索引是唯一索引。</li>
-<li>:schema 参考<strong>schema详解</strong></li>
-<li>:column_name1 需要加索引的数据表列名，可以有多个，多个的话就是联合索引</li>
-<li>:table_space 表空间名称，索引所在的表空间可以和数据表不同</li>
-<li>online 这里有作用么，待深入 #TODO<h2 id="索引查询"><a href="#索引查询" class="headerlink" title="索引查询"></a>索引查询</h2><h3 id="查看单个数据表包含的索引"><a href="#查看单个数据表包含的索引" class="headerlink" title="查看单个数据表包含的索引"></a>查看单个数据表包含的索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_indexes <span class="keyword">where</span> table_name<span class="operator">=</span><span class="built_in">upper</span>(:table_name);</span><br><span class="line"><span class="operator">-</span> :table_name 表名，注意两边加上单引号</span><br></pre></td></tr></table></figure>
-<h3 id="按照索引名字查询索引"><a href="#按照索引名字查询索引" class="headerlink" title="按照索引名字查询索引"></a>按照索引名字查询索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_objects <span class="keyword">where</span> object_type <span class="operator">=</span> <span class="string">&#x27;INDEX&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> created <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="查询指定索引创建语句"><a href="#查询指定索引创建语句" class="headerlink" title="查询指定索引创建语句"></a>查询指定索引创建语句</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> dbms_metadata.get_ddl(<span class="string">&#x27;INDEX&#x27;</span>, :index_name, :user_name) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure></li>
+            <h1 id="unicode概念"><a href="#unicode概念" class="headerlink" title="unicode概念"></a>unicode概念</h1><pre><code>Unicode（统一码、万国码、单一码）是计算机科学领域里的一项业界标准,包括字符集、编码方案等。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。1990年开始研发，1994年正式公布。</code></pre>
+<p>简单来说，unicode是一种抽象字符到二进制编码的映射规则。</p>
+<h1 id="unicode基础"><a href="#unicode基础" class="headerlink" title="unicode基础"></a>unicode基础</h1><ul>
+<li>unicode也称为UCS(Universal Multiple-Octet Coded Character Set)</li>
+<li>unicode每个字符对应的编码数字称为code point</li>
+<li>unicode的code point的范围是 0 - 10FFFF.</li>
+<li>一个unicode的code point的写法通常是”U+”接上16进制表示的代码点数字</li>
+<li>unicode的前256个字符和ISO-8859-1（即Latin-1）一样，也就是ASCII</li>
+<li>unicode目前定义了17个plane，列举如下：<figure class="highlight plain"><figcaption><span>planes of 64k code points each</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plane 0 (U+0000 - U+FFFF): Basic Multilingual Plane (BMP, 1.0) frequent characters</span><br><span class="line">plane 1 (U+10000 - U+1FFFF): Supplementary Multilingual Plane (SMP, 3.1) infrequent, non-ideographic characters</span><br><span class="line">plane 2 (U+20000 - U+2FFFF): Supplementary Ideographic Plane (SIP, 3.1) infrequent, ideographic characters</span><br><span class="line">plane 14 (U+E0000 - U+EFFFF): Supplementary Special-purpose Plane (SSP, 3.1)</span><br><span class="line">planes 15 and 16  (U+F0000 - U+10FFFF) : Private use planes (2.0)</span><br></pre></td></tr></table></figure></li>
+<li>开始unicode使用2个字节表示常用的字符，能够表示65536个字符，后来发现不够，就从所有的code point中未使用的部分分割了两块出来，用于扩展，在utf-16中有体现，分割的情况如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">surrogates code points</span><br><span class="line">U+D800 - U+DBFF: 1,024 high surrogates</span><br><span class="line">U+DC00 - U+DFFF: 1,024 low surrogates</span><br><span class="line"></span><br><span class="line">scalar values</span><br><span class="line">U+0000 - U+D7FF</span><br><span class="line">U+E000 - U+10FFFF</span><br></pre></td></tr></table></figure>
+surrogates code points不能出现在数据中</li>
+<li>scalar values在电脑中的表示就是我们实际使用的编码方式，统一称为UTF(Unicode Transformation Format)，常用的有UTF-8/UTF-16/UTF-32等。这些编码方式都能表示所有unicode的scalar values，但是各自表示一个code point的code unit不同。</li>
 </ul>
-<ul>
-<li>:index_name 索引名，注意两边加上单引号</li>
-<li>:user_name 数据库用户名，注意两边加上单引号<h3 id="根据索引名查看索引包含的字段"><a href="#根据索引名查看索引包含的字段" class="headerlink" title="根据索引名查看索引包含的字段"></a>根据索引名查看索引包含的字段</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> user_ind_columns <span class="keyword">where</span> index_name <span class="operator">=</span> :index_name;</span><br></pre></td></tr></table></figure></li>
-<li>:user_name 数据库用户名，注意两边加上单引号<h2 id="索引删除"><a href="#索引删除" class="headerlink" title="索引删除"></a>索引删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> INDEX [:schema.]INDEXNAME;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<ul>
-<li>:schema 参考<strong>schema详解</strong></li>
-</ul>
-<h2 id="约束创建"><a href="#约束创建" class="headerlink" title="约束创建"></a>约束创建</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> :table_name <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> :constraint_name <span class="keyword">UNIQUE</span> (:column_name1[, :column_name2...]);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>:table_name 要创建约束的表名</li>
-<li>:constraint_name 约束名</li>
-<li>:column_name1 创建约束的列名，可以有多个列，建立联合约束</li>
-<li>创建唯一约束会自动创建对应的唯一索引，但是反之不然。</li>
-</ul>
-<h2 id="约束查询"><a href="#约束查询" class="headerlink" title="约束查询"></a>约束查询</h2><h3 id="查找索引对应的约束"><a href="#查找索引对应的约束" class="headerlink" title="查找索引对应的约束"></a>查找索引对应的约束</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> OWNER, CONSTRAINT_NAME, CONSTRAINT_TYPE,</span><br><span class="line"> TABLE_NAME, INDEX_OWNER, INDEX_NAME</span><br><span class="line"><span class="keyword">FROM</span> ALL_CONSTRAINTS</span><br><span class="line"><span class="keyword">WHERE</span> INDEX_NAME <span class="operator">=</span> :index_name;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>:index_name 索引名，注意两边加上单引号<h2 id="约束删除"><a href="#约束删除" class="headerlink" title="约束删除"></a>约束删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> :table_name <span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> :constraint_name;</span><br></pre></td></tr></table></figure></li>
-<li>:table_name 要创建约束的表名</li>
-<li>:constraint_name 约束名<h3 id="删除约束同时删除索引"><a href="#删除约束同时删除索引" class="headerlink" title="删除约束同时删除索引"></a>删除约束同时删除索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :table_name <span class="keyword">drop</span> <span class="keyword">constraint</span> :constraint_name cascade <span class="keyword">drop</span> index;</span><br></pre></td></tr></table></figure>
-注：对于在创建唯一约束后自动生成的唯一索引，验证过“cascade drop index”不加也会自动删除。</li>
-</ul>
-<h2 id="唯一索引和唯一约束的区别"><a href="#唯一索引和唯一约束的区别" class="headerlink" title="唯一索引和唯一约束的区别"></a>唯一索引和唯一约束的区别</h2><ul>
-<li>首先是语义上的区别，约束是一种限制，索引是一种加快数据库查询的手段。</li>
-<li>其次，一个表的外键必须是另一个表的唯一约束的列，唯一索引不满足条件。</li>
-</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf">https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf</a></p>
 
           
         
@@ -420,7 +365,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/51/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/blog/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/53/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/51/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/blog/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/53/">&gt;</a>
   </nav>
 
 
@@ -466,7 +411,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -477,7 +422,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -516,7 +461,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

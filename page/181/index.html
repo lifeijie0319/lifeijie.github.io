@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/Django/db/db2/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/rabbitmq/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%81%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/Django/db/db2/" itemprop="url">Django使用db2数据库</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/rabbitmq/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%81%9C/" itemprop="url">rabbitmq安装与启停</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/Django/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/tools/rabbitmq/" itemprop="url" rel="index">
+                    <span itemprop="name">rabbitmq</span>
                   </a>
                 </span>
 
@@ -367,36 +345,9 @@
       
         
           
-            <h1 id="Django与db2字段类型的对应关系"><a href="#Django与db2字段类型的对应关系" class="headerlink" title="Django与db2字段类型的对应关系"></a>Django与db2字段类型的对应关系</h1><table>
-<thead>
-<tr>
-<th>Django字段类型</th>
-<th>db2对应字段类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>EmailField()/CharField(max_length=16)</td>
-<td>varchar(16)</td>
-</tr>
-<tr>
-<td>DateTimeField()</td>
-<td>timestamp</td>
-</tr>
-<tr>
-<td>TextField()</td>
-<td>clob</td>
-</tr>
-<tr>
-<td>BooleanField()/PositiveSmallIntegerField()</td>
-<td>smallint</td>
-</tr>
-<tr>
-<td>AutoField()/ForeignKey()</td>
-<td>integer</td>
-</tr>
-</tbody></table>
-<h1 id="CharField字段长度中文问题"><a href="#CharField字段长度中文问题" class="headerlink" title="CharField字段长度中文问题"></a>CharField字段长度中文问题</h1><p>Django的orm连接db2数据库。配置CharField的时候，要注意对于中文，CharField的maxlength要3倍于实际值。<br>举例：想要设计一个8个中文字符的字段，那么数据库里实际的类型至少应该是varchar(24)，同样的，CharField的maxlength属性也至少是24.</p>
-
+            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h1 id="启停"><a href="#启停" class="headerlink" title="启停"></a>启停</h1><h2 id="前台启动"><a href="#前台启动" class="headerlink" title="前台启动"></a>前台启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server</span><br></pre></td></tr></table></figure>
+<h2 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server -detached</span><br></pre></td></tr></table></figure>
+<h1 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl stop</span><br></pre></td></tr></table></figure>
           
         
       
@@ -435,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/180/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/180/">180</a><span class="page-number current">181</span><a class="page-number" href="/blog/page/182/">182</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/182/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/180/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/180/">180</a><span class="page-number current">181</span><a class="page-number" href="/blog/page/182/">182</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/182/">&gt;</a>
   </nav>
 
 
@@ -481,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -492,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -531,7 +482,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

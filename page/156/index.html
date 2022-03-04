@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/maven/maven%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/java/maven/maven%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url">maven常识</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/" itemprop="url">sftp服务器搭建一</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/maven/" itemprop="url" rel="index">
-                    <span itemprop="name">maven</span>
+                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
                   </a>
                 </span>
 
@@ -356,11 +345,15 @@
       
         
           
-            <h1 id="maven是什么"><a href="#maven是什么" class="headerlink" title="maven是什么"></a>maven是什么</h1><p>maven是java包管理工具，通过pom.xml配置文件可以指明项目依赖的jar包，并且可以通过maven提供的工具对这些依赖包进行管理。</p>
-<h1 id="maven库如何管理"><a href="#maven库如何管理" class="headerlink" title="maven库如何管理"></a>maven库如何管理</h1><p>maven库默认放在用户目录下的.m2/repository/下面，这个路径可以通过配置文件进行配置。</p>
-<h1 id="maven配置文件"><a href="#maven配置文件" class="headerlink" title="maven配置文件"></a>maven配置文件</h1><h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><p>maven配置文件默认路径为maven安装目录下的conf/settings.xml，可以创建用户目录下的.m2/settings.xml，优先级更高。</p>
-<h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="pluginGroups"><a href="#pluginGroups" class="headerlink" title="pluginGroups"></a>pluginGroups</h3><p>搜索插件时, 如果 groupId 没有显式提供时, 则以此处配置的 groupId 为默认值, 可以简单理解为默认导入这些 groupId 下的所有 artifact（需要时才下载）</p>
-
+            <h1 id="1-说明"><a href="#1-说明" class="headerlink" title="1 说明"></a>1 说明</h1><p>sftp是Secure File Transfer Protocol的缩写，安全文件传送协议。可以为传输文件提供一种安全的加密方法。<br>sftp 与 ftp有着几乎一样的语法和功能。SFTP 为 SSH的一部份，和vsftpd一点关系没有，是一种传输档案至 Blogger 伺服器的安全方式。本身没有守护进程，是包含在ssh中，端口也是22</p>
+<h1 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2 搭建"></a>2 搭建</h1><h2 id="2-1-新建用户"><a href="#2-1-新建用户" class="headerlink" title="2.1 新建用户"></a>2.1 新建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# userdel ftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser|passwd --stdin sftpuser </span><br><span class="line">Changing password for user sftpuser.</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-配置-etc-ssh-sshd-config"><a href="#2-2-配置-etc-ssh-sshd-config" class="headerlink" title="2.2 配置/etc/ssh/sshd_config"></a>2.2 配置/etc/ssh/sshd_config</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># override default of no subsystems</span><br><span class="line">#Subsystem sftp &#x2F;usr&#x2F;libexec&#x2F;openssh&#x2F;sftp-server</span><br><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match User sftpuser</span><br><span class="line">ChrootDirectory &#x2F;</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no </span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
+<p>【注】：</p>
+<ul>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，属主和属组必须是root；</li>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，只有属主能拥有写权限，也就是说权限最大设置只能是755</li>
+</ul>
+<h2 id="2-3-重启服务"><a href="#2-3-重启服务" class="headerlink" title="2.3 重启服务"></a>2.3 重启服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# systemctl restart sshd</span><br></pre></td></tr></table></figure>
           
         
       
@@ -399,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/155/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/155/">155</a><span class="page-number current">156</span><a class="page-number" href="/blog/page/157/">157</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/157/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/155/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/155/">155</a><span class="page-number current">156</span><a class="page-number" href="/blog/page/157/">157</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/157/">&gt;</a>
   </nav>
 
 
@@ -445,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -495,7 +488,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

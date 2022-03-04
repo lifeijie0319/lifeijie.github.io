@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/diff/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">svn常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/diff/" itemprop="url">diff命令</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
-                    <span itemprop="name">svn</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,21 +334,8 @@
       
         
           
-            <h1 id="一、客户端安装"><a href="#一、客户端安装" class="headerlink" title="一、客户端安装"></a>一、客户端安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1、sudo yum install -y subversion</span><br></pre></td></tr></table></figure>
-<h1 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h1><h2 id="1、检出代码"><a href="#1、检出代码" class="headerlink" title="1、检出代码"></a>1、检出代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn co https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br></pre></td></tr></table></figure>
-<p>这样得到的是django_pros文件夹</p>
-<h2 id="2、版本回退"><a href="#2、版本回退" class="headerlink" title="2、版本回退"></a>2、版本回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn merge -r 751:750 https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br><span class="line">svn ci -m &#39;back to 750 from 751&#39;</span><br></pre></td></tr></table></figure>
-<p>说明：上述版本</p>
-<h2 id="3、将未纳入版本控制的文件夹加入到svn服务器"><a href="#3、将未纳入版本控制的文件夹加入到svn服务器" class="headerlink" title="3、将未纳入版本控制的文件夹加入到svn服务器"></a>3、将未纳入版本控制的文件夹加入到svn服务器</h2><p>语法：svn import PATH URL -m LOG</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn import weixin_inner&#x2F; https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;weixin_inner&#x2F; -m &#39;create weixin_inner&#39;</span><br></pre></td></tr></table></figure>
-<h2 id="4、删除目录时提示过期"><a href="#4、删除目录时提示过期" class="headerlink" title="4、删除目录时提示过期"></a>4、删除目录时提示过期</h2><p>解决：先update，然后删除</p>
-<h2 id="5、获取当前目录对应的url信息"><a href="#5、获取当前目录对应的url信息" class="headerlink" title="5、获取当前目录对应的url信息"></a>5、获取当前目录对应的url信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn info | grep URL</span><br></pre></td></tr></table></figure>
-<h2 id="6、解除目录版本控制"><a href="#6、解除目录版本控制" class="headerlink" title="6、解除目录版本控制"></a>6、解除目录版本控制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name &#39;.svn&#39;|xargs rm -rf</span><br></pre></td></tr></table></figure>
-<p>找到.svn目录，删除该目录即可</p>
-<h2 id="7、撤销目录的add状态"><a href="#7、撤销目录的add状态" class="headerlink" title="7、撤销目录的add状态"></a>7、撤销目录的add状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert --recursive doc&#x2F;</span><br></pre></td></tr></table></figure>
-<h2 id="8、打包时忽略svn版本控制文件"><a href="#8、打包时忽略svn版本控制文件" class="headerlink" title="8、打包时忽略svn版本控制文件"></a>8、打包时忽略svn版本控制文件</h2><p>加参数–exclude-vcs</p>
-<h1 id="三、svn版本号的困惑"><a href="#三、svn版本号的困惑" class="headerlink" title="三、svn版本号的困惑"></a>三、svn版本号的困惑</h1><p><a target="_blank" rel="noopener" href="http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html">http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html</a></p>
-<h1 id="四、svn冲突与解决"><a href="#四、svn冲突与解决" class="headerlink" title="四、svn冲突与解决"></a>四、svn冲突与解决</h1><p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_640531380102vyr1.html">http://blog.sina.com.cn/s/blog_640531380102vyr1.html</a></p>
+            <h2 id="比较两个文件"><a href="#比较两个文件" class="headerlink" title="比较两个文件"></a>比较两个文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff file1 file2</span><br></pre></td></tr></table></figure>
+<h2 id="diff的结果一般格式"><a href="#diff的结果一般格式" class="headerlink" title="diff的结果一般格式"></a>diff的结果一般格式</h2><p>n1 a n2，这里n1是file1的行，n2是file2的行，这句话指的是file2相对于file1增加了内容。随后会有&lt;或者&gt;开头的内容，&lt;指的是file1的内容，&gt;指的是file2的内容。除了增加是a，还有修改是c，删除是d。</p>
 
           
         
@@ -399,7 +375,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/126/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/126/">126</a><span class="page-number current">127</span><a class="page-number" href="/blog/page/128/">128</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/128/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/126/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/126/">126</a><span class="page-number current">127</span><a class="page-number" href="/blog/page/128/">128</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/128/">&gt;</a>
   </nav>
 
 
@@ -445,7 +421,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +432,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -495,7 +471,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

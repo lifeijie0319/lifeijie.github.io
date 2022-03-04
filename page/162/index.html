@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/KeyboardInterrupt/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/kvm/kvm%E5%9C%A8Ubuntu18.04%E7%9A%84%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/KeyboardInterrupt/" itemprop="url">理解KeyboardInterrupt</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/kvm/kvm%E5%9C%A8Ubuntu18.04%E7%9A%84%E5%AE%89%E8%A3%85/" itemprop="url">Ubuntu18.04 kvm安装</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/tools/kvm/" itemprop="url" rel="index">
+                    <span itemprop="name">kvm</span>
                   </a>
                 </span>
 
@@ -356,16 +345,13 @@
       
         
           
-            <h1 id="KeyboardInterrupt是什么"><a href="#KeyboardInterrupt是什么" class="headerlink" title="KeyboardInterrupt是什么"></a>KeyboardInterrupt是什么</h1><p>KeyboardInterrupt是python内置的一个异常。当python程序收到SIGINT信号后，程序抛出该异常。</p>
-<h1 id="KeyboardInterrupt和Ctrl-C的关系"><a href="#KeyboardInterrupt和Ctrl-C的关系" class="headerlink" title="KeyboardInterrupt和Ctrl+C的关系"></a>KeyboardInterrupt和Ctrl+C的关系</h1><p>键盘操作Ctrl+C会被shell解析，发送SIGINT信号到当前shell上的前台进程。其它常见的有：</p>
-<ul>
-<li>Ctrl+\ - SIGQUIT</li>
-<li>Ctrl+Z - SIGTSTP</li>
-</ul>
-<h1 id="为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt"><a href="#为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt" class="headerlink" title="为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt"></a>为什么使用kill向后台进程发送信号SIGINT不会触发KeyboardInterrupt</h1><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/40775054/capturing-sigint-using-keyboardinterrupt-exception-works-in-terminal-not-in-scr">https://stackoverflow.com/questions/40775054/capturing-sigint-using-keyboardinterrupt-exception-works-in-terminal-not-in-scr</a><br><a target="_blank" rel="noopener" href="https://hg.python.org/cpython/file/6eefdf0fade6/Modules/signalmodule.c#l608">https://hg.python.org/cpython/file/6eefdf0fade6/Modules/signalmodule.c#l608</a></p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>因为SIGINT对应的默认处理方法没有注册。这是由python解释器决定的，当程序开始时，如果信号掩码对SIGINT的处理方式是SIG_IGN（代表忽略），默认的处理方法就不会进行注册。对于SIG_IGN类型的信号掩码，当前进程是继承父进程的，而父进程中注册了处理方法的信号，到了子进程后会回复默认处理方法。</p>
-<h2 id="如何处理使得后台python程序也能收到KeyboardInterrupt"><a href="#如何处理使得后台python程序也能收到KeyboardInterrupt" class="headerlink" title="如何处理使得后台python程序也能收到KeyboardInterrupt"></a>如何处理使得后台python程序也能收到KeyboardInterrupt</h2><p>在代码中显示注册SIGINT的默认处理方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import signal</span><br><span class="line">signal.signal(signal.SIGINT, signal.default_int_handler)</span><br></pre></td></tr></table></figure>
+            <h1 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h1><h2 id="检查是否支持虚拟化"><a href="#检查是否支持虚拟化" class="headerlink" title="检查是否支持虚拟化"></a>检查是否支持虚拟化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">egrep -c &#39;(svm|vmx)&#39; &#x2F;proc&#x2F;cpuinfo</span><br></pre></td></tr></table></figure>
+<p>检测cpu是否支持虚拟化技术，如果返回为0表示不支持。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install qemu qemu-kvm libvirt-bin  bridge-utils  virt-manager</span><br></pre></td></tr></table></figure>
+<h2 id="将libvirtd添加自启动"><a href="#将libvirtd添加自启动" class="headerlink" title="将libvirtd添加自启动"></a>将libvirtd添加自启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start libvirtd.service</span><br><span class="line">sudo systemctl enable libvirtd.service</span><br></pre></td></tr></table></figure>
+<h2 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h2><h2 id="添加用户到libvirt组"><a href="#添加用户到libvirt组" class="headerlink" title="添加用户到libvirt组"></a>添加用户到libvirt组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser $username libvirt</span><br></pre></td></tr></table></figure>
+<h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><p>按照虚拟机正常使用流程打开virt-manager安装虚拟机</p>
+
           
         
       
@@ -404,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/161/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><span class="page-number current">162</span><a class="page-number" href="/blog/page/163/">163</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/163/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/161/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><span class="page-number current">162</span><a class="page-number" href="/blog/page/163/">163</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/163/">&gt;</a>
   </nav>
 
 
@@ -450,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -461,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -500,7 +486,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

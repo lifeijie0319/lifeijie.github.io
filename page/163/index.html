@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/OOP/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/kvm/kvm%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/OOP/" itemprop="url">python实例方法、类方法和静态方法</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/kvm/kvm%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" itemprop="url">kvm基本操作</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/tools/kvm/" itemprop="url" rel="index">
+                    <span itemprop="name">kvm</span>
                   </a>
                 </span>
 
@@ -356,11 +345,22 @@
       
         
           
-            <p>示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    data = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span>  <span class="title">f</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.data</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f1</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="keyword">return</span> cls.data</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f2</span>():</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h2 id="1、普通方法："><a href="#1、普通方法：" class="headerlink" title="1、普通方法："></a>1、普通方法：</h2><p>只有实例可以调用，实例作为第一个参数传入方法。</p>
-<h2 id="2、classmethod类方法"><a href="#2、classmethod类方法" class="headerlink" title="2、classmethod类方法"></a>2、classmethod类方法</h2><p>类和实例都可以调用，自动传入类作为方法的第一个参数。</p>
-<h2 id="3、staticmethod静态方法"><a href="#3、staticmethod静态方法" class="headerlink" title="3、staticmethod静态方法"></a>3、staticmethod静态方法</h2><p>类和实例都可以调用，与普通函数类似。</p>
+            <p>virsh是kvm虚拟机常用的管理工具，以下是一些常用的命令。</p>
+<ol>
+<li>查看在运行的虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list </span><br></pre></td></tr></table></figure></li>
+<li>查看创建的所有虚拟机 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br></pre></td></tr></table></figure></li>
+<li>启动虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh start win10</span><br></pre></td></tr></table></figure>
+win10是虚拟机的domain名称，下同。</li>
+<li>挂起虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh suspend win10</span><br></pre></td></tr></table></figure></li>
+<li>恢复被挂起的虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh resume win10</span><br></pre></td></tr></table></figure></li>
+<li>开机启动虚拟机，即在虚拟机服务（libvirt）启动的时候，就启动虚拟机。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh autostart win10</span><br></pre></td></tr></table></figure></li>
+<li>关闭开机启动虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh auto start --disable win10 </span><br></pre></td></tr></table></figure></li>
+<li>关闭虚拟机（需要ACPID服务的支持，ACPI是Advanced<br>Configuration and PowerInterface缩写，高级配置和电源管理接口）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh shutdown win10</span><br></pre></td></tr></table></figure></li>
+<li>强制关闭虚拟机，这种方式是从virsh list列表中将虚拟机删除，仍然可以start起来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh destory win10</span><br></pre></td></tr></table></figure></li>
+<li>启动默认的网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-start default</span><br></pre></td></tr></table></figure></li>
+<li>自启动默认网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-autostart default</span><br></pre></td></tr></table></figure></li>
+<li>彻底删除虚拟机步骤<br>1）关闭虚拟机：virsh destroy win10<br>2）删除定义：virsh undefine win10<br>3）删除虚拟机文件（在/var/lib/libvirtd/下的相关文件）  </li>
+</ol>
 
           
         
@@ -400,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/162/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/blog/page/164/">164</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/164/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/162/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/blog/page/164/">164</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/164/">&gt;</a>
   </nav>
 
 
@@ -446,7 +446,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -496,7 +496,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

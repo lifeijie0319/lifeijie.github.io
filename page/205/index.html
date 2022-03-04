@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/performance/memory_profiler/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/performance/memory_profiler/" itemprop="url">memory_profiler</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">svn常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/performance/" itemprop="url" rel="index">
-                    <span itemprop="name">performance</span>
+                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
+                    <span itemprop="name">svn</span>
                   </a>
                 </span>
 
@@ -367,20 +345,21 @@
       
         
           
-            <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p>一个可以按照代码逐行显示内存变化的内存监控工具</p>
-<h1 id="2-使用方法"><a href="#2-使用方法" class="headerlink" title="2 使用方法"></a>2 使用方法</h1><h2 id="2-1-方法一"><a href="#2-1-方法一" class="headerlink" title="2.1 方法一"></a>2.1 方法一</h2><p>1）在要监控的函数前添加 @profile，注意使用前需要import<br>2）python -m memory_profiler memory_profiler_test.py </p>
-<h2 id="2-2-方法二"><a href="#2-2-方法二" class="headerlink" title="2.2 方法二"></a>2.2 方法二</h2><h3 id="1）函数前加装饰器"><a href="#1）函数前加装饰器" class="headerlink" title="1）函数前加装饰器"></a>1）函数前加装饰器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@profile(<span class="params">precision=<span class="number">4</span>,stream=<span class="built_in">open</span>(<span class="params"><span class="string">&#x27;memory_profiler.log&#x27;</span>,<span class="string">&#x27;w+&#x27;</span></span>)</span>)</span></span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<ul>
-<li>precision:精确到小数点后几位  </li>
-<li>stream:此模块分析结果保存到 ‘memory_profiler.log’ 日志文件。如果没有此参数，分析结果会在控制台输出<h3 id="2）python-memory-profiler-test-py"><a href="#2）python-memory-profiler-test-py" class="headerlink" title="2）python memory_profiler_test.py"></a>2）python memory_profiler_test.py</h3></li>
-</ul>
-<h1 id="2-3-方法三："><a href="#2-3-方法三：" class="headerlink" title="2.3 方法三："></a>2.3 方法三：</h1><p>脚本代码和方法二一样，但是 运行方式不同  </p>
-<ul>
-<li>mprof run memory_profiler_test.py: 分析结果会保存到一个.dat格式文件中  </li>
-<li>mprof plot: 把结果以图片到方式显示出来（直接在本目录下运行此命令即可，程序会自动找出.dat文件（要安装matplotlib）</li>
-<li>mprof clean: 清空所有 .dat文件</li>
-</ul>
+            <h1 id="一、客户端安装"><a href="#一、客户端安装" class="headerlink" title="一、客户端安装"></a>一、客户端安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1、sudo yum install -y subversion</span><br></pre></td></tr></table></figure>
+<h1 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h1><h2 id="1、检出代码"><a href="#1、检出代码" class="headerlink" title="1、检出代码"></a>1、检出代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn co https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br></pre></td></tr></table></figure>
+<p>这样得到的是django_pros文件夹</p>
+<h2 id="2、版本回退"><a href="#2、版本回退" class="headerlink" title="2、版本回退"></a>2、版本回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn merge -r 751:750 https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br><span class="line">svn ci -m &#39;back to 750 from 751&#39;</span><br></pre></td></tr></table></figure>
+<p>说明：上述版本</p>
+<h2 id="3、将未纳入版本控制的文件夹加入到svn服务器"><a href="#3、将未纳入版本控制的文件夹加入到svn服务器" class="headerlink" title="3、将未纳入版本控制的文件夹加入到svn服务器"></a>3、将未纳入版本控制的文件夹加入到svn服务器</h2><p>语法：svn import PATH URL -m LOG</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn import weixin_inner&#x2F; https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;weixin_inner&#x2F; -m &#39;create weixin_inner&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="4、删除目录时提示过期"><a href="#4、删除目录时提示过期" class="headerlink" title="4、删除目录时提示过期"></a>4、删除目录时提示过期</h2><p>解决：先update，然后删除</p>
+<h2 id="5、获取当前目录对应的url信息"><a href="#5、获取当前目录对应的url信息" class="headerlink" title="5、获取当前目录对应的url信息"></a>5、获取当前目录对应的url信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn info | grep URL</span><br></pre></td></tr></table></figure>
+<h2 id="6、解除目录版本控制"><a href="#6、解除目录版本控制" class="headerlink" title="6、解除目录版本控制"></a>6、解除目录版本控制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name &#39;.svn&#39;|xargs rm -rf</span><br></pre></td></tr></table></figure>
+<p>找到.svn目录，删除该目录即可</p>
+<h2 id="7、撤销目录的add状态"><a href="#7、撤销目录的add状态" class="headerlink" title="7、撤销目录的add状态"></a>7、撤销目录的add状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert --recursive doc&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="8、打包时忽略svn版本控制文件"><a href="#8、打包时忽略svn版本控制文件" class="headerlink" title="8、打包时忽略svn版本控制文件"></a>8、打包时忽略svn版本控制文件</h2><p>加参数–exclude-vcs</p>
+<h1 id="三、svn版本号的困惑"><a href="#三、svn版本号的困惑" class="headerlink" title="三、svn版本号的困惑"></a>三、svn版本号的困惑</h1><p><a target="_blank" rel="noopener" href="http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html">http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html</a></p>
+<h1 id="四、svn冲突与解决"><a href="#四、svn冲突与解决" class="headerlink" title="四、svn冲突与解决"></a>四、svn冲突与解决</h1><p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_640531380102vyr1.html">http://blog.sina.com.cn/s/blog_640531380102vyr1.html</a></p>
 
           
         
@@ -420,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/204/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/204/">204</a><span class="page-number current">205</span><a class="page-number" href="/blog/page/206/">206</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/206/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/204/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/204/">204</a><span class="page-number current">205</span><a class="page-number" href="/blog/page/206/">206</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/206/">&gt;</a>
   </nav>
 
 
@@ -466,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -477,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -516,7 +495,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

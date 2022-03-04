@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/windows/%E5%BC%80%E6%9C%BA%E8%81%94%E7%BD%91%E5%BC%82%E5%B8%B8/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/oracle/schema%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/windows/%E5%BC%80%E6%9C%BA%E8%81%94%E7%BD%91%E5%BC%82%E5%B8%B8/" itemprop="url">开机联网异常</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/oracle/schema%E8%AF%A6%E8%A7%A3/" itemprop="url">schema详解</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/windows/" itemprop="url" rel="index">
-                    <span itemprop="name">windows</span>
+                  <a href="/blog/categories/database/oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">oracle</span>
                   </a>
                 </span>
 
@@ -345,7 +345,18 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/59865134/answer/170027484">https://www.zhihu.com/question/59865134/answer/170027484</a></p>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>A schema is a collection of database objects (used by a user.).</li>
+<li>Schema objects are the logical structures that directly refer to the database’s data.</li>
+<li>A user is a name defined in the database that can connect to and access objects.</li>
+<li>Schemas and users help database administrators manage database security.</li>
+</ul>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
+<li>一个用户一般对应一个schema,该用户的schema名等于用户名，并作为该用户缺省schema。</li>
+<li> Oracle 数据库中不能新创建一个schema，要想创建一个schema，只能通过创建一个用户的方法解决。</li>
+<li> 一个用户有一个缺省的schema，其schema名就等于用户名，当然一个用户还可以使用其他的schema。</li>
+<li> 如果我们访问一个表时，没有指明该表属于哪一个schema中的，系统就会自动给我们在表上加上缺省的schema名。</li>
+</ul>
 
           
         
@@ -385,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/147/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/147/">147</a><span class="page-number current">148</span><a class="page-number" href="/blog/page/149/">149</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/149/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/147/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/147/">147</a><span class="page-number current">148</span><a class="page-number" href="/blog/page/149/">149</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/149/">&gt;</a>
   </nav>
 
 
@@ -431,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -481,7 +492,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

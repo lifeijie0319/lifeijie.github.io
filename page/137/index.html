@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E8%84%9A%E6%9C%AC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/" itemprop="url">rsa的密钥位数</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E8%84%9A%E6%9C%AC/" itemprop="url">db2 脚本</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/security/rsa/" itemprop="url" rel="index">
-                    <span itemprop="name">rsa</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,7 +345,13 @@
       
         
           
-            <h1 id="常用的1024位-2048位的rsa密钥长度到底是谁的长度"><a href="#常用的1024位-2048位的rsa密钥长度到底是谁的长度" class="headerlink" title="常用的1024位/2048位的rsa密钥长度到底是谁的长度"></a>常用的1024位/2048位的rsa密钥长度到底是谁的长度</h1><p>rsa有三个重要的大数：公钥指数e、私钥指数d和模值n。我们说的“密钥长度”一般只是指模值的位长度。参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh2075/article/details/79718285">https://blog.csdn.net/zxh2075/article/details/79718285</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/caidi/p/14794952.html">https://www.cnblogs.com/caidi/p/14794952.html</a></p>
+            <h1 id="执行sql文件"><a href="#执行sql文件" class="headerlink" title="执行sql文件"></a>执行sql文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 -tvf &lt;sql文件名&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>v     代表输出结果到屏幕      </li>
+<li>t     指以；号作为每行的分隔符      </li>
+<li>f     指后面需跟脚本文件名</li>
+<li>注：如果以@符号作为存储过程的结尾，-t改成-td@</li>
+</ul>
 
           
         
@@ -385,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/136/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/136/">136</a><span class="page-number current">137</span><a class="page-number" href="/blog/page/138/">138</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/138/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/136/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/136/">136</a><span class="page-number current">137</span><a class="page-number" href="/blog/page/138/">138</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/138/">&gt;</a>
   </nav>
 
 
@@ -431,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -481,7 +487,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

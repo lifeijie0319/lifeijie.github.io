@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/js/node/npm/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/question/q1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/js/node/npm/" itemprop="url">npm介绍</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/question/q1/" itemprop="url">servlet转发乱码问题</a></h1>
         
 
         <div class="post-meta">
@@ -282,6 +282,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/question/" itemprop="url" rel="index">
+                    <span itemprop="name">question</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,11 +334,7 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code>npm是nodejs的包管理工具</code></pre>
-<h1 id="npm镜像"><a href="#npm镜像" class="headerlink" title="npm镜像"></a>npm镜像</h1><pre><code>npm下载包默认从国外网站下载，为了加速，可以使用淘宝镜像cnpm，从国内下载包，安装如下：
-npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
-<h1 id="npm全局安装与本地安装"><a href="#npm全局安装与本地安装" class="headerlink" title="npm全局安装与本地安装"></a>npm全局安装与本地安装</h1><pre><code>1. npm install 将安装包放在 ./node_modules 下（运行 npm 命令时所在的目录），如果没有 node_modules 目录，会在当前执行 npm 命令的目录下生成 node_modules 目录。
-2. npm install -g 全局安装，会将安装包放在 /usr/local 下或者 node 的安装目录，使用npm root -g可以查看该路径。</code></pre>
+            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>servlet使用request.getRequestDispatcher(“success.html”).forward(request, response)做服务端重定向，如果在这条语句之前进行response.setContentType(“text/html; charset=UTF-8”)或者response.setCharacterEncoding(“UTF-8”)，会导致中文乱码。</p>
 
           
         
@@ -356,7 +374,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
   </nav>
 
 
@@ -402,7 +420,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -413,7 +431,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -452,7 +470,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/js/jquery/jquery_mobile%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/js/node/npm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/js/jquery/jquery_mobile%E6%8A%80%E5%B7%A7/" itemprop="url">jquery mobile 常用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/js/node/npm/" itemprop="url">npm介绍</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:36+08:00">
                 2021-12-04
               </time>
             
@@ -282,6 +282,50 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/js/node/" itemprop="url" rel="index">
+                    <span itemprop="name">node</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,11 +356,11 @@
       
         
           
-            <h1 id="缓存页面"><a href="#缓存页面" class="headerlink" title="缓存页面"></a>缓存页面</h1><pre><code>在page容器上添加属性data-dom-cache=&quot;true&quot;即可实现</code></pre>
-<h1 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h1><pre><code>在链接上添加属性data-prefetch=&quot;true&quot;即可实现预加载</code></pre>
-<h1 id="jquery-mobile的页面机制与事件"><a href="#jquery-mobile的页面机制与事件" class="headerlink" title="jquery mobile的页面机制与事件"></a>jquery mobile的页面机制与事件</h1><pre><code>jquery mobile的页面机制主要分两种，一是单页，而是多页。
-单页就是你在一个html页面里面把所有需要用到的page都写在里面了，这个时候页面之间的转场一个可以靠 a标签里的href，里面是想要转到页面的ID。单页里面写到的page都会一直存在于dom中，所以不存在缓存的问题，页面转换时也不需要ajax去获取新加载页面的内容。缺点就是当需求比较多时，在一个html页面写完整个app需要的page和相应的js，页面会显得臃肿而且不好维护。那么我们更多的是使用多页的机制，把每个page独立写到不同的html页面里，在需要转到对应页面时，才通过ajax去获取页面的内容和js，这样使我们的app代码部署就如我们网站开发一样，一个页面一个html文件。这样就会存在一个问题，因为每个page不像单页一样写在一起，jquery mobile的机制只会把需要显示的page加载到dom里面，当离开这个page时，会自动把这个page的dom清除掉，假如你想要保留这个page在dom里，以后再次显示，需要加上 data-dom-cache=&quot;true&quot; 属性。解决了page缓存的问题，那么又会遇到page里的js问题。例如我希望把page的dom缓存下来，但是我又希望每次这个page显示的时候，触发执行一些js，那么这个时候我们在对应page的事件处理时，就不能用 pageinit而是要用pageshow了，因为pageinit只在这个page从dom加载进来时触发，如果page缓存了，那么pageinit只会在第一次时触发。
-除了pageshow，还有pagehide、pageremove、pagebeforeshow、pagebeforehide等等事件响应，都是可以针对不同的需求使用的。</code></pre>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><pre><code>npm是nodejs的包管理工具</code></pre>
+<h1 id="npm镜像"><a href="#npm镜像" class="headerlink" title="npm镜像"></a>npm镜像</h1><pre><code>npm下载包默认从国外网站下载，为了加速，可以使用淘宝镜像cnpm，从国内下载包，安装如下：
+npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre>
+<h1 id="npm全局安装与本地安装"><a href="#npm全局安装与本地安装" class="headerlink" title="npm全局安装与本地安装"></a>npm全局安装与本地安装</h1><pre><code>1. npm install 将安装包放在 ./node_modules 下（运行 npm 命令时所在的目录），如果没有 node_modules 目录，会在当前执行 npm 命令的目录下生成 node_modules 目录。
+2. npm install -g 全局安装，会将安装包放在 /usr/local 下或者 node 的安装目录，使用npm root -g可以查看该路径。</code></pre>
 
           
         
@@ -356,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/112/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/blog/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/114/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/112/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/blog/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/114/">&gt;</a>
   </nav>
 
 
@@ -402,7 +446,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -413,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -452,7 +496,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

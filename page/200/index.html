@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/env/pip/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/tomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/env/pip/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/java/tomcat/" itemprop="url">windows下tomcat使用注意事项</a></h1>
         
 
         <div class="post-meta">
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/env/" itemprop="url" rel="index">
-                    <span itemprop="name">env</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -367,21 +345,8 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="（一）yum安装"><a href="#（一）yum安装" class="headerlink" title="（一）yum安装"></a>（一）yum安装</h2><p>sudo yum install python-pip<br>报错: 没有可用软件包 pip。<br>错误：无须任何处理<br>解决：sudo yum -y install epel-release</p>
-<h2 id="（二）源码编译安装"><a href="#（二）源码编译安装" class="headerlink" title="（二）源码编译安装"></a>（二）源码编译安装</h2><p>1、下载解压，进入目录<br>2、sudo python2.7 setup.py install<br>报错：<br>pip is configured with locations that require TLS/SSL, however the ssl module in python is not available.<br>原因：没有安装openssl、openssl-devel<br>解决：sudo yum install openssl openssl-devel</p>
-<h1 id="二、修改pip源。"><a href="#二、修改pip源。" class="headerlink" title="二、修改pip源。"></a>二、修改pip源。</h1><h2 id="（一）、全局配置"><a href="#（一）、全局配置" class="headerlink" title="（一）、全局配置"></a>（一）、全局配置</h2><p>linux:<br>修改文件：/etc/pip.conf<br>windows:<br>新建文件：%APPDATA%/pip/pip.conf</p>
-<h2 id="（二）、用户配置"><a href="#（二）、用户配置" class="headerlink" title="（二）、用户配置"></a>（二）、用户配置</h2><p>修改文件：~/.pip/pip.conf</p>
-<h2 id="（三）、文件内容更"><a href="#（三）、文件内容更" class="headerlink" title="（三）、文件内容更"></a>（三）、文件内容更</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;pypi.doubanio.com&#x2F;simple&#x2F;</span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;pypi.doubanio.com</span><br><span class="line">disable-pip-version-check &#x3D; true</span><br><span class="line">#取消pip版本检查，排除每次都报最新的pip</span><br></pre></td></tr></table></figure>
-<h2 id="（四）、其它国内源网址"><a href="#（四）、其它国内源网址" class="headerlink" title="（四）、其它国内源网址"></a>（四）、其它国内源网址</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://pypi.v2ex.com/simple/">http://pypi.v2ex.com/simple/</a></li>
-<li><a target="_blank" rel="noopener" href="http://pypi.douban.com/">http://pypi.douban.com/</a>  豆瓣</li>
-<li><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></li>
-<li><a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a>  清华</li>
-<li><a target="_blank" rel="noopener" href="http://pypi.hustunique.com/">http://pypi.hustunique.com/</a>  华中理工大学</li>
-<li><a target="_blank" rel="noopener" href="http://pypi.sdutlinux.org/">http://pypi.sdutlinux.org/</a>  山东理工大学</li>
-<li><a target="_blank" rel="noopener" href="http://pypi.mirrors.ustc.edu.cn/">http://pypi.mirrors.ustc.edu.cn/</a>  中国科学技术大学</li>
-</ul>
-<h1 id="三、常用技巧"><a href="#三、常用技巧" class="headerlink" title="三、常用技巧"></a>三、常用技巧</h1><h2 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h2><p>pip install –no-index -f /home/nanxun/packages/ redis-2.10.5-py2.py3-none-any.whl</p>
+            <h1 id="windows下使用tomcat常见问题"><a href="#windows下使用tomcat常见问题" class="headerlink" title="windows下使用tomcat常见问题"></a>windows下使用tomcat常见问题</h1><h2 id="1、控制台输出中文乱码"><a href="#1、控制台输出中文乱码" class="headerlink" title="1、控制台输出中文乱码"></a>1、控制台输出中文乱码</h2><p>解决方案：修改$TOMCAT_HOME\conf\logging.properties，将日志编码utf-8改成gbk。</p>
+<h2 id="2、启动异常"><a href="#2、启动异常" class="headerlink" title="2、启动异常"></a>2、启动异常</h2><p>错误：java.io.FileNotFoundException: C:\Program Files\apache-tomcat-10.0.2\logs\catalina.2021-02-20.log (拒绝访问。)<br>原因与解决方案：权限问题，修改当前用户对该目录的权限，右键属性-安全-权限-编辑，修改当前用户对该目录的权限为完全控制。</p>
 
           
         
@@ -421,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/199/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><span class="page-number current">200</span><a class="page-number" href="/blog/page/201/">201</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/201/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/199/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><span class="page-number current">200</span><a class="page-number" href="/blog/page/201/">201</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/201/">&gt;</a>
   </nav>
 
 
@@ -467,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -478,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -517,7 +482,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

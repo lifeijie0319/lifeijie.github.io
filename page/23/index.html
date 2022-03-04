@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/x-windows/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/24/network/tcp/tcp%E5%B8%B8%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/x-windows/" itemprop="url">x-windows</a></h1>
+                <a class="post-title-link" href="/blog/2022/02/24/network/tcp/tcp%E5%B8%B8%E8%AF%86/" itemprop="url">tcp常识</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-24T16:12:09+08:00">
+                2022-02-24
               </time>
             
 
@@ -282,28 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -334,12 +312,11 @@
       
         
           
-            <h1 id="x-window究竟是什么"><a href="#x-window究竟是什么" class="headerlink" title="x-window究竟是什么"></a>x-window究竟是什么</h1><p><a target="_blank" rel="noopener" href="https://www.linuxidc.com/linux/2015-02/114175.htm">https://www.linuxidc.com/linux/2015-02/114175.htm</a></p>
-<h1 id="XWindow、Server、Client和QT、GTK之间的关系"><a href="#XWindow、Server、Client和QT、GTK之间的关系" class="headerlink" title="XWindow、Server、Client和QT、GTK之间的关系"></a>XWindow、Server、Client和QT、GTK之间的关系</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sueble/p/6901817.html">https://www.cnblogs.com/sueble/p/6901817.html</a></p>
-<h1 id="linux下的X-server-linux图形界面原理"><a href="#linux下的X-server-linux图形界面原理" class="headerlink" title="linux下的X server:linux图形界面原理"></a>linux下的X server:linux图形界面原理</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/cbuy888/article/details/82051161">https://blog.csdn.net/cbuy888/article/details/82051161</a></p>
-<h1 id="Linux下X-Server工作方式"><a href="#Linux下X-Server工作方式" class="headerlink" title="Linux下X Server工作方式"></a>Linux下X Server工作方式</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30768175/article/details/96082715">https://blog.csdn.net/weixin_30768175/article/details/96082715</a></p>
-<h1 id="Linux在远程X-Server上显示图形界面"><a href="#Linux在远程X-Server上显示图形界面" class="headerlink" title="Linux在远程X Server上显示图形界面"></a>Linux在远程X Server上显示图形界面</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/vic_qxz/article/details/79073558">https://blog.csdn.net/vic_qxz/article/details/79073558</a></p>
-<h1 id="使用ssh-x11转发连接linux图形"><a href="#使用ssh-x11转发连接linux图形" class="headerlink" title="使用ssh x11转发连接linux图形"></a>使用ssh x11转发连接linux图形</h1><p><a target="_blank" rel="noopener" href="https://www.fcwys.cc/archives/316.html">https://www.fcwys.cc/archives/316.html</a></p>
+            <h1 id="tcp粘包"><a href="#tcp粘包" class="headerlink" title="tcp粘包"></a>tcp粘包</h1><p>tcp是传输层协议，面向数据流的，而将流数据解析成数据报文是应用层的任务。tcp粘包其实是个伪问题。<br>所谓“tcp粘包”一般是两个原因：</p>
+<ol>
+<li>发送的数据包过于的小时，那么TCP协议默认的会启用Nagle算法，将这些较小的数据包进行合并发送（缓冲区数据发送是一个堆压的过程）</li>
+<li>对于接收端，应用端不会直接处理收到的包，有一个接收缓冲区，如果TCP接收数据包到缓存的速度大于应用程序从缓存中读取数据包的速度，多个包就会被缓存，应用程序就有可能读取到多个首尾相接粘到一起的包。<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2>制定应用层协议，能够将数据流转化成报文。比如一个简单的xml传输，可以在头部固定6位用来指示xml报文的长度。</li>
+</ol>
 
           
         
@@ -379,7 +356,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/22/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/24/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/22/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/24/">&gt;</a>
   </nav>
 
 
@@ -425,7 +402,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -436,7 +413,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -475,7 +452,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

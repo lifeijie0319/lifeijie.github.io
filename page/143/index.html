@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/%E5%9F%BA%E7%A1%80/" itemprop="url">linux基础</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" itemprop="url">mysql数据库编码问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,8 +345,24 @@
       
         
           
-            <h1 id="查看系统版本"><a href="#查看系统版本" class="headerlink" title="查看系统版本"></a>查看系统版本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;issue</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
+            <h1 id="一、查看字符编码"><a href="#一、查看字符编码" class="headerlink" title="一、查看字符编码"></a>一、查看字符编码</h1><h2 id="1、全局查看"><a href="#1、全局查看" class="headerlink" title="1、全局查看"></a>1、全局查看</h2><p>进入mysql数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span>；</span><br></pre></td></tr></table></figure>
+<h2 id="2、查看特定数据库编码"><a href="#2、查看特定数据库编码" class="headerlink" title="2、查看特定数据库编码"></a>2、查看特定数据库编码</h2><p>进入指定数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;character%&#x27;</span>；</span><br></pre></td></tr></table></figure>
+<h1 id="二、设置全局编码为utf-8"><a href="#二、设置全局编码为utf-8" class="headerlink" title="二、设置全局编码为utf-8"></a>二、设置全局编码为utf-8</h1><h2 id="1、编辑mysql配置文件，默认是-etc-my-cnf"><a href="#1、编辑mysql配置文件，默认是-etc-my-cnf" class="headerlink" title="1、编辑mysql配置文件，默认是/etc/my.cnf"></a>1、编辑mysql配置文件，默认是/etc/my.cnf</h2><p>在[client]下添加<br>default-character-set=utf8<br>在[mysqld]下添加<br>default-character-set=utf8</p>
+<h2 id="2、重启数据库"><a href="#2、重启数据库" class="headerlink" title="2、重启数据库"></a>2、重启数据库</h2><p>sudo service mysqld restart</p>
+<h1 id="三、修改特定数据库编码"><a href="#三、修改特定数据库编码" class="headerlink" title="三、修改特定数据库编码"></a>三、修改特定数据库编码</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> database :db <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8;</span><br></pre></td></tr></table></figure>
+<p>:db 数据库名称</p>
+<h1 id="四、修改表的编码格式"><a href="#四、修改表的编码格式" class="headerlink" title="四、修改表的编码格式"></a>四、修改表的编码格式</h1><h2 id="1、查看数据表的编码格式"><a href="#1、查看数据表的编码格式" class="headerlink" title="1、查看数据表的编码格式"></a>1、查看数据表的编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> :table_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>:table_name 表名<h2 id="2、修改数据表格编码格式"><a href="#2、修改数据表格编码格式" class="headerlink" title="2、修改数据表格编码格式"></a>2、修改数据表格编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql<span class="operator">&gt;</span> <span class="keyword">alter</span> <span class="keyword">table</span> :table_name <span class="type">character</span> <span class="keyword">set</span> utf8;</span><br></pre></td></tr></table></figure></li>
+<li>:table_name 表名<h2 id="3、修改字段编码格式"><a href="#3、修改字段编码格式" class="headerlink" title="3、修改字段编码格式"></a>3、修改字段编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> :table_name CHANGE :col1 :col2 <span class="type">VARCHAR</span>(<span class="number">36</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">NOT</span> <span class="keyword">NULL</span>; </span><br></pre></td></tr></table></figure></li>
+<li>:col1 原字段名</li>
+<li>:col2 新字段名<h2 id="4、修改表以及表中所有字段编码格式"><a href="#4、修改表以及表中所有字段编码格式" class="headerlink" title="4、修改表以及表中所有字段编码格式"></a>4、修改表以及表中所有字段编码格式</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :table_name <span class="keyword">convert</span> <span class="keyword">to</span> <span class="type">character</span> <span class="keyword">set</span> utf8;</span><br></pre></td></tr></table></figure></li>
+<li>:table_name 表名</li>
+</ul>
+<h1 id="utf8和utf8mb4的区别"><a href="#utf8和utf8mb4的区别" class="headerlink" title="utf8和utf8mb4的区别"></a>utf8和utf8mb4的区别</h1><p>utf8mb4支持emoji表情，utf8不支持</p>
+
           
         
       
@@ -385,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/142/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/blog/page/144/">144</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/144/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/142/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/blog/page/144/">144</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/144/">&gt;</a>
   </nav>
 
 
@@ -431,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -481,7 +497,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

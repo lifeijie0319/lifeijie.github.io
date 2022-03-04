@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/c/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/02/tools/docker/docker%E7%9A%84cgroup%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/c/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/" itemprop="url">Linux下的静态库与动态库</a></h1>
+                <a class="post-title-link" href="/blog/2022/01/02/tools/docker/docker%E7%9A%84cgroup%E9%85%8D%E7%BD%AE/" itemprop="url">docker的cgroup配置</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-02T15:53:44+08:00">
+                2022-01-02
               </time>
             
 
@@ -312,36 +312,12 @@
       
         
           
-            <h1 id="库的理解"><a href="#库的理解" class="headerlink" title="库的理解"></a>库的理解</h1><pre><code>本质上来说，库时一种可执行代码的二进制形式，可以被操作系统载入内存执行。一般分为静态库和动态库两种。</code></pre>
-<h1 id="静态库和动态库的区别"><a href="#静态库和动态库的区别" class="headerlink" title="静态库和动态库的区别"></a>静态库和动态库的区别</h1><h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><pre><code>静态库文件名的命名方式是“libxxx.a”,库名前加”lib”，后缀用”.a”，“xxx”为静态库名。
-动态库的命名方式与静态库类似，前缀相同，为“lib”，后缀变为“.so”。</code></pre>
-<h2 id="链接方式"><a href="#链接方式" class="headerlink" title="链接方式"></a>链接方式</h2><pre><code>静态库的代码是在编译过程中被载入程序中，是将整个函数库的所有数据都整合进了目标代码。
-动态库在编译的时候并没有被编译进目标代码，而是当你的程序执行到相关函数时才调用该函数库里的相应函数。</code></pre>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><pre><code>静态库的优点是在编译后的执行程序不在需要外部的函数库支持，因为所使用的函数都已经被编进去了。缺点是，如果所使用的静态库发生更新改变，你的程序必须重新编译。
-动态库的优点是动态库的改变并不影响你的程序，所以动态函数库升级比较方便。缺点是因为函数库并没有整合进程序，所以程序的运行环境必须提供相应的库</code></pre>
-<h1 id="静态库的生成和使用"><a href="#静态库的生成和使用" class="headerlink" title="静态库的生成和使用"></a>静态库的生成和使用</h1><pre><code>初始文件：time.c时间库函数源文件；time.h时间库函数头文件；test.c主入口文件。
-步骤：
-（1）编写库文件：time.c
-（2）生成.o文件：gcc -c time.c
-（3）生成静态库：ar cr libmytime.a time.o
-注：c：表示创建静态库;r：表示将.o目标文件加入到静态库中；
-（4）编译生成可执行文件：gcc -o test test.c -static -lmytime -L.
-注：如果编译出现/usr/bin/ld: cannot find lc，可能的解决方法是sudo yum install glibc-static
-（5）执行生成的可执行程序：./test</code></pre>
-<h1 id="动态库的生成和使用"><a href="#动态库的生成和使用" class="headerlink" title="动态库的生成和使用"></a>动态库的生成和使用</h1><pre><code>初始文件：同上；
-（1）同上；
-（2）生成.o文件：gcc -fPIC -c time.c
-（3）生成动态库：gcc -shared -fPIC -o libmytime.so time.so
-（4）编译生成可执行文件：gcc -o test2 test.c -lmytime -L.
-注：可以看到，生成的可执行文件比4静态库生成的可执行文件小得多。
-（5）执行生成的可执行程序：./test2
-注：这里执行报错，因为动态库的查找路径一般不包括当前路径。可以在动态库默认搜索路径/usr/lib下添加链接文件，也可以将当前路径加入LD_LIBRARY_PATH环境变量。</code></pre>
-<h1 id="三种使得装载器正确寻找并加载到动态库的方法"><a href="#三种使得装载器正确寻找并加载到动态库的方法" class="headerlink" title="三种使得装载器正确寻找并加载到动态库的方法"></a>三种使得装载器正确寻找并加载到动态库的方法</h1><pre><code>a. 将libx.so移到系统库文件目录下
-b. export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`
-c. 使用配置文件告诉系统动态库的路径. 
-vi   /etc/ld.so.conf.d/xxxx.conf
-添加库文件路径</code></pre>
-<h1 id="查看依赖的动态库文件"><a href="#查看依赖的动态库文件" class="headerlink" title="查看依赖的动态库文件"></a>查看依赖的动态库文件</h1><pre><code>ldd xxxx</code></pre>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>在学习k8s集群搭建时，得知需要修改docker的cgroup配置。</p>
+<h1 id="cgroup认识"><a href="#cgroup认识" class="headerlink" title="cgroup认识"></a>cgroup认识</h1><p>Control groups are used to constrain resources that are allocated to processes.<br>cgroup是进程资源分配控制的工具。systemd和cgroupfs是两种不同的实现cgroup的驱动，虽然linux可以并存，但是实践表明，如果docker和kubelet使用cgroupfs，系统其它进程使用systemd，会导致node不稳定。k8s推荐使用systemd。</p>
+<h1 id="docker配置cgroup"><a href="#docker配置cgroup" class="headerlink" title="docker配置cgroup"></a>docker配置cgroup</h1><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir &#x2F;etc&#x2F;docker</span><br><span class="line">cat &lt;&lt;EOF | sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],</span><br><span class="line">  &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">  &quot;log-opts&quot;: &#123;</span><br><span class="line">    &quot;max-size&quot;: &quot;100m&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;storage-driver&quot;: &quot;overlay2&quot;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable docker</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>注意，如果在启动参数里面添加了配置项，同时配置文件里又配置了，会导致冲突失败，保留一处即可。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/">https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/</a><br><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/setup/production-environment/container-runtimes/">https://kubernetes.io/docs/setup/production-environment/container-runtimes/</a></p>
 
           
         
@@ -381,7 +357,7 @@ vi   /etc/ld.so.conf.d/xxxx.conf
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/62/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/62/">62</a><span class="page-number current">63</span><a class="page-number" href="/blog/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/64/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/62/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/62/">62</a><span class="page-number current">63</span><a class="page-number" href="/blog/page/64/">64</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/64/">&gt;</a>
   </nav>
 
 
@@ -427,7 +403,7 @@ vi   /etc/ld.so.conf.d/xxxx.conf
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -438,7 +414,7 @@ vi   /etc/ld.so.conf.d/xxxx.conf
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -477,7 +453,7 @@ vi   /etc/ld.so.conf.d/xxxx.conf
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

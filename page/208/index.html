@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/visual/pygraphviz/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/visual/pygraphviz/" itemprop="url">pygraphviz安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" itemprop="url">dh交换算法原理</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/visual/" itemprop="url" rel="index">
-                    <span itemprop="name">visual</span>
+                  <a href="/blog/categories/security/dh/" itemprop="url" rel="index">
+                    <span itemprop="name">dh</span>
                   </a>
                 </span>
 
@@ -367,12 +345,9 @@
       
         
           
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Graphviz 是一个几何图形可视化软件，能够将数据的结构信息表示为抽象图形和网络图的方式。PyGraphviz 主要对数据量大、可任意定制的图形上具有强大优势。</p>
-<h1 id="pygraphviz安装问题"><a href="#pygraphviz安装问题" class="headerlink" title="pygraphviz安装问题"></a>pygraphviz安装问题</h1><h2 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h2><p>python setup.py install</p>
-<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>安装pygraphviz失败</p>
-<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><p>需要先安装graphviz和pygraphviz-devel。因为yum没有配置，所以需要先在官网下载yum源配置文件。之后可以用yum安装。然而yum源安装获取的版本（2.40）与网站提供的版本（2.38）不一致，所以需要先下载rpm包，然后sudo yum localinstall graphviz-devel-2.38.0-1.el7.x86_64.rpm graphviz-2.38.0-1.el7.x86_64.rpm</p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html">http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html</a></p>
-<h2 id="注：在ubuntu下面安装-graphviz"><a href="#注：在ubuntu下面安装-graphviz" class="headerlink" title="注：在ubuntu下面安装 graphviz"></a>注：在ubuntu下面安装 graphviz</h2><p>sudo apt-get install graphviz, graphviz-dev<br>注意graphiviz-dev是pygraphviz所依赖的必须安装。<br>pip install pygraphviz</p>
+            <h1 id="交换过程描述"><a href="#交换过程描述" class="headerlink" title="交换过程描述"></a>交换过程描述</h1><p>甲乙双方按照dh算法交换密钥。<br>首先，甲生成随机数x，底数为d，一个大素数p，根据算法生成A = d ^ x % p。之后甲将d、p、A传递给乙。<br>乙收到后生成随机数y，计算B = d ^ y % p, C1 = A ^ y % p，将B传回给甲。<br>甲收到B后计算C2 = B ^ x % p。<br>C1和C2就是协商得到的密钥。可以证明C1=C2。</p>
+<h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><p>按照上述过程描述，欲证C1 = C2，C1 = A ^ y % p = (d ^ x % p) ^ y % p，C2 = (d ^ y % p) ^ x % p。<br>假设d ^ x = pn + a，则<br>C1 = (d ^ x % p) ^ y % p = a ^ y % p = (d ^ x - pn) ^ y % p<br>根据二项式定理，得到C1 = d ^ (xy) % p，同理，C2 = d ^ (xy) % p = C1。</p>
+<h1 id="算法的可靠性"><a href="#算法的可靠性" class="headerlink" title="算法的可靠性"></a>算法的可靠性</h1><p>由交换过程可以知道，攻击者可以拿到d、p、A、B，要破解算法，关键要拿到x、y。以x为例，A = d ^ x % p，现在就是已知其它三个变量求x。已知在数学上，当p很大时，很难计算x（有限群的离散对数问题），这就保证了该算法的可靠性。</p>
 
           
         
@@ -412,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/207/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/207/">207</a><span class="page-number current">208</span><a class="page-number" href="/blog/page/209/">209</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/209/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/207/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/207/">207</a><span class="page-number current">208</span><a class="page-number" href="/blog/page/209/">209</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/209/">&gt;</a>
   </nav>
 
 
@@ -458,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -508,7 +483,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

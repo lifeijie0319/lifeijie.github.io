@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/db/sqlalchemy/sqlalchemy%E5%92%8Cfork%E5%A4%9A%E8%BF%9B%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/windows/windows%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/db/sqlalchemy/sqlalchemy%E5%92%8Cfork%E5%A4%9A%E8%BF%9B%E7%A8%8B/" itemprop="url">sqlalchemy和fork多进程</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/windows/windows%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/" itemprop="url">windows常见网络问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,41 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
-                    <span itemprop="name">sqlalchemy</span>
+                  <a href="/blog/categories/system/windows/" itemprop="url" rel="index">
+                    <span itemprop="name">windows</span>
                   </a>
                 </span>
 
@@ -378,11 +345,8 @@
       
         
           
-            <h1 id="1-问题出现："><a href="#1-问题出现：" class="headerlink" title="1 问题出现："></a>1 问题出现：</h1><p>下载美团合同太慢，改成multiprocessing多进程下载，发现无法全部下载成功。</p>
-<h1 id="2-第一次处理："><a href="#2-第一次处理：" class="headerlink" title="2 第一次处理："></a>2 第一次处理：</h1><p>考虑是不是子进程函数里面用的是主进程初始化的session，改成在子进程中创建session。</p>
-<h2 id="第一次处理结果："><a href="#第一次处理结果：" class="headerlink" title="第一次处理结果："></a>第一次处理结果：</h2><p>还是不行，报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cx_Oracle.DatabaseError: ORA-3306: fatal two-task communicationo protocol error</span><br><span class="line">cx_Oracle.DatabaseError: ORA-03113: end-of-file on communication channel</span><br><span class="line">cx_Oracle.DatabaseError: ORA-03135: connection lost contact</span><br><span class="line">sqlalchemy.exc.InvalidRequestError: Can&#39;t reconnect until invalid transaction is rolled back</span><br></pre></td></tr></table></figure>
-<h1 id="3-第二次处理"><a href="#3-第二次处理" class="headerlink" title="3 第二次处理"></a>3 第二次处理</h1><p>根据上述情况，考虑session的问题，<br>3.1 使用python的id方法打印子进程的session的内存地址，发现子进程中的session的内存地址一样。<br>3.2 查询sqlalchemy，发现他的session对多线程scoped_session有threadlocal的控制，但是本质上不支持并发使用同一个session。<br>3.3 查看<a target="_blank" rel="noopener" href="https://docs.sqlalchemy.org/en/13/faq/connections.html#how-do-i-use-engines-connections-sessions-with-python-multiprocessing-or-os-fork%E8%AF%81%E5%AE%9E%E7%BB%93%E6%9E%9C%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%B8%8D%E4%BD%86session%E4%B8%8D%E8%83%BD%E5%85%B1%E7%94%A8%EF%BC%8C%E8%BF%9Eengine%E9%83%BD%E4%B8%8D%E8%83%BD%E5%85%B1%E7%94%A8%E3%80%82">https://docs.sqlalchemy.org/en/13/faq/connections.html#how-do-i-use-engines-connections-sessions-with-python-multiprocessing-or-os-fork证实结果，多进程不但session不能共用，连engine都不能共用。</a></p>
+            <h1 id="ping不通"><a href="#ping不通" class="headerlink" title="ping不通"></a>ping不通</h1><p>情景一：网络不通<br>情景二：防火墙-高级-入站规则，开启：文件和打印机共享(回显请求 - ICMPv4-In)</p>
+<h1 id="telnet不通"><a href="#telnet不通" class="headerlink" title="telnet不通"></a>telnet不通</h1><p>情景一：telnet客户端没开<br>解决：控制面板-程序和功能-启用或关闭windows功能-勾选Telnet客户端-确定<br>情景二：telnet的对象防火墙没关</p>
 
           
         
@@ -422,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/211/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/blog/page/213/">213</a><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/213/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/211/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/blog/page/213/">213</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/213/">&gt;</a>
   </nav>
 
 
@@ -468,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -479,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -518,7 +482,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

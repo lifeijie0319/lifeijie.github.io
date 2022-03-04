@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/db/ibm_db_django/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/db/ibm_db_django/" itemprop="url">ibm_db_django</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
                   </a>
                 </span>
 
@@ -367,8 +356,9 @@
       
         
           
-            <h1 id="一、说明："><a href="#一、说明：" class="headerlink" title="一、说明："></a>一、说明：</h1><p>Django要连接db2，除了ibm_db这个Python和db2的连接件，还需要安装ibm_db_django包。</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1>
+            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
+<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
+
           
         
       
@@ -407,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/191/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/191/">191</a><span class="page-number current">192</span><a class="page-number" href="/blog/page/193/">193</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/193/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/191/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/191/">191</a><span class="page-number current">192</span><a class="page-number" href="/blog/page/193/">193</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/193/">&gt;</a>
   </nav>
 
 
@@ -453,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -464,7 +454,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -503,7 +493,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

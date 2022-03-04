@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/args/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/java/args/" itemprop="url">java参数详解</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E5%87%BD%E6%95%B0/" itemprop="url">db2函数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,17 +345,18 @@
       
         
           
-            <h1 id="D参数与args"><a href="#D参数与args" class="headerlink" title="-D参数与args"></a>-D参数与args</h1><p>-D参数属于-options，而不是args，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Djava.ext.dirs&#x3D;&#x2F;home&#x2F;LeoJava&#x2F;libs -Dpara&#x3D;1 HelloWorld a&#x3D;1 b</span><br></pre></td></tr></table></figure>
-<p>按照java命令行规范</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java [-options] class [args...]</span><br></pre></td></tr></table></figure>
-<p>“-Djava.ext.dirs=/home/LeoJava/libs -Dpara=1”属于options，而”a=1 b”属于args。-D参数可以再代码中使用System.getProperty获取参数值，args就是main方法中的args字符串数组。参考如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.getProperty(<span class="string">&quot;java.ext.dirs&quot;</span>));</span><br><span class="line">        System.out.println(System.getProperty(<span class="string">&quot;para&quot;</span>));</span><br><span class="line">        System.out.println(Arrays.asList(args));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="cp和–classpath"><a href="#cp和–classpath" class="headerlink" title="-cp和–classpath"></a>-cp和–classpath</h1><p>-cp和–classpath是一样的，指定包搜索路径，有如下几点需要注意：</p>
-<ul>
-<li>不同路径需要分开，linux上分隔符是:，windows下分隔符是;</li>
-<li>注意包含当前路径，一般入口类在当前路径，如果不加当前路径，会找不到主类。当前路径用.代表。</li>
-</ul>
+            <h1 id="EXISTS"><a href="#EXISTS" class="headerlink" title="EXISTS"></a>EXISTS</h1><p>EXISTS（），判断括号内的语句结果是否为空</p>
+<h1 id="TO-CHAR"><a href="#TO-CHAR" class="headerlink" title="TO_CHAR"></a>TO_CHAR</h1><p>TO_CHAR(OPER_TIME,’YYYYMMDD’)，把参数一按照参数二的格式转换</p>
+<h1 id="NVL"><a href="#NVL" class="headerlink" title="NVL"></a>NVL</h1><p>NVL(ARG,VALUE)，如果前面的ARG值为NULL那么返回的值为后面的VALUE</p>
+<h1 id="DECODE"><a href="#DECODE" class="headerlink" title="DECODE"></a>DECODE</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decode(条件,值1,翻译值1,值2,翻译值2,...值n,翻译值n,缺省值)</span><br></pre></td></tr></table></figure>
+<p>含义说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">IF 条件&#x3D;值1 THEN</span><br><span class="line">　　　　RETURN(翻译值1)</span><br><span class="line">ELSIF 条件&#x3D;值2 THEN</span><br><span class="line">　　　　RETURN(翻译值2)</span><br><span class="line">　　　　......</span><br><span class="line">ELSIF 条件&#x3D;值n THEN</span><br><span class="line">　　　　RETURN(翻译值n)</span><br><span class="line">ELSE</span><br><span class="line">　　　　RETURN(缺省值)</span><br><span class="line">END IF</span><br></pre></td></tr></table></figure>
+<h1 id="case函数的两种形式"><a href="#case函数的两种形式" class="headerlink" title="case函数的两种形式"></a>case函数的两种形式</h1><p>–简单Case函数<br>CASE sex<br>         WHEN ‘1’ THEN ‘男’<br>         WHEN ‘2’ THEN ‘女’<br>ELSE ‘其他’ END<br>–Case搜索函数<br>CASE WHEN sex = ‘1’ THEN ‘男’<br>         WHEN sex = ‘2’ THEN ‘女’<br>ELSE ‘其他’ END</p>
+<h1 id="日期的各种形式的互相转换"><a href="#日期的各种形式的互相转换" class="headerlink" title="日期的各种形式的互相转换"></a>日期的各种形式的互相转换</h1><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/QQParadise/articles/2058047.html">http://www.cnblogs.com/QQParadise/articles/2058047.html</a></p>
+<h1 id="COALESCE"><a href="#COALESCE" class="headerlink" title="COALESCE"></a>COALESCE</h1><p>COALESCE将null转化成整数、小数、字符串<br>COALESCE(col_name, 0)</p>
+<h1 id="DB2常用字符串函数"><a href="#DB2常用字符串函数" class="headerlink" title="DB2常用字符串函数"></a>DB2常用字符串函数</h1><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/QQParadise/articles/2058050.html">http://www.cnblogs.com/QQParadise/articles/2058050.html</a></p>
+<h1 id="ROW-NUMBER"><a href="#ROW-NUMBER" class="headerlink" title="ROW_NUMBER"></a>ROW_NUMBER</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROW_NUMBER() OVER(PARTITION BY C1 ORDER BY C2)</span><br></pre></td></tr></table></figure>
+<p>如上语句对搜索结果按照C1分组，组内按照C2排序，顺序1、2、3顺延</p>
 
           
         
@@ -395,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/130/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/130/">130</a><span class="page-number current">131</span><a class="page-number" href="/blog/page/132/">132</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/132/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/130/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/130/">130</a><span class="page-number current">131</span><a class="page-number" href="/blog/page/132/">132</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/132/">&gt;</a>
   </nav>
 
 
@@ -441,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -491,7 +492,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/oracle/schema%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/13/other/%E7%BC%96%E7%A0%81/%E8%A1%A5%E7%A0%81%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/oracle/schema%E8%AF%A6%E8%A7%A3/" itemprop="url">schema详解</a></h1>
+                <a class="post-title-link" href="/blog/2022/01/13/other/%E7%BC%96%E7%A0%81/%E8%A1%A5%E7%A0%81%E5%8E%9F%E7%90%86/" itemprop="url">补码原理</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-13T15:03:46+08:00">
+                2022-01-13
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,18 +312,24 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
-<li>A schema is a collection of database objects (used by a user.).</li>
-<li>Schema objects are the logical structures that directly refer to the database’s data.</li>
-<li>A user is a name defined in the database that can connect to and access objects.</li>
-<li>Schemas and users help database administrators manage database security.</li>
+            <h1 id="什么是补码"><a href="#什么是补码" class="headerlink" title="什么是补码"></a>什么是补码</h1><h2 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h2><p>在计算机中，使用首位表示符号，后续表示数值，这样的数字二进制表示称为原码。以8位二进制为例，2 = 0x 0000 0010， -1 = 0x 1000 0001</p>
+<h2 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h2><p>正数的反码是其本身，负数的反码是原码除符号位外取反</p>
+<h2 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h2><p>正数的补码是其本身，负数的补码是其反码+1</p>
+<h1 id="补码的正确性"><a href="#补码的正确性" class="headerlink" title="补码的正确性"></a>补码的正确性</h1><p>在n位2进制表示的数中，任何一个负数都可以表示为-x，其中x为正数，如果用补码表示，我们假设-x的补码为$\bar{x}$,$\bar{x}$=$2^{n-1}$(符号位) + ($2^{n-1}$ - 1 - x)(取反) + 1 = $2^n$ - x。假设与-x相加的另一个数为正数y，则按照补码相加规则，得到y + $\bar{x}$ = $2^n$ - x + y。由于在n位2进制表示的数中，$2^n$是溢出无法表示的，所以最后得到的就是y - x。假设除了-x另一个加数也是负数，我们用-z表示，同理可$\bar{z}$ = $2^n$ - z，所以$\bar{x}$ + $\bar{z}$ = $2^n$ - x + $2^n$ - z = -x -z.</p>
+<h1 id="补码的数学原理"><a href="#补码的数学原理" class="headerlink" title="补码的数学原理"></a>补码的数学原理</h1><h2 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h2><p>两个整数a, b,如果它们对整数m求余的结果相同，则称a与b对于模m同余，记作$a\equiv b$ (mod m)。求余运算的计算规则为 x mod y = x - $\lfloor x / y \rfloor$ * y</p>
+<h2 id="求余的基本定理"><a href="#求余的基本定理" class="headerlink" title="求余的基本定理"></a>求余的基本定理</h2><h3 id="反身性"><a href="#反身性" class="headerlink" title="反身性"></a>反身性</h3><p>a ≡ a (mod m)</p>
+<h3 id="线性运算定理"><a href="#线性运算定理" class="headerlink" title="线性运算定理"></a>线性运算定理</h3><p>如果a ≡ b (mod m)，c ≡ d (mod m) 那么:</p>
+<ol>
+<li>a ± c ≡ b ± d (mod m)</li>
+<li>a * c ≡ b * d (mod m)<h2 id="结合补码来讲"><a href="#结合补码来讲" class="headerlink" title="结合补码来讲"></a>结合补码来讲</h2>根据求余的反身性，有y + $\bar{x}$ $\equiv$ (y + $2^n$ - x) mod $2^n$ ①。易知 0 $\equiv$ $2^n$ (mod $2^n$) ②，联立①②，结合反身性和线性运算定理，知(y + $\bar{x}$) $\equiv$ (y - x) (mod $2^n$)。由于固定位数的二进制相加有溢出处理，本质上是求余运算。而根据我们刚才的计算结果，补码相加结果和原计算结果是同余的。</li>
+</ol>
+<h1 id="为什么要有补码"><a href="#为什么要有补码" class="headerlink" title="为什么要有补码"></a>为什么要有补码</h1><ul>
+<li>首先，要明确一点。计算机内部用什么方式表示负数，其实是无所谓的。只要能够保持一一对应的关系，就可以用任意方式表示负数。</li>
+<li>原码表示的数字，正负相加会有问题，比如1+(-1) = 0x 0000 0001 + 0x 1000 0001 = 0x 1000 0010 = -2，与实际不符</li>
+<li>补码表示的数字符号位参与运算，不用单独考虑符号位</li>
+<li>有一说补码构成了一个群，而原码和反码不能形成群，待深入</li>
 </ul>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
-<li>一个用户一般对应一个schema,该用户的schema名等于用户名，并作为该用户缺省schema。</li>
-<li> Oracle 数据库中不能新创建一个schema，要想创建一个schema，只能通过创建一个用户的方法解决。</li>
-<li> 一个用户有一个缺省的schema，其schema名就等于用户名，当然一个用户还可以使用其他的schema。</li>
-<li> 如果我们访问一个表时，没有指明该表属于哪一个schema中的，系统就会自动给我们在表上加上缺省的schema名。</li>
-</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zl10086111/article/details/80907428/">https://blog.csdn.net/zl10086111/article/details/80907428/</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2009/08/twos_complement.html">http://www.ruanyifeng.com/blog/2009/08/twos_complement.html</a></p>
 
           
         
@@ -396,7 +369,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/49/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/49/">49</a><span class="page-number current">50</span><a class="page-number" href="/blog/page/51/">51</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/51/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/49/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/49/">49</a><span class="page-number current">50</span><a class="page-number" href="/blog/page/51/">51</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/51/">&gt;</a>
   </nav>
 
 
@@ -442,7 +415,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +426,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -492,7 +465,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

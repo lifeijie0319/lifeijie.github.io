@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/flask/json%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96/" itemprop="url">json数据的获取</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url">nginx常用指令</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/flask/" itemprop="url" rel="index">
-                    <span itemprop="name">flask</span>
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -356,7 +345,12 @@
       
         
           
-            <p>后台要用request.json获得前台的json数据，需要使用完整的$.ajax()，设置contentType: ‘application/json’<br><a target="_blank" rel="noopener" href="https://www.zybuluo.com/harpsword/note/209162">https://www.zybuluo.com/harpsword/note/209162</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/zhu_free/article/details/50396616">http://blog.csdn.net/zhu_free/article/details/50396616</a></p>
+            <h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><ol>
+<li>./nginx -s quit:此方式停止步骤是待nginx进程处理任务完毕进行停止。</li>
+<li>./nginx -s stop:此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程。</li>
+<li>对 nginx 进行重启相当于先停止再启动，即先执行停止命令再执行启动命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -s quit</span><br><span class="line">.&#x2F;nginx</span><br></pre></td></tr></table></figure></li>
+<li>./nginx -s reload不停止nginx的情况下重新加载配置文件。</li>
+</ol>
 
           
         
@@ -396,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/168/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/168/">168</a><span class="page-number current">169</span><a class="page-number" href="/blog/page/170/">170</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/170/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/168/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/168/">168</a><span class="page-number current">169</span><a class="page-number" href="/blog/page/170/">170</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/170/">&gt;</a>
   </nav>
 
 
@@ -442,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -492,7 +486,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

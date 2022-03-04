@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/String/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/schema/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/java/String/" itemprop="url">JAVA String</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/schema/" itemprop="url">db2 schema</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,11 +345,16 @@
       
         
           
-            <h1 id="String的存储"><a href="#String的存储" class="headerlink" title="String的存储"></a>String的存储</h1><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">String s3 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>), s4 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(s1 == s2);</span><br><span class="line">System.out.println(s1 == s3);</span><br><span class="line">System.out.println(s4 == s3);</span><br><span class="line">System.out.println(s1.equals(s3));</span><br><span class="line">System.out.println(s4.equals(s3));</span><br></pre></td></tr></table></figure>
-<h3 id="打印结果："><a href="#打印结果：" class="headerlink" title="打印结果："></a>打印结果：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">false</span><br><span class="line">false</span><br><span class="line">true</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
-<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>java中的String有两种定义方式，对应的存储原理不同。<br>一种是s1和s2这样，字符串定义在堆中的常量区，s1生成常量对象，s2定义时，jvm发现常量区已有该字符串，直接返回对应地址。<br>另一种是s3和s4这样，等于实例化一个普通类，每次实例化返回的地址不同，在堆中生成了不同的实例。<br>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36653524/article/details/100730394">https://blog.csdn.net/qq_36653524/article/details/100730394</a> </p>
-<h3 id="“-”和equals方法进行字符串比较时的不同"><a href="#“-”和equals方法进行字符串比较时的不同" class="headerlink" title="“==”和equals方法进行字符串比较时的不同"></a>“==”和equals方法进行字符串比较时的不同</h3><p>java中的非基本类型都是引用（指针），”==”实际上是引用（指针存储的地址）的比较。而equals方法比较的是字符串内容是否相等。</p>
-
+            <h1 id="创建schema"><a href="#创建schema" class="headerlink" title="创建schema"></a>创建schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE SCHEMA &lt;schema-name&gt; [AUTHORIZATION &lt;schema-owner-name&gt;]</span><br></pre></td></tr></table></figure>
+<h1 id="删除schema"><a href="#删除schema" class="headerlink" title="删除schema"></a>删除schema</h1><p>schema下面没有对象的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 drop schema wxdemo restrict</span><br></pre></td></tr></table></figure>
+<p>schema下面有对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;call ADMIN_DROP_SCHEMA(&#39;wxdemo&#39;, NULL, &#39;errorschema&#39;, &#39;ERRTABLE&#39;)&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="复制schema"><a href="#复制schema" class="headerlink" title="复制schema"></a>复制schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;CALL SYSPROC.ADMIN_COPY_SCHEMA</span><br><span class="line">(&#39;TONGLIAN&#39;,&#39;WXDEMO&#39;,&#39;COPYNO&#39;,NULL,NULL,NULL,&#39;ERRORSCHEMA&#39;,&#39;ERRORTABLE&#39;);&quot;</span><br></pre></td></tr></table></figure>
+<p>注意：目标schema不能已存在，否则报错。</p>
+<h1 id="查看当前schema"><a href="#查看当前schema" class="headerlink" title="查看当前schema"></a>查看当前schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 values current schema</span><br></pre></td></tr></table></figure>
+<h1 id="查询数据库内的所有schema"><a href="#查询数据库内的所有schema" class="headerlink" title="查询数据库内的所有schema"></a>查询数据库内的所有schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from sysibm.sysschemata</span><br></pre></td></tr></table></figure>
+<h1 id="查询schem下面的所有表格"><a href="#查询schem下面的所有表格" class="headerlink" title="查询schem下面的所有表格"></a>查询schem下面的所有表格</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 list tables for schema XXX</span><br></pre></td></tr></table></figure>
           
         
       
@@ -388,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/129/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/129/">129</a><span class="page-number current">130</span><a class="page-number" href="/blog/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/131/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/129/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/129/">129</a><span class="page-number current">130</span><a class="page-number" href="/blog/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/131/">&gt;</a>
   </nav>
 
 
@@ -434,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -484,7 +489,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

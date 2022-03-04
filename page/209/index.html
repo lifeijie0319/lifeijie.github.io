@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/ubuntu/apt/apt-get%E5%AE%89%E8%A3%85%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/ubuntu/apt/apt-get%E5%AE%89%E8%A3%85%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">apt-get安装常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/" itemprop="url">rsa的密钥位数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/ubuntu/apt/" itemprop="url" rel="index">
-                    <span itemprop="name">apt</span>
+                  <a href="/blog/categories/security/rsa/" itemprop="url" rel="index">
+                    <span itemprop="name">rsa</span>
                   </a>
                 </span>
 
@@ -367,21 +345,7 @@
       
         
           
-            <h1 id="常见错误：获取不到锁"><a href="#常见错误：获取不到锁" class="headerlink" title="常见错误：获取不到锁"></a>常见错误：获取不到锁</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E: Could not get lock &#x2F;var&#x2F;lib&#x2F;dpkg&#x2F;lock - open (11: Resource temporarily unavailable)</span><br><span class="line">E: Unable to lock the administration directory (&#x2F;var&#x2F;lib&#x2F;dpkg&#x2F;), is another process using it?</span><br></pre></td></tr></table></figure>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>主要是因为apt还在运行。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol>
-<li>查找所有apt相关的进程，并用命令杀死。</li>
-<li>删除锁定文件<br>一旦你运行了 apt-get 或者 apt 命令，锁定文件将会创建于 /var/lib/apt/lists/、/var/lib/dpkg/、/var/cache/apt/archives/ 中。<br>这有助于运行中的 apt-get 或者 apt 进程能够避免被其它需要使用相同文件的用户或者系统进程所打断。当该进程执行完毕后，锁定文件将会删除。所以：</li>
-</ol>
-<p>2.1 移除对应目录下的锁文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm &#x2F;var&#x2F;lib&#x2F;dpkg&#x2F;lock</span><br></pre></td></tr></table></figure>
-<p>2.2 强制重新配置软件包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg --configure -a</span><br></pre></td></tr></table></figure>
-<p>2.3 更新软件包源文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>问题解决，执行apt install 命令成功。</li>
-</ol>
+            <h1 id="常用的1024位-2048位的rsa密钥长度到底是谁的长度"><a href="#常用的1024位-2048位的rsa密钥长度到底是谁的长度" class="headerlink" title="常用的1024位/2048位的rsa密钥长度到底是谁的长度"></a>常用的1024位/2048位的rsa密钥长度到底是谁的长度</h1><p>rsa有三个重要的大数：公钥指数e、私钥指数d和模值n。我们说的“密钥长度”一般只是指模值的位长度。参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh2075/article/details/79718285">https://blog.csdn.net/zxh2075/article/details/79718285</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/caidi/p/14794952.html">https://www.cnblogs.com/caidi/p/14794952.html</a></p>
 
           
         
@@ -421,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/208/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/208/">208</a><span class="page-number current">209</span><a class="page-number" href="/blog/page/210/">210</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/210/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/208/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/208/">208</a><span class="page-number current">209</span><a class="page-number" href="/blog/page/210/">210</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/210/">&gt;</a>
   </nav>
 
 
@@ -467,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -478,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -517,7 +481,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

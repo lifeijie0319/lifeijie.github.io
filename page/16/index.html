@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/apache/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/28/language/java/basic/oop/OOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/apache/" itemprop="url">apache服务器基础</a></h1>
+                <a class="post-title-link" href="/blog/2022/02/28/language/java/basic/oop/OOP/" itemprop="url">OOP常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-28T16:40:08+08:00">
+                2022-02-28
               </time>
             
 
@@ -282,28 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -334,16 +312,54 @@
       
         
           
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h2><ol>
-<li>查看httpd包是否可用：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum list | grep httpd</span><br></pre></td></tr></table></figure></li>
-<li>安装Apache和相关包<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install httpd httpd-devel</span><br></pre></td></tr></table></figure></li>
-<li>配置ServerName<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;httpd&#x2F;conf&#x2F;httpd.conf</span><br></pre></td></tr></table></figure>
-如果没有域名，则：ServerName localhost:80<h2 id="安装目录介绍"><a href="#安装目录介绍" class="headerlink" title="安装目录介绍"></a>安装目录介绍</h2>Apache默认将网站的根目录指向/var/www/html，目录默认的主配置文件是/etc/httpd/conf/httpd.conf。配置存储在的/etc/httpd/conf.d/目录</li>
+            <h1 id="普通类与抽象类的区别"><a href="#普通类与抽象类的区别" class="headerlink" title="普通类与抽象类的区别"></a>普通类与抽象类的区别</h1><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>成员方法</th>
+<th>实例化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通类</td>
+<td>不能包含抽象方法</td>
+<td>可以实例化</td>
+</tr>
+<tr>
+<td>抽象类</td>
+<td>可以定义抽象方法</td>
+<td>无法实例化</td>
+</tr>
+</tbody></table>
+<h1 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h1><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>成员变量</th>
+<th>成员方法</th>
+<th>构造函数</th>
+<th>继承/实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接口</td>
+<td>默认是public static final修饰的</td>
+<td>默认是public abstract修饰的</td>
+<td>不能有构造函数</td>
+<td>implements，一个类可以实现多个接口，实现的时候必须覆写接口的所有方法</td>
+</tr>
+<tr>
+<td>抽象类</td>
+<td>和正常类一样定义</td>
+<td>和普通类一样定义方法，可以额外定义抽象方法</td>
+<td>可以有构造函数</td>
+<td>extends，只能单继承，不用覆写所有方法</td>
+</tr>
+</tbody></table>
+<h1 id="覆写和隐藏"><a href="#覆写和隐藏" class="headerlink" title="覆写和隐藏"></a>覆写和隐藏</h1><ol>
+<li>子类存在与父类签名相同的普通方法，Override父类方法，实际调用的方法取决于实例真实类型。</li>
+<li>子类存在与父类签名相同的静态方法，隐藏父类方法，合理的方式是通过类来调用方法，实际调用的方法取决于类的类型。如果通过实例来调用静态方法（不推荐，一般编译器报警），调用的具体方法取决于引用类型。<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java">https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java</a></li>
 </ol>
-<h1 id="启停"><a href="#启停" class="headerlink" title="启停"></a>启停</h1><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd</span><br></pre></td></tr></table></figure>
-<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd -k stop</span><br></pre></td></tr></table></figure>
-<h2 id="设置开机自动启动："><a href="#设置开机自动启动：" class="headerlink" title="设置开机自动启动："></a>设置开机自动启动：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig httpd on</span><br></pre></td></tr></table></figure>
-
 
           
         
@@ -383,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/15/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/blog/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/214/">214</a><a class="extend next" rel="next" href="/blog/page/17/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/15/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/blog/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/17/">&gt;</a>
   </nav>
 
 
@@ -429,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">279</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -440,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -479,7 +495,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

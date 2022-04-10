@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/20/tools/curl/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/tools/docker/docker%E7%9A%84cgroup%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/20/tools/curl/" itemprop="url">curl常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/tools/docker/docker%E7%9A%84cgroup%E9%85%8D%E7%BD%AE/" itemprop="url">docker的cgroup配置</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-20T10:07:40+08:00">
-                2021-12-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,7 +345,12 @@
       
         
           
-            <h1 id="Connection-0-to-host-127-0-0-1-left-intact"><a href="#Connection-0-to-host-127-0-0-1-left-intact" class="headerlink" title="Connection #0 to host 127.0.0.1 left intact"></a>Connection #0 to host 127.0.0.1 left intact</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>使用curl请求服务接口时，如果使用-v参数查看返回详情，可以看到标题所示报错，本质上是由于服务端使用长连接，没有立刻关闭连接。<br>详细解释参考链接<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/61880928/what-does-connection-0-to-host-example-com-left-intact-mean">https://stackoverflow.com/questions/61880928/what-does-connection-0-to-host-example-com-left-intact-mean</a></p>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>在学习k8s集群搭建时，得知需要修改docker的cgroup配置。</p>
+<h1 id="cgroup认识"><a href="#cgroup认识" class="headerlink" title="cgroup认识"></a>cgroup认识</h1><p>Control groups are used to constrain resources that are allocated to processes.<br>cgroup是进程资源分配控制的工具。systemd和cgroupfs是两种不同的实现cgroup的驱动，虽然linux可以并存，但是实践表明，如果docker和kubelet使用cgroupfs，系统其它进程使用systemd，会导致node不稳定。k8s推荐使用systemd。</p>
+<h1 id="docker配置cgroup"><a href="#docker配置cgroup" class="headerlink" title="docker配置cgroup"></a>docker配置cgroup</h1><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir &#x2F;etc&#x2F;docker</span><br><span class="line">cat &lt;&lt;EOF | sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],</span><br><span class="line">  &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">  &quot;log-opts&quot;: &#123;</span><br><span class="line">    &quot;max-size&quot;: &quot;100m&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;storage-driver&quot;: &quot;overlay2&quot;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable docker</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<p>注意，如果在启动参数里面添加了配置项，同时配置文件里又配置了，会导致冲突失败，保留一处即可。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/">https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/</a><br><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/setup/production-environment/container-runtimes/">https://kubernetes.io/docs/setup/production-environment/container-runtimes/</a></p>
 
           
         
@@ -352,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/73/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/blog/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/75/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/73/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/blog/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/75/">&gt;</a>
   </nav>
 
 
@@ -398,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -409,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

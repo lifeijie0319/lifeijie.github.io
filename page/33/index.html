@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/23/database/db2/%E6%8C%87%E4%BB%A4-%E6%95%B0%E6%8D%AE%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/30/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/23/database/db2/%E6%8C%87%E4%BB%A4-%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url">db2数据库管理指令</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/30/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-23T19:39:12+08:00">
-                2022-02-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T10:28:15+08:00">
+                2022-03-30
               </time>
             
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
                   </a>
                 </span>
 
@@ -345,22 +356,11 @@
       
         
           
-            <h1 id="查看数据库版本"><a href="#查看数据库版本" class="headerlink" title="查看数据库版本"></a>查看数据库版本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2level</span><br></pre></td></tr></table></figure>
-<h1 id="查看数据库配置"><a href="#查看数据库配置" class="headerlink" title="查看数据库配置"></a>查看数据库配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 get dbm cfg</span><br></pre></td></tr></table></figure>
-<h1 id="数据库端口查看与配置"><a href="#数据库端口查看与配置" class="headerlink" title="数据库端口查看与配置"></a>数据库端口查看与配置</h1><p>查找service名称，例如DB2_db2inst1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$db2 get dbm cfg|grep -i service</span><br></pre></td></tr></table></figure>
-<p>在所有service里面查看服务端口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$grep DB2_db2inst1 &#x2F;etc&#x2F;services</span><br></pre></td></tr></table></figure>
-<p>修改配置文件对应行的端口号为所需端口号</p>
-<h1 id="重启数据库"><a href="#重启数据库" class="headerlink" title="重启数据库"></a>重启数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$su - db2inst1</span><br><span class="line">$db2stop</span><br><span class="line">$db2start</span><br></pre></td></tr></table></figure>
-<h1 id="置db2开机自启动"><a href="#置db2开机自启动" class="headerlink" title="置db2开机自启动"></a>置db2开机自启动</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2set DB2AUTOSTART&#x3D;YES</span><br></pre></td></tr></table></figure>
-<h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><h2 id="查询当前用户权限"><a href="#查询当前用户权限" class="headerlink" title="查询当前用户权限"></a>查询当前用户权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 get authorizations</span><br></pre></td></tr></table></figure>
-<p>注意：查询时必须先连接到数据库。</p>
-<h2 id="授予用户数据库管理员权限"><a href="#授予用户数据库管理员权限" class="headerlink" title="授予用户数据库管理员权限"></a>授予用户数据库管理员权限</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 grant dbadm on database to user nanxun</span><br></pre></td></tr></table></figure>
-<h1 id="数据库创建"><a href="#数据库创建" class="headerlink" title="数据库创建"></a>数据库创建</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 create db example using codeset utf-8 territory CN</span><br></pre></td></tr></table></figure>
-<h1 id="查看所有数据库"><a href="#查看所有数据库" class="headerlink" title="查看所有数据库"></a>查看所有数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 list db directory</span><br></pre></td></tr></table></figure>
-<h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 connect to $dbname user user_name using pw</span><br></pre></td></tr></table></figure>
-<h1 id="查看当前连接信息"><a href="#查看当前连接信息" class="headerlink" title="查看当前连接信息"></a>查看当前连接信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 get connection state</span><br></pre></td></tr></table></figure>
+            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
+<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
+<h1 id="联合索引的列顺序"><a href="#联合索引的列顺序" class="headerlink" title="联合索引的列顺序"></a>联合索引的列顺序</h1><p>设计联合索引时，要将离散度大的列放在前面。</p>
+<h1 id="联合索引是否需要包含主键"><a href="#联合索引是否需要包含主键" class="headerlink" title="联合索引是否需要包含主键"></a>联合索引是否需要包含主键</h1><p>innodb的索引默认会包含主键列，所以建立联合索引的时候无需加入主键列。</p>
+
           
         
       
@@ -399,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/32/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/blog/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/34/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/32/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><span class="page-number current">33</span><a class="page-number" href="/blog/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/34/">&gt;</a>
   </nav>
 
 
@@ -445,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

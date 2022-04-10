@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/tornado/websocket/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/tornado/websocket/" itemprop="url">tornado里面实现websocket</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/linux/%E5%9F%BA%E7%A1%80/" itemprop="url">linux基础</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/tornado/" itemprop="url" rel="index">
-                    <span itemprop="name">tornado</span>
+                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -356,11 +345,8 @@
       
         
           
-            <h1 id="1、js建立websocket错误404："><a href="#1、js建立websocket错误404：" class="headerlink" title="1、js建立websocket错误404："></a>1、js建立websocket错误404：</h1><p>原因：服务器路由设置不正确，tornado.web.Application的handlers参数类似于Django的urls，只不过Django里面是view来处理，tornado是handler来处理。</p>
-<h1 id="2、js建立websocket错误403"><a href="#2、js建立websocket错误403" class="headerlink" title="2、js建立websocket错误403"></a>2、js建立websocket错误403</h1><p>原因：同源检查问题，在handler类里面添加方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_origin</span>(<span class="params">self, origin</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-<p>可以暂时解决这个问题。</p>
-
+            <h1 id="查看系统版本"><a href="#查看系统版本" class="headerlink" title="查看系统版本"></a>查看系统版本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;issue</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsb_release -a</span><br></pre></td></tr></table></figure>
           
         
       
@@ -399,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/235/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/235/">235</a><span class="page-number current">236</span><a class="page-number" href="/blog/page/237/">237</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/237/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/235/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/235/">235</a><span class="page-number current">236</span><a class="page-number" href="/blog/page/237/">237</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/237/">&gt;</a>
   </nav>
 
 
@@ -445,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/db/redis/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/tornado/websocket/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/db/redis/" itemprop="url">redis</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/python/tornado/websocket/" itemprop="url">tornado里面实现websocket</a></h1>
         
 
         <div class="post-meta">
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/language/python/tornado/" itemprop="url" rel="index">
+                    <span itemprop="name">tornado</span>
                   </a>
                 </span>
 
@@ -367,8 +356,10 @@
       
         
           
-            <h1 id="一、说明"><a href="#一、说明" class="headerlink" title="一、说明"></a>一、说明</h1><p>python与redis的连接件</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h2 id="1、离线安装"><a href="#1、离线安装" class="headerlink" title="1、离线安装"></a>1、离线安装</h2><p>pip install –no-index -f /home/nanxun/packages/ redis-2.10.5-py2.py3-none-any.whl</p>
+            <h1 id="1、js建立websocket错误404："><a href="#1、js建立websocket错误404：" class="headerlink" title="1、js建立websocket错误404："></a>1、js建立websocket错误404：</h1><p>原因：服务器路由设置不正确，tornado.web.Application的handlers参数类似于Django的urls，只不过Django里面是view来处理，tornado是handler来处理。</p>
+<h1 id="2、js建立websocket错误403"><a href="#2、js建立websocket错误403" class="headerlink" title="2、js建立websocket错误403"></a>2、js建立websocket错误403</h1><p>原因：同源检查问题，在handler类里面添加方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_origin</span>(<span class="params">self, origin</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>可以暂时解决这个问题。</p>
 
           
         
@@ -408,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/259/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/259/">259</a><span class="page-number current">260</span><a class="page-number" href="/blog/page/261/">261</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/261/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/259/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/259/">259</a><span class="page-number current">260</span><a class="page-number" href="/blog/page/261/">261</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/261/">&gt;</a>
   </nav>
 
 
@@ -454,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -465,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

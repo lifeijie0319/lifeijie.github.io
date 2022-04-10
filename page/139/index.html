@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/js/jquery/jquery_mobile%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" itemprop="url">db2表空间管理</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/js/jquery/jquery_mobile%E6%8A%80%E5%B7%A7/" itemprop="url">jquery mobile 常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:36+08:00">
                 2021-12-04
               </time>
             
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/blog/categories/language/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/js/jquery/" itemprop="url" rel="index">
+                    <span itemprop="name">jquery</span>
                   </a>
                 </span>
 
@@ -345,13 +356,11 @@
       
         
           
-            <h1 id="查看表空间"><a href="#查看表空间" class="headerlink" title="查看表空间"></a>查看表空间</h1><ol>
-<li>查看表空间概况<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES</span><br></pre></td></tr></table></figure></li>
-<li>查看表空间详情<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES SHOW DETAIL</span><br></pre></td></tr></table></figure>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2>删除表报错<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DB21034E  The command was processed as an SQL statement because it was not a </span><br><span class="line">valid Command Line Processor command.  During SQL processing it returned:</span><br><span class="line">SQL0290N  Table space access is not allowed.  SQLSTATE&#x3D;55039</span><br></pre></td></tr></table></figure>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2>表空间状态不正常，为Backup pending<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2>备份数据库或表空间。<br>备份数据库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 backup database xxxxx </span><br></pre></td></tr></table></figure>
-备份表空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 force applications all &amp; db2 backup database xxx tablespace xxx</span><br></pre></td></tr></table></figure></li>
-</ol>
+            <h1 id="缓存页面"><a href="#缓存页面" class="headerlink" title="缓存页面"></a>缓存页面</h1><pre><code>在page容器上添加属性data-dom-cache=&quot;true&quot;即可实现</code></pre>
+<h1 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h1><pre><code>在链接上添加属性data-prefetch=&quot;true&quot;即可实现预加载</code></pre>
+<h1 id="jquery-mobile的页面机制与事件"><a href="#jquery-mobile的页面机制与事件" class="headerlink" title="jquery mobile的页面机制与事件"></a>jquery mobile的页面机制与事件</h1><pre><code>jquery mobile的页面机制主要分两种，一是单页，而是多页。
+单页就是你在一个html页面里面把所有需要用到的page都写在里面了，这个时候页面之间的转场一个可以靠 a标签里的href，里面是想要转到页面的ID。单页里面写到的page都会一直存在于dom中，所以不存在缓存的问题，页面转换时也不需要ajax去获取新加载页面的内容。缺点就是当需求比较多时，在一个html页面写完整个app需要的page和相应的js，页面会显得臃肿而且不好维护。那么我们更多的是使用多页的机制，把每个page独立写到不同的html页面里，在需要转到对应页面时，才通过ajax去获取页面的内容和js，这样使我们的app代码部署就如我们网站开发一样，一个页面一个html文件。这样就会存在一个问题，因为每个page不像单页一样写在一起，jquery mobile的机制只会把需要显示的page加载到dom里面，当离开这个page时，会自动把这个page的dom清除掉，假如你想要保留这个page在dom里，以后再次显示，需要加上 data-dom-cache=&quot;true&quot; 属性。解决了page缓存的问题，那么又会遇到page里的js问题。例如我希望把page的dom缓存下来，但是我又希望每次这个page显示的时候，触发执行一些js，那么这个时候我们在对应page的事件处理时，就不能用 pageinit而是要用pageshow了，因为pageinit只在这个page从dom加载进来时触发，如果page缓存了，那么pageinit只会在第一次时触发。
+除了pageshow，还有pagehide、pageremove、pagebeforeshow、pagebeforehide等等事件响应，都是可以针对不同的需求使用的。</code></pre>
 
           
         
@@ -391,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/138/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/blog/page/140/">140</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/140/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/138/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/138/">138</a><span class="page-number current">139</span><a class="page-number" href="/blog/page/140/">140</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/140/">&gt;</a>
   </nav>
 
 
@@ -437,7 +446,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

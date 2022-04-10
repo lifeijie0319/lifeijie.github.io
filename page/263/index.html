@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/security/M2Crypto/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/centos/selinux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/security/M2Crypto/" itemprop="url">M2Crypto安装问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/linux/centos/selinux/" itemprop="url">selinux</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/blog/categories/system/linux/centos/" itemprop="url" rel="index">
+                    <span itemprop="name">centos</span>
                   </a>
                 </span>
 
@@ -367,10 +356,12 @@
       
         
           
-            <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>问题：SWIG/_m2crypto_wrap.c:3557:25: 致命错误：openssl/err.h：没有那个文件或目录<br>原因：没有安装swig<br>解决：yum install swig  </p>
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>问题：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SWIG&#x2F;_m2crypto.i</span><br><span class="line">SWIG&#x2F;_m2crypto.i:54: Error: Unable to find &#39;openssl&#x2F;opensslv.h&#39;</span><br><span class="line">SWIG&#x2F;_m2crypto.i:60: Error: Unable to find &#39;openssl&#x2F;safestack.h&#39;</span><br><span class="line">SWIG&#x2F;_evp.i:12: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_rc4.i:5: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br><span class="line">SWIG&#x2F;_ec.i:7: Error: Unable to find &#39;openssl&#x2F;opensslconf.h&#39;</span><br></pre></td></tr></table></figure>
-<p>解决：yum install openssl-devel</p>
+            <h1 id="查看状态："><a href="#查看状态：" class="headerlink" title="查看状态："></a>查看状态：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getenforce</span><br></pre></td></tr></table></figure>
+<h1 id="临时禁用"><a href="#临时禁用" class="headerlink" title="临时禁用"></a>临时禁用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<h1 id="永久禁用"><a href="#永久禁用" class="headerlink" title="永久禁用"></a>永久禁用</h1><ol>
+<li>打开文件/etc/selinux/config</li>
+<li>修改SELINUX=disabled</li>
+</ol>
 
           
         
@@ -410,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/262/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/262/">262</a><span class="page-number current">263</span><a class="page-number" href="/blog/page/264/">264</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/264/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/262/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/262/">262</a><span class="page-number current">263</span><a class="page-number" href="/blog/page/264/">264</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/264/">&gt;</a>
   </nav>
 
 
@@ -456,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -467,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

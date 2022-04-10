@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/signal%E5%AE%9E%E7%8E%B0%E5%87%BD%E6%95%B0%E8%B6%85%E6%97%B6/" itemprop="url">python使用signal模块实现函数超时控制</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/" itemprop="url">rsa的密钥位数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/security/rsa/" itemprop="url" rel="index">
+                    <span itemprop="name">rsa</span>
                   </a>
                 </span>
 
@@ -356,8 +345,8 @@
       
         
           
-            <p>signal模块可以实现函数超时控制，但是windows平台不支持。   </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">time_limit</span>(<span class="params">interval</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wraps</span>(<span class="params">func</span>):</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">handler</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            <span class="keyword">raise</span> RuntimeError()</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">deco</span>(<span class="params">*args, **kwargs</span>):</span></span><br><span class="line">            signal.signal(signal.SIGALRM, handler) <span class="comment"># 注册监听事件</span></span><br><span class="line">            signal.alarm(interval) <span class="comment"># 设置闹钟时间为interval秒</span></span><br><span class="line">            res = func(*args, **kwargs)</span><br><span class="line">            signal.alarm(<span class="number">0</span>) <span class="comment"># 关闭闹钟</span></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">return</span> deco</span><br><span class="line">    <span class="keyword">return</span> wraps</span><br></pre></td></tr></table></figure>
+            <h1 id="常用的1024位-2048位的rsa密钥长度到底是谁的长度"><a href="#常用的1024位-2048位的rsa密钥长度到底是谁的长度" class="headerlink" title="常用的1024位/2048位的rsa密钥长度到底是谁的长度"></a>常用的1024位/2048位的rsa密钥长度到底是谁的长度</h1><p>rsa有三个重要的大数：公钥指数e、私钥指数d和模值n。我们说的“密钥长度”一般只是指模值的位长度。参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh2075/article/details/79718285">https://blog.csdn.net/zxh2075/article/details/79718285</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/caidi/p/14794952.html">https://www.cnblogs.com/caidi/p/14794952.html</a></p>
+
           
         
       
@@ -396,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/229/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/229/">229</a><span class="page-number current">230</span><a class="page-number" href="/blog/page/231/">231</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/231/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/229/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/229/">229</a><span class="page-number current">230</span><a class="page-number" href="/blog/page/231/">231</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/231/">&gt;</a>
   </nav>
 
 
@@ -442,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

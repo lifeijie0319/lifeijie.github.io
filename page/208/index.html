@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/vi/vi%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" itemprop="url">dh交换算法原理</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/vi/vi%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">vi使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/security/dh/" itemprop="url" rel="index">
-                    <span itemprop="name">dh</span>
+                  <a href="/blog/categories/tools/vi/" itemprop="url" rel="index">
+                    <span itemprop="name">vi</span>
                   </a>
                 </span>
 
@@ -345,10 +345,16 @@
       
         
           
-            <h1 id="交换过程描述"><a href="#交换过程描述" class="headerlink" title="交换过程描述"></a>交换过程描述</h1><p>甲乙双方按照dh算法交换密钥。<br>首先，甲生成随机数x，底数为d，一个大素数p，根据算法生成A = d ^ x % p。之后甲将d、p、A传递给乙。<br>乙收到后生成随机数y，计算B = d ^ y % p, C1 = A ^ y % p，将B传回给甲。<br>甲收到B后计算C2 = B ^ x % p。<br>C1和C2就是协商得到的密钥。可以证明C1=C2。</p>
-<h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><p>按照上述过程描述，欲证C1 = C2，C1 = A ^ y % p = (d ^ x % p) ^ y % p，C2 = (d ^ y % p) ^ x % p。<br>假设d ^ x = pn + a，则<br>C1 = (d ^ x % p) ^ y % p = a ^ y % p = (d ^ x - pn) ^ y % p<br>根据二项式定理，得到C1 = d ^ (xy) % p，同理，C2 = d ^ (xy) % p = C1。</p>
-<h1 id="算法的可靠性"><a href="#算法的可靠性" class="headerlink" title="算法的可靠性"></a>算法的可靠性</h1><p>由交换过程可以知道，攻击者可以拿到d、p、A、B，要破解算法，关键要拿到x、y。以x为例，A = d ^ x % p，现在就是已知其它三个变量求x。已知在数学上，当p很大时，很难计算x（有限群的离散对数问题），这就保证了该算法的可靠性。</p>
-
+            <h1 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h1><p>i进入编辑模式，:进入命令模式，v进入视图模式</p>
+<h1 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h1><p>v进入视图模式，选中要转换的代码。:u或者:U转换</p>
+<h1 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h1><h2 id="单行替换"><a href="#单行替换" class="headerlink" title="单行替换"></a>单行替换</h2><p>s/欲替换的内容(可以是正则)/替换后的内容(可以是正则)/g</p>
+<h2 id="多行替换"><a href="#多行替换" class="headerlink" title="多行替换"></a>多行替换</h2><p>:start,:ends/欲替换的内容(可以是正则)/替换后的内容(可以是正则)/g<br>:start 数字，表示替换的查找起始行<br>:end 数字，表示替换的查找结束行</p>
+<h1 id="正则替换时替换后的内容使用替换前的内容"><a href="#正则替换时替换后的内容使用替换前的内容" class="headerlink" title="正则替换时替换后的内容使用替换前的内容"></a>正则替换时替换后的内容使用替换前的内容</h1><p>替换前的内容使用()包围，替换后使用:num指代替换前的第num个括号内的内容，num从1开始，比如把文中的所有字符串“abc……xyz”替换为“xyz……abc”可以有下列写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:%s&#x2F;abc\(.*\)xyz&#x2F;xyz\1abc&#x2F;g</span><br><span class="line">:%s&#x2F;\(abc\)\(.*\)\(xyz\)&#x2F;\3\2\1&#x2F;g</span><br></pre></td></tr></table></figure>
+<h1 id="查找或者替换时不区分大小写"><a href="#查找或者替换时不区分大小写" class="headerlink" title="查找或者替换时不区分大小写"></a>查找或者替换时不区分大小写</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>查找或替换时的表达式末尾添加\c</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ic</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase</span><br></pre></td></tr></table></figure>
           
         
       
@@ -387,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/207/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/207/">207</a><span class="page-number current">208</span><a class="page-number" href="/blog/page/209/">209</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/209/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/207/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/207/">207</a><span class="page-number current">208</span><a class="page-number" href="/blog/page/209/">209</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/209/">&gt;</a>
   </nav>
 
 
@@ -433,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

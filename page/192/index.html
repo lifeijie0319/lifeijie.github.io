@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" itemprop="url">nginx健康检查</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
-                    <span itemprop="name">index</span>
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -356,8 +345,13 @@
       
         
           
-            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
-<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
+            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html">https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html</a></p>
+<h1 id="被动检查"><a href="#被动检查" class="headerlink" title="被动检查"></a>被动检查</h1><p>利用nginx自带模块ngx_http_proxy_module和ngx_http_upstream_module对后端节点做健康检查</p>
+<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><ol>
+<li>检测server失败时，请求会转到下一个正常server。</li>
+<li>测试发现，max_fails只在服务由正常状态转成down时生效，如果服务已经被标记成down，那么只会检测一次。</li>
+</ol>
+<h1 id="主动检查"><a href="#主动检查" class="headerlink" title="主动检查"></a>主动检查</h1><p>利用nginx_upstream_check_module模块对后端节点做健康检查</p>
 
           
         
@@ -397,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/191/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/191/">191</a><span class="page-number current">192</span><a class="page-number" href="/blog/page/193/">193</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/193/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/191/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/191/">191</a><span class="page-number current">192</span><a class="page-number" href="/blog/page/193/">193</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/193/">&gt;</a>
   </nav>
 
 
@@ -443,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

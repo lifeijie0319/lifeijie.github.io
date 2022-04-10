@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" itemprop="url">nginx健康检查</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/" itemprop="url">date_format函数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,13 +345,40 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html">https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html</a></p>
-<h1 id="被动检查"><a href="#被动检查" class="headerlink" title="被动检查"></a>被动检查</h1><p>利用nginx自带模块ngx_http_proxy_module和ngx_http_upstream_module对后端节点做健康检查</p>
-<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><ol>
-<li>检测server失败时，请求会转到下一个正常server。</li>
-<li>测试发现，max_fails只在服务由正常状态转成down时生效，如果服务已经被标记成down，那么只会检测一次。</li>
-</ol>
-<h1 id="主动检查"><a href="#主动检查" class="headerlink" title="主动检查"></a>主动检查</h1><p>利用nginx_upstream_check_module模块对后端节点做健康检查</p>
+            <h1 id="日期格式化函数："><a href="#日期格式化函数：" class="headerlink" title="日期格式化函数："></a>日期格式化函数：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATE_FORMAT(<span class="type">date</span>,format)</span><br></pre></td></tr></table></figure>
+<h1 id="format参数"><a href="#format参数" class="headerlink" title="format参数"></a>format参数</h1><ul>
+<li>%a    缩写星期名</li>
+<li>%b    缩写月名</li>
+<li>%c    月，数值</li>
+<li>%D    带有英文前缀的月中的天</li>
+<li>%d    月的天，数值(00-31)</li>
+<li>%e    月的天，数值(0-31)</li>
+<li>%f    微秒</li>
+<li>%H    小时 (00-23)</li>
+<li>%h    小时 (01-12)</li>
+<li>%I    小时 (01-12)</li>
+<li>%i    分钟，数值(00-59)</li>
+<li>%j    年的天 (001-366)</li>
+<li>%k    小时 (0-23)</li>
+<li>%l    小时 (1-12)</li>
+<li>%M    月名</li>
+<li>%m    月，数值(00-12)</li>
+<li>%p    AM 或 PM</li>
+<li>%r    时间，12-小时（hh:mm:ss AM 或 PM）</li>
+<li>%S    秒(00-59)</li>
+<li>%s    秒(00-59)</li>
+<li>%T    时间, 24-小时 (hh:mm:ss)</li>
+<li>%U    周 (00-53) 星期日是一周的第一天</li>
+<li>%u    周 (00-53) 星期一是一周的第一天</li>
+<li>%V    周 (01-53) 星期日是一周的第一天，与 %X 使用</li>
+<li>%v    周 (01-53) 星期一是一周的第一天，与 %x 使用</li>
+<li>%W    星期名</li>
+<li>%w    周的天 （0=星期日, 6=星期六）</li>
+<li>%X    年，其中的星期日是周的第一天，4 位，与 %V 使用</li>
+<li>%x    年，其中的星期一是周的第一天，4 位，与 %v 使用</li>
+<li>%Y    年，4 位</li>
+<li>%y    年，2 位</li>
+</ul>
 
           
         
@@ -391,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/166/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/blog/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/168/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/166/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/blog/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/168/">&gt;</a>
   </nav>
 
 
@@ -437,7 +464,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +475,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

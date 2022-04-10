@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/print%E7%94%9F%E4%BA%A7%E9%83%A8%E7%BD%B2OSError/" itemprop="url">print生产部署OSError</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" itemprop="url">dh交换算法原理</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/security/dh/" itemprop="url" rel="index">
+                    <span itemprop="name">dh</span>
                   </a>
                 </span>
 
@@ -356,12 +345,9 @@
       
         
           
-            <h1 id="错误描述："><a href="#错误描述：" class="headerlink" title="错误描述："></a>错误描述：</h1><p>生产部署简单tornado服务之后，退出控制台，外部访问执行到print出错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OSError: [Error 5] Input&#x2F;output error</span><br></pre></td></tr></table></figure>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python xx.py &amp; </span><br></pre></td></tr></table></figure>
-<p>方式部署python服务，ssh断开之后，print语句没地方输出，就error了</p>
-<h1 id="处理方式："><a href="#处理方式：" class="headerlink" title="处理方式："></a>处理方式：</h1><p>1、使用shell重定向，或者nohup<br>2、删除替换所有的print语句</p>
+            <h1 id="交换过程描述"><a href="#交换过程描述" class="headerlink" title="交换过程描述"></a>交换过程描述</h1><p>甲乙双方按照dh算法交换密钥。<br>首先，甲生成随机数x，底数为d，一个大素数p，根据算法生成A = d ^ x % p。之后甲将d、p、A传递给乙。<br>乙收到后生成随机数y，计算B = d ^ y % p, C1 = A ^ y % p，将B传回给甲。<br>甲收到B后计算C2 = B ^ x % p。<br>C1和C2就是协商得到的密钥。可以证明C1=C2。</p>
+<h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><p>按照上述过程描述，欲证C1 = C2，C1 = A ^ y % p = (d ^ x % p) ^ y % p，C2 = (d ^ y % p) ^ x % p。<br>假设d ^ x = pn + a，则<br>C1 = (d ^ x % p) ^ y % p = a ^ y % p = (d ^ x - pn) ^ y % p<br>根据二项式定理，得到C1 = d ^ (xy) % p，同理，C2 = d ^ (xy) % p = C1。</p>
+<h1 id="算法的可靠性"><a href="#算法的可靠性" class="headerlink" title="算法的可靠性"></a>算法的可靠性</h1><p>由交换过程可以知道，攻击者可以拿到d、p、A、B，要破解算法，关键要拿到x、y。以x为例，A = d ^ x % p，现在就是已知其它三个变量求x。已知在数学上，当p很大时，很难计算x（有限群的离散对数问题），这就保证了该算法的可靠性。</p>
 
           
         
@@ -401,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/228/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/228/">228</a><span class="page-number current">229</span><a class="page-number" href="/blog/page/230/">230</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/230/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/228/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/228/">228</a><span class="page-number current">229</span><a class="page-number" href="/blog/page/230/">230</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/230/">&gt;</a>
   </nav>
 
 
@@ -447,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -458,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/software_enginering/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81SOA%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/database/%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/" itemprop="url">乐观锁与悲观锁</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/software_enginering/%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81SOA%E4%B8%8E%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url">分布式、SOA与微服务</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T15:28:02+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -282,6 +282,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/software-enginering/" itemprop="url" rel="index">
+                    <span itemprop="name">software_enginering</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,8 +334,17 @@
       
         
           
-            <h1 id="什么是乐观锁和悲观锁"><a href="#什么是乐观锁和悲观锁" class="headerlink" title="什么是乐观锁和悲观锁"></a>什么是乐观锁和悲观锁</h1><p>悲观锁指查询时先用排他锁锁住要修改的行，修改完成后释放锁。而乐观锁是查询时不加锁，乐观地认为在查询到更新这个阶段没有其它事务修改数据行，在更新时再判断数据库中的记录是否是之前查询时的状态，如果是的话进行更新，如果不是的话重试（自旋操作）。<br>乐观锁能够支持更高的并发，但是会有失败的情况，适合读多写少的情况。</p>
-<h1 id="乐观锁的实现方式"><a href="#乐观锁的实现方式" class="headerlink" title="乐观锁的实现方式"></a>乐观锁的实现方式</h1><p>一般通过在数据表中添加version字段，每次更新的时候version+1。假设查询出的结果version为1，然后更新的时候version也作为更新条件，更新成功说明这期间记录没有改变，更新失败说明这期间又其它更新导致version变化了。</p>
+            <h1 id="什么是分布式系统"><a href="#什么是分布式系统" class="headerlink" title="什么是分布式系统"></a>什么是分布式系统</h1><h2 id="wikipedia"><a href="#wikipedia" class="headerlink" title="wikipedia"></a>wikipedia</h2><p>A distributed system is a system whose components are located on different networked computers, which communicate and coordinate their actions by passing messages to one another from any system</p>
+<h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p>分布式系统就是由分布在不同计算机节点上的进程通过通络通信协同完成任务的系统。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://github.com/aphyr/distsys-class">https://github.com/aphyr/distsys-class</a></p>
+<h1 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h1><p>SOA(Service Oriented Architecture)，面向服务架构，是一种软件架构设计方案。SOA将传统的单机应用拆分成各种不同的服务，并一般通过ESB(Enterprise Service Bus)将各个服务进行联结。ESB将网状的服务调用关系变成了总线型，并使用统一的交互规范(XML/SOAP/WSDL等)降低了服务间的耦合。</p>
+<h1 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h1><h2 id="什么是微服务架构"><a href="#什么是微服务架构" class="headerlink" title="什么是微服务架构"></a>什么是微服务架构</h2><p>微服务架构是指将单体应用拆分独立出一个个松耦合高内聚的服务，并进行统一管理。微服务需要满足这些特征：</p>
+<ul>
+<li>组件化 系统由单体应用拆分为一个个独立维护的软件单元，并运行在独立的进程上。组件向外提供服务，被其它组件以HTTP/RPC等方式调用。独立的软件单元含义包括独立的代码库、持久层以及测试部署运维等</li>
+<li>基础设施自动化 单体系统拆分后组件很多，一般借助容器技术和云平台来实现组件的管理</li>
+<li>持续改进 微服务架构的设计是随着业务发展不停变化的，比如有的服务逐渐复杂就可能进一步拆分<h2 id="微服务架构和分布式的关系"><a href="#微服务架构和分布式的关系" class="headerlink" title="微服务架构和分布式的关系"></a>微服务架构和分布式的关系</h2>微服务架构可以认为是分布式的一种具体实践。<h2 id="微服务架构和SOA的关系"><a href="#微服务架构和SOA的关系" class="headerlink" title="微服务架构和SOA的关系"></a>微服务架构和SOA的关系</h2>微服务架构是SOA思想的进一步演进，是传统SOA架构的新发展，进一步降低了服务间的耦合（比如微服务一般是独立的数据源，而传统SOA复用一个数据库）并去中心化。</li>
+</ul>
+<h1 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/457803728">https://zhuanlan.zhihu.com/p/457803728</a></p>
 
           
         
@@ -353,7 +384,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/2/">&lt;</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/4/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/2/">&lt;</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/4/">&gt;</a>
   </nav>
 
 
@@ -399,7 +430,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -410,7 +441,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

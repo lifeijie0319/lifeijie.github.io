@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/openssl/rsa/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/riak/install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/openssl/rsa/" itemprop="url">openssl rsa相关操作</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/riak/install/" itemprop="url">riak源码安装</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/openssl/" itemprop="url" rel="index">
-                    <span itemprop="name">openssl</span>
+                  <a href="/blog/categories/database/riak/" itemprop="url" rel="index">
+                    <span itemprop="name">riak</span>
                   </a>
                 </span>
 
@@ -345,10 +345,14 @@
       
         
           
-            <h1 id="openssl生成公私钥"><a href="#openssl生成公私钥" class="headerlink" title="openssl生成公私钥"></a>openssl生成公私钥</h1><h2 id="生成-RSA-私钥"><a href="#生成-RSA-私钥" class="headerlink" title="生成 RSA 私钥"></a>生成 RSA 私钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out rsa_private_key.pem 1024</span><br></pre></td></tr></table></figure>
-<h2 id="生成-RSA-公钥"><a href="#生成-RSA-公钥" class="headerlink" title="生成 RSA 公钥"></a>生成 RSA 公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</span><br></pre></td></tr></table></figure>
-<p>注：这样命令生成的公钥是pkcs8格式的，使用的私钥格式可以是pkcs1或者pkcs8</p>
-<h1 id="获取私钥长度"><a href="#获取私钥长度" class="headerlink" title="获取私钥长度"></a>获取私钥长度</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in secret.key -text -noout | grep &quot;Private-Key&quot;</span><br></pre></td></tr></table></figure>
+            <h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>sudo yum install gcc gcc-c++ glibc-devel make git pam-devel</p>
+<h1 id="下载解压"><a href="#下载解压" class="headerlink" title="下载解压"></a>下载解压</h1><p>wget <a target="_blank" rel="noopener" href="http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz">http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz</a></p>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>make rel</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p><img src="/blog/images/database/riak/install/1.png"></p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>git版本低，不再被支持。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Please upgrade your git client.</span><br><span class="line">GitHub.com no longer supports git over dumb-http: https:&#x2F;&#x2F;github.com&#x2F;blog&#x2F;809-git-dumb-http-transport-to-be-turned-off-in-90-days</span><br></pre></td></tr></table></figure>
+<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>yum remove当前git，安装新版本git</p>
+
           
         
       
@@ -387,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/175/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><span class="page-number current">176</span><a class="page-number" href="/blog/page/177/">177</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/177/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/175/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><span class="page-number current">176</span><a class="page-number" href="/blog/page/177/">177</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/177/">&gt;</a>
   </nav>
 
 
@@ -433,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

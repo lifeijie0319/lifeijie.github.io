@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/js/jquery/jquery_mobile%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/python/basic/concurrent/experience1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/js/jquery/jquery_mobile%E6%8A%80%E5%B7%A7/" itemprop="url">jquery mobile 常用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/python/basic/concurrent/experience1/" itemprop="url">多线程no attribute error排查</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:36+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
+                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -317,8 +317,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/js/jquery/" itemprop="url" rel="index">
-                    <span itemprop="name">jquery</span>
+                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/basic/concurrent/" itemprop="url" rel="index">
+                    <span itemprop="name">concurrent</span>
                   </a>
                 </span>
 
@@ -356,11 +367,11 @@
       
         
           
-            <h1 id="缓存页面"><a href="#缓存页面" class="headerlink" title="缓存页面"></a>缓存页面</h1><pre><code>在page容器上添加属性data-dom-cache=&quot;true&quot;即可实现</code></pre>
-<h1 id="预加载"><a href="#预加载" class="headerlink" title="预加载"></a>预加载</h1><pre><code>在链接上添加属性data-prefetch=&quot;true&quot;即可实现预加载</code></pre>
-<h1 id="jquery-mobile的页面机制与事件"><a href="#jquery-mobile的页面机制与事件" class="headerlink" title="jquery mobile的页面机制与事件"></a>jquery mobile的页面机制与事件</h1><pre><code>jquery mobile的页面机制主要分两种，一是单页，而是多页。
-单页就是你在一个html页面里面把所有需要用到的page都写在里面了，这个时候页面之间的转场一个可以靠 a标签里的href，里面是想要转到页面的ID。单页里面写到的page都会一直存在于dom中，所以不存在缓存的问题，页面转换时也不需要ajax去获取新加载页面的内容。缺点就是当需求比较多时，在一个html页面写完整个app需要的page和相应的js，页面会显得臃肿而且不好维护。那么我们更多的是使用多页的机制，把每个page独立写到不同的html页面里，在需要转到对应页面时，才通过ajax去获取页面的内容和js，这样使我们的app代码部署就如我们网站开发一样，一个页面一个html文件。这样就会存在一个问题，因为每个page不像单页一样写在一起，jquery mobile的机制只会把需要显示的page加载到dom里面，当离开这个page时，会自动把这个page的dom清除掉，假如你想要保留这个page在dom里，以后再次显示，需要加上 data-dom-cache=&quot;true&quot; 属性。解决了page缓存的问题，那么又会遇到page里的js问题。例如我希望把page的dom缓存下来，但是我又希望每次这个page显示的时候，触发执行一些js，那么这个时候我们在对应page的事件处理时，就不能用 pageinit而是要用pageshow了，因为pageinit只在这个page从dom加载进来时触发，如果page缓存了，那么pageinit只会在第一次时触发。
-除了pageshow，还有pagehide、pageremove、pagebeforeshow、pagebeforehide等等事件响应，都是可以针对不同的需求使用的。</code></pre>
+            <h1 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h1><p>有一个类A，引用了加解密类B，B使用装饰器设计为单例模式。多线程实例化类A时，有时候出现找不到B实例的某个属性的问题。报错类似于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: &#39;A&#39; object has no attribute &#39;pri_key&#39;</span><br></pre></td></tr></table></figure>
+<h1 id="关键代码结构"><a href="#关键代码结构" class="headerlink" title="关键代码结构"></a>关键代码结构</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SHAWithRSA</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, sha: <span class="built_in">str</span>, pri_key=<span class="literal">None</span>, pub_key=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.sha = sha</span><br><span class="line">        self.pub_key = pub_key</span><br><span class="line">        self.pri_key = pri_key</span><br><span class="line">        self.sha_func = <span class="built_in">getattr</span>(hashlib, self.sha)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">SHAWithRSA</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        pri_key_path = os.path.join(config.ROOT_DIR, <span class="string">&#x27;asset/file_&#123;&#125;/pri.pem&#x27;</span>.<span class="built_in">format</span>(config.ENV))</span><br><span class="line">        pub_key_path = os.path.join(config.ROOT_DIR, <span class="string">&#x27;asset/file_&#123;&#125;/pub.pem&#x27;</span>.<span class="built_in">format</span>(config.ENV))</span><br><span class="line">        pri_key = M2Crypto.RSA.load_key(pri_key_path)</span><br><span class="line">        pub_key = M2Crypto.RSA.load_pub_key(pub_key_path)</span><br><span class="line">        <span class="built_in">super</span>().__init__(<span class="string">&#x27;md5&#x27;</span>, pri_key, pub_key)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, logger=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.logger = logger <span class="keyword">if</span> logger <span class="keyword">else</span> LOGGER</span><br><span class="line">        self.aes_mode = <span class="string">&#x27;CFB&#x27;</span></span><br><span class="line">        self.aes_iv = <span class="string">b&#x27;0000000000000000&#x27;</span></span><br><span class="line">        self.aes_padding = <span class="string">&#x27;PKCS7&#x27;</span></span><br><span class="line">        self.rsa = A()</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<h1 id="问题排查与分析"><a href="#问题排查与分析" class="headerlink" title="问题排查与分析"></a>问题排查与分析</h1><p>通过在singleton装饰器内以及A的初始化步骤中打印日志，发现出错的时候，假设线程1进行A的实例化，singleton中的__new__即实例化已经执行，但是并没有在本线程内完成__init__初始化，就切换到线程2，线程2进行A的实例化，按照单例模式原理，发现A类已经有实例，所以会直接返回实例，但是该实例是没有初始化完成的，所以对于线程2，部分属性是缺失的，访问会报上诉错误。</p>
+<h1 id="结论与解决方式"><a href="#结论与解决方式" class="headerlink" title="结论与解决方式"></a>结论与解决方式</h1><p>综上所述，上述属性缺失错误是由于在线程内进行对象实例化和初始化，但是初始化未完成时线程切换导致的。<br>考虑在线程外完成对象的实例化和初始化。</p>
 
           
         
@@ -400,7 +411,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/111/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/111/">111</a><span class="page-number current">112</span><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/113/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/111/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/111/">111</a><span class="page-number current">112</span><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/113/">&gt;</a>
   </nav>
 
 
@@ -446,7 +457,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +468,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

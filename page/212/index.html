@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/windows/windows%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/windows/windows%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/" itemprop="url">windows常见网络问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/" itemprop="url">virtualbox迁移踩坑</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/windows/" itemprop="url" rel="index">
-                    <span itemprop="name">windows</span>
+                  <a href="/blog/categories/tools/virtualbox/" itemprop="url" rel="index">
+                    <span itemprop="name">virtualbox</span>
                   </a>
                 </span>
 
@@ -345,8 +345,21 @@
       
         
           
-            <h1 id="ping不通"><a href="#ping不通" class="headerlink" title="ping不通"></a>ping不通</h1><p>情景一：网络不通<br>情景二：防火墙-高级-入站规则，开启：文件和打印机共享(回显请求 - ICMPv4-In)</p>
-<h1 id="telnet不通"><a href="#telnet不通" class="headerlink" title="telnet不通"></a>telnet不通</h1><p>情景一：telnet客户端没开<br>解决：控制面板-程序和功能-启用或关闭windows功能-勾选Telnet客户端-确定<br>情景二：telnet的对象防火墙没关</p>
+            <h1 id="1-vdi无法使用"><a href="#1-vdi无法使用" class="headerlink" title="1 vdi无法使用"></a>1 vdi无法使用</h1><pre><code>问题： VD: error VERR_PATH_NOT_FOUND opening image file
+处理 ：settings-Storage-Controller
+先把原来的vdi remove，然后重新添加vdi</code></pre>
+<h1 id="2-vdi无法添加"><a href="#2-vdi无法添加" class="headerlink" title="2 vdi无法添加"></a>2 vdi无法添加</h1><p>问题：Cannot register the hard disk … with UUID … already exists<br>处理：</p>
+<h2 id="2-1-进入virtualbox安装目录"><a href="#2-1-进入virtualbox安装目录" class="headerlink" title="2.1 进入virtualbox安装目录"></a>2.1 进入virtualbox安装目录</h2><h2 id="2-2-打开cmd，执行"><a href="#2-2-打开cmd，执行" class="headerlink" title="2.2 打开cmd，执行"></a>2.2 打开cmd，执行</h2><p>VBoxManage internalcommands sethduuid $vdi路径</p>
+<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>问题： VT-x is not available (VERR_VMX_NO_VMX).  返回 代码: E_FAIL (0x80004005) 组件: ConsoleWrap 界面: IConsole {872da645-4a9b-1727-bee2-5585105b9eed}<br>原因： Hyper-V与virtualbox冲突<br>解决：  </p>
+<ol>
+<li>首先，管理员身份打开提示符。  </li>
+<li>输入 bcdedit 并回车，找到hypervisorlaunchtype选项发现为auto</li>
+<li>输入命令bcdedit /set hypervisorlaunchtype off  </li>
+<li>重启电脑  </li>
+</ol>
+<h2 id="bcdedit是什么"><a href="#bcdedit是什么" class="headerlink" title="bcdedit是什么"></a>bcdedit是什么</h2><p>bcdedit 是一个启动选项编辑工具，用来管理启动设置。</p>
+<p>BCDEdit 不是一个运行于图形界面下的程序，而是一个命令行工具，该文件 (Bcdedit.exe) 位于 “\Windows\System32” 目录下。通过命令行工具 Bcdedit ，我们可以添加、删除及修改 BCD (Boot Configuration Data) 中的对象。在 BCD 中，每个对象均具有唯一的 GUID (Globally Unique Identifier : 全局唯一标识符 ) ，如系统中的每块硬盘、每个分区的 GUID ( 全局唯一标识符 ) 均不相同。</p>
+<h2 id="Hyper-V-是什么"><a href="#Hyper-V-是什么" class="headerlink" title="Hyper-V 是什么"></a>Hyper-V 是什么</h2><p>Hyper-V是微软的一款虚拟化产品，是微软第一个采用类似Vmware和Citrix开源Xen一样的基于hypervisor的技术。这也意味着微软会更加直接地与市场先行者VMware展开竞争，但竞争的方式会有所不同。<br>Hyper-V是微软提出的一种系统管理程序虚拟化技术，能够实现桌面虚拟化 [1] 。</p>
 
           
         
@@ -386,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/211/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/blog/page/213/">213</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/213/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/211/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/blog/page/213/">213</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/213/">&gt;</a>
   </nav>
 
 
@@ -432,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -443,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

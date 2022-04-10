@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/swap%E7%A9%BA%E9%97%B4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/ssh/NAT/ssh%E8%BD%AC%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/swap%E7%A9%BA%E9%97%B4/" itemprop="url">swap空间</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/network/ssh/NAT/ssh%E8%BD%AC%E5%8F%91/" itemprop="url">ssh隧道</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/network/ssh/NAT/" itemprop="url" rel="index">
+                    <span itemprop="name">NAT</span>
                   </a>
                 </span>
 
@@ -345,19 +356,24 @@
       
         
           
-            <h1 id="什么是Swap-Swap什么时候会被使用到？"><a href="#什么是Swap-Swap什么时候会被使用到？" class="headerlink" title="什么是Swap?Swap什么时候会被使用到？"></a>什么是Swap?Swap什么时候会被使用到？</h1><p>我们都知道计算机系统在运行的时候会使用到RAM（Random Access Memory），当只有少数应用程序在运行时，系统会使用可用的RAM进行管理。但是如果有很多很多的程序在运行，那么就需要非常大容量RAM，这时候计算机RAM不够，应用程序就会崩溃。当RAM耗尽时，Swap交换空间会被系统使用。当RAM耗尽时，Linux系统使用部分硬盘内存并将其分配给正在运行的应用程序.<br>这听起来非常不错，这意味着如果我们如果分配50GBSwap交换空间，系统或许可以同时运行成百上千的应用程序？是这样么？大错特错！！！你知道的，程序运行速度十分重要；RAM访问数据的大小为纳秒级；SSD访问数据（以微秒为单位），而普通硬盘以毫秒为单位访问数据；这意味着RAM比SSD快1000倍，比普通HDD快100,000倍。如果应用程序过分依赖Swap交换空间，则其性能将下降，因为它无法以与RAM中相同的速度访问数据。<br>因此，完成相同任务可能需要几分钟才能完成任务，而不需要花费1秒钟完成任务。这将使应用程序几乎无用。这被称为计算术语中的颠簸。<br>Swap交换空间只是用来应急的，所以它的分配要适量。</p>
-<h1 id="应该分配多大的Swap交换空间"><a href="#应该分配多大的Swap交换空间" class="headerlink" title="应该分配多大的Swap交换空间"></a>应该分配多大的Swap交换空间</h1><p>现在回到这个最大的问题上，应该给Linux分配多少Swap空间才够。答案是没有一个确切的答案，不过倒是有一些建议，不同的人根据自己的实际情况分配交换空间的大小。<br>如果根据Red Hat的建议，他们建议是分配RAM 20%的换空间，也就是RAM是8GB，分配1.6GB交换空间。<br>CentOS建议如果RAM小于2GB，就分配和RAM同等大小的Swap交换空间。<br>如果RAM大于2GB，就分配2GB交换空间。<br>Ubuntu考虑到系统需要休眠，如果RAM小于1GB，Swap空间至少要和RAM一样大，甚至是要为RAM的两倍大小。如果RAM大于1GB，Swap交换空间应该至少等于RAM大小的平方根，并且最多为RAM大小的两倍。如果要休眠，Swap交换大小应该等于RAM的大小加上RAM大小的平方根。</p>
-<h1 id="查看swap空间"><a href="#查看swap空间" class="headerlink" title="查看swap空间"></a>查看swap空间</h1><p>方法一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep SwapTotal &#x2F;proc&#x2F;meminfo</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
-<h1 id="增加swap空间"><a href="#增加swap空间" class="headerlink" title="增加swap空间"></a>增加swap空间</h1><ol>
-<li>切换到root用户</li>
-<li>创建swap文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir &#x2F;swap &amp;&amp; cd &#x2F;swap</span><br><span class="line">$ fallocate -l 1G &#x2F;swapfile</span><br><span class="line">$ ls -lh &#x2F;swapfile</span><br></pre></td></tr></table></figure></li>
-<li>激活swap空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 600 swapfile</span><br><span class="line">$ mkswap swapfile</span><br><span class="line">$ swapon swapfile</span><br><span class="line">$ free -h</span><br></pre></td></tr></table></figure></li>
-<li>删除swap空间（可选）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ swapoff swapfile</span><br><span class="line">$ rm -rf  swapfile</span><br></pre></td></tr></table></figure></li>
-<li>保持swap空间，重启后仍然生效<br>打开/etc/fstab，添加/swap/swapfile /swap swap defaults 0 0</li>
-</ol>
+            <h1 id="ssh隧道的使用"><a href="#ssh隧道的使用" class="headerlink" title="ssh隧道的使用"></a>ssh隧道的使用</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>ssh正向代理又称端口转发、本地端口转发。ssh正向代理可以用来绕过一些网络限制。比如有三台机器A/B/C，A想要访问C，但是A-&gt;C不通，但是B和两台机器都通，那么可以使用B作为跳板，建立隧道。这种应用场景下，可以在B建立隧道如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L $PortB:$C:$PortC $username@$C</span><br></pre></td></tr></table></figure>
+<p>其中$PortB是B暴露的端口，$C是C的IP，$PortC是目标端口，然后可以在A机器上访问到C，以ssh访问为例，此时在A上执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p $PortB $username@$B</span><br></pre></td></tr></table></figure>
+<p>即可登录C。事实上，正向代理的基本语法是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L [bind_address:]port:host:hostport username@proxy</span><br></pre></td></tr></table></figure>
+<p>bind_address的含义如下：By default, the local port is bound in accordance with the GatewayPorts setting.  However, an explicit bind_address may be used to bind the connection to a specific address.  The bind_address of “localhost” indicates that the listening port be bound for local use only, while an empty address or ‘*’ indicates that the port should be available from all interfaces.<br>本质上，是在执行该命令的机器上建立了到host:port的通道，这条通道是通过proxy连接的。</p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>还是正向代理这个例子，这时候B-&gt;C也不通，好在C-&gt;B是通的，那么我们可以用反向代理，在C上设置反向代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R $PortB:localhost:$PortC $username@$B</span><br></pre></td></tr></table></figure>
+<p>之后A就可以通过B的$PortB访问C的$PortC，以ssh为例，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p $PortB $username@$B</span><br></pre></td></tr></table></figure>
+<p>反向代理的基本语法是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R [bind_address:]port:host:hostport username@remote</span><br></pre></td></tr></table></figure>
+<p>这里是建立了远端服务器到本地的隧道，port是remote远端服务器的对外端口，而host:hostport则是隧道的目的地，一般是本机或者本地局域网的其它机器（待试验）。<br>注意：反向代理默认关闭，需要进行设置并重启sshd服务：<br>1、在/etc/ssh/sshd_config中设置GatewayPorts yes<br>2、重启sshd服务service sshd restart</p>
+<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1><p>动态代理是在本地起了个socket服务器，所有流向本地代理端口的流量都会从隧道另一侧流出。动态代理的基本语法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D [bind_address:]port username@remote</span><br></pre></td></tr></table></figure>
+<h2 id="隧道常用参数"><a href="#隧道常用参数" class="headerlink" title="隧道常用参数"></a>隧道常用参数</h2><p>-f Fork into background after authentication<br>-N Do not execute a shell or command</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="http://events.jianshu.io/p/452358a9a7a3">http://events.jianshu.io/p/452358a9a7a3</a><br><a target="_blank" rel="noopener" href="https://blog.51cto.com/wavework/1608937">https://blog.51cto.com/wavework/1608937</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html</a><br><a target="_blank" rel="noopener" href="https://www.redhat.com/sysadmin/ssh-dynamic-port-forwarding">https://www.redhat.com/sysadmin/ssh-dynamic-port-forwarding</a></p>
 
           
         
@@ -397,7 +413,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/215/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/215/">215</a><span class="page-number current">216</span><a class="page-number" href="/blog/page/217/">217</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/217/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/215/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/215/">215</a><span class="page-number current">216</span><a class="page-number" href="/blog/page/217/">217</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/217/">&gt;</a>
   </nav>
 
 
@@ -443,7 +459,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +470,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

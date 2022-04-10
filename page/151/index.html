@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/riak/install/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/riak/install/" itemprop="url">riak源码安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/nc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">nc使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/riak/" itemprop="url" rel="index">
-                    <span itemprop="name">riak</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,13 +334,9 @@
       
         
           
-            <h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>sudo yum install gcc gcc-c++ glibc-devel make git pam-devel</p>
-<h1 id="下载解压"><a href="#下载解压" class="headerlink" title="下载解压"></a>下载解压</h1><p>wget <a target="_blank" rel="noopener" href="http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz">http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz</a></p>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>make rel</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p><img src="/blog/images/database/riak/install/1.png"></p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>git版本低，不再被支持。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Please upgrade your git client.</span><br><span class="line">GitHub.com no longer supports git over dumb-http: https:&#x2F;&#x2F;github.com&#x2F;blog&#x2F;809-git-dumb-http-transport-to-be-turned-off-in-90-days</span><br></pre></td></tr></table></figure>
-<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>yum remove当前git，安装新版本git</p>
+            <h1 id="nc传文件"><a href="#nc传文件" class="headerlink" title="nc传文件"></a>nc传文件</h1><h2 id="服务端（收文件）"><a href="#服务端（收文件）" class="headerlink" title="服务端（收文件）"></a>服务端（收文件）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc  -l  8889 &gt; recv.txt</span><br></pre></td></tr></table></figure>
+<h2 id="客户端（发文件）"><a href="#客户端（发文件）" class="headerlink" title="客户端（发文件）"></a>客户端（发文件）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc  192.168.XXX.XXX 8889 &lt; send.txt</span><br></pre></td></tr></table></figure>
+<p>【注】 先启动服务端，再启动客户端</p>
 
           
         
@@ -391,7 +376,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/150/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><span class="page-number current">151</span><a class="page-number" href="/blog/page/152/">152</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/152/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/150/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><span class="page-number current">151</span><a class="page-number" href="/blog/page/152/">152</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/152/">&gt;</a>
   </nav>
 
 
@@ -437,7 +422,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +433,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

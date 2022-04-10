@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/test/webbench/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/test/webbench/" itemprop="url">webbench使用基础</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" itemprop="url">使用kerl安装erlang环境</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/test/" itemprop="url" rel="index">
-                    <span itemprop="name">test</span>
+                  <a href="/blog/categories/language/erlang/" itemprop="url" rel="index">
+                    <span itemprop="name">erlang</span>
                   </a>
                 </span>
 
@@ -345,18 +345,15 @@
       
         
           
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>下载</li>
-<li>解压</li>
-<li>make<h2 id="问题描述与解决"><a href="#问题描述与解决" class="headerlink" title="问题描述与解决"></a>问题描述与解决</h2><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cc -Wall -ggdb -W -O   -c -o webbench.o webbench.c</span><br><span class="line">webbench.c: 在函数‘alarm_handler’中:</span><br><span class="line">webbench.c:77:31: 警告：未使用的参数‘signal’ [-Wunused-parameter]</span><br><span class="line"> static void alarm_handler(int signal)</span><br><span class="line">                               ^</span><br><span class="line">cc -Wall -ggdb -W -O  -o webbench webbench.o  </span><br><span class="line">ctags *.c</span><br><span class="line">&#x2F;bin&#x2F;sh: ctags: 未找到命令</span><br><span class="line">make: [tags] 错误 127 (忽略)</span><br></pre></td></tr></table></figure>
-<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4>缺少ctags命令引起的，需要安装ctags<h4 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h4><h5 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;prdownloads.sourceforge.NET&#x2F;ctags&#x2F;ctags-5.8.tar.gz</span><br><span class="line">cd ctags-5.8</span><br><span class="line">.&#x2F;configure &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<h5 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h5>yum install ctags</li>
-</ol>
-<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><h4 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">install -s webbench &#x2F;usr&#x2F;local&#x2F;bin  </span><br><span class="line">install -m 644 webbench.1 &#x2F;usr&#x2F;local&#x2F;man&#x2F;man1</span><br><span class="line">install: 无法创建普通文件&quot;&#x2F;usr&#x2F;local&#x2F;man&#x2F;man1&quot;: 没有那个文件或目录</span><br><span class="line">make: *** [install] 错误 1</span><br></pre></td></tr></table></figure>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>在/usr/local/下手动创建man、man/man1，重新到webbench-1.5下make &amp;&amp; make install即可。</p>
-<h3 id="问题三"><a href="#问题三" class="headerlink" title="问题三"></a>问题三</h3><h4 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cc -Wall -ggdb -W -O   -c -o webbench.o webbench.c</span><br><span class="line">make: cc: Command not found</span><br><span class="line">make: *** [webbench.o] Error 127</span><br></pre></td></tr></table></figure>
-<h4 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h4><p>没有安装gcc</p>
-<h4 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h4><p><a target="_blank" rel="noopener" href="http://blog.csdn.net/sxhong/article/details/18663171">http://blog.csdn.net/sxhong/article/details/18663171</a><br><a target="_blank" rel="noopener" href="http://www.open-open.com/lib/view/open1411113293125.html">http://www.open-open.com/lib/view/open1411113293125.html</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/jk110333/article/details/9190687">http://blog.csdn.net/jk110333/article/details/9190687</a></p>
+            <p>参考： kancloud.cn</p>
+<h1 id="kerl说明"><a href="#kerl说明" class="headerlink" title="kerl说明"></a>kerl说明</h1><p>kerl是一个OTP版本管理工具，可以在不同的OTP版本间随意切换。</p>
+<h1 id="安装kerl"><a href="#安装kerl" class="headerlink" title="安装kerl"></a>安装kerl</h1><p>curl -O <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod">https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod</a> a+x kerl</p>
+<h1 id="查看所有可用的版本"><a href="#查看所有可用的版本" class="headerlink" title="查看所有可用的版本"></a>查看所有可用的版本</h1><p>./kerl list releases</p>
+<h1 id="下载编译"><a href="#下载编译" class="headerlink" title="下载编译"></a>下载编译</h1><p>./kerl build $版本 </p>
+<h1 id="安装OTP"><a href="#安装OTP" class="headerlink" title="安装OTP"></a>安装OTP</h1><p>./kerl install $版本 $安装路径</p>
+<h1 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h1><p>. $安装路径/activate</p>
+<h1 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h1><p>kerl_deactivate</p>
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>./kerl delete installation/build $版本</p>
 
           
         
@@ -396,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/178/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/178/">178</a><span class="page-number current">179</span><a class="page-number" href="/blog/page/180/">180</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/180/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/178/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/178/">178</a><span class="page-number current">179</span><a class="page-number" href="/blog/page/180/">180</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/180/">&gt;</a>
   </nav>
 
 
@@ -442,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/23/language/java/basic/concurrent/pool/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/14/network/tcp/tcp%E5%B8%B8%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/23/language/java/basic/concurrent/pool/" itemprop="url">线程池</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/14/network/tcp/tcp%E5%B8%B8%E8%AF%86/" itemprop="url">tcp常识</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-23T09:12:55+08:00">
-                2022-02-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T16:18:43+08:00">
+                2022-03-14
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
+                    <span itemprop="name">tcp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,33 +345,11 @@
       
         
           
-            <h1 id="四种线程池"><a href="#四种线程池" class="headerlink" title="四种线程池"></a>四种线程池</h1><p>java提供四种线程池，分别为</p>
+            <h1 id="tcp粘包"><a href="#tcp粘包" class="headerlink" title="tcp粘包"></a>tcp粘包</h1><p>tcp是传输层协议，面向数据流的，而将流数据解析成数据报文是应用层的任务。tcp粘包其实是个伪命题。<br>所谓“tcp粘包”一般是两个原因：</p>
 <ol>
-<li>newSingleThreadExecutor 创建只有一个线程的线程池，当该线程正繁忙时，对于新任务会进入阻塞队列中(无界的阻塞队列)</li>
-<li>newFixedThreadPool 创建可容纳固定数量线程的池子，每个线程的存活时间是无限的，当池子满了就不再添加线程了；如果池中的所有线程均在繁忙状态，对于新任务会进入阻塞队列中(无界的阻塞队列)</li>
-<li>newScheduledThreadPool 创建一个固定大小的线程池，线程池内线程存活时间无限制，线程池可以支持定时及周期性任务执行，如果所有线程均处于繁忙状态，对于新任务会进入DelayedWorkQueue队列中，这是一种按照超时时间排序的队列结构</li>
-<li>newCachedThreadPool 当有新任务到来，放入队列，在池中寻找可用的线程执行任务，没有则创建线程执行，若空闲时间超过设置，线程自动销毁<br>他们本质上都是创建ThreadPoolExecutor类。</li>
+<li>发送的数据包过于的小时，那么TCP协议默认的会启用Nagle算法，将这些较小的数据包进行合并发送（缓冲区数据发送是一个堆压的过程）</li>
+<li>对于接收端，应用端不会直接处理收到的包，有一个接收缓冲区，如果TCP接收数据包到缓存的速度大于应用程序从缓存中读取数据包的速度，多个包就会被缓存，应用程序就有可能读取到多个首尾相接粘到一起的包。<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2>制定应用层协议，能够将数据流转化成报文。比如一个简单的xml传输，可以在头部固定6位用来指示xml报文的长度。</li>
 </ol>
-<h2 id="ThreadPoolExecutor构造参数"><a href="#ThreadPoolExecutor构造参数" class="headerlink" title="ThreadPoolExecutor构造参数"></a>ThreadPoolExecutor构造参数</h2><ul>
-<li>int corePoolSize 核心线程数量</li>
-<li>int maximumPoolSize 最大线程大小</li>
-<li>long keepAliveTime 超过corePoolSize的线程保持时间</li>
-<li>TimeUnit unit 时间单位</li>
-<li>BlockingQueue<Runnable> workQueue 任务队列</li>
-<li>ThreadFactory threadFactory 线程池工厂</li>
-<li>RejectedExecutionHandler handler 拒绝策略</li>
-</ul>
-<h1 id="线程池任务执行流程"><a href="#线程池任务执行流程" class="headerlink" title="线程池任务执行流程"></a>线程池任务执行流程</h1><ol>
-<li>当线程小于corePoolSize时，新提交的任务将创建新线程执行，即使线程池中存在空闲线程。</li>
-<li>当线程池中的线程数达到corePoolSize时，新提交的任务被放入workQueue中，等待线程池调度运行。</li>
-<li>当workQueue已满，并且maximumPoolSize &gt; corePoolSize时，新提交任务将创建新线程执行。</li>
-<li>当提交任务数超过maximumPoolSize时，新提交的任务由RejectedExecutionHandler处理</li>
-<li>当线程中超过corePoolSize数量的线程空闲时间超过keepAliveTime，释放空闲线程</li>
-<li>当设置allowCoreThreadTimeOut=true时（默认false），线程池中corePoolSize范围内的线程达到keepAliveTime也将释放。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</span><br><span class="line">            (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,</span><br><span class="line">                                    <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                    <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,</span><br><span class="line">                                      <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                      <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,</span><br><span class="line">                                      <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                      <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建一个定长线程池，支持定时及周期性任务执行。延迟执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params"><span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                              TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                              BlockingQueue&lt;Runnable&gt; workQueue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">             Executors.defaultThreadFactory(), defaultHandler);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledThreadPoolExecutor</span></span></span><br><span class="line"><span class="class">        <span class="keyword">extends</span> <span class="title">ThreadPoolExecutor</span></span></span><br><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">ScheduledExecutorService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ScheduledThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(corePoolSize, Integer.MAX_VALUE, <span class="number">0</span>, NANOSECONDS,</span><br><span class="line">              <span class="keyword">new</span> DelayedWorkQueue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="内置线程池常见问题"><a href="#内置线程池常见问题" class="headerlink" title="内置线程池常见问题"></a>内置线程池常见问题</h1><h2 id="任务堆积队列过长内存不足问题"><a href="#任务堆积队列过长内存不足问题" class="headerlink" title="任务堆积队列过长内存不足问题"></a>任务堆积队列过长内存不足问题</h2><p>newFixedThreadPool使用LinkedBlockingQueue<Runnable>来作为阻塞队列，该队列是没有上限的，所以如果任务过多，而线程池处理不过来，会导致该队列不断增大，撑爆内存。考虑使用ArrayBlockingQueue<Runnable>这种有界阻塞队列。newSingleThreadExecutor有同样的情况。newScheduledThreadPool使用DelayedWorkQueue，也是无界阻塞队列，有类似问题。</p>
-<h1 id="无限制创建线程导致内存不足或者超过系统上限无法创建新线程"><a href="#无限制创建线程导致内存不足或者超过系统上限无法创建新线程" class="headerlink" title="无限制创建线程导致内存不足或者超过系统上限无法创建新线程"></a>无限制创建线程导致内存不足或者超过系统上限无法创建新线程</h1><p>newCachedThreadPool创建的线程池使用任务队列使用的是SynchronousQueue,SynchronousQueue本身并不存储任务，而是对任务直接进行转发，这本身是没有问题的，但maximumPoolSize被设置成了Integer.MAX_VALUE，所以由于 CachedThreadPool 并不限制线程的数量，当任务数量特别多的时候，就可能会导致创建非常多的线程，最终超过了操作系统的上限而无法创建新线程，或者导致内存不足。</p>
 
           
         
@@ -378,7 +389,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/34/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/blog/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/36/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/34/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/blog/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/36/">&gt;</a>
   </nav>
 
 
@@ -424,7 +435,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -435,7 +446,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

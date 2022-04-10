@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/visual/pygraphviz/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/centos/centos%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/visual/pygraphviz/" itemprop="url">pygraphviz安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/linux/centos/centos%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" itemprop="url">centos基本网络配置</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/visual/" itemprop="url" rel="index">
-                    <span itemprop="name">visual</span>
+                  <a href="/blog/categories/system/linux/centos/" itemprop="url" rel="index">
+                    <span itemprop="name">centos</span>
                   </a>
                 </span>
 
@@ -367,13 +356,15 @@
       
         
           
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Graphviz 是一个几何图形可视化软件，能够将数据的结构信息表示为抽象图形和网络图的方式。PyGraphviz 主要对数据量大、可任意定制的图形上具有强大优势。</p>
-<h1 id="pygraphviz安装问题"><a href="#pygraphviz安装问题" class="headerlink" title="pygraphviz安装问题"></a>pygraphviz安装问题</h1><h2 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h2><p>python setup.py install</p>
-<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>安装pygraphviz失败</p>
-<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><p>需要先安装graphviz和pygraphviz-devel。因为yum没有配置，所以需要先在官网下载yum源配置文件。之后可以用yum安装。然而yum源安装获取的版本（2.40）与网站提供的版本（2.38）不一致，所以需要先下载rpm包，然后sudo yum localinstall graphviz-devel-2.38.0-1.el7.x86_64.rpm graphviz-2.38.0-1.el7.x86_64.rpm</p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html">http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html</a></p>
-<h2 id="注：在ubuntu下面安装-graphviz"><a href="#注：在ubuntu下面安装-graphviz" class="headerlink" title="注：在ubuntu下面安装 graphviz"></a>注：在ubuntu下面安装 graphviz</h2><p>sudo apt-get install graphviz, graphviz-dev<br>注意graphiviz-dev是pygraphviz所依赖的必须安装。<br>pip install pygraphviz</p>
-
+            <h1 id="设置ipv4网络"><a href="#设置ipv4网络" class="headerlink" title="设置ipv4网络"></a>设置ipv4网络</h1><h2 id="查看网络情况"><a href="#查看网络情况" class="headerlink" title="查看网络情况"></a>查看网络情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ifconfig    # If no arguments are given, ifconfig displays the status of the currently active interfaces.</span><br><span class="line">ip a    # &#x3D; ip address, show protocol (IP or IPv6) address on a device</span><br><span class="line">ip link # show network device</span><br></pre></td></tr></table></figure>
+<h2 id="编辑网卡配置文件"><a href="#编辑网卡配置文件" class="headerlink" title="编辑网卡配置文件"></a>编辑网卡配置文件</h2><p>一般网卡配置文件为/etc/sysconfig/network-scripts/ifcfg-*，比如ifcfg-eth0或者ifcfg-enp0s3等，修改或添加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ONBOOT&#x3D;yes  # 开机启动网络</span><br><span class="line">NM_CONTROLLED&#x3D;no    # 禁用NetworkManager管理网络，待深入学习</span><br><span class="line">NETMASK&#x3D;255.255.255.0   # 子网掩码</span><br><span class="line">GATEWAY&#x3D;192.168.1.1 # 网关地址</span><br><span class="line">DNS1&#x3D;114.114.114.114    # DNS服务器地址</span><br><span class="line">DNS2&#x3D;8.8.8.8</span><br></pre></td></tr></table></figure>
+<p>如果想要自动设置ip，配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BOOTPROTO&#x3D;dhcp</span><br></pre></td></tr></table></figure>
+<p>如果想要设置静态ip，配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BOOTPROTO&#x3D;static</span><br><span class="line">IPADDR&#x3D;192.168.1.20 #想要设置的静态ip</span><br></pre></td></tr></table></figure>
+<h2 id="重启网络"><a href="#重启网络" class="headerlink" title="重启网络"></a>重启网络</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+<h2 id="（可选）关闭防火墙"><a href="#（可选）关闭防火墙" class="headerlink" title="（可选）关闭防火墙"></a>（可选）关闭防火墙</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service iptables stop   # 临时关闭</span><br><span class="line">chkconfig iptables off  # 永久关闭</span><br></pre></td></tr></table></figure>
           
         
       
@@ -412,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/260/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/260/">260</a><span class="page-number current">261</span><a class="page-number" href="/blog/page/262/">262</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/262/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/260/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/260/">260</a><span class="page-number current">261</span><a class="page-number" href="/blog/page/262/">262</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/262/">&gt;</a>
   </nav>
 
 
@@ -458,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

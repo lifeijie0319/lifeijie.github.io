@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/10/language/python/basic/import/import%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">sed常用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/10/language/python/basic/import/import%E6%9C%BA%E5%88%B6/" itemprop="url">import机制</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-10T11:22:31+08:00">
+                2021-12-10
               </time>
             
 
@@ -295,8 +295,41 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/basic/import/" itemprop="url" rel="index">
+                    <span itemprop="name">import</span>
                   </a>
                 </span>
 
@@ -334,26 +367,12 @@
       
         
           
-            <h1 id="基本替换模式"><a href="#基本替换模式" class="headerlink" title="基本替换模式"></a>基本替换模式</h1><p>sed -i :expression :file<br>:expression 一般是替换的表达式，参考vi中的替换。注意，与vi不同之处，一是用s而非%s，二是替换时忽略大小写，参考下文<br>:file 文件名<br>-i: sed处理过的输出是直接输出到屏幕上的,使用参数”i”直接在文件中替换。</p>
-<h1 id="expression详解"><a href="#expression详解" class="headerlink" title=":expression详解"></a>:expression详解</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>‘s/原字符串/替换字符串/‘<br>单引号里面,s表示替换,三根斜线中间是替换的样式,特殊字符需要使用反斜线”\”进行转义。</p>
-<h2 id="“-“处理"><a href="#“-“处理" class="headerlink" title="“/“处理"></a>“/“处理</h2><p>命令中的三根斜线分隔符可以换成别的符号,有时候替换目录字符串的时候有较多斜线，这个时候换成其它的分割符是较为方便,只需要紧跟s定义即可。</p>
-<h2 id="全局匹配"><a href="#全局匹配" class="headerlink" title="全局匹配"></a>全局匹配</h2><p>可以在末尾加g替换每一个匹配的关键字,否则只替换每行的第一个。</p>
-<h2 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h2><p>单引号” ‘ ’”是没有办法用反斜线”\”转义的,这时候只要把命令两边的单引号改为双引号就行了,格式如下：<br>sed “s/原字符串包含’/替换字符串包含’/“ </p>
-<h2 id="替换时忽略大小写"><a href="#替换时忽略大小写" class="headerlink" title="替换时忽略大小写"></a>替换时忽略大小写</h2><p>在:expression的最后加上I代表忽略大小写</p>
-<h2 id="多条替换规则"><a href="#多条替换规则" class="headerlink" title="多条替换规则"></a>多条替换规则</h2><p>多个替换可以在同一条命令中执行,用分号”;”分隔，其格式为:<br>sed ‘s/^/添加的头部&amp;/g；s/$/&amp;添加的尾部/g’ </p>
-<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><ul>
-<li>”^”表示行首  </li>
-<li>”$”符号如果在引号中表示行尾，但是在引号外却表示末行(最后一行)  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sed &#39;s&#x2F;^&#x2F;添加的头部&amp;&#x2F;g&#39; 　　　　 #在所有行首添加  </span><br><span class="line">sed &#39;s&#x2F;$&#x2F;&amp;添加的尾部&#x2F;g&#39; 　　　　 #在所有行末添加  </span><br><span class="line">sed &#39;2s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39;　 #替换第2行  </span><br><span class="line">sed &#39;$s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39;   #替换最后一行  </span><br><span class="line">sed &#39;2,5s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39; #替换2到5行  </span><br><span class="line">sed &#39;2,$s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39; #替换2到最后一行  </span><br></pre></td></tr></table></figure>
-注意这里的 “ &amp; “ 符号，如果没有 “&amp;”，就会直接将匹配到的字符串替换掉</li>
-</ul>
-<h2 id="删除行"><a href="#删除行" class="headerlink" title="删除行"></a>删除行</h2><p>删除包含特殊字符的行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;from ..models import&#x2F;d&#39; &#96;grep -rl --include&#x3D;&#39;*.py&#39; &#39;from ..models import&#39;&#96;</span><br></pre></td></tr></table></figure>
-<p>删除两行之间的所有行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;&lt;!-- Page Header --&gt;&#x2F;,&#x2F;&lt;!-- END Page Header --&gt;&#x2F;d&#39; &#96;grep -rl --include&#x3D;&#39;*.html&#39; --exclude&#x3D;&#39;index.html&#39; &#39;&lt;!-- Page Header --&gt;&#39;&#96;</span><br></pre></td></tr></table></figure>
-<h2 id="插入行"><a href="#插入行" class="headerlink" title="插入行"></a>插入行</h2><p>在指定行前插入语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;def &#x2F;i\@login_check&#39; group.py</span><br></pre></td></tr></table></figure>
-<p>在指定行后插入语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;def &#x2F;a\@login_check&#39; group.py</span><br></pre></td></tr></table></figure>
+            <h1 id="一、import的模块存在sys-modules字典中"><a href="#一、import的模块存在sys-modules字典中" class="headerlink" title="一、import的模块存在sys.modules字典中"></a>一、import的模块存在sys.modules字典中</h1><h1 id="二、from-module-import-g和import-module的区别"><a href="#二、from-module-import-g和import-module的区别" class="headerlink" title="二、from module import g和import module的区别"></a>二、from module import g和import module的区别</h1><p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/4344016/blog/3833716">https://my.oschina.net/u/4344016/blog/3833716</a><br>import module方式操作module的变量时，本地不会创建新变量，操作的是目标模块的变量！<br>from module import *方式操作module变量时，实质上是在本地创建一个与目标模块相同的变量名，并且默认与目标模块变量指向同一个内存空间。</p>
+<h1 id="三、重载模块"><a href="#三、重载模块" class="headerlink" title="三、重载模块"></a>三、重载模块</h1><p>python2.7 中内置reload函数<br>python3.7 中可以使用imp模块（不建议）或者importlib模块中的reload函数</p>
+<h1 id="四、import路径问题"><a href="#四、import路径问题" class="headerlink" title="四、import路径问题"></a>四、import路径问题</h1><p>现象：使用signal实现超时控制的时候，总是报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: module &#39;signal&#39; has no attribute &#39;SIGALRM&#39;</span><br></pre></td></tr></table></figure>
+<p>原因：根据python搜索路径，会优先搜索当前路径。由于我们的测试文件名字与signal模块一样，导致导入signal的时候实际导入的是当前路径的signal测试文件 ，而不是python内置模块，自然找不到对应的参数SIGALARM。</p>
+
           
         
       
@@ -392,7 +411,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/123/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/123/">123</a><span class="page-number current">124</span><a class="page-number" href="/blog/page/125/">125</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/125/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/123/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/123/">123</a><span class="page-number current">124</span><a class="page-number" href="/blog/page/125/">125</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/125/">&gt;</a>
   </nav>
 
 
@@ -438,7 +457,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +468,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

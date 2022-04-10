@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/mysql%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/data_structure/B+tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/mysql%E5%AE%89%E8%A3%85/" itemprop="url">mysql安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/data_structure/B+tree/" itemprop="url">B+树</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/blog/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
                   </a>
                 </span>
 
@@ -345,14 +334,13 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
-<li>centos下使用yum安装<br>sudo yum install -y mysql-server mysql mysql-devel</li>
+            <h1 id="B-树的定义"><a href="#B-树的定义" class="headerlink" title="B+树的定义"></a>B+树的定义</h1><p>B+树的定义有两种，其中一种基本和B树等价，关键字个数比孩子节点数小1；另一种关键字个数和孩子节点数相等。我们按照第一种定义展开学习，这种情况下，B+树在B树的基础上做了如下调整：</p>
+<ul>
+<li>B+树分为两种节点，内部节点（也称索引节点）和叶子节点。根节点可以是内部节点，也可以是叶子节点。</li>
+<li>B+树的内部节点不保存数据，所有数据都保存在叶子节点。</li>
+<li>对于内部节点的一个key，左子树中的所有key值小于它，右子树中的key都大于等于它。内部节点的key值和叶子节点的key值都按升序排列。</li>
+<li>每个叶子节点有相邻叶子节点的指针，叶子节点之间自小而大顺序排列。</li>
 </ul>
-<h1 id="二、设置开机自启动"><a href="#二、设置开机自启动" class="headerlink" title="二、设置开机自启动"></a>二、设置开机自启动</h1><p>设置：sudo chkconfig mysqld on<br>查看：chkconfig –list | grep mysqld</p>
-<h1 id="三、启动"><a href="#三、启动" class="headerlink" title="三、启动"></a>三、启动</h1><p>sudo service mysqld start</p>
-<h1 id="四、设置数据库root用户密码"><a href="#四、设置数据库root用户密码" class="headerlink" title="四、设置数据库root用户密码"></a>四、设置数据库root用户密码</h1><p>（一）、新密码：/usr/bin/mysqladmin -u root password ‘new-password’<br>（二）、重设密码：<br>1、mysqladmin -u root -p password ‘new-password’<br>2、# mysql </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE mysql; </span><br><span class="line">mysql&gt; UPDATE user SET Password &#x3D; password ( &#39;new-password&#39; ) WHERE User &#x3D; &#39;root&#39;; </span><br><span class="line">mysql&gt; flush privileges; </span><br><span class="line">mysql&gt; quit</span><br></pre></td></tr></table></figure>
-<h1 id="五、mysql的目录设置"><a href="#五、mysql的目录设置" class="headerlink" title="五、mysql的目录设置"></a>五、mysql的目录设置</h1><p>1./etc/my.cnf 这是mysql的主配置文件<br>2./var/lib/mysql mysql数据库的数据库文件存放位置<br>3./var/log mysql数据库的日志输出存放位置</p>
 
           
         
@@ -392,7 +380,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/140/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/140/">140</a><span class="page-number current">141</span><a class="page-number" href="/blog/page/142/">142</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/142/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/140/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/140/">140</a><span class="page-number current">141</span><a class="page-number" href="/blog/page/142/">142</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/142/">&gt;</a>
   </nav>
 
 
@@ -438,7 +426,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +437,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

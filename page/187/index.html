@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/virtualbox/virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/kvm/kvm%E5%9C%A8Ubuntu18.04%E7%9A%84%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/virtualbox/virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/kvm/kvm%E5%9C%A8Ubuntu18.04%E7%9A%84%E5%AE%89%E8%A3%85/" itemprop="url">Ubuntu18.04 kvm安装</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/virtualbox/" itemprop="url" rel="index">
-                    <span itemprop="name">virtualbox</span>
+                  <a href="/blog/categories/tools/kvm/" itemprop="url" rel="index">
+                    <span itemprop="name">kvm</span>
                   </a>
                 </span>
 
@@ -345,15 +345,12 @@
       
         
           
-            <hr>
-<h2 id="virtualbox虚拟机扩容"><a href="#virtualbox虚拟机扩容" class="headerlink" title="virtualbox虚拟机扩容"></a>virtualbox虚拟机扩容</h2><h1 id="硬盘扩容"><a href="#硬盘扩容" class="headerlink" title="硬盘扩容"></a>硬盘扩容</h1><p>硬盘扩容可以调整原有vdi大小，也可以新加vdi</p>
-<h2 id="调整原有vdi大小（dos）"><a href="#调整原有vdi大小（dos）" class="headerlink" title="调整原有vdi大小（dos）"></a>调整原有vdi大小（dos）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd :VirtualBoxHome&#x2F;bin</span><br><span class="line">VBoxManage modifyhd :vdi_location --resize :size</span><br></pre></td></tr></table></figure>
-<ul>
-<li>:VirtualBoxHome 虚拟机安装目录</li>
-<li>:vdi_location 磁盘映像文件全路径。注意，这里也可以是vdi的uuid，使用VBoxManage list hdds命令可以得到当前所有的vdi信息</li>
-<li>:size 新的硬盘大小，单位是M<h2 id="添加vdi"><a href="#添加vdi" class="headerlink" title="添加vdi"></a>添加vdi</h2>直接在virtualbox界面按照提示操作即可：设置-存储-添加虚拟硬盘</li>
-</ul>
-<h1 id="虚拟机内部操作扩容"><a href="#虚拟机内部操作扩容" class="headerlink" title="虚拟机内部操作扩容"></a>虚拟机内部操作扩容</h1><p>参考/linux/centos硬盘扩容</p>
+            <h1 id="安装流程"><a href="#安装流程" class="headerlink" title="安装流程"></a>安装流程</h1><h2 id="检查是否支持虚拟化"><a href="#检查是否支持虚拟化" class="headerlink" title="检查是否支持虚拟化"></a>检查是否支持虚拟化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">egrep -c &#39;(svm|vmx)&#39; &#x2F;proc&#x2F;cpuinfo</span><br></pre></td></tr></table></figure>
+<p>检测cpu是否支持虚拟化技术，如果返回为0表示不支持。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install qemu qemu-kvm libvirt-bin  bridge-utils  virt-manager</span><br></pre></td></tr></table></figure>
+<h2 id="将libvirtd添加自启动"><a href="#将libvirtd添加自启动" class="headerlink" title="将libvirtd添加自启动"></a>将libvirtd添加自启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start libvirtd.service</span><br><span class="line">sudo systemctl enable libvirtd.service</span><br></pre></td></tr></table></figure>
+<h2 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h2><h2 id="添加用户到libvirt组"><a href="#添加用户到libvirt组" class="headerlink" title="添加用户到libvirt组"></a>添加用户到libvirt组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser $username libvirt</span><br></pre></td></tr></table></figure>
+<h2 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h2><p>按照虚拟机正常使用流程打开virt-manager安装虚拟机</p>
 
           
         
@@ -393,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/186/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/186/">186</a><span class="page-number current">187</span><a class="page-number" href="/blog/page/188/">188</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/188/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/186/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/186/">186</a><span class="page-number current">187</span><a class="page-number" href="/blog/page/188/">188</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/188/">&gt;</a>
   </nav>
 
 
@@ -439,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

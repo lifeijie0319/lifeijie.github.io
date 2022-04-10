@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/28/language/java/basic/oop/OOP/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/language/java/log/log4j/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/28/language/java/basic/oop/OOP/" itemprop="url">OOP常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/language/java/log/log4j/" itemprop="url">log4j</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-28T16:40:08+08:00">
-                2022-02-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -282,6 +282,50 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/log/" itemprop="url" rel="index">
+                    <span itemprop="name">log</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,54 +356,7 @@
       
         
           
-            <h1 id="普通类与抽象类的区别"><a href="#普通类与抽象类的区别" class="headerlink" title="普通类与抽象类的区别"></a>普通类与抽象类的区别</h1><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>成员方法</th>
-<th>实例化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>普通类</td>
-<td>不能包含抽象方法</td>
-<td>可以实例化</td>
-</tr>
-<tr>
-<td>抽象类</td>
-<td>可以定义抽象方法</td>
-<td>无法实例化</td>
-</tr>
-</tbody></table>
-<h1 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h1><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>成员变量</th>
-<th>成员方法</th>
-<th>构造函数</th>
-<th>继承/实现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>接口</td>
-<td>默认是public static final修饰的</td>
-<td>默认是public abstract修饰的</td>
-<td>不能有构造函数</td>
-<td>implements，一个类可以实现多个接口，实现的时候必须覆写接口的所有方法</td>
-</tr>
-<tr>
-<td>抽象类</td>
-<td>和正常类一样定义</td>
-<td>和普通类一样定义方法，可以额外定义抽象方法</td>
-<td>可以有构造函数</td>
-<td>extends，只能单继承，不用覆写所有方法</td>
-</tr>
-</tbody></table>
-<h1 id="覆写和隐藏"><a href="#覆写和隐藏" class="headerlink" title="覆写和隐藏"></a>覆写和隐藏</h1><ol>
-<li>子类存在与父类签名相同的普通方法，Override父类方法，实际调用的方法取决于实例真实类型。</li>
-<li>子类存在与父类签名相同的静态方法，隐藏父类方法，合理的方式是通过类来调用方法，实际调用的方法取决于类的类型。如果通过实例来调用静态方法（不推荐，一般编译器报警），调用的具体方法取决于引用类型。<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java">https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java</a></li>
-</ol>
+            <h1 id="log4j与log4j2"><a href="#log4j与log4j2" class="headerlink" title="log4j与log4j2"></a>log4j与log4j2</h1><p>log4j2是log4j的升级版本，配置文件的语法并不相同。</p>
 
           
         
@@ -399,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/15/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/blog/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/17/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/15/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/blog/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/17/">&gt;</a>
   </nav>
 
 
@@ -445,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

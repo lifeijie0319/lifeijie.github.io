@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/tuxedo/tuxedo%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/docker/docker%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/tuxedo/tuxedo%E5%AE%89%E8%A3%85/" itemprop="url">tuxedo安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/docker/docker%E5%AE%89%E8%A3%85/" itemprop="url">docker安装</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/tuxedo/" itemprop="url" rel="index">
-                    <span itemprop="name">tuxedo</span>
+                  <a href="/blog/categories/tools/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -345,15 +345,10 @@
       
         
           
-            <ol>
-<li>下载得到tuxedo111120_64_Linux_01_x86.bin</li>
-<li>创建tuxedo用户组<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd oinstall</span><br></pre></td></tr></table></figure></li>
-<li>创建tuxedo用户<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -d &#x2F;home&#x2F;tuxedo -g oinstall -m tuxedo</span><br></pre></td></tr></table></figure>
-[注] 所有的oracle产品都应该有一个共同的根目录</li>
-<li>创建tuxedo用户的密码<br>passwd tuxedo，密码输入两次，设定密码为tuxedo</li>
-<li>进入到/home/tuxedo目录下，将tuxedo111120_64_Linux_01_x86.bin拷贝到该目录，并添加执行权限<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x tuxedo111120_64_Linux_01_x86.bin</span><br></pre></td></tr></table></figure></li>
-<li>执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;tuxedo111120_64_Linux_01_x86.bin -i console</span><br></pre></td></tr></table></figure>
-开始console模式安装tuxedo</li>
+            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li>获取安装脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker &gt;&gt; install.sh</span><br></pre></td></tr></table></figure></li>
+<li>执行安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh install.sh</span><br></pre></td></tr></table></figure>
+<h1 id="报错与解决"><a href="#报错与解决" class="headerlink" title="报错与解决"></a>报错与解决</h1><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2>Public key for docker-ce-19.03.12-3.el7.x86_64.rpm is not installed<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;get.docker.com&#x2F;gpg</span><br><span class="line">rpmkeys --import gpg</span><br></pre></td></tr></table></figure></li>
 </ol>
 
           
@@ -394,7 +389,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/184/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><span class="page-number current">185</span><a class="page-number" href="/blog/page/186/">186</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/186/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/184/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><span class="page-number current">185</span><a class="page-number" href="/blog/page/186/">186</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/186/">&gt;</a>
   </nav>
 
 
@@ -440,7 +435,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -451,7 +446,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

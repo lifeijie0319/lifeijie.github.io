@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/" itemprop="url">pkcs格式的相互转化</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/" itemprop="url">centos7安装Redis的经历</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/openssl/" itemprop="url" rel="index">
-                    <span itemprop="name">openssl</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,11 +345,14 @@
       
         
           
-            <h1 id="pkcs格式基本样式"><a href="#pkcs格式基本样式" class="headerlink" title="pkcs格式基本样式"></a>pkcs格式基本样式</h1><h2 id="pkcs1格式"><a href="#pkcs1格式" class="headerlink" title="pkcs1格式"></a>pkcs1格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN RSA PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END RSA PUBLIC KEY----</span><br></pre></td></tr></table></figure>
-<h2 id="pkcs8格式"><a href="#pkcs8格式" class="headerlink" title="pkcs8格式"></a>pkcs8格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END PUBLIC KEY----</span><br></pre></td></tr></table></figure>
-<h1 id="pkcs1和pkcs8格式公钥的相互转化"><a href="#pkcs1和pkcs8格式公钥的相互转化" class="headerlink" title="pkcs1和pkcs8格式公钥的相互转化"></a>pkcs1和pkcs8格式公钥的相互转化</h1><h2 id="pkcs8公钥转pkcs1公钥"><a href="#pkcs8公钥转pkcs1公钥" class="headerlink" title="pkcs8公钥转pkcs1公钥"></a>pkcs8公钥转pkcs1公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -pubin -in public.pem -RSAPublicKey_out</span><br></pre></td></tr></table></figure>
-<h2 id="pkcs1公钥转换为pkcs8公钥"><a href="#pkcs1公钥转换为pkcs8公钥" class="headerlink" title="pkcs1公钥转换为pkcs8公钥"></a>pkcs1公钥转换为pkcs8公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -RSAPublicKey_in -in pub_pkcs1.pem -pubout</span><br></pre></td></tr></table></figure>
-<h1 id="p12即PKCS-12格式的密钥转换成pem格式"><a href="#p12即PKCS-12格式的密钥转换成pem格式" class="headerlink" title="p12即PKCS#12格式的密钥转换成pem格式"></a>p12即PKCS#12格式的密钥转换成pem格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -nocerts -nodes -in 20060400000044502.p12 -out 20060400000044502.pem</span><br></pre></td></tr></table></figure>
+            <h1 id="下载编译安装"><a href="#下载编译安装" class="headerlink" title="下载编译安装"></a>下载编译安装</h1><p>1 redis官网下载，解压后进入目录<br>2 make &amp; make install<br>注：make install如果不支持可以手动操作，实际上做了如下动作：</p>
+<ul>
+<li>删除源文件及目标文件以方便后续copy生成可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] rm -f src&#x2F;*.c *.h *.o</span><br></pre></td></tr></table></figure></li>
+<li>copy可执行文件至环境变量目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis] cp src&#x2F;redis-* &#x2F;usr&#x2F;local&#x2F;bin   </span><br></pre></td></tr></table></figure></li>
+<li>copy配置文件至系统配置文件目录,如果是集群安装，文件最好以端口作为文件名称<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] cp redis.conf &#x2F;etc&#x2F;</span><br></pre></td></tr></table></figure>
+<h1 id="配置redis为系统服务"><a href="#配置redis为系统服务" class="headerlink" title="配置redis为系统服务"></a>配置redis为系统服务</h1><h2 id="使用service命令启停"><a href="#使用service命令启停" class="headerlink" title="使用service命令启停"></a>使用service命令启停</h2>可以将redis解压后的目录下的utils/redis_init_script文件拷贝到/etc/init.d/目录下，这个是redis预设的初始化脚本，加好之后就可以用sevice来启停服务了。<h2 id="使用systemd启停"><a href="#使用systemd启停" class="headerlink" title="使用systemd启停"></a>使用systemd启停</h2>编写/usr/lib/systemd/system/redis.service，使用systemd管理服务。redis.service示例如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">#描述信息</span><br><span class="line">Description&#x3D;Redis Server 3.0.4</span><br><span class="line">#启动时机,开机启动最好在网络服务启动后即启动</span><br><span class="line">After&#x3D;network.target</span><br><span class="line">[Service]</span><br><span class="line">#此处为命令行启动redis的命令及参数,可参考官方文档</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-server &#x2F;etc&#x2F;redis.conf --daemonize no  </span><br><span class="line">#停止redis服务器命令</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-cli -h 127.0.0.1 -p 6379 shutdown </span><br><span class="line">User&#x3D;redis</span><br><span class="line">#运行reddis用户</span><br><span class="line">Group&#x3D;redis</span><br><span class="line">#所属组</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target #字符界面下启动</span><br></pre></td></tr></table></figure></li>
+</ul>
+
           
         
       
@@ -388,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/174/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/174/">174</a><span class="page-number current">175</span><a class="page-number" href="/blog/page/176/">176</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/176/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/174/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/174/">174</a><span class="page-number current">175</span><a class="page-number" href="/blog/page/176/">176</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/176/">&gt;</a>
   </nav>
 
 
@@ -434,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -445,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

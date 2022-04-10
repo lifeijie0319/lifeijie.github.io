@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/23/database/db2/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/30/database/mysql/engine/transaction/mysql%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/23/database/db2/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/" itemprop="url">数据迁移</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/30/database/mysql/engine/transaction/mysql%E4%BA%8B%E5%8A%A1/" itemprop="url">mysql事务</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-23T20:44:14+08:00">
-                2022-02-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T19:16:34+08:00">
+                2022-03-30
               </time>
             
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
+                    <span itemprop="name">engine</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/engine/transaction/" itemprop="url" rel="index">
+                    <span itemprop="name">transaction</span>
                   </a>
                 </span>
 
@@ -345,28 +367,10 @@
       
         
           
-            <h1 id="db2move"><a href="#db2move" class="headerlink" title="db2move"></a>db2move</h1><ol>
-<li>基本用法</li>
-<li>load失败造成表pending状态处理<br><a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-20083-id-2785295.html">http://blog.chinaunix.net/uid-20083-id-2785295.html</a></li>
-</ol>
-<h1 id="export导出"><a href="#export导出" class="headerlink" title="export导出"></a>export导出</h1><p>1、export to #path# of #type# #select sql#;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export to export&#x2F;a.del of del select * from ydw.table_a;</span><br></pre></td></tr></table></figure>
-<p>2、导出时修改编码格式，1383是gb2312，1208是utf-8加上modified by codepage=1208，在’of del’后面</p>
-<h1 id="import导入"><a href="#import导入" class="headerlink" title="import导入"></a>import导入</h1><p>import from #path# of #type# #insert sql#;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mport from import&#x2F;a.ixf of ixf insert into ydw.table_b;</span><br></pre></td></tr></table></figure>
-<h1 id="使用cursor快速迁移数据"><a href="#使用cursor快速迁移数据" class="headerlink" title="使用cursor快速迁移数据"></a>使用cursor快速迁移数据</h1><p>1、导出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE C1 CURSOR FOR SELECT * FROM FECHNER.SALES</span><br></pre></td></tr></table></figure>
-<p>2、导入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOAD FROM C1 OF CURSOR MESSAGES C:\load_sales_tmp.msg INSERT INTO FECHNER.SALES_TMP NONRECOVERABLE</span><br></pre></td></tr></table></figure>
-<h1 id="导出表结构"><a href="#导出表结构" class="headerlink" title="导出表结构"></a>导出表结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2look -d db_name -i user_name -w password -a -e -o d:\script.sql </span><br></pre></td></tr></table></figure>
-<p>db_name 是指数据库的名字， user_name 是数据库用户名，password是数据库密码</p>
-<h1 id="数据库备份与恢复"><a href="#数据库备份与恢复" class="headerlink" title="数据库备份与恢复"></a>数据库备份与恢复</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 关闭所有连接</span><br><span class="line">db2 force application all</span><br><span class="line"># 备份</span><br><span class="line">db2 backup database :dbname to :path</span><br><span class="line"># 检查备份文件</span><br><span class="line">db2ckbkp :filename</span><br><span class="line"># 恢复</span><br><span class="line">db2 restore db :dbname taken at :timestamp</span><br></pre></td></tr></table></figure>
-<ul>
-<li>:dbname 备份的数据库名</li>
-<li>:filename 生成的备份文件名</li>
-<li>:timestamp 备份生成的文件名中包含的时间戳<br>实践表明，跨版本备份和恢复会出现问题。</li>
-</ul>
-
+            <h1 id="mysql客户端开启事务的方式"><a href="#mysql客户端开启事务的方式" class="headerlink" title="mysql客户端开启事务的方式"></a>mysql客户端开启事务的方式</h1><h2 id="显式启动事务"><a href="#显式启动事务" class="headerlink" title="显式启动事务"></a>显式启动事务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">begin&#x2F;start transaction;</span><br></pre></td></tr></table></figure>
+<h2 id="修改客户端autocommit值"><a href="#修改客户端autocommit值" class="headerlink" title="修改客户端autocommit值"></a>修改客户端autocommit值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%autocommit%&#39;;</span><br><span class="line">set autocommit&#x3D;0;</span><br><span class="line">show variables like &#39;%autocommit%&#39;;</span><br></pre></td></tr></table></figure>
+<h1 id="隔离级别的查看与设置"><a href="#隔离级别的查看与设置" class="headerlink" title="隔离级别的查看与设置"></a>隔离级别的查看与设置</h1><h2 id="隔离级别的查看"><a href="#隔离级别的查看" class="headerlink" title="隔离级别的查看"></a>隔离级别的查看</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select @@tx_isolation; # 查看当前会话的隔离级别</span><br><span class="line">select @@global.tx_isolation; # 查看全局的隔离级别</span><br></pre></td></tr></table></figure>
+<h2 id="隔离级别的设置"><a href="#隔离级别的设置" class="headerlink" title="隔离级别的设置"></a>隔离级别的设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set session transaction isolation level read committed; # 设置会话的隔离级别</span><br></pre></td></tr></table></figure>
           
         
       
@@ -405,7 +409,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/31/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/blog/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/33/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/31/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/blog/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/33/">&gt;</a>
   </nav>
 
 
@@ -451,7 +455,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -462,7 +466,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

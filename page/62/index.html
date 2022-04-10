@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/02/tools/docker/docker%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/unicode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/01/02/tools/docker/docker%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">docker常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/unicode/" itemprop="url">理解unicode</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-02T20:57:42+08:00">
-                2022-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,27 +345,20 @@
       
         
           
-            <h1 id="普通用户无法使用docker，权限不足"><a href="#普通用户无法使用docker，权限不足" class="headerlink" title="普通用户无法使用docker，权限不足"></a>普通用户无法使用docker，权限不足</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行docker命令时，报错如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Got permission denied while trying to connect to the Docker daemon socket at unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock: Post http:&#x2F;&#x2F;%2Fvar%2Frun%2Fdocker.sock&#x2F;v1.38&#x2F;build?buildargs&#x3D;%7B%7D&amp;cachefrom&#x3D;%5B%5D&amp;cgroupparent&#x3D;&amp;cpuperiod&#x3D;0&amp;cpuquota&#x3D;0&amp;cpusetcpus&#x3D;&amp;cpusetmems&#x3D;&amp;cpushares&#x3D;0&amp;dockerfile&#x3D;Dockerfile&amp;labels&#x3D;%7B%7D&amp;memory&#x3D;0&amp;memswap&#x3D;0&amp;networkmode&#x3D;default&amp;rm&#x3D;1&amp;session&#x3D;p9710s6yzkfrztcevkmj7vd77&amp;shmsize&#x3D;0&amp;t&#x3D;fastdfs-demo-web&amp;target&#x3D;&amp;ulimits&#x3D;null&amp;version&#x3D;1: dial unix &#x2F;var&#x2F;run&#x2F;docker.sock: connect: permission denied</span><br></pre></td></tr></table></figure>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>需要给用户添加docker组权限，执行以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker :user</span><br><span class="line">newgrp docker</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<ol>
-<li>该命令需要root权限</li>
-<li>-aG代表添加组</li>
-<li>:user指代实际要添加docker权限的用户名</li>
-<li>刷新group使生效</li>
-</ol>
-<h1 id="无法删除镜像"><a href="#无法删除镜像" class="headerlink" title="无法删除镜像"></a>无法删除镜像</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>当想要删除镜像时，如果还有该镜像的容器存在，即使镜像不运行，也无法删除，报错如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error response from daemon: conflict: unable to delete 384072e23c5b (must be forced) - image is being used by stopped container e5238250eea2</span><br></pre></td></tr></table></figure>
-<h2 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h2><ol>
-<li>删除相关的容器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container rm e5238250eea2</span><br></pre></td></tr></table></figure></li>
-<li>删除镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image rm 384072e23c5b</span><br></pre></td></tr></table></figure>
-<h1 id="docker-images镜像消失"><a href="#docker-images镜像消失" class="headerlink" title="docker images镜像消失"></a>docker images镜像消失</h1>imagesfs不足15%的会发生驱逐</li>
-</ol>
-<h1 id="docker服务启动失败"><a href="#docker服务启动失败" class="headerlink" title="docker服务启动失败"></a>docker服务启动失败</h1><h2 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker.socket: Failed with result &#39;service-start-limit-hit&#39;.</span><br></pre></td></tr></table></figure>
-<h2 id="原因与解决方法"><a href="#原因与解决方法" class="headerlink" title="原因与解决方法"></a>原因与解决方法</h2><p>原因是/etc/docker/daemon.json配置文件格式异常，修正后启动服务正常。</p>
-<h1 id="服务日志报错MemoryAccounting-CPUAccounting-not-enabled-for-pid"><a href="#服务日志报错MemoryAccounting-CPUAccounting-not-enabled-for-pid" class="headerlink" title="服务日志报错MemoryAccounting CPUAccounting not enabled for pid"></a>服务日志报错MemoryAccounting CPUAccounting not enabled for pid</h1><p><a target="_blank" rel="noopener" href="https://www.sudops.com/kubelet-1-9-memoryaccounting-cpuaccounting-not-enabled-pid.html">https://www.sudops.com/kubelet-1-9-memoryaccounting-cpuaccounting-not-enabled-pid.html</a></p>
+            <h1 id="unicode概念"><a href="#unicode概念" class="headerlink" title="unicode概念"></a>unicode概念</h1><pre><code>Unicode（统一码、万国码、单一码）是计算机科学领域里的一项业界标准,包括字符集、编码方案等。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。1990年开始研发，1994年正式公布。</code></pre>
+<p>简单来说，unicode是一种抽象字符到二进制编码的映射规则。</p>
+<h1 id="unicode基础"><a href="#unicode基础" class="headerlink" title="unicode基础"></a>unicode基础</h1><ul>
+<li>unicode也称为UCS(Universal Multiple-Octet Coded Character Set)</li>
+<li>unicode每个字符对应的编码数字称为code point</li>
+<li>unicode的code point的范围是 0 - 10FFFF.</li>
+<li>一个unicode的code point的写法通常是”U+”接上16进制表示的代码点数字</li>
+<li>unicode的前256个字符和ISO-8859-1（即Latin-1）一样，也就是ASCII</li>
+<li>unicode目前定义了17个plane，列举如下：<figure class="highlight plain"><figcaption><span>planes of 64k code points each</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plane 0 (U+0000 - U+FFFF): Basic Multilingual Plane (BMP, 1.0) frequent characters</span><br><span class="line">plane 1 (U+10000 - U+1FFFF): Supplementary Multilingual Plane (SMP, 3.1) infrequent, non-ideographic characters</span><br><span class="line">plane 2 (U+20000 - U+2FFFF): Supplementary Ideographic Plane (SIP, 3.1) infrequent, ideographic characters</span><br><span class="line">plane 14 (U+E0000 - U+EFFFF): Supplementary Special-purpose Plane (SSP, 3.1)</span><br><span class="line">planes 15 and 16  (U+F0000 - U+10FFFF) : Private use planes (2.0)</span><br></pre></td></tr></table></figure></li>
+<li>开始unicode使用2个字节表示常用的字符，能够表示65536个字符，后来发现不够，就从所有的code point中未使用的部分分割了两块出来，用于扩展，在utf-16中有体现，分割的情况如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">surrogates code points</span><br><span class="line">U+D800 - U+DBFF: 1,024 high surrogates</span><br><span class="line">U+DC00 - U+DFFF: 1,024 low surrogates</span><br><span class="line"></span><br><span class="line">scalar values</span><br><span class="line">U+0000 - U+D7FF</span><br><span class="line">U+E000 - U+10FFFF</span><br></pre></td></tr></table></figure>
+surrogates code points不能出现在数据中</li>
+<li>scalar values在电脑中的表示就是我们实际使用的编码方式，统一称为UTF(Unicode Transformation Format)，常用的有UTF-8/UTF-16/UTF-32等。这些编码方式都能表示所有unicode的scalar values，但是各自表示一个code point的code unit不同。</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf">https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf</a></p>
 
           
         
@@ -372,7 +398,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/61/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/63/">&gt;</a>
   </nav>
 
 
@@ -418,7 +444,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -429,7 +455,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

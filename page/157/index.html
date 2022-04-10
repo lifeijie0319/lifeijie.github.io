@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%BA%8C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/schema/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%BA%8C/" itemprop="url">sftp服务器搭建二</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/schema/" itemprop="url">db2 schema</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
-                    <span itemprop="name">ssh</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,10 +345,16 @@
       
         
           
-            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>除了之前那样建一个sftp正常用户，还可以建立sftp组进行控制。</p>
-<h1 id="2-过程"><a href="#2-过程" class="headerlink" title="2 过程"></a>2 过程</h1><h2 id="2-1-创建用户"><a href="#2-1-创建用户" class="headerlink" title="2.1 创建用户"></a>2.1 创建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# groupadd sftp </span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser2 -g sftp -s &#x2F;sbin&#x2F;nologin -M</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser2:sftpuser2|chpasswd</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-创建目录"><a href="#2-2-创建目录" class="headerlink" title="2.2 创建目录"></a>2.2 创建目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# mkdir &#x2F;data&#x2F;sftp&#x2F;sftpuser2</span><br><span class="line">[root@VM_0_7_centos ~]# cd &#x2F;data&#x2F;sftp&#x2F;</span><br><span class="line">[root@VM_0_7_centos sftp]# ll</span><br><span class="line">total 4</span><br><span class="line">drwxr-xr-x 2 root root 4096 Jul 17 15:01 sftpuser2</span><br><span class="line">[root@VM_0_7_centos sftp]# chown sftpuser2:sftp sftpuser2&#x2F;</span><br><span class="line">[root@VM_0_7_centos sftp]# ll</span><br><span class="line">total 4</span><br><span class="line">drwxr-xr-x 2 sftpuser2 sftp 4096 Jul 17 15:01 sftpuser2</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-配置"><a href="#2-3-配置" class="headerlink" title="2.3 配置"></a>2.3 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match Group sftp</span><br><span class="line">ChrootDirectory &#x2F;data&#x2F;sftp&#x2F; 注意这个地方的目录一定是root:root的</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no</span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
+            <h1 id="创建schema"><a href="#创建schema" class="headerlink" title="创建schema"></a>创建schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE SCHEMA &lt;schema-name&gt; [AUTHORIZATION &lt;schema-owner-name&gt;]</span><br></pre></td></tr></table></figure>
+<h1 id="删除schema"><a href="#删除schema" class="headerlink" title="删除schema"></a>删除schema</h1><p>schema下面没有对象的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 drop schema wxdemo restrict</span><br></pre></td></tr></table></figure>
+<p>schema下面有对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;call ADMIN_DROP_SCHEMA(&#39;wxdemo&#39;, NULL, &#39;errorschema&#39;, &#39;ERRTABLE&#39;)&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="复制schema"><a href="#复制schema" class="headerlink" title="复制schema"></a>复制schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;CALL SYSPROC.ADMIN_COPY_SCHEMA</span><br><span class="line">(&#39;TONGLIAN&#39;,&#39;WXDEMO&#39;,&#39;COPYNO&#39;,NULL,NULL,NULL,&#39;ERRORSCHEMA&#39;,&#39;ERRORTABLE&#39;);&quot;</span><br></pre></td></tr></table></figure>
+<p>注意：目标schema不能已存在，否则报错。</p>
+<h1 id="查看当前schema"><a href="#查看当前schema" class="headerlink" title="查看当前schema"></a>查看当前schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 values current schema</span><br></pre></td></tr></table></figure>
+<h1 id="查询数据库内的所有schema"><a href="#查询数据库内的所有schema" class="headerlink" title="查询数据库内的所有schema"></a>查询数据库内的所有schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from sysibm.sysschemata</span><br></pre></td></tr></table></figure>
+<h1 id="查询schem下面的所有表格"><a href="#查询schem下面的所有表格" class="headerlink" title="查询schem下面的所有表格"></a>查询schem下面的所有表格</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 list tables for schema XXX</span><br></pre></td></tr></table></figure>
           
         
       
@@ -387,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/156/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/blog/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/158/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/156/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/blog/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/158/">&gt;</a>
   </nav>
 
 
@@ -433,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

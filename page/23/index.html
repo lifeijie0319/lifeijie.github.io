@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/24/network/tcp/tcp%E5%B8%B8%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/08/tools/rabbitmq/%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/24/network/tcp/tcp%E5%B8%B8%E8%AF%86/" itemprop="url">tcp常识</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/08/tools/rabbitmq/%E5%9F%BA%E7%A1%80/" itemprop="url">rabbitmq基础</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-24T16:12:09+08:00">
-                2022-02-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-08T17:40:30+08:00">
+                2022-04-08
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/rabbitmq/" itemprop="url" rel="index">
+                    <span itemprop="name">rabbitmq</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,10 +345,44 @@
       
         
           
-            <h1 id="tcp粘包"><a href="#tcp粘包" class="headerlink" title="tcp粘包"></a>tcp粘包</h1><p>tcp是传输层协议，面向数据流的，而将流数据解析成数据报文是应用层的任务。tcp粘包其实是个伪问题。<br>所谓“tcp粘包”一般是两个原因：</p>
-<ol>
-<li>发送的数据包过于的小时，那么TCP协议默认的会启用Nagle算法，将这些较小的数据包进行合并发送（缓冲区数据发送是一个堆压的过程）</li>
-<li>对于接收端，应用端不会直接处理收到的包，有一个接收缓冲区，如果TCP接收数据包到缓存的速度大于应用程序从缓存中读取数据包的速度，多个包就会被缓存，应用程序就有可能读取到多个首尾相接粘到一起的包。<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2>制定应用层协议，能够将数据流转化成报文。比如一个简单的xml传输，可以在头部固定6位用来指示xml报文的长度。</li>
+            <h1 id="什么是rabbitmq"><a href="#什么是rabbitmq" class="headerlink" title="什么是rabbitmq"></a>什么是rabbitmq</h1><p>rabbitmq是一个erlang编写的消息中间件。</p>
+<h2 id="rabbitmq的应用场景"><a href="#rabbitmq的应用场景" class="headerlink" title="rabbitmq的应用场景"></a>rabbitmq的应用场景</h2><ul>
+<li>异步通信 比如发短信、发邮件</li>
+<li>提高消息处理能力 同步转异步，减少了服务端的阻塞和资源占用，流量高峰时可以暂时存储到队列，后续服务慢慢处理消息。甚至有EDA(Event Driven Architecture)设计，在消息队列的基础上构建应用</li>
+<li>减少耦合 消息的生产者和消费者没有直接调用关系</li>
+<li>发布订阅模式</li>
+</ul>
+<h1 id="消息队列相关的角色"><a href="#消息队列相关的角色" class="headerlink" title="消息队列相关的角色"></a>消息队列相关的角色</h1><p>消息分发的模型，无一例外都是由生产者、消费者、消息队列组成，消息队列处于生产者和消费者之间，起到消息分发的作用。</p>
+<h1 id="rabbitmq的常见概念"><a href="#rabbitmq的常见概念" class="headerlink" title="rabbitmq的常见概念"></a>rabbitmq的常见概念</h1><h2 id="vhost"><a href="#vhost" class="headerlink" title="vhost"></a>vhost</h2><p>vhost是rabbitmq虚拟的broker，内部包含完整的exchange/queue等组件。vhost主要用于权限隔离，不同的应用可以跑在不同的vhost上。</p>
+<h2 id="channel"><a href="#channel" class="headerlink" title="channel"></a>channel</h2><p>channel是建立在真实tcp连接上的虚拟信道。客户端和rabbitmq服务器认证连接之后，会在tcp连接之上建立一条遵循ampq协议的信道。</p>
+<h1 id="rabbitmq任务分发机制"><a href="#rabbitmq任务分发机制" class="headerlink" title="rabbitmq任务分发机制"></a>rabbitmq任务分发机制</h1><p>rabbitmq请求到达服务端经过这几个组件：</p>
+<ul>
+<li>exchange<br>exchange分为以下四种：<ul>
+<li>direct：根据key与对应的queue绑定</li>
+<li>fanout：广播，所有queue均能收到消息</li>
+<li>topic：key是一个通配表示，符合条件的queue均能收到消息</li>
+<li>head</li>
+</ul>
+</li>
+<li>queue<br>消息队列，有消费者绑定在队列上进行处理<br>注意：任务分发是在队列上才进行分发，即多个消费者绑定到同一个队列上才会分发，而exchange即使发消息到多个队列，其实消息是每个绑定队列都会收到，而不是分发。</li>
+</ul>
+<h1 id="rabbitmq如何保证消息的可靠传递"><a href="#rabbitmq如何保证消息的可靠传递" class="headerlink" title="rabbitmq如何保证消息的可靠传递"></a>rabbitmq如何保证消息的可靠传递</h1><ul>
+<li>生产者发送消息到rabbitmq有confirm机制确认消息发送成功</li>
+<li>消费者有ack确认机制确认消息被消费</li>
+<li>rabbitmq可以对消息进行持久化，避免消息丢失</li>
+</ul>
+<h1 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h1><p>Channel Prefetch Setting (QoS)，rabbitmq可以设置QoS参数，该参数限制了某个channel当前已发送未确认消费的消息数量上限。某个消费者当前未ack的消息数量达到该值时，broker就不再向该channel继续推送消息。该参数可以在channel或者某个特定消费者上进行设置。</p>
+<h1 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h1><h2 id="消息持久化成功的条件"><a href="#消息持久化成功的条件" class="headerlink" title="消息持久化成功的条件"></a>消息持久化成功的条件</h2><ul>
+<li>声明的队列必须是durable</li>
+<li>消息投送必须设置deliveryMode为2<h2 id="持久化的缺点"><a href="#持久化的缺点" class="headerlink" title="持久化的缺点"></a>持久化的缺点</h2>降低了服务器的吞吐量</li>
+</ul>
+<h2 id="延迟消息队列"><a href="#延迟消息队列" class="headerlink" title="延迟消息队列"></a>延迟消息队列</h2><p>延迟消息队列是指带有延迟功能的消息队列，比如两小时后给客户发送消息。</p>
+<h3 id="利用DLX（Dead-Letter-Exchanges）-TTL（消息存活时间）实现"><a href="#利用DLX（Dead-Letter-Exchanges）-TTL（消息存活时间）实现" class="headerlink" title="利用DLX（Dead Letter Exchanges）+ TTL（消息存活时间）实现"></a>利用DLX（Dead Letter Exchanges）+ TTL（消息存活时间）实现</h3><ol>
+<li>创建延迟队列delay_queue，设置其死信交换机 (通过x-dead-letter-exchange参数) 和 RoutingKey (通过x-dead-letter-routing-key参数)，即该队列消息成为死信后会转发到死信交换机。</li>
+<li>创建真正的消费队列queue，绑定到死信交换机</li>
+<li>生产者发送消息时设置消息的过期时间，也可以直接在delay_queue设置队列级别的过期时间<h3 id="采用rabbitmq-delayed-message-exchange-插件实现"><a href="#采用rabbitmq-delayed-message-exchange-插件实现" class="headerlink" title="采用rabbitmq-delayed-message-exchange 插件实现"></a>采用rabbitmq-delayed-message-exchange 插件实现</h3><a target="_blank" rel="noopener" href="https://blog.rabbitmq.com/posts/2015/04/scheduling-messages-with-rabbitmq">https://blog.rabbitmq.com/posts/2015/04/scheduling-messages-with-rabbitmq</a></li>
+<li>声明exchange的类型为x-delayed-message，并添加参数x-delayed-type，代表原先exchange的分发类型，可以是direct/fanout/topic这些</li>
+<li>发送的消息设置x-delay头，值是需要延迟的时间（毫秒）</li>
 </ol>
 
           
@@ -356,7 +423,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/22/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/24/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/22/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/24/">&gt;</a>
   </nav>
 
 
@@ -402,7 +469,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -413,7 +480,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

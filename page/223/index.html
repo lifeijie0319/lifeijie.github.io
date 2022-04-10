@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/jvm/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%94%9F%E4%BA%A7jvm%E5%B4%A9%E6%BA%83/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/VCS/git/git%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/java/jvm/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%94%9F%E4%BA%A7jvm%E5%B4%A9%E6%BA%83/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/VCS/git/git%E5%AE%89%E8%A3%85/" itemprop="url">Centos下安装git记录</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
+                  <a href="/blog/categories/VCS/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -356,13 +345,11 @@
       
         
           
-            <hr>
-<h2 id="title-记一次生产jvm崩溃"><a href="#title-记一次生产jvm崩溃" class="headerlink" title="title:记一次生产jvm崩溃"></a>title:记一次生产jvm崩溃</h2><h1 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h1><p>查看hs_err_pid13355.log</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>Most of the times, the crashes in ZIP_GetEntry occur when the jar file being accessed has been modified/overwritten while the JVM instance was running. For performance reasons, HotSpot JVM memory maps each Jar file’s central directory structure using mmap. This is done so as to avoid reading the central directory structure data from the disk every time it needs to read entries from the Jar file. When a Jar file is modified or overwritten on the disk, the JVM’s copy of the data read earlier becomes inconsistent with the jar file on the disk, and any attempt to read and load entries from the modified jar can result in an application crash.</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>Since 1.6.0_23, a property can be used to disable the memory mapping of the central directory structure of the Jar files:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dsun.zip.disableMemoryMapping&#x3D;true</span><br></pre></td></tr></table></figure>
-<p>Please note that enabling this property would have some performance impact on the application as the JVM needs to read the central directory structure from the Jar files on the disk again and again whenever it reads a Jar file entry. So, it is best to ensure that the jar files are not modified or overwritten while the JVM has an image of them loaded.<br>In Java 9, this ZIP crash has been resolved with the following enhancement:JDK-8142508: To bring j.u.z.ZipFile’s native implementation to Java to remove the expensive jni cost and mmap crash risk. This enhancement replaces the ZIP file native implementation that used mmap with the Java implementation, and that removes the risk of application crashes described above. </p>
-
+            <h1 id="1-背景"><a href="#1-背景" class="headerlink" title="1 背景"></a>1 背景</h1><p>linux使用yum安装的git下载时显示git版本过低，但是yum下载显示已经是最新版本1.7.1</p>
+<h1 id="2-卸载当前git"><a href="#2-卸载当前git" class="headerlink" title="2 卸载当前git"></a>2 卸载当前git</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br></pre></td></tr></table></figure>
+<h1 id="3-下载源码包，解压"><a href="#3-下载源码包，解压" class="headerlink" title="3 下载源码包，解压"></a>3 下载源码包，解压</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;www.kernel.org&#x2F;pub&#x2F;software&#x2F;scm&#x2F;git&#x2F;git-2.15.1.tar.xz</span><br><span class="line">tar -vxf git-2.15.1.tar.xz</span><br></pre></td></tr></table></figure>
+<h1 id="4-安装依赖包"><a href="#4-安装依赖包" class="headerlink" title="4 安装依赖包"></a>4 安装依赖包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install tk zlib-devel openssl-devel perl cpio expat-devel gettext-devel </span><br></pre></td></tr></table></figure>
+<h1 id="5-编译安装"><a href="#5-编译安装" class="headerlink" title="5 编译安装"></a>5 编译安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp; make install</span><br></pre></td></tr></table></figure>
           
         
       
@@ -401,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/222/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/222/">222</a><span class="page-number current">223</span><a class="page-number" href="/blog/page/224/">224</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/224/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/222/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/222/">222</a><span class="page-number current">223</span><a class="page-number" href="/blog/page/224/">224</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/224/">&gt;</a>
   </nav>
 
 
@@ -447,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -458,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

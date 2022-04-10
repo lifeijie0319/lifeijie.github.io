@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/tomcat/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/java/tomcat/" itemprop="url">windows下tomcat使用注意事项</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/" itemprop="url">pkcs格式的相互转化</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/blog/categories/tools/openssl/" itemprop="url" rel="index">
+                    <span itemprop="name">openssl</span>
                   </a>
                 </span>
 
@@ -345,9 +345,11 @@
       
         
           
-            <h1 id="windows下使用tomcat常见问题"><a href="#windows下使用tomcat常见问题" class="headerlink" title="windows下使用tomcat常见问题"></a>windows下使用tomcat常见问题</h1><h2 id="1、控制台输出中文乱码"><a href="#1、控制台输出中文乱码" class="headerlink" title="1、控制台输出中文乱码"></a>1、控制台输出中文乱码</h2><p>解决方案：修改$TOMCAT_HOME\conf\logging.properties，将日志编码utf-8改成gbk。</p>
-<h2 id="2、启动异常"><a href="#2、启动异常" class="headerlink" title="2、启动异常"></a>2、启动异常</h2><p>错误：java.io.FileNotFoundException: C:\Program Files\apache-tomcat-10.0.2\logs\catalina.2021-02-20.log (拒绝访问。)<br>原因与解决方案：权限问题，修改当前用户对该目录的权限，右键属性-安全-权限-编辑，修改当前用户对该目录的权限为完全控制。</p>
-
+            <h1 id="pkcs格式基本样式"><a href="#pkcs格式基本样式" class="headerlink" title="pkcs格式基本样式"></a>pkcs格式基本样式</h1><h2 id="pkcs1格式"><a href="#pkcs1格式" class="headerlink" title="pkcs1格式"></a>pkcs1格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN RSA PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END RSA PUBLIC KEY----</span><br></pre></td></tr></table></figure>
+<h2 id="pkcs8格式"><a href="#pkcs8格式" class="headerlink" title="pkcs8格式"></a>pkcs8格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END PUBLIC KEY----</span><br></pre></td></tr></table></figure>
+<h1 id="pkcs1和pkcs8格式公钥的相互转化"><a href="#pkcs1和pkcs8格式公钥的相互转化" class="headerlink" title="pkcs1和pkcs8格式公钥的相互转化"></a>pkcs1和pkcs8格式公钥的相互转化</h1><h2 id="pkcs8公钥转pkcs1公钥"><a href="#pkcs8公钥转pkcs1公钥" class="headerlink" title="pkcs8公钥转pkcs1公钥"></a>pkcs8公钥转pkcs1公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -pubin -in public.pem -RSAPublicKey_out</span><br></pre></td></tr></table></figure>
+<h2 id="pkcs1公钥转换为pkcs8公钥"><a href="#pkcs1公钥转换为pkcs8公钥" class="headerlink" title="pkcs1公钥转换为pkcs8公钥"></a>pkcs1公钥转换为pkcs8公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -RSAPublicKey_in -in pub_pkcs1.pem -pubout</span><br></pre></td></tr></table></figure>
+<h1 id="p12即PKCS-12格式的密钥转换成pem格式"><a href="#p12即PKCS-12格式的密钥转换成pem格式" class="headerlink" title="p12即PKCS#12格式的密钥转换成pem格式"></a>p12即PKCS#12格式的密钥转换成pem格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -nocerts -nodes -in 20060400000044502.p12 -out 20060400000044502.pem</span><br></pre></td></tr></table></figure>
           
         
       
@@ -386,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/199/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><span class="page-number current">200</span><a class="page-number" href="/blog/page/201/">201</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/201/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/199/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><span class="page-number current">200</span><a class="page-number" href="/blog/page/201/">201</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/201/">&gt;</a>
   </nav>
 
 
@@ -432,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -443,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

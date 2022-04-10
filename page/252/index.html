@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/network/requests/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/email/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/network/requests/" itemprop="url">requests离线安装</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/email/" itemprop="url">email发送和接收</a></h1>
         
 
         <div class="post-meta">
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -367,8 +356,50 @@
       
         
           
-            <p>pip install –no-index -f ~/packages/ requests-2.18.1-py2.py3-none-any.whl<br>注意：要预先安装好需求宝或者同事在目录下放置需求包，requests的需求包有以下几个：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Processing .&#x2F;requests-2.18.1-py2.py3-none-any.whl</span><br><span class="line">Requirement already satisfied: chardet&lt;3.1.0,&gt;&#x3D;3.0.2 in &#x2F;home&#x2F;nanxun&#x2F;wxenv&#x2F;lib&#x2F;python2.7&#x2F;site-packages (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Requirement already satisfied: certifi&gt;&#x3D;2017.4.17 in &#x2F;home&#x2F;nanxun&#x2F;wxenv&#x2F;lib&#x2F;python2.7&#x2F;site-packages (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Collecting idna&lt;2.6,&gt;&#x3D;2.5 (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Collecting urllib3&lt;1.22,&gt;&#x3D;1.21.1 (from requests&#x3D;&#x3D;2.18.1)</span><br><span class="line">Installing collected packages: idna, urllib3, requests</span><br><span class="line">Successfully installed idna-2.5 requests-2.18.1 urllib3-1.21.1</span><br></pre></td></tr></table></figure>
+            <p>参考：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0</a></p>
+<h1 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h1><p>需要手动对发送方邮箱配置SMTP协议，此时可能需要设置客户端授权码，即为登录第三方邮件客户端的专用口令，以下是常用邮箱SMTP端口及登录说明：  </p>
+<table>
+<thead>
+<tr>
+<th>邮箱</th>
+<th>SMTP服务器</th>
+<th>登录口令</th>
+<th>支持加密方式</th>
+<th>对应端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>163</td>
+<td>smtp.163.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>126</td>
+<td>smtp.126.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>smtp.qq.com</td>
+<td>系统分配授权码</td>
+<td>明文/SSL加密/TLS加密</td>
+<td>25/465/587</td>
+</tr>
+<tr>
+<td>Gmail</td>
+<td>smtp.gmail.com</td>
+<td>邮箱登录密码</td>
+<td>TLS加密</td>
+<td>587</td>
+</tr>
+</tbody></table>
+<h1 id="2、加密问题"><a href="#2、加密问题" class="headerlink" title="2、加密问题"></a>2、加密问题</h1><p>SMTP协议发送邮件，如果想要加密，有如下几种方式：<br>1）明文传输:　端口号是25；<br>2）SSL加密: 端口号是465，通信过程加密，邮件数据安全；<br>3）TLS加密: 端口号是587，通信过程加密，邮件数据安全，使用正常的smtp端口。对于TLS加密方式需要先建立SSL连接，然后再发送邮件。</p>
+<h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3 遇到的问题"></a>3 遇到的问题</h1><p>3.1 使用qq向foxmail发送带附件的邮件时，如果不用加密，程序报错，连接中断。<br>3.2 如果使用POP3收邮件，必须使用ssl加密的方式登录服务器。</p>
+
           
         
       
@@ -407,7 +438,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/251/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/251/">251</a><span class="page-number current">252</span><a class="page-number" href="/blog/page/253/">253</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/253/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/251/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/251/">251</a><span class="page-number current">252</span><a class="page-number" href="/blog/page/253/">253</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/253/">&gt;</a>
   </nav>
 
 
@@ -453,7 +484,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -464,7 +495,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

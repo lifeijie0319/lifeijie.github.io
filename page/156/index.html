@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/merge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/" itemprop="url">sftp服务器搭建一</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/merge/" itemprop="url">merge语法</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
-                    <span itemprop="name">ssh</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,15 +345,18 @@
       
         
           
-            <h1 id="1-说明"><a href="#1-说明" class="headerlink" title="1 说明"></a>1 说明</h1><p>sftp是Secure File Transfer Protocol的缩写，安全文件传送协议。可以为传输文件提供一种安全的加密方法。<br>sftp 与 ftp有着几乎一样的语法和功能。SFTP 为 SSH的一部份，和vsftpd一点关系没有，是一种传输档案至 Blogger 伺服器的安全方式。本身没有守护进程，是包含在ssh中，端口也是22</p>
-<h1 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2 搭建"></a>2 搭建</h1><h2 id="2-1-新建用户"><a href="#2-1-新建用户" class="headerlink" title="2.1 新建用户"></a>2.1 新建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# userdel ftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser|passwd --stdin sftpuser </span><br><span class="line">Changing password for user sftpuser.</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-配置-etc-ssh-sshd-config"><a href="#2-2-配置-etc-ssh-sshd-config" class="headerlink" title="2.2 配置/etc/ssh/sshd_config"></a>2.2 配置/etc/ssh/sshd_config</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># override default of no subsystems</span><br><span class="line">#Subsystem sftp &#x2F;usr&#x2F;libexec&#x2F;openssh&#x2F;sftp-server</span><br><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match User sftpuser</span><br><span class="line">ChrootDirectory &#x2F;</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no </span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
-<p>【注】：</p>
+            <p>MERGE语句：<br>语法如下：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MERGE INTO &lt;target&gt; USING &lt;source&gt; </span><br><span class="line">ON &lt;match-condition&gt;</span><br><span class="line">WHEN [NOT] MATCHED [AND &lt;othe-condition&gt;]</span><br><span class="line">THEN [UPDATE SET ... | DELETE | INSERT VALUES ... | SIGNAL ...]</span><br><span class="line">[ELSE IGNORE]</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，属主和属组必须是root；</li>
-<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，只有属主能拥有写权限，也就是说权限最大设置只能是755</li>
+<li>target：表示操作的对象，表，视图(最终还是操作表)</li>
+<li>source：一个查询，或者一个表</li>
+<li>match-condition：target和source的链接条件</li>
+<li>when matched：表示符合链接条件</li>
+<li>when not matched：表示不符合链接条件</li>
+<li>other-condition：其他判断条件</li>
+<li>signal：用于标注错误处理，如添加一条已经存在的数据的时候，就可以这么写：signal sqlstate=’70001’ set message_text=’Record already exists’</li>
+<li>else ignore：当不满足前面任何when条件的数据，进行忽略处理。</li>
 </ul>
-<h2 id="2-3-重启服务"><a href="#2-3-重启服务" class="headerlink" title="2.3 重启服务"></a>2.3 重启服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# systemctl restart sshd</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -392,7 +395,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/155/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/155/">155</a><span class="page-number current">156</span><a class="page-number" href="/blog/page/157/">157</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/157/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/155/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/155/">155</a><span class="page-number current">156</span><a class="page-number" href="/blog/page/157/">157</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/157/">&gt;</a>
   </nav>
 
 
@@ -438,7 +441,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +452,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

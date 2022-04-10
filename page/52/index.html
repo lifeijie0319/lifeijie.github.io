@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/11/other/%E7%BC%96%E7%A0%81/unicode/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/01/11/other/%E7%BC%96%E7%A0%81/unicode/" itemprop="url">理解unicode</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-11T21:38:11+08:00">
-                2022-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,20 +345,11 @@
       
         
           
-            <h1 id="unicode概念"><a href="#unicode概念" class="headerlink" title="unicode概念"></a>unicode概念</h1><pre><code>Unicode（统一码、万国码、单一码）是计算机科学领域里的一项业界标准,包括字符集、编码方案等。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。1990年开始研发，1994年正式公布。</code></pre>
-<p>简单来说，unicode是一种抽象字符到二进制编码的映射规则。</p>
-<h1 id="unicode基础"><a href="#unicode基础" class="headerlink" title="unicode基础"></a>unicode基础</h1><ul>
-<li>unicode也称为UCS(Universal Multiple-Octet Coded Character Set)</li>
-<li>unicode每个字符对应的编码数字称为code point</li>
-<li>unicode的code point的范围是 0 - 10FFFF.</li>
-<li>一个unicode的code point的写法通常是”U+”接上16进制表示的代码点数字</li>
-<li>unicode的前256个字符和ISO-8859-1（即Latin-1）一样，也就是ASCII</li>
-<li>unicode目前定义了17个plane，列举如下：<figure class="highlight plain"><figcaption><span>planes of 64k code points each</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plane 0 (U+0000 - U+FFFF): Basic Multilingual Plane (BMP, 1.0) frequent characters</span><br><span class="line">plane 1 (U+10000 - U+1FFFF): Supplementary Multilingual Plane (SMP, 3.1) infrequent, non-ideographic characters</span><br><span class="line">plane 2 (U+20000 - U+2FFFF): Supplementary Ideographic Plane (SIP, 3.1) infrequent, ideographic characters</span><br><span class="line">plane 14 (U+E0000 - U+EFFFF): Supplementary Special-purpose Plane (SSP, 3.1)</span><br><span class="line">planes 15 and 16  (U+F0000 - U+10FFFF) : Private use planes (2.0)</span><br></pre></td></tr></table></figure></li>
-<li>开始unicode使用2个字节表示常用的字符，能够表示65536个字符，后来发现不够，就从所有的code point中未使用的部分分割了两块出来，用于扩展，在utf-16中有体现，分割的情况如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">surrogates code points</span><br><span class="line">U+D800 - U+DBFF: 1,024 high surrogates</span><br><span class="line">U+DC00 - U+DFFF: 1,024 low surrogates</span><br><span class="line"></span><br><span class="line">scalar values</span><br><span class="line">U+0000 - U+D7FF</span><br><span class="line">U+E000 - U+10FFFF</span><br></pre></td></tr></table></figure>
-surrogates code points不能出现在数据中</li>
-<li>scalar values在电脑中的表示就是我们实际使用的编码方式，统一称为UTF(Unicode Transformation Format)，常用的有UTF-8/UTF-16/UTF-32等。这些编码方式都能表示所有unicode的scalar values，但是各自表示一个code point的code unit不同。</li>
+            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
+<ul>
+<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
+<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
 </ul>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf">https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf</a></p>
 
           
         
@@ -365,7 +389,7 @@ surrogates code points不能出现在数据中</li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/51/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/blog/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/53/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/51/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/blog/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/53/">&gt;</a>
   </nav>
 
 
@@ -411,7 +435,7 @@ surrogates code points不能出现在数据中</li>
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -422,7 +446,7 @@ surrogates code points不能出现在数据中</li>
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/segmentfaut%E6%9F%A5%E7%9C%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/Django/%E5%9C%A8django%E7%B3%BB%E7%BB%9F%E5%A4%96%E4%BD%BF%E7%94%A8django%E7%9A%84ORM/" itemprop="url">在django系统外使用django的ORM</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/linux/segmentfaut%E6%9F%A5%E7%9C%8B/" itemprop="url">segmentfaut查看</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -356,9 +345,17 @@
       
         
           
-            <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><p>django.core.exceptions.ImproperlyConfigured: Requested setting DEFAULT_INDEX_TABLESPACE, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.</p>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error">http://stackoverflow.com/questions/15556499/django-db-settings-improperly-configured-error</a></p>
-<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/1dbd3a22da10">http://www.jianshu.com/p/1dbd3a22da10</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/orangleliu/article/details/21722725">http://blog.csdn.net/orangleliu/article/details/21722725</a>  </p>
+            <h1 id="产生core文件方法"><a href="#产生core文件方法" class="headerlink" title="产生core文件方法"></a>产生core文件方法</h1><p>产生coredump的条件，首先需要确认当前会话的ulimit –c，若为0，则不会产生对应的coredump，需要进行修改和设置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ulimit -c unlimited # 可以产生coredump且不受大小限制)</span><br></pre></td></tr></table></figure>
+<p>这种设置仅对当前生效，如果想永久生效 可以用(source /etc/profile 命令马上生效)。那么需要在/etc/profile中加入这一行</p>
+<h1 id="更改core-dump生成路径"><a href="#更改core-dump生成路径" class="headerlink" title="更改core dump生成路径"></a>更改core dump生成路径</h1><p>因为core dump默认会生成在程序的工作目录，但是有些程序存在切换目录的情况，导致core dump生成的路径没有规律，<br>所以最好是自己建立一个文件夹，存放生成的core文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x2F;data&#x2F;coredump&#x2F;core.%e.%p&gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;core_pattern</span><br></pre></td></tr></table></figure>
+<p>将更改core文件生成路径，自动放在这个/data/coredump文件夹里。<br>%e表示程序名， %p表示进程id</p>
+<h1 id="用gdb调试该core"><a href="#用gdb调试该core" class="headerlink" title="用gdb调试该core"></a>用gdb调试该core</h1><ol>
+<li>gdb 可执行程序exe</li>
+<li>进入gdb环境后<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">core-file $filename</span><br></pre></td></tr></table></figure></li>
+<li>敲命令bt可以查看准确信息</li>
+</ol>
 
           
         
@@ -398,7 +395,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/232/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/232/">232</a><span class="page-number current">233</span><a class="page-number" href="/blog/page/234/">234</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/234/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/232/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/232/">232</a><span class="page-number current">233</span><a class="page-number" href="/blog/page/234/">234</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/234/">&gt;</a>
   </nav>
 
 
@@ -444,7 +441,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -455,7 +452,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

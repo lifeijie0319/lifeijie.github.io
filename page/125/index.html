@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/tar/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/10/database/oracle/%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/tar/" itemprop="url">tar常用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/10/database/oracle/%E9%94%81/" itemprop="url">Oracle锁</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-10T10:20:42+08:00">
+                2021-12-10
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">oracle</span>
                   </a>
                 </span>
 
@@ -334,9 +345,119 @@
       
         
           
-            <h1 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-c: 建立压缩档案</span><br><span class="line">-x：解压</span><br><span class="line">-t：查看内容</span><br><span class="line">-r：向压缩归档文件末尾追加文件</span><br><span class="line">-u：更新原压缩包中的文件</span><br><span class="line">-z：有gzip属性的</span><br><span class="line">-j：有bz2属性的</span><br><span class="line">-Z：有compress属性的</span><br><span class="line">-v：显示所有过程</span><br><span class="line">-O：将文件解开到标准输出</span><br></pre></td></tr></table></figure>
-<h1 id="tar-xz处理"><a href="#tar-xz处理" class="headerlink" title="tar.xz处理"></a>tar.xz处理</h1><p>习惯了 tar czvf 或 tar xzvf 的人可能碰到 tar.xz也会想用单一命令搞定解压或压缩。其实不行 tar里面没有征对xz格式的参数比如 z是针对 gzip，j是针对 bzip2。  </p>
-<h2 id="创建tar-xz文件"><a href="#创建tar-xz文件" class="headerlink" title="创建tar.xz文件"></a>创建tar.xz文件</h2><p>只要先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz<br>解压tar.xz文件：先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包。</p>
+            <h1 id="锁分类"><a href="#锁分类" class="headerlink" title="锁分类"></a>锁分类</h1><h2 id="根据保护的对象不同分"><a href="#根据保护的对象不同分" class="headerlink" title="根据保护的对象不同分"></a>根据保护的对象不同分</h2><ul>
+<li>DML锁（data locks，数据锁），用于保护数据的完整性。</li>
+<li>DDL锁（dictionary locks，字典锁），用于保护数据库对象的结构，如表、索引等的结构定义。</li>
+<li>内部锁和闩（internal locks and latches），保护数据库的内部结构。<h2 id="按锁级别划分"><a href="#按锁级别划分" class="headerlink" title="按锁级别划分"></a>按锁级别划分</h2></li>
+<li>排它锁（Exclusive  Locks，即X锁）<br>  事务设置排它锁后，该事务单独获得此资源，另一事务不能在此事务提交之前获得相同对象的共享锁或排它锁。 X锁上不能加其它任何锁。</li>
+<li>共享锁（Share Locks，即S锁）<br>  共享锁使一个事务对特定数据库资源进行共享访问——另一事务也可对此资源进行访问或获得相同共享锁。共享锁为事务提供高并发性，但如拙劣的事务设计+共享锁容易造成死锁或数据更新丢失。S锁上可以加S锁，不能加X锁。</li>
+</ul>
+<h1 id="DML锁"><a href="#DML锁" class="headerlink" title="DML锁"></a>DML锁</h1><p>DML锁主要包括TM锁和TX锁，其中TM锁称为意向锁或表级锁，TX锁称为行级锁或事务锁。当Oracle执行DML语句时，系统自动在所要操作的表上申请TM类型的锁。当TM锁获得后，系统再自动申请TX类型的锁，<br>并将实际锁定的数据行的锁标志位进行置位。这样在事务加锁前检查TX锁相容性时就不用再逐行检查锁标志，而只需检查TM锁模式的相容性即可，大大提高了系统的效率。</p>
+<h2 id="TX锁"><a href="#TX锁" class="headerlink" title="TX锁"></a>TX锁</h2><p>TX锁只包含一种类型的锁，即X锁。</p>
+<h2 id="TM锁"><a href="#TM锁" class="headerlink" title="TM锁"></a>TM锁</h2><h3 id="TM锁的兼容性"><a href="#TM锁的兼容性" class="headerlink" title="TM锁的兼容性"></a>TM锁的兼容性</h3><table>
+<thead>
+<tr>
+<th>锁模式</th>
+<th>锁描述</th>
+<th>解释</th>
+<th>SQL操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>none</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>NULL</td>
+<td>空</td>
+<td>Select</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SS(Row-S)</td>
+<td>行级共享锁，其他对象只能查询这些数据行</td>
+<td>Select for update、Lock for update、Lock row share</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SX(Row-X)</td>
+<td>行级排它锁，在提交前不允许做DML操作</td>
+<td>Insert、Update、Delete、Lock row share</td>
+</tr>
+<tr>
+<td>4</td>
+<td>S(Share)</td>
+<td>共享锁</td>
+<td>Create index、Lock share</td>
+</tr>
+<tr>
+<td>5</td>
+<td>SSX(S/Row-X)</td>
+<td>共享行级排它锁</td>
+<td>Lock share row exclusive</td>
+</tr>
+<tr>
+<td>6</td>
+<td>X(Exclusive)</td>
+<td>排它锁</td>
+<td>Alter table、Drop able、Drop index、Truncate table 、Lock exclusive</td>
+</tr>
+</tbody></table>
+<h3 id="TM锁的兼容性-1"><a href="#TM锁的兼容性-1" class="headerlink" title="TM锁的兼容性"></a>TM锁的兼容性</h3><table>
+<thead>
+<tr>
+<th>NULL</th>
+<th>RS</th>
+<th>Rx</th>
+<th>S</th>
+<th>SRX</th>
+<th>X</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RS</td>
+<td>可</td>
+<td>可</td>
+<td>可</td>
+<td>可</td>
+<td>否</td>
+</tr>
+<tr>
+<td>RX</td>
+<td>可</td>
+<td>可</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>S</td>
+<td>可</td>
+<td>否</td>
+<td>可</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>SRX</td>
+<td>可</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td>X</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+</tr>
+</tbody></table>
 
           
         
@@ -376,7 +497,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/124/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/124/">124</a><span class="page-number current">125</span><a class="page-number" href="/blog/page/126/">126</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/126/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/124/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/124/">124</a><span class="page-number current">125</span><a class="page-number" href="/blog/page/126/">126</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/126/">&gt;</a>
   </nav>
 
 
@@ -422,7 +543,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -433,7 +554,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/basic/concurrent/concurrent.futures/submit%E5%92%8Cmap/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/db/ibm_db/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/basic/concurrent/concurrent.futures/submit%E5%92%8Cmap/" itemprop="url">concurrent.futures模块中的submit和map</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/db/ibm_db/" itemprop="url">ibm_db</a></h1>
         
 
         <div class="post-meta">
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
                   </a>
                 </span>
 
@@ -328,8 +328,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/concurrent-futures/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent.futures</span>
+                  <a href="/blog/categories/language/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
                   </a>
                 </span>
 
@@ -367,8 +367,9 @@
       
         
           
-            <p>1 concurrent.futures的父类Executor定义了两个执行任务的方法，submit和map<br>ThreadPoolExecutor和ProcessPoolExecutor继承Executor</p>
-<p>2 需要注意，submit执行的任务直接返回concurrent.futures.Future对象，返回的futures列表中的future对象状态可能处于中间状态。<br>map则阻塞到所有任务完成。</p>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><p><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html</a></p>
+<h2 id="（一）离线安装"><a href="#（一）离线安装" class="headerlink" title="（一）离线安装"></a>（一）离线安装</h2><p>1、解压linuxx64_odbc_cli.tar.gz（实际上是IBM Data Server Driver for ODBC and CLI），将解压得到的处理driver移动到适当位置<br>2、设置环境变量：<br>export IBM_DB_HOME：文件夹ibm_db-2.0.7所在路径<br>3、解压ibm_db-2.0.7.tar.gz，得到解压后的文件夹ibm_db-2.0.7<br>4、进入文件夹ibm_db-2.0.7，执行<br>python2.7 setup.py build<br>python2.7 setup.py install<br>5、执行python，进入python环境，执行如下指令：<br>import ibm_db<br>没有报错说明包安装成功<br>6、Ensure that the Python driver can access the libdb2.so CLI driver file:<br>For 64-bit Linux and UNIX operating systems other than the AIX operating system, set the LD_LIBRARY_PATH variable to the IBM_DB_HOME/lib64 directory by issuing the export command:<br>export LD_LIBRARY_PATH=IBM_DB_HOME/lib64<br>这一步是设置环境变量，如果包下面没有这个lib64文件夹，可以将clidriver下面的db2profile执行设置环境变量。为了长期使用，可以把执行db2profiel的命令加到.bash_profilel或者.bashrc下面。</p>
+<h1 id="（二）在线安装"><a href="#（二）在线安装" class="headerlink" title="（二）在线安装"></a>（二）在线安装</h1><p>pip install ibm_db</p>
 
           
         
@@ -408,7 +409,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/275/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/275/">275</a><span class="page-number current">276</span><a class="page-number" href="/blog/page/277/">277</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/277/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/275/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/275/">275</a><span class="page-number current">276</span><a class="page-number" href="/blog/page/277/">277</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/277/">&gt;</a>
   </nav>
 
 
@@ -454,7 +455,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -465,7 +466,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

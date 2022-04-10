@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/database/Mybatis/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/database/redis/redis%E5%BA%94%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/database/Mybatis/" itemprop="url">Mybatis</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/database/redis/redis%E5%BA%94%E7%94%A8/" itemprop="url">redis应用</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T09:56:53+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,63 +345,23 @@
       
         
           
-            <h1 id="Mybatis语法"><a href="#Mybatis语法" class="headerlink" title="Mybatis语法"></a>Mybatis语法</h1><h2 id="sql中的-和-的区别是什么"><a href="#sql中的-和-的区别是什么" class="headerlink" title="sql中的#{}和 ${}的区别是什么"></a>sql中的#{}和 ${}的区别是什么</h2><p>  #{}是预编译处理，底层会使用PreparedStatement，能够防止sql注入；<br>  ${}是字符串替换</p>
-<h1 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h1><h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>Mybatis仅支持association和collection关联对象的延迟加载。association是一对一，collection是一对多。在Mybatis配置文件中可以配置是否开启延迟加载。相关的主要配置项是：</p>
-<ul>
-<li>lazyLoadingEnabled 延迟加载的全局开关，默认false不开启。在特定的关联关系中可以设置 fetchType 属性来覆盖该项的开关状态。</li>
-<li>aggressiveLazyLoading 当开启时，任何方法的调用都会加载该对象的所有属性。否则，每个属性会按需加载。默认false。<h2 id="延迟加载的原理"><a href="#延迟加载的原理" class="headerlink" title="延迟加载的原理"></a>延迟加载的原理</h2>创建目标对象的代理对象，如果获取延迟加载的对象发现是null，就发出预存的sql查询相关数据填充当前对象。<h2 id="延迟加载出现序列化问题"><a href="#延迟加载出现序列化问题" class="headerlink" title="延迟加载出现序列化问题"></a>延迟加载出现序列化问题</h2>使用延迟加载后，常会出现如下错误：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No serializer found for class org.apache.ibatis.executor.loader.javassist.JavassistProxyFactory$EnhancedResultObjectProxyImpl and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS)</span><br></pre></td></tr></table></figure>
-debug观察此时通过dao获取到的结果，是一个代理对象，代理对象包含一个handler属性，该属性不是可以自动序列化的类型。此时，在返回结果进行json序列化的时候抛出异常。有两种常见的处理方式：</li>
+            <h1 id="常见应用"><a href="#常见应用" class="headerlink" title="常见应用"></a>常见应用</h1><ul>
+<li>数据缓存</li>
+<li>分布式锁</li>
+<li>消息队列</li>
 </ul>
-<ol>
-<li>报错的信息建议disable SerializationFeature.FAIL_ON_EMPTY_BEANS，可以通过设置spring.jackson.serialization.FAIL_ON_EMPTY_BEANS=false来处理。背后的原因在于：<br>FAIL_ON_EMPTY_BEANS是com.fasterxml.jackson.databind.SerializationFeature枚举类的一个枚举值，该值的作用是：Feature that determines what happens when no accessors are found for a type (and there are no annotations to indicate it is meant to be serialized). If enabled (default), an exception is thrown to indicate these as non-serializable types; if disabled, they are serialized as empty Objects, i.e. without any properties. 即FAIL_ON_EMPTY_BEANS=true，无法序列化属性时抛出异常，否则将属性值置空处理。</li>
-<li>在被代理的实体类上添加注解@JsonIgnoreProperties(value = “handler”)。<h2 id="懒加载失效"><a href="#懒加载失效" class="headerlink" title="懒加载失效"></a>懒加载失效</h2>使用json序列化的时候，往往会调用方法获取关联数据，使得懒加载失效。（待验证）</li>
-</ol>
-<h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><p>基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session。当 Session flush（mapper中可以针对特定语句配置） 或 close 之后，该 Session 中的所有 Cache 就将清空。默认打开一级缓存。</p>
-<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>二级缓存与一级缓存其机制相同，不同在于其存储作用域为 Mapper(Namespace)，并且可自定义存储源，如 Ehcache。默认不打开二级缓存。</p>
-<h2 id="缓存数据更新"><a href="#缓存数据更新" class="headerlink" title="缓存数据更新"></a>缓存数据更新</h2><p>当某一个作用域(一级缓存 Session/二级缓存Namespaces)的进行了C/U/D 操作后，默认该作用域下所有 select 中的缓存将被 clear。</p>
-<h1 id="Mybatic和Hibernate的区别"><a href="#Mybatic和Hibernate的区别" class="headerlink" title="Mybatic和Hibernate的区别"></a>Mybatic和Hibernate的区别</h1><table>
-<thead>
-<tr>
-<th>特征</th>
-<th>Mybatis</th>
-<th>Hibernate</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>数据库相关性</td>
-<td>高度相关</td>
-<td>相关度低</td>
-</tr>
-<tr>
-<td>编写灵活性</td>
-<td>高</td>
-<td>低</td>
-</tr>
-<tr>
-<td>自动化</td>
-<td>半自动化，只有数据库数据到对象的映射</td>
-<td>全自动化</td>
-</tr>
-</tbody></table>
-<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>Mybatis自定义插件针对Mybatis四大对象进行拦截，分别是：</p>
-<ul>
-<li>Executor(update, query, flushStatements, commit, rollback, getTransaction, close, isClosed)：拦截执行器的方法(log记录) </li>
-<li>StatementHandler(prepare, parameterize, batch, update, query) ：拦截Sql语法构建的处理 </li>
-<li>ParameterHandler(getParameterObject, setParameters) ：拦截参数的处理 </li>
-<li>ResultSetHandler(handleResultSets, handleOutputParameters) ：拦截结果集的处理<h2 id="自定义插件使用"><a href="#自定义插件使用" class="headerlink" title="自定义插件使用"></a>自定义插件使用</h2></li>
+<h1 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h1><h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><p>缓存穿透是指查询一个不存在的数据，查询没有结果不进行缓存，导致每次都要进行数据库查询。可以通过查不到数据设置很快过期的空值缓存来避免缓存穿透。</p>
+<h2 id="缓存与数据库的一致性"><a href="#缓存与数据库的一致性" class="headerlink" title="缓存与数据库的一致性"></a>缓存与数据库的一致性</h2><ul>
+<li>合理设置过期时间</li>
+<li>写数据库时同步更新redis缓存，通过数据库事务机制保证一致性</li>
 </ul>
-<ol>
-<li>编写自定义插件类实现Interceptor接口，使用@Signature注解标记插件的作用区域，如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ExamplePlugin.java</span></span><br><span class="line"><span class="meta">@Intercepts(&#123;@Signature(</span></span><br><span class="line"><span class="meta">  type= Executor.class,</span></span><br><span class="line"><span class="meta">  method = &quot;update&quot;,</span></span><br><span class="line"><span class="meta">  args = &#123;MappedStatement.class,Object.class&#125;)&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExamplePlugin</span> <span class="keyword">implements</span> <span class="title">Interceptor</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Invocation invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    <span class="comment">// implement pre-processing if needed</span></span><br><span class="line">    Object returnObject = invocation.proceed();</span><br><span class="line">    <span class="comment">// implement post-processing if needed</span></span><br><span class="line">    <span class="keyword">return</span> returnObject;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setProperties</span><span class="params">(Properties properties)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.properties = properties;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-@Signature的参数如下：</li>
-</ol>
-<ul>
-<li>type： 拦截的类</li>
-<li>method： 拦截的方法</li>
-<li>args： 方法参数</li>
-</ul>
-<ol start="2">
-<li>在配置文件中添加插件配置，如：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">interceptor</span>=<span class="string">&quot;org.mybatis.example.ExamplePlugin&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;someProperty&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h2>分页插件的基本原理是使用Mybatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截执行的sql，然后重写sql，添加相应的分页参数。<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tonghun/p/7122801.html">https://www.cnblogs.com/tonghun/p/7122801.html</a></li>
+<h1 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h1><p>由于redis是单线程，两个客户端顺序使用setnx(set if not exists) lock value，只有前一个会成功，成功后执行临界区代码，之后使用del删除lock，其它客户端可以获取锁。</p>
+<h2 id="问题与改进"><a href="#问题与改进" class="headerlink" title="问题与改进"></a>问题与改进</h2><ol>
+<li>客户端A设置的锁被客户端B删除<br>value与客户端一一对应，删除的时候比较value，确认和加锁的时候是一个客户端</li>
+<li>加锁后客户端宕机锁无法释放导致死锁<br>设置锁的超时时间，超过一定时间自动释放锁。Redis 2.6.12 之后，Redis 扩展了 SET 命令的参数，可以使用set key value [EX seconds] [PX milliseconds] NX代替setnx</li>
+<li>超时时间的决策<br>Redisson框架使用锁续期的策略实现。思路是客户端加锁后新建守护线程，守护线程定时給锁续期，客户端正常释放锁后关闭守护线程。如果客户端宕机，守护线程随之退出，redis的锁在超时时间过后自动失效。</li>
+<li>锁获取失败后重复获取<br>使用发布订阅模式，获取锁失败后订阅锁释放消息，锁释放后发布释放消息。</li>
+<li>锁重入<br>使用Redis的哈希表存储可重入次数，当加锁成功后，使用hset命令，value(重入次数)则是1，如果同一个客户端再次加锁成功，则使用hincrby自增加一。解锁时，先判断可重复次数是否大于0，大于0则减一，否则删除键值，释放锁资源。<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/300767410/answer/1698980571">https://www.zhihu.com/question/300767410/answer/1698980571</a></li>
 </ol>
 
           
@@ -409,7 +402,7 @@ debug观察此时通过dao获取到的结果，是一个代理对象，代理对
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/6/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/8/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/6/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/8/">&gt;</a>
   </nav>
 
 
@@ -455,7 +448,7 @@ debug观察此时通过dao获取到的结果，是一个代理对象，代理对
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -466,7 +459,7 @@ debug观察此时通过dao获取到的结果，是一个代理对象，代理对
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

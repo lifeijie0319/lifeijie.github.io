@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/riak/start/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/riak/start/" itemprop="url">riak启动</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/sed%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">sed常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/riak/" itemprop="url" rel="index">
-                    <span itemprop="name">riak</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,15 +334,26 @@
       
         
           
-            <p>参考文档： <a target="_blank" rel="noopener" href="https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html">https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html</a></p>
-<h1 id="停服务"><a href="#停服务" class="headerlink" title="停服务"></a>停服务</h1><p>riak stop</p>
-<h1 id="改配置"><a href="#改配置" class="headerlink" title="改配置"></a>改配置</h1><p>配置文件路径/etc/riak/riak.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listener.protobuf.internal &#x3D; 127.0.0.1:8087 #改成实际IP和端口</span><br><span class="line">nodename &#x3D; riak@127.0.0.1 #改成想改的名字，注意要唯一标识此节点</span><br></pre></td></tr></table></figure>
-<h1 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h1><p>riak start  </p>
-<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p><img src="/blog/images/database/riak/start/start1.png"></p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Riak’s Erlang VM is built with SMP support and if Riak is started on a non-SMP system, an error like this one is logged. This is commonly seen in virtualized environments configured for only one CPU core.</p>
-<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>改用4核cpu，然后还是报这个错。怀疑这个问题的真实原因。看到另一篇博客里说是因为/data/ring/下面的文件要清理掉，到是和官方文档不谋而合。处理了一下，果然，报另一个错误了：<br><img src="/blog/images/database/riak/start/start2.png"><br>看了一下，是8098默认端口被占用了，应该是指之前起的riak失败导致，重启机器之后就好了。另一次安装的时候，发现node名字也是导致此故障的原因之一，即node名字不能随意取，使用本机IP即可。</p>
-
+            <h1 id="基本替换模式"><a href="#基本替换模式" class="headerlink" title="基本替换模式"></a>基本替换模式</h1><p>sed -i :expression :file<br>:expression 一般是替换的表达式，参考vi中的替换。注意，与vi不同之处，一是用s而非%s，二是替换时忽略大小写，参考下文<br>:file 文件名<br>-i: sed处理过的输出是直接输出到屏幕上的,使用参数”i”直接在文件中替换。</p>
+<h1 id="expression详解"><a href="#expression详解" class="headerlink" title=":expression详解"></a>:expression详解</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><p>‘s/原字符串/替换字符串/‘<br>单引号里面,s表示替换,三根斜线中间是替换的样式,特殊字符需要使用反斜线”\”进行转义。</p>
+<h2 id="“-“处理"><a href="#“-“处理" class="headerlink" title="“/“处理"></a>“/“处理</h2><p>命令中的三根斜线分隔符可以换成别的符号,有时候替换目录字符串的时候有较多斜线，这个时候换成其它的分割符是较为方便,只需要紧跟s定义即可。</p>
+<h2 id="全局匹配"><a href="#全局匹配" class="headerlink" title="全局匹配"></a>全局匹配</h2><p>可以在末尾加g替换每一个匹配的关键字,否则只替换每行的第一个。</p>
+<h2 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h2><p>单引号” ‘ ’”是没有办法用反斜线”\”转义的,这时候只要把命令两边的单引号改为双引号就行了,格式如下：<br>sed “s/原字符串包含’/替换字符串包含’/“ </p>
+<h2 id="替换时忽略大小写"><a href="#替换时忽略大小写" class="headerlink" title="替换时忽略大小写"></a>替换时忽略大小写</h2><p>在:expression的最后加上I代表忽略大小写</p>
+<h2 id="多条替换规则"><a href="#多条替换规则" class="headerlink" title="多条替换规则"></a>多条替换规则</h2><p>多个替换可以在同一条命令中执行,用分号”;”分隔，其格式为:<br>sed ‘s/^/添加的头部&amp;/g；s/$/&amp;添加的尾部/g’ </p>
+<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><ul>
+<li>”^”表示行首  </li>
+<li>”$”符号如果在引号中表示行尾，但是在引号外却表示末行(最后一行)  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sed &#39;s&#x2F;^&#x2F;添加的头部&amp;&#x2F;g&#39; 　　　　 #在所有行首添加  </span><br><span class="line">sed &#39;s&#x2F;$&#x2F;&amp;添加的尾部&#x2F;g&#39; 　　　　 #在所有行末添加  </span><br><span class="line">sed &#39;2s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39;　 #替换第2行  </span><br><span class="line">sed &#39;$s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39;   #替换最后一行  </span><br><span class="line">sed &#39;2,5s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39; #替换2到5行  </span><br><span class="line">sed &#39;2,$s&#x2F;原字符串&#x2F;替换字符串&#x2F;g&#39; #替换2到最后一行  </span><br></pre></td></tr></table></figure>
+注意这里的 “ &amp; “ 符号，如果没有 “&amp;”，就会直接将匹配到的字符串替换掉</li>
+</ul>
+<h2 id="删除行"><a href="#删除行" class="headerlink" title="删除行"></a>删除行</h2><p>删除包含特殊字符的行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;from ..models import&#x2F;d&#39; &#96;grep -rl --include&#x3D;&#39;*.py&#39; &#39;from ..models import&#39;&#96;</span><br></pre></td></tr></table></figure>
+<p>删除两行之间的所有行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;&lt;!-- Page Header --&gt;&#x2F;,&#x2F;&lt;!-- END Page Header --&gt;&#x2F;d&#39; &#96;grep -rl --include&#x3D;&#39;*.html&#39; --exclude&#x3D;&#39;index.html&#39; &#39;&lt;!-- Page Header --&gt;&#39;&#96;</span><br></pre></td></tr></table></figure>
+<h2 id="插入行"><a href="#插入行" class="headerlink" title="插入行"></a>插入行</h2><p>在指定行前插入语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;def &#x2F;i\@login_check&#39; group.py</span><br></pre></td></tr></table></figure>
+<p>在指定行后插入语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#39;&#x2F;def &#x2F;a\@login_check&#39; group.py</span><br></pre></td></tr></table></figure>
           
         
       
@@ -392,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/151/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/blog/page/153/">153</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/153/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/151/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/blog/page/153/">153</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/153/">&gt;</a>
   </nav>
 
 
@@ -438,7 +438,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

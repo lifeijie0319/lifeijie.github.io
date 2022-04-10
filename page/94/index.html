@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/08/database/mysql/engine/transaction/MVCC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/security/sm2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/08/database/mysql/engine/transaction/MVCC/" itemprop="url">MySQL MVCC实现</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/java/security/sm2/" itemprop="url">sm2常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-08T16:50:35+08:00">
-                2021-12-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -345,14 +356,14 @@
       
         
           
-            <h1 id="mysql的MVCC的实现"><a href="#mysql的MVCC的实现" class="headerlink" title="mysql的MVCC的实现"></a>mysql的MVCC的实现</h1><h2 id="mysql记录的结构"><a href="#mysql记录的结构" class="headerlink" title="mysql记录的结构"></a>mysql记录的结构</h2><p>mysql底层数据，除了业务数据，mysql还默认增加了两列，分别是事务id（trx_id）和指针(ptr)。事务id是每次事务开启之后首次执行sql时分配的，指针指向的是数据的历史版本（undo日志）。每次对一条记录进行增、删、改时，mysql并不直接删除记录，而是新增一条新的记录，记录的事务id为造成变动的事务id，指针指向原记录。这样，对一条记录的增、删、改实际上形成了一个版本链。</p>
-<h2 id="read-view与查询的底层逻辑"><a href="#read-view与查询的底层逻辑" class="headerlink" title="read-view与查询的底层逻辑"></a>read-view与查询的底层逻辑</h2><p>read-view称为一致性视图，是一个mysql对数据库整体的一个快照。在可重复读的情况下是第一次查询生成的，后续查询使用同一个read-view。在读已提交的隔离级别下是在每次查询时生成新的。<br>每次生成read-view的时候，实际包含两个关键数据结构。一是一个数组，存储的是当前未提交的所有事务的id，我们记作tran_v，其中最小值为min_id，另一个是当前已经生成的所有事务中的最大事务id，记为max_id。每次查询，从版本链的最上层往下比较，规则如下：</p>
-<ul>
-<li>如果记录的事务id trx_id &lt; min_id，记录可见，查询返回。</li>
-<li>如果trx_id &gt; max_id，trx_id对应的事务是在read-view生成之后才建立的，不可见，继续向下查找。</li>
-<li>如果min_id &lt;= trx_id &lt;= max_id，并且trx_id在tran_v数组中，说明read-view生成时记录还未提交，不可见，继续向下查找。</li>
-<li>如果min_id &lt;= trx_id &lt;= max_id，并且trx_id不在tran_v数组中，说明read-view生成时记录已经提交，记录可见，查询返回。</li>
+            <h1 id="sm2加解密"><a href="#sm2加解密" class="headerlink" title="sm2加解密"></a>sm2加解密</h1><p>在java中，一般使用bouncycastle库来实现sm2加解密，但是有几个要注意的点。</p>
+<h2 id="加解密排序模式"><a href="#加解密排序模式" class="headerlink" title="加解密排序模式"></a>加解密排序模式</h2><p>在sm2加解密过程中，密文由C1C2C3三个模块组成，但是密文的排序会有两种方式。按照国密标准，排序方式是C1C3C2，但是bouncycastle库模式使用C1C2C3排序。</p>
+<h2 id="密钥格式"><a href="#密钥格式" class="headerlink" title="密钥格式"></a>密钥格式</h2><ul>
+<li>私钥 bouncycastle库使用32字节的私钥</li>
+<li>公钥 bouncycastle库使用64字节的公钥，但是在公钥前面会有额外一个字节的压缩标志位。在椭圆曲线算法中，公钥其实是曲线上的一个点，在bouncycastle库中用ECPoint来表示。它的二进制表示通过public byte[] getEncoded(boolean compressed)方法获得。这里如果compressed是true，那么压缩标志位会是02或者03，压缩的公钥只能在bouncycastle库中使用；如果是false，那么压缩标志位是04。<h2 id="密文"><a href="#密文" class="headerlink" title="密文"></a>密文</h2>使用bouncycastle库加密生成的密文会在前面自动加上一个额外字节04。</li>
 </ul>
+<h1 id="sm2加验签"><a href="#sm2加验签" class="headerlink" title="sm2加验签"></a>sm2加验签</h1><p>在java中，使用bouncycastle库来实现sm2加验签，要注意的是，签名后会使用ASN.1的DER格式对签名结果（64字节）进行编码，处理后的结果可能是70-72字节的长度。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/seeyouagen/article/details/115727307">https://blog.csdn.net/seeyouagen/article/details/115727307</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/chuiyi5395/article/details/100674019">https://blog.csdn.net/chuiyi5395/article/details/100674019</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/Lemon_MY/article/details/108586527">https://blog.csdn.net/Lemon_MY/article/details/108586527</a><br><a target="_blank" rel="noopener" href="https://bbs.csdn.net/topics/392137835">https://bbs.csdn.net/topics/392137835</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/xlb8224866/article/details/104917818">https://blog.csdn.net/xlb8224866/article/details/104917818</a></p>
 
           
         
@@ -392,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/93/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/93/">93</a><span class="page-number current">94</span><a class="page-number" href="/blog/page/95/">95</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/95/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/93/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/93/">93</a><span class="page-number current">94</span><a class="page-number" href="/blog/page/95/">95</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/95/">&gt;</a>
   </nav>
 
 
@@ -438,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

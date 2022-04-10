@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/24/language/java/j2ee/jsp/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/31/database/mysql/mysql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/24/language/java/j2ee/jsp/" itemprop="url">jsp</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/31/database/mysql/mysql%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92/" itemprop="url">mysql执行计划</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-24T14:29:02+08:00">
-                2022-02-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-31T18:08:24+08:00">
+                2022-03-31
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,23 +345,22 @@
       
         
           
-            <h1 id="jsp与servlet的联系与区别"><a href="#jsp与servlet的联系与区别" class="headerlink" title="jsp与servlet的联系与区别"></a>jsp与servlet的联系与区别</h1><p>jsp本质上就是servlet，但是这是web容器编译后的情况，可以认为jsp是一种专门用来渲染页面的被简化的servlet，程序员只需要填入需要的数据，由容器完成后续编译成servlet的工作。<br>|          | jsp                                                            | servlet                         |<br>| ——– | ————————————————————– | ——————————- |<br>| 作用     | 渲染页面                                                       | 业务逻辑处理，提供jsp需要的数据 |<br>| 内置对象 | 通过HttpServletRequest/HttpServletResponse/HttpServlet对象得到 | 无                              |</p>
-<h2 id="jsp的内置对象与作用"><a href="#jsp的内置对象与作用" class="headerlink" title="jsp的内置对象与作用"></a>jsp的内置对象与作用</h2><ul>
-<li>request 客户端请求对象</li>
-<li>response 响应对象</li>
-<li>pageContext 页面上下文，可以引用到request/session/application等作用域</li>
-<li>session 用户会话对象</li>
-<li>application 服务器运行环境对象</li>
-<li>out 输出流对象</li>
-<li>config web应用的配置对象</li>
-<li>page jsp页面本身，相当于类中的this</li>
-<li>exception 封装页面抛出的异常</li>
-</ul>
-<h2 id="jsp的四种作用域"><a href="#jsp的四种作用域" class="headerlink" title="jsp的四种作用域"></a>jsp的四种作用域</h2><ul>
-<li>page 页面相关的对象和属性</li>
-<li>request 请求相关的对象和属性，一个web请求可以跨越多个page</li>
-<li>session 用户与服务器建立的会话相关的对象和属性，跨越request</li>
-<li>application 代表与整个web应用相关的对象和属性，一个全局作用域</li>
+            <h1 id="执行计划查看"><a href="#执行计划查看" class="headerlink" title="执行计划查看"></a>执行计划查看</h1><h2 id="如何查看"><a href="#如何查看" class="headerlink" title="如何查看"></a>如何查看</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DESC</span><span class="operator">/</span>EXPLAIN :<span class="keyword">sql</span>;</span><br></pre></td></tr></table></figure>
+<p>sql: 要查看执行计划的sql</p>
+<h2 id="查询结果分析"><a href="#查询结果分析" class="headerlink" title="查询结果分析"></a>查询结果分析</h2><h3 id="查询结果列"><a href="#查询结果列" class="headerlink" title="查询结果列"></a>查询结果列</h3><ul>
+<li>table: 查询的表</li>
+<li>type: 查询的类型（全表/索引）</li>
+<li>possible_keys: 可选索引</li>
+<li>key: 选择索引</li>
+<li>key_len：索引匹配长度（联合索引时可能只走了部分部分列）</li>
+<li>extra: 额外信息<h3 id="type类型详解"><a href="#type类型详解" class="headerlink" title="type类型详解"></a>type类型详解</h3>type包含以下类型：</li>
+<li>ALL：全表扫描，不走索引。注意，即使列上有索引，但是如果使用&lt;&gt;，not in, like 等可能走的还全表扫描。</li>
+<li>index：全索引扫描。比如查询列为索引列，没有where条件时。</li>
+<li>range：索引范围扫描，索引列上使用where范围搜索条件。比如&gt;,&gt;=,&lt;,&lt;=,between,in,and,or等。</li>
+<li>ref: 非唯一性索引，等值查询。</li>
+<li>eq_ref：多表连接时，连接条件使用了唯一索引。</li>
+<li>system,const：唯一键等值查询。</li>
+<li>null：唯一键等值查询，但是没有对应结果。<h3 id="extra-filesort"><a href="#extra-filesort" class="headerlink" title="extra filesort"></a>extra filesort</h3>当extra字段里面出现filesort时，说明数据库需要对结果进行额外的排序操作，如果可以使用联合索引使查询结果自动有序，可以进行优化。</li>
 </ul>
 
           
@@ -369,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/28/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/30/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/28/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/30/">&gt;</a>
   </nav>
 
 
@@ -415,7 +447,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -426,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

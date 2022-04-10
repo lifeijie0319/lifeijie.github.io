@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/27/language/go/effective_go/4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/security/web/CSRF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/27/language/go/effective_go/4/" itemprop="url">effective go 学习整理四</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/security/web/CSRF/" itemprop="url">CSRF攻击</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-27T20:40:32+08:00">
-                2021-12-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/security/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,7 +345,10 @@
       
         
           
-            <h1 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h1><p>Do not communicate by sharing memory; instead, share memory by communicating.这是go中并发的思想核心。简单来说，传统的并发控制通过对一个共享对象加锁并进行争用实现，而go的思想是，单线程本身是顺序的，只有两个线程交互的时候，才有并发的问题，而交流的过程就是同步的过程，可以把这种同步理解为unix的pipe。<br>goroutine实现并发，chan实现同步和信号量，两者结合形成go的并发体系。<br>go的并发机制也能用来实现多核并行，关键在于将任务分解到goroutine中，最后通过resultChan来收集结果。</p>
+            <h1 id="什么是CSRF"><a href="#什么是CSRF" class="headerlink" title="什么是CSRF"></a>什么是CSRF</h1><p>跨站脚本伪造(CROSS SITE REQUEST FORGE)，即CSRF，是指攻击者在自己的网站上伪造用户请求访问用户曾经访问的已登录认证的有CSRF漏洞的网站。由于被攻击网站只确认了请求来自于用户浏览器，而没有确认请求是否来自用户的真实意愿。</p>
+<h1 id="如何防范CSRF"><a href="#如何防范CSRF" class="headerlink" title="如何防范CSRF"></a>如何防范CSRF</h1><h2 id="验证HTTP-referer字段"><a href="#验证HTTP-referer字段" class="headerlink" title="验证HTTP referer字段"></a>验证HTTP referer字段</h2><p>HTTP头中的Referer字段记录了该HTTP请求的来源地址。referer字段告诉服务器该网页是从哪个页面链接过来的，而攻击者的网页和被攻击网站的页面并不相同。</p>
+<h2 id="使用验证码"><a href="#使用验证码" class="headerlink" title="使用验证码"></a>使用验证码</h2><p>对重要的请求，比如转账等，添加额外校验。</p>
+<h2 id="token验证"><a href="#token验证" class="headerlink" title="token验证"></a>token验证</h2><p>CSRF能够成功的关键在于用户访问攻击者网站而在未知情的情况下向缺陷网站发送了请求，这个请求带上了用户之前访问缺陷网站登录验证的cookie。所以，在cookie之外向服务端传递之前服务端产生的token，服务端将请求的token和服务端存储的token（一般在session中）比较确认请求是否来自于自己的网站页面。token可以放在报文体或者http头部中。</p>
 
           
         
@@ -352,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/65/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/65/">65</a><span class="page-number current">66</span><a class="page-number" href="/blog/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/67/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/65/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/65/">65</a><span class="page-number current">66</span><a class="page-number" href="/blog/page/67/">67</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/67/">&gt;</a>
   </nav>
 
 
@@ -398,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -409,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

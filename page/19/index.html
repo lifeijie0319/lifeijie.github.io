@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/27/language/java/spring/mvc/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/language/java/database/hibernate/hibernate%20session/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/27/language/java/spring/mvc/" itemprop="url">spring mvc</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/language/java/database/hibernate/hibernate%20session/" itemprop="url">hibernate session</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-27T13:48:25+08:00">
-                2022-02-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -282,6 +282,61 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/hibernate/" itemprop="url" rel="index">
+                    <span itemprop="name">hibernate</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,28 +367,56 @@
       
         
           
-            <h1 id="spring-mvc-请求执行流程"><a href="#spring-mvc-请求执行流程" class="headerlink" title="spring mvc 请求执行流程"></a>spring mvc 请求执行流程</h1><ol>
-<li>DispatcherServlet接收请求</li>
-<li>DispatcherServlet解析URL，根据HandlerMapping找到对应的Controller，还包括Controller相关的拦截器Interceptor等，组成一个HandlerExecutionChain，按照顺序执行这个chain。</li>
-<li>返回ModelAndView到DispatcherServlet</li>
-<li>选择合适的ViewResolver渲染视图返回响应</li>
+            <h1 id="hibernate执行流程"><a href="#hibernate执行流程" class="headerlink" title="hibernate执行流程"></a>hibernate执行流程</h1><ol>
+<li>创建配置类Configuration</li>
+<li>根据配置创建SessionFactory </li>
+<li>从SessionFactory获得Session。注意，这里有两个方法openSession和getCurrentSession都可以获得Session。区别在于openSession每次开启新的Session，需要手动关闭；而getCurrentSession每次获得同一个当前线程绑定的Session，无需手动关闭</li>
+<li>使用Session开启事务，执行业务</li>
+<li>关闭Session</li>
+<li>关闭SessionFactory </li>
 </ol>
-<h1 id="spring-mvc-有哪些组件"><a href="#spring-mvc-有哪些组件" class="headerlink" title="spring mvc 有哪些组件"></a>spring mvc 有哪些组件</h1><ul>
-<li>DispatcherServlet：中央控制器，把请求给转发到具体的控制类</li>
-<li>Controller：具体处理请求的控制器</li>
-<li>HandlerMapping：映射处理器，负责映射中央处理器转发给controller时的映射策略</li>
-<li>ModelAndView：服务层返回的数据和视图层的封装类</li>
-<li>ViewResolver：视图解析器，解析具体的视图</li>
-<li>Interceptors ：拦截器，负责拦截我们定义的请求然后做处理工作</li>
-</ul>
-<h1 id="RequestMapping注解"><a href="#RequestMapping注解" class="headerlink" title="@RequestMapping注解"></a>@RequestMapping注解</h1><p>RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。</p>
+<h1 id="session与connection的关系"><a href="#session与connection的关系" class="headerlink" title="session与connection的关系"></a>session与connection的关系</h1><p>session是数据库操作的对象，一个connection在不同的时刻供不同的session使用。</p>
+<h1 id="session事务支持"><a href="#session事务支持" class="headerlink" title="session事务支持"></a>session事务支持</h1><p>session开启事务后需要显示提交，默认是不提交的。</p>
 <ul>
-<li>value: 请求路径</li>
-<li>method： http请求方法</li>
-<li>consumes: 指定请求的Content-Type</li>
-<li>produces: 指定响应的内容类型，必须请求头Accept中包含该类型。</li>
-<li>params: 指定请求中必须包含某些参数值</li>
-<li>headers: 指定请求头中必须包含某些指定header</li>
+<li>beginTransaction() 开启事务方法</li>
+<li>commit() 提交事务方法</li>
+</ul>
+<h1 id="openSession-和getCurrentSession-的区别"><a href="#openSession-和getCurrentSession-的区别" class="headerlink" title="openSession()和getCurrentSession()的区别"></a>openSession()和getCurrentSession()的区别</h1><ul>
+<li>openSession()每次生成新的session，getCurrentSession()每次获得相同的session</li>
+<li>openSession()生成的session需要手动释放close()，而getCurrentSession()获得的session在事务执行之后会自动关闭</li>
+<li>getCurrentSession()需要在配置文件下的session-factory标签内添加hibernate.current_session_context_class的property，一般值设置为thread，表示在当前线程内获取唯一实例</li>
+</ul>
+<h1 id="get和load的区别"><a href="#get和load的区别" class="headerlink" title="get和load的区别"></a>get和load的区别</h1><p>hibernate中Session接口提供的get()和load()方法都是用来获取一个实体对象，在使用方式和查询性能上有一些区别。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user=session.get(User.class, <span class="string">&quot;1&quot;</span>);</span><br><span class="line">User user=session.load(User.class, <span class="string">&quot;1&quot;</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>比较项</th>
+<th>load</th>
+<th>get</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>加载方式</td>
+<td>懒加载，查询id以外的数据时才实际执行</td>
+<td>立即生成sql执行</td>
+</tr>
+<tr>
+<td>记录未找到</td>
+<td>方法本身返回代理类实例，获取实际数据时抛出ObjectNotFoundException</td>
+<td>返回null</td>
+</tr>
+<tr>
+<td>缓存</td>
+<td>按照一级缓存-二级缓存-数据库的顺序查询</td>
+<td>一级缓存没有直接查数据库</td>
+</tr>
+</tbody></table>
+<h1 id="三种查询方式"><a href="#三种查询方式" class="headerlink" title="三种查询方式"></a>三种查询方式</h1><ul>
+<li>HQL(Hibernate Query Language)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Query query = session.createQuery(<span class="string">&quot;from Customer where name = ?&quot;</span>);</span><br><span class="line">query.setParameter(<span class="number">0</span>, <span class="string">&quot;苍老师&quot;</span>);</span><br><span class="line">query.list();</span><br></pre></td></tr></table></figure></li>
+<li>QBC(Query By Criteria)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Criteria criteria = session.createCriteria(Customer.class);</span><br><span class="line">criteria.add(Restrictions.eq(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;花姐&quot;</span>));</span><br><span class="line">List&lt;Customer&gt; list = criteria.list();</span><br></pre></td></tr></table></figure></li>
+<li>SQL(Structured Query Language)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SQLQuery query = session.createSQLQuery(<span class="string">&quot;select * from customer&quot;</span>);</span><br><span class="line">List&lt;Object[]&gt; list = query.list();</span><br><span class="line"></span><br><span class="line">SQLQuery query = session.createSQLQuery(<span class="string">&quot;select * from customer&quot;</span>);</span><br><span class="line">query.addEntity(Customer.class);</span><br><span class="line">List&lt;Customer&gt; list = query.list();</span><br></pre></td></tr></table></figure>
+HQL是面向对象的，SQL是面向表结构的。</li>
 </ul>
 
           
@@ -374,7 +457,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/18/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/blog/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/20/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/18/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/blog/page/20/">20</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/20/">&gt;</a>
   </nav>
 
 
@@ -420,7 +503,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -431,7 +514,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

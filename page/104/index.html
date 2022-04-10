@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/07/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/basic/datatype/String/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/07/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/" itemprop="url">复杂正则理解</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/java/basic/datatype/String/" itemprop="url">JAVA String</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-07T09:42:27+08:00">
-                2021-12-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index">
-                    <span itemprop="name">正则</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/basic/datatype/" itemprop="url" rel="index">
+                    <span itemprop="name">datatype</span>
                   </a>
                 </span>
 
@@ -345,25 +367,10 @@
       
         
           
-            <h1 id="非获取匹配"><a href="#非获取匹配" class="headerlink" title="非获取匹配"></a>非获取匹配</h1><h2 id="什么是非获取匹配"><a href="#什么是非获取匹配" class="headerlink" title="什么是非获取匹配"></a>什么是非获取匹配</h2><pre><code>在使用正则表达式的时候，我们经常会使用()把某个部分括起来，称为一个子模式。
-子模式有Capturing和Non-Capturing两种情况。
-Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配结果保存起来，供我们查找或者替换。如后向引用的使用；
-而Non-Capturing指非获取匹配 ，这时系统并不会保存子模式的匹配结果，子模式的匹配更多的只是作为一种限制条件使用，如正向预查，反向预查，负正向预查，负反向预查等。</code></pre>
-<p>参考如下示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">(<span class="string">&#x27;7&#x27;</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">()</span><br></pre></td></tr></table></figure>
-<h2 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h2><p>非获取匹配，匹配pattern但不获取匹配结果，不进行存储供以后使用。这在使用或字符“(|)”来组合一个模式的各个部分是很有用。例如“industr(?:y|ies)”就是一个比“industry|industries”更简略的表达式。</p>
-<h2 id="pattern-1"><a href="#pattern-1" class="headerlink" title="(?=pattern)"></a>(?=pattern)</h2><p>非获取匹配，正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如，“Windows(?=95|98|NT|2000)”能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”。</p>
-<h2 id="预查与普通非获取匹配的区别"><a href="#预查与普通非获取匹配的区别" class="headerlink" title="预查与普通非获取匹配的区别"></a>预查与普通非获取匹配的区别</h2><p>预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。参考如下示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>phone = <span class="string">&quot;1233-hfdh&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)23&#x27;</span>, phone)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">1</span>), match=<span class="string">&#x27;1&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)23&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="pattern-2"><a href="#pattern-2" class="headerlink" title="(?!pattern)"></a>(?!pattern)</h2><p>非获取匹配，正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如“Windows(?!95|98|NT|2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。</p>
-<h2 id="lt-pattern"><a href="#lt-pattern" class="headerlink" title="(?&lt;=pattern)"></a>(?&lt;=pattern)</h2><p>非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95|98|NT|2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”。另外，(?&lt;=pattern)不支持pattern变长。</p>
-<h2 id="lt-pattern-1"><a href="#lt-pattern-1" class="headerlink" title="(?&lt;!pattern)"></a>(?&lt;!pattern)</h2><p>非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如“(?&lt;!95|98|NT|2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。这个地方不正确，有问题 </p>
-<h2 id="通俗理解"><a href="#通俗理解" class="headerlink" title="通俗理解"></a>通俗理解</h2><ol>
-<li><code>?=</code> ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test(‘bab’)</li>
-<li><code>?&lt;=</code> ： 询问是否以这个东西开头  /(?&lt;=a)b/.test(‘ab’)</li>
-<li><code>?!</code> : 询问后面跟着的东西是否不是这个  /b(?!a)/.test(‘bb’)</li>
-<li><code>?&lt;!</code> ：询问是否不是以这个东西开头  /(?&lt;!=a)b/.test(‘bb’)</li>
-</ol>
+            <h1 id="String的存储"><a href="#String的存储" class="headerlink" title="String的存储"></a>String的存储</h1><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;hello&quot;</span>, s2 = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">String s3 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>), s4 = <span class="keyword">new</span> String(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">System.out.println(s1 == s2);</span><br><span class="line">System.out.println(s1 == s3);</span><br><span class="line">System.out.println(s4 == s3);</span><br><span class="line">System.out.println(s1.equals(s3));</span><br><span class="line">System.out.println(s4.equals(s3));</span><br></pre></td></tr></table></figure>
+<h3 id="打印结果："><a href="#打印结果：" class="headerlink" title="打印结果："></a>打印结果：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">false</span><br><span class="line">false</span><br><span class="line">true</span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+<h2 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h2><h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>java中的String有两种定义方式，对应的存储原理不同。<br>一种是s1和s2这样，字符串定义在堆中的常量区，s1生成常量对象，s2定义时，jvm发现常量区已有该字符串，直接返回对应地址。<br>另一种是s3和s4这样，等于实例化一个普通类，每次实例化返回的地址不同，在堆中生成了不同的实例。<br>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36653524/article/details/100730394">https://blog.csdn.net/qq_36653524/article/details/100730394</a> </p>
+<h3 id="“-”和equals方法进行字符串比较时的不同"><a href="#“-”和equals方法进行字符串比较时的不同" class="headerlink" title="“==”和equals方法进行字符串比较时的不同"></a>“==”和equals方法进行字符串比较时的不同</h3><p>java中的非基本类型都是引用（指针），”==”实际上是引用（指针存储的地址）的比较。而equals方法比较的是字符串内容是否相等。</p>
 
           
         
@@ -403,7 +410,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/103/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/105/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/103/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/103/">103</a><span class="page-number current">104</span><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/105/">&gt;</a>
   </nav>
 
 
@@ -449,7 +456,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +467,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

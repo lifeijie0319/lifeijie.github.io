@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/11/other/%E7%BC%96%E7%A0%81/utf-8/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/mysql/mysql%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E6%89%8B%E6%AE%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/01/11/other/%E7%BC%96%E7%A0%81/utf-8/" itemprop="url">utf-8编码原理</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/database/mysql/mysql%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5%E6%89%8B%E6%AE%B5/" itemprop="url">mysql问题排查手段</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-11T16:28:28+08:00">
-                2022-01-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,40 +345,9 @@
       
         
           
-            <h1 id="utf-8概念"><a href="#utf-8概念" class="headerlink" title="utf-8概念"></a>utf-8概念</h1><pre><code>UTF-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，又称万国码。由Ken Thompson于1992年创建。现在已经标准化为RFC 3629。UTF-8用1到6个字节编码Unicode字符。</code></pre>
-<h1 id="unicode到utf-8编码的转换"><a href="#unicode到utf-8编码的转换" class="headerlink" title="unicode到utf-8编码的转换"></a>unicode到utf-8编码的转换</h1><table>
-<thead>
-<tr>
-<th>Unicode码范围</th>
-<th>UTF-8编码方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U+0000~U+007F</td>
-<td>0????????</td>
-</tr>
-<tr>
-<td>U+0080~U+07FF</td>
-<td>110????? 10??????</td>
-</tr>
-<tr>
-<td>U+0800~U+FFFF</td>
-<td>1110???? 10?????? 10??????</td>
-</tr>
-<tr>
-<td>U+10000~U+10FFFF</td>
-<td>11110??? 10?????? 10?????? 10??????</td>
-</tr>
-</tbody></table>
-<h2 id="转换规则"><a href="#转换规则" class="headerlink" title="转换规则"></a>转换规则</h2><ol>
-<li>判断unicode码值所在范围</li>
-<li>将unicode码值转换成二进制形式，从右往左填充，左边不够补零，超长截断。<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2></li>
-</ol>
-<ul>
-<li>U+0020 = 0b 0000 0000 0010 0000 -&gt; 0b 00100000 = 0x20</li>
-<li>U+A12B = 0b 1010 0001 0010 1011 -&gt; 0b 11101010 10000100 10101011 = 0xEA84AB</li>
-</ul>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>知道utf-8的一个code unit，很容易知道当前code point的起点，如果字节起始位是0，那么这个是个单字节表示的code point，如果起始是10，只要往前寻找不是10开头的字节，不超过三次即可找到，可以根据找到的起始字节确认是多少字节表示的code point。</p>
+            <h1 id="查看执行计划"><a href="#查看执行计划" class="headerlink" title="查看执行计划"></a>查看执行计划</h1><p>详见mysql执行计划</p>
+<h1 id="慢查询日志"><a href="#慢查询日志" class="headerlink" title="慢查询日志"></a>慢查询日志</h1><p>MySQL提供的一种日志记录，用来记录在MySQL中响应时间超过阀值的语句。需要配置开启，开启后运行时间超过long_query_time值的SQL语句，则会被记录到慢查询日志中，对mysql性能有一定影响。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40884473/article/details/89455740">https://blog.csdn.net/qq_40884473/article/details/89455740</a></p>
 
           
         
@@ -385,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/53/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/blog/page/55/">55</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/55/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/53/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/blog/page/55/">55</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/55/">&gt;</a>
   </nav>
 
 
@@ -431,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

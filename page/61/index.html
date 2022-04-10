@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/02/tools/k8s/k8s%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/endianess/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/01/02/tools/k8s/k8s%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" itemprop="url">k8s集群kubeadm安装部署</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/endianess/" itemprop="url">endianess</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-02T22:15:10+08:00">
-                2022-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,41 +345,7 @@
       
         
           
-            <h1 id="机器准备"><a href="#机器准备" class="headerlink" title="机器准备"></a>机器准备</h1><p>k8s集群，至少要两台机器，且按照k8s建议，至少需要2核2G内存。</p>
-<h1 id="确认机器唯一性"><a href="#确认机器唯一性" class="headerlink" title="确认机器唯一性"></a>确认机器唯一性</h1><p>kubenetes使用mac和机器uuid来确认不同节点，必须保证唯一性</p>
-<h2 id="确认mac地址唯一"><a href="#确认mac地址唯一" class="headerlink" title="确认mac地址唯一"></a>确认mac地址唯一</h2><p>ip link 或者 ifconfig -a</p>
-<h2 id="确认产品uuid唯一"><a href="#确认产品uuid唯一" class="headerlink" title="确认产品uuid唯一"></a>确认产品uuid唯一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cat &#x2F;sys&#x2F;class&#x2F;dmi&#x2F;id&#x2F;product_uuid</span><br></pre></td></tr></table></figure>
-<h1 id="关闭SELINUX"><a href="#关闭SELINUX" class="headerlink" title="关闭SELINUX"></a>关闭SELINUX</h1><p>This is required to allow containers to access the host filesystem, which is needed by pod networks for example. You have to do this until SELinux support is improved in the kubelet.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo setenforce 0</span><br><span class="line">sudo sed -i &#39;s&#x2F;^SELINUX&#x3D;enforcing$&#x2F;SELINUX&#x3D;permissive&#x2F;&#39; &#x2F;etc&#x2F;selinux&#x2F;config</span><br></pre></td></tr></table></figure>
-<h1 id="关闭swap"><a href="#关闭swap" class="headerlink" title="关闭swap"></a>关闭swap</h1><h2 id="临时关闭"><a href="#临时关闭" class="headerlink" title="临时关闭"></a>临时关闭</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br></pre></td></tr></table></figure>
-<p>注：</p>
-<ul>
-<li>-a, –all  disable all swaps from /proc/swaps<h2 id="永久关闭"><a href="#永久关闭" class="headerlink" title="永久关闭"></a>永久关闭</h2>vi /etc/fstab注释swap相关这一行<h2 id="确认"><a href="#确认" class="headerlink" title="确认"></a>确认</h2>free -m 可以看到Swap这一行都变成了0<h2 id="todo"><a href="#todo" class="headerlink" title="todo"></a>todo</h2>  为什么要关闭swap<br>  /etc/fstab是什么文件，内容的格式说明了什么</li>
-</ul>
-<h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
-<h2 id="todo-1"><a href="#todo-1" class="headerlink" title="todo"></a>todo</h2><p>不关闭防火墙后面配置cni网络插件的时候coredns启动会一直处于Not ready状态，检查明细显示测试ready接口503。这里全局关闭防火墙，应该会有更精细化的管理，待研究。</p>
-<h1 id="安装docker并启动"><a href="#安装docker并启动" class="headerlink" title="安装docker并启动"></a>安装docker并启动</h1><p>详见tools/docker/docker安装</p>
-<h1 id="安装kubeadm-kubelet-kubectl"><a href="#安装kubeadm-kubelet-kubectl" class="headerlink" title="安装kubeadm,kubelet,kubectl"></a>安装kubeadm,kubelet,kubectl</h1><p>国内安装一般要设置新的源，使用系统自带的包管理工具安装。<br>注意安装好后要修改docker的cgroup，详细参考tools/docker/cgroup配置。</p>
-<h1 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --image-repository registry.aliyuncs.com&#x2F;google_containers</span><br></pre></td></tr></table></figure>
-<ul>
-<li>–image-repository string Choose a container registry to pull control plane images from (default “k8s.gcr.io”) 容器镜像下载地址，国内无法访问k8s.gcr.io，所以这里必须指定为阿里云镜像。</li>
-<li>–pod-network-cidr string Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node. pod网络内网地址，注意该地址需要与后文安装pod网络插件CNI相互呼应，不同的网络插件对该地址可能有不同的要求</li>
-<li>–service-cidr string Use alternative range of IP address for service VIPs. (default “10.96.0.0/12”) service虚拟地址范围。</li>
-<li>–control-plane-endpoint string Specify a stable IP address or DNS name for the control plane.可以使用改配置指定dns映射，以便实现负载均衡访问多个控制台，实现集群高可用。</li>
-</ul>
-<h2 id="初始化失败清理"><a href="#初始化失败清理" class="headerlink" title="初始化失败清理"></a>初始化失败清理</h2><p>kubeadm init如果失败，重新初始化无法完成，需要使用kubeadm reset先进行清理。</p>
-<h1 id="配置授权信息"><a href="#配置授权信息" class="headerlink" title="配置授权信息"></a>配置授权信息</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br></pre></td></tr></table></figure>
-<h2 id="todo-深入理解"><a href="#todo-深入理解" class="headerlink" title="todo 深入理解"></a>todo 深入理解</h2><h1 id="安装pod网络插件CNI"><a href="#安装pod网络插件CNI" class="headerlink" title="安装pod网络插件CNI"></a>安装pod网络插件CNI</h1><p>You must deploy a Container Network Interface (CNI) based Pod network add-on so that your Pods can communicate with each other. Cluster DNS (CoreDNS) will not start up before a network is installed.<br>k8s有自己的网络模型，其中基本的设计理念是“IP-per-pod”，即每个pod有独立ip，另外，有两个基本要求：</p>
-<ul>
-<li>any pod-network pod on any node can communicate with all other pod-network pods on all nodes without NAT.</li>
-<li>non-pod processes on a node (the kubelet, and also for example any other system daemon) can communicate with all pods on that node.<br>有许多实现k8s网络模型的技术，flannel是其中一个。如果使用该网络插件，之前执行kubeadm init的时候需要添加参数–pod-network-cidr=10.244.0.0/16。对于Kubernetes v1.17+，可以用以下命令应用该网络插件：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml</span><br></pre></td></tr></table></figure>
-装好之后执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -n kube-system</span><br></pre></td></tr></table></figure>
-直到确认所有组件状态都为：Running，这个过程要下载镜像，可能持续较长时间。注意，最后虽然所有pods都是running状态，但是coredns还是会一直会不在ready状态，原因是没有加入node，而本身control plane是不允许添加pod的（除非特殊设置）。<h2 id="设置control-plane允许pod运行"><a href="#设置control-plane允许pod运行" class="headerlink" title="设置control-plane允许pod运行"></a>设置control-plane允许pod运行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint nodes --all node-role.kubernetes.io&#x2F;master-</span><br></pre></td></tr></table></figure>
-<h1 id="将节点加入集群"><a href="#将节点加入集群" class="headerlink" title="将节点加入集群"></a>将节点加入集群</h1>kubeadm init完成后会有node加入集群的提示命令，按照提示操作即可。<br>实际命令格式如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join --token &lt;token&gt; &lt;control-plane-host&gt;:&lt;control-plane-port&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</span><br></pre></td></tr></table></figure>
-如果kubeadm的命令没有记住，需要手动执行上述命令，其中<br><token>可以使用kubeadm token list看到，默认token24小时过期，如果过期了，可以使用kubeadm token create重新创建token进行使用。<br><hash>可以使用如下命令获取：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -pubkey -in &#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;ca.crt | openssl rsa -pubin -outform der 2&gt;&#x2F;dev&#x2F;null | \</span><br><span class="line">   openssl dgst -sha256 -hex | sed &#39;s&#x2F;^.* &#x2F;&#x2F;&#39;</span><br></pre></td></tr></table></figure>
-<h2 id="调整coredns分布"><a href="#调整coredns分布" class="headerlink" title="调整coredns分布"></a>调整coredns分布</h2>由于集群节点是依次建立的，coredns pod一般会都跑在control plane上，为了提高可用性，可以使用如下命令对coredns pod再平衡<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl -n kube-system rollout restart deployment coredns</span><br></pre></td></tr></table></figure>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm">https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm</a></li>
-</ul>
+            <h1 id="什么是大端小端"><a href="#什么是大端小端" class="headerlink" title="什么是大端小端"></a>什么是大端小端</h1><p>Endianess是多字节数据对象（比如c语言中的int）字节排列的顺序。<br>BE stores the big-end first. 大端即低地址存的是高位的字节。<br>LE stores the little-end first.小端即低地址存的是低位的字节。</p>
 
           
         
@@ -386,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/60/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/blog/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/62/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/60/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/blog/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/62/">&gt;</a>
   </nav>
 
 
@@ -432,7 +431,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -443,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/27/language/java/spring/%E4%BA%8B%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/language/java/database/hibernate/Hibernate%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/27/language/java/spring/%E4%BA%8B%E5%8A%A1/" itemprop="url">spring的事务支持</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/language/java/database/hibernate/Hibernate%E5%9F%BA%E7%A1%80/" itemprop="url">Hibernate</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-27T19:35:28+08:00">
-                2022-02-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -282,6 +282,61 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/hibernate/" itemprop="url" rel="index">
+                    <span itemprop="name">hibernate</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,21 +367,13 @@
       
         
           
-            <h1 id="spring事务的实现方式"><a href="#spring事务的实现方式" class="headerlink" title="spring事务的实现方式"></a>spring事务的实现方式</h1><ol>
-<li>编程式事务管理：在代码中调用beginTransaction()、commit()、rollback()等事务管理相关的方法；又比如通过spring提供的jdbcTemplate管理事务等通过代码编写来控制事务的方式</li>
-<li>基于 TransactionProxyFactoryBean 的声明式事务管理，就是创建一个TransactionProxyFactoryBean类型的代理类，代理实际业务类，代理类完成事务管理</li>
-<li>基于 Aspectj AOP 配置事务，就是配置一个事务管理的aop切面，配置的advice是特殊的事务管理的advice</li>
-<li>基于 @Transactional 的声明式事务管理</li>
-</ol>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/myseries/p/10834172.html">https://www.cnblogs.com/myseries/p/10834172.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/donggua3694857/article/details/69858827">https://blog.csdn.net/donggua3694857/article/details/69858827</a></p>
-<h1 id="事务传播"><a href="#事务传播" class="headerlink" title="事务传播"></a>事务传播</h1><ul>
-<li>PROPAGATION_REQUIRED 支持当前事务，如果不存在，就创建一个</li>
-<li>PROPAGATION_SUPPORTED 支持当前事务，如果不存在，就不适用事务</li>
-<li>PROPAGATION_MANDATORY 支持当前事务，如果不存在，就抛出异常</li>
-<li>PROPAGATION_REQUIRES_NEW 如果当前有事务存在，挂起当前事务，创建一个新的事务</li>
-<li>PROPAGATION_NOT_SUPPORTED 以非事务方式运行，如果有事务存在，挂起当前事务</li>
-<li>PROPAGATION_NEVER 以非事务方式运行，如果有事务存在，抛出异常</li>
-<li>PROPAGATION_NESTED 如果当前事务存在，则嵌套事务执行</li>
+            <h1 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h1><p>ORM(Object Relational Mapping)，即对象-关系映射。面向对象的是编程中主流的开发方法，而关系型数据库是存储数据的主流系统。对象和关系数据是数据在内存和数据库中的不同表现形式，ORM是实现程序对象到数据库关系数据的映射转化关系的中间件。</p>
+<h1 id="实体类定义常见问题"><a href="#实体类定义常见问题" class="headerlink" title="实体类定义常见问题"></a>实体类定义常见问题</h1><h2 id="实体类的成员变量使用基本类型还是包装类型"><a href="#实体类的成员变量使用基本类型还是包装类型" class="headerlink" title="实体类的成员变量使用基本类型还是包装类型"></a>实体类的成员变量使用基本类型还是包装类型</h2><p>当成员变量是基本类型时，如果对应的数据库列存在null，那么获取数据映射到对象时会出现错误，因为基本类型不能存储null。</p>
+<h2 id="无参构造器"><a href="#无参构造器" class="headerlink" title="无参构造器"></a>无参构造器</h2><p>每个Hibernate实体类必须包含一个无参数的构造器， 这是因为 Hibernate框架要使用Reflection API，通过调用Class.newInstance()来创建这些实体类的实例。如果在实体类中找不到无参数的构造器，这个方法就会抛出一个InstantiationException异常。</p>
+<h1 id="对象状态与缓存"><a href="#对象状态与缓存" class="headerlink" title="对象状态与缓存"></a>对象状态与缓存</h1><h2 id="hibernate对象状态"><a href="#hibernate对象状态" class="headerlink" title="hibernate对象状态"></a>hibernate对象状态</h2><ul>
+<li>transient 对象创建出来，没有与数据库建立联系</li>
+<li>persistent 调用了save()/saveOrUpdate()等方法，数据持久化到数据库，生成id之后</li>
+<li>detached session关闭之后<h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2>与Session绑定的缓存。<br>同一个session中，只有第一次查询会实际执行sql，后面的查询会直接使用已经加载到内存的对象的数据。<br>Session为清除缓存提供了clear(清除所有的一级缓存)、evict(清除实例对象缓存)、refresh（重新查询数据并刷新缓存）。<br>一级缓存的数据存放在栈中。<h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2>与SessionFactory绑定的缓存。<br>二级缓存默认不开启，需要特殊配置。<br>二级缓存的数据存放在堆中。</li>
 </ul>
 
           
@@ -367,7 +414,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/17/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/blog/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/19/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/17/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/17/">17</a><span class="page-number current">18</span><a class="page-number" href="/blog/page/19/">19</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/19/">&gt;</a>
   </nav>
 
 
@@ -413,7 +460,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -424,7 +471,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

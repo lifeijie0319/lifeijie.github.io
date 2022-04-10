@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/software_enginering/%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/14/tools/nginx/nginx%E6%AD%A3%E5%90%91https%E4%BB%A3%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/software_enginering/%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4/" itemprop="url">测试基本步骤</a></h1>
+                <a class="post-title-link" href="/blog/2022/01/14/tools/nginx/nginx%E6%AD%A3%E5%90%91https%E4%BB%A3%E7%90%86/" itemprop="url">正向https代理</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-14T16:06:42+08:00">
+                2022-01-14
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/software-enginering/" itemprop="url" rel="index">
-                    <span itemprop="name">software_enginering</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -334,11 +345,17 @@
       
         
           
-            <h1 id="测试基本步骤"><a href="#测试基本步骤" class="headerlink" title="测试基本步骤"></a>测试基本步骤</h1><ol>
-<li>确认业务返回的正确性和一致性，对于各个接口的请求和响应参数尤其要确认清楚。</li>
-<li>考虑覆盖成功、失败、在途等多个状态</li>
-<li>有并发需求则需进行压力测试</li>
+            <h1 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h1><ol>
+<li>应用部署在内网，不能https直接访问外网，需要通过nginx机器代理，这就是https正向代理。</li>
+<li>默认nginx支持http正向代理，但是不支持https正向代理。</li>
+<li>正向代理的时候，客户端首先和代理发起connect请求，connect是建立通道，通道建立之后，客户端和目标服务器就相当于直接连通，代理变成透明的。</li>
 </ol>
+<h1 id="ngx-http-proxy-connect-module"><a href="#ngx-http-proxy-connect-module" class="headerlink" title="ngx_http_proxy_connect_module"></a>ngx_http_proxy_connect_module</h1><p>官网地址<a target="_blank" rel="noopener" href="https://github.com/chobits/ngx_http_proxy_connect_module">https://github.com/chobits/ngx_http_proxy_connect_module</a><br>ngx_http_proxy_connect_module是nginx支持https的模块，要安装该模块，需要重新编译nginx，使其平滑升级。</p>
+<h2 id="常见注意事项"><a href="#常见注意事项" class="headerlink" title="常见注意事项"></a>常见注意事项</h2><ul>
+<li>仔细选择编译的patch，patch不对会导致请求403</li>
+<li>注意proxy_conncet_allow配置，该配置限制了CONNECT方法能够连接的端口。如果没有配置443端口，会导致请求403</li>
+<li>该模块只会使用配置里的resolver解析域名，不会使用/etc/hosts本地解析</li>
+</ul>
 
           
         
@@ -378,7 +395,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/117/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/117/">117</a><span class="page-number current">118</span><a class="page-number" href="/blog/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/119/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/117/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/117/">117</a><span class="page-number current">118</span><a class="page-number" href="/blog/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/119/">&gt;</a>
   </nav>
 
 
@@ -424,7 +441,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -435,7 +452,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

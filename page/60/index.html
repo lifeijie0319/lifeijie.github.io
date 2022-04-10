@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/01/03/language/js/node/node%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/BOM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/01/03/language/js/node/node%E5%AE%89%E8%A3%85/" itemprop="url">nodesjs 安装</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/BOM/" itemprop="url">BOM(Byte Order Mark) 字节序标记</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-03T20:50:29+08:00">
-                2022-01-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/js/node/" itemprop="url" rel="index">
-                    <span itemprop="name">node</span>
+                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -356,8 +345,9 @@
       
         
           
-            <h1 id="windows下安装"><a href="#windows下安装" class="headerlink" title="windows下安装"></a>windows下安装</h1><pre><code>https://nodejs.org/en/官网下载安装包
-查看版本号确认安装成功：node -v</code></pre>
+            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>Unicode中有一个叫做”ZERO WIDTH NO-BREAK SPACE”的字符，它的编码是FEFF。Unicode建议传输字节流前，先传输该字符，这样如果接收者收到FEFF，代表这个字节流是Big-Endian的；反之如果接收者收到的是FFFE，代表这个字节流是Little-Endian的。</p>
+<h1 id="BOM和UTF-8"><a href="#BOM和UTF-8" class="headerlink" title="BOM和UTF-8"></a>BOM和UTF-8</h1><p>UTF-8无需BOM来区别字节序，然而BOM可以用来判断编码类型。FEFF在UTF-8中的编码是0xEFBBBF，看到这串编码开头，即可判断字节流是UTF-8编码。</p>
+<h1 id="BOM和UTF-16-UTF-32"><a href="#BOM和UTF-16-UTF-32" class="headerlink" title="BOM和UTF-16/UTF-32"></a>BOM和UTF-16/UTF-32</h1><p>在UTF-16/UTF-32编码中，BOM就是用来表示Endian的，表格如下：<br>编码|表示 (十六进制)<br>|—|—|<br>UTF-16（大端序）|FE FF<br>UTF-16（小端序）|FF FE<br>UTF-32（大端序）|00 00 FE FF<br>UTF-32（小端序）|FF FE 00 00</p>
 
           
         
@@ -397,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/59/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/blog/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/61/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/59/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/blog/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/61/">&gt;</a>
   </nav>
 
 
@@ -443,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

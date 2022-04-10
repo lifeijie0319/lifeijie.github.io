@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/tcp/ftp/ftp%E4%B8%BB%E5%8A%A8%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/network/tcp/ftp/ftp%E4%B8%BB%E5%8A%A8%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/" itemprop="url">nginx平滑升级</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
-                    <span itemprop="name">tcp</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/tcp/ftp/" itemprop="url" rel="index">
-                    <span itemprop="name">ftp</span>
+                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -356,16 +345,18 @@
       
         
           
-            <h1 id="1-基本介绍"><a href="#1-基本介绍" class="headerlink" title="1 基本介绍"></a>1 基本介绍</h1><h2 id="1-1-初步认识"><a href="#1-1-初步认识" class="headerlink" title="1.1 初步认识"></a>1.1 初步认识</h2><p>已知ftp只基于tcp，不基于udp，而且命令链路和数据链路分离。<br>ftp主动被动模式判断的关键在于建立数据链路的时候，服务端是不是主动发起的一方。</p>
-<h2 id="1-2-主动-FTP-："><a href="#1-2-主动-FTP-：" class="headerlink" title="1.2 主动 FTP ："></a>1.2 主动 FTP ：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　　　命令连接：客户端 &gt;1024 端口 → 服务器 21 端口</span><br><span class="line">　　　　数据连接：客户端 &gt;1024 端口 ← 服务器 20 端口 </span><br></pre></td></tr></table></figure>
-<p>主动模式，在第 1 步中，客户端的命令端口与 FTP 服务器的命令端口建立连接，并发送命令 “PORT 1027” 。然后在第 2 步中， FTP 服务器给客户端的命令端口返回一个 “ACK” 。在第 3 步中， FTP 服务器发起一个从它自己的数据端口（ 20 ）到客户端先前指定的数据端口（ 1027 ）的连接，最后客户端在第 4 步中给 服务器端返回一个 “ACK” 。可以看到，服务器主动发起对客户端的连接。</p>
-<h2 id="1-3-被动-FTP-："><a href="#1-3-被动-FTP-：" class="headerlink" title="1.3 被动 FTP ："></a>1.3 被动 FTP ：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">　　　　命令连接：客户端 &gt;1024 端口 → 服务器 21 端口</span><br><span class="line">　　　　数据连接：客户端 &gt;1024 端口 ← 服务器 &gt;1024 端口</span><br></pre></td></tr></table></figure>
-<p>被动模式，在第 1 步中，客户端的命令端口与 服务器的命令端口建立连接，并发送命令 “PASV” 。然后在第 2 步中， 服务器返回命令 “PORT 2024” ，告诉客户端（ 服务器）用哪个端口侦听数据连接 。在第 3 步中，客户端初始化一个从自己的数据端口到 服务器端指定的数据端口的数据连接 。最后 服务器在第 4 步中给客户端的数据端口返回一个 “ACK” 响应 。可以看到，客户端主动发起对服务器的连接。</p>
-<h1 id="2-为什么要有被动模式"><a href="#2-为什么要有被动模式" class="headerlink" title="2 为什么要有被动模式"></a>2 为什么要有被动模式</h1><p>可以看到，主动模式是服务器主动向客户端建立数据链路连接。对于客户端的防火墙来说，这是从外部系统建立到内部客户端的连接，这是通常会被阻塞的 。</p>
-<h1 id="3-被动模式的注意点"><a href="#3-被动模式的注意点" class="headerlink" title="3 被动模式的注意点"></a>3 被动模式的注意点</h1><p>最大的问题是需要允许从任意远程终端到 服务器高位端口的连接 。幸运的是，许多 FTP 守护程序，包括流行的 WU-FTPD 允许管理员指定 FTP 服务器使用的端口范围 。</p>
-<h1 id="4-主动被动模式的优缺点总结"><a href="#4-主动被动模式的优缺点总结" class="headerlink" title="4 主动被动模式的优缺点总结"></a>4 主动被动模式的优缺点总结</h1><p>主动 FTP 对 FTP 服务器的管理有利，但对客户端的管理不利 。因为 FTP 服务器企图与客户端的高位随机端口建立连接，而这个端口很有可能被客户端的防火墙阻塞掉 。被动 FTP 对 FTP 客户端的管理有利，但对 服务器端的管理不利 。因为客户端要与 服务器端建立两个连接，其中一个连到一个高位随机端口，而这个端口很有可能被 服务器端的防火墙阻塞掉 。<br>　　幸运的是，有折衷的办法 。既然 FTP 服务器的管理员需要他们的 服务器有最多的客户连接，那么必须得支持被动 FTP 。我们可以通过为 FTP 服务器指定一个有限的端口范围来减小 服务器高位端口的暴露 。这样，不在这个范围的任何端口会被 服务器的防火墙阻塞 。虽然这没有消除所有针对服务器的危险，但它大大减少了危险 。</p>
-<h1 id="5-主动被动模式的切换"><a href="#5-主动被动模式的切换" class="headerlink" title="5 主动被动模式的切换"></a>5 主动被动模式的切换</h1><h2 id="5-1-vsFTPd"><a href="#5-1-vsFTPd" class="headerlink" title="5.1 vsFTPd"></a>5.1 vsFTPd</h2><p>在命令行登录之后，可以通过输入passive切换模式</p>
-<h2 id="5-1-ftplib"><a href="#5-1-ftplib" class="headerlink" title="5.1 ftplib"></a>5.1 ftplib</h2><p>可以使用FTP实例的set_pasv(bool)函数来切换模式</p>
+            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wanghs8/p/11545324.html">https://www.cnblogs.com/wanghs8/p/11545324.html</a></p>
+<h1 id="ngx-http-proxy-connect-module安装与nginx平滑升级"><a href="#ngx-http-proxy-connect-module安装与nginx平滑升级" class="headerlink" title="ngx_http_proxy_connect_module安装与nginx平滑升级"></a>ngx_http_proxy_connect_module安装与nginx平滑升级</h1><ol>
+<li>下载nginx源码和ngx_http_proxy_connect_module，这个项目开源在<a target="_blank" rel="noopener" href="https://github.com/chobits/ngx_http_proxy_connect_module">https://github.com/chobits/ngx_http_proxy_connect_module</a></li>
+<li>将这个模块的补丁打入源码，注意补丁版本<br>打补丁命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch -p1 &lt; &#x2F;path&#x2F;to&#x2F;ngx_http_proxy_connect_module&#x2F;patch&#x2F;proxy_connect.patch</span><br></pre></td></tr></table></figure>
+补丁选择：参考<a target="_blank" rel="noopener" href="https://github.com/chobits/ngx_http_proxy_connect_module#select-patch">https://github.com/chobits/ngx_http_proxy_connect_module#select-patch</a></li>
+<li>重新编译nginx，make注意不要make install</li>
+<li>备份原Nginx二进制文件，将新编译出来的objs目录下的nginx二进制文件拷贝到原来的位置</li>
+<li>nginx -t检查新的nginx是否正常</li>
+<li>使nginx的旧版本停止就收请求，有Nginx新版本接替，且老进程处理完所有请求，关闭所有连接后，停止<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -USR2 &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid&#96;</span><br></pre></td></tr></table></figure>
+查看nginx日志目录会生成一个nginx.pid.oldbin文件，存放旧版本nginx 的pid号</li>
+<li>通过发送WINCH信号（平缓停止worker process）和QUIT信号（平缓停止Nginx服务）停止旧的Nginx服务进程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kill -WINCH &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid.oldbin&#96; </span><br><span class="line">kill -QUIT &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid.oldbin&#96;</span><br></pre></td></tr></table></figure></li>
+</ol>
 
           
         
@@ -405,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/194/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><span class="page-number current">195</span><a class="page-number" href="/blog/page/196/">196</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/196/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/194/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><span class="page-number current">195</span><a class="page-number" href="/blog/page/196/">196</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/196/">&gt;</a>
   </nav>
 
 
@@ -451,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -462,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

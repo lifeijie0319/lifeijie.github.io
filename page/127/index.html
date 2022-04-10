@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/diff/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/09/database/mysql/index/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/diff/" itemprop="url">diff命令</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/09/database/mysql/index/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url">Mysql索引基础</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-09T13:44:41+08:00">
+                2021-12-09
               </time>
             
 
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
                   </a>
                 </span>
 
@@ -334,8 +356,19 @@
       
         
           
-            <h2 id="比较两个文件"><a href="#比较两个文件" class="headerlink" title="比较两个文件"></a>比较两个文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff file1 file2</span><br></pre></td></tr></table></figure>
-<h2 id="diff的结果一般格式"><a href="#diff的结果一般格式" class="headerlink" title="diff的结果一般格式"></a>diff的结果一般格式</h2><p>n1 a n2，这里n1是file1的行，n2是file2的行，这句话指的是file2相对于file1增加了内容。随后会有&lt;或者&gt;开头的内容，&lt;指的是file1的内容，&gt;指的是file2的内容。除了增加是a，还有修改是c，删除是d。</p>
+            <h1 id="什么是索引"><a href="#什么是索引" class="headerlink" title="什么是索引"></a>什么是索引</h1><p>索引是帮助MySQL高效获取数据的<strong>排好序</strong>的<strong>数据结构</strong></p>
+<h1 id="索引存储的数据结构是什么"><a href="#索引存储的数据结构是什么" class="headerlink" title="索引存储的数据结构是什么"></a>索引存储的数据结构是什么</h1><p>MySQL使用B+树存储索引</p>
+<h2 id="为什么不用平衡二叉树（红黑树）来存储索引"><a href="#为什么不用平衡二叉树（红黑树）来存储索引" class="headerlink" title="为什么不用平衡二叉树（红黑树）来存储索引"></a>为什么不用平衡二叉树（红黑树）来存储索引</h2><p>因为数据获取的主要消耗在于IO，对于大数据量，红黑树的树高太高，如果要查叶子节点的数据，就会进行多次IO，性能太差。</p>
+<h2 id="什么是B树，B树相对于红黑树有什么优点"><a href="#什么是B树，B树相对于红黑树有什么优点" class="headerlink" title="什么是B树，B树相对于红黑树有什么优点"></a>什么是B树，B树相对于红黑树有什么优点</h2><p>B树是平衡多叉树，对于某一层，分为两种节点，一种是数据节点，一种是下层索引节点，数据节点是有序的，两个数据节点之间是下层索引节点，指向数值在两个索引节点数值之间的索引值。<br>由于B树在一层上的节点数比二叉树多，所以相同的数据量，B树的树高比二叉树低，减少了数据查找的IO次数。</p>
+<h2 id="什么是B-树，B-树相对于B树有什么优点"><a href="#什么是B-树，B-树相对于B树有什么优点" class="headerlink" title="什么是B+树，B+树相对于B树有什么优点"></a>什么是B+树，B+树相对于B树有什么优点</h2><p>B+树是B树的优化，B+树在非叶子节点不存放数据，只存放索引值和下层索引块指针。<br>这样使得一层能存放更多的索引值，最终树高是比B树低的。</p>
+<h1 id="MySQL的索引实际底层存储结构"><a href="#MySQL的索引实际底层存储结构" class="headerlink" title="MySQL的索引实际底层存储结构"></a>MySQL的索引实际底层存储结构</h1><p>数据结构使用B+树。一般分三层，上两层是索引值节点和下层索引指针节点（一般6字节），最下层是数据。一般使用页作为最小存储单位，常见MySQL页大小为16K，那么一层能存约1k索引值，这样三层结构一般能到千万数据量（内部节点存指针数量约为16<em>1024</em>/14=1170，假设一条数据大小为1k，那么叶子节点一页存16条数据，总共1170<em>1170</em>16=21902400约两千万）。</p>
+<h1 id="既然树高低IO就少，能不能用一层有序结构？"><a href="#既然树高低IO就少，能不能用一层有序结构？" class="headerlink" title="既然树高低IO就少，能不能用一层有序结构？"></a>既然树高低IO就少，能不能用一层有序结构？</h1><p>磁盘IO交互的基本单位是数据页。数据量太大时，一个页放不下一层的所有数据。</p>
+<h1 id="hash结构索引"><a href="#hash结构索引" class="headerlink" title="hash结构索引"></a>hash结构索引</h1><p>hash结构的索引，查找单元素的效率不比B+树低，甚至更高，因为获取实际数据地址的值通过一次hash就能获得。<br>但是hash索引有这些缺点：</p>
+<ul>
+<li>不支持范围查找，范围查找退化成全表扫描。相对而言，B+树底层叶子节点之间是有序的，而且也有指针可以向后查找，可以支持范围查找。</li>
+<li>数据量大时hash表占用的空间太大，内存无法放下。</li>
+</ul>
+<h1 id="聚集（簇）索引和非聚集（簇）索引"><a href="#聚集（簇）索引和非聚集（簇）索引" class="headerlink" title="聚集（簇）索引和非聚集（簇）索引"></a>聚集（簇）索引和非聚集（簇）索引</h1><p>关键在于其它数据和索引是否放在一起，聚集（簇）索引的叶子节点包含了实际数据页，非聚集（簇）索引的叶子节点只是指向聚集（簇）索引的指针。</p>
 
           
         
@@ -375,7 +408,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/126/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/126/">126</a><span class="page-number current">127</span><a class="page-number" href="/blog/page/128/">128</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/128/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/126/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/126/">126</a><span class="page-number current">127</span><a class="page-number" href="/blog/page/128/">128</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/128/">&gt;</a>
   </nav>
 
 
@@ -421,7 +454,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -432,7 +465,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

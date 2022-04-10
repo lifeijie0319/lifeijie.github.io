@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/24/web/%E8%B7%A8%E5%9F%9F/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/language/java/database/mybatis/mybatis%E7%BC%93%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/24/web/%E8%B7%A8%E5%9F%9F/" itemprop="url">跨域</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/language/java/database/mybatis/mybatis%E7%BC%93%E5%AD%98/" itemprop="url">mybatis缓存</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-24T16:31:45+08:00">
-                2022-02-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -282,6 +282,61 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/mybatis/" itemprop="url" rel="index">
+                    <span itemprop="name">mybatis</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,11 +367,38 @@
       
         
           
-            <h1 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h1><p>浏览器不允许请求当前网站域名之外的资源，跨越这个限制就是跨域</p>
-<h1 id="如何实现跨域"><a href="#如何实现跨域" class="headerlink" title="如何实现跨域"></a>如何实现跨域</h1><h2 id="script"><a href="#script" class="headerlink" title="script"></a>script</h2><p>script标签可以得到从其他来源数据，这也是JSONP依赖的根据。</p>
-<h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><p>利用script标签可以跨域，服务端返回js代码，js代码在浏览器执行。浏览器本身的js会定义接收函数比如func，然后服务端返回的一般是json数据和浏览器这个函数的拼接内容比如’func(“json数据”)’，这就是JSONP命名的缘由：JSON+padding。</p>
-<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><p>Cross-Origin Resource Sharing（CORS）跨域资源共享是一份浏览器技术的规范，提供了 Web 服务从不同域传来沙盒脚本的方法，以避开浏览器的同源策略，确保安全的跨域数据传输。</p>
-<h2 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h2><p>同源策略是浏览器端的限制，服务端没有这个问题，可以依靠服务端越过这个限制。<br>请求-&gt;DomainA服务器-&gt;DomainB服务器</p>
+            <h1 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h1><p>基于 PerpetualCache 的 HashMap 本地缓存，其存储作用域为 Session。默认打开一级缓存。</p>
+<h2 id="一级缓存的命中原则"><a href="#一级缓存的命中原则" class="headerlink" title="一级缓存的命中原则"></a>一级缓存的命中原则</h2><ul>
+<li>同一个环境（数据库）</li>
+<li>sql的id相同</li>
+<li>sql的内容相同</li>
+<li>sql的传参相同（主要是最终传入sql中的参数值要相同）</li>
+<li>分页参数相同<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="缓存产生"><a href="#缓存产生" class="headerlink" title="缓存产生"></a>缓存产生</h3>session执行select*方法时，即需要是查询方法。<h3 id="缓存结束（被清空）"><a href="#缓存结束（被清空）" class="headerlink" title="缓存结束（被清空）"></a>缓存结束（被清空）</h3></li>
+<li>session关闭</li>
+<li>session提交或者回滚</li>
+<li>执行update/delete/insert</li>
+<li>执行session.clearCache<h2 id="spring与以及缓存"><a href="#spring与以及缓存" class="headerlink" title="spring与以及缓存"></a>spring与以及缓存</h2>如果未开启事务，每次查询会新建session，缓存不生效。开启事务的情况下，同一事务下的多次查询能使用以及缓存。</li>
+</ul>
+<h1 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h1><p>二级缓存与一级缓存其机制相同，不同在于其存储作用域为SessionFactory，并且可自定义存储源，如 Ehcache。默认不打开二级缓存。</p>
+<h2 id="配置打开二级缓存"><a href="#配置打开二级缓存" class="headerlink" title="配置打开二级缓存"></a>配置打开二级缓存</h2><ul>
+<li>在mybatis-config.xml中配置<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;cacheEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>在映射关系配置文件的mapper标签下增加<cache/></li>
+<li>让相关的实体类implements Serializable</li>
+</ul>
+<h2 id="二级缓存的命中原则"><a href="#二级缓存的命中原则" class="headerlink" title="二级缓存的命中原则"></a>二级缓存的命中原则</h2><p>与一级缓存的命中原则一致。</p>
+<h2 id="生命周期-1"><a href="#生命周期-1" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="缓存产生-1"><a href="#缓存产生-1" class="headerlink" title="缓存产生"></a>缓存产生</h3><ol>
+<li>session执行select*方法时，即需要是查询方法。</li>
+<li>session执行close或者commit。<h3 id="缓存结束（被清空）-1"><a href="#缓存结束（被清空）-1" class="headerlink" title="缓存结束（被清空）"></a>缓存结束（被清空）</h3>进行了C/U/D 操作并提交事务后，默认该mapper下所有 select 中的缓存将被 clear。<h2 id="其它常见配置"><a href="#其它常见配置" class="headerlink" title="其它常见配置"></a>其它常见配置</h2><h2 id="useCache"><a href="#useCache" class="headerlink" title="useCache"></a>useCache</h2>select标签的属性，规定查询是否使用缓存，默认true。<h2 id="flushCache"><a href="#flushCache" class="headerlink" title="flushCache"></a>flushCache</h2>作为select标签的属性时默认false，作为insert/update/delete标签的属性时默认true。表示是否清空二级缓存。<h2 id="eviction"><a href="#eviction" class="headerlink" title="eviction"></a>eviction</h2><cache>标签的属性。<br>当二级缓存达到一定大小时，会自动进行清楚，可选清除策略如下：</li>
+</ol>
+<ul>
+<li>LRU 移除时间最长不被使用的对象</li>
+<li>FIFO 先进先出</li>
+<li>SOFT 基于GC和软引用移除对象</li>
+<li>WEAK 基于GC和弱引用移除对象<h2 id="size"><a href="#size" class="headerlink" title="size"></a>size</h2><cache>标签的属性。<br>引用数目，当引用数目达到size时，按照eviction策略进行清除。</li>
+</ul>
+<h2 id="自定义缓存"><a href="#自定义缓存" class="headerlink" title="自定义缓存"></a>自定义缓存</h2><p>自定义缓存可以使用如redis等作为缓存的存储容器。需要定义一个Cache的实现类并配置到mapper配置文件中，比如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;host&quot;</span> <span class="attr">value</span>=<span class="string">&quot;127.0.0.1&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;port&quot;</span> <span class="attr">value</span>=<span class="string">&quot;6379&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意，使用自定义缓存之后，上述各种中配置项就不再生效。</p>
 
           
         
@@ -356,7 +438,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/21/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/blog/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/23/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/21/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/blog/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/23/">&gt;</a>
   </nav>
 
 
@@ -402,7 +484,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -413,7 +495,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

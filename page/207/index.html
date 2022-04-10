@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/other/mobile/%E9%80%9A%E8%AF%9D%E6%97%B6%E6%96%AD%E7%BD%91/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/tuxedo/tuxedo%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/other/mobile/%E9%80%9A%E8%AF%9D%E6%97%B6%E6%96%AD%E7%BD%91/" itemprop="url">打电话时断网问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/tuxedo/tuxedo%E5%AE%89%E8%A3%85/" itemprop="url">tuxedo安装</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/mobile/" itemprop="url" rel="index">
-                    <span itemprop="name">mobile</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/tools/tuxedo/" itemprop="url" rel="index">
+                    <span itemprop="name">tuxedo</span>
                   </a>
                 </span>
 
@@ -334,9 +345,16 @@
       
         
           
-            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>拨打电话时，微信显示无网络。</p>
-<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>拨打电话时，信号由4G变成2G，无法上网。</p>
-<h1 id="处理方法"><a href="#处理方法" class="headerlink" title="处理方法"></a>处理方法</h1><p>寻找服务商开通volte服务，打开手机volte设置后可以在通话时保持4G网络。</p>
+            <ol>
+<li>下载得到tuxedo111120_64_Linux_01_x86.bin</li>
+<li>创建tuxedo用户组<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd oinstall</span><br></pre></td></tr></table></figure></li>
+<li>创建tuxedo用户<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -d &#x2F;home&#x2F;tuxedo -g oinstall -m tuxedo</span><br></pre></td></tr></table></figure>
+[注] 所有的oracle产品都应该有一个共同的根目录</li>
+<li>创建tuxedo用户的密码<br>passwd tuxedo，密码输入两次，设定密码为tuxedo</li>
+<li>进入到/home/tuxedo目录下，将tuxedo111120_64_Linux_01_x86.bin拷贝到该目录，并添加执行权限<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x tuxedo111120_64_Linux_01_x86.bin</span><br></pre></td></tr></table></figure></li>
+<li>执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;tuxedo111120_64_Linux_01_x86.bin -i console</span><br></pre></td></tr></table></figure>
+开始console模式安装tuxedo</li>
+</ol>
 
           
         
@@ -376,7 +394,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/206/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/206/">206</a><span class="page-number current">207</span><a class="page-number" href="/blog/page/208/">208</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/208/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/206/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/206/">206</a><span class="page-number current">207</span><a class="page-number" href="/blog/page/208/">208</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/208/">&gt;</a>
   </nav>
 
 
@@ -422,7 +440,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -433,7 +451,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

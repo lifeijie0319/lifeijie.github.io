@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/VCS/git/git%E4%B8%8B%E8%BD%BDhttps%E5%BA%93%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/rabbitmq/%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/VCS/git/git%E4%B8%8B%E8%BD%BDhttps%E5%BA%93%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86/" itemprop="url">git下载https库失败</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/rabbitmq/%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C/" itemprop="url">rabbitmq基本用户操作</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
+                  <a href="/blog/categories/tools/rabbitmq/" itemprop="url" rel="index">
+                    <span itemprop="name">rabbitmq</span>
                   </a>
                 </span>
 
@@ -345,13 +345,9 @@
       
         
           
-            <h1 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h1><h2 id="1-1-场景"><a href="#1-1-场景" class="headerlink" title="1.1 场景"></a>1.1 场景</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: Unable to find remote helper for &#39;https&#39;</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-原因"><a href="#1-2-原因" class="headerlink" title="1.2 原因"></a>1.2 原因</h2><p>git编译的时候没有安装curl-devel</p>
-<h2 id="1-3-解决"><a href="#1-3-解决" class="headerlink" title="1.3 解决"></a>1.3 解决</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel</span><br><span class="line">cd $git_source_code_path</span><br><span class="line">.&#x2F;configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<h1 id="场景二"><a href="#场景二" class="headerlink" title="场景二"></a>场景二</h1><h2 id="1-1-场景-1"><a href="#1-1-场景-1" class="headerlink" title="1.1 场景"></a>1.1 场景</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#39;https:&#x2F;&#x2F;github.com&#x2F;basho&#x2F;node_package.git&#x2F;&#39;: SSL connect error</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-原因-1"><a href="#1-2-原因-1" class="headerlink" title="1.2 原因"></a>1.2 原因</h2><p>ssl版本太低</p>
-<h2 id="1-3-解决-1"><a href="#1-3-解决-1" class="headerlink" title="1.3 解决"></a>1.3 解决</h2><p>更多openssl版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update nss</span><br></pre></td></tr></table></figure>
+            <h1 id="vhost操作"><a href="#vhost操作" class="headerlink" title="vhost操作"></a>vhost操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#添加vhost</span><br><span class="line">rabbitmqctl add_vhost &#x2F;testhost</span><br><span class="line">#列出vhost</span><br><span class="line">rabbitmqctl list_vhosts</span><br><span class="line">#删除vhost</span><br><span class="line">rabbitmqctl delete_vhost &#x2F;testhost</span><br></pre></td></tr></table></figure>
+<h1 id="用户操作"><a href="#用户操作" class="headerlink" title="用户操作"></a>用户操作</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 添加用户</span><br><span class="line">rabbitmqctl add_user admin 123456</span><br><span class="line"># 修改用户密码</span><br><span class="line">rabbitmqctl change_password admin 1234567</span><br><span class="line"># 验证用户密码</span><br><span class="line">rabbitmqctl authenticate_user admin 123456</span><br><span class="line"># 删除用户</span><br><span class="line">rabbitmqctl delete_user admin</span><br><span class="line"># 列出用户</span><br><span class="line">rabbitmqctl list_users</span><br><span class="line"># 给用户设置标签</span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br></pre></td></tr></table></figure>
+<h1 id="给用户赋权限"><a href="#给用户赋权限" class="headerlink" title="给用户赋权限"></a>给用户赋权限</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># rabbitmqctl set_permissions [-p host] &#123;user&#125; &#123;conf&#125; &#123;write&#125; &#123;read&#125;</span><br><span class="line"># vhost 授予用户访问权限的vhost名称 默认 &#x2F;</span><br><span class="line"># user 可以访问指定vhost的用户名</span><br><span class="line"># conf 一个用于匹配用户在那些资源上拥有可配置的正则表达式</span><br><span class="line"># write 一个用于匹配用户在那些资源上拥有可写的正则表达式</span><br><span class="line"># read 一个用于匹配用户在那些资源上拥有可读的正则表达式</span><br><span class="line"></span><br><span class="line"># 授予admin用户可访问虚拟主机testhost，并在所有的资源上具备可配置、可写及可读的权限</span><br><span class="line">rabbitmqctl set_permissions -p &#x2F;testhost admin &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"> </span><br><span class="line"># 授予admin用户可访问虚拟主机testhost1，在以queue开头的资源上具备可配置权限、并在所有的资源上可写及可读的权限</span><br><span class="line">rabbitmqctl set_permissions -p &#x2F;testhost1 admin &quot;^queue.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br><span class="line"># 清除权限</span><br><span class="line">rabbitmqctl clear_permissions -p &#x2F;testhost admin</span><br><span class="line"># 查看虚拟主机的权限</span><br><span class="line">rabbitmqctl list_permissions -p &#x2F;testhost</span><br><span class="line"># 查看用户权限</span><br><span class="line">rabbitmqctl list_user_permissions admin</span><br></pre></td></tr></table></figure>
           
         
       
@@ -390,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/201/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/201/">201</a><span class="page-number current">202</span><a class="page-number" href="/blog/page/203/">203</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/279/">279</a><a class="extend next" rel="next" href="/blog/page/203/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/201/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/201/">201</a><span class="page-number current">202</span><a class="page-number" href="/blog/page/203/">203</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/203/">&gt;</a>
   </nav>
 
 
@@ -436,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">279</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/blog/categories/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

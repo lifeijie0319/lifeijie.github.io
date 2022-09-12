@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/db/python%E8%BF%9E%E6%8E%A5db2/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/Django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/db/python%E8%BF%9E%E6%8E%A5db2/" itemprop="url">python连接db2</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/python/Django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/" itemprop="url">django静态文件</a></h1>
         
 
         <div class="post-meta">
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/language/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -367,7 +356,8 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/c0054366.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/c0054366.html</a></p>
+            <h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><p>执行python manage.py collectstatic出错：<br>django collectstatic OSError: [Errno 2] No such file or directory</p>
+<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>collectstatic汇集所有app和STATICFILES_DIRS配置路径下的静态文件到一个目录STATIC_ROOT下，这里报错是因为STATICFILES_DIRS配置的路径是不存在的。</p>
 
           
         
@@ -407,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/281/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/281/">281</a><span class="page-number current">282</span><a class="page-number" href="/blog/page/283/">283</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/283/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/281/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/281/">281</a><span class="page-number current">282</span><a class="page-number" href="/blog/page/283/">283</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/283/">&gt;</a>
   </nav>
 
 
@@ -453,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

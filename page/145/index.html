@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/question/q1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/go/effective_go/4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/question/q1/" itemprop="url">servlet转发乱码问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/go/effective_go/4/" itemprop="url">effective go 学习整理四</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/question/" itemprop="url" rel="index">
-                    <span itemprop="name">question</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/go/effective-go/" itemprop="url" rel="index">
+                    <span itemprop="name">effective_go</span>
                   </a>
                 </span>
 
@@ -334,7 +356,7 @@
       
         
           
-            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>servlet使用request.getRequestDispatcher(“success.html”).forward(request, response)做服务端重定向，如果在这条语句之前进行response.setContentType(“text/html; charset=UTF-8”)或者response.setCharacterEncoding(“UTF-8”)，会导致中文乱码。</p>
+            <h1 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h1><p>Do not communicate by sharing memory; instead, share memory by communicating.这是go中并发的思想核心。简单来说，传统的并发控制通过对一个共享对象加锁并进行争用实现，而go的思想是，单线程本身是顺序的，只有两个线程交互的时候，才有并发的问题，而交流的过程就是同步的过程，可以把这种同步理解为unix的pipe。<br>goroutine实现并发，chan实现同步和信号量，两者结合形成go的并发体系。<br>go的并发机制也能用来实现多核并行，关键在于将任务分解到goroutine中，最后通过resultChan来收集结果。</p>
 
           
         
@@ -374,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/144/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/blog/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/146/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/144/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/blog/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/146/">&gt;</a>
   </nav>
 
 
@@ -420,7 +442,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

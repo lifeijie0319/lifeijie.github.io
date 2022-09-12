@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/docker/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84docker%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E5%A4%96%E7%BD%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/" itemprop="url">jvm错误日志信号分析</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/docker/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84docker%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E5%A4%96%E7%BD%91/" itemprop="url">虚拟机中的Docker容器不能访问外网域名的问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
+                  <a href="/blog/categories/tools/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -356,25 +345,16 @@
       
         
           
-            <h1 id="SIGSEGV"><a href="#SIGSEGV" class="headerlink" title="SIGSEGV"></a>SIGSEGV</h1><p>SIGSEGV — Segment Fault. The possible cases of your encountering this error are: </p>
-<ul>
-<li>buffer overflow — usually caused by a pointer reference out of range.</li>
-<li>stack overflow — please keep in mind that the default stack size is 8192K.</li>
-<li>illegal file access — file operations are forbidden on our judge system.</li>
-</ul>
-<h1 id="SIGBUS"><a href="#SIGBUS" class="headerlink" title="SIGBUS:"></a>SIGBUS:</h1><p>导致SIGBUS信号的可能原因: </p>
-<ul>
-<li>硬件故障，不用说，程序猿最常碰上的肯定不是这样的情形。 </li>
-<li>Linux平台上运行malloc()，假设没有足够的RAM。Linux不是让malloc()失败返回。 而是向当前进程分发SIGBUS信号。<br>  注: 对该点执怀疑态度，有机会可自行測试确认当前系统反应。 </li>
-<li>某些架构上訪问数据时有对齐的要求，比方仅仅能从4字节边界上读取一个4字节的 数据类型。IA-32架构没有硬性要求对齐，虽然未对齐的訪问减少运行效率。另外一些架构，比方SPARC、m68k，要求对齐訪问，否则向当前进程分发SIGBUS信号。 </li>
-<li>试图訪问一块无文件内容相应的内存区域，比方超过文件尾的内存区域，或者以前有文件内容相应，如今为还有一进程截断过的内存区域。</li>
-</ul>
-<h1 id="SIGBUS与SIGSEGV信号的一般差别"><a href="#SIGBUS与SIGSEGV信号的一般差别" class="headerlink" title="SIGBUS与SIGSEGV信号的一般差别"></a>SIGBUS与SIGSEGV信号的一般差别</h1><ul>
-<li>SIGBUS(Bus error)意味着指针所相应的地址是有效地址，但总线不能正常使用该指针。一般是未对齐的数据訪问所致。</li>
-<li>SIGSEGV(Segment fault)意味着指针所相应的地址是无效地址。没有物理内存相应该地址。 </li>
-</ul>
-<h1 id="EXCEPTION-ACCESS-VIOLATION"><a href="#EXCEPTION-ACCESS-VIOLATION" class="headerlink" title="EXCEPTION_ACCESS_VIOLATION"></a>EXCEPTION_ACCESS_VIOLATION</h1><p>意味着Java应用Crash的时候，正在运行JVM自己的代码，而不是外部的Java代码或其他类库代码。这种情况很可能是JVM的Bug，但是也不一定。</p>
-<h1 id="EXCEPTION-STACK-OVERFLOW"><a href="#EXCEPTION-STACK-OVERFLOW" class="headerlink" title="EXCEPTION_STACK_OVERFLOW"></a>EXCEPTION_STACK_OVERFLOW</h1><p>意味着这是个栈溢出的错误。</p>
+            <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><pre><code>按照官网getting-started教程，创建Dockerfile，然后尝试创建image失败</code></pre>
+<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><pre><code>docker创建的容器无法解析域名</code></pre>
+<h1 id="解决尝试"><a href="#解决尝试" class="headerlink" title="解决尝试"></a>解决尝试</h1><h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><pre><code>修改DNS，修改/etc/resolv.conf
+![](/blog/images/tools/docker/docker1.png)</code></pre>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><pre><code>无效</code></pre>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><pre><code>不是DNS的问题</code></pre>
+<h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><h3 id="方案-1"><a href="#方案-1" class="headerlink" title="方案"></a>方案</h3><pre><code>更改docker网络连接模式，即在docker run 指令后加参数 --network=host，host模式的含义是使docker的网络连接模式与宿主机的网络连接模式一致。
+![](/blog/images/tools/docker/docker2.png)</code></pre>
+<h3 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h3><pre><code>成功</code></pre>
+<h3 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h3><pre><code>但是每次访问外网需要加--network=host参数，不方便。</code></pre>
 
           
         
@@ -414,7 +394,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/243/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/243/">243</a><span class="page-number current">244</span><a class="page-number" href="/blog/page/245/">245</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/245/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/243/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/243/">243</a><span class="page-number current">244</span><a class="page-number" href="/blog/page/245/">245</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/245/">&gt;</a>
   </nav>
 
 
@@ -460,7 +440,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

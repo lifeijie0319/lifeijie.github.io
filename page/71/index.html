@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/tools/docker/docker%E4%BA%A4%E4%BA%92/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/language/java/database/hibernate/hibernate%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/tools/docker/docker%E4%BA%A4%E4%BA%92/" itemprop="url">docker交互</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/language/java/database/hibernate/hibernate%E9%85%8D%E7%BD%AE/" itemprop="url">hibernate配置</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/database/hibernate/" itemprop="url" rel="index">
+                    <span itemprop="name">hibernate</span>
                   </a>
                 </span>
 
@@ -345,18 +367,17 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>docker交互一般使用docker exec和doceker attach</p>
-<h1 id="docker-exec"><a href="#docker-exec" class="headerlink" title="docker exec"></a>docker exec</h1><h2 id="进入指令"><a href="#进入指令" class="headerlink" title="进入指令"></a>进入指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec [OPTIONS] CONTAINER COMMAND [ARG...]</span><br></pre></td></tr></table></figure>
-<p>说明：Run a command in a running container</p>
-<h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><ul>
-<li>一般搭配-it使用，这样才能和容器内交互，否则只是执行命令而已</li>
-<li>使用exit可以退出</li>
+            <h1 id="配置文件位置与命名"><a href="#配置文件位置与命名" class="headerlink" title="配置文件位置与命名"></a>配置文件位置与命名</h1><p>hibernate默认的配置文件是在classpath下的hibernate.cfg.xml</p>
+<h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;utf-8&#x27;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-configuration</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;-//Hibernate/Hibernate Configuration DTD//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- properties --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.username&quot;</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.password&quot;</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.driver_class&quot;</span>&gt;</span>com.mysql.cj.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.url&quot;</span>&gt;</span>jdbc:mysql://localhost:3306/imooc<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dialect&quot;</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;show_sql&quot;</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;format_sql&quot;</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.hbm2ddl.auto&quot;</span>&gt;</span>create<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.default_schema&quot;</span>&gt;</span>imooc<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mapping files --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">&quot;hbm.xml&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- cache settings --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;class-cache class=&quot;org.hibernate.auction.Item&quot; usage=&quot;read-write&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;class-cache class=&quot;org.hibernate.auction.Bid&quot; usage=&quot;read-only&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;collection-cache collection=&quot;org.hibernate.auction.Item.bids&quot; usage=&quot;read-write&quot;/&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="常见配置项解析"><a href="#常见配置项解析" class="headerlink" title="常见配置项解析"></a>常见配置项解析</h2><h3 id="session-factory中的property属性"><a href="#session-factory中的property属性" class="headerlink" title="session-factory中的property属性"></a>session-factory中的property属性</h3><ul>
+<li>show_sql 是否在控制台打印sql</li>
+<li>format_sql 在控制台打印sql是否进行格式化</li>
+<li>hibernate.hbm2ddl.auto 建表策略，常见的选项有：<ul>
+<li>create 每次删表重建</li>
+<li>update 在现有表的基础上进行更新</li>
 </ul>
-<h1 id="docker-attach"><a href="#docker-attach" class="headerlink" title="docker attach"></a>docker attach</h1><h2 id="进入指令-1"><a href="#进入指令-1" class="headerlink" title="进入指令"></a>进入指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach :container_id</span><br></pre></td></tr></table></figure>
-<p>说明：Attach local standard input, output, and error streams to a running container</p>
-<h2 id="特征-1"><a href="#特征-1" class="headerlink" title="特征"></a>特征</h2><ul>
-<li>如果容器运行在前台，Ctrl+C会导致容器的退出</li>
-<li>只能看一下容器的输出，没法执行啥</li>
+</li>
+<li>hibernate.default_schema 默认的数据库schema名称</li>
 </ul>
 
           
@@ -397,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/70/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/70/">70</a><span class="page-number current">71</span><a class="page-number" href="/blog/page/72/">72</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/72/">&gt;</a>
   </nav>
 
 
@@ -443,7 +464,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

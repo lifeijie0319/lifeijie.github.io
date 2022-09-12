@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/db/ibm_db_django/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/j2ee/servlet%E8%B7%AF%E7%94%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/db/ibm_db_django/" itemprop="url">ibm_db_django</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/java/j2ee/servlet%E8%B7%AF%E7%94%B1/" itemprop="url">servlet路由</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/language/java/j2ee/" itemprop="url" rel="index">
+                    <span itemprop="name">j2ee</span>
                   </a>
                 </span>
 
@@ -367,8 +356,15 @@
       
         
           
-            <h1 id="一、说明："><a href="#一、说明：" class="headerlink" title="一、说明："></a>一、说明：</h1><p>Django要连接db2，除了ibm_db这个Python和db2的连接件，还需要安装ibm_db_django包。</p>
-<h1 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h1><h1 id="三、使用"><a href="#三、使用" class="headerlink" title="三、使用"></a>三、使用</h1>
+            <h1 id="web-xml配置-、-、-do的区别"><a href="#web-xml配置-、-、-do的区别" class="headerlink" title="web.xml配置/、/、.do的区别"></a>web.xml配置/、/<em>、</em>.do的区别</h1><ul>
+<li>“/‘表示匹配所有请求（其中包含除.jsp和.jspx外的所有后缀）。<br>jsp和jspx使用tomcat默认的JspServlet进行处理，至于其它带后缀的请求，如果没有配置静态资源匹配，会默认去掉后缀，当做控制器路由进行处理。</li>
+<li>“/*”表示匹配所有请求（包含所有后缀）。<br>这个路由控制会导致静态资源也无法访问。</li>
+<li><em>.do表示匹配所有以.do结尾的请求<br>控制器路由统一使用</em>.do结尾，省去了静态资源配置的麻烦，但是不符合restful风格。</li>
+</ul>
+<h1 id="web-xml静态资源配置"><a href="#web-xml静态资源配置" class="headerlink" title="web.xml静态资源配置"></a>web.xml静态资源配置</h1><p>tomcat有默认的DefaultServlet处理静态资源，DefaultServlet对应的id为default，在用户web.xml中配置静态资源指向default即可，访问js文件配置如下，其它同理：  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>default<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.js<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意: WEB-INF目录不允许直接访问，静态资源一般建立WEB-INF同级目录进行访问。</p>
+
           
         
       
@@ -407,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/276/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/276/">276</a><span class="page-number current">277</span><a class="page-number" href="/blog/page/278/">278</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/278/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/276/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/276/">276</a><span class="page-number current">277</span><a class="page-number" href="/blog/page/278/">278</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/278/">&gt;</a>
   </nav>
 
 
@@ -453,7 +449,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

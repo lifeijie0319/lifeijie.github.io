@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/basic/oop/OOP/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/mysql/mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/basic/oop/OOP/" itemprop="url">OOP常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/database/mysql/mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="url">mysql数据类型</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/oop/" itemprop="url" rel="index">
-                    <span itemprop="name">oop</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -367,54 +345,44 @@
       
         
           
-            <h1 id="普通类与抽象类的区别"><a href="#普通类与抽象类的区别" class="headerlink" title="普通类与抽象类的区别"></a>普通类与抽象类的区别</h1><table>
+            <h1 id="char和varchar"><a href="#char和varchar" class="headerlink" title="char和varchar"></a>char和varchar</h1><table>
 <thead>
 <tr>
-<th>类型</th>
-<th>成员方法</th>
-<th>实例化</th>
+<th>角度</th>
+<th>char(n)</th>
+<th>varchar(n)</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>普通类</td>
-<td>不能包含抽象方法</td>
-<td>可以实例化</td>
+<td>空间</td>
+<td>固定长度</td>
+<td>变长，但是有一个额外的字节描述长度</td>
 </tr>
 <tr>
-<td>抽象类</td>
-<td>可以定义抽象方法</td>
-<td>无法实例化</td>
+<td>效率</td>
+<td>高</td>
+<td>低</td>
 </tr>
 </tbody></table>
-<h1 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h1><table>
+<h1 id="float和double"><a href="#float和double" class="headerlink" title="float和double"></a>float和double</h1><table>
 <thead>
 <tr>
-<th>类型</th>
-<th>成员变量</th>
-<th>成员方法</th>
-<th>构造函数</th>
-<th>继承/实现</th>
+<th>角度</th>
+<th>float</th>
+<th>double</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>接口</td>
-<td>默认是public static final修饰的</td>
-<td>默认是public abstract修饰的</td>
-<td>不能有构造函数</td>
-<td>implements，一个类可以实现多个接口，实现的时候必须覆写接口的所有方法</td>
+<td>长度</td>
+<td>最长8位10进制数</td>
+<td>最长16位10进制数</td>
 </tr>
 <tr>
-<td>抽象类</td>
-<td>和正常类一样定义</td>
-<td>和普通类一样定义方法，可以额外定义抽象方法</td>
-<td>可以有构造函数</td>
-<td>extends，只能单继承，不用覆写所有方法</td>
+<td>空间</td>
+<td>4字节</td>
+<td>8字节</td>
 </tr>
 </tbody></table>
-<h1 id="覆写和隐藏"><a href="#覆写和隐藏" class="headerlink" title="覆写和隐藏"></a>覆写和隐藏</h1><ol>
-<li>子类存在与父类签名相同的普通方法，Override父类方法，实际调用的方法取决于实例真实类型。</li>
-<li>子类存在与父类签名相同的静态方法，隐藏父类方法，合理的方式是通过类来调用方法，实际调用的方法取决于类的类型。如果通过实例来调用静态方法（不推荐，一般编译器报警），调用的具体方法取决于引用类型。<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java">https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java</a></li>
-</ol>
 
           
         
@@ -454,7 +422,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/106/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/106/">106</a><span class="page-number current">107</span><a class="page-number" href="/blog/page/108/">108</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/108/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/106/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/106/">106</a><span class="page-number current">107</span><a class="page-number" href="/blog/page/108/">108</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/108/">&gt;</a>
   </nav>
 
 
@@ -500,7 +468,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/Django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/ssh/NAT/ssh%E8%BD%AC%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/Django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6/" itemprop="url">django静态文件</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/network/ssh/NAT/ssh%E8%BD%AC%E5%8F%91/" itemprop="url">ssh隧道</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/blog/categories/network/ssh/NAT/" itemprop="url" rel="index">
+                    <span itemprop="name">NAT</span>
                   </a>
                 </span>
 
@@ -356,8 +356,24 @@
       
         
           
-            <h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><p>执行python manage.py collectstatic出错：<br>django collectstatic OSError: [Errno 2] No such file or directory</p>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>collectstatic汇集所有app和STATICFILES_DIRS配置路径下的静态文件到一个目录STATIC_ROOT下，这里报错是因为STATICFILES_DIRS配置的路径是不存在的。</p>
+            <h1 id="ssh隧道的使用"><a href="#ssh隧道的使用" class="headerlink" title="ssh隧道的使用"></a>ssh隧道的使用</h1><h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>ssh正向代理又称端口转发、本地端口转发。ssh正向代理可以用来绕过一些网络限制。比如有三台机器A/B/C，A想要访问C，但是A-&gt;C不通，但是B和两台机器都通，那么可以使用B作为跳板，建立隧道。这种应用场景下，可以在B建立隧道如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L $PortB:$C:$PortC $username@$C</span><br></pre></td></tr></table></figure>
+<p>其中$PortB是B暴露的端口，$C是C的IP，$PortC是目标端口，然后可以在A机器上访问到C，以ssh访问为例，此时在A上执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p $PortB $username@$B</span><br></pre></td></tr></table></figure>
+<p>即可登录C。事实上，正向代理的基本语法是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -L [bind_address:]port:host:hostport username@proxy</span><br></pre></td></tr></table></figure>
+<p>bind_address的含义如下：By default, the local port is bound in accordance with the GatewayPorts setting.  However, an explicit bind_address may be used to bind the connection to a specific address.  The bind_address of “localhost” indicates that the listening port be bound for local use only, while an empty address or ‘*’ indicates that the port should be available from all interfaces.<br>本质上，是在执行该命令的机器上建立了到host:port的通道，这条通道是通过proxy连接的。</p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p>还是正向代理这个例子，这时候B-&gt;C也不通，好在C-&gt;B是通的，那么我们可以用反向代理，在C上设置反向代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R $PortB:localhost:$PortC $username@$B</span><br></pre></td></tr></table></figure>
+<p>之后A就可以通过B的$PortB访问C的$PortC，以ssh为例，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p $PortB $username@$B</span><br></pre></td></tr></table></figure>
+<p>反向代理的基本语法是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -R [bind_address:]port:host:hostport username@remote</span><br></pre></td></tr></table></figure>
+<p>这里是建立了远端服务器到本地的隧道，port是remote远端服务器的对外端口，而host:hostport则是隧道的目的地，一般是本机或者本地局域网的其它机器（待试验）。<br>注意：反向代理默认关闭，需要进行设置并重启sshd服务：<br>1、在/etc/ssh/sshd_config中设置GatewayPorts yes<br>2、重启sshd服务service sshd restart</p>
+<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1><p>动态代理是在本地起了个socket服务器，所有流向本地代理端口的流量都会从隧道另一侧流出。动态代理的基本语法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -D [bind_address:]port username@remote</span><br></pre></td></tr></table></figure>
+<h2 id="隧道常用参数"><a href="#隧道常用参数" class="headerlink" title="隧道常用参数"></a>隧道常用参数</h2><p>-f Fork into background after authentication<br>-N Do not execute a shell or command</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="http://events.jianshu.io/p/452358a9a7a3">http://events.jianshu.io/p/452358a9a7a3</a><br><a target="_blank" rel="noopener" href="https://blog.51cto.com/wavework/1608937">https://blog.51cto.com/wavework/1608937</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html">http://www.ruanyifeng.com/blog/2011/12/ssh_port_forwarding.html</a><br><a target="_blank" rel="noopener" href="https://www.redhat.com/sysadmin/ssh-dynamic-port-forwarding">https://www.redhat.com/sysadmin/ssh-dynamic-port-forwarding</a></p>
 
           
         
@@ -397,7 +413,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/250/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/250/">250</a><span class="page-number current">251</span><a class="page-number" href="/blog/page/252/">252</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/252/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/250/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/250/">250</a><span class="page-number current">251</span><a class="page-number" href="/blog/page/252/">252</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/252/">&gt;</a>
   </nav>
 
 
@@ -443,7 +459,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

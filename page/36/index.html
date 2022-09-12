@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/14/web/JWT/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/12/language/python/basic/%E5%B8%B8%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/14/web/JWT/" itemprop="url">JWT理解</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/12/language/python/basic/%E5%B8%B8%E8%AF%86/" itemprop="url">python常识</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T13:41:53+08:00">
-                2022-03-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-12T15:37:44+08:00">
+                2022-04-12
               </time>
             
 
@@ -282,28 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -334,21 +312,7 @@
       
         
           
-            <h1 id="什么是JWT"><a href="#什么是JWT" class="headerlink" title="什么是JWT"></a>什么是JWT</h1><p>JWT(JSON Web Token)是一种认证方式，常用于web场景下服务端对客户端身份的验证。</p>
-<h1 id="JWT的原理"><a href="#JWT的原理" class="headerlink" title="JWT的原理"></a>JWT的原理</h1><p>JWT一般分为两个步骤，一是客户端到服务端获取token并储存，二是客户端再发起请求，此时需要在请求参数或者请求头中带上token（一般是在请求头里加入Authorization，并加上Bearer标注），服务端对token进行验证，验证通过才能返回请求数据。</p>
-<h2 id="token的组成"><a href="#token的组成" class="headerlink" title="token的组成"></a>token的组成</h2><p>token由header/payload/signature三部分组成，格式为header.payload.signature</p>
-<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p>header指明token的类型和使用的算法，一般形式为</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;typ&#x27;: &#x27;JWT&#x27;,</span><br><span class="line">    &#x27;alg&#x27;: &#x27;HS256&#x27;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用base64编码后成为token里面的第一部分。<br>注：一般使用HS256（即HMAC SHA256）签名算法。</p>
-<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>payload包含负载信息，按照标准，有以下内容（也可以添加自定义的内容）：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &#x27;iss&#x27;: &#x27;jwt签发者&#x27;</span><br><span class="line">    &#x27;sub&#x27;: &#x27;jwt所面向的用户&#x27;</span><br><span class="line">    &#x27;aud&#x27;: &#x27;接收jwt的一方（应用服务和认证服务分开的时候，标识应用服务）&#x27;</span><br><span class="line">    &#x27;exp&#x27;: &#x27;jwt的过期时间，这个过期时间必须要大于签发时间&#x27;</span><br><span class="line">    &#x27;nbf&#x27;: &#x27;定义在什么时间之前，该jwt都是不可用的&#x27;</span><br><span class="line">    &#x27;iat&#x27;: &#x27;jwt的签发时间&#x27;</span><br><span class="line">    &#x27;jti&#x27;: &#x27;jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用base64编码后成为token里面的第二部分。<br>注：一般使用HS256（即HMAC SHA256）签名算法。</p>
-<h3 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h3><p>signature是之前信息的签名，防止header和payload被篡改。生成算法为：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> encodeString = base64UrlEncode(header) + <span class="string">&#x27;.&#x27;</span> + base64UrlEncode(payload)</span><br><span class="line"><span class="keyword">var</span> signature = HMACSHA256(encodeString, secrect)</span><br></pre></td></tr></table></figure>
-<p>其中secrect为服务端存储的秘钥</p>
-<h2 id="验证的方式"><a href="#验证的方式" class="headerlink" title="验证的方式"></a>验证的方式</h2><p>一般有两层验证，一是验证signature的正确性，确定token没有被篡改；二是解出payload，查看是否过期。</p>
-<h1 id="JWT与session验证"><a href="#JWT与session验证" class="headerlink" title="JWT与session验证"></a>JWT与session验证</h1><p>早期，session验证客户端身份是主流，客户端发起请求，服务端生成session，存储在内存中。返回的http响应给客户端的cookie中存储了sessionid，用于和服务端的session对应。<br>session验证存在分布式服务器难以协调的问题，因为session存储在服务器内存，多台服务器难以协调一致。JWT服务端不存储token，解决了这个问题。</p>
-<h1 id="JWT没有解决的问题"><a href="#JWT没有解决的问题" class="headerlink" title="JWT没有解决的问题"></a>JWT没有解决的问题</h1><p>JWT没有解决中间人攻击的问题，如果劫持者使用客户端的token，可以伪装客户端与服务端进行通信。一般要求使用https来处理请求被劫持的情况。</p>
+            <h1 id="PEP"><a href="#PEP" class="headerlink" title="PEP"></a>PEP</h1><p>PEP代表Python Enhancement Proposal。它是一组规则，指定如何格式化Python代码以获得最大可读性。</p>
 
           
         
@@ -388,7 +352,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/35/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/blog/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/37/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/35/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/blog/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/37/">&gt;</a>
   </nav>
 
 
@@ -434,7 +398,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

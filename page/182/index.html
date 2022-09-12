@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%BA%8C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/experience1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%BA%8C/" itemprop="url">sftp服务器搭建二</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/experience1/" itemprop="url">记录一次建表卡死的经历</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/ssh/" itemprop="url" rel="index">
-                    <span itemprop="name">ssh</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -345,10 +334,10 @@
       
         
           
-            <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h1><p>除了之前那样建一个sftp正常用户，还可以建立sftp组进行控制。</p>
-<h1 id="2-过程"><a href="#2-过程" class="headerlink" title="2 过程"></a>2 过程</h1><h2 id="2-1-创建用户"><a href="#2-1-创建用户" class="headerlink" title="2.1 创建用户"></a>2.1 创建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# groupadd sftp </span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser2 -g sftp -s &#x2F;sbin&#x2F;nologin -M</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser2:sftpuser2|chpasswd</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-创建目录"><a href="#2-2-创建目录" class="headerlink" title="2.2 创建目录"></a>2.2 创建目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# mkdir &#x2F;data&#x2F;sftp&#x2F;sftpuser2</span><br><span class="line">[root@VM_0_7_centos ~]# cd &#x2F;data&#x2F;sftp&#x2F;</span><br><span class="line">[root@VM_0_7_centos sftp]# ll</span><br><span class="line">total 4</span><br><span class="line">drwxr-xr-x 2 root root 4096 Jul 17 15:01 sftpuser2</span><br><span class="line">[root@VM_0_7_centos sftp]# chown sftpuser2:sftp sftpuser2&#x2F;</span><br><span class="line">[root@VM_0_7_centos sftp]# ll</span><br><span class="line">total 4</span><br><span class="line">drwxr-xr-x 2 sftpuser2 sftp 4096 Jul 17 15:01 sftpuser2</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-配置"><a href="#2-3-配置" class="headerlink" title="2.3 配置"></a>2.3 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match Group sftp</span><br><span class="line">ChrootDirectory &#x2F;data&#x2F;sftp&#x2F; 注意这个地方的目录一定是root:root的</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no</span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
+            <h1 id="1-现象与排查"><a href="#1-现象与排查" class="headerlink" title="1 现象与排查"></a>1 现象与排查</h1><p>1.1 sqlalchemy orm教程，建表users表之后，需要建立addresses表并且与users表建立外键关联，执行Base.metadata.create_all(engine)时卡死<br>1.2 再次执行建表脚本，报错<br><img src="/blog/images/database/experience1/1.png"><br>1.3 查看数据库当前正在执行的语句，发现建表语句处于pending状态，在等待锁<br><img src="/blog/images/database/experience1/2.png"><br>1.4 查看数据库锁，看到有事务运行中<br><img src="/blog/images/database/experience1/3.png"></p>
+<h1 id="2-分析"><a href="#2-分析" class="headerlink" title="2 分析"></a>2 分析</h1><p>python解释器中使用session建立了事务，没有结束，导致users表上有事务存在。<br>建立addresses表时需要建立和users的外键，因而等待事务锁释放。</p>
+<h1 id="3-处理"><a href="#3-处理" class="headerlink" title="3 处理"></a>3 处理</h1><p>结束python解释器中使用session建立的事务。mysql中的建表语句自动完成。</p>
+
           
         
       
@@ -387,7 +376,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/181/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/181/">181</a><span class="page-number current">182</span><a class="page-number" href="/blog/page/183/">183</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/183/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/181/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/181/">181</a><span class="page-number current">182</span><a class="page-number" href="/blog/page/183/">183</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/183/">&gt;</a>
   </nav>
 
 
@@ -433,7 +422,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

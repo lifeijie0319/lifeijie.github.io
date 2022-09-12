@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/VCS/svn/svn%20up%20401%E6%95%85%E9%9A%9C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/openssl/rsa/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/VCS/svn/svn%20up%20401%E6%95%85%E9%9A%9C/" itemprop="url">svn up 401故障</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/openssl/rsa/" itemprop="url">openssl rsa相关操作</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/" itemprop="url" rel="index">
-                    <span itemprop="name">VCS</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/VCS/svn/" itemprop="url" rel="index">
-                    <span itemprop="name">svn</span>
+                  <a href="/blog/categories/tools/openssl/" itemprop="url" rel="index">
+                    <span itemprop="name">openssl</span>
                   </a>
                 </span>
 
@@ -345,10 +345,10 @@
       
         
           
-            <h1 id="报错信息："><a href="#报错信息：" class="headerlink" title="报错信息："></a>报错信息：</h1><p>401 Authorization Required</p>
-<h1 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h1><p>密码过期</p>
-<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><p>ssh登录，会提示输入旧密码，修改新密码，修改成功即可</p>
-
+            <h1 id="openssl生成公私钥"><a href="#openssl生成公私钥" class="headerlink" title="openssl生成公私钥"></a>openssl生成公私钥</h1><h2 id="生成-RSA-私钥"><a href="#生成-RSA-私钥" class="headerlink" title="生成 RSA 私钥"></a>生成 RSA 私钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out rsa_private_key.pem 1024</span><br></pre></td></tr></table></figure>
+<h2 id="生成-RSA-公钥"><a href="#生成-RSA-公钥" class="headerlink" title="生成 RSA 公钥"></a>生成 RSA 公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</span><br></pre></td></tr></table></figure>
+<p>注：这样命令生成的公钥是pkcs8格式的，使用的私钥格式可以是pkcs1或者pkcs8</p>
+<h1 id="获取私钥长度"><a href="#获取私钥长度" class="headerlink" title="获取私钥长度"></a>获取私钥长度</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in secret.key -text -noout | grep &quot;Private-Key&quot;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -387,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/223/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/223/">223</a><span class="page-number current">224</span><a class="page-number" href="/blog/page/225/">225</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/225/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/223/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/223/">223</a><span class="page-number current">224</span><a class="page-number" href="/blog/page/225/">225</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/225/">&gt;</a>
   </nav>
 
 
@@ -433,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

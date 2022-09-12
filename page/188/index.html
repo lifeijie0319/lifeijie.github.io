@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/kvm/kvm%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/apache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/kvm/kvm%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" itemprop="url">kvm基本操作</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/apache/" itemprop="url">apache服务器基础</a></h1>
         
 
         <div class="post-meta">
@@ -302,17 +302,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/kvm/" itemprop="url" rel="index">
-                    <span itemprop="name">kvm</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -345,22 +334,16 @@
       
         
           
-            <p>virsh是kvm虚拟机常用的管理工具，以下是一些常用的命令。</p>
-<ol>
-<li>查看在运行的虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list </span><br></pre></td></tr></table></figure></li>
-<li>查看创建的所有虚拟机 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br></pre></td></tr></table></figure></li>
-<li>启动虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh start win10</span><br></pre></td></tr></table></figure>
-win10是虚拟机的domain名称，下同。</li>
-<li>挂起虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh suspend win10</span><br></pre></td></tr></table></figure></li>
-<li>恢复被挂起的虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh resume win10</span><br></pre></td></tr></table></figure></li>
-<li>开机启动虚拟机，即在虚拟机服务（libvirt）启动的时候，就启动虚拟机。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh autostart win10</span><br></pre></td></tr></table></figure></li>
-<li>关闭开机启动虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh auto start --disable win10 </span><br></pre></td></tr></table></figure></li>
-<li>关闭虚拟机（需要ACPID服务的支持，ACPI是Advanced<br>Configuration and PowerInterface缩写，高级配置和电源管理接口）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh shutdown win10</span><br></pre></td></tr></table></figure></li>
-<li>强制关闭虚拟机，这种方式是从virsh list列表中将虚拟机删除，仍然可以start起来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh destory win10</span><br></pre></td></tr></table></figure></li>
-<li>启动默认的网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-start default</span><br></pre></td></tr></table></figure></li>
-<li>自启动默认网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-autostart default</span><br></pre></td></tr></table></figure></li>
-<li>彻底删除虚拟机步骤<br>1）关闭虚拟机：virsh destroy win10<br>2）删除定义：virsh undefine win10<br>3）删除虚拟机文件（在/var/lib/libvirtd/下的相关文件）  </li>
+            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="yum安装"><a href="#yum安装" class="headerlink" title="yum安装"></a>yum安装</h2><ol>
+<li>查看httpd包是否可用：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum list | grep httpd</span><br></pre></td></tr></table></figure></li>
+<li>安装Apache和相关包<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install httpd httpd-devel</span><br></pre></td></tr></table></figure></li>
+<li>配置ServerName<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;httpd&#x2F;conf&#x2F;httpd.conf</span><br></pre></td></tr></table></figure>
+如果没有域名，则：ServerName localhost:80<h2 id="安装目录介绍"><a href="#安装目录介绍" class="headerlink" title="安装目录介绍"></a>安装目录介绍</h2>Apache默认将网站的根目录指向/var/www/html，目录默认的主配置文件是/etc/httpd/conf/httpd.conf。配置存储在的/etc/httpd/conf.d/目录</li>
 </ol>
+<h1 id="启停"><a href="#启停" class="headerlink" title="启停"></a>启停</h1><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd</span><br></pre></td></tr></table></figure>
+<h2 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">httpd -k stop</span><br></pre></td></tr></table></figure>
+<h2 id="设置开机自动启动："><a href="#设置开机自动启动：" class="headerlink" title="设置开机自动启动："></a>设置开机自动启动：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig httpd on</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -400,7 +383,7 @@ win10是虚拟机的domain名称，下同。</li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/187/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/187/">187</a><span class="page-number current">188</span><a class="page-number" href="/blog/page/189/">189</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/189/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/187/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/187/">187</a><span class="page-number current">188</span><a class="page-number" href="/blog/page/189/">189</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/189/">&gt;</a>
   </nav>
 
 
@@ -446,7 +429,7 @@ win10是虚拟机的domain名称，下同。</li>
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

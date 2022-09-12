@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/08/database/mysql/engine/innodb%E9%94%81%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/tools/docker/docker%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/08/database/mysql/engine/innodb%E9%94%81%E8%AF%A6%E8%A7%A3/" itemprop="url">mysql innodb锁详解</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/tools/docker/docker%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">docker常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-08T16:45:23+08:00">
-                2021-12-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
+                  <a href="/blog/categories/tools/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -356,16 +345,28 @@
       
         
           
-            <h1 id="innodb锁介绍"><a href="#innodb锁介绍" class="headerlink" title="innodb锁介绍"></a>innodb锁介绍</h1><p>官方文档介绍了innodb锁类型<br><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html">https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html</a><br>注意，共享锁(S锁)和排它锁(X锁)不是独立的锁，而是用来修饰其它锁的。</p>
-<h1 id="影响mysql加锁的因素"><a href="#影响mysql加锁的因素" class="headerlink" title="影响mysql加锁的因素"></a>影响mysql加锁的因素</h1><h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><pre><code>参考database/数据库隔离级别</code></pre>
-<h2 id="一致性非锁定读和锁定读"><a href="#一致性非锁定读和锁定读" class="headerlink" title="一致性非锁定读和锁定读"></a>一致性非锁定读和锁定读</h2><pre><code>一致性非锁定读就是平常的select，不加锁。锁定读SELECT分为两种，即SELECT ... FOR SHARE 和 SELECT ... FOR UPDATE，加锁。DML(INSERT/UPDATE/DELETE)时，需要先查询表中的记录，此时也使用锁定读，加锁。  
-注：FOR SHARE 语法是 MySQL 8.0 时加入的，FOR SHARE 和 LOCK IN SHARE MODE 是等价的，但，FOR SHARE 用于替代 LOCK IN SHARE MODE，不过，为了向后兼容，LOCK IN SHARE MODE依然可用。</code></pre>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><pre><code>数据表列上是否有索引，影响mysql加锁的情况。</code></pre>
-<h1 id="锁查看的方式"><a href="#锁查看的方式" class="headerlink" title="锁查看的方式"></a>锁查看的方式</h1><pre><code>MySQL5.7及之前，可以通过information_schema.innodb_locks查看事务的锁情况，但只能看到阻塞事务的锁。另外相关的表information_schema.innodb_trx描述了当前的事务信息，information_schema.innodb_lock_waits说明了锁之间的等待信息。另外，可以通过show engine innodb status查看最近的死锁情况。
+            <h1 id="普通用户无法使用docker，权限不足"><a href="#普通用户无法使用docker，权限不足" class="headerlink" title="普通用户无法使用docker，权限不足"></a>普通用户无法使用docker，权限不足</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>执行docker命令时，报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Got permission denied while trying to connect to the Docker daemon socket at unix:&#x2F;&#x2F;&#x2F;var&#x2F;run&#x2F;docker.sock: Post http:&#x2F;&#x2F;%2Fvar%2Frun%2Fdocker.sock&#x2F;v1.38&#x2F;build?buildargs&#x3D;%7B%7D&amp;cachefrom&#x3D;%5B%5D&amp;cgroupparent&#x3D;&amp;cpuperiod&#x3D;0&amp;cpuquota&#x3D;0&amp;cpusetcpus&#x3D;&amp;cpusetmems&#x3D;&amp;cpushares&#x3D;0&amp;dockerfile&#x3D;Dockerfile&amp;labels&#x3D;%7B%7D&amp;memory&#x3D;0&amp;memswap&#x3D;0&amp;networkmode&#x3D;default&amp;rm&#x3D;1&amp;session&#x3D;p9710s6yzkfrztcevkmj7vd77&amp;shmsize&#x3D;0&amp;t&#x3D;fastdfs-demo-web&amp;target&#x3D;&amp;ulimits&#x3D;null&amp;version&#x3D;1: dial unix &#x2F;var&#x2F;run&#x2F;docker.sock: connect: permission denied</span><br></pre></td></tr></table></figure>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>需要给用户添加docker组权限，执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker :user</span><br><span class="line">newgrp docker</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<ol>
+<li>该命令需要root权限</li>
+<li>-aG代表添加组</li>
+<li>:user指代实际要添加docker权限的用户名</li>
+<li>刷新group使生效</li>
+</ol>
+<h1 id="无法删除镜像"><a href="#无法删除镜像" class="headerlink" title="无法删除镜像"></a>无法删除镜像</h1><h2 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h2><p>当想要删除镜像时，如果还有该镜像的容器存在，即使镜像不运行，也无法删除，报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error response from daemon: conflict: unable to delete 384072e23c5b (must be forced) - image is being used by stopped container e5238250eea2</span><br></pre></td></tr></table></figure>
+<h2 id="问题处理"><a href="#问题处理" class="headerlink" title="问题处理"></a>问题处理</h2><ol>
+<li>删除相关的容器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container rm e5238250eea2</span><br></pre></td></tr></table></figure></li>
+<li>删除镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image rm 384072e23c5b</span><br></pre></td></tr></table></figure>
+<h1 id="docker-images镜像消失"><a href="#docker-images镜像消失" class="headerlink" title="docker images镜像消失"></a>docker images镜像消失</h1>imagesfs不足15%的会发生驱逐</li>
+</ol>
+<h1 id="docker服务启动失败"><a href="#docker服务启动失败" class="headerlink" title="docker服务启动失败"></a>docker服务启动失败</h1><h2 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker.socket: Failed with result &#39;service-start-limit-hit&#39;.</span><br></pre></td></tr></table></figure>
+<h2 id="原因与解决方法"><a href="#原因与解决方法" class="headerlink" title="原因与解决方法"></a>原因与解决方法</h2><p>原因是/etc/docker/daemon.json配置文件格式异常，修正后启动服务正常。</p>
+<h1 id="服务日志报错MemoryAccounting-CPUAccounting-not-enabled-for-pid"><a href="#服务日志报错MemoryAccounting-CPUAccounting-not-enabled-for-pid" class="headerlink" title="服务日志报错MemoryAccounting CPUAccounting not enabled for pid"></a>服务日志报错MemoryAccounting CPUAccounting not enabled for pid</h1><p><a target="_blank" rel="noopener" href="https://www.sudops.com/kubelet-1-9-memoryaccounting-cpuaccounting-not-enabled-pid.html">https://www.sudops.com/kubelet-1-9-memoryaccounting-cpuaccounting-not-enabled-pid.html</a></p>
 
-MySQL8.0通过performance_schema.data_locks查看事务的锁情况，并且不需要事务阻塞，正常事务加锁也能看到。</code></pre>
-<h1 id="实践与常见情形"><a href="#实践与常见情形" class="headerlink" title="实践与常见情形"></a>实践与常见情形</h1><h2 id="等值查询（RR隔离级别）"><a href="#等值查询（RR隔离级别）" class="headerlink" title="等值查询（RR隔离级别）"></a>等值查询（RR隔离级别）</h2><pre><code>搜索条件无索引，innodb锁全表，每一行加排它锁，每个间隙加gap锁。搜索条件是唯一索引，如果能匹配到记录，只在记录上加排它锁，否则在当前间隙加gap锁。搜索条件是普通索引，如果能匹配到记录，在记录上加Next-Key锁，在下一条记录前加gap锁，否则在当前间隙加gap锁。</code></pre>
-<h1 id="锁等待时间查看"><a href="#锁等待时间查看" class="headerlink" title="锁等待时间查看"></a>锁等待时间查看</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;innodb_lock_wait_timeout&#39;;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -404,7 +405,7 @@ MySQL8.0通过performance_schema.data_locks查看事务的锁情况，并且不�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/127/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/127/">127</a><span class="page-number current">128</span><a class="page-number" href="/blog/page/129/">129</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/129/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/127/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/127/">127</a><span class="page-number current">128</span><a class="page-number" href="/blog/page/129/">129</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/129/">&gt;</a>
   </nav>
 
 
@@ -450,7 +451,7 @@ MySQL8.0通过performance_schema.data_locks查看事务的锁情况，并且不�
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

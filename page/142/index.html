@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/experience1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/go/effective_go/1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/experience1/" itemprop="url">记录一次建表卡死的经历</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/go/effective_go/1/" itemprop="url">effective go 学习整理一</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/go/effective-go/" itemprop="url" rel="index">
+                    <span itemprop="name">effective_go</span>
                   </a>
                 </span>
 
@@ -334,9 +356,29 @@
       
         
           
-            <h1 id="1-现象与排查"><a href="#1-现象与排查" class="headerlink" title="1 现象与排查"></a>1 现象与排查</h1><p>1.1 sqlalchemy orm教程，建表users表之后，需要建立addresses表并且与users表建立外键关联，执行Base.metadata.create_all(engine)时卡死<br>1.2 再次执行建表脚本，报错<br><img src="/blog/images/database/experience1/1.png"><br>1.3 查看数据库当前正在执行的语句，发现建表语句处于pending状态，在等待锁<br><img src="/blog/images/database/experience1/2.png"><br>1.4 查看数据库锁，看到有事务运行中<br><img src="/blog/images/database/experience1/3.png"></p>
-<h1 id="2-分析"><a href="#2-分析" class="headerlink" title="2 分析"></a>2 分析</h1><p>python解释器中使用session建立了事务，没有结束，导致users表上有事务存在。<br>建立addresses表时需要建立和users的外键，因而等待事务锁释放。</p>
-<h1 id="3-处理"><a href="#3-处理" class="headerlink" title="3 处理"></a>3 处理</h1><p>结束python解释器中使用session建立的事务。mysql中的建表语句自动完成。</p>
+            <h1 id="Formatting"><a href="#Formatting" class="headerlink" title="Formatting"></a>Formatting</h1><p>gofmt 按照标准自动格式化源文件</p>
+<h1 id="Commentary"><a href="#Commentary" class="headerlink" title="Commentary"></a>Commentary</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">块注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">// 行注释</span></span><br></pre></td></tr></table></figure>
+<p>块注释除了基本的注释一段文字外，还常用于描述包信息。</p>
+<h2 id="godoc"><a href="#godoc" class="headerlink" title="godoc"></a>godoc</h2><p>godoc根据go源文件生成解释文档，顶层声明对象的注释信息影响生成的文档的质量。原文为：Comments that appear before top-level declarations, with no intervening newlines, are extracted along with the declaration to serve as explanatory text for the item.<br>每个都应该有包注释，包内有多个源文件时，只要在其中一个文件的顶部写包注释即可。<br>顶层声明对象的注释文档最好以对象名称开头。</p>
+<h1 id="Names"><a href="#Names" class="headerlink" title="Names"></a>Names</h1><p>go命名一般风格是驼峰和帕斯卡</p>
+<h2 id="package-names"><a href="#package-names" class="headerlink" title="package names"></a>package names</h2><p>包名一般是小写单个单词<br>By convention, packages are given lower case, single-word names; there should be no need for underscores or mixedCaps.</p>
+<h2 id="getter和setter"><a href="#getter和setter" class="headerlink" title="getter和setter"></a>getter和setter</h2><p>比如属性owner，按照go的风格，其getter方法名应为Owner()，setter方法名应为SetOwner()</p>
+<h2 id="interface-names"><a href="#interface-names" class="headerlink" title="interface names"></a>interface names</h2><p>单方法的接口命名一般是在方法后面加-er后缀，比如Reader接口实现了read方法</p>
+<h1 id="Semicolons"><a href="#Semicolons" class="headerlink" title="Semicolons"></a>Semicolons</h1><p>表示一行结束的分号不用加，go编译器会处理。所以不能把控制结构(if, for, switch, or select)的开始括号另起一行。</p>
+<h1 id="Control-structures"><a href="#Control-structures" class="headerlink" title="Control structures"></a>Control structures</h1><h2 id="If"><a href="#If" class="headerlink" title="If"></a>If</h2><p>if支持初始化语句，初始化语句和条件语句用分号隔开。<br>初始化常常使用:=同时进行声明和初始化，有时候一个变量可以同时出现在两个:=语句中，比如</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Open(name)</span><br><span class="line">...</span><br><span class="line">d, err := f.Stat()</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>这里err似乎重复声明了，但是其实第二次只是进行了重新赋值。但是这种特殊情况需要满足以下三个条件：</p>
+<ul>
+<li>两个语句在同一个作用域</li>
+<li>初始化的值能够赋给该变量</li>
+<li>至少有另一个其它变量同时被声明赋值<h2 id="for"><a href="#for" class="headerlink" title="for"></a>for</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Like a C for</span></span><br><span class="line"><span class="keyword">for</span> init; condition; post &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Like a C while</span></span><br><span class="line"><span class="keyword">for</span> condition &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Like a C for(;;)</span></span><br><span class="line"><span class="keyword">for</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
+另外，可以用range对数组、切片、字符串、map、channel进行循环。字符串循环的时候，会自动把UTF-8的字符串转换成unicode字符，如果解析不了，会消耗一个utf-8字节，产生U+FFFD。<h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2></li>
+<li>switch可以不带变量，此时switch可以认为是switch true，用于替代if-else-if-else链。比如<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">unhex</span><span class="params">(c <span class="keyword">byte</span>)</span> <span class="title">byte</span></span> &#123;</span><br><span class="line">    <span class="keyword">switch</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;0&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> c - <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;a&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="string">&#x27;f&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> c - <span class="string">&#x27;a&#x27;</span> + <span class="number">10</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span> &lt;= c &amp;&amp; c &lt;= <span class="string">&#x27;F&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> c - <span class="string">&#x27;A&#x27;</span> + <span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>switch后面不限定为常数或者基本类型变量</li>
+<li>switch每个case结束不会自动进入下一个case</li>
+<li>在case中break只会终止当前case的后续语句，break tag可以终止回到tag标记的地方，continue也支持tag跳转<h2 id="Type-Switch"><a href="#Type-Switch" class="headerlink" title="Type Switch"></a>Type Switch</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> t <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">t = functionOfSomeType()</span><br><span class="line"><span class="keyword">switch</span> t := t.(<span class="keyword">type</span>) &#123;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;unexpected type %T\n&quot;</span>, t)     <span class="comment">// %T prints whatever type t has</span></span><br><span class="line"><span class="keyword">case</span> <span class="keyword">bool</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;boolean %t\n&quot;</span>, t)             <span class="comment">// t has type bool</span></span><br><span class="line"><span class="keyword">case</span> <span class="keyword">int</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;integer %d\n&quot;</span>, t)             <span class="comment">// t has type int</span></span><br><span class="line"><span class="keyword">case</span> *<span class="keyword">bool</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;pointer to boolean %t\n&quot;</span>, *t) <span class="comment">// t has type *bool</span></span><br><span class="line"><span class="keyword">case</span> *<span class="keyword">int</span>:</span><br><span class="line">    fmt.Printf(<span class="string">&quot;pointer to integer %d\n&quot;</span>, *t) <span class="comment">// t has type *int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h1><h2 id="多返回值"><a href="#多返回值" class="headerlink" title="多返回值"></a>多返回值</h2>go函数支持多返回值，且返回值支持命名，一旦命名，这些命名的返回值就是本地变量，初始化为各自类型的零值，且return时无须再加上这些命名返回值。<h2 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h2>defer将一个函数的执行放在当前调用defer的函数结束前执行，常用于资源释放。<br>传给defer函数的参数在defer这行出现时就执行。<br>多个defer函数按照LIFO的顺序执行。</li>
+</ul>
 
           
         
@@ -376,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/141/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/141/">141</a><span class="page-number current">142</span><a class="page-number" href="/blog/page/143/">143</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/143/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/141/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/141/">141</a><span class="page-number current">142</span><a class="page-number" href="/blog/page/143/">143</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/143/">&gt;</a>
   </nav>
 
 
@@ -422,7 +464,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

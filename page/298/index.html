@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/ubuntu/Ubuntu%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/libs/db/sqlalchemy/sqlalchemy%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%9B%B4%E6%96%B0%E5%92%8C%E6%8F%92%E5%85%A5%E9%BB%98%E8%AE%A4%E5%80%BC/" itemprop="url">sqlalchemy表设计更新和插入默认值</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/linux/ubuntu/Ubuntu%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" itemprop="url">Ubuntu基本网络配置</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -317,30 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/libs/db/sqlalchemy/" itemprop="url" rel="index">
-                    <span itemprop="name">sqlalchemy</span>
+                  <a href="/blog/categories/system/linux/ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">ubuntu</span>
                   </a>
                 </span>
 
@@ -378,11 +356,14 @@
       
         
           
-            <h1 id="1、设置默认值为python程序返回值"><a href="#1、设置默认值为python程序返回值" class="headerlink" title="1、设置默认值为python程序返回值"></a>1、设置默认值为python程序返回值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">t = Table(<span class="string">&quot;mytable&quot;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;id&#x27;</span>, Integer, primary_key=<span class="literal">True</span>),</span><br><span class="line">    <span class="comment"># define &#x27;last_updated&#x27; to be populated with datetime.now()</span></span><br><span class="line">    Column(<span class="string">&#x27;last_updated&#x27;</span>, DateTime, onupdate=datetime.datetime.now),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>注意，该定义在使用session.execute直接执行sql时无效，使用orm或者t对象操作时才生效。</p>
-<h1 id="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"><a href="#2、设置默认值为数据库默认值，实际上改变了数据库建表语句" class="headerlink" title="2、设置默认值为数据库默认值，实际上改变了数据库建表语句"></a>2、设置默认值为数据库默认值，实际上改变了数据库建表语句</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">t = Table(<span class="string">&#x27;test&#x27;</span>, meta,</span><br><span class="line">    Column(<span class="string">&#x27;abc&#x27;</span>, String(<span class="number">20</span>), server_default=<span class="string">&#x27;abc&#x27;</span>),</span><br><span class="line">    Column(<span class="string">&#x27;created_at&#x27;</span>, DateTime, server_default=text(<span class="string">&quot;sysdate&quot;</span>))</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>相当于：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> test (</span><br><span class="line">    abc <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">default</span> <span class="string">&#x27;abc&#x27;</span>,</span><br><span class="line">    created_at datetime <span class="keyword">default</span> sysdate</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+            <h2 id="编辑网卡配置文件"><a href="#编辑网卡配置文件" class="headerlink" title="编辑网卡配置文件"></a>编辑网卡配置文件</h2><p>一般网卡配置文件为/etc/network/interfaces，修改或添加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">auto lo</span><br><span class="line">iface lo inet loopback</span><br><span class="line"># 这两行表示的是 auto lo 系统启动时自动配置 lo 接口，然后对于 lo 接口配置一个本地回环（loopback) 地址</span><br><span class="line">netmask 255.255.255.0   # 子网掩码</span><br><span class="line">gateway 192.168.10.254 # 网关地址</span><br><span class="line">nameserver 8.8.8.8    # DNS服务器地址</span><br></pre></td></tr></table></figure>
+<p>如果想要自动设置ip，配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto eth0</span><br><span class="line">iface eth0 inet dhcp</span><br></pre></td></tr></table></figure>
+<p>如果想要设置静态ip，配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto eth0</span><br><span class="line">iface eth0 inet static</span><br><span class="line">address 192.168.10.210 #想要设置的静态ip</span><br></pre></td></tr></table></figure>
+<h2 id="重启网卡"><a href="#重启网卡" class="headerlink" title="重启网卡"></a>重启网卡</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo ifup eth0</span><br><span class="line">sudo ifdown eth0</span><br><span class="line"># or</span><br><span class="line">sudo ifconfig eth0 down</span><br><span class="line">sudo ifconfig eth0 up</span><br></pre></td></tr></table></figure>
+<h2 id="重启网络"><a href="#重启网络" class="headerlink" title="重启网络"></a>重启网络</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo &#x2F;etc&#x2F;init.d&#x2F;networking restart</span><br><span class="line">sudo &#x2F;etc&#x2F;init.d&#x2F;network-manager restart</span><br></pre></td></tr></table></figure>
           
         
       
@@ -421,7 +402,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/297/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/297/">297</a><span class="page-number current">298</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/299/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/297/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/297/">297</a><span class="page-number current">298</span><a class="page-number" href="/blog/page/299/">299</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/299/">&gt;</a>
   </nav>
 
 
@@ -467,7 +448,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

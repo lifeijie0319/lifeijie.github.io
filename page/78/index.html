@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/tools/k8s/k8s%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/02/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/tools/k8s/k8s%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">k8s常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/02/database/redis/redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" itemprop="url">redis配置文件</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-02T17:51:46+08:00">
+                2022-04-02
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/k8s/" itemprop="url" rel="index">
-                    <span itemprop="name">k8s</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,9 +345,28 @@
       
         
           
-            <h1 id="kubectl-get-nodes返回502"><a href="#kubectl-get-nodes返回502" class="headerlink" title="kubectl get nodes返回502"></a>kubectl get nodes返回502</h1><h2 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[LeoWeb@k8smaster fastdfs-demo-frontend]$ kubectl get nodes</span><br><span class="line">Error from server (InternalError): an error on the server (&quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;502 Bad Gateway&lt;&#x2F;title&gt;&lt;&#x2F;head&gt;\r\n&lt;body bgcolor&#x3D;\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;502 Bad Gateway&lt;&#x2F;h1&gt;&lt;&#x2F;center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx&#x2F;1.12.1&lt;&#x2F;center&gt;\r\n&lt;&#x2F;body&gt;\r\n&lt;&#x2F;html&gt;&quot;) has prevented the request from succeeding</span><br></pre></td></tr></table></figure>
-<h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br></pre></td></tr></table></figure>
-<h2 id="部署时ErrImageNeverPull"><a href="#部署时ErrImageNeverPull" class="headerlink" title="部署时ErrImageNeverPull"></a>部署时ErrImageNeverPull</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41535316/article/details/116047617">https://blog.csdn.net/weixin_41535316/article/details/116047617</a></p>
+            <h1 id="配置文件地址"><a href="#配置文件地址" class="headerlink" title="配置文件地址"></a>配置文件地址</h1><p>默认地址：/etc/redis.conf</p>
+<h1 id="常用配置项"><a href="#常用配置项" class="headerlink" title="常用配置项"></a>常用配置项</h1><ul>
+<li><p>daemonize<br>daemonize表示是否后台启动redis，默认是no，表示前台启动。如果要改成后台启动，no要改成yes</p>
+</li>
+<li><p>bind<br>先说一句精华的话：bind配置了什么ip，别人就得访问bind里面配置的ip才访问到redis服务。<br>一台主机，可能会有多张网卡，或者对应多网段内网的Ip，公网IP等，也就意味着其他机器可以通过多个IP地址访问到这台主机。假如 有ip1，ip2，ip3可以访问到一台服务器。但是redis bind只配置了</p>
+</li>
+</ul>
+<p><em>bind ip1 ip2</em><br>那如果是远程连接redis服务的话就只能通过ip1和ip2来访问。ip3不行。即使你可以ping得通。<br>注：这里的ip不是能访问redis的客户端的ip，而是能访问redis的本机网卡的ip</p>
+<h2 id="RDB相关"><a href="#RDB相关" class="headerlink" title="RDB相关"></a>RDB相关</h2><ul>
+<li>save 900 1 # 每900秒至少1个key变化，持久化一次，到内存一个快照</li>
+<li>save 300 10 # 每300秒至少10个key变化，往硬盘写一次</li>
+<li>save 60 10000 # 每60秒至少10000个key变化，写一次</li>
+<li>dbfilename dump.rdb # 数据的文件名</li>
+<li>dir ./ # 保存的路径，redis路径下</li>
+</ul>
+<h2 id="AOF相关"><a href="#AOF相关" class="headerlink" title="AOF相关"></a>AOF相关</h2><ul>
+<li>appendonly no # AOF方式默认关闭  </li>
+<li>appendfilename appendonly.aof # 配置文件名</li>
+<li>#appendfsync always # 每修改一次，同步到磁盘上</li>
+<li>appendsync everysec # 每秒同步到磁盘一次</li>
+<li>#appensync no # 不同步</li>
+</ul>
 
           
         
@@ -387,7 +406,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/77/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/77/">77</a><span class="page-number current">78</span><a class="page-number" href="/blog/page/79/">79</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/79/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/77/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/77/">77</a><span class="page-number current">78</span><a class="page-number" href="/blog/page/79/">79</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/79/">&gt;</a>
   </nav>
 
 
@@ -433,7 +452,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

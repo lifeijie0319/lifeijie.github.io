@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/riak/start/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/js/js%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/riak/start/" itemprop="url">riak启动</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/js/js%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" itemprop="url">js的执行顺序</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:36+08:00">
                 2021-12-04
               </time>
             
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/riak/" itemprop="url" rel="index">
-                    <span itemprop="name">riak</span>
+                  <a href="/blog/categories/language/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
                   </a>
                 </span>
 
@@ -345,14 +345,32 @@
       
         
           
-            <p>参考文档： <a target="_blank" rel="noopener" href="https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html">https://docs.riak.com/riak/kv/2.2.3/using/running-a-cluster.1.html</a></p>
-<h1 id="停服务"><a href="#停服务" class="headerlink" title="停服务"></a>停服务</h1><p>riak stop</p>
-<h1 id="改配置"><a href="#改配置" class="headerlink" title="改配置"></a>改配置</h1><p>配置文件路径/etc/riak/riak.conf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listener.protobuf.internal &#x3D; 127.0.0.1:8087 #改成实际IP和端口</span><br><span class="line">nodename &#x3D; riak@127.0.0.1 #改成想改的名字，注意要唯一标识此节点</span><br></pre></td></tr></table></figure>
-<h1 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h1><p>riak start  </p>
-<h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p><img src="/blog/images/database/riak/start/start1.png"></p>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>Riak’s Erlang VM is built with SMP support and if Riak is started on a non-SMP system, an error like this one is logged. This is commonly seen in virtualized environments configured for only one CPU core.</p>
-<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><p>改用4核cpu，然后还是报这个错。怀疑这个问题的真实原因。看到另一篇博客里说是因为/data/ring/下面的文件要清理掉，到是和官方文档不谋而合。处理了一下，果然，报另一个错误了：<br><img src="/blog/images/database/riak/start/start2.png"><br>看了一下，是8098默认端口被占用了，应该是指之前起的riak失败导致，重启机器之后就好了。另一次安装的时候，发现node名字也是导致此故障的原因之一，即node名字不能随意取，使用本机IP即可。</p>
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><pre><code>http://www.cnblogs.com/CBDoctor/p/3745246.html
+http://coolshell.cn/articles/9749.html</code></pre>
+<h1 id="js执行顺序说明"><a href="#js执行顺序说明" class="headerlink" title="js执行顺序说明"></a>js执行顺序说明</h1><pre><code>一、正常情况下，js顺序加载，单线程。
+
+二、要在其他文档元素加载之后执行js，要么把js放在后面，要么用特殊时间监听实现，比如监听body加载完成的onload事件，jQuery的ready事件等等。
+
+三、js使用回调的方式伪造了类似多线程的效果。
+
+四、预编译
+js解析时，并不是完全的严格按照顺序，而是先进行一次预编译。预编译时，首先创建一个当前执行环境下的活动对象。
+JS加载包含预编译和执行两个阶段。 编译阶段会对所有的var变量和function进行扫描，并将var变量初始化为undefined类型，而function则被初始化为函数值。
+到了执行阶段，JS从上面往下面依顺序执行，遇到var变量便进行赋值(因此，在赋值之前进行调用的话会出现错误).遇到函数变量的话会从活动对象中寻找函数
+注意：
+f();                                 // 调用函数，返回值1
+function f()&#123;
+    alert(1);
+&#125;
+但是，如果按下面方式定义函数，则JavaScript解释器会提示语法错误。
+f();                                 // 调用函数，返回语法错误
+var f = function()&#123;
+    alert(1);
+&#125;
+
+五、虽然说，JavaScript是按块执行的，但是不同块都属于同一个全局作用域，也就是说，块之间的变量和函数是可以共享的。
+
+六、注意如果在一个页面中存在多个windows.onload事件处理函数，则只有最后一个才是有效的，为了解决这个问题，可以把所有脚本或调用函数都放在同一个onload事件处理函数中</code></pre>
 
           
         
@@ -392,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/176/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><span class="page-number current">177</span><a class="page-number" href="/blog/page/178/">178</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/178/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/176/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><span class="page-number current">177</span><a class="page-number" href="/blog/page/178/">178</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/178/">&gt;</a>
   </nav>
 
 
@@ -438,7 +456,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

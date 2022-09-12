@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/spring/IOC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/tools/curl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/spring/IOC/" itemprop="url">IOC</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/tools/curl/" itemprop="url">curl常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -356,14 +334,7 @@
       
         
           
-            <h1 id="spring中的bean是线程安全的么"><a href="#spring中的bean是线程安全的么" class="headerlink" title="spring中的bean是线程安全的么"></a>spring中的bean是线程安全的么</h1><p>不是。</p>
-<h1 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h1><ul>
-<li>singleton 默认作用域，单例模式，容器中只有一个该类型bean实例</li>
-<li>prototype 原型模式，每次通过容器获取的bean都是该类的一个新实例</li>
-<li>request 每次请求的时候生成一个新的bean实例，只适用于使用spring的web应用</li>
-<li>session 对于每个http session，生成一个新的bean实例，只适用于使用spring的web应用</li>
-<li>globalSession globalSession is something that is connected to Portlet applications. When your application works in a Portlet container it is built of some amount of portlets. Each portlet has its own session, but if you want to store variables global for all portlets in your application then you should store them in globalSession. This scope doesn’t have any special effect different from the session scope in Servlet based applications. 另外，Portlet支持在spring5中已经被移除，所以globalSession这个scope也相应移除了。</li>
-</ul>
+            <h1 id="Connection-0-to-host-127-0-0-1-left-intact"><a href="#Connection-0-to-host-127-0-0-1-left-intact" class="headerlink" title="Connection #0 to host 127.0.0.1 left intact"></a>Connection #0 to host 127.0.0.1 left intact</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>使用curl请求服务接口时，如果使用-v参数查看返回详情，可以看到标题所示报错，本质上是由于服务端使用长连接，没有立刻关闭连接。<br>详细解释参考链接<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/61880928/what-does-connection-0-to-host-example-com-left-intact-mean">https://stackoverflow.com/questions/61880928/what-does-connection-0-to-host-example-com-left-intact-mean</a></p>
 
           
         
@@ -403,7 +374,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/94/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/96/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/94/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/96/">&gt;</a>
   </nav>
 
 
@@ -449,7 +420,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

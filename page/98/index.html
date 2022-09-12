@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/spring/%E4%BA%8B%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/web/session%E4%B8%8Ecookie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/spring/%E4%BA%8B%E5%8A%A1/" itemprop="url">spring的事务支持</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/web/session%E4%B8%8Ecookie/" itemprop="url">session与cookie</a></h1>
         
 
         <div class="post-meta">
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/blog/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
                   </a>
                 </span>
 
@@ -356,21 +334,12 @@
       
         
           
-            <h1 id="spring事务的实现方式"><a href="#spring事务的实现方式" class="headerlink" title="spring事务的实现方式"></a>spring事务的实现方式</h1><ol>
-<li>编程式事务管理：在代码中调用beginTransaction()、commit()、rollback()等事务管理相关的方法；又比如通过spring提供的jdbcTemplate管理事务等通过代码编写来控制事务的方式</li>
-<li>基于 TransactionProxyFactoryBean 的声明式事务管理，就是创建一个TransactionProxyFactoryBean类型的代理类，代理实际业务类，代理类完成事务管理</li>
-<li>基于 Aspectj AOP 配置事务，就是配置一个事务管理的aop切面，配置的advice是特殊的事务管理的advice</li>
-<li>基于 @Transactional 的声明式事务管理</li>
-</ol>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/myseries/p/10834172.html">https://www.cnblogs.com/myseries/p/10834172.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/donggua3694857/article/details/69858827">https://blog.csdn.net/donggua3694857/article/details/69858827</a></p>
-<h1 id="事务传播"><a href="#事务传播" class="headerlink" title="事务传播"></a>事务传播</h1><ul>
-<li>PROPAGATION_REQUIRED 支持当前事务，如果不存在，就创建一个</li>
-<li>PROPAGATION_SUPPORTED 支持当前事务，如果不存在，就不适用事务</li>
-<li>PROPAGATION_MANDATORY 支持当前事务，如果不存在，就抛出异常</li>
-<li>PROPAGATION_REQUIRES_NEW 如果当前有事务存在，挂起当前事务，创建一个新的事务</li>
-<li>PROPAGATION_NOT_SUPPORTED 以非事务方式运行，如果有事务存在，挂起当前事务</li>
-<li>PROPAGATION_NEVER 以非事务方式运行，如果有事务存在，抛出异常</li>
-<li>PROPAGATION_NESTED 如果当前事务存在，则嵌套事务执行</li>
+            <h1 id="session是什么"><a href="#session是什么" class="headerlink" title="session是什么"></a>session是什么</h1><p>由于http请求是无状态的，即用户的下一个请求和上一个请求在服务器看来没有联系。为了建立这种联系，服务端建立了一种跟踪用户的机制，就是seesion。每个用户对应一个session，记录了用户相关的信息，可以跨越用户的多个http请求。<br>seesion其实类似一个map，每个用户有独立的session_id，对应的value就是用户session的存储内容。<br>session有多种实现，可以存在内存、文件、数据库、第三方集群中等。</p>
+<h1 id="cookie是什么"><a href="#cookie是什么" class="headerlink" title="cookie是什么"></a>cookie是什么</h1><p>虽然服务器有了登记每个用户信息跨越请求的session机制，但是http请求和session的联系并没有建立，这就是cookie的建立原因。cookie可以认为是用户在客户端建立的session，其中存储最关键的信息是session_id，永固初次请求服务端建立服务端seesion的时候，cookie要保存服务端返回的session_id。http请求每次都会带上cookie，所以每次服务端都能找到对应的seesion。<br>cookie的另一个功能是方便用户。比如一个网站的登录界面，因为cookie存储了用户的信息，所以第二次登录的时候可以使用cookie自动填好相关信息，简化了用户操作。</p>
+<h1 id="如果客户端禁用cookie，session是否还能使用"><a href="#如果客户端禁用cookie，session是否还能使用" class="headerlink" title="如果客户端禁用cookie，session是否还能使用"></a>如果客户端禁用cookie，session是否还能使用</h1><p>本质上就是客户端要每次都传递seesion_id给服务端，可能的方案有；</p>
+<ul>
+<li>URL重写 每次在url后面田间seession_id参数</li>
+<li>手动调用传递seession_id</li>
 </ul>
 
           
@@ -411,7 +380,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/97/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/97/">97</a><span class="page-number current">98</span><a class="page-number" href="/blog/page/99/">99</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/99/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/97/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/97/">97</a><span class="page-number current">98</span><a class="page-number" href="/blog/page/99/">99</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/99/">&gt;</a>
   </nav>
 
 
@@ -457,7 +426,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/centos/yum%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/windows/windows%E4%B8%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/centos/yum%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url">yum基础知识</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/windows/windows%E4%B8%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8E%9F%E7%90%86%E4%B8%8E%E6%8A%80%E5%B7%A7/" itemprop="url">windows下软件安装原理与技巧</a></h1>
         
 
         <div class="post-meta">
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/centos/" itemprop="url" rel="index">
-                    <span itemprop="name">centos</span>
+                  <a href="/blog/categories/system/windows/" itemprop="url" rel="index">
+                    <span itemprop="name">windows</span>
                   </a>
                 </span>
 
@@ -356,13 +345,15 @@
       
         
           
-            <h1 id="配置国内yum源"><a href="#配置国内yum源" class="headerlink" title="配置国内yum源"></a>配置国内yum源</h1><ol>
-<li>备份本地yum源配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;etc&#x2F;yum.repos.d&#x2F;</span><br><span class="line">cp CentOS-Base.repo CentOS-Base.repo.bak</span><br></pre></td></tr></table></figure></li>
-<li>获取国内yum源配置文件，替换/etc/yum.repos.d/CentOS-Base.repo，参考：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-7.repo </span><br></pre></td></tr></table></figure></li>
-<li>更新cache<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache </span><br></pre></td></tr></table></figure>
-<h1 id="常用的yum指令"><a href="#常用的yum指令" class="headerlink" title="常用的yum指令"></a>常用的yum指令</h1><h2 id="缓存处理"><a href="#缓存处理" class="headerlink" title="缓存处理"></a>缓存处理</h2>yum会将下载下来的包文件rpm和头文件header存盘在本地机器的硬盘缓存中，yum clean可以对缓存进行清理，常用的clean命令如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean headers: &#x2F;&#x2F; 释放头文件</span><br><span class="line">yum clean packages: &#x2F;&#x2F; 清除包文件</span><br><span class="line">yum clean all: &#x2F;&#x2F; 清除所有</span><br></pre></td></tr></table></figure>
-与之相反，yum makecache可以把服务器的包信息下载到本地缓存起来<h2 id="包的安装与删除"><a href="#包的安装与删除" class="headerlink" title="包的安装与删除"></a>包的安装与删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum search package &#x2F;&#x2F; 搜索</span><br><span class="line">yum install package &#x2F;&#x2F; 安装</span><br><span class="line">yum remove package &#x2F;&#x2F; 卸载</span><br></pre></td></tr></table></figure>
-<h2 id="包的更新"><a href="#包的更新" class="headerlink" title="包的更新"></a>包的更新</h2>有两个命令可以对现有的包进行升级，分别是yum update和yum upgrade，后面可以带包名也可以不带，带包名会更新指定的包（未安装的包不更新），不带的话会更新整个系统所有已安装的包。yum upgrade = yum update –obsolete，表示更新后删除旧版本的包。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update [package]</span><br><span class="line">yum upgrade [package]</span><br></pre></td></tr></table></figure></li>
+            <h1 id="安装基本过程"><a href="#安装基本过程" class="headerlink" title="安装基本过程"></a>安装基本过程</h1><ol>
+<li>从压缩档/目录/网络复制文件</li>
+<li>在程序清单中注册（写注册表）<br>注：注册表原理<a target="_blank" rel="noopener" href="http://blog.csdn.net/haiross/article/details/45171725">http://blog.csdn.net/haiross/article/details/45171725</a></li>
+<li>安装需要的依赖库</li>
+</ol>
+<h1 id="软件安装原则"><a href="#软件安装原则" class="headerlink" title="软件安装原则"></a>软件安装原则</h1><ol>
+<li>数据、资料放在C盘之外，以便重装系统，防止数据丢失。</li>
+<li>小型软件、常用软件装在C盘。因为一般软件都会有文件在C盘，如果软件装在其他盘重装系统之后可能会导致软件不可用。重装系统后软件重装也不麻烦。</li>
+<li>大型软件、绿色软件、难获取的软件安装在其他盘。</li>
 </ol>
 
           
@@ -403,7 +394,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/263/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/263/">263</a><span class="page-number current">264</span><a class="page-number" href="/blog/page/265/">265</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/265/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/263/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/263/">263</a><span class="page-number current">264</span><a class="page-number" href="/blog/page/265/">265</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/265/">&gt;</a>
   </nav>
 
 
@@ -449,7 +440,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

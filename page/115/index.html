@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/02/23/database/db2/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/unicode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/02/23/database/db2/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/" itemprop="url">数据迁移</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/unicode/" itemprop="url">理解unicode</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-23T20:44:14+08:00">
-                2022-02-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -345,27 +345,20 @@
       
         
           
-            <h1 id="db2move"><a href="#db2move" class="headerlink" title="db2move"></a>db2move</h1><ol>
-<li>基本用法</li>
-<li>load失败造成表pending状态处理<br><a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-20083-id-2785295.html">http://blog.chinaunix.net/uid-20083-id-2785295.html</a></li>
-</ol>
-<h1 id="export导出"><a href="#export导出" class="headerlink" title="export导出"></a>export导出</h1><p>1、export to #path# of #type# #select sql#;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export to export&#x2F;a.del of del select * from ydw.table_a;</span><br></pre></td></tr></table></figure>
-<p>2、导出时修改编码格式，1383是gb2312，1208是utf-8加上modified by codepage=1208，在’of del’后面</p>
-<h1 id="import导入"><a href="#import导入" class="headerlink" title="import导入"></a>import导入</h1><p>import from #path# of #type# #insert sql#;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mport from import&#x2F;a.ixf of ixf insert into ydw.table_b;</span><br></pre></td></tr></table></figure>
-<h1 id="使用cursor快速迁移数据"><a href="#使用cursor快速迁移数据" class="headerlink" title="使用cursor快速迁移数据"></a>使用cursor快速迁移数据</h1><p>1、导出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DECLARE C1 CURSOR FOR SELECT * FROM FECHNER.SALES</span><br></pre></td></tr></table></figure>
-<p>2、导入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOAD FROM C1 OF CURSOR MESSAGES C:\load_sales_tmp.msg INSERT INTO FECHNER.SALES_TMP NONRECOVERABLE</span><br></pre></td></tr></table></figure>
-<h1 id="导出表结构"><a href="#导出表结构" class="headerlink" title="导出表结构"></a>导出表结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2look -d db_name -i user_name -w password -a -e -o d:\script.sql </span><br></pre></td></tr></table></figure>
-<p>db_name 是指数据库的名字， user_name 是数据库用户名，password是数据库密码</p>
-<h1 id="数据库备份与恢复"><a href="#数据库备份与恢复" class="headerlink" title="数据库备份与恢复"></a>数据库备份与恢复</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 关闭所有连接</span><br><span class="line">db2 force application all</span><br><span class="line"># 备份</span><br><span class="line">db2 backup database :dbname to :path</span><br><span class="line"># 检查备份文件</span><br><span class="line">db2ckbkp :filename</span><br><span class="line"># 恢复</span><br><span class="line">db2 restore db :dbname taken at :timestamp</span><br></pre></td></tr></table></figure>
-<ul>
-<li>:dbname 备份的数据库名</li>
-<li>:filename 生成的备份文件名</li>
-<li>:timestamp 备份生成的文件名中包含的时间戳<br>实践表明，跨版本备份和恢复会出现问题。</li>
+            <h1 id="unicode概念"><a href="#unicode概念" class="headerlink" title="unicode概念"></a>unicode概念</h1><pre><code>Unicode（统一码、万国码、单一码）是计算机科学领域里的一项业界标准,包括字符集、编码方案等。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。1990年开始研发，1994年正式公布。</code></pre>
+<p>简单来说，unicode是一种抽象字符到二进制编码的映射规则。</p>
+<h1 id="unicode基础"><a href="#unicode基础" class="headerlink" title="unicode基础"></a>unicode基础</h1><ul>
+<li>unicode也称为UCS(Universal Multiple-Octet Coded Character Set)</li>
+<li>unicode每个字符对应的编码数字称为code point</li>
+<li>unicode的code point的范围是 0 - 10FFFF.</li>
+<li>一个unicode的code point的写法通常是”U+”接上16进制表示的代码点数字</li>
+<li>unicode的前256个字符和ISO-8859-1（即Latin-1）一样，也就是ASCII</li>
+<li>unicode目前定义了17个plane，列举如下：<figure class="highlight plain"><figcaption><span>planes of 64k code points each</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plane 0 (U+0000 - U+FFFF): Basic Multilingual Plane (BMP, 1.0) frequent characters</span><br><span class="line">plane 1 (U+10000 - U+1FFFF): Supplementary Multilingual Plane (SMP, 3.1) infrequent, non-ideographic characters</span><br><span class="line">plane 2 (U+20000 - U+2FFFF): Supplementary Ideographic Plane (SIP, 3.1) infrequent, ideographic characters</span><br><span class="line">plane 14 (U+E0000 - U+EFFFF): Supplementary Special-purpose Plane (SSP, 3.1)</span><br><span class="line">planes 15 and 16  (U+F0000 - U+10FFFF) : Private use planes (2.0)</span><br></pre></td></tr></table></figure></li>
+<li>开始unicode使用2个字节表示常用的字符，能够表示65536个字符，后来发现不够，就从所有的code point中未使用的部分分割了两块出来，用于扩展，在utf-16中有体现，分割的情况如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">surrogates code points</span><br><span class="line">U+D800 - U+DBFF: 1,024 high surrogates</span><br><span class="line">U+DC00 - U+DFFF: 1,024 low surrogates</span><br><span class="line"></span><br><span class="line">scalar values</span><br><span class="line">U+0000 - U+D7FF</span><br><span class="line">U+E000 - U+10FFFF</span><br></pre></td></tr></table></figure>
+surrogates code points不能出现在数据中</li>
+<li>scalar values在电脑中的表示就是我们实际使用的编码方式，统一称为UTF(Unicode Transformation Format)，常用的有UTF-8/UTF-16/UTF-32等。这些编码方式都能表示所有unicode的scalar values，但是各自表示一个code point的code unit不同。</li>
 </ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf">https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf</a></p>
 
           
         
@@ -405,7 +398,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/114/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/116/">&gt;</a>
   </nav>
 
 
@@ -451,7 +444,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

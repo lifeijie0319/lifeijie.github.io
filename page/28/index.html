@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/01/data_structure/B-tree/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/05/04/language/c/scanf%E5%92%8Cprintf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/04/01/data_structure/B-tree/" itemprop="url">B-树</a></h1>
+                <a class="post-title-link" href="/blog/2022/05/04/language/c/scanf%E5%92%8Cprintf/" itemprop="url">scanf和printf</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-01T11:53:34+08:00">
-                2022-04-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-04T12:40:42+08:00">
+                2022-05-04
               </time>
             
 
@@ -282,28 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/data-structure/" itemprop="url" rel="index">
-                    <span itemprop="name">data_structure</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -334,20 +312,81 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>B-树是二叉平衡树的推广，是一种多叉平衡树。B-树其实就是B-tree，不是“B减树”。</p>
-<h1 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h1><h2 id="一棵m阶B-tree（m叉树）满足如下特征："><a href="#一棵m阶B-tree（m叉树）满足如下特征：" class="headerlink" title="一棵m阶B-tree（m叉树）满足如下特征："></a>一棵m阶B-tree（m叉树）满足如下特征：</h2><ul>
-<li>树中每个节点最多含有m个孩子</li>
-<li>如果根节点不是叶子节点，则根节点至少包括两个孩子</li>
-<li>除根节点和叶节点外，其他每个节点至少有ceil(m/2)个孩子（ceil()为向上取整）</li>
-<li>所有叶子节点都位于同一层，叶子节点指向子节点的指针为空。</li>
-<li>每个非叶节点包括n个关键字信息(n，P0，K1，P1，K2，P2，……，Kn，Pn)，其中<ul>
-<li>Ki(i=1…n)为关键字，且关键字的顺序按照升序排列</li>
-<li>Pi(i=0…n)为指向子树的指针，满足K(i-1) &lt; P(i-1) &lt; Ki</li>
-<li>ceil(m/2)-1 &lt;= n &lt;= m-1<h2 id="B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）"><a href="#B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）" class="headerlink" title="B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）"></a>B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）</h2>证明如下：<br>假设第i层的节点数是$M_i$，关键字个数是$N_i$，i行第j个节点的关键字数是$N_i^j$。根据节点子树数量与节点关键字数目的关系，$M_i$=$\sum_{j=1}^{N_i}(N_i^j+1)$=M<sub>i-1</sub>+N<sub>i-1</sub>=M<sub>i-2</sub>+N<sub>i-2</sub>+N<sub>i-1</sub>=…=M<sub>1</sub>+N<sub>1</sub>+…+N<sub>i-1</sub>=1+N<br>这里N是指i层以前所有关键字的和。</li>
+            <h1 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="scanf格式"><a href="#scanf格式" class="headerlink" title="scanf格式"></a>scanf格式</h1><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>格式符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>%d</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>%lld</td>
+</tr>
+<tr>
+<td>float</td>
+<td>%f</td>
+</tr>
+<tr>
+<td>double</td>
+<td>%lf</td>
+</tr>
+<tr>
+<td>char</td>
+<td>%c</td>
+</tr>
+<tr>
+<td>char数组</td>
+<td>%s</td>
+</tr>
+</tbody></table>
+<h2 id="输入注意"><a href="#输入注意" class="headerlink" title="输入注意"></a>输入注意</h2><ol>
+<li>读入char数组时，注意默认是读到末尾’\n’时停止，’\n’并没有被消费，下一次读入，如果想要从新的一行开始，要注意使用getchar()消费掉’\n’</li>
+<li>scanf返回正确读入的参数个数</li>
+</ol>
+<h1 id="printf格式"><a href="#printf格式" class="headerlink" title="printf格式"></a>printf格式</h1><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>格式符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>%d</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>%lld</td>
+</tr>
+<tr>
+<td>float</td>
+<td>%f</td>
+</tr>
+<tr>
+<td>double</td>
+<td>%f</td>
+</tr>
+<tr>
+<td>char</td>
+<td>%c</td>
+</tr>
+<tr>
+<td>char数组</td>
+<td>%s</td>
+</tr>
+</tbody></table>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>printf返回正确输出的参数个数</p>
+<h2 id="输出常用技巧"><a href="#输出常用技巧" class="headerlink" title="输出常用技巧"></a>输出常用技巧</h2><ul>
+<li>%md %md可以使不足m位的int型变量进行右对齐输出，其中高位用空格补齐；如果变量本身超过m位，则保持原样。</li>
+<li>%0md 和%md类似，不同的是高位用0补齐</li>
+<li>%.mf 保留m位小数</li>
 </ul>
-</li>
-</ul>
-<h1 id="搜索性能"><a href="#搜索性能" class="headerlink" title="搜索性能"></a>搜索性能</h1><p>B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为空，或已经是叶子结点。<br>B-树的性能总是等价于二分查找（与阶数m值无关），为O($log_2{n}$)，其中n为关键字的总数。</p>
 
           
         
@@ -387,7 +426,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/27/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/blog/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/29/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/27/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/blog/page/29/">29</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/29/">&gt;</a>
   </nav>
 
 
@@ -433,7 +472,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

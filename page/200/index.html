@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E6%8C%87%E4%BB%A4-%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/" itemprop="url">pkcs格式的相互转化</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E6%8C%87%E4%BB%A4-%E5%88%97/" itemprop="url">指令-列</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/openssl/" itemprop="url" rel="index">
-                    <span itemprop="name">openssl</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,11 +345,20 @@
       
         
           
-            <h1 id="pkcs格式基本样式"><a href="#pkcs格式基本样式" class="headerlink" title="pkcs格式基本样式"></a>pkcs格式基本样式</h1><h2 id="pkcs1格式"><a href="#pkcs1格式" class="headerlink" title="pkcs1格式"></a>pkcs1格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN RSA PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END RSA PUBLIC KEY----</span><br></pre></td></tr></table></figure>
-<h2 id="pkcs8格式"><a href="#pkcs8格式" class="headerlink" title="pkcs8格式"></a>pkcs8格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END PUBLIC KEY----</span><br></pre></td></tr></table></figure>
-<h1 id="pkcs1和pkcs8格式公钥的相互转化"><a href="#pkcs1和pkcs8格式公钥的相互转化" class="headerlink" title="pkcs1和pkcs8格式公钥的相互转化"></a>pkcs1和pkcs8格式公钥的相互转化</h1><h2 id="pkcs8公钥转pkcs1公钥"><a href="#pkcs8公钥转pkcs1公钥" class="headerlink" title="pkcs8公钥转pkcs1公钥"></a>pkcs8公钥转pkcs1公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -pubin -in public.pem -RSAPublicKey_out</span><br></pre></td></tr></table></figure>
-<h2 id="pkcs1公钥转换为pkcs8公钥"><a href="#pkcs1公钥转换为pkcs8公钥" class="headerlink" title="pkcs1公钥转换为pkcs8公钥"></a>pkcs1公钥转换为pkcs8公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -RSAPublicKey_in -in pub_pkcs1.pem -pubout</span><br></pre></td></tr></table></figure>
-<h1 id="p12即PKCS-12格式的密钥转换成pem格式"><a href="#p12即PKCS-12格式的密钥转换成pem格式" class="headerlink" title="p12即PKCS#12格式的密钥转换成pem格式"></a>p12即PKCS#12格式的密钥转换成pem格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -nocerts -nodes -in 20060400000044502.p12 -out 20060400000044502.pem</span><br></pre></td></tr></table></figure>
+            <h1 id="添加字段"><a href="#添加字段" class="headerlink" title="添加字段"></a>添加字段</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名称 add 字段名称 类型</span><br></pre></td></tr></table></figure>
+<p>添加带默认值的字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name add column column_test vachar(20) not null with default &#39;value&#39;;</span><br></pre></td></tr></table></figure>
+<h1 id="为字段添加默认值"><a href="#为字段添加默认值" class="headerlink" title="为字段添加默认值"></a>为字段添加默认值</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名称 alter column 字段名 set default 值</span><br><span class="line">alter table table_name alter column column_test set default  &#39;value&#39;;</span><br></pre></td></tr></table></figure>
+<h1 id="设置字段默认时间为当前时间"><a href="#设置字段默认时间为当前时间" class="headerlink" title="设置字段默认时间为当前时间"></a>设置字段默认时间为当前时间</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table table_name alter column column_test set default  current date;</span><br></pre></td></tr></table></figure>
+<h1 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter table 表名称 drop column 字段名</span><br><span class="line">alter table table_name drop column column_test;</span><br></pre></td></tr></table></figure>
+<p>注意: drop掉字段之后,可能会导致表查询/插入操作不能执行,需要执行一下reorg命令才可以（为什么，待深入）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reorg table table_name;</span><br></pre></td></tr></table></figure>
+<h1 id="修改字段类型"><a href="#修改字段类型" class="headerlink" title="修改字段类型"></a>修改字段类型</h1><p>基本语法： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table &lt;TABLE_NAME&gt; alter column &lt;COLUMN_NAME&gt; set data type &lt;NEW TYPE&gt;</span><br></pre></td></tr></table></figure>
+<p>Examples:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table HR.EMPLOYEE alter column HOBBY set data type varchar(300);</span><br></pre></td></tr></table></figure>
+<p>注意: 更改字段类型是有操作限制的。将字段改为比之前类型长度大的可以，如果要改小，必须先drop掉原来的column，然后再重新添加。例如我要将一个Varchar(50)的column改为Varchar(30)，这样采用以上的sql是不能成功的。 另外改为不同的类型，也需要先drop掉column。</p>
+
           
         
       
@@ -388,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/199/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><span class="page-number current">200</span><a class="page-number" href="/blog/page/201/">201</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/201/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/199/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><span class="page-number current">200</span><a class="page-number" href="/blog/page/201/">201</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/201/">&gt;</a>
   </nav>
 
 
@@ -434,7 +443,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

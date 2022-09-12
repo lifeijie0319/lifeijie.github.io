@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/" itemprop="url">nginx平滑升级</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/erlang/%E4%BD%BF%E7%94%A8kerl%E5%AE%89%E8%A3%85erlang%E7%8E%AF%E5%A2%83/" itemprop="url">使用kerl安装erlang环境</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/blog/categories/language/erlang/" itemprop="url" rel="index">
+                    <span itemprop="name">erlang</span>
                   </a>
                 </span>
 
@@ -345,18 +345,15 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wanghs8/p/11545324.html">https://www.cnblogs.com/wanghs8/p/11545324.html</a></p>
-<h1 id="ngx-http-proxy-connect-module安装与nginx平滑升级"><a href="#ngx-http-proxy-connect-module安装与nginx平滑升级" class="headerlink" title="ngx_http_proxy_connect_module安装与nginx平滑升级"></a>ngx_http_proxy_connect_module安装与nginx平滑升级</h1><ol>
-<li>下载nginx源码和ngx_http_proxy_connect_module，这个项目开源在<a target="_blank" rel="noopener" href="https://github.com/chobits/ngx_http_proxy_connect_module">https://github.com/chobits/ngx_http_proxy_connect_module</a></li>
-<li>将这个模块的补丁打入源码，注意补丁版本<br>打补丁命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch -p1 &lt; &#x2F;path&#x2F;to&#x2F;ngx_http_proxy_connect_module&#x2F;patch&#x2F;proxy_connect.patch</span><br></pre></td></tr></table></figure>
-补丁选择：参考<a target="_blank" rel="noopener" href="https://github.com/chobits/ngx_http_proxy_connect_module#select-patch">https://github.com/chobits/ngx_http_proxy_connect_module#select-patch</a></li>
-<li>重新编译nginx，make注意不要make install</li>
-<li>备份原Nginx二进制文件，将新编译出来的objs目录下的nginx二进制文件拷贝到原来的位置</li>
-<li>nginx -t检查新的nginx是否正常</li>
-<li>使nginx的旧版本停止就收请求，有Nginx新版本接替，且老进程处理完所有请求，关闭所有连接后，停止<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -USR2 &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid&#96;</span><br></pre></td></tr></table></figure>
-查看nginx日志目录会生成一个nginx.pid.oldbin文件，存放旧版本nginx 的pid号</li>
-<li>通过发送WINCH信号（平缓停止worker process）和QUIT信号（平缓停止Nginx服务）停止旧的Nginx服务进程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kill -WINCH &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid.oldbin&#96; </span><br><span class="line">kill -QUIT &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid.oldbin&#96;</span><br></pre></td></tr></table></figure></li>
-</ol>
+            <p>参考： kancloud.cn</p>
+<h1 id="kerl说明"><a href="#kerl说明" class="headerlink" title="kerl说明"></a>kerl说明</h1><p>kerl是一个OTP版本管理工具，可以在不同的OTP版本间随意切换。</p>
+<h1 id="安装kerl"><a href="#安装kerl" class="headerlink" title="安装kerl"></a>安装kerl</h1><p>curl -O <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod">https://raw.githubusercontent.com/kerl/kerl/master/kerl&amp;chmod</a> a+x kerl</p>
+<h1 id="查看所有可用的版本"><a href="#查看所有可用的版本" class="headerlink" title="查看所有可用的版本"></a>查看所有可用的版本</h1><p>./kerl list releases</p>
+<h1 id="下载编译"><a href="#下载编译" class="headerlink" title="下载编译"></a>下载编译</h1><p>./kerl build $版本 </p>
+<h1 id="安装OTP"><a href="#安装OTP" class="headerlink" title="安装OTP"></a>安装OTP</h1><p>./kerl install $版本 $安装路径</p>
+<h1 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h1><p>. $安装路径/activate</p>
+<h1 id="取消激活"><a href="#取消激活" class="headerlink" title="取消激活"></a>取消激活</h1><p>kerl_deactivate</p>
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>./kerl delete installation/build $版本</p>
 
           
         
@@ -396,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/194/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><span class="page-number current">195</span><a class="page-number" href="/blog/page/196/">196</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/196/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/194/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><span class="page-number current">195</span><a class="page-number" href="/blog/page/196/">196</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/196/">&gt;</a>
   </nav>
 
 
@@ -442,7 +439,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

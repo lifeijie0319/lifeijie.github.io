@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/network/tcp%E5%92%8Cudp%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/11/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/network/tcp%E5%92%8Cudp%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">tcp和udp的区别</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/11/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/" itemprop="url">复杂正则理解</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-11T14:40:31+08:00">
+                2022-04-11
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/other/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index">
+                    <span itemprop="name">正则</span>
                   </a>
                 </span>
 
@@ -334,41 +345,29 @@
       
         
           
-            <h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
-<thead>
-<tr>
-<th></th>
-<th>TCP</th>
-<th>UDP</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>建立连接</td>
-<td>是</td>
-<td>否</td>
-</tr>
-<tr>
-<td>可靠性</td>
-<td>可靠</td>
-<td>不可靠</td>
-</tr>
-<tr>
-<td>实时性</td>
-<td>差</td>
-<td>好</td>
-</tr>
-<tr>
-<td>传播模型</td>
-<td>点对点</td>
-<td>一对一/一对多/多对一/多对多</td>
-</tr>
-<tr>
-<td>资源要求</td>
-<td>高</td>
-<td>低</td>
-</tr>
-</tbody></table>
-<h1 id="TCP可靠性的实现"><a href="#TCP可靠性的实现" class="headerlink" title="TCP可靠性的实现"></a>TCP可靠性的实现</h1><p>TCP通过校验和，重传控制，序号标识，滑动窗口，确认应答实现可靠传输。如丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制。待深入。</p>
+            <h1 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h1><ul>
+<li>（.*）是贪婪匹配，会把满足正则的尽可能多的往后匹配。</li>
+<li>（.*?）是非贪婪匹配，会把满足正则的尽可能少匹配。</li>
+</ul>
+<h1 id="非获取匹配"><a href="#非获取匹配" class="headerlink" title="非获取匹配"></a>非获取匹配</h1><h2 id="什么是非获取匹配"><a href="#什么是非获取匹配" class="headerlink" title="什么是非获取匹配"></a>什么是非获取匹配</h2><pre><code>在使用正则表达式的时候，我们经常会使用()把某个部分括起来，称为一个子模式。
+子模式有Capturing和Non-Capturing两种情况。
+Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配结果保存起来，供我们查找或者替换。如后向引用的使用；
+而Non-Capturing指非获取匹配 ，这时系统并不会保存子模式的匹配结果，子模式的匹配更多的只是作为一种限制条件使用，如正向预查，反向预查，负正向预查，负反向预查等。</code></pre>
+<p>参考如下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">(<span class="string">&#x27;7&#x27;</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">()</span><br></pre></td></tr></table></figure>
+<h2 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h2><p>非获取匹配，匹配pattern但不获取匹配结果，不进行存储供以后使用。这在使用或字符“(|)”来组合一个模式的各个部分是很有用。例如“industr(?:y|ies)”就是一个比“industry|industries”更简略的表达式。</p>
+<h2 id="pattern-1"><a href="#pattern-1" class="headerlink" title="(?=pattern)"></a>(?=pattern)</h2><p>非获取匹配，正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如，“Windows(?=95|98|NT|2000)”能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”。</p>
+<h2 id="预查与普通非获取匹配的区别"><a href="#预查与普通非获取匹配的区别" class="headerlink" title="预查与普通非获取匹配的区别"></a>预查与普通非获取匹配的区别</h2><p>预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。参考如下示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>phone = <span class="string">&quot;1233-hfdh&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)23&#x27;</span>, phone)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">1</span>), match=<span class="string">&#x27;1&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)23&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="pattern-2"><a href="#pattern-2" class="headerlink" title="(?!pattern)"></a>(?!pattern)</h2><p>非获取匹配，正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如“Windows(?!95|98|NT|2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。</p>
+<h2 id="lt-pattern"><a href="#lt-pattern" class="headerlink" title="(?&lt;=pattern)"></a>(?&lt;=pattern)</h2><p>非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95|98|NT|2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”。另外，(?&lt;=pattern)不支持pattern变长。</p>
+<h2 id="lt-pattern-1"><a href="#lt-pattern-1" class="headerlink" title="(?&lt;!pattern)"></a>(?&lt;!pattern)</h2><p>非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如“(?&lt;!95|98|NT|2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。这个地方不正确，有问题 </p>
+<h2 id="通俗理解"><a href="#通俗理解" class="headerlink" title="通俗理解"></a>通俗理解</h2><ol>
+<li><code>?=</code> ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test(‘bab’)</li>
+<li><code>?&lt;=</code> ： 询问是否以这个东西开头  /(?&lt;=a)b/.test(‘ab’)</li>
+<li><code>?!</code> : 询问后面跟着的东西是否不是这个  /b(?!a)/.test(‘bb’)</li>
+<li><code>?&lt;!</code> ：询问是否不是以这个东西开头  /(?&lt;!=a)b/.test(‘bb’)</li>
+</ol>
 
           
         
@@ -408,7 +407,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/41/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/blog/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/43/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/41/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/blog/page/43/">43</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/43/">&gt;</a>
   </nav>
 
 
@@ -454,7 +453,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

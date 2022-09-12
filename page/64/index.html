@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-8/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/tools/zookeeper/zookeeper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-8/" itemprop="url">utf-8编码原理</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/tools/zookeeper/zookeeper/" itemprop="url">zookeeper</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">编码</span>
+                  <a href="/blog/categories/tools/zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">zookeeper</span>
                   </a>
                 </span>
 
@@ -345,40 +345,72 @@
       
         
           
-            <h1 id="utf-8概念"><a href="#utf-8概念" class="headerlink" title="utf-8概念"></a>utf-8概念</h1><pre><code>UTF-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，又称万国码。由Ken Thompson于1992年创建。现在已经标准化为RFC 3629。UTF-8用1到6个字节编码Unicode字符。</code></pre>
-<h1 id="unicode到utf-8编码的转换"><a href="#unicode到utf-8编码的转换" class="headerlink" title="unicode到utf-8编码的转换"></a>unicode到utf-8编码的转换</h1><table>
-<thead>
-<tr>
-<th>Unicode码范围</th>
-<th>UTF-8编码方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U+0000~U+007F</td>
-<td>0????????</td>
-</tr>
-<tr>
-<td>U+0080~U+07FF</td>
-<td>110????? 10??????</td>
-</tr>
-<tr>
-<td>U+0800~U+FFFF</td>
-<td>1110???? 10?????? 10??????</td>
-</tr>
-<tr>
-<td>U+10000~U+10FFFF</td>
-<td>11110??? 10?????? 10?????? 10??????</td>
-</tr>
-</tbody></table>
-<h2 id="转换规则"><a href="#转换规则" class="headerlink" title="转换规则"></a>转换规则</h2><ol>
-<li>判断unicode码值所在范围</li>
-<li>将unicode码值转换成二进制形式，从右往左填充，左边不够补零，超长截断。<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2></li>
+            <h1 id="zookeeper是什么"><a href="#zookeeper是什么" class="headerlink" title="zookeeper是什么"></a>zookeeper是什么</h1><p>zookeeper是一个java编写的分布式应用程序协调服务。zookeeper是google chubby的开源实现，是hadoop和hbase的重要组件。</p>
+<h2 id="zookeeper的应用"><a href="#zookeeper的应用" class="headerlink" title="zookeeper的应用"></a>zookeeper的应用</h2><ul>
+<li>配置中心</li>
+<li>命名服务 根据指定名字来获取资源或服务的地址</li>
+<li>分布式锁 包括独占锁和共享锁</li>
+<li>数据发布/订阅</li>
+</ul>
+<h1 id="zookeeper节点"><a href="#zookeeper节点" class="headerlink" title="zookeeper节点"></a>zookeeper节点</h1><p>每个节点在 Zookeeper 中叫做 Znode，并且其有一个唯一的路径标识，类似linux的文件目录体系。</p>
+<ul>
+<li>Znode可以包含数据和子节点</li>
+<li>Znode包含的数据可以有多个版本，如果有多版本数据，查询时要带上版本号</li>
+<li>节点不支持部分读写，必须一次性完整读写</li>
+<li>客户端可以在节点上设置监视器<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2></li>
+</ul>
+<ol>
+<li>根据持续时间，Znode可以分为</li>
 </ol>
 <ul>
-<li>U+0020 = 0b 0000 0000 0010 0000 -&gt; 0b 00100000 = 0x20</li>
-<li>U+A12B = 0b 1010 0001 0010 1011 -&gt; 0b 11101010 10000100 10101011 = 0xEA84AB</li>
+<li>持久节点 persistent 不会因为客户端session结束而消失</li>
+<li>临时节点 ephemeral 不能有子节点</li>
 </ul>
-<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>知道utf-8的一个code unit，很容易知道当前code point的起点，如果字节起始位是0，那么这个是个单字节表示的code point，如果起始是10，只要往前寻找不是10开头的字节，不超过三次即可找到，可以根据找到的起始字节确认是多少字节表示的code point。</p>
+<ol start="2">
+<li>根据是否有序，Znode可以分为</li>
+</ol>
+<ul>
+<li>顺序节点 sequential</li>
+<li>无序节点 （默认）</li>
+</ul>
+<h1 id="zookeeper的角色"><a href="#zookeeper的角色" class="headerlink" title="zookeeper的角色"></a>zookeeper的角色</h1><ul>
+<li>领导者leader 负责投票的发起和决策，更新系统状态</li>
+<li>跟随者follower 用于接收客户端请求并给客户端返回结果，在选主过程中进行投票</li>
+<li>观察者observer 不参与选举，在不增加选举复杂程度的同时，提升整个办事处集群对读请求的吞吐量</li>
+<li>客户端client 请求发起方</li>
+</ul>
+<h1 id="zookeeper架构"><a href="#zookeeper架构" class="headerlink" title="zookeeper架构"></a>zookeeper架构</h1><h2 id="为什么要有主节点"><a href="#为什么要有主节点" class="headerlink" title="为什么要有主节点"></a>为什么要有主节点</h2><p>有些业务逻辑只要有一台机器执行，其它机器进行共享即可。这样做减少重复计算，提高性能。</p>
+<h2 id="如何保证一致性"><a href="#如何保证一致性" class="headerlink" title="如何保证一致性"></a>如何保证一致性</h2><p>zookeeper依赖zab协议来实现分布式数据一致性，协议有两种模式，分别是恢复模式（选主）和广播模式（同步）。</p>
+<h3 id="广播模式"><a href="#广播模式" class="headerlink" title="广播模式"></a>广播模式</h3><ol>
+<li>client发起写请求到follower</li>
+<li>follower将写请求转发给leader</li>
+<li>leader生成proposal</li>
+<li>leader将proposal发给所有follower</li>
+<li>follower给出正确反馈</li>
+<li>leader向所有follower发起commit</li>
+<li>开始的follower将response给到client<h3 id="恢复模式"><a href="#恢复模式" class="headerlink" title="恢复模式"></a>恢复模式</h3>leader崩溃或者与过半follower失去通信，就会进入崩溃恢复模式。zab恢复模式使用了如下策略：</li>
+</ol>
+<ul>
+<li>选取zxid最大的节点作为新的leader</li>
+<li>新leader将事务日志中尚未提交的事务进行处理</li>
+</ul>
+<h1 id="zookeeper选举"><a href="#zookeeper选举" class="headerlink" title="zookeeper选举"></a>zookeeper选举</h1><h2 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h2><p>每次投票可以用(epoch, zxid, sid)来唯一标识</p>
+<ul>
+<li>epoch 选举轮次，每次选举建立了leader-follower关系之后，都有一个唯一的epoch来标识</li>
+<li>zxid 事务id，用来标识一次服务器状态的更新，和服务器处理客户端写请求相关</li>
+<li>sid 服务器id<h2 id="选举规则"><a href="#选举规则" class="headerlink" title="选举规则"></a>选举规则</h2></li>
+<li>服务器一开始都是looking状态</li>
+<li>每台服务器优先投票给自己，然后广播到其它机器</li>
+<li>收到其它服务器的投票后首先判断epoch:<ol>
+<li>收到的epoch小于自身epoch，返回自己的投票状态给发出广播的服务器</li>
+<li>收到的epoch等于自身epoch，选(zxid, sid)较大的作为选举对象，如果和原来的选举对象不同，那么发出广播</li>
+<li>收到的epoch大于自身的epoch，先更新自身的epoch，再按照相等的情况进行选举</li>
+</ol>
+</li>
+<li>当选举对象的票数大于所有服务器数量的一半后，根据选举结果，更新自身状态为leading或者following</li>
+<li>如果集群内部已有leader，新加入的机器服从已有的结果<h2 id="paxos算法"><a href="#paxos算法" class="headerlink" title="paxos算法"></a>paxos算法</h2>单数服务器只要没超过一半的服务器宕机就可以继续使用。比如3台zookeeper服务器构成的集群可以容忍一台机器宕机。</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1693897375037977921&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1693897375037977921&amp;wfr=spider&amp;for=pc</a></p>
 
           
         
@@ -418,7 +450,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/63/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/blog/page/65/">65</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/65/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/63/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/63/">63</a><span class="page-number current">64</span><a class="page-number" href="/blog/page/65/">65</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/65/">&gt;</a>
   </nav>
 
 
@@ -464,7 +496,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

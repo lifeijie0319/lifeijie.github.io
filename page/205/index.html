@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/shell/%E6%96%B0%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/shell/%E6%96%B0%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E9%97%AE%E9%A2%98/" itemprop="url">新用户创建问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" itemprop="url">db2表空间管理</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/shell/" itemprop="url" rel="index">
-                    <span itemprop="name">shell</span>
+                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,14 +345,12 @@
       
         
           
-            <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>新建一用户，切换到该用户下，提示符仅仅是一个$，很奇怪。输入命令，用TAB键也无法补全命令。并且没有命令历史功能。</p>
-<h1 id="原因查找"><a href="#原因查找" class="headerlink" title="原因查找"></a>原因查找</h1><ol>
-<li>查看用户SHELL变量，发现用户使用的是/bin/sh<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $SHELL</span><br></pre></td></tr></table></figure></li>
-<li>查看/bin/sh，发现这个软链接实际指向dash<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l &#x2F;bin&#x2F;sh</span><br></pre></td></tr></table></figure>
-<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1></li>
-<li>当前问题解决<br>修改/etc/passwd中相应用户的默认shell<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;passwd</span><br><span class="line">grep $user &#x2F;etc&#x2F;passwd</span><br></pre></td></tr></table></figure></li>
-<li>一劳永逸的方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;default&#x2F;useradd</span><br></pre></td></tr></table></figure>
-修改$SHELL = /bin/bash</li>
+            <h1 id="查看表空间"><a href="#查看表空间" class="headerlink" title="查看表空间"></a>查看表空间</h1><ol>
+<li>查看表空间概况<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES</span><br></pre></td></tr></table></figure></li>
+<li>查看表空间详情<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES SHOW DETAIL</span><br></pre></td></tr></table></figure>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2>删除表报错<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DB21034E  The command was processed as an SQL statement because it was not a </span><br><span class="line">valid Command Line Processor command.  During SQL processing it returned:</span><br><span class="line">SQL0290N  Table space access is not allowed.  SQLSTATE&#x3D;55039</span><br></pre></td></tr></table></figure>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2>表空间状态不正常，为Backup pending<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2>备份数据库或表空间。<br>备份数据库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 backup database xxxxx </span><br></pre></td></tr></table></figure>
+备份表空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 force applications all &amp; db2 backup database xxx tablespace xxx</span><br></pre></td></tr></table></figure></li>
 </ol>
 
           
@@ -393,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/204/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/204/">204</a><span class="page-number current">205</span><a class="page-number" href="/blog/page/206/">206</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/206/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/204/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/204/">204</a><span class="page-number current">205</span><a class="page-number" href="/blog/page/206/">206</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/206/">&gt;</a>
   </nav>
 
 
@@ -439,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

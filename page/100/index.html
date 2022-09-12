@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/mysql/engine/transaction/experience1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/database/mysql/engine/transaction/experience1/" itemprop="url">记一次事务未及时提交导致的bug</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" itemprop="url">操作系统基础知识</a></h1>
         
 
         <div class="post-meta">
@@ -295,41 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/transaction/" itemprop="url" rel="index">
-                    <span itemprop="name">transaction</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -367,15 +334,11 @@
       
         
           
-            <h1 id="背景描述"><a href="#背景描述" class="headerlink" title="背景描述"></a>背景描述</h1><h2 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h2><p>公司维护了一个合同电子签章平台。每次客户端发送合同到平台进行签章。</p>
-<h2 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h2><p>数据库使用mysql，合同电子签章平台由tornado搭建，使用aiomysql库访问mysql。签章平台的逻辑是，如果数据库里没查到记录或者记录状态为失败，就发送合同到签章服务提供商进行签章，否则，返回数据库里面的记录状态。</p>
-<h2 id="bug现象"><a href="#bug现象" class="headerlink" title="bug现象"></a>bug现象</h2><p>每天签章几万份合同，有少量合同会出现重复成功签署的奇怪现象。比如合同A到平台请求签章，看到数据库记录签署成功。而后过了几分钟，客户端进行重试（第一次客户端获得的结果是处理中，通过重试确定合同状态），查询sql没有查到上次入库的记录，重新发起签章流程，导致了数据库有了同一合同的第二条成功记录。</p>
-<h1 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h1><ul>
-<li>初步思考是否同一个合同并发请求到签章平台（客户端没有设置轮询间隔），导致同时查询数据库，因为查询没有加排他锁，因而都没有查到记录。但是查看发现即使过了一段时间（足以结束请求，完成提交），仍然有bug现象。</li>
-<li>在github的aiomysql项目托管处的issue里面查到原因，即aiomysql使用连接池的时候，连接关闭实际上是把连接放回连接池，并没有关闭连接，也没有提交事务。而默认模式下，select会自动开启事务，如果事务没有及时提交，会导致下一次使用该连接的时候继续上次的事务。按照mysql的默认可重复读的隔离级别，同一个合同如果上次查询没有记录，这次仍然查不到。  </li>
-<li>那么为什么这个现象是偶发的？因为系统其它地方会有提交操作。那么只要不是同一个连接重复被同一个合同的请求使用到，这个连接的查询事务会被其它各种情况commit掉。</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>非autocommit的模式下，select一般会默认开启事务，而且很容易忽略，一定要注意。之前还有过这样的经历，由于select开启事务没有及时关闭，后面有进行了耗时操作（比如http请求外部服务），导致数据库连接池耗尽。</p>
+            <h1 id="操作系统特征"><a href="#操作系统特征" class="headerlink" title="操作系统特征"></a>操作系统特征</h1><h2 id="怎么理解操作系统的虚拟性"><a href="#怎么理解操作系统的虚拟性" class="headerlink" title="怎么理解操作系统的虚拟性"></a>怎么理解操作系统的虚拟性</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/bingocoder/article/details/114750748">https://blog.csdn.net/bingocoder/article/details/114750748</a><br>虚拟性表现为把一个物理实体转变为若干个逻辑实体。最简单的，linux用socket文件来虚拟网络连接。</p>
+<h2 id="怎么理解操作系统的不确定性"><a href="#怎么理解操作系统的不确定性" class="headerlink" title="怎么理解操作系统的不确定性"></a>怎么理解操作系统的不确定性</h2><p>操作系统运行有并行性，不能保证程序执行的顺序性。<br><a target="_blank" rel="noopener" href="https://max.book118.com/html/2016/0128/34296853.shtm">https://max.book118.com/html/2016/0128/34296853.shtm</a></p>
+<h1 id="操作系统分类"><a href="#操作系统分类" class="headerlink" title="操作系统分类"></a>操作系统分类</h1><h2 id="分时操作系统和实时操作系统的区别"><a href="#分时操作系统和实时操作系统的区别" class="headerlink" title="分时操作系统和实时操作系统的区别"></a>分时操作系统和实时操作系统的区别</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43321489/article/details/107938587">https://blog.csdn.net/weixin_43321489/article/details/107938587</a><br>看这里说，主要是在调度算法上的区别。我们平常用的linux之类是时间片轮转调度，而实时操作系统是优先级调度，优先级高的任务能抢占资源执行，保证任务的实时性。</p>
+<h1 id="网络操作系统和分布式操作系统的区别"><a href="#网络操作系统和分布式操作系统的区别" class="headerlink" title="网络操作系统和分布式操作系统的区别"></a>网络操作系统和分布式操作系统的区别</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010889616/article/details/48424823">https://blog.csdn.net/u010889616/article/details/48424823</a><br>gaojiufeng.cn/?id=38965<br>简单说，网络操作系统中各台计算机是独立的，但是可以相互通信和资源共享；而分布式操作系统强调一个任务由系统中的多台计算机协同完成。</p>
+<h1 id="管程的概念"><a href="#管程的概念" class="headerlink" title="管程的概念"></a>管程的概念</h1><p>管程是对PV操作进行封装后的程序，实现互斥和同步操作。外部程序通过调用管程，实现对临界资源的访问。便于维护，不易出错。</p>
 
           
         
@@ -415,7 +378,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/99/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/blog/page/101/">101</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/101/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/99/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/blog/page/101/">101</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/101/">&gt;</a>
   </nav>
 
 
@@ -461,7 +424,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

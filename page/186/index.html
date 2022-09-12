@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/docker/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84docker%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E5%A4%96%E7%BD%91/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/network/%E9%82%AE%E4%BB%B6%E4%BC%A0%E8%BE%93%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/docker/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84docker%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E5%A4%96%E7%BD%91/" itemprop="url">虚拟机中的Docker容器不能访问外网域名的问题</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/network/%E9%82%AE%E4%BB%B6%E4%BC%A0%E8%BE%93%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%8D%8F%E8%AE%AE/" itemprop="url">email传输的过程与协议</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/docker/" itemprop="url" rel="index">
-                    <span itemprop="name">docker</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -345,16 +334,8 @@
       
         
           
-            <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><pre><code>按照官网getting-started教程，创建Dockerfile，然后尝试创建image失败</code></pre>
-<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><pre><code>docker创建的容器无法解析域名</code></pre>
-<h1 id="解决尝试"><a href="#解决尝试" class="headerlink" title="解决尝试"></a>解决尝试</h1><h2 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h2><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><pre><code>修改DNS，修改/etc/resolv.conf
-![](/blog/images/tools/docker/docker1.png)</code></pre>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><pre><code>无效</code></pre>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><pre><code>不是DNS的问题</code></pre>
-<h2 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h2><h3 id="方案-1"><a href="#方案-1" class="headerlink" title="方案"></a>方案</h3><pre><code>更改docker网络连接模式，即在docker run 指令后加参数 --network=host，host模式的含义是使docker的网络连接模式与宿主机的网络连接模式一致。
-![](/blog/images/tools/docker/docker2.png)</code></pre>
-<h3 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h3><pre><code>成功</code></pre>
-<h3 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h3><pre><code>但是每次访问外网需要加--network=host参数，不方便。</code></pre>
+            <h1 id="过程理解"><a href="#过程理解" class="headerlink" title="过程理解"></a>过程理解</h1><p>email传输是现实邮件传输的模拟。普通邮件传输，发送者写好信件，投入本地邮局的邮箱，邮局定时将邮件收走，按照目标地址投放到对应的目标邮局，目标邮局的邮递员根据实际目标地址投送到指定邮箱，最后接受者到邮箱取到信件。在email的世界里，我们用的邮件客户端（比如foxmail）就是邮箱，email服务提供商（比如网易、腾讯）就是邮局。</p>
+<h1 id="邮件传输过程中用到的协议"><a href="#邮件传输过程中用到的协议" class="headerlink" title="邮件传输过程中用到的协议"></a>邮件传输过程中用到的协议</h1><p>我们称邮件客户端为MUA(Mail User Agent)，email服务提供商为MTA(Mail Transfer Agent)。邮件的传输过程为：发件人 -&gt; MUA -&gt; MTA -&gt; MTA -&gt; 若干个MTA -&gt; MDA &lt;- MUA &lt;- 收件人。这里MDA(Mail Delivery Agent)是接受邮件的服务商存放某些邮件的地方，可以理解为一个暂存服务器。<br>发邮件时，MUA和MTA使用的协议就是SMTP：Simple Mail Transfer Protocol，后面的MTA到另一个MTA也是用SMTP协议。<br>收邮件时，MUA和MDA使用的协议有两种：POP：Post Office Protocol，目前版本是3，俗称POP3；IMAP：Internet Message Access Protocol，目前版本是4，优点是不但能取邮件，还可以直接操作MDA上存储的邮件，比如从收件箱移到垃圾箱，等等。</p>
 
           
         
@@ -394,7 +375,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/185/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/185/">185</a><span class="page-number current">186</span><a class="page-number" href="/blog/page/187/">187</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/187/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/185/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/185/">185</a><span class="page-number current">186</span><a class="page-number" href="/blog/page/187/">187</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/187/">&gt;</a>
   </nav>
 
 
@@ -440,7 +421,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

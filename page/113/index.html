@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/python/basic/concurrent/concurrent.futures/submit%E5%92%8Cmap/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/BOM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/python/basic/concurrent/concurrent.futures/submit%E5%92%8Cmap/" itemprop="url">concurrent.futures模块中的submit和map</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/BOM/" itemprop="url">BOM(Byte Order Mark) 字节序标记</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,41 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/concurrent/concurrent-futures/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent.futures</span>
+                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -378,8 +345,9 @@
       
         
           
-            <p>1 concurrent.futures的父类Executor定义了两个执行任务的方法，submit和map<br>ThreadPoolExecutor和ProcessPoolExecutor继承Executor</p>
-<p>2 需要注意，submit执行的任务直接返回concurrent.futures.Future对象，返回的futures列表中的future对象状态可能处于中间状态。<br>map则阻塞到所有任务完成。</p>
+            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>Unicode中有一个叫做”ZERO WIDTH NO-BREAK SPACE”的字符，它的编码是FEFF。Unicode建议传输字节流前，先传输该字符，这样如果接收者收到FEFF，代表这个字节流是Big-Endian的；反之如果接收者收到的是FFFE，代表这个字节流是Little-Endian的。</p>
+<h1 id="BOM和UTF-8"><a href="#BOM和UTF-8" class="headerlink" title="BOM和UTF-8"></a>BOM和UTF-8</h1><p>UTF-8无需BOM来区别字节序，然而BOM可以用来判断编码类型。FEFF在UTF-8中的编码是0xEFBBBF，看到这串编码开头，即可判断字节流是UTF-8编码。</p>
+<h1 id="BOM和UTF-16-UTF-32"><a href="#BOM和UTF-16-UTF-32" class="headerlink" title="BOM和UTF-16/UTF-32"></a>BOM和UTF-16/UTF-32</h1><p>在UTF-16/UTF-32编码中，BOM就是用来表示Endian的，表格如下：<br>编码|表示 (十六进制)<br>|—|—|<br>UTF-16（大端序）|FE FF<br>UTF-16（小端序）|FF FE<br>UTF-32（大端序）|00 00 FE FF<br>UTF-32（小端序）|FF FE 00 00</p>
 
           
         
@@ -419,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/112/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/blog/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/114/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/112/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/blog/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/114/">&gt;</a>
   </nav>
 
 
@@ -465,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/virtualbox/virtualbox%E8%BF%81%E7%A7%BB%E8%B8%A9%E5%9D%91/" itemprop="url">virtualbox迁移踩坑</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/" itemprop="url">centos7安装Redis的经历</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/virtualbox/" itemprop="url" rel="index">
-                    <span itemprop="name">virtualbox</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,21 +345,13 @@
       
         
           
-            <h1 id="1-vdi无法使用"><a href="#1-vdi无法使用" class="headerlink" title="1 vdi无法使用"></a>1 vdi无法使用</h1><pre><code>问题： VD: error VERR_PATH_NOT_FOUND opening image file
-处理 ：settings-Storage-Controller
-先把原来的vdi remove，然后重新添加vdi</code></pre>
-<h1 id="2-vdi无法添加"><a href="#2-vdi无法添加" class="headerlink" title="2 vdi无法添加"></a>2 vdi无法添加</h1><p>问题：Cannot register the hard disk … with UUID … already exists<br>处理：</p>
-<h2 id="2-1-进入virtualbox安装目录"><a href="#2-1-进入virtualbox安装目录" class="headerlink" title="2.1 进入virtualbox安装目录"></a>2.1 进入virtualbox安装目录</h2><h2 id="2-2-打开cmd，执行"><a href="#2-2-打开cmd，执行" class="headerlink" title="2.2 打开cmd，执行"></a>2.2 打开cmd，执行</h2><p>VBoxManage internalcommands sethduuid $vdi路径</p>
-<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>问题： VT-x is not available (VERR_VMX_NO_VMX).  返回 代码: E_FAIL (0x80004005) 组件: ConsoleWrap 界面: IConsole {872da645-4a9b-1727-bee2-5585105b9eed}<br>原因： Hyper-V与virtualbox冲突<br>解决：  </p>
-<ol>
-<li>首先，管理员身份打开提示符。  </li>
-<li>输入 bcdedit 并回车，找到hypervisorlaunchtype选项发现为auto</li>
-<li>输入命令bcdedit /set hypervisorlaunchtype off  </li>
-<li>重启电脑  </li>
-</ol>
-<h2 id="bcdedit是什么"><a href="#bcdedit是什么" class="headerlink" title="bcdedit是什么"></a>bcdedit是什么</h2><p>bcdedit 是一个启动选项编辑工具，用来管理启动设置。</p>
-<p>BCDEdit 不是一个运行于图形界面下的程序，而是一个命令行工具，该文件 (Bcdedit.exe) 位于 “\Windows\System32” 目录下。通过命令行工具 Bcdedit ，我们可以添加、删除及修改 BCD (Boot Configuration Data) 中的对象。在 BCD 中，每个对象均具有唯一的 GUID (Globally Unique Identifier : 全局唯一标识符 ) ，如系统中的每块硬盘、每个分区的 GUID ( 全局唯一标识符 ) 均不相同。</p>
-<h2 id="Hyper-V-是什么"><a href="#Hyper-V-是什么" class="headerlink" title="Hyper-V 是什么"></a>Hyper-V 是什么</h2><p>Hyper-V是微软的一款虚拟化产品，是微软第一个采用类似Vmware和Citrix开源Xen一样的基于hypervisor的技术。这也意味着微软会更加直接地与市场先行者VMware展开竞争，但竞争的方式会有所不同。<br>Hyper-V是微软提出的一种系统管理程序虚拟化技术，能够实现桌面虚拟化 [1] 。</p>
+            <h1 id="下载编译安装"><a href="#下载编译安装" class="headerlink" title="下载编译安装"></a>下载编译安装</h1><p>1 redis官网下载，解压后进入目录<br>2 make &amp; make install<br>注：make install如果不支持可以手动操作，实际上做了如下动作：</p>
+<ul>
+<li>删除源文件及目标文件以方便后续copy生成可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] rm -f src&#x2F;*.c *.h *.o</span><br></pre></td></tr></table></figure></li>
+<li>copy可执行文件至环境变量目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis] cp src&#x2F;redis-* &#x2F;usr&#x2F;local&#x2F;bin   </span><br></pre></td></tr></table></figure></li>
+<li>copy配置文件至系统配置文件目录,如果是集群安装，文件最好以端口作为文件名称<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] cp redis.conf &#x2F;etc&#x2F;</span><br></pre></td></tr></table></figure>
+<h1 id="配置redis为系统服务"><a href="#配置redis为系统服务" class="headerlink" title="配置redis为系统服务"></a>配置redis为系统服务</h1><h2 id="使用service命令启停"><a href="#使用service命令启停" class="headerlink" title="使用service命令启停"></a>使用service命令启停</h2>可以将redis解压后的目录下的utils/redis_init_script文件拷贝到/etc/init.d/目录下，这个是redis预设的初始化脚本，加好之后就可以用sevice来启停服务了。<h2 id="使用systemd启停"><a href="#使用systemd启停" class="headerlink" title="使用systemd启停"></a>使用systemd启停</h2>编写/usr/lib/systemd/system/redis.service，使用systemd管理服务。redis.service示例如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">#描述信息</span><br><span class="line">Description&#x3D;Redis Server 3.0.4</span><br><span class="line">#启动时机,开机启动最好在网络服务启动后即启动</span><br><span class="line">After&#x3D;network.target</span><br><span class="line">[Service]</span><br><span class="line">#此处为命令行启动redis的命令及参数,可参考官方文档</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-server &#x2F;etc&#x2F;redis.conf --daemonize no  </span><br><span class="line">#停止redis服务器命令</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-cli -h 127.0.0.1 -p 6379 shutdown </span><br><span class="line">User&#x3D;redis</span><br><span class="line">#运行reddis用户</span><br><span class="line">Group&#x3D;redis</span><br><span class="line">#所属组</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target #字符界面下启动</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -399,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/211/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/blog/page/213/">213</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/213/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/211/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/blog/page/213/">213</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/213/">&gt;</a>
   </nav>
 
 
@@ -445,7 +437,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

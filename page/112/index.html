@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/python/basic/concurrent/experience1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/ASN.1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/python/basic/concurrent/experience1/" itemprop="url">多线程no attribute error排查</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/ASN.1/" itemprop="url">ASN.1</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
+                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -367,11 +345,9 @@
       
         
           
-            <h1 id="场景描述"><a href="#场景描述" class="headerlink" title="场景描述"></a>场景描述</h1><p>有一个类A，引用了加解密类B，B使用装饰器设计为单例模式。多线程实例化类A时，有时候出现找不到B实例的某个属性的问题。报错类似于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AttributeError: &#39;A&#39; object has no attribute &#39;pri_key&#39;</span><br></pre></td></tr></table></figure>
-<h1 id="关键代码结构"><a href="#关键代码结构" class="headerlink" title="关键代码结构"></a>关键代码结构</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SHAWithRSA</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, sha: <span class="built_in">str</span>, pri_key=<span class="literal">None</span>, pub_key=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.sha = sha</span><br><span class="line">        self.pub_key = pub_key</span><br><span class="line">        self.pri_key = pri_key</span><br><span class="line">        self.sha_func = <span class="built_in">getattr</span>(hashlib, self.sha)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">@singleton</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>(<span class="params">SHAWithRSA</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        pri_key_path = os.path.join(config.ROOT_DIR, <span class="string">&#x27;asset/file_&#123;&#125;/pri.pem&#x27;</span>.<span class="built_in">format</span>(config.ENV))</span><br><span class="line">        pub_key_path = os.path.join(config.ROOT_DIR, <span class="string">&#x27;asset/file_&#123;&#125;/pub.pem&#x27;</span>.<span class="built_in">format</span>(config.ENV))</span><br><span class="line">        pri_key = M2Crypto.RSA.load_key(pri_key_path)</span><br><span class="line">        pub_key = M2Crypto.RSA.load_pub_key(pub_key_path)</span><br><span class="line">        <span class="built_in">super</span>().__init__(<span class="string">&#x27;md5&#x27;</span>, pri_key, pub_key)</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, logger=<span class="literal">None</span></span>):</span></span><br><span class="line">        self.logger = logger <span class="keyword">if</span> logger <span class="keyword">else</span> LOGGER</span><br><span class="line">        self.aes_mode = <span class="string">&#x27;CFB&#x27;</span></span><br><span class="line">        self.aes_iv = <span class="string">b&#x27;0000000000000000&#x27;</span></span><br><span class="line">        self.aes_padding = <span class="string">&#x27;PKCS7&#x27;</span></span><br><span class="line">        self.rsa = A()</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-<h1 id="问题排查与分析"><a href="#问题排查与分析" class="headerlink" title="问题排查与分析"></a>问题排查与分析</h1><p>通过在singleton装饰器内以及A的初始化步骤中打印日志，发现出错的时候，假设线程1进行A的实例化，singleton中的__new__即实例化已经执行，但是并没有在本线程内完成__init__初始化，就切换到线程2，线程2进行A的实例化，按照单例模式原理，发现A类已经有实例，所以会直接返回实例，但是该实例是没有初始化完成的，所以对于线程2，部分属性是缺失的，访问会报上诉错误。</p>
-<h1 id="结论与解决方式"><a href="#结论与解决方式" class="headerlink" title="结论与解决方式"></a>结论与解决方式</h1><p>综上所述，上述属性缺失错误是由于在线程内进行对象实例化和初始化，但是初始化未完成时线程切换导致的。<br>考虑在线程外完成对象的实例化和初始化。</p>
+            <h1 id="什么是ASN-1"><a href="#什么是ASN-1" class="headerlink" title="什么是ASN.1"></a>什么是ASN.1</h1><p>ASN.1，即Abstract Syntax Notation，抽象语法符号，是一种跨语言的序列化方法，将结构化数据转化成二进制存储。后面的.1表示版本一，是为了之后的扩展，但是目前只有1。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/seccertenroll/about-asn-1-type-system">https://docs.microsoft.com/en-us/windows/win32/seccertenroll/about-asn-1-type-system</a></p>
+<h2 id="python-ASN-1编解码"><a href="#python-ASN-1编解码" class="headerlink" title="python ASN.1编解码"></a>python ASN.1编解码</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/20175211lyz/p/12769883.html">https://www.cnblogs.com/20175211lyz/p/12769883.html</a></p>
 
           
         
@@ -411,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/111/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/111/">111</a><span class="page-number current">112</span><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/113/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/111/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/111/">111</a><span class="page-number current">112</span><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/113/">&gt;</a>
   </nav>
 
 
@@ -457,7 +433,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

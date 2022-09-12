@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/go/go%E5%B8%B8%E8%A7%81%E8%AF%AD%E6%B3%95%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/database/mysql/mysql%20binlog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/go/go%E5%B8%B8%E8%A7%81%E8%AF%AD%E6%B3%95%E9%97%AE%E9%A2%98/" itemprop="url">go常见语法问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/database/mysql/mysql%20binlog/" itemprop="url">mysql binlog</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,12 +345,34 @@
       
         
           
-            <h1 id="missing-‘-’-before-newline-in-composite-literal"><a href="#missing-‘-’-before-newline-in-composite-literal" class="headerlink" title="missing ‘,’ before newline in composite literal"></a>missing ‘,’ before newline in composite literal</h1><h2 id="错误代码"><a href="#错误代码" class="headerlink" title="错误代码"></a>错误代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fileId, err :&#x3D; client.UploadByBuffer(buffer, ext); err !&#x3D; nil &#123;</span><br><span class="line">	c.String(http.StatusBadRequest, fmt.Sprintf(&quot;fdfs上传失败: %s&quot;, err.Error()))</span><br><span class="line">	return</span><br><span class="line">&#125;</span><br><span class="line">   image.FileId &#x3D; fileId</span><br></pre></td></tr></table></figure>
-<h2 id="正确代码"><a href="#正确代码" class="headerlink" title="正确代码"></a>正确代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fileId, err :&#x3D; client.UploadByBuffer(buffer, ext)</span><br><span class="line">   if err !&#x3D; nil &#123;</span><br><span class="line">	c.String(http.StatusBadRequest, fmt.Sprintf(&quot;fdfs上传失败: %s&quot;, err.Error()))</span><br><span class="line">	return</span><br><span class="line">&#125;</span><br><span class="line">   image.FileId &#x3D; fileId</span><br></pre></td></tr></table></figure>
-<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p>使用;隔开的语句里，作用域局限在本条语句中，无法被后续语句使用<br>在官方文档Effective Go里面，关于此点有如下描述：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">§ It&#39;s worth noting here that in Go the scope of function parameters and return values is the same as the function body, even though they appear lexically outside the braces that enclose the body.</span><br></pre></td></tr></table></figure>
-<h1 id="append特殊用法"><a href="#append特殊用法" class="headerlink" title="append特殊用法"></a>append特殊用法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">slice &#x3D; append(slice, elem1, elem2)</span><br><span class="line">slice &#x3D; append(slice, anotherSlice...)</span><br><span class="line">As a special case, it is legal to append a string to a byte slice, like this:</span><br><span class="line">slice &#x3D; append([]byte(&quot;hello &quot;), &quot;world&quot;...)</span><br></pre></td></tr></table></figure>
-<p>append除了正常添加单个slice的元素，还可以使用…解包将一个slice添加到另一个slice后面，特殊用法，可以对string类型解包添加到[]byte类型的slice后。</p>
+            <h1 id="什么是binlog"><a href="#什么是binlog" class="headerlink" title="什么是binlog"></a>什么是binlog</h1><p>mysql的binlog是server层维护的一个二进制日志，用于记录所有的 DDL 和 DML 语句。binlog常用的作用有：</p>
+<ul>
+<li>主从复制</li>
+<li>数据恢复</li>
+<li>增量备份</li>
+</ul>
+<h1 id="常用相关操作"><a href="#常用相关操作" class="headerlink" title="常用相关操作"></a>常用相关操作</h1><h2 id="开启binlog"><a href="#开启binlog" class="headerlink" title="开启binlog"></a>开启binlog</h2><p>默认binlog不开启，想要开启binlog，必须进行相关配置，一般修改配置文件my.cnf。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 打开binlog</span><br><span class="line">log_bin&#x3D;ON</span><br><span class="line"># binlog日志的基本文件名</span><br><span class="line">log_bin_basename&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line"># binlog文件的索引文件，文本格式，记录了所有binlog的文件路径</span><br><span class="line">log_bin_index&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin.index</span><br></pre></td></tr></table></figure>
+<p>修改配置之后重启mysql服务即可。但是如果是5.7及以上版本的话，重启mysql服务会报错，需要加一个配置server_id=1这样，server_id在集群中是唯一的。验证如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%log_bin%&#39;</span><br></pre></td></tr></table></figure>
+<p>有三种情况，binlog会重新生成新的：</p>
+<ul>
+<li>每次重启会生成新的binlog文件</li>
+<li>当 binlog 文件大小超过 max_binlog_size 变量的值时</li>
+<li>使用 flush logs 命令<h2 id="binlog常见查询命令"><a href="#binlog常见查询命令" class="headerlink" title="binlog常见查询命令"></a>binlog常见查询命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show binary logs; &#x2F;&#x2F;查看binlog文件列表</span><br><span class="line">show master status; &#x2F;&#x2F;查看当前二进制日志文件的状态信息，显示正在写入的二进制文件，及当前position</span><br></pre></td></tr></table></figure>
+<h1 id="binlog的日志格式"><a href="#binlog的日志格式" class="headerlink" title="binlog的日志格式"></a>binlog的日志格式</h1></li>
+<li>STATEMENT：基于SQL语句的复制（statement-based replication, SBR）</li>
+<li>ROW：基于行的复制（row-based replication, RBR）</li>
+<li>MIXED：混合模式复制（mixed-based replication, MBR）</li>
+</ul>
+<h1 id="binlog文件查看"><a href="#binlog文件查看" class="headerlink" title="binlog文件查看"></a>binlog文件查看</h1><h2 id="使用mysqlbinlog工具"><a href="#使用mysqlbinlog工具" class="headerlink" title="使用mysqlbinlog工具"></a>使用mysqlbinlog工具</h2><p>mysqlbinlog [options] log_file</p>
+<h2 id="使用mysql命令查询"><a href="#使用mysql命令查询" class="headerlink" title="使用mysql命令查询"></a>使用mysql命令查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SHOW BINLOG EVENTS</span><br><span class="line">            [IN &#39;log_name&#39;] &#x2F;&#x2F;要查询的binlog文件名</span><br><span class="line">            [FROM pos]  </span><br><span class="line">            [LIMIT [offset,] row_count]  </span><br></pre></td></tr></table></figure>
+<h1 id="binlog恢复数据"><a href="#binlog恢复数据" class="headerlink" title="binlog恢复数据"></a>binlog恢复数据</h1><p>使用binlog恢复数据，本质上就是从binlog提取历史的操作记录sql，然后重新执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqlbinlog --start-position&#x3D;:p1 --stop-position&#x3D;:p2 :binlogname &gt; restore.sql</span><br><span class="line">mysql&gt; source &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;restore.sql</span><br></pre></td></tr></table></figure>
+<ul>
+<li>:p1, :p2 binlog中的位置</li>
+<li>binlogname binlog文件名</li>
+</ul>
 
           
         
@@ -390,7 +412,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/54/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/blog/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/56/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/54/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/blog/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/56/">&gt;</a>
   </nav>
 
 
@@ -436,7 +458,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

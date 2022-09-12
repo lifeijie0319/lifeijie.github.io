@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/basic/sql%E8%BF%9E%E6%8E%A5/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/language/java/jvm/jvm%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/database/basic/sql%E8%BF%9E%E6%8E%A5/" itemprop="url">sql表连接</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/language/java/jvm/jvm%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" itemprop="url">jvm垃圾回收</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T16:36:55+08:00">
+                2022-04-10
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,15 +312,8 @@
       
         
           
-            <h1 id="sql表连接的含义"><a href="#sql表连接的含义" class="headerlink" title="sql表连接的含义"></a>sql表连接的含义</h1><p>sql查询常把多表关联起来查询，我们把表A的数据设为一个集合、表B的数据设为一个集合，以此为例，理解以下几种表连接：</p>
-<ol>
-<li>(inner) join 内连接就是A和B的交集</li>
-<li>left (outer) join 左连接是A连接B，以A为标杆，即使B没有对应数据也把A记录下来</li>
-<li>right (outer) join 右连接与左连接类似，但方向相反</li>
-<li>full (outer) join 完整外部连接，得到集合A和B的并集，即使对方表没有匹配的数据，本表的数据也会占用一行结果行。注意mysql并不支持full join。</li>
-<li>交叉连接 交叉联接返回左表中的所有行，左表中的每一行与右表中的所有行组合。交叉联接也称作笛卡尔积。</li>
-</ol>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/afirefly/archive/2010/10/08/1845906.html">https://www.cnblogs.com/afirefly/archive/2010/10/08/1845906.html</a></p>
+            <h1 id="如何判断对象可以回收"><a href="#如何判断对象可以回收" class="headerlink" title="如何判断对象可以回收"></a>如何判断对象可以回收</h1><h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><p>为每个对象创建一个引用计数，新增对象引用时计数器+1，引用释放时计数器-1，当计数器为0时可以回收。引用计数法无法解决循环引用的问题。</p>
+<h2 id="可达性分析"><a href="#可达性分析" class="headerlink" title="可达性分析"></a>可达性分析</h2><p>从GC Root开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Root没有引用链，则该对象可以被回收。</p>
 
           
         
@@ -393,7 +353,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/50/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/50/">50</a><span class="page-number current">51</span><a class="page-number" href="/blog/page/52/">52</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/52/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/50/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/50/">50</a><span class="page-number current">51</span><a class="page-number" href="/blog/page/52/">52</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/52/">&gt;</a>
   </nav>
 
 
@@ -439,7 +399,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/python/basic/concurrent/GIL/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/security/web/XSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/python/basic/concurrent/GIL/" itemprop="url">python GIL</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/security/web/XSS/" itemprop="url">XSS攻击</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
+                  <a href="/blog/categories/security/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
                   </a>
                 </span>
 
@@ -367,14 +345,8 @@
       
         
           
-            <h1 id="什么是GIL"><a href="#什么是GIL" class="headerlink" title="什么是GIL"></a>什么是GIL</h1><p>GIL(Global Interpreter Lock)，全局解释器锁，是指cpython中，多线程执行时，线程需要先获取GIL，才能被执行。</p>
-<h1 id="为什么说GIL不能利用多核"><a href="#为什么说GIL不能利用多核" class="headerlink" title="为什么说GIL不能利用多核"></a>为什么说GIL不能利用多核</h1><p>在单核处理器中，线程的执行是并发而不是并行的，但是多核使得线程执行可以是真正并行的。但是加了GIL锁之后，多线程的执行又变成了串行，结果退回了原来单核的情况。测试发现，使用c的pthread库开启两个线程，线程中做循环，cpu的使用率可以达到200%，但是python使用threading库开启多线程，cpu的使用率只能达到100%。</p>
-<h1 id="为什么要有GIL"><a href="#为什么要有GIL" class="headerlink" title="为什么要有GIL"></a>为什么要有GIL</h1><p>因为cpython解释器的内存管理不是线程安全的。举个例子，python中的垃圾回收是依靠对象的引用计数。如果两个线程并行（同一时刻）增加对象A的引用计数，那么可能最终A的引用计数只增加了1，导致错误。</p>
-<h1 id="GIL的改进"><a href="#GIL的改进" class="headerlink" title="GIL的改进"></a>GIL的改进</h1><p>python3.2版本之前，定义了一个tick计数器，表示当前线程在释放gil之前连续执行的多少个字节码,tick到达100或者程序碰到io会自动释放GIL。<br>python3.2以后使用时间片来切换线程，时间阈值是0.005秒。并且会动态调整线程的优先级，使得GIL不会被同一个线程长期占用。</p>
-<h1 id="如何应对GIL无法利用多核的缺陷"><a href="#如何应对GIL无法利用多核的缺陷" class="headerlink" title="如何应对GIL无法利用多核的缺陷"></a>如何应对GIL无法利用多核的缺陷</h1><ul>
-<li>使用多进程取代多进程</li>
-<li>对于计算密集型的程序，使用C扩展</li>
-</ul>
+            <h1 id="什么是XSS攻击"><a href="#什么是XSS攻击" class="headerlink" title="什么是XSS攻击"></a>什么是XSS攻击</h1><p>跨站脚本攻击（CROSS SITE SCRIPT），即XSS，是攻击者在有该漏洞的网站网页中输入恶意的js代码，其它用户访问时，这段代码执行，使得攻击者获取用户的一些信息。</p>
+<h1 id="如何防范XSS攻击"><a href="#如何防范XSS攻击" class="headerlink" title="如何防范XSS攻击"></a>如何防范XSS攻击</h1><p>对输入和URL参数校验过滤，对输出编码。</p>
 
           
         
@@ -414,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/110/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/110/">110</a><span class="page-number current">111</span><a class="page-number" href="/blog/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/112/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/110/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/110/">110</a><span class="page-number current">111</span><a class="page-number" href="/blog/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/112/">&gt;</a>
   </nav>
 
 
@@ -460,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

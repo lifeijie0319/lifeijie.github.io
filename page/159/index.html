@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/spring/spring%20cloud/spring%20cloud%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/db2/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/" itemprop="url">存储过程</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/java/spring/spring%20cloud/spring%20cloud%E5%9F%BA%E7%A1%80/" itemprop="url">spring cloud基础</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/spring/spring-cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">spring cloud</span>
                   </a>
                 </span>
 
@@ -345,33 +367,9 @@
       
         
           
-            <h1 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h1><p>使用create procedure语句创建</p>
-<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CALL YDW.LIFEIJIE_TEST(&#39;20170802&#39;, ?, ?);</span><br></pre></td></tr></table></figure>
-<h1 id="在一个procedure中调用另一个procedure"><a href="#在一个procedure中调用另一个procedure" class="headerlink" title="在一个procedure中调用另一个procedure"></a>在一个procedure中调用另一个procedure</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CALL YDW.P_TRUNCATTABLE(&#39;YDW.WX_ACCT_DEBIT_CARD_UNION&#39;, OUT_SQLCODE, OUT_MSG);</span><br></pre></td></tr></table></figure>
-<p>说明：YDW.P_TRUNCATTABLE是之前定义的一个procedure，调用时需要将输出参数传入。</p>
-<h1 id="return"><a href="#return" class="headerlink" title="return"></a>return</h1><p>RETURN是存储过程执行过程中判断执行的结果是成功，还是失败的。跟正常的SHELL的执行结果返回值类似。返回0为成功。返回其他为失败。</p>
-<h1 id="使用命令行导入存储过程"><a href="#使用命令行导入存储过程" class="headerlink" title="使用命令行导入存储过程"></a>使用命令行导入存储过程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 -tvf P_WX_CUS_INFO.sql -z P_WX_CUS_INFO.log</span><br></pre></td></tr></table></figure>
-<p>这种情况下db2会以默认的分号作为语句结束符，所以db2执行的是一句句零散的无意义的语句。我们要让db2把整个存储过程当做一个语句来执行，所以要用自定义符号（比如@）来作为整个存储过程创建语句的结束符，并在执行sql的时候指定该符号为结束符。如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 -td@ -vf P_WX_CUS_INFO.sql -z P_WX_CUS_INFO.log</span><br></pre></td></tr></table></figure>
-<h1 id="从表中取参数存入变量"><a href="#从表中取参数存入变量" class="headerlink" title="从表中取参数存入变量"></a>从表中取参数存入变量</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT START_DATE INTO START_DATE FROM YDW.WX_CUS_TERM WHERE CODE &#x3D; &#39;CONTRACT01&#39;;</span><br></pre></td></tr></table></figure>
-<h1 id="删除procedure"><a href="#删除procedure" class="headerlink" title="删除procedure"></a>删除procedure</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop procedure proc_name</span><br></pre></td></tr></table></figure>
-<p>如果过程名称相同，参数个数不同，则指定参数类型即可删除，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop procedure proc_name(int,varchar)</span><br></pre></td></tr></table></figure>
-<h1 id="存储过程的头部声明"><a href="#存储过程的头部声明" class="headerlink" title="存储过程的头部声明"></a>存储过程的头部声明</h1><ol>
-<li>SPECIFIC: 为了在内部标识一个过程而指定的一个特定名称。如果没有指定名称，则 DB2 会赋予一个系统生成的值。对于重载存储过程，这一点特别有用。</li>
-<li>DYNAMIC RESULT SETS: 指定保持打开并传回给调用程序或应用程序的结果集的数量。如果您的存储过程将返回n 个结果集，那么需要填写这一选项。</li>
-<li>DETERMINISTIC: 指定对于给定的参数值，该过程是否总是返回相同的结果。如果每次返回的结果相同，用DETERMINISTIC，结果集放在内存中可以重用，因此可以提高运行性能;缺省值是NOT DETERMINISTIC。</li>
-<li>LANGUAGE: SQL 过程仅支持 DB2 SQL PL 语言。</li>
-<li>访问数据库的模式<br>CONTAINS SQL: 表明存储过程可以执行既不读取也不修改 SQL 数据的 SQL 语句。<br>READS SQL DATA: 表明存储过程中可以包括某些不修改 SQL 数据的 SQL 语句。<br>MODIFIES SQL DATA: 表明存储过程可以执行除了存储过程中不支持的 SQL 语句之外的任何 SQL 语句。</li>
-<li>called on null input：当输入参数为空值，过程依旧执行，缺省值</li>
-<li>INHERIT SPECIAL REGISTERS：表示继承专用寄存器。</li>
-<li>OLD SAVEPOINT LEVEL or NEW SAVEPOINT LEVEL：建立存储点。OLD SAVEPOINT LEVEL是默认的存储点。</li>
-<li>EXTERNAL ACTION or NO EXTERNAL ACTION：表示存储过程是否执行一些改变理数据库状态的活动，而不通过数据库管理器管。默认是 EXTERNAL ACTION。如果指定为NO EXTERNAL ACTION ,则数据库会确定最最佳优化方案。 </li>
-<li>PARAMETER CCSID：指定所有输出字符串数据的编码,默认为UNICODE编码数据库为PARAMETER CCSID UNICODE ，其他的数据库默认为PARAMETER CCSID 3 ASCII。 </li>
-</ol>
-<h1 id="存储过程导出"><a href="#存储过程导出" class="headerlink" title="存储过程导出"></a>存储过程导出</h1><p>db2look -d &lt;数据库名&gt; -z &lt;模式名&gt; -cor -e -o &lt;输出文件名&gt;<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/junli0310/article/details/2506809">http://blog.csdn.net/junli0310/article/details/2506809</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/wupeng88/p/4503504.html">http://www.cnblogs.com/wupeng88/p/4503504.html</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/u012849872/article/details/51747665">http://blog.csdn.net/u012849872/article/details/51747665</a></p>
-
+            <h1 id="什么是spring-cloud"><a href="#什么是spring-cloud" class="headerlink" title="什么是spring cloud"></a>什么是spring cloud</h1><p>一个致力于快速构建分布式系统、云服务的框架。</p>
+<h1 id="spring-cloud的核心组件"><a href="#spring-cloud的核心组件" class="headerlink" title="spring cloud的核心组件"></a>spring cloud的核心组件</h1><h2 id="服务发现-Netflix-Eureka"><a href="#服务发现-Netflix-Eureka" class="headerlink" title="服务发现 Netflix Eureka"></a>服务发现 Netflix Eureka</h2><p>实现服务注册和发现，由客户端和服务端组成。</p>
+<h2 id="客户端负载均衡-Netflix-Ribbon"><a href="#客户端负载均衡-Netflix-Ribbon" class="headerlink" title="客户端负载均衡 Netflix Ribbon"></a>客户端负载均衡 Netflix Ribbon</h2><h2 id="断路器-Netflix-Hystrix"><a href="#断路器-Netflix-Hystrix" class="headerlink" title="断路器 Netflix Hystrix"></a>断路器 Netflix Hystrix</h2><h2 id="网关-Netflix-Zuul"><a href="#网关-Netflix-Zuul" class="headerlink" title="网关 Netflix Zuul"></a>网关 Netflix Zuul</h2><h2 id="分布式配置-Spring-Cloud-Config"><a href="#分布式配置-Spring-Cloud-Config" class="headerlink" title="分布式配置 Spring Cloud Config"></a>分布式配置 Spring Cloud Config</h2>
           
         
       
@@ -410,7 +408,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/158/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/158/">158</a><span class="page-number current">159</span><a class="page-number" href="/blog/page/160/">160</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/160/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/158/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/158/">158</a><span class="page-number current">159</span><a class="page-number" href="/blog/page/160/">160</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/160/">&gt;</a>
   </nav>
 
 
@@ -456,7 +454,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

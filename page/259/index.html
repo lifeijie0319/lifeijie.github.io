@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/pycharm/%E9%85%8D%E7%BD%AEsvn/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/java/tomcat/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/pycharm/%E9%85%8D%E7%BD%AEsvn/" itemprop="url">配置svn</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/language/java/tomcat/" itemprop="url">windows下tomcat使用注意事项</a></h1>
         
 
         <div class="post-meta">
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/pycharm/" itemprop="url" rel="index">
-                    <span itemprop="name">pycharm</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -356,9 +345,8 @@
       
         
           
-            <p>1、安装tortoise<br>注意：安装的时候选择command line client tools</p>
-<p>2、配置svn可执行程序路径<br>Settings - Subversion - 顶部</p>
-<p>3、添加svn远程服务器地址<br>VCS - Browse    VCS Repository - Browse Subversion Repository<br>新建repository</p>
+            <h1 id="windows下使用tomcat常见问题"><a href="#windows下使用tomcat常见问题" class="headerlink" title="windows下使用tomcat常见问题"></a>windows下使用tomcat常见问题</h1><h2 id="1、控制台输出中文乱码"><a href="#1、控制台输出中文乱码" class="headerlink" title="1、控制台输出中文乱码"></a>1、控制台输出中文乱码</h2><p>解决方案：修改$TOMCAT_HOME\conf\logging.properties，将日志编码utf-8改成gbk。</p>
+<h2 id="2、启动异常"><a href="#2、启动异常" class="headerlink" title="2、启动异常"></a>2、启动异常</h2><p>错误：java.io.FileNotFoundException: C:\Program Files\apache-tomcat-10.0.2\logs\catalina.2021-02-20.log (拒绝访问。)<br>原因与解决方案：权限问题，修改当前用户对该目录的权限，右键属性-安全-权限-编辑，修改当前用户对该目录的权限为完全控制。</p>
 
           
         
@@ -398,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/258/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/258/">258</a><span class="page-number current">259</span><a class="page-number" href="/blog/page/260/">260</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/260/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/258/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/258/">258</a><span class="page-number current">259</span><a class="page-number" href="/blog/page/260/">260</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/260/">&gt;</a>
   </nav>
 
 
@@ -444,7 +432,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

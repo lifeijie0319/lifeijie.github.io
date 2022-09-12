@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/basic/datatype/%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/basic/datatype/%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B/" itemprop="url">java包装类型</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
+                  <a href="/blog/categories/database/basic/" itemprop="url" rel="index">
                     <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/datatype/" itemprop="url" rel="index">
-                    <span itemprop="name">datatype</span>
                   </a>
                 </span>
 
@@ -367,11 +345,10 @@
       
         
           
-            <h1 id="为什么java要有基本类型的包装类型"><a href="#为什么java要有基本类型的包装类型" class="headerlink" title="为什么java要有基本类型的包装类型"></a>为什么java要有基本类型的包装类型</h1><ul>
-<li>符合java面向对象的思想</li>
-<li>方便给数据封装一些常用的操作，比如进制转换等</li>
-<li>可以给包装类型赋值为null，基本类型无法这样做。null和基本类型的默认值有时候是有区别的，尤其是在面向数据库应用方面。</li>
-<li>java的集合类型只支持包装类型，因为集合是基于Object的。</li>
+            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
+<ul>
+<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
+<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
 </ul>
 
           
@@ -412,7 +389,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/105/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><span class="page-number current">106</span><a class="page-number" href="/blog/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/107/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/105/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/105/">105</a><span class="page-number current">106</span><a class="page-number" href="/blog/page/107/">107</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/107/">&gt;</a>
   </nav>
 
 
@@ -458,7 +435,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

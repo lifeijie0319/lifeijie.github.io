@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/ASN.1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/database/redis/redis%E6%8C%81%E4%B9%85%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/other/%E7%BC%96%E7%A0%81/ASN.1/" itemprop="url">ASN.1</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/10/database/redis/redis%E6%8C%81%E4%B9%85%E5%8C%96/" itemprop="url">redis持久化</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">编码</span>
+                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,9 +345,53 @@
       
         
           
-            <h1 id="什么是ASN-1"><a href="#什么是ASN-1" class="headerlink" title="什么是ASN.1"></a>什么是ASN.1</h1><p>ASN.1，即Abstract Syntax Notation，抽象语法符号，是一种跨语言的序列化方法，将结构化数据转化成二进制存储。后面的.1表示版本一，是为了之后的扩展，但是目前只有1。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/seccertenroll/about-asn-1-type-system">https://docs.microsoft.com/en-us/windows/win32/seccertenroll/about-asn-1-type-system</a></p>
-<h2 id="python-ASN-1编解码"><a href="#python-ASN-1编解码" class="headerlink" title="python ASN.1编解码"></a>python ASN.1编解码</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/20175211lyz/p/12769883.html">https://www.cnblogs.com/20175211lyz/p/12769883.html</a></p>
+            <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>redis的高性能建立在它整个数据库都在内存中，为了保存数据，所以有持久化的需要。默认是RDB方式，可以在通过配置文件开启AOF方式，也可以完全禁用持久化或者两种持久化方式并行。两种方式并行时，redis重启时会使用AOF文件来恢复，因为这种方式的数据更加完整。</p>
+<h1 id="RDB-Redis-Database"><a href="#RDB-Redis-Database" class="headerlink" title="RDB(Redis Database)"></a>RDB(Redis Database)</h1><p>指定的时间对数据进行快照存储</p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul>
+<li>只有一个二进制的快照文件，方便备份和恢复</li>
+<li>使用fork进程的方式进行持久化，避免主进程执行IO，效率高</li>
+<li>对于大数据集，和AOF相比启动更快<h2 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h2></li>
+<li>定期备份可能会有数据丢失</li>
+<li>当数据库很大时，fork进程耗时长，并阻塞主进程</li>
+</ul>
+<h1 id="AOF-Append-Only-File"><a href="#AOF-Append-Only-File" class="headerlink" title="AOF(Append Only File)"></a>AOF(Append Only File)</h1><p>每个收到的写命令都使用write函数追加到文件中。AOF文件过大时，redis会安全地进行文件重写，减少文件内容。</p>
+<h2 id="AOF同步策略"><a href="#AOF同步策略" class="headerlink" title="AOF同步策略"></a>AOF同步策略</h2><p>采用AOF持久化之后，服务器会将写指令写入内存缓冲区，之后其实是两个步骤，分别是文件写入和同步。写入是将新增的写指令写入文件，同步是将文件的内容持久化到硬盘。同步策略有三种</p>
+<ul>
+<li>always 写入之后进行同步，最大程度保存数据</li>
+<li>everysec 每秒进行同步，新开线程执行</li>
+<li>no 不进行同步，同步交给操作系统执行</li>
+</ul>
+<h2 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h2><ul>
+<li>追加文件的方式同步，发生故障数据丢失少，即使写入一半数据时系统崩溃，也可以使用redis-check-aof工具进行修复</li>
+<li>日志文件格式清晰<h2 id="劣势-1"><a href="#劣势-1" class="headerlink" title="劣势"></a>劣势</h2></li>
+<li>和RDB相比，AOF文件较大</li>
+<li>和RDB相比效率低</li>
+</ul>
+<h1 id="AOF与RDB对比"><a href="#AOF与RDB对比" class="headerlink" title="AOF与RDB对比"></a>AOF与RDB对比</h1><table>
+<thead>
+<tr>
+<th>角度</th>
+<th>RDB</th>
+<th>AOF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>执行效率</td>
+<td>新开进程备份快照，对主进程影响小，效率高</td>
+<td>追加方式写文件，尤其是同步策略为always时效率相对较低</td>
+</tr>
+<tr>
+<td>数据安全</td>
+<td>按照备份时间会有丢失</td>
+<td>按照同步策略，数据可靠性不同，整体比RDB要高</td>
+</tr>
+<tr>
+<td>备份与恢复</td>
+<td>快照文件易备份，恢复也快</td>
+<td>日志文件格式清晰，但比RDB快照文件一般要大，恢复起来较慢</td>
+</tr>
+</tbody></table>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://redis.io/docs/manual/persistence/#rdb-advantages">https://redis.io/docs/manual/persistence/#rdb-advantages</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000040186654/en">https://segmentfault.com/a/1190000040186654/en</a></p>
 
           
         
@@ -387,7 +431,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/58/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/58/">58</a><span class="page-number current">59</span><a class="page-number" href="/blog/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/60/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/58/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/58/">58</a><span class="page-number current">59</span><a class="page-number" href="/blog/page/60/">60</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/60/">&gt;</a>
   </nav>
 
 
@@ -433,7 +477,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

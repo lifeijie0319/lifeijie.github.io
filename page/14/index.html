@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/tools/zookeeper/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/07/23/language/java/spring/spring%20cloud/nacos/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/04/10/tools/zookeeper/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" itemprop="url">zookeeper分布式锁</a></h1>
+                <a class="post-title-link" href="/blog/2022/07/23/language/java/spring/spring%20cloud/nacos/" itemprop="url">nacos实践</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-23T08:38:12+08:00">
+                2022-07-23
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">zookeeper</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,18 +312,9 @@
       
         
           
-            <h1 id="排它锁"><a href="#排它锁" class="headerlink" title="排它锁"></a>排它锁</h1><p>利用zookeeper同级节点的唯一性，不同客户端调用create()接口，最终只有一个客户端能创建成功，没有成功的客户端在创建的目录的上级目录上注册事件监听目录变化，以便重新获取锁。</p>
-<h1 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h1><h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ol>
-<li>客户端调用 create 方法创建类似定义锁方式的临时顺序节点，临时节点可以这样定义：[hostname]-请求类型W/R-序号。</li>
-<li>客户端调用getChilldren接口来获取所有已创建的子节点。对于读请求，如果自己是序号最小的节点或者所有比自己小的节点都是读请求，就表明共享锁加锁成功，否则需要注册监听事件到比自己小的最后一个写请求目录，观察到该目录被删除之后再执行后续操作。对于写请求，如果自身不是最小的节点就进入等待。<h2 id="java工具包"><a href="#java工具包" class="headerlink" title="java工具包"></a>java工具包</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.curator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>curator-recipes<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>x.x.x<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-curator 的几种锁方案：</li>
-</ol>
-<ul>
-<li>InterProcessMutex：分布式可重入排它锁</li>
-<li>InterProcessSemaphoreMutex：分布式排它锁</li>
-<li>InterProcessReadWriteLock：分布式读写锁</li>
-</ul>
-
+            <h1 id="常见问题与解决"><a href="#常见问题与解决" class="headerlink" title="常见问题与解决"></a>常见问题与解决</h1><h2 id="nacos单机集群部署异常"><a href="#nacos单机集群部署异常" class="headerlink" title="nacos单机集群部署异常"></a>nacos单机集群部署异常</h2><p>集群预设三个服务端口为8848/8849/8850，除了最开始启动的服务，后续服务均可能启动失败，报端口被占用。本质是由于nacos2.0之后启动服务会连带启动服务端口+1000和服务端口+1001.</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w_e_i_a_i_/article/details/121993518">https://blog.csdn.net/w_e_i_a_i_/article/details/121993518</a></p>
+<h2 id="nacos单机模式无法使用注册ephemeral-false的永久节点"><a href="#nacos单机模式无法使用注册ephemeral-false的永久节点" class="headerlink" title="nacos单机模式无法使用注册ephemeral=false的永久节点"></a>nacos单机模式无法使用注册ephemeral=false的永久节点</h2><h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: com.alibaba.nacos.api.exception.NacosException: failed to req API:&#x2F;nacos&#x2F;v1&#x2F;ns&#x2F;instance after all servers([127.0.0.1:8848]) tried: ErrCode:500, ErrMsg:caused: java.util.concurrent.ExecutionException: com.alibaba.nacos.consistency.exception.ConsistencyException: com.alibaba.nacos.core.distributed.raft.exception.NoLeaderException: The Raft Group [naming_persistent_service_v2] did not find the Leader node;caused: com.alibaba.nacos.consistency.exception.ConsistencyException: com.alibaba.nacos.core.distributed.raft.exception.NoLeaderException: The Raft Group [naming_persistent_service_v2] did not find the Leader node;caused: com.alibaba.nacos.core.distributed.raft.exception.NoLeaderException: The Raft Group [naming_persistent_service_v2] did not find the Leader node;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -395,7 +353,7 @@ curator 的几种锁方案：</li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/13/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/blog/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/15/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/13/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/blog/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/15/">&gt;</a>
   </nav>
 
 
@@ -441,7 +399,7 @@ curator 的几种锁方案：</li>
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

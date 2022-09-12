@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/vi/vi%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/vi/vi%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">vi使用技巧</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/" itemprop="url">date_format函数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/vi/" itemprop="url" rel="index">
-                    <span itemprop="name">vi</span>
+                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,16 +345,41 @@
       
         
           
-            <h1 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h1><p>i进入编辑模式，:进入命令模式，v进入视图模式</p>
-<h1 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h1><p>v进入视图模式，选中要转换的代码。:u或者:U转换</p>
-<h1 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h1><h2 id="单行替换"><a href="#单行替换" class="headerlink" title="单行替换"></a>单行替换</h2><p>s/欲替换的内容(可以是正则)/替换后的内容(可以是正则)/g</p>
-<h2 id="多行替换"><a href="#多行替换" class="headerlink" title="多行替换"></a>多行替换</h2><p>:start,:ends/欲替换的内容(可以是正则)/替换后的内容(可以是正则)/g<br>:start 数字，表示替换的查找起始行<br>:end 数字，表示替换的查找结束行</p>
-<h1 id="正则替换时替换后的内容使用替换前的内容"><a href="#正则替换时替换后的内容使用替换前的内容" class="headerlink" title="正则替换时替换后的内容使用替换前的内容"></a>正则替换时替换后的内容使用替换前的内容</h1><p>替换前的内容使用()包围，替换后使用:num指代替换前的第num个括号内的内容，num从1开始，比如把文中的所有字符串“abc……xyz”替换为“xyz……abc”可以有下列写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:%s&#x2F;abc\(.*\)xyz&#x2F;xyz\1abc&#x2F;g</span><br><span class="line">:%s&#x2F;\(abc\)\(.*\)\(xyz\)&#x2F;\3\2\1&#x2F;g</span><br></pre></td></tr></table></figure>
-<h1 id="查找或者替换时不区分大小写"><a href="#查找或者替换时不区分大小写" class="headerlink" title="查找或者替换时不区分大小写"></a>查找或者替换时不区分大小写</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>查找或替换时的表达式末尾添加\c</p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ic</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ignorecase</span><br></pre></td></tr></table></figure>
+            <h1 id="日期格式化函数："><a href="#日期格式化函数：" class="headerlink" title="日期格式化函数："></a>日期格式化函数：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATE_FORMAT(<span class="type">date</span>,format)</span><br></pre></td></tr></table></figure>
+<h1 id="format参数"><a href="#format参数" class="headerlink" title="format参数"></a>format参数</h1><ul>
+<li>%a    缩写星期名</li>
+<li>%b    缩写月名</li>
+<li>%c    月，数值</li>
+<li>%D    带有英文前缀的月中的天</li>
+<li>%d    月的天，数值(00-31)</li>
+<li>%e    月的天，数值(0-31)</li>
+<li>%f    微秒</li>
+<li>%H    小时 (00-23)</li>
+<li>%h    小时 (01-12)</li>
+<li>%I    小时 (01-12)</li>
+<li>%i    分钟，数值(00-59)</li>
+<li>%j    年的天 (001-366)</li>
+<li>%k    小时 (0-23)</li>
+<li>%l    小时 (1-12)</li>
+<li>%M    月名</li>
+<li>%m    月，数值(00-12)</li>
+<li>%p    AM 或 PM</li>
+<li>%r    时间，12-小时（hh:mm:ss AM 或 PM）</li>
+<li>%S    秒(00-59)</li>
+<li>%s    秒(00-59)</li>
+<li>%T    时间, 24-小时 (hh:mm:ss)</li>
+<li>%U    周 (00-53) 星期日是一周的第一天</li>
+<li>%u    周 (00-53) 星期一是一周的第一天</li>
+<li>%V    周 (01-53) 星期日是一周的第一天，与 %X 使用</li>
+<li>%v    周 (01-53) 星期一是一周的第一天，与 %x 使用</li>
+<li>%W    星期名</li>
+<li>%w    周的天 （0=星期日, 6=星期六）</li>
+<li>%X    年，其中的星期日是周的第一天，4 位，与 %V 使用</li>
+<li>%x    年，其中的星期一是周的第一天，4 位，与 %v 使用</li>
+<li>%Y    年，4 位</li>
+<li>%y    年，2 位</li>
+</ul>
+
           
         
       
@@ -393,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/207/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/207/">207</a><span class="page-number current">208</span><a class="page-number" href="/blog/page/209/">209</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/209/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/207/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/207/">207</a><span class="page-number current">208</span><a class="page-number" href="/blog/page/209/">209</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/209/">&gt;</a>
   </nav>
 
 
@@ -439,7 +464,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

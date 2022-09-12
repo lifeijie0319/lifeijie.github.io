@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/language/python/Django/db/channels/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/hugepage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/language/python/Django/db/channels/" itemprop="url">django使用channels实现websocket</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/system/linux/hugepage/" itemprop="url">hugepage</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/python/Django/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -367,13 +345,21 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="1、联网安装"><a href="#1、联网安装" class="headerlink" title="1、联网安装"></a>1、联网安装</h2><p>pip install channels<br>错误：unable to execute gcc: No such file or directory<br>error: command ‘gcc’ failed with exit status 1<br>分析：缺少gcc<br>尝试：  </p>
-<ul>
-<li>（1）sudo yum install python-devel失败</li>
-<li>（2）sudo yum install gcc<br>成功！<h2 id="2、离线安装"><a href="#2、离线安装" class="headerlink" title="2、离线安装"></a>2、离线安装</h2>指令：pip install –no-index -f /home/nanxun/packages/channels_install/ channels-1.1.6-py2.py3-none-any.whl<br>依赖包：/home/nanxun/packages/channels_install/<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Requirement already satisfied: Django&gt;&#x3D;1.8 in &#x2F;home&#x2F;nanxun&#x2F;wxenv&#x2F;lib&#x2F;python2.7&#x2F;site-packages (from channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting asgiref~&#x3D;1.1 (from channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting daphne~&#x3D;1.3 (from channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting six (from asgiref~&#x3D;1.1-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting autobahn&gt;&#x3D;0.18 (from daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting twisted&gt;&#x3D;17.1 (from daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting txaio&gt;&#x3D;2.7.0 (from autobahn&gt;&#x3D;0.18-&gt;daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting zope.interface&gt;&#x3D;3.6.0 (from twisted&gt;&#x3D;17.1-&gt;daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting constantly&gt;&#x3D;15.1 (from twisted&gt;&#x3D;17.1-&gt;daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting incremental&gt;&#x3D;16.10.1 (from twisted&gt;&#x3D;17.1-&gt;daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting Automat&gt;&#x3D;0.3.0 (from twisted&gt;&#x3D;17.1-&gt;daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br><span class="line">Collecting hyperlink&gt;&#x3D;17.1.1 (from twisted&gt;&#x3D;17.1-&gt;daphne~&#x3D;1.3-&gt;channels&#x3D;&#x3D;1.1.6)</span><br></pre></td></tr></table></figure>
-3、将 “channels”添加到 INSTALLED_APPS配置项中<br>4、在settings模块里面添加配置如下  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CHANNEL_LAYERS = &#123;</span><br><span class="line">    <span class="string">&quot;default&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;BACKEND&quot;</span>: <span class="string">&quot;asgiref.inmemory.ChannelLayer&quot;</span>,</span><br><span class="line">        <span class="string">&quot;ROUTING&quot;</span>: <span class="string">&quot;nanxun_pro.routing.channel_routing&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-5、在settings同一级添加routing模块，用于引导ws请求，如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> channels.routing <span class="keyword">import</span> route</span><br><span class="line"><span class="keyword">from</span> nanxun.consumers <span class="keyword">import</span> ws_connect, ws_disconnect</span><br><span class="line">channel_routing = [</span><br><span class="line">    route(<span class="string">&#x27;websocket.connect&#x27;</span>, ws_connect),</span><br><span class="line">    route(<span class="string">&#x27;websocket.disconnect&#x27;</span>, ws_disconnect),</span><br><span class="line">]</span><br></pre></td></tr></table></figure></li>
-</ul>
+            <h1 id="Linux-中的“大内存页”是个什么玩意？"><a href="#Linux-中的“大内存页”是个什么玩意？" class="headerlink" title="Linux 中的“大内存页”是个什么玩意？"></a>Linux 中的“大内存页”是个什么玩意？</h1><p>“大内存页”有助于 Linux 系统进行虚拟内存管理。顾名思义，除了标准的 4KB 大小的页面外，它们还能帮助管理内存中的巨大的页面。使用“大内存页”，你最大可以定义 1GB 的页面大小。</p>
+<p>在系统启动期间，你能用“大内存页”为应用程序预留一部分内存。这部分内存，即被“大内存页”占用的这些存储器永远不会被交换出内存。它会一直保留其中，除非你修改了配置。这会极大地提高像 Oracle 数据库这样的需要海量内存的应用程序的性能。</p>
+<h1 id="为什么使用“大内存页”？"><a href="#为什么使用“大内存页”？" class="headerlink" title="为什么使用“大内存页”？"></a>为什么使用“大内存页”？</h1><p>在虚拟内存管理中，内核维护一个将虚拟内存地址映射到物理地址的表，对于每个页面操作，内核都需要加载相关的映射。如果你的内存页很小，那么你需要加载的页就会很多，导致内核会加载更多的映射表。而这会降低性能。</p>
+<p>使用“大内存页”，意味着所需要的页变少了。从而大大减少由内核加载的映射表的数量。这提高了内核级别的性能最终有利于应用程序的性能。</p>
+<p>简而言之，通过启用“大内存页”，系统具只需要处理较少的页面映射表，从而减少访问/维护它们的开销！</p>
+<h1 id="如何配置“大内存页”？"><a href="#如何配置“大内存页”？" class="headerlink" title="如何配置“大内存页”？"></a>如何配置“大内存页”？</h1><p>运行下面命令来查看当前“大内存页”的详细内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep Huge &#x2F;proc&#x2F;meminfo</span><br></pre></td></tr></table></figure>
+<p>oracle有hugepages_settings.sh脚本可以知道系统当前需要多少个巨大页。<br>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kerneltalks # sh &#x2F;tmp&#x2F;hugepages_settings.sh</span><br><span class="line">Recommended setting: vm.nr_hugepages &#x3D; 124</span><br></pre></td></tr></table></figure>
+<p>这意味着，你系统需要 124 个每个 2MB 的“大内存页”！若你设置页面大小为 4MB，则结果就变成了 62。你明白了吧？</p>
+<p>本文最后一部分内容是配置上面提到的 内核参数 ，然后重新加载。将下面内容添加到 /etc/sysctl.conf 中，然后输入 sysctl -p 命令重新加载配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.nr_hugepages&#x3D;126</span><br></pre></td></tr></table></figure>
+<p>注意我们这里多加了两个额外的页，因为我们希望在实际需要的页面数量之外多一些额外的空闲页。<br>现在，内核已经配置好了，但是要让应用能够使用这些“大内存页”还需要提高内存的使用阀值。新的内存阀值应该为 126 个页 x 每个页 2 MB = 252 MB，也就是 258048 KB。<br>你需要编辑 /etc/security/limits.conf 中的如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">soft memlock 258048</span><br><span class="line">hard memlock 258048</span><br></pre></td></tr></table></figure>
+<p>某些情况下，这些设置是在指定应用的文件中配置的，比如 Oracle DB 就是在 /etc/security/limits.d/99-grid-oracle-limits.conf 中配置的。<br>这就完成了！你可能还需要重启应用来让应用来使用这些新的巨大页。</p>
 
           
         
@@ -413,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/266/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/266/">266</a><span class="page-number current">267</span><a class="page-number" href="/blog/page/268/">268</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/268/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/266/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/266/">266</a><span class="page-number current">267</span><a class="page-number" href="/blog/page/268/">268</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/268/">&gt;</a>
   </nav>
 
 
@@ -459,7 +445,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

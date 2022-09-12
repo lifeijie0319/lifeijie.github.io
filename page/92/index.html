@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/basic/math/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/database/%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/basic/math/" itemprop="url">Math包</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/database/%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81/" itemprop="url">乐观锁与悲观锁</a></h1>
         
 
         <div class="post-meta">
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/blog/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -356,9 +334,8 @@
       
         
           
-            <h1 id="Math-round计算规则"><a href="#Math-round计算规则" class="headerlink" title="Math.round计算规则"></a>Math.round计算规则</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>Math.round是一个四舍五入的方法，有不同重载分别接收long/float/double类型参数，返回int。</p>
-<h2 id="计算规则"><a href="#计算规则" class="headerlink" title="计算规则"></a>计算规则</h2><p>round()方法在实现四舍五入的时候不论正负，它会先将这个数加上0.5然后再向下取整。<br>向下取整是指取不大于输入值的最大整数</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37358860/article/details/100197724">https://blog.csdn.net/qq_37358860/article/details/100197724</a></p>
+            <h1 id="什么是乐观锁和悲观锁"><a href="#什么是乐观锁和悲观锁" class="headerlink" title="什么是乐观锁和悲观锁"></a>什么是乐观锁和悲观锁</h1><p>悲观锁指查询时先用排他锁锁住要修改的行，修改完成后释放锁。而乐观锁是查询时不加锁，乐观地认为在查询到更新这个阶段没有其它事务修改数据行，在更新时再判断数据库中的记录是否是之前查询时的状态，如果是的话进行更新，如果不是的话重试（自旋操作）。<br>乐观锁能够支持更高的并发，但是会有失败的情况，适合读多写少的情况。</p>
+<h1 id="乐观锁的实现方式"><a href="#乐观锁的实现方式" class="headerlink" title="乐观锁的实现方式"></a>乐观锁的实现方式</h1><p>一般通过在数据表中添加version字段，每次更新的时候version+1。假设查询出的结果version为1，然后更新的时候version也作为更新条件，更新成功说明这期间记录没有改变，更新失败说明这期间又其它更新导致version变化了。</p>
 
           
         
@@ -398,7 +375,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/91/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/91/">91</a><span class="page-number current">92</span><a class="page-number" href="/blog/page/93/">93</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/93/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/91/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/91/">91</a><span class="page-number current">92</span><a class="page-number" href="/blog/page/93/">93</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/93/">&gt;</a>
   </nav>
 
 
@@ -444,7 +421,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

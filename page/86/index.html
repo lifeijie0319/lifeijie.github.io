@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/go/effective_go/4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/14/network/tcp/tcp%E5%B8%B8%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/go/effective_go/4/" itemprop="url">effective go 学习整理四</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/14/network/tcp/tcp%E5%B8%B8%E8%AF%86/" itemprop="url">tcp常识</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-14T16:18:43+08:00">
+                2022-03-14
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/go/effective-go/" itemprop="url" rel="index">
-                    <span itemprop="name">effective_go</span>
+                  <a href="/blog/categories/network/tcp/" itemprop="url" rel="index">
+                    <span itemprop="name">tcp</span>
                   </a>
                 </span>
 
@@ -356,7 +345,11 @@
       
         
           
-            <h1 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h1><p>Do not communicate by sharing memory; instead, share memory by communicating.这是go中并发的思想核心。简单来说，传统的并发控制通过对一个共享对象加锁并进行争用实现，而go的思想是，单线程本身是顺序的，只有两个线程交互的时候，才有并发的问题，而交流的过程就是同步的过程，可以把这种同步理解为unix的pipe。<br>goroutine实现并发，chan实现同步和信号量，两者结合形成go的并发体系。<br>go的并发机制也能用来实现多核并行，关键在于将任务分解到goroutine中，最后通过resultChan来收集结果。</p>
+            <h1 id="tcp粘包"><a href="#tcp粘包" class="headerlink" title="tcp粘包"></a>tcp粘包</h1><p>tcp是传输层协议，面向数据流的，而将流数据解析成数据报文是应用层的任务。tcp粘包其实是个伪命题。<br>所谓“tcp粘包”一般是两个原因：</p>
+<ol>
+<li>发送的数据包过于的小时，那么TCP协议默认的会启用Nagle算法，将这些较小的数据包进行合并发送（缓冲区数据发送是一个堆压的过程）</li>
+<li>对于接收端，应用端不会直接处理收到的包，有一个接收缓冲区，如果TCP接收数据包到缓存的速度大于应用程序从缓存中读取数据包的速度，多个包就会被缓存，应用程序就有可能读取到多个首尾相接粘到一起的包。<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2>制定应用层协议，能够将数据流转化成报文。比如一个简单的xml传输，可以在头部固定6位用来指示xml报文的长度。</li>
+</ol>
 
           
         
@@ -396,7 +389,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/85/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/blog/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/87/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/85/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/85/">85</a><span class="page-number current">86</span><a class="page-number" href="/blog/page/87/">87</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/87/">&gt;</a>
   </nav>
 
 
@@ -442,7 +435,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

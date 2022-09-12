@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/07/tools/rabbitmq/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%81%9C/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/05/20/math/accounting/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/04/07/tools/rabbitmq/%E5%AE%89%E8%A3%85%E4%B8%8E%E5%90%AF%E5%81%9C/" itemprop="url">rabbitmq安装与启停</a></h1>
+                <a class="post-title-link" href="/blog/2022/05/20/math/accounting/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF/" itemprop="url">等额本息</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T11:53:24+08:00">
-                2022-04-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-20T17:51:24+08:00">
+                2022-05-20
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/rabbitmq/" itemprop="url" rel="index">
-                    <span itemprop="name">rabbitmq</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,15 +312,9 @@
       
         
           
-            <h1 id="安装-Cenntos7"><a href="#安装-Cenntos7" class="headerlink" title="安装(Cenntos7)"></a>安装(Cenntos7)</h1><h2 id="安装erlang"><a href="#安装erlang" class="headerlink" title="安装erlang"></a>安装erlang</h2><ol>
-<li>使用packagecloud提供的脚本安装yum源<br><a target="_blank" rel="noopener" href="https://packagecloud.io/rabbitmq/erlang/install#bash-rpm">https://packagecloud.io/rabbitmq/erlang/install#bash-rpm</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https:&#x2F;&#x2F;packagecloud.io&#x2F;install&#x2F;repositories&#x2F;rabbitmq&#x2F;erlang&#x2F;script.rpm.sh | sudo bash</span><br></pre></td></tr></table></figure></li>
-<li>yum install erlang<h2 id="安装rabbitmq"><a href="#安装rabbitmq" class="headerlink" title="安装rabbitmq"></a>安装rabbitmq</h2></li>
-<li>使用packagecloud提供的脚本安装yum源<br><a target="_blank" rel="noopener" href="https://packagecloud.io/rabbitmq/rabbitmq-server/install#bash-rpm">https://packagecloud.io/rabbitmq/rabbitmq-server/install#bash-rpm</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https:&#x2F;&#x2F;packagecloud.io&#x2F;install&#x2F;repositories&#x2F;rabbitmq&#x2F;rabbitmq-server&#x2F;script.rpm.sh | sudo bash</span><br></pre></td></tr></table></figure></li>
-<li>yum install rabbitmq-server</li>
-</ol>
-<h1 id="启停"><a href="#启停" class="headerlink" title="启停"></a>启停</h1><h2 id="前台启动"><a href="#前台启动" class="headerlink" title="前台启动"></a>前台启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server</span><br></pre></td></tr></table></figure>
-<h2 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server -detached</span><br></pre></td></tr></table></figure>
-<h1 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl stop</span><br></pre></td></tr></table></figure>
+            <h1 id="计算公式与推导"><a href="#计算公式与推导" class="headerlink" title="计算公式与推导"></a>计算公式与推导</h1><p>A 本金 X 期款 R 利率<br>第一期剩余本金  A*(1+R)-X<br>第二期剩余本金  (A*(1+R)-X)<em>(1+R) - X = A</em>(1+R)^2 - X((1+R) + 1)<br>第三期剩余本金  (A*(1+R)^2 - X((1+R) + 1))<em>(1+R) - X = A</em>(1+R)^3 - X((1+R)^2 + (1+R) + 1)<br>第四期剩余本金  (A*(1+R)^3 - X((1+R)^2 + (1+R) + 1))<em>(1+R) - X = A</em>(1+R)^4 - X((1+R)^3 + (1+R)^2 + (1+R) + 1)<br>…<br>第N期剩余本金  A*(1+R)^N - X((1+R)^N-1 + … + 1) = A(1+R)^N - X*(1 - (1+R)^N)) / -R = A(1+R)^N + X * (1 - (1+R)^N) / R = 0<br>X = A(1+R)^N *R/ ((1+R)^N - 1)</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.baiozhuntuixing.com/p/103.html">https://www.baiozhuntuixing.com/p/103.html</a><br><a target="_blank" rel="noopener" href="https://www.baiozhuntuixing.com/p/100.html">https://www.baiozhuntuixing.com/p/100.html</a></p>
+
           
         
       
@@ -392,7 +353,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/23/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/blog/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/25/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/23/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/blog/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/25/">&gt;</a>
   </nav>
 
 
@@ -438,7 +399,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/database/mysql/mysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/09/06/language/python/basic/%E5%A4%9A%E7%BB%A7%E6%89%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/04/10/database/mysql/mysql%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/" itemprop="url">mysql主从复制</a></h1>
+                <a class="post-title-link" href="/blog/2022/09/06/language/python/basic/%E5%A4%9A%E7%BB%A7%E6%89%BF/" itemprop="url">多继承</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-06T14:00:07+08:00">
+                2022-09-06
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,46 +312,14 @@
       
         
           
-            <h1 id="主从复制形式"><a href="#主从复制形式" class="headerlink" title="主从复制形式"></a>主从复制形式</h1><ul>
-<li>一主一从</li>
-<li>一主多从 和一主一从类似，部署slave的时候再多部署几台</li>
-<li>多主一从</li>
-<li>主主复制</li>
-<li>级联复制 一级slave后面还有二级slave从一级slave同步数据</li>
-</ul>
-<h1 id="主从复制原理"><a href="#主从复制原理" class="headerlink" title="主从复制原理"></a>主从复制原理</h1><h2 id="异步复制"><a href="#异步复制" class="headerlink" title="异步复制"></a>异步复制</h2><p>默认的复制模式，之后的操作以异步复制为例</p>
+            <h1 id="多继承的含参初始化"><a href="#多继承的含参初始化" class="headerlink" title="多继承的含参初始化"></a>多继承的含参初始化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">a</span>):</span></span><br><span class="line">      print(<span class="string">f&#x27;init A: <span class="subst">&#123;a&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">a, b</span>):</span></span><br><span class="line">      print(<span class="string">f&#x27;init B: <span class="subst">&#123;a&#125;</span>, <span class="subst">&#123;b&#125;</span>&#x27;</span>)</span><br><span class="line">      <span class="built_in">super</span>().__init__(a)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>(<span class="params">A</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">a, c, d</span>):</span></span><br><span class="line">      print(<span class="string">f&#x27;init C: <span class="subst">&#123;a&#125;</span>, <span class="subst">&#123;c&#125;</span>, <span class="subst">&#123;d&#125;</span>&#x27;</span>)</span><br><span class="line">      <span class="built_in">super</span>().__init__(a)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>(<span class="params">B, C</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">a, b, c, d</span>):</span></span><br><span class="line">        print(<span class="string">f&#x27;init D: <span class="subst">&#123;a&#125;</span>, <span class="subst">&#123;b&#125;</span>&#x27;</span>)</span><br><span class="line">        <span class="built_in">super</span>(D, self).__init__(a, b)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">   d = D(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>上面这种做法会报错，原因在于D初始化调用B初始化，B初始化使用super会按照mro调用C的初始化，此时传递的参数数量不对。我们设想的其实是B调用super会调用A的初始化。为了达成目的，可能的做法是：</p>
 <ol>
-<li>主库在每个事务更新数据完成之前将操作记录串行写入binlog</li>
-<li>从库开启IO线程，从主库binlog读取日志写入从库的中继日志relaylog</li>
-<li>从库SQL线程读取中继日志relaylog并顺序执行日志记录的sql<h2 id="半同步复制"><a href="#半同步复制" class="headerlink" title="半同步复制"></a>半同步复制</h2>半同步复制与异步复制的区别在于，半同步复制的时候，master将对应的binary log发送给slace的io thread之后要等待slave响应之后再返回给客户端。半同步模式效率更低，但是提高了主从服务器之间的数据一致性。</li>
+<li>函数初始化统一使用变长参数</li>
+<li>放弃super，使用类直接初始化，但是这样会导致父类多次初始化</li>
+<li>避免使用多继承</li>
 </ol>
-<h1 id="主从复制的作用"><a href="#主从复制的作用" class="headerlink" title="主从复制的作用"></a>主从复制的作用</h1><ul>
-<li>从服务器作为备库，一方面进行日常备份，不影响主服务器；另一方面如果主服务器崩溃，可以切换到从服务器</li>
-<li>可以进行数据库层面的读写分离</li>
-</ul>
-<h1 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h1><h2 id="主库配置"><a href="#主库配置" class="headerlink" title="主库配置"></a>主库配置</h2><ol>
-<li>修改my.cnf数据库配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">server_id&#x3D;3 # 唯一标识数据库实例</span><br><span class="line"># binlog路径</span><br><span class="line">log_bin&#x3D;&#x2F;mysql_data&#x2F;3306&#x2F;data&#x2F;mysql-bin</span><br><span class="line"># binlog索引文件路径</span><br><span class="line">log_bin_index&#x3D;&#x2F;mysql_data&#x2F;3306&#x2F;data&#x2F;mysql-bin-index</span><br><span class="line"># binlog记录方式</span><br><span class="line">binlog_format&#x3D;mixed</span><br><span class="line"># binlog不记录的数据库</span><br><span class="line">binlog-ignore-db&#x3D;mysql</span><br><span class="line">binlog-ignore-db&#x3D;information_schema</span><br><span class="line">binlog-ignore-db&#x3D;performance_schema</span><br><span class="line">binlog-ignore-db&#x3D;test</span><br></pre></td></tr></table></figure></li>
-<li>重启服务</li>
-<li>创建复制账户，赋予账户复制权限<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> REPLICATION SLAVE <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;repl&#x27;</span>@<span class="string">&#x27;127.0.0.1&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;repl&#x27;</span>;</span><br></pre></td></tr></table></figure>
-关于赋予用户的权限，有两个相似的概念，记录如下：</li>
-</ol>
-<ul>
-<li>The REPLICATION CLIENT privilege enables the use of SHOW MASTER STATUS and SHOW SLAVE STATUS. In MySQL 5.6.6 and later, it also enables the use of the SHOW BINARY LOGS statement.</li>
-<li>The REPLICATION SLAVE privilege should be granted to accounts that are used by slave servers to connect to the current server as their master. Without this privilege, the slave cannot request updates that have been made to databases on the master server.</li>
-</ul>
-<ol start="4">
-<li>查看二进制日志文件及位置点<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> master status\G</span><br></pre></td></tr></table></figure>
-<h2 id="从库配置"><a href="#从库配置" class="headerlink" title="从库配置"></a>从库配置</h2></li>
-</ol>
-<ul>
-<li>修改my.cnf数据库配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server-id&#x3D;2</span><br><span class="line">relay-log&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;rely-bin            &#x2F;&#x2F; 开启从机中继日志</span><br><span class="line">relay-log-index&#x3D;relay-bin.index</span><br></pre></td></tr></table></figure></li>
-<li>重启服务</li>
-<li>修改从库上的master指向，使其指向主库，并且从主库上最新的二进制日志和位置点开始同步，然后启动主从同步<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CHANGE MASTER <span class="keyword">TO</span></span><br><span class="line">    master_host<span class="operator">=</span><span class="string">&#x27;127.0.0.1&#x27;</span>,</span><br><span class="line">    master_port<span class="operator">=</span><span class="number">3306</span>,</span><br><span class="line">    master_user<span class="operator">=</span><span class="string">&#x27;repl&#x27;</span>,</span><br><span class="line">    master_password<span class="operator">=</span><span class="string">&#x27;repl&#x27;</span>,</span><br><span class="line">    master_log_file<span class="operator">=</span><span class="string">&#x27;mysql-bin.000014&#x27;</span>,</span><br><span class="line">    master_log_pos <span class="operator">=</span> <span class="number">367</span>;</span><br><span class="line"><span class="keyword">START</span> SLAVE;</span><br><span class="line"><span class="keyword">SHOW</span> SLAVE STATUS \G</span><br></pre></td></tr></table></figure>
-注意，这里的master_log_file和master_log_pos制定了开始复制的起点。</li>
-</ul>
-<h1 id="主从复制常见问题"><a href="#主从复制常见问题" class="headerlink" title="主从复制常见问题"></a>主从复制常见问题</h1><h2 id="限制从服务器只读"><a href="#限制从服务器只读" class="headerlink" title="限制从服务器只读"></a>限制从服务器只读</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global read_only&#x3D;1;</span><br></pre></td></tr></table></figure>
-<p>在从服务器上设置：read_only = ON,但是此限制对拥有SUPER权限的用户均无效。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1822790">https://cloud.tencent.com/developer/article/1822790</a><br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000015282191">https://segmentfault.com/a/1190000015282191</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/RSstudent/article/details/108809921">https://blog.csdn.net/RSstudent/article/details/108809921</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/61137040">https://www.zhihu.com/question/61137040</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41841097/article/details/109068491">https://blog.csdn.net/weixin_41841097/article/details/109068491</a></p>
 
           
         
@@ -424,7 +359,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/4/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/6/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/4/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/6/">&gt;</a>
   </nav>
 
 
@@ -470,7 +405,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

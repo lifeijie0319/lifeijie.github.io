@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/system/linux/ulimit/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/kvm/kvm%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/system/linux/ulimit/" itemprop="url">ulimit</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/kvm/kvm%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" itemprop="url">kvm基本操作</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/blog/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/blog/categories/tools/kvm/" itemprop="url" rel="index">
+                    <span itemprop="name">kvm</span>
                   </a>
                 </span>
 
@@ -345,19 +345,22 @@
       
         
           
-            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>ulimt是一个linux自带应用工具，用于控制资源的可用性</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>ulimit  [-HSTabcdefilmnpqrstuvx  [limit]]</p>
-<h2 id="a"><a href="#a" class="headerlink" title="-a"></a>-a</h2><p>-a 显示所有的资源限制参数配置</p>
-<h2 id="H-和-S"><a href="#H-和-S" class="headerlink" title="-H 和 -S"></a>-H 和 -S</h2><p>-H选项和-S选项分别表示对给定资源的硬限制（hard limit）和软限制（soft limit）进行设置。硬限制（hard limit）一旦被设置以后就不能被非root用户修改，软限制（soft limit）可以增长达到硬限制（hard limit）。如果既没有指定-H选项也没有指定-S选项，那么硬限制（hard limit）和软限制（soft limit）都会被设置。limit的值可以是一个数值，也可以是一些特定的值，比如：hard，soft，unlimited，分别代表当前硬件限制、当前软件限制、不限制。</p>
-<h2 id="查看进程打开文件的最大限制"><a href="#查看进程打开文件的最大限制" class="headerlink" title="查看进程打开文件的最大限制"></a>查看进程打开文件的最大限制</h2><h3 id="系统级最大限制"><a href="#系统级最大限制" class="headerlink" title="系统级最大限制"></a>系统级最大限制</h3><p>cat /proc/sys/fs/file-max</p>
-<h3 id="用户级限制"><a href="#用户级限制" class="headerlink" title="用户级限制"></a>用户级限制</h3><p>ulimit -n</p>
-<h2 id="查看进程已经打开的文件数"><a href="#查看进程已经打开的文件数" class="headerlink" title="查看进程已经打开的文件数"></a>查看进程已经打开的文件数</h2><h3 id="查看进程资源限制"><a href="#查看进程资源限制" class="headerlink" title="查看进程资源限制"></a>查看进程资源限制</h3><p>cat /proc/$pid/limits</p>
-<h3 id="查看实际打开文件数"><a href="#查看实际打开文件数" class="headerlink" title="查看实际打开文件数"></a>查看实际打开文件数</h3><p>ls /proc/$pid/fd|wc -l</p>
-<h2 id="修改限制"><a href="#修改限制" class="headerlink" title="修改限制"></a>修改限制</h2><h3 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h3><p>ulimit -n $num</p>
-<h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a>永久修改</h3><p>vi /etc/security/limits.conf<br>参考文档内说明配置限制项</p>
-<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="20210510-riak服务异常"><a href="#20210510-riak服务异常" class="headerlink" title="20210510 riak服务异常"></a>20210510 riak服务异常</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>客户端连接riak服务端超时。检查发现进程打开的文件数已经超过用户设置的限制50000。另外top命令显示系统cpu资源占用率400%以上。</p>
-<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>修改riak用户的打开文件数限制，增加到65535。重启riak服务。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>riak为什么打开文件数这么多还有待研究。</p>
+            <p>virsh是kvm虚拟机常用的管理工具，以下是一些常用的命令。</p>
+<ol>
+<li>查看在运行的虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list </span><br></pre></td></tr></table></figure></li>
+<li>查看创建的所有虚拟机 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all</span><br></pre></td></tr></table></figure></li>
+<li>启动虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh start win10</span><br></pre></td></tr></table></figure>
+win10是虚拟机的domain名称，下同。</li>
+<li>挂起虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh suspend win10</span><br></pre></td></tr></table></figure></li>
+<li>恢复被挂起的虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh resume win10</span><br></pre></td></tr></table></figure></li>
+<li>开机启动虚拟机，即在虚拟机服务（libvirt）启动的时候，就启动虚拟机。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh autostart win10</span><br></pre></td></tr></table></figure></li>
+<li>关闭开机启动虚拟机<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh auto start --disable win10 </span><br></pre></td></tr></table></figure></li>
+<li>关闭虚拟机（需要ACPID服务的支持，ACPI是Advanced<br>Configuration and PowerInterface缩写，高级配置和电源管理接口）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh shutdown win10</span><br></pre></td></tr></table></figure></li>
+<li>强制关闭虚拟机，这种方式是从virsh list列表中将虚拟机删除，仍然可以start起来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh destory win10</span><br></pre></td></tr></table></figure></li>
+<li>启动默认的网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-start default</span><br></pre></td></tr></table></figure></li>
+<li>自启动默认网络<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh net-autostart default</span><br></pre></td></tr></table></figure></li>
+<li>彻底删除虚拟机步骤<br>1）关闭虚拟机：virsh destroy win10<br>2）删除定义：virsh undefine win10<br>3）删除虚拟机文件（在/var/lib/libvirtd/下的相关文件）  </li>
+</ol>
 
           
         
@@ -397,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/234/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/234/">234</a><span class="page-number current">235</span><a class="page-number" href="/blog/page/236/">236</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/236/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/234/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/234/">234</a><span class="page-number current">235</span><a class="page-number" href="/blog/page/236/">236</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/236/">&gt;</a>
   </nav>
 
 
@@ -443,7 +446,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

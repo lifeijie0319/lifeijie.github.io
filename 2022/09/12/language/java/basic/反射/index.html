@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是反射Class类类是实例的模板，Class类是普通类的模板，每一个普通类（包括基本数据类型）在JVM中都有一个唯一的关联Class实例。通过Class实例获取对应类的各种信息的过程称为反射。 获取Class实例的三种方法1234567&#x2F;&#x2F; 通过类直接获取Class cls &#x3D; String.class;&#x2F;&#x2F; 通过类的实例获取String s &#x3D; &quot;Hello&quot;;Class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java反射">
+<meta property="og:url" content="https://lifeijie.gitee.io/blog/2022/09/12/language/java/basic/%E5%8F%8D%E5%B0%84/index.html">
+<meta property="og:site_name" content="李飞杰的个人博客">
+<meta property="og:description" content="什么是反射Class类类是实例的模板，Class类是普通类的模板，每一个普通类（包括基本数据类型）在JVM中都有一个唯一的关联Class实例。通过Class实例获取对应类的各种信息的过程称为反射。 获取Class实例的三种方法1234567&#x2F;&#x2F; 通过类直接获取Class cls &#x3D; String.class;&#x2F;&#x2F; 通过类的实例获取String s &#x3D; &quot;Hello&quot;;Class">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-09-12T07:40:33.173Z">
+<meta property="article:modified_time" content="2022-09-12T07:40:33.173Z">
+<meta property="article:author" content="lifeijie">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lifeijie.gitee.io/blog/2022/09/12/language/java/basic/反射/"/>
+
+
+
+
+
+  <title>java反射 | 李飞杰的个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">李飞杰的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/09/12/language/java/basic/%E5%8F%8D%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="李飞杰的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java反射</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T15:40:33+08:00">
+                2022-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h1><h2 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h2><p>类是实例的模板，Class类是普通类的模板，每一个普通类（包括基本数据类型）在JVM中都有一个唯一的关联Class实例。通过Class实例获取对应类的各种信息的过程称为反射。</p>
+<h3 id="获取Class实例的三种方法"><a href="#获取Class实例的三种方法" class="headerlink" title="获取Class实例的三种方法"></a>获取Class实例的三种方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过类直接获取</span></span><br><span class="line">Class cls = String.class;</span><br><span class="line"><span class="comment">// 通过类的实例获取</span></span><br><span class="line">String s = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">Class cls = s.getClass();</span><br><span class="line"><span class="comment">// 通过完整类名获取</span></span><br><span class="line">Class cls = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="动态加载"><a href="#动态加载" class="headerlink" title="动态加载"></a>动态加载</h2><p>JVM中类的加载是动态的，用到某些类才会加载他们。典型例子，Commons Logging总是优先使用Log4j，只有当Log4j不存在时，才使用JDK的logging。基本逻辑代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LogFactory factory = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (isClassPresent(<span class="string">&quot;org.apache.logging.log4j.Logger&quot;</span>)) &#123;</span><br><span class="line">    factory = createLog4j();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    factory = createJdkLog();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="java反射机制的意义"><a href="#java反射机制的意义" class="headerlink" title="java反射机制的意义"></a>java反射机制的意义</h1><p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20157023/answer/1021842505">https://www.zhihu.com/question/20157023/answer/1021842505</a><br>按照上述参考回答，反射的意义有二：</p>
+<ul>
+<li>提高程序的灵活性</li>
+<li>屏蔽掉实现的细节，让使用者更加方便好用</li>
+</ul>
+<p>第一点文章以数据库驱动的动态加载为例说明，但是这里一直有疑惑。为什么不是不同的数据库驱动厂商实现统一接口，而使用者调用接口即可？<br>第二点以springMVC框架的参数自动装载为例说明，到是没有什么疑义。</p>
+<h1 id="常用的反射API"><a href="#常用的反射API" class="headerlink" title="常用的反射API"></a>常用的反射API</h1><h2 id="获取字段"><a href="#获取字段" class="headerlink" title="获取字段"></a>获取字段</h2><ul>
+<li>Field getField(name)：根据字段名获取某个public的field（包括父类）</li>
+<li>Field getDeclaredField(name)：根据字段名获取当前类的某个field（不包括父类）</li>
+<li>Field[] getFields()：获取所有public的field（包括父类）</li>
+<li>Field[] getDeclaredFields()：获取当前类的所有field（不包括父类）<h3 id="获取到Field之后"><a href="#获取到Field之后" class="headerlink" title="获取到Field之后"></a>获取到Field之后</h3>获取到Field之后，可以通过Field获取到字段的各种信息，也可以对字段值进行获取和设置。</li>
+</ul>
+<ol>
+<li>字段信息获取</li>
+</ol>
+<ul>
+<li>getName()：返回字段名称，例如，”name”；</li>
+<li>getType()：返回字段类型，也是一个Class实例，例如，String.class；</li>
+<li>getModifiers()：返回字段的修饰符，它是一个int，不同的bit表示不同的含义。</li>
+</ul>
+<ol start="2">
+<li>字段值获取</li>
+</ol>
+<ul>
+<li>Field.get(Object) 传参为实例</li>
+<li>对于非public的字段，使用Field.setAccessible(true)使得字段可以被访问，后续类似场景带入即可</li>
+</ul>
+<ol start="3">
+<li>字段值设置</li>
+</ol>
+<ul>
+<li>Field.set(Object, Object) 第一个Object参数是指定的实例，第二个Object参数是待修改的值</li>
+</ul>
+<h2 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h2><ul>
+<li>Method getMethod(name, Class…)：获取某个public的Method（包括父类）</li>
+<li>Method getDeclaredMethod(name, Class…)：获取当前类的某个Method（不包括父类）</li>
+<li>Method[] getMethods()：获取所有public的Method（包括父类）</li>
+<li>Method[] getDeclaredMethods()：获取当前类的所有Method（不包括父类）<h3 id="获取到Method之后"><a href="#获取到Method之后" class="headerlink" title="获取到Method之后"></a>获取到Method之后</h3></li>
+</ul>
+<ol>
+<li>方法信息获取</li>
+</ol>
+<ul>
+<li>getName()：返回方法名称，例如：”getScore”；</li>
+<li>getReturnType()：返回方法返回值类型，也是一个Class实例，例如：String.class；</li>
+<li>getParameterTypes()：返回方法的参数类型，是一个Class数组，例如：{String.class, int.class}；</li>
+<li>getModifiers()：返回方法的修饰符，它是一个int，不同的bit表示不同的含义。</li>
+</ul>
+<ol start="2">
+<li>调用方法</li>
+</ol>
+<ul>
+<li>method.invoke(Object, Object…) 第一个参数是实例，后面的参数是方法本身需要的参数</li>
+<li>静态方法只要把第一个参数传入null即可</li>
+<li>非public方法使用Method.setAccessible(true)允许其调用</li>
+<li>通过反射调用方法时，仍然遵循多态原则即即总是调用实际类型的覆写方法</li>
+</ul>
+<h2 id="调用构造方法"><a href="#调用构造方法" class="headerlink" title="调用构造方法"></a>调用构造方法</h2><ul>
+<li>getConstructor(Class…)：获取某个public的Constructor；</li>
+<li>getDeclaredConstructor(Class…)：获取某个Constructor；</li>
+<li>getConstructors()：获取所有public的Constructor；</li>
+<li>getDeclaredConstructors()：获取所有Constructor。<h3 id="获取到Constructor之后"><a href="#获取到Constructor之后" class="headerlink" title="获取到Constructor之后"></a>获取到Constructor之后</h3></li>
+<li>Constructor.newInstance(Object… parameters)实现实例的创建</li>
+<li>通过设置setAccessible(true)来访问非public构造方法</li>
+</ul>
+<h2 id="获取继承关系"><a href="#获取继承关系" class="headerlink" title="获取继承关系"></a>获取继承关系</h2><ul>
+<li>class.getSuperclass(); 获取父类</li>
+<li>class.getInterfaces(); 获取接口</li>
+<li>class.isAssignableFrom(Class<T>); 判断当前class实例是否可以由另一个class向上转型而来</li>
+</ul>
+<h1 id="java反射的应用"><a href="#java反射的应用" class="headerlink" title="java反射的应用"></a>java反射的应用</h1><h1 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h1><p>对类A的访问统一通过类B来进行，我们称B是A的代理，代理类可以对被代理类的访问进行安全控制、功能增强等。比较好的静态代理是面向接口的静态代理，比如A和B实现相同的接口I，接口I以组合的方式结合到B中，调用时实例化B，通过传入A的实例实现A的功能调用以及B的代理功能。</p>
+<ul>
+<li>优点：高内聚松耦合，被代理类（通常是业务类）和代理类（通常是功能类）各自关注各自的功能逻辑，便于代码复用。</li>
+<li>缺点：<ul>
+<li>如果接口的方法很多，代理对每个接口实现的功能一致，会有冗余</li>
+<li>接口变动会导致代理类和被代理类一起变动<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1>当我们希望对一组类进行代理，并且代理希望实现的功能一致，只要这组类都实现了相同的接口，可以通过JDK提供的代理工具来实现。基本步骤如下：</li>
+</ul>
+</li>
+<li>创建InvocationHandler子类，覆写invoke方法，实现代理核心功能。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">InvocationHandler handler = <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(method);</span><br><span class="line">        <span class="keyword">if</span> (method.getName().equals(<span class="string">&quot;morning&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Good morning, &quot;</span> + args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>Proxy.newProxyInstance创建代理类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Hello hello = (Hello) Proxy.newProxyInstance(</span><br><span class="line">Hello.class.getClassLoader(), <span class="comment">// 传入ClassLoader</span></span><br><span class="line"><span class="keyword">new</span> Class[] &#123; Hello.class &#125;, <span class="comment">// 传入要实现的接口</span></span><br><span class="line">handler); <span class="comment">// 传入处理调用方法的InvocationHandler</span></span><br></pre></td></tr></table></figure>
+<h2 id="动态代理原理"><a href="#动态代理原理" class="headerlink" title="动态代理原理"></a>动态代理原理</h2>本质上，动态代理动态生成了一个代理类，代理类继承Proxy，实现了我们传入的接口。代理类通过反射静态获取了所有实现的方法的Method实例，我们称它们为被代理的原始方法，然后对应生成新的方法，新的方法实际都是调用handler，传入的参数依次为本代理类对象，被代理的原始方法，被代理的原始方法的参数。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaoluo501395377/p/3383130.html">https://www.cnblogs.com/xiaoluo501395377/p/3383130.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gonjan-blog/p/6685611.html">https://www.cnblogs.com/gonjan-blog/p/6685611.html</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/347141071">https://zhuanlan.zhihu.com/p/347141071</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bohu83/article/details/51124094">https://blog.csdn.net/bohu83/article/details/51124094</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2022/09/12/language/java/basic/%E6%B3%9B%E5%9E%8B/" rel="next" title="泛型">
+                <i class="fa fa-chevron-left"></i> 泛型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">330</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84"><span class="nav-number">1.</span> <span class="nav-text">什么是反射</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Class%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">Class类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96Class%E5%AE%9E%E4%BE%8B%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">获取Class实例的三种方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">动态加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">java反射机制的意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8F%8D%E5%B0%84API"><span class="nav-number">3.</span> <span class="nav-text">常用的反射API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AD%97%E6%AE%B5"><span class="nav-number">3.1.</span> <span class="nav-text">获取字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%88%B0Field%E4%B9%8B%E5%90%8E"><span class="nav-number">3.1.1.</span> <span class="nav-text">获取到Field之后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">调用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%88%B0Method%E4%B9%8B%E5%90%8E"><span class="nav-number">3.2.1.</span> <span class="nav-text">获取到Method之后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">调用构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%88%B0Constructor%E4%B9%8B%E5%90%8E"><span class="nav-number">3.3.1.</span> <span class="nav-text">获取到Constructor之后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB"><span class="nav-number">3.4.</span> <span class="nav-text">获取继承关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%8F%8D%E5%B0%84%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">java反射的应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">静态代理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="nav-number">6.</span> <span class="nav-text">动态代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%8E%9F%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">动态代理原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lifeijie</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

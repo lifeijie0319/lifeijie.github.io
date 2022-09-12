@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/other/chrome/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/go/effective_go/3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/other/chrome/" itemprop="url">chrome知识点</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/go/effective_go/3/" itemprop="url">effective go 学习整理三</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/go/effective-go/" itemprop="url" rel="index">
+                    <span itemprop="name">effective_go</span>
                   </a>
                 </span>
 
@@ -334,7 +356,29 @@
       
         
           
-            <h1 id="一、console-log"><a href="#一、console-log" class="headerlink" title="一、console.log"></a>一、console.log</h1><p>console.log是异步执行的。<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/23429203/">https://stackoverflow.com/questions/23429203/</a> weird-behavior-with-objects-console-log<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20507212">https://www.zhihu.com/question/20507212</a>  </p>
+            <h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><p>任何命名类型（除了指针和interface）都可以定义方法。比如下面的例子给[]byte的命名类型定义方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ByteSlice []<span class="keyword">byte</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(slice ByteSlice)</span> <span class="title">Append</span><span class="params">(data []<span class="keyword">byte</span>)</span> []<span class="title">byte</span></span> &#123;</span><br><span class="line">    <span class="comment">// Body exactly the same as the Append function defined above.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面例子方法是定义在值上的，不会改变原值，可以改成定义在指针上，参考C参数传递里面的值传递和指针传递。定义在值上的方法指针和值都能调用，定义在指针上的方法只有指针能够调用，但是如果能够寻址，go会自动把值转换成地址进行调用。<br>如果一个类型实现了某个接口的所有方法，那这个类型就是实现了这个接口。以下是一个实现Writer接口的write方法的示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *ByteSlice)</span> <span class="title">Write</span><span class="params">(data []<span class="keyword">byte</span>)</span> <span class="params">(n <span class="keyword">int</span>, err error)</span></span> &#123;</span><br><span class="line">    slice := *p</span><br><span class="line">    <span class="comment">// Again as above.</span></span><br><span class="line">    *p = slice</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(data), <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// use case</span></span><br><span class="line"><span class="keyword">var</span> b ByteSlice</span><br><span class="line">fmt.Fprintf(&amp;b, <span class="string">&quot;This hour has %d days\n&quot;</span>, <span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="Interfaces-and-other-types"><a href="#Interfaces-and-other-types" class="headerlink" title="Interfaces and other types"></a>Interfaces and other types</h1><p>接口提供了一种方法来定义对象的行为：如果对象能做一些操作，那么它能够被用在这里。一种类型可以同时实现多个接口。如果当前类型可以转化成其它类型，那么可以复用其它类型的方法。net/http包的HandlerFunc方法可以将一个普通方法转换成可以接收http请求的方法，传入http.handle使用，关键就在于在HandlerFunc方法类型上定义了ServeHTTP方法，满足了Handler接口的要求。</p>
+<h2 id="Interface-conversions-and-type-assertions"><a href="#Interface-conversions-and-type-assertions" class="headerlink" title="Interface conversions and type assertions"></a>Interface conversions and type assertions</h2><p>对于interface{}类型的转换，有两种方式，一种是type switch，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Stringer <span class="keyword">interface</span> &#123;</span><br><span class="line">    String() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> value <span class="keyword">interface</span>&#123;&#125; <span class="comment">// Value provided by caller.</span></span><br><span class="line"><span class="keyword">switch</span> str := value.(<span class="keyword">type</span>) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">    <span class="keyword">return</span> str</span><br><span class="line"><span class="keyword">case</span> Stringer:</span><br><span class="line">    <span class="keyword">return</span> str.String()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果只希望获得一种类型，有第二种转换方式，即type assertion，如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str, ok := value.(<span class="keyword">string</span>)</span><br><span class="line"><span class="keyword">if</span> ok &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;string value is: %q\n&quot;</span>, str)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;value is not a string\n&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="The-blank-identifier"><a href="#The-blank-identifier" class="headerlink" title="The blank identifier"></a>The blank identifier</h1><p>_ 作为空白标识，有以下可能的作用</p>
+<ol>
+<li>忽略返回值<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> _, err := os.Stat(path); os.IsNotExist(err) &#123;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%s does not exist\n&quot;</span>, path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>忽略报警<br>编译不能允许未使用的import和变量，可以用空白标识符暂时忽略<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;io&quot;</span></span><br><span class="line">    <span class="string">&quot;log&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line">    _ <span class="string">&quot;net/http/pprof&quot;</span> <span class="comment">// 这种import是特殊的，当前源文件的确不需要用包内提供的对象，但是需要执行包的init函数</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _ = fmt.Printf <span class="comment">// For debugging; delete when done.</span></span><br><span class="line"><span class="keyword">var</span> _ io.Reader    <span class="comment">// For debugging; delete when done.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fd, err := os.Open(<span class="string">&quot;test.go&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatal(err)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> use fd.</span></span><br><span class="line">    _ = fd</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>类型检查<br>有时候，需要对一个类型是否实现某个接口进行检查，但是没有实际使用该类型实例。可以用如下方法：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _ json.Marshaler = (*RawMessage)(<span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+该例检查了RawMessage是否实现了json.Marshaler接口</li>
+</ol>
+<h1 id="Embeding"><a href="#Embeding" class="headerlink" title="Embeding"></a>Embeding</h1><p>go中没有传统类型语言的继承机制，但是interface和struct可以使用嵌入。<br>interface嵌入：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Reader <span class="keyword">interface</span> &#123;</span><br><span class="line">    Read(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Writer <span class="keyword">interface</span> &#123;</span><br><span class="line">    Write(p []<span class="keyword">byte</span>) (n <span class="keyword">int</span>, err error)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ReadWriter is the interface that combines the Reader and Writer interfaces.</span></span><br><span class="line"><span class="keyword">type</span> ReadWriter <span class="keyword">interface</span> &#123;</span><br><span class="line">    Reader</span><br><span class="line">    Writer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>struct嵌入</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ReadWriter stores pointers to a Reader and a Writer.</span></span><br><span class="line"><span class="comment">// It implements io.ReadWriter.</span></span><br><span class="line"><span class="keyword">type</span> ReadWriter <span class="keyword">struct</span> &#123;</span><br><span class="line">    *Reader  <span class="comment">// *bufio.Reader</span></span><br><span class="line">    *Writer  <span class="comment">// *bufio.Writer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用这种嵌入时，内部指针对应的结构实现的方法变成外部结构实现的方法，但是实际上方法的接收者仍然是内部的指针对象。When we embed a type, the methods of that type become methods of the outer type, but when they are invoked the receiver of the method is the inner type, not the outer one.<br>有时候要直接获取到内部结构的某个属性，可以用指针类名（不带包路径）进行引用，比如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(job *Job)</span> <span class="title">Printf</span><span class="params">(format <span class="keyword">string</span>, args ...<span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">    job.Logger.Printf(<span class="string">&quot;%q: %s&quot;</span>, job.Command, fmt.Sprintf(format, args...))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里job.Logger.Printf获取了内部对象Logger的Printf函数，如果还用job.Printf会陷入循环引用。</p>
 
           
         
@@ -374,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/143/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/blog/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/145/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/143/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/blog/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/145/">&gt;</a>
   </nav>
 
 
@@ -420,7 +464,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

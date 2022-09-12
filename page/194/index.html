@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url">nginx常用指令</a></h1>
+                <a class="post-title-link" href="/blog/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">grep常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -302,17 +302,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -345,12 +334,16 @@
       
         
           
-            <h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><ol>
-<li>./nginx -s quit:此方式停止步骤是待nginx进程处理任务完毕进行停止。</li>
-<li>./nginx -s stop:此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程。</li>
-<li>对 nginx 进行重启相当于先停止再启动，即先执行停止命令再执行启动命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -s quit</span><br><span class="line">.&#x2F;nginx</span><br></pre></td></tr></table></figure></li>
-<li>./nginx -s reload不停止nginx的情况下重新加载配置文件。</li>
-</ol>
+            <h1 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h1><p>grep [:options] :expression :file<br>:options 选项<br>:expression 要查找的内容，可以用正则表达式<br>:file 搜索的文件名</p>
+<h1 id="常见options"><a href="#常见options" class="headerlink" title="常见options"></a>常见options</h1><ul>
+<li>-l 只打印文件名，不输出匹配的行内容</li>
+<li>-I 不搜索二进制文件</li>
+<li>-r 递归搜索子目录下的文件</li>
+<li>-n 打印匹配内容在文件中的行数</li>
+<li>–include=GLOB 使用GLOB指定的通配符来匹配文件名</li>
+<li>-l 列出符合匹配的文件名</li>
+<li>-L参数列出不符合匹配的参数名</li>
+</ul>
 
           
         
@@ -390,7 +383,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/193/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/blog/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/195/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/193/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/193/">193</a><span class="page-number current">194</span><a class="page-number" href="/blog/page/195/">195</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/195/">&gt;</a>
   </nav>
 
 
@@ -436,7 +429,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

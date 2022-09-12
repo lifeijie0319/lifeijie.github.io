@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/30/database/mysql/engine/transaction/mysql%E4%BA%8B%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/25/tools/k8s/%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/30/database/mysql/engine/transaction/mysql%E4%BA%8B%E5%8A%A1/" itemprop="url">mysql事务</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/25/tools/k8s/%E5%9F%BA%E7%A1%80/" itemprop="url">k8s基础</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T19:16:34+08:00">
-                2022-03-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-25T10:43:56+08:00">
+                2022-04-25
               </time>
             
 
@@ -282,61 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/mysql/engine/transaction/" itemprop="url" rel="index">
-                    <span itemprop="name">transaction</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -367,10 +312,16 @@
       
         
           
-            <h1 id="mysql客户端开启事务的方式"><a href="#mysql客户端开启事务的方式" class="headerlink" title="mysql客户端开启事务的方式"></a>mysql客户端开启事务的方式</h1><h2 id="显式启动事务"><a href="#显式启动事务" class="headerlink" title="显式启动事务"></a>显式启动事务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">begin&#x2F;start transaction;</span><br></pre></td></tr></table></figure>
-<h2 id="修改客户端autocommit值"><a href="#修改客户端autocommit值" class="headerlink" title="修改客户端autocommit值"></a>修改客户端autocommit值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%autocommit%&#39;;</span><br><span class="line">set autocommit&#x3D;0;</span><br><span class="line">show variables like &#39;%autocommit%&#39;;</span><br></pre></td></tr></table></figure>
-<h1 id="隔离级别的查看与设置"><a href="#隔离级别的查看与设置" class="headerlink" title="隔离级别的查看与设置"></a>隔离级别的查看与设置</h1><h2 id="隔离级别的查看"><a href="#隔离级别的查看" class="headerlink" title="隔离级别的查看"></a>隔离级别的查看</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select @@tx_isolation; # 查看当前会话的隔离级别</span><br><span class="line">select @@global.tx_isolation; # 查看全局的隔离级别</span><br></pre></td></tr></table></figure>
-<h2 id="隔离级别的设置"><a href="#隔离级别的设置" class="headerlink" title="隔离级别的设置"></a>隔离级别的设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set session transaction isolation level read committed; # 设置会话的隔离级别</span><br></pre></td></tr></table></figure>
+            <h1 id="k8s基础结构"><a href="#k8s基础结构" class="headerlink" title="k8s基础结构"></a>k8s基础结构</h1><p>k8s是主从架构，有master节点和worker节点之分。</p>
+<h2 id="k8s组件"><a href="#k8s组件" class="headerlink" title="k8s组件"></a>k8s组件</h2><ul>
+<li>kube-scheduler：负责调度 pod 到 node 上</li>
+<li>kube-controller-manager：给 controller 创建 pod，管理 node 等</li>
+<li>kube-apiserver: 接收其他组件的请求，执⾏资源的 CRUD，是个⽹关</li>
+<li>kube-proxy: 给到 pod 的流量⽣成转发规则</li>
+<li>kubelet: 负责单节点上的 pod ⽣命周期管理</li>
+</ul>
+<p>其中 kube-scheduler、kube-controller-manager、kube-apiserver 是 运⾏在集群的 master 节点的。kube-proxy、kubelet 是运⾏在所有节点 的(master 节点 + worker 节点)。</p>
+
           
         
       
@@ -409,7 +360,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/31/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/blog/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/33/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/31/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/blog/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/33/">&gt;</a>
   </nav>
 
 
@@ -455,7 +406,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

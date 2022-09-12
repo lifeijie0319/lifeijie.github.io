@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/schema/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/python/basic/concurrent/GIL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/db2/schema/" itemprop="url">db2 schema</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/python/basic/concurrent/GIL/" itemprop="url">python GIL</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/blog/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/python/basic/concurrent/" itemprop="url" rel="index">
+                    <span itemprop="name">concurrent</span>
                   </a>
                 </span>
 
@@ -345,16 +367,15 @@
       
         
           
-            <h1 id="创建schema"><a href="#创建schema" class="headerlink" title="创建schema"></a>创建schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE SCHEMA &lt;schema-name&gt; [AUTHORIZATION &lt;schema-owner-name&gt;]</span><br></pre></td></tr></table></figure>
-<h1 id="删除schema"><a href="#删除schema" class="headerlink" title="删除schema"></a>删除schema</h1><p>schema下面没有对象的情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 drop schema wxdemo restrict</span><br></pre></td></tr></table></figure>
-<p>schema下面有对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;call ADMIN_DROP_SCHEMA(&#39;wxdemo&#39;, NULL, &#39;errorschema&#39;, &#39;ERRTABLE&#39;)&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="复制schema"><a href="#复制schema" class="headerlink" title="复制schema"></a>复制schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;CALL SYSPROC.ADMIN_COPY_SCHEMA</span><br><span class="line">(&#39;TONGLIAN&#39;,&#39;WXDEMO&#39;,&#39;COPYNO&#39;,NULL,NULL,NULL,&#39;ERRORSCHEMA&#39;,&#39;ERRORTABLE&#39;);&quot;</span><br></pre></td></tr></table></figure>
-<p>注意：目标schema不能已存在，否则报错。</p>
-<h1 id="查看当前schema"><a href="#查看当前schema" class="headerlink" title="查看当前schema"></a>查看当前schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 values current schema</span><br></pre></td></tr></table></figure>
-<h1 id="查询数据库内的所有schema"><a href="#查询数据库内的所有schema" class="headerlink" title="查询数据库内的所有schema"></a>查询数据库内的所有schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from sysibm.sysschemata</span><br></pre></td></tr></table></figure>
-<h1 id="查询schem下面的所有表格"><a href="#查询schem下面的所有表格" class="headerlink" title="查询schem下面的所有表格"></a>查询schem下面的所有表格</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 list tables for schema XXX</span><br></pre></td></tr></table></figure>
+            <h1 id="什么是GIL"><a href="#什么是GIL" class="headerlink" title="什么是GIL"></a>什么是GIL</h1><p>GIL(Global Interpreter Lock)，全局解释器锁，是指cpython中，多线程执行时，线程需要先获取GIL，才能被执行。</p>
+<h1 id="为什么说GIL不能利用多核"><a href="#为什么说GIL不能利用多核" class="headerlink" title="为什么说GIL不能利用多核"></a>为什么说GIL不能利用多核</h1><p>在单核处理器中，线程的执行是并发而不是并行的，但是多核使得线程执行可以是真正并行的。但是加了GIL锁之后，多线程的执行又变成了串行，结果退回了原来单核的情况。测试发现，使用c的pthread库开启两个线程，线程中做循环，cpu的使用率可以达到200%，但是python使用threading库开启多线程，cpu的使用率只能达到100%。</p>
+<h1 id="为什么要有GIL"><a href="#为什么要有GIL" class="headerlink" title="为什么要有GIL"></a>为什么要有GIL</h1><p>因为cpython解释器的内存管理不是线程安全的。举个例子，python中的垃圾回收是依靠对象的引用计数。如果两个线程并行（同一时刻）增加对象A的引用计数，那么可能最终A的引用计数只增加了1，导致错误。</p>
+<h1 id="GIL的改进"><a href="#GIL的改进" class="headerlink" title="GIL的改进"></a>GIL的改进</h1><p>python3.2版本之前，定义了一个tick计数器，表示当前线程在释放gil之前连续执行的多少个字节码,tick到达100或者程序碰到io会自动释放GIL。<br>python3.2以后使用时间片来切换线程，时间阈值是0.005秒。并且会动态调整线程的优先级，使得GIL不会被同一个线程长期占用。</p>
+<h1 id="如何应对GIL无法利用多核的缺陷"><a href="#如何应对GIL无法利用多核的缺陷" class="headerlink" title="如何应对GIL无法利用多核的缺陷"></a>如何应对GIL无法利用多核的缺陷</h1><ul>
+<li>使用多进程取代多进程</li>
+<li>对于计算密集型的程序，使用C扩展</li>
+</ul>
+
           
         
       
@@ -393,7 +414,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/156/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/blog/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/158/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/156/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/156/">156</a><span class="page-number current">157</span><a class="page-number" href="/blog/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/158/">&gt;</a>
   </nav>
 
 
@@ -439,7 +460,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

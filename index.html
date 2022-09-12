@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/10/database/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/09/12/language/java/basic/%E5%8F%8D%E5%B0%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/04/10/database/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="url">redis数据类型</a></h1>
+                <a class="post-title-link" href="/blog/2022/09/12/language/java/basic/%E5%8F%8D%E5%B0%84/" itemprop="url">java反射</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:56:37+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T15:40:33+08:00">
+                2022-09-12
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -345,14 +356,93 @@
       
         
           
-            <p>redis支持五种数据类型，分别是string（字符串）、hash（字典）、list（列表）、set（集合）、zset（有序集合）。</p>
+            <h1 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h1><h2 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h2><p>类是实例的模板，Class类是普通类的模板，每一个普通类（包括基本数据类型）在JVM中都有一个唯一的关联Class实例。通过Class实例获取对应类的各种信息的过程称为反射。</p>
+<h3 id="获取Class实例的三种方法"><a href="#获取Class实例的三种方法" class="headerlink" title="获取Class实例的三种方法"></a>获取Class实例的三种方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过类直接获取</span></span><br><span class="line">Class cls = String.class;</span><br><span class="line"><span class="comment">// 通过类的实例获取</span></span><br><span class="line">String s = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">Class cls = s.getClass();</span><br><span class="line"><span class="comment">// 通过完整类名获取</span></span><br><span class="line">Class cls = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="动态加载"><a href="#动态加载" class="headerlink" title="动态加载"></a>动态加载</h2><p>JVM中类的加载是动态的，用到某些类才会加载他们。典型例子，Commons Logging总是优先使用Log4j，只有当Log4j不存在时，才使用JDK的logging。基本逻辑代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LogFactory factory = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (isClassPresent(<span class="string">&quot;org.apache.logging.log4j.Logger&quot;</span>)) &#123;</span><br><span class="line">    factory = createLog4j();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    factory = createJdkLog();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="java反射机制的意义"><a href="#java反射机制的意义" class="headerlink" title="java反射机制的意义"></a>java反射机制的意义</h1><p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20157023/answer/1021842505">https://www.zhihu.com/question/20157023/answer/1021842505</a><br>按照上述参考回答，反射的意义有二：</p>
 <ul>
-<li>string<br>基本类型，一个键最多存储512M数据。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set a &quot;hello&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get a</span><br><span class="line">&quot;hello&quot;</span><br></pre></td></tr></table></figure></li>
-<li>hash<br>pyhton里的字典，java里的HashMap。每个 hash 可以存储 2^32 -1 个键值对（40多亿）。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmset hello_map key1 &quot;lala&quot; key2 14</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; hget hello_map key1</span><br><span class="line">&quot;lala&quot;</span><br><span class="line">127.0.0.1:6379&gt; hget hello_map key2</span><br><span class="line">&quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; HDEL hello_map key1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; HGETALL hello_map</span><br><span class="line">1) &quot;key2&quot;</span><br><span class="line">2) &quot;14&quot;</span><br></pre></td></tr></table></figure></li>
-<li>list<br>双向有序列表<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; lpush hello_list 14</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; lpush hello_list &quot;ddw&quot;</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; lpush hello_list 1.23</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 -1</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">3) &quot;14&quot;</span><br><span class="line">2) &quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 2</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">3) &quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 1</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 0</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">127.0.0.1:6379&gt; lpop hello_list</span><br><span class="line">&quot;1.23&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 -1</span><br><span class="line">1) &quot;ddw&quot;</span><br><span class="line">2) &quot;14&quot;</span><br></pre></td></tr></table></figure></li>
-<li>set<br>string无序集合，通过hash实现，增删改查时间复杂度为O(1)。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd hello_set a</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd hello_set a</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; sadd hello_set 13</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers hello_set</span><br><span class="line">1) &quot;13&quot;</span><br><span class="line">2) &quot;a&quot;</span><br></pre></td></tr></table></figure></li>
-<li>zset<br>string有序集合，每个元素会关联一个double类型的分数，可以据此进行排序。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd hello_zset 0 candy</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset 1 buffer</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset 2 date</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset -1 hello</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zrange hello_zset 0 -1</span><br><span class="line">1) &quot;hello&quot;</span><br><span class="line">2) &quot;candy&quot;</span><br><span class="line">3) &quot;buffer&quot;</span><br><span class="line">4) &quot;date&quot;</span><br><span class="line">127.0.0.1:6379&gt; zrangebyscore hello_zset 0 100</span><br><span class="line">1) &quot;candy&quot;</span><br><span class="line">2) &quot;buffer&quot;</span><br><span class="line">3) &quot;date&quot;</span><br><span class="line">127.0.0.1:6379&gt; zscore hello_zset buffer</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure></li>
+<li>提高程序的灵活性</li>
+<li>屏蔽掉实现的细节，让使用者更加方便好用</li>
 </ul>
+<p>第一点文章以数据库驱动的动态加载为例说明，但是这里一直有疑惑。为什么不是不同的数据库驱动厂商实现统一接口，而使用者调用接口即可？<br>第二点以springMVC框架的参数自动装载为例说明，到是没有什么疑义。</p>
+<h1 id="常用的反射API"><a href="#常用的反射API" class="headerlink" title="常用的反射API"></a>常用的反射API</h1><h2 id="获取字段"><a href="#获取字段" class="headerlink" title="获取字段"></a>获取字段</h2><ul>
+<li>Field getField(name)：根据字段名获取某个public的field（包括父类）</li>
+<li>Field getDeclaredField(name)：根据字段名获取当前类的某个field（不包括父类）</li>
+<li>Field[] getFields()：获取所有public的field（包括父类）</li>
+<li>Field[] getDeclaredFields()：获取当前类的所有field（不包括父类）<h3 id="获取到Field之后"><a href="#获取到Field之后" class="headerlink" title="获取到Field之后"></a>获取到Field之后</h3>获取到Field之后，可以通过Field获取到字段的各种信息，也可以对字段值进行获取和设置。</li>
+</ul>
+<ol>
+<li>字段信息获取</li>
+</ol>
+<ul>
+<li>getName()：返回字段名称，例如，”name”；</li>
+<li>getType()：返回字段类型，也是一个Class实例，例如，String.class；</li>
+<li>getModifiers()：返回字段的修饰符，它是一个int，不同的bit表示不同的含义。</li>
+</ul>
+<ol start="2">
+<li>字段值获取</li>
+</ol>
+<ul>
+<li>Field.get(Object) 传参为实例</li>
+<li>对于非public的字段，使用Field.setAccessible(true)使得字段可以被访问，后续类似场景带入即可</li>
+</ul>
+<ol start="3">
+<li>字段值设置</li>
+</ol>
+<ul>
+<li>Field.set(Object, Object) 第一个Object参数是指定的实例，第二个Object参数是待修改的值</li>
+</ul>
+<h2 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h2><ul>
+<li>Method getMethod(name, Class…)：获取某个public的Method（包括父类）</li>
+<li>Method getDeclaredMethod(name, Class…)：获取当前类的某个Method（不包括父类）</li>
+<li>Method[] getMethods()：获取所有public的Method（包括父类）</li>
+<li>Method[] getDeclaredMethods()：获取当前类的所有Method（不包括父类）<h3 id="获取到Method之后"><a href="#获取到Method之后" class="headerlink" title="获取到Method之后"></a>获取到Method之后</h3></li>
+</ul>
+<ol>
+<li>方法信息获取</li>
+</ol>
+<ul>
+<li>getName()：返回方法名称，例如：”getScore”；</li>
+<li>getReturnType()：返回方法返回值类型，也是一个Class实例，例如：String.class；</li>
+<li>getParameterTypes()：返回方法的参数类型，是一个Class数组，例如：{String.class, int.class}；</li>
+<li>getModifiers()：返回方法的修饰符，它是一个int，不同的bit表示不同的含义。</li>
+</ul>
+<ol start="2">
+<li>调用方法</li>
+</ol>
+<ul>
+<li>method.invoke(Object, Object…) 第一个参数是实例，后面的参数是方法本身需要的参数</li>
+<li>静态方法只要把第一个参数传入null即可</li>
+<li>非public方法使用Method.setAccessible(true)允许其调用</li>
+<li>通过反射调用方法时，仍然遵循多态原则即即总是调用实际类型的覆写方法</li>
+</ul>
+<h2 id="调用构造方法"><a href="#调用构造方法" class="headerlink" title="调用构造方法"></a>调用构造方法</h2><ul>
+<li>getConstructor(Class…)：获取某个public的Constructor；</li>
+<li>getDeclaredConstructor(Class…)：获取某个Constructor；</li>
+<li>getConstructors()：获取所有public的Constructor；</li>
+<li>getDeclaredConstructors()：获取所有Constructor。<h3 id="获取到Constructor之后"><a href="#获取到Constructor之后" class="headerlink" title="获取到Constructor之后"></a>获取到Constructor之后</h3></li>
+<li>Constructor.newInstance(Object… parameters)实现实例的创建</li>
+<li>通过设置setAccessible(true)来访问非public构造方法</li>
+</ul>
+<h2 id="获取继承关系"><a href="#获取继承关系" class="headerlink" title="获取继承关系"></a>获取继承关系</h2><ul>
+<li>class.getSuperclass(); 获取父类</li>
+<li>class.getInterfaces(); 获取接口</li>
+<li>class.isAssignableFrom(Class<T>); 判断当前class实例是否可以由另一个class向上转型而来</li>
+</ul>
+<h1 id="java反射的应用"><a href="#java反射的应用" class="headerlink" title="java反射的应用"></a>java反射的应用</h1><h1 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h1><p>对类A的访问统一通过类B来进行，我们称B是A的代理，代理类可以对被代理类的访问进行安全控制、功能增强等。比较好的静态代理是面向接口的静态代理，比如A和B实现相同的接口I，接口I以组合的方式结合到B中，调用时实例化B，通过传入A的实例实现A的功能调用以及B的代理功能。</p>
+<ul>
+<li>优点：高内聚松耦合，被代理类（通常是业务类）和代理类（通常是功能类）各自关注各自的功能逻辑，便于代码复用。</li>
+<li>缺点：<ul>
+<li>如果接口的方法很多，代理对每个接口实现的功能一致，会有冗余</li>
+<li>接口变动会导致代理类和被代理类一起变动<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1>当我们希望对一组类进行代理，并且代理希望实现的功能一致，只要这组类都实现了相同的接口，可以通过JDK提供的代理工具来实现。基本步骤如下：</li>
+</ul>
+</li>
+<li>创建InvocationHandler子类，覆写invoke方法，实现代理核心功能。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">InvocationHandler handler = <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(method);</span><br><span class="line">        <span class="keyword">if</span> (method.getName().equals(<span class="string">&quot;morning&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Good morning, &quot;</span> + args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>Proxy.newProxyInstance创建代理类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Hello hello = (Hello) Proxy.newProxyInstance(</span><br><span class="line">Hello.class.getClassLoader(), <span class="comment">// 传入ClassLoader</span></span><br><span class="line"><span class="keyword">new</span> Class[] &#123; Hello.class &#125;, <span class="comment">// 传入要实现的接口</span></span><br><span class="line">handler); <span class="comment">// 传入处理调用方法的InvocationHandler</span></span><br></pre></td></tr></table></figure>
+<h2 id="动态代理原理"><a href="#动态代理原理" class="headerlink" title="动态代理原理"></a>动态代理原理</h2>本质上，动态代理动态生成了一个代理类，代理类继承Proxy，实现了我们传入的接口。代理类通过反射静态获取了所有实现的方法的Method实例，我们称它们为被代理的原始方法，然后对应生成新的方法，新的方法实际都是调用handler，传入的参数依次为本代理类对象，被代理的原始方法，被代理的原始方法的参数。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaoluo501395377/p/3383130.html">https://www.cnblogs.com/xiaoluo501395377/p/3383130.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gonjan-blog/p/6685611.html">https://www.cnblogs.com/gonjan-blog/p/6685611.html</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/347141071">https://zhuanlan.zhihu.com/p/347141071</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bohu83/article/details/51124094">https://blog.csdn.net/bohu83/article/details/51124094</a></p>
 
           
         
@@ -392,7 +482,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/2/">&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/2/">&gt;</a>
   </nav>
 
 
@@ -438,7 +528,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

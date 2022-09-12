@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/spring/springboot/%E5%B8%B8%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/security/web/CSRF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/spring/springboot/%E5%B8%B8%E8%AF%86/" itemprop="url">springboot常识</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/security/web/CSRF/" itemprop="url">CSRF攻击</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/blog/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/spring/springboot/" itemprop="url" rel="index">
-                    <span itemprop="name">springboot</span>
+                  <a href="/blog/categories/security/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
                   </a>
                 </span>
 
@@ -367,15 +345,10 @@
       
         
           
-            <h1 id="springboot热部署的实现方式"><a href="#springboot热部署的实现方式" class="headerlink" title="springboot热部署的实现方式"></a>springboot热部署的实现方式</h1><h2 id="使用spring-boot-devtools"><a href="#使用spring-boot-devtools" class="headerlink" title="使用spring-boot-devtools"></a>使用spring-boot-devtools</h2><ol>
-<li>添加pom依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-devtools&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure></li>
-<li>配置idea<br>shift+ctrl+alt+”/“ （IDEA中的快捷键）<br>选择”Registry”<br>勾选 compiler.automake.allow.when.app.running</li>
-</ol>
-<h1 id="使用spring-loaded"><a href="#使用spring-loaded" class="headerlink" title="使用spring loaded"></a>使用spring loaded</h1><ol>
-<li>添加pom插件<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- springBoot编译插件--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- spring热部署 --&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 该依赖在此处下载不下来，可以放置在build标签外部下载完成后再粘贴进plugin中 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springloaded<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.6.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>在idea中，修改settings-&gt;compiler，勾选Build project automatically.</li>
-<li>在idea中，使用右侧maven的plugins，找到sping-boot:run命令双击执行即可启动服务</li>
-</ol>
+            <h1 id="什么是CSRF"><a href="#什么是CSRF" class="headerlink" title="什么是CSRF"></a>什么是CSRF</h1><p>跨站脚本伪造(CROSS SITE REQUEST FORGE)，即CSRF，是指攻击者在自己的网站上伪造用户请求访问用户曾经访问的已登录认证的有CSRF漏洞的网站。由于被攻击网站只确认了请求来自于用户浏览器，而没有确认请求是否来自用户的真实意愿。</p>
+<h1 id="如何防范CSRF"><a href="#如何防范CSRF" class="headerlink" title="如何防范CSRF"></a>如何防范CSRF</h1><h2 id="验证HTTP-referer字段"><a href="#验证HTTP-referer字段" class="headerlink" title="验证HTTP referer字段"></a>验证HTTP referer字段</h2><p>HTTP头中的Referer字段记录了该HTTP请求的来源地址。referer字段告诉服务器该网页是从哪个页面链接过来的，而攻击者的网页和被攻击网站的页面并不相同。</p>
+<h2 id="使用验证码"><a href="#使用验证码" class="headerlink" title="使用验证码"></a>使用验证码</h2><p>对重要的请求，比如转账等，添加额外校验。</p>
+<h2 id="token验证"><a href="#token验证" class="headerlink" title="token验证"></a>token验证</h2><p>CSRF能够成功的关键在于用户访问攻击者网站而在未知情的情况下向缺陷网站发送了请求，这个请求带上了用户之前访问缺陷网站登录验证的cookie。所以，在cookie之外向服务端传递之前服务端产生的token，服务端将请求的token和服务端存储的token（一般在session中）比较确认请求是否来自于自己的网站页面。token可以放在报文体或者http头部中。</p>
 
           
         
@@ -415,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/109/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/111/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/109/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/111/">&gt;</a>
   </nav>
 
 
@@ -461,7 +434,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

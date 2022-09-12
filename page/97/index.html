@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/spring/spring%E6%A6%82%E8%BF%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/web/http%E8%BD%AC%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/spring/spring%E6%A6%82%E8%BF%B0/" itemprop="url">spring概述</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/web/http%E8%BD%AC%E5%8F%91/" itemprop="url">http转发</a></h1>
         
 
         <div class="post-meta">
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/blog/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
                   </a>
                 </span>
 
@@ -356,18 +334,13 @@
       
         
           
-            <h1 id="什么是spring"><a href="#什么是spring" class="headerlink" title="什么是spring"></a>什么是spring</h1><p>Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器框架。</p>
-<h2 id="轻量"><a href="#轻量" class="headerlink" title="轻量"></a>轻量</h2><ol>
-<li>大小，完整的spring框架可以在一个1M多的文件里发布。</li>
-<li>开销小。</li>
-<li>非侵入式，spring引用的类不依赖于spring框架的类。<h2 id="控制反转"><a href="#控制反转" class="headerlink" title="控制反转"></a>控制反转</h2>对象之间的依赖关系不再由应用代码显式创建，而是由spring根据配置和注解自动注入。即A依赖B的关系由原来的A主动创建B变成了由spring框架来注入B，依赖的建立由主动变成被动。<h2 id="面向切面"><a href="#面向切面" class="headerlink" title="面向切面"></a>面向切面</h2>spring提供了面向切面的丰富支持，使得应用本身的逻辑和系统级服务（日志、事务处理等）分离开来，方便复用，降低耦合。<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2>spring管理应用对象的整个生命周期，所以是一个容器。<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2>spring内置了很多功能，并且也容易与其他功能集成，使得开发者能在spring的基础上快速开发应用。</li>
-</ol>
-<h1 id="spring模块"><a href="#spring模块" class="headerlink" title="spring模块"></a>spring模块</h1><ul>
-<li>Core Container: Beans Core Context SpEL</li>
-<li>AOP: Aspects Instruments Messageing</li>
-<li>Web: Web WebSocket Servlet Portlet</li>
-<li>Data Access/Integration: JDBC ORM OXM JMS Transactions</li>
-<li>Test</li>
+            <h1 id="301和302响应码的区别"><a href="#301和302响应码的区别" class="headerlink" title="301和302响应码的区别"></a>301和302响应码的区别</h1><ul>
+<li>301 redirect: 301 代表永久性转移(Permanently Moved)</li>
+<li>302 redirect: 302 代表暂时性转移(Temporarily Moved)</li>
+</ul>
+<h1 id="直接转发和间接转发的区别"><a href="#直接转发和间接转发的区别" class="headerlink" title="直接转发和间接转发的区别"></a>直接转发和间接转发的区别</h1><ul>
+<li>直接转发方式（Forward）客户端只发出一次请求，请求由一个请求资源转（servlet）移到另一个请求资源（servlet）</li>
+<li>间接转发方式（Redirect）实际是两次http请求，服务器端在响应第一次请求的时候，让浏览器再向另外一个URL发出请求，从而达到转发的目的</li>
 </ul>
 
           
@@ -408,7 +381,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/96/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/blog/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/98/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/96/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/blog/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/98/">&gt;</a>
   </nav>
 
 
@@ -454,7 +427,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

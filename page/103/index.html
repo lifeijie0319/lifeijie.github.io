@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/basic/concurrent/%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/go/log/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/04/language/java/basic/concurrent/%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/" itemprop="url">线程停止的方法</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/go/log/" itemprop="url">标准库log学习</a></h1>
         
 
         <div class="post-meta">
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
+                  <a href="/blog/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -367,19 +345,13 @@
       
         
           
-            <h1 id="public-final-void-stop"><a href="#public-final-void-stop" class="headerlink" title="public final void stop()"></a>public final void stop()</h1><p>不推荐，作用是使得线程实例戛然而止。</p>
-<h1 id="标志位"><a href="#标志位" class="headerlink" title="标志位"></a>标志位</h1><p>自定义标志位，作为循环判断条件，在外部改变标志位，控制线程执行。</p>
-<h1 id="interupt"><a href="#interupt" class="headerlink" title="interupt()"></a>interupt()</h1><p>相当于内置标志位</p>
-<h2 id="使用情形"><a href="#使用情形" class="headerlink" title="使用情形"></a>使用情形</h2><p>对于线程实例t可以调用interrupt方法，中断线程。有以下几种情形：</p>
-<ol>
-<li>当线程t阻塞于wait/join/sleep这几个方法时，阻塞标记变量会被清除，转而抛出一个InterruptedException异常</li>
-<li>当线程阻塞于一个java.nio.channels.InterruptibleChannel上的I/O操作时，阻塞标记变量会被设置，并且线程收到java.nio.channels.ClosedByInterruptException</li>
-<li>当线程阻塞于一个java.nio.channels.Selector时，阻塞标记变量会被设置，当前select操作直接返回，就如java.nio.channels.Selector#wakeup方法被调用</li>
-<li>其它情形只会设置阻塞标记变量</li>
-</ol>
-<h2 id="public-static-boolean-interrupted"><a href="#public-static-boolean-interrupted" class="headerlink" title="public static boolean interrupted()"></a>public static boolean interrupted()</h2><p>该方法返回当前阻塞标记变量状态，并且清理状态。即第一次返回true之后马上重置为false。</p>
-<h2 id="public-boolean-isInterrupted"><a href="#public-boolean-isInterrupted" class="headerlink" title="public boolean isInterrupted()"></a>public boolean isInterrupted()</h2><p>该方法返回当前阻塞标记变量状态，不会重置状态。</p>
-
+            <h1 id="基本设计"><a href="#基本设计" class="headerlink" title="基本设计"></a>基本设计</h1><p>log包定义了Logger类型和一个该类型的std对象，std对象输出到标准输出。</p>
+<h1 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h1><p>prefix和flag是Logger类型的两个属性，用于标识日志头部的一些输出格式。其中prefix是用户自定义的头部，flag确定了一些内置的头部，flag由包内定义的常量进行”或“操作获得。注意其中有个特殊的常量Lmsgprefix，设置了该常量后prefix会从最头部移到实际msg前面，参考如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log.SetFlags(log.Ldate | log.Lmicroseconds | log.Lshortfile | log.Lmsgprefix)</span><br><span class="line">log.SetPrefix(&quot;[TEST] &quot;)</span><br><span class="line">log.Println(&quot;haha..&quot;)</span><br></pre></td></tr></table></figure>
+<p>输出如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2022&#x2F;01&#x2F;04 14:47:49.490832 hello.go:24: [TEST] haha..</span><br></pre></td></tr></table></figure>
+<p>不设置Lmsgprefix时输出是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TEST] 2022&#x2F;01&#x2F;04 15:01:18.727718 hello.go:24: haha..</span><br></pre></td></tr></table></figure>
           
         
       
@@ -418,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/102/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/blog/page/104/">104</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/104/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/102/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/blog/page/104/">104</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/104/">&gt;</a>
   </nav>
 
 
@@ -464,7 +436,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

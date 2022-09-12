@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/13/language/java/basic/concurrent/synchronized/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/04/11/language/python/basic/%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2022/03/13/language/java/basic/concurrent/synchronized/" itemprop="url">synchronized常见问题</a></h1>
+                <a class="post-title-link" href="/blog/2022/04/11/language/python/basic/%E5%87%BD%E6%95%B0/" itemprop="url">函数</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-13T11:23:06+08:00">
-                2022-03-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-11T20:01:42+08:00">
+                2022-04-11
               </time>
             
 
@@ -282,61 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/language/java/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -367,22 +312,8 @@
       
         
           
-            <h1 id="synchronized基本认识"><a href="#synchronized基本认识" class="headerlink" title="synchronized基本认识"></a>synchronized基本认识</h1><p>synchronized是一种修饰符，它创建了一个同步块，同步块的代码同一时间只能有一个线程可以执行。java中的所有对象都可以作为锁，这是synchronized实现的基础。</p>
-<ul>
-<li>synchronized修饰普通方法，锁住当前对象</li>
-<li>synchronized修饰静态方法，锁住当前类的class对象</li>
-<li>synchronized修饰特定对象，锁住该对象</li>
-</ul>
-<h1 id="为什么要有wait-notify-notifyAll"><a href="#为什么要有wait-notify-notifyAll" class="headerlink" title="为什么要有wait/notify/notifyAll"></a>为什么要有wait/notify/notifyAll</h1><p>个人理解while循环占用了大量的cpu时间，而wait会使线程进入等待，将cpu让出。<br><a target="_blank" rel="noopener" href="https://ld246.com/article/1533288025966">https://ld246.com/article/1533288025966</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/rongxh7/archive/2010/04/11/1709333.html">https://www.cnblogs.com/rongxh7/archive/2010/04/11/1709333.html</a></p>
-<h1 id="为什么需要在synchronized锁住对象之后才能使用wait-notify-notifyAll"><a href="#为什么需要在synchronized锁住对象之后才能使用wait-notify-notifyAll" class="headerlink" title="为什么需要在synchronized锁住对象之后才能使用wait/notify/notifyAll"></a>为什么需要在synchronized锁住对象之后才能使用wait/notify/notifyAll</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2><p>如果在synchronized外使用wait/notify/notifyAll，必然出现java.lang.IllegalMonitorStateException</p>
-<h2 id="为什么wait-必须在同步（Synchronized）方法-代码块中调用"><a href="#为什么wait-必须在同步（Synchronized）方法-代码块中调用" class="headerlink" title="为什么wait()必须在同步（Synchronized）方法/代码块中调用"></a>为什么wait()必须在同步（Synchronized）方法/代码块中调用</h2><p>调用wait()就是释放锁，释放锁的前提是必须要先获得锁，先获得锁才能释放锁</p>
-<h2 id="为什么notify-notifyAll-必须在同步（Synchronized）方法-代码块中调用"><a href="#为什么notify-notifyAll-必须在同步（Synchronized）方法-代码块中调用" class="headerlink" title="为什么notify(),notifyAll()必须在同步（Synchronized）方法/代码块中调用"></a>为什么notify(),notifyAll()必须在同步（Synchronized）方法/代码块中调用</h2><p>notify(),notifyAll()是将锁交给含有wait()方法的线程，让其继续执行下去，如果自身没有锁，怎么叫把锁交给其他线程呢</p>
-<h2 id="本质详解"><a href="#本质详解" class="headerlink" title="本质详解"></a>本质详解</h2><p>每个对象都有一个监视器，该监视器分为三部分，分别是该对象的锁、等待队列、同步队列（争用锁的队列）。wait()方法需要当前线程释放对象锁，进入等待队列；notify()是唤醒等待队列中的一个线程，将它移到同步队列中去，然后释放自身拥有的对象锁（同步块结束后），让同步队列的线程争用；notifyAll()和notify作用类似，只不过唤醒的是等待队列中的所有线程。</p>
-<h2 id="设计原因"><a href="#设计原因" class="headerlink" title="设计原因"></a>设计原因</h2><p>synchronized锁住对象之后才能使用wait/notify/notifyAll，本质上是为了规避多线程并发执行时导致的程序执行混乱问题。以简单的生产-消费者模型为例，在并发情况下，可能的执行顺序如下：<br>| 步骤 | 消费者           | 生产者                               |<br>| —- | —————- | ———————————— |<br>| 1    | 判断队列没有数据 |                                      |<br>| 2    |                  | 添加数据到队列，执行notify/notifyAll |<br>| 3    | 执行wait         |                                      |<br>由于步骤2时消费者尚未进入等待队列，所以生产者线程的唤醒操作不生效，而步骤3时由于消费者线程之前在步骤1已经做过判断，所以这里直接进入等待队列。如果没有其它操作，可以看到，这个步骤执行下来，消费者永久休眠，而队列中的数据明明有数据却无法被消费。而使用synchronized之后，步骤1和步骤3会在同步块中（具有原子性），不会被步骤2插入执行。</p>
-<h2 id="进入wait需要循环判断的原因"><a href="#进入wait需要循环判断的原因" class="headerlink" title="进入wait需要循环判断的原因"></a>进入wait需要循环判断的原因</h2><p>当前线程被notify之后，如果不再次判断，可能当前情况已经发生了改变。比如</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span> (object) &#123;</span><br><span class="line">  <span class="keyword">if</span>(queue.isFull())&#123;</span><br><span class="line">    queue.wait();</span><br><span class="line">  &#125;</span><br><span class="line">  queue.add(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一段典型的生产者代码片段。如果线程被唤醒，会直接执行添加元素的语句，但是可能已经有其它线程先一步获取了锁，队列已经又是满的状态，这时候当前线程再去添加元素就会报错。如果用循环判断语句，那么线程被唤醒之后会再次进行条件判断，条件满足（队列已满）那么重新进入等待，确实队列不满了才添加元素。</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>涉及锁升级，具体升级流程：无锁状态-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁，待深入。</p>
+            <h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><h2 id="什么是闭包"><a href="#什么是闭包" class="headerlink" title="什么是闭包"></a>什么是闭包</h2><p>函数内新定义函数，并且内部的函数内引用了外部函数的局部变量，这种内部函数称为闭包。</p>
+<h2 id="闭包的后期绑定"><a href="#闭包的后期绑定" class="headerlink" title="闭包的后期绑定"></a>闭包的后期绑定</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/453787908">https://zhuanlan.zhihu.com/p/453787908</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/29483144">https://www.zhihu.com/question/29483144</a></p>
 
           
         
@@ -422,7 +353,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/40/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/40/">&gt;</a>
   </nav>
 
 
@@ -468,7 +399,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

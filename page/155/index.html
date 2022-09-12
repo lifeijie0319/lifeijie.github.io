@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2021/12/04/database/db2/DB2%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie.gitee.io/blog/blog/2022/03/04/language/java/basic/oop/OOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2021/12/04/database/db2/DB2%E5%AE%89%E8%A3%85/" itemprop="url">DB2 V9.7 ESE for Linux在centos7上安装</a></h1>
+                <a class="post-title-link" href="/blog/2022/03/04/language/java/basic/oop/OOP/" itemprop="url">OOP常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
+                2022-03-04
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/blog/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/blog/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/language/java/basic/oop/" itemprop="url" rel="index">
+                    <span itemprop="name">oop</span>
                   </a>
                 </span>
 
@@ -345,39 +367,53 @@
       
         
           
-            <h1 id="下载解压"><a href="#下载解压" class="headerlink" title="下载解压"></a>下载解压</h1><ol>
-<li>解压DB2_ESE_97_Linux_x86-64.tar.gz，进入解压得到的目录ese</li>
-<li>可以看到有多个可执行的脚本，其 中db2prereqcheck是先决条件检查，db2setup是图形界面安装程序，db2_install是命令行方式安装。还有一个db2目录，保存了需要安装的二进制文件。</li>
-</ol>
-<h1 id="安装前检查"><a href="#安装前检查" class="headerlink" title="安装前检查"></a>安装前检查</h1><h2 id="执行检查"><a href="#执行检查" class="headerlink" title="执行检查"></a>执行检查</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;db2prereqcheck</span><br></pre></td></tr></table></figure>
-<h2 id="报错与处理"><a href="#报错与处理" class="headerlink" title="报错与处理"></a>报错与处理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WARNING:</span><br><span class="line">   The 32 bit library file libstdc++.so.6 is not found on the system. </span><br><span class="line">   32-bit applications may be affected.</span><br></pre></td></tr></table></figure>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh glibc-common-2.17-157.el7.x86_64.rpm glibc-2.17-157.el7.x86_64.rpm</span><br><span class="line">sudo rpm -ivh glibc-2.17-157.el7.i686.rpm libgcc-4.8.5-11.el7.i686.rpm nss-softokn-freebl-3.16.2.3-14.4.el7.i686.rpm</span><br><span class="line">sudo rpm -ivh libstdc++-4.8.5-11.el7.i686.rpm</span><br></pre></td></tr></table></figure>
-<h3 id="警告（-todo）"><a href="#警告（-todo）" class="headerlink" title="警告（#todo）"></a>警告（#todo）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">warning: libstdc++-4.8.5-11.el7.i686.rpm: Header V3 RSA&#x2F;SHA256 Signature, key ID f4a80eb5: NOKEY</span><br></pre></td></tr></table></figure>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>在解压后的文件夹中执行指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo .&#x2F;db2_install</span><br></pre></td></tr></table></figure>
-<p>选择安装目录或者使用默认目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Default directory for installation of products - &#x2F;opt&#x2F;ibm&#x2F;db2&#x2F;V9.7</span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line">Do you want to choose a different directory to install [yes&#x2F;no] ?</span><br><span class="line">no</span><br></pre></td></tr></table></figure>
-<p>选择产品类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Specify one of the following keywords to install DB2 products.</span><br><span class="line"></span><br><span class="line">  ESE </span><br><span class="line">  CLIENT </span><br><span class="line">  RTCL </span><br><span class="line"> </span><br><span class="line">Enter &quot;help&quot; to redisplay product names.</span><br><span class="line"></span><br><span class="line">Enter &quot;quit&quot; to exit.</span><br><span class="line"></span><br><span class="line">***********************************************************</span><br><span class="line">ese</span><br></pre></td></tr></table></figure>
-<p>等待安装，期间有看到报警：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TSAMP_VERSION&#x3D;3.1.0.1</span><br><span class="line">DBI1130E  The IBM Tivoli System Automation for Multiplatforms (SA MP) Base Component could not be installed or updated because system prerequisites were not met. See the log file &#x2F;tmp&#x2F;prereqSAM.log.3721 for details.</span><br></pre></td></tr></table></figure>
-<p>原因：SA MP是db2数据库用于集群分布的部件。这里显示条件不满足，所以未能正常安装。如果不用相应的集群功能，可以忽略。</p>
-<h1 id="安装后配置"><a href="#安装后配置" class="headerlink" title="安装后配置"></a>安装后配置</h1><h2 id="创建三个用户组和三个用户"><a href="#创建三个用户组和三个用户" class="headerlink" title="创建三个用户组和三个用户"></a>创建三个用户组和三个用户</h2><p><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006742.html?pos=2">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006742.html?pos=2</a></p>
-<h2 id="创建-DB2-管理服务器"><a href="#创建-DB2-管理服务器" class="headerlink" title="创建 DB2 管理服务器"></a>创建 DB2 管理服务器</h2><ol>
-<li>教程<br><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006743.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006743.html</a></li>
-<li>操作结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost instance]# .&#x2F;dascrt -u dasusr1</span><br><span class="line">SQL4406W  The DB2 Administration Server was started successfully.</span><br><span class="line">DBI1070I  Program dascrt completed successfully.</span><br></pre></td></tr></table></figure>
-<h2 id="使用-db2icrt-创建实例"><a href="#使用-db2icrt-创建实例" class="headerlink" title="使用 db2icrt 创建实例"></a>使用 db2icrt 创建实例</h2></li>
-<li>教程<br><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006744.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006744.html</a></li>
-<li>操作结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost instance]# .&#x2F;db2icrt -a server -u db2fenc1 db2inst1</span><br><span class="line">DBI1070I  Program db2icrt completed successfully.</span><br></pre></td></tr></table></figure>
-<h2 id="验证安装"><a href="#验证安装" class="headerlink" title="验证安装"></a>验证安装</h2></li>
-<li>教程<br><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006839.html?pos=2">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006839.html?pos=2</a></li>
-<li>操作结果：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[db2inst1@localhost sqllib]$ db2start</span><br><span class="line">07&#x2F;27&#x2F;2017 22:20:15     0   0   SQL1063N  DB2START processing was successful.</span><br><span class="line">SQL1063N  DB2START processing was successful.</span><br><span class="line">[db2inst1@localhost sqllib]$ db2sampl</span><br><span class="line"></span><br><span class="line">  Creating database &quot;SAMPLE&quot;...</span><br><span class="line">  Connecting to database &quot;SAMPLE&quot;...</span><br><span class="line">  Creating tables and data in schema &quot;DB2INST1&quot;...</span><br><span class="line">  Creating tables with XML columns and XML data in schema &quot;DB2INST1&quot;...</span><br><span class="line"></span><br><span class="line">  &#39;db2sampl&#39; processing complete.</span><br></pre></td></tr></table></figure>
-<h2 id="为-DB2-实例配置-TCP-IP-通信（为了远程连接）"><a href="#为-DB2-实例配置-TCP-IP-通信（为了远程连接）" class="headerlink" title="为 DB2 实例配置 TCP/IP 通信（为了远程连接）"></a>为 DB2 实例配置 TCP/IP 通信（为了远程连接）</h2></li>
-<li>教程：<br><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006066.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.qb.server.doc/doc/t0006066.html</a></li>
-<li>实际操作</li>
-<li>1 修改/etc/services<br>在底部添加链接服务名和端口，但是查看发现已经填写<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DB2_db2inst1    60000&#x2F;tcp</span><br><span class="line">DB2_db2inst1_1  60001&#x2F;tcp</span><br><span class="line">DB2_db2inst1_2  60002&#x2F;tcp</span><br><span class="line">DB2_db2inst1_END        60003&#x2F;tcp</span><br></pre></td></tr></table></figure></li>
-<li>2 更新数据库管理器配置文件  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[db2inst1@localhost sqllib]$ db2 update database manager configuration using svcename DB2_db2inst1</span><br><span class="line">DB20000I  The UPDATE DATABASE MANAGER CONFIGURATION command completed </span><br><span class="line">successfully.</span><br><span class="line">[db2inst1@localhost sqllib]$ db2 get database manager configuration|grep SVCENAME</span><br><span class="line">TCP&#x2F;IP Service name (SVCENAME) &#x3D; DB2_db2inst1</span><br></pre></td></tr></table></figure></li>
-<li>3 设置通信协议为tcpip <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[db2inst1@localhost sqllib]$ db2set DB2COMM&#x3D;tcpip</span><br><span class="line">[db2inst1@localhost sqllib]$ db2stop</span><br><span class="line">07&#x2F;27&#x2F;2017 23:44:14     0   0   SQL1064N  DB2STOP processing was successful.</span><br><span class="line">SQL1064N  DB2STOP processing was successful.</span><br><span class="line">[db2inst1@localhost sqllib]$ db2start</span><br><span class="line">07&#x2F;27&#x2F;2017 23:44:19     0   0   SQL1063N  DB2START processing was successful.</span><br><span class="line">SQL1063N  DB2START processing was successful.</span><br></pre></td></tr></table></figure></li>
+            <h1 id="普通类与抽象类的区别"><a href="#普通类与抽象类的区别" class="headerlink" title="普通类与抽象类的区别"></a>普通类与抽象类的区别</h1><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>成员方法</th>
+<th>实例化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通类</td>
+<td>不能包含抽象方法</td>
+<td>可以实例化</td>
+</tr>
+<tr>
+<td>抽象类</td>
+<td>可以定义抽象方法</td>
+<td>无法实例化</td>
+</tr>
+</tbody></table>
+<h1 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h1><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>成员变量</th>
+<th>成员方法</th>
+<th>构造函数</th>
+<th>继承/实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>接口</td>
+<td>默认是public static final修饰的</td>
+<td>默认是public abstract修饰的</td>
+<td>不能有构造函数</td>
+<td>implements，一个类可以实现多个接口，实现的时候必须覆写接口的所有方法</td>
+</tr>
+<tr>
+<td>抽象类</td>
+<td>和正常类一样定义</td>
+<td>和普通类一样定义方法，可以额外定义抽象方法</td>
+<td>可以有构造函数</td>
+<td>extends，只能单继承，不用覆写所有方法</td>
+</tr>
+</tbody></table>
+<h1 id="覆写和隐藏"><a href="#覆写和隐藏" class="headerlink" title="覆写和隐藏"></a>覆写和隐藏</h1><ol>
+<li>子类存在与父类签名相同的普通方法，Override父类方法，实际调用的方法取决于实例真实类型。</li>
+<li>子类存在与父类签名相同的静态方法，隐藏父类方法，合理的方式是通过类来调用方法，实际调用的方法取决于类的类型。如果通过实例来调用静态方法（不推荐，一般编译器报警），调用的具体方法取决于引用类型。<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java">https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java</a></li>
 </ol>
 
           
@@ -418,7 +454,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog/page/154/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/blog/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/299/">299</a><a class="extend next" rel="next" href="/blog/page/156/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/154/">&lt;</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/154/">154</a><span class="page-number current">155</span><a class="page-number" href="/blog/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/330/">330</a><a class="extend next" rel="next" href="/blog/page/156/">&gt;</a>
   </nav>
 
 
@@ -464,7 +500,7 @@
               
                 <a href="/blog/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">299</span>
+                  <span class="site-state-item-count">330</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

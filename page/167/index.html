@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/basic/concurrent/deadlock/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/basic/args/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/basic/concurrent/deadlock/" itemprop="url">死锁</a></h1>
+                <a class="post-title-link" href="/2022/03/04/language/java/basic/args/" itemprop="url">java参数详解</a></h1>
         
 
         <div class="post-meta">
@@ -324,17 +324,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -367,12 +356,17 @@
       
         
           
-            <h1 id="什么是死锁"><a href="#什么是死锁" class="headerlink" title="什么是死锁"></a>什么是死锁</h1><p>死锁是指两个或两个以上的进程/线程在执行过程中，由于竞争资源或彼此通信而造成的一种阻塞的现象，若无外力作用，它们将无法推进下去。</p>
-<h1 id="死锁的四个必要条件"><a href="#死锁的四个必要条件" class="headerlink" title="死锁的四个必要条件"></a>死锁的四个必要条件</h1><p>互斥条件：进程对所分配的资源不允许其它进程访问，其它进程访问资源，只能等待，直到占有该资源的进程释放该资源。<br>请求和保持条件：进程获得一定的资源以后，又对其它资源发出请求，但是该资源被其它进程占用，当前进程只能等待，但是进程占有的资源仍然保持不会释放。<br>不可剥夺条件：进程已获得的资源，在未使用完成之前，不可被剥夺，只能使用完之后自己释放。<br>环路等待条件：进程之间形成一种头尾相接的资源等待关系。</p>
-<h2 id="互斥与不可剥夺的区别"><a href="#互斥与不可剥夺的区别" class="headerlink" title="互斥与不可剥夺的区别"></a>互斥与不可剥夺的区别</h2><ol>
-<li>互斥是站在资源的角度上，不可剥夺是站在进程/线程的角度</li>
-<li>互斥强调的是资源竞争时发生的事，不可剥夺强调的是进程/线程持有资源之后</li>
-</ol>
+            <h1 id="D参数与args"><a href="#D参数与args" class="headerlink" title="-D参数与args"></a>-D参数与args</h1><p>-D参数属于-options，而不是args，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Djava.ext.dirs&#x3D;&#x2F;home&#x2F;LeoJava&#x2F;libs -Dpara&#x3D;1 HelloWorld a&#x3D;1 b</span><br></pre></td></tr></table></figure>
+<p>按照java命令行规范</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java [-options] class [args...]</span><br></pre></td></tr></table></figure>
+<p>“-Djava.ext.dirs=/home/LeoJava/libs -Dpara=1”属于options，而”a=1 b”属于args。-D参数可以再代码中使用System.getProperty获取参数值，args就是main方法中的args字符串数组。参考如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(System.getProperty(<span class="string">&quot;java.ext.dirs&quot;</span>));</span><br><span class="line">        System.out.println(System.getProperty(<span class="string">&quot;para&quot;</span>));</span><br><span class="line">        System.out.println(Arrays.asList(args));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="cp和–classpath"><a href="#cp和–classpath" class="headerlink" title="-cp和–classpath"></a>-cp和–classpath</h1><p>-cp和–classpath是一样的，指定包搜索路径，有如下几点需要注意：</p>
+<ul>
+<li>不同路径需要分开，linux上分隔符是:，windows下分隔符是;</li>
+<li>注意包含当前路径，一般入口类在当前路径，如果不加当前路径，会找不到主类。当前路径用.代表。</li>
+</ul>
 
           
         
@@ -412,7 +406,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/166/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/168/">&gt;</a>
   </nav>
 
 
@@ -458,7 +452,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +463,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

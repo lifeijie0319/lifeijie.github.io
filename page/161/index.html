@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/spring/mvc/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/other/%E7%BC%96%E7%A0%81/endianess/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/spring/mvc/" itemprop="url">spring mvc</a></h1>
+                <a class="post-title-link" href="/2022/03/04/other/%E7%BC%96%E7%A0%81/endianess/" itemprop="url">endianess</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -356,29 +345,7 @@
       
         
           
-            <h1 id="spring-mvc-请求执行流程"><a href="#spring-mvc-请求执行流程" class="headerlink" title="spring mvc 请求执行流程"></a>spring mvc 请求执行流程</h1><ol>
-<li>DispatcherServlet接收请求</li>
-<li>DispatcherServlet解析URL，根据HandlerMapping找到对应的Controller，还包括Controller相关的拦截器Interceptor等，组成一个HandlerExecutionChain，按照顺序执行这个chain。</li>
-<li>返回ModelAndView到DispatcherServlet</li>
-<li>选择合适的ViewResolver渲染视图返回响应</li>
-</ol>
-<h1 id="spring-mvc-有哪些组件"><a href="#spring-mvc-有哪些组件" class="headerlink" title="spring mvc 有哪些组件"></a>spring mvc 有哪些组件</h1><ul>
-<li>DispatcherServlet：中央控制器，把请求给转发到具体的控制类</li>
-<li>Controller：具体处理请求的控制器</li>
-<li>HandlerMapping：映射处理器，负责映射中央处理器转发给controller时的映射策略</li>
-<li>ModelAndView：服务层返回的数据和视图层的封装类</li>
-<li>ViewResolver：视图解析器，解析具体的视图</li>
-<li>Interceptors ：拦截器，负责拦截我们定义的请求然后做处理工作</li>
-</ul>
-<h1 id="RequestMapping注解"><a href="#RequestMapping注解" class="headerlink" title="@RequestMapping注解"></a>@RequestMapping注解</h1><p>RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。</p>
-<ul>
-<li>value: 请求路径</li>
-<li>method： http请求方法</li>
-<li>consumes: 指定请求的Content-Type</li>
-<li>produces: 指定响应的内容类型，必须请求头Accept中包含该类型。</li>
-<li>params: 指定请求中必须包含某些参数值</li>
-<li>headers: 指定请求头中必须包含某些指定header</li>
-</ul>
+            <h1 id="什么是大端小端"><a href="#什么是大端小端" class="headerlink" title="什么是大端小端"></a>什么是大端小端</h1><p>Endianess是多字节数据对象（比如c语言中的int）字节排列的顺序。<br>BE stores the big-end first. 大端即低地址存的是高位的字节。<br>LE stores the little-end first.小端即低地址存的是低位的字节。</p>
 
           
         
@@ -418,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/160/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/160/">160</a><span class="page-number current">161</span><a class="page-number" href="/page/162/">162</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/162/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/160/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/160/">160</a><span class="page-number current">161</span><a class="page-number" href="/page/162/">162</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/162/">&gt;</a>
   </nav>
 
 
@@ -464,7 +431,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -475,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

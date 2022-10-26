@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/11/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/python/basic/oop/OOP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/11/other/%E6%AD%A3%E5%88%99/%E5%A4%8D%E6%9D%82%E6%AD%A3%E5%88%99/" itemprop="url">复杂正则理解</a></h1>
+                <a class="post-title-link" href="/2022/09/12/language/python/basic/oop/OOP/" itemprop="url">python实例方法、类方法和静态方法</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-11T14:40:31+08:00">
-                2022-04-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T17:04:33+08:00">
+                2022-09-12
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/%E6%AD%A3%E5%88%99/" itemprop="url" rel="index">
-                    <span itemprop="name">正则</span>
+                  <a href="/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/basic/oop/" itemprop="url" rel="index">
+                    <span itemprop="name">oop</span>
                   </a>
                 </span>
 
@@ -345,29 +367,12 @@
       
         
           
-            <h1 id="贪婪匹配"><a href="#贪婪匹配" class="headerlink" title="贪婪匹配"></a>贪婪匹配</h1><ul>
-<li>（.*）是贪婪匹配，会把满足正则的尽可能多的往后匹配。</li>
-<li>（.*?）是非贪婪匹配，会把满足正则的尽可能少匹配。</li>
-</ul>
-<h1 id="非获取匹配"><a href="#非获取匹配" class="headerlink" title="非获取匹配"></a>非获取匹配</h1><h2 id="什么是非获取匹配"><a href="#什么是非获取匹配" class="headerlink" title="什么是非获取匹配"></a>什么是非获取匹配</h2><pre><code>在使用正则表达式的时候，我们经常会使用()把某个部分括起来，称为一个子模式。
-子模式有Capturing和Non-Capturing两种情况。
-Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配结果保存起来，供我们查找或者替换。如后向引用的使用；
-而Non-Capturing指非获取匹配 ，这时系统并不会保存子模式的匹配结果，子模式的匹配更多的只是作为一种限制条件使用，如正向预查，反向预查，负正向预查，负反向预查等。</code></pre>
-<p>参考如下示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">(<span class="string">&#x27;7&#x27;</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).group()</span><br><span class="line"><span class="string">&#x27;win 7&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">&quot;win (?:7|vista)&quot;</span>, <span class="string">&quot;win 7&quot;</span>).groups()</span><br><span class="line">()</span><br></pre></td></tr></table></figure>
-<h2 id="pattern"><a href="#pattern" class="headerlink" title="(?:pattern)"></a>(?:pattern)</h2><p>非获取匹配，匹配pattern但不获取匹配结果，不进行存储供以后使用。这在使用或字符“(|)”来组合一个模式的各个部分是很有用。例如“industr(?:y|ies)”就是一个比“industry|industries”更简略的表达式。</p>
-<h2 id="pattern-1"><a href="#pattern-1" class="headerlink" title="(?=pattern)"></a>(?=pattern)</h2><p>非获取匹配，正向肯定预查，在任何匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如，“Windows(?=95|98|NT|2000)”能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”。</p>
-<h2 id="预查与普通非获取匹配的区别"><a href="#预查与普通非获取匹配的区别" class="headerlink" title="预查与普通非获取匹配的区别"></a>预查与普通非获取匹配的区别</h2><p>预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。参考如下示例：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>phone = <span class="string">&quot;1233-hfdh&quot;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?:23)23&#x27;</span>, phone)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">1</span>), match=<span class="string">&#x27;1&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.search(<span class="string">&#x27;1(?=23)23&#x27;</span>, phone)</span><br><span class="line">&lt;re.Match <span class="built_in">object</span>; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">&#x27;123&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="pattern-2"><a href="#pattern-2" class="headerlink" title="(?!pattern)"></a>(?!pattern)</h2><p>非获取匹配，正向否定预查，在任何不匹配pattern的字符串开始处匹配查找字符串，该匹配不需要获取供以后使用。例如“Windows(?!95|98|NT|2000)”能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”。</p>
-<h2 id="lt-pattern"><a href="#lt-pattern" class="headerlink" title="(?&lt;=pattern)"></a>(?&lt;=pattern)</h2><p>非获取匹配，反向肯定预查，与正向肯定预查类似，只是方向相反。例如，“(?&lt;=95|98|NT|2000)Windows”能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”。另外，(?&lt;=pattern)不支持pattern变长。</p>
-<h2 id="lt-pattern-1"><a href="#lt-pattern-1" class="headerlink" title="(?&lt;!pattern)"></a>(?&lt;!pattern)</h2><p>非获取匹配，反向否定预查，与正向否定预查类似，只是方向相反。例如“(?&lt;!95|98|NT|2000)Windows”能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”。这个地方不正确，有问题 </p>
-<h2 id="通俗理解"><a href="#通俗理解" class="headerlink" title="通俗理解"></a>通俗理解</h2><ol>
-<li><code>?=</code> ： 询问后面跟着的东西是否等于这个    /b(?=a)/.test(‘bab’)</li>
-<li><code>?&lt;=</code> ： 询问是否以这个东西开头  /(?&lt;=a)b/.test(‘ab’)</li>
-<li><code>?!</code> : 询问后面跟着的东西是否不是这个  /b(?!a)/.test(‘bb’)</li>
-<li><code>?&lt;!</code> ：询问是否不是以这个东西开头  /(?&lt;!=a)b/.test(‘bb’)</li>
-</ol>
+            <p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span>:</span></span><br><span class="line">    data = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> self.data</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f1</span>(<span class="params">cls</span>):</span></span><br><span class="line">        <span class="keyword">return</span> cls.data</span><br><span class="line"></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">f2</span>():</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h2 id="1、普通方法："><a href="#1、普通方法：" class="headerlink" title="1、普通方法："></a>1、普通方法：</h2><p>只有实例可以调用，实例作为第一个参数传入方法。</p>
+<h2 id="2、classmethod类方法"><a href="#2、classmethod类方法" class="headerlink" title="2、classmethod类方法"></a>2、classmethod类方法</h2><p>类和实例都可以调用，自动传入类作为方法的第一个参数。</p>
+<h2 id="3、staticmethod静态方法"><a href="#3、staticmethod静态方法" class="headerlink" title="3、staticmethod静态方法"></a>3、staticmethod静态方法</h2><p>类和实例都可以调用，与普通函数类似。</p>
+<h1 id="多继承与mro"><a href="#多继承与mro" class="headerlink" title="多继承与mro"></a>多继承与mro</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lovemo1314/archive/2011/05/03/2035005.html">https://www.cnblogs.com/lovemo1314/archive/2011/05/03/2035005.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/crazyrunning/p/7095014.html">https://www.cnblogs.com/crazyrunning/p/7095014.html</a></p>
 
           
         
@@ -407,7 +412,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/72/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><span class="page-number current">73</span><a class="page-number" href="/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/74/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/72/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/72/">72</a><span class="page-number current">73</span><a class="page-number" href="/page/74/">74</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/74/">&gt;</a>
   </nav>
 
 
@@ -453,7 +458,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -464,7 +469,7 @@ Capturing指获取匹配 ，是指系统会在幕后将所有的子模式匹配�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

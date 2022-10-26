@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/language/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url">django基本环境配置</a></h1>
+                <a class="post-title-link" href="/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/" itemprop="url">rsa的密钥位数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/Django/" itemprop="url" rel="index">
-                    <span itemprop="name">Django</span>
+                  <a href="/categories/security/rsa/" itemprop="url" rel="index">
+                    <span itemprop="name">rsa</span>
                   </a>
                 </span>
 
@@ -356,15 +345,8 @@
       
         
           
-            <h1 id="一、新建项目"><a href="#一、新建项目" class="headerlink" title="一、新建项目"></a>一、新建项目</h1><p>django-admin startproject nanxun_pro</p>
-<h1 id="二、建立app"><a href="#二、建立app" class="headerlink" title="二、建立app"></a>二、建立app</h1><p>cd nanxun_pro/<br>python manage.py startapp nanxun<br>修改配置添加app名字</p>
-<h1 id="三、django连接psql"><a href="#三、django连接psql" class="headerlink" title="三、django连接psql"></a>三、django连接psql</h1><p><a target="_blank" rel="noopener" href="http://luct.blogbus.com/logs/111257414.html">http://luct.blogbus.com/logs/111257414.html</a></p>
-<h2 id="1、修改配置"><a href="#1、修改配置" class="headerlink" title="1、修改配置"></a>1、修改配置</h2><p>默认：<br>修改后：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,</span><br><span class="line">        &#39;NAME&#39;: &#39;nanxundb&#39;,</span><br><span class="line">        &#39;USER&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;PASSWORD&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;HOST&#39;: &#39;localhost&#39;,</span><br><span class="line">        &#39;PORT&#39;: &#39;5432&#39;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2、安装psycopg2，psql在python中运行的中间件。"><a href="#2、安装psycopg2，psql在python中运行的中间件。" class="headerlink" title="2、安装psycopg2，psql在python中运行的中间件。"></a>2、安装psycopg2，psql在python中运行的中间件。</h2><p>pip install psycopg2</p>
-<h2 id="3、初始化数据库，载入django自带的数据模型"><a href="#3、初始化数据库，载入django自带的数据模型" class="headerlink" title="3、初始化数据库，载入django自带的数据模型"></a>3、初始化数据库，载入django自带的数据模型</h2><p>python manage.py migrate</p>
-<h1 id="四、配置admin账户"><a href="#四、配置admin账户" class="headerlink" title="四、配置admin账户"></a>四、配置admin账户</h1><p>python manage.py createsuperuser</p>
-<h1 id="五、创建模板与静态文件目录。"><a href="#五、创建模板与静态文件目录。" class="headerlink" title="五、创建模板与静态文件目录。"></a>五、创建模板与静态文件目录。</h1>
+            <h1 id="常用的1024位-2048位的rsa密钥长度到底是谁的长度"><a href="#常用的1024位-2048位的rsa密钥长度到底是谁的长度" class="headerlink" title="常用的1024位/2048位的rsa密钥长度到底是谁的长度"></a>常用的1024位/2048位的rsa密钥长度到底是谁的长度</h1><p>rsa有三个重要的大数：公钥指数e、私钥指数d和模值n。我们说的“密钥长度”一般只是指模值的位长度。参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh2075/article/details/79718285">https://blog.csdn.net/zxh2075/article/details/79718285</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/caidi/p/14794952.html">https://www.cnblogs.com/caidi/p/14794952.html</a></p>
+
           
         
       
@@ -403,7 +385,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/288/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/288/">288</a><span class="page-number current">289</span><a class="page-number" href="/page/290/">290</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/290/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/288/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/288/">288</a><span class="page-number current">289</span><a class="page-number" href="/page/290/">290</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/290/">&gt;</a>
   </nav>
 
 
@@ -449,7 +431,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +442,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

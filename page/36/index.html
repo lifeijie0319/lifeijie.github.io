@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/java/basic/%E6%B3%9B%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/26/tools/kafka/kafka%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/java/basic/%E6%B3%9B%E5%9E%8B/" itemprop="url">泛型</a></h1>
+                <a class="post-title-link" href="/2022/09/26/tools/kafka/kafka%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T17:04:33+08:00">
-                2022-09-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T15:53:12+08:00">
+                2022-09-26
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/categories/tools/kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">kafka</span>
                   </a>
                 </span>
 
@@ -356,54 +345,13 @@
       
         
           
-            <h1 id="什么是泛型"><a href="#什么是泛型" class="headerlink" title="什么是泛型"></a>什么是泛型</h1><p>泛型是一种类的模板，可以接受不同的数据类型，方便实现不同数据类型相似的操作，实现了代码的复用。</p>
-<h1 id="泛型的使用"><a href="#泛型的使用" class="headerlink" title="泛型的使用"></a>泛型的使用</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
-<p>以上是泛型最常见的使用方式。ArrayList是JDK提供的泛型类，List是JDK提供的泛型接口，这里定义了一个列表，列表的元素是String类型。</p>
-<ul>
-<li>String可以替换成其它引用类型比如Intager，这就变成了整数的列表，但是注意这里只能是引用类型，不能是基本数据类型。</li>
-<li>这里使用了面向接口的设计理念，ArrayList实现了List接口，我们称这种使用方式为向上转型。但是注意，向上转型的时候内置数据类型要一致，比如<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Number&gt; numberList = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br></pre></td></tr></table></figure>
-是不允许的，编译器不通过。假设可以，那么numberList可以接受Float类型数据，因为Float是Number的子类，而实际上Float类型无法存入Integer类型的列表。将Integer和Number调换位置也不行，待分析。</li>
-</ul>
-<h1 id="编写泛型"><a href="#编写泛型" class="headerlink" title="编写泛型"></a>编写泛型</h1><h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><p>只要按照正常类进行定义，然后把需要泛型化的参数类统一替换成一个字母，比如T，之后在类名后添加<T>，该类就变成了泛型类。如果参数类型有多个，用多个不同的子母即可，类名后添加的后缀变成&lt;T, K&gt;，即不同的参数类之间用逗号隔开。</p>
-<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p>泛型方法的定义与其所在的类是否是泛型类是没有任何关系的，所在的类既可以是泛型类，也可以不是泛型类。泛型方法不使用泛型类本身定义的参数类，需要独立地定义泛型参数。比如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;K&gt; <span class="function">Pair&lt;K&gt; <span class="title">create</span><span class="params">(K first, K last)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Pair&lt;K&gt;(first, last);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">String <span class="title">getClassName</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> t.getClass().getName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="泛型的实现原理"><a href="#泛型的实现原理" class="headerlink" title="泛型的实现原理"></a>泛型的实现原理</h1><p>java语言实现泛型的方式是擦拭法，即虚拟机对泛型一无所知，所有的工作都是编译器完成。编译器把泛型类参数替换成Object并进行正确的的类型转换。比如：</p>
-<ol>
-<li>我们的代码，也是编译器看到的代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;String&gt; p = <span class="keyword">new</span> Pair&lt;&gt;(<span class="string">&quot;Hello&quot;</span>, <span class="string">&quot;world&quot;</span>);</span><br><span class="line">String first = p.getFirst();</span><br><span class="line">String last = p.getLast();</span><br></pre></td></tr></table></figure></li>
-<li>虚拟机执行的代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pair p = <span class="keyword">new</span> Pair(<span class="string">&quot;Hello&quot;</span>, <span class="string">&quot;world&quot;</span>);</span><br><span class="line">String first = (String) p.getFirst();</span><br><span class="line">String last = (String) p.getLast();</span><br></pre></td></tr></table></figure>
-<h2 id="由于擦拭法导致的一些注意点"><a href="#由于擦拭法导致的一些注意点" class="headerlink" title="由于擦拭法导致的一些注意点"></a>由于擦拭法导致的一些注意点</h2></li>
-<li><T>不能是基本类型，因为Object无法持有基本类型</li>
-<li>无法取得带泛型的class，所有泛型实例，无论T的类型是什么，getClass()返回同一个Class实例，因为编译后它们全部都是Pair<Object>。</li>
-<li>无法判断带泛型的类型<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = <span class="keyword">new</span> Pair&lt;&gt;(<span class="number">123</span>, <span class="number">456</span>);</span><br><span class="line"><span class="comment">// Compile error:</span></span><br><span class="line"><span class="keyword">if</span> (p <span class="keyword">instanceof</span> Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>不能实例化T类型<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> T first;</span><br><span class="line">    <span class="keyword">private</span> T last;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Compile error:</span></span><br><span class="line">        first = <span class="keyword">new</span> T();</span><br><span class="line">        last = <span class="keyword">new</span> T();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 正确的方式</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(Class&lt;T&gt; clazz)</span> </span>&#123;</span><br><span class="line">        first = clazz.newInstance();</span><br><span class="line">        last = clazz.newInstance();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>不恰当的覆写方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(T t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span> == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-这个代码经过编译器编译之后，会实际变成覆写Object类的equals方法，一般通过换方法名来解决。</li>
-</ol>
-<h2 id="泛型继承"><a href="#泛型继承" class="headerlink" title="泛型继承"></a>泛型继承</h2><p>一个类可以继承自泛型类，但是继承的时候编译器就会将参数类固定下来。通过子类可以判断父类的泛型参数类型。</p>
-<h1 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h1><h2 id="extends通配符"><a href="#extends通配符" class="headerlink" title="extends通配符"></a>extends通配符</h2><h3 id="限定泛型类能接受的类型参数"><a href="#限定泛型类能接受的类型参数" class="headerlink" title="限定泛型类能接受的类型参数"></a>限定泛型类能接受的类型参数</h3><p>使用<T extends Number>可以限制T的类型是Number的子类</p>
-<h3 id="限定方法参数的类型"><a href="#限定方法参数的类型" class="headerlink" title="限定方法参数的类型"></a>限定方法参数的类型</h3><p>以Pair&lt;? extends Number&gt;为例，该限定有如下效果：</p>
-<ul>
-<li>传入的Pair实例的参数类型是Number的子类</li>
-<li>方法体中能获取Pair实例的成员变量，但是返回类型是Number</li>
-<li>方法体中不能使用Pair实例的set方法修改成员变量的值(null除外)</li>
-</ul>
-<h2 id="super通配符"><a href="#super通配符" class="headerlink" title="super通配符"></a>super通配符</h2><h3 id="限定泛型类能接受的类型参数-1"><a href="#限定泛型类能接受的类型参数-1" class="headerlink" title="限定泛型类能接受的类型参数"></a>限定泛型类能接受的类型参数</h3><p>使用<T super Integer>可以限制T的类型是Integer的父类</p>
-<h3 id="限定方法参数的类型-1"><a href="#限定方法参数的类型-1" class="headerlink" title="限定方法参数的类型"></a>限定方法参数的类型</h3><p>以Pair&lt;? super Integer&gt;为例，该限定有如下效果：</p>
-<ul>
-<li>传入的Pair实例的参数类型是Integer的父类</li>
-<li>方法体中能使用Pair实例的set方法修改成员变量的值，但是set只接受Integer类型参数</li>
-<li>方法体中不能使用Pair实例的get方法获取成员变量的值(Object除外)</li>
-</ul>
-<h2 id="PCES原则"><a href="#PCES原则" class="headerlink" title="PCES原则"></a>PCES原则</h2><p>PECS原则：Producer Extends Consumer Super。即对于数据的提供者，使用extends通配符，对于数据的时候者，使用super通配符。</p>
-<h2 id="无限定通配符"><a href="#无限定通配符" class="headerlink" title="无限定通配符"></a>无限定通配符</h2><?>是一种特殊的通配符，以Pair<?><p>为例，有如下特点：</p>
-<ul>
-<li>不允许调用set(T)方法并传入引用（null除外）；</li>
-<li>不允许调用T get()方法并获取T引用（只能获取Object引用）。</li>
-<li>Pair&lt;?&gt;是所有Pair<T>的超类</li>
-</ul>
-<h1 id="泛型与反射"><a href="#泛型与反射" class="headerlink" title="泛型与反射"></a>泛型与反射</h1><p>部分反射API使用了泛型，比如Class<T>，Constructor<T></p>
-<h1 id="泛型数组"><a href="#泛型数组" class="headerlink" title="泛型数组"></a>泛型数组</h1><p>可以声明泛型数组，但是不能使用new创建泛型数组，本质上是由于泛型实现原理擦拭法，导致生成的是Object数组。正确的方式是使用强制转型或者可变参数。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;String&gt;[] ps = <span class="keyword">null</span>; <span class="comment">// ok</span></span><br><span class="line">Pair&lt;String&gt;[] ps = <span class="keyword">new</span> Pair&lt;String&gt;[<span class="number">2</span>]; <span class="comment">// compile error!</span></span><br><span class="line"><span class="comment">// 创建泛型数据</span></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">Pair&lt;String&gt;[] ps2 = (Pair&lt;String&gt;[])<span class="keyword">new</span> Pair[<span class="number">2</span>];</span><br><span class="line"><span class="comment">// 创建泛型数据</span></span><br><span class="line">T[] createArray(Class&lt;T&gt; cls) &#123;</span><br><span class="line">    <span class="keyword">return</span> (T[]) Array.newInstance(cls, <span class="number">5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@SafeVarargs</span></span><br><span class="line"><span class="keyword">static</span> &lt;T&gt; T[] asArray(T... objs) &#123;</span><br><span class="line">    <span class="keyword">return</span> objs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <hr>
+<h2 id="title：kafka常见问题"><a href="#title：kafka常见问题" class="headerlink" title="title：kafka常见问题"></a>title：kafka常见问题</h2><h1 id="org-apache-kafka-common-errors-TimeoutException"><a href="#org-apache-kafka-common-errors-TimeoutException" class="headerlink" title="org.apache.kafka.common.errors.TimeoutException"></a>org.apache.kafka.common.errors.TimeoutException</h1><p>按照示例尝试kafka的消息队列功能时，生产者发送消息到kafka的broker超时，原因是客户端无法按照服务端返回的域名地址（解析出ip进行访问），这里在kafka的服务端配置文件中有说：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># The address the socket server listens on. It will get the value returned from</span><br><span class="line"># java.net.InetAddress.getCanonicalHostName() if not configured.</span><br><span class="line">#   FORMAT:</span><br><span class="line">#     listeners &#x3D; listener_name:&#x2F;&#x2F;host_name:port</span><br><span class="line">#   EXAMPLE:</span><br><span class="line">#     listeners &#x3D; PLAINTEXT:&#x2F;&#x2F;your.host.name:9092</span><br><span class="line">listeners&#x3D;PLAINTEXT:&#x2F;&#x2F;192.168.1.29:9092</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/maoyuanming0806/article/details/80553632/">https://blog.csdn.net/maoyuanming0806/article/details/80553632/</a></p>
+<h1 id="JVM内存不足"><a href="#JVM内存不足" class="headerlink" title="JVM内存不足"></a>JVM内存不足</h1><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.OutOfMemoryError: Java heap space</span><br></pre></td></tr></table></figure>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>设置环境变量类似如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export KAFKA_HEAP_OPTS&#x3D;&quot;-Xms2128m -Xmx256m&quot;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -442,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/35/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/37/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/35/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/35/">35</a><span class="page-number current">36</span><a class="page-number" href="/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/37/">&gt;</a>
   </nav>
 
 
@@ -488,7 +436,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -499,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

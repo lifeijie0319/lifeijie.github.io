@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/linux/ubuntu/dpkg/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/linux/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A0%81%E8%AE%BE%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/system/linux/ubuntu/dpkg/" itemprop="url">dpkg详解</a></h1>
+                <a class="post-title-link" href="/2021/12/04/system/linux/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A0%81%E8%AE%BE%E7%BD%AE/" itemprop="url">系统编码设置</a></h1>
         
 
         <div class="post-meta">
@@ -313,17 +313,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/linux/ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -356,15 +345,11 @@
       
         
           
-            <h1 id="dpkg和apt的区别"><a href="#dpkg和apt的区别" class="headerlink" title="dpkg和apt的区别"></a>dpkg和apt的区别</h1><ol>
-<li>dpkg是用来安装.deb文件,但不会解决模块的依赖关系,且不会关心ubuntu的软件仓库内的软件,可以用于安装本地的deb文件。</li>
-<li>apt会解决和安装模块的依赖问题,并会咨询软件仓库, 但不会安装本地的deb文件, apt是建立在dpkg之上的软件管理工具</li>
-</ol>
-<h1 id="dpkg基本操作"><a href="#dpkg基本操作" class="headerlink" title="dpkg基本操作"></a>dpkg基本操作</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i deb文件名</span><br></pre></td></tr></table></figure>
-<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -l 包名</span><br></pre></td></tr></table></figure>
-<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><h3 id="一般卸载"><a href="#一般卸载" class="headerlink" title="一般卸载"></a>一般卸载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -r 包名</span><br></pre></td></tr></table></figure>
-<p>注：这样卸载之后配置信息仍然保留，可以用dpkg -l查看</p>
-<h3 id="彻底卸载"><a href="#彻底卸载" class="headerlink" title="彻底卸载"></a>彻底卸载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -P 包名</span><br></pre></td></tr></table></figure>
+            <h1 id="配置系统编码"><a href="#配置系统编码" class="headerlink" title="配置系统编码"></a>配置系统编码</h1><h2 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h2><p>修改/etc/sysconfig/i18n，写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG&#x3D;&quot;zh_CN.UTF-8&quot;</span><br></pre></td></tr></table></figure>
+<p>保存退出</p>
+<h2 id="用户配置"><a href="#用户配置" class="headerlink" title="用户配置"></a>用户配置</h2><p>修改.bashrc或者.bash_profile，添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LANG&#x3D;&quot;zh_CN.UTF-8&quot; </span><br></pre></td></tr></table></figure>
           
         
       
@@ -403,7 +388,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/300/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/300/">300</a><span class="page-number current">301</span><a class="page-number" href="/page/302/">302</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/302/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/300/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/300/">300</a><span class="page-number current">301</span><a class="page-number" href="/page/302/">302</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/302/">&gt;</a>
   </nav>
 
 
@@ -449,7 +434,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +445,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

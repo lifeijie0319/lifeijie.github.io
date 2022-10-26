@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/oracle/schema%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/database/oracle/schema%E8%AF%A6%E8%A7%A3/" itemprop="url">schema详解</a></h1>
+                <a class="post-title-link" href="/2021/12/04/tools/nginx/nginx%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5/" itemprop="url">nginx健康检查</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">oracle</span>
+                  <a href="/categories/tools/nginx/" itemprop="url" rel="index">
+                    <span itemprop="name">nginx</span>
                   </a>
                 </span>
 
@@ -345,18 +345,13 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
-<li>A schema is a collection of database objects (used by a user.).</li>
-<li>Schema objects are the logical structures that directly refer to the database’s data.</li>
-<li>A user is a name defined in the database that can connect to and access objects.</li>
-<li>Schemas and users help database administrators manage database security.</li>
-</ul>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
-<li>一个用户一般对应一个schema,该用户的schema名等于用户名，并作为该用户缺省schema。</li>
-<li> Oracle 数据库中不能新创建一个schema，要想创建一个schema，只能通过创建一个用户的方法解决。</li>
-<li> 一个用户有一个缺省的schema，其schema名就等于用户名，当然一个用户还可以使用其他的schema。</li>
-<li> 如果我们访问一个表时，没有指明该表属于哪一个schema中的，系统就会自动给我们在表上加上缺省的schema名。</li>
-</ul>
+            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html">https://www.cnblogs.com/xingxia/p/nginx_healthcheck.html</a></p>
+<h1 id="被动检查"><a href="#被动检查" class="headerlink" title="被动检查"></a>被动检查</h1><p>利用nginx自带模块ngx_http_proxy_module和ngx_http_upstream_module对后端节点做健康检查</p>
+<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><ol>
+<li>检测server失败时，请求会转到下一个正常server。</li>
+<li>测试发现，max_fails只在服务由正常状态转成down时生效，如果服务已经被标记成down，那么只会检测一次。</li>
+</ol>
+<h1 id="主动检查"><a href="#主动检查" class="headerlink" title="主动检查"></a>主动检查</h1><p>利用nginx_upstream_check_module模块对后端节点做健康检查</p>
 
           
         
@@ -396,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/256/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/256/">256</a><span class="page-number current">257</span><a class="page-number" href="/page/258/">258</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/258/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/256/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/256/">256</a><span class="page-number current">257</span><a class="page-number" href="/page/258/">258</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/258/">&gt;</a>
   </nav>
 
 
@@ -442,7 +437,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/openssl/rsa/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/tools/openssl/rsa/" itemprop="url">openssl rsa相关操作</a></h1>
+                <a class="post-title-link" href="/2021/12/04/database/mysql/date_format%E5%87%BD%E6%95%B0/" itemprop="url">date_format函数</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/openssl/" itemprop="url" rel="index">
-                    <span itemprop="name">openssl</span>
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,10 +345,41 @@
       
         
           
-            <h1 id="openssl生成公私钥"><a href="#openssl生成公私钥" class="headerlink" title="openssl生成公私钥"></a>openssl生成公私钥</h1><h2 id="生成-RSA-私钥"><a href="#生成-RSA-私钥" class="headerlink" title="生成 RSA 私钥"></a>生成 RSA 私钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out rsa_private_key.pem 1024</span><br></pre></td></tr></table></figure>
-<h2 id="生成-RSA-公钥"><a href="#生成-RSA-公钥" class="headerlink" title="生成 RSA 公钥"></a>生成 RSA 公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem</span><br></pre></td></tr></table></figure>
-<p>注：这样命令生成的公钥是pkcs8格式的，使用的私钥格式可以是pkcs1或者pkcs8</p>
-<h1 id="获取私钥长度"><a href="#获取私钥长度" class="headerlink" title="获取私钥长度"></a>获取私钥长度</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in secret.key -text -noout | grep &quot;Private-Key&quot;</span><br></pre></td></tr></table></figure>
+            <h1 id="日期格式化函数："><a href="#日期格式化函数：" class="headerlink" title="日期格式化函数："></a>日期格式化函数：</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DATE_FORMAT(<span class="type">date</span>,format)</span><br></pre></td></tr></table></figure>
+<h1 id="format参数"><a href="#format参数" class="headerlink" title="format参数"></a>format参数</h1><ul>
+<li>%a    缩写星期名</li>
+<li>%b    缩写月名</li>
+<li>%c    月，数值</li>
+<li>%D    带有英文前缀的月中的天</li>
+<li>%d    月的天，数值(00-31)</li>
+<li>%e    月的天，数值(0-31)</li>
+<li>%f    微秒</li>
+<li>%H    小时 (00-23)</li>
+<li>%h    小时 (01-12)</li>
+<li>%I    小时 (01-12)</li>
+<li>%i    分钟，数值(00-59)</li>
+<li>%j    年的天 (001-366)</li>
+<li>%k    小时 (0-23)</li>
+<li>%l    小时 (1-12)</li>
+<li>%M    月名</li>
+<li>%m    月，数值(00-12)</li>
+<li>%p    AM 或 PM</li>
+<li>%r    时间，12-小时（hh:mm:ss AM 或 PM）</li>
+<li>%S    秒(00-59)</li>
+<li>%s    秒(00-59)</li>
+<li>%T    时间, 24-小时 (hh:mm:ss)</li>
+<li>%U    周 (00-53) 星期日是一周的第一天</li>
+<li>%u    周 (00-53) 星期一是一周的第一天</li>
+<li>%V    周 (01-53) 星期日是一周的第一天，与 %X 使用</li>
+<li>%v    周 (01-53) 星期一是一周的第一天，与 %x 使用</li>
+<li>%W    星期名</li>
+<li>%w    周的天 （0=星期日, 6=星期六）</li>
+<li>%X    年，其中的星期日是周的第一天，4 位，与 %V 使用</li>
+<li>%x    年，其中的星期一是周的第一天，4 位，与 %v 使用</li>
+<li>%Y    年，4 位</li>
+<li>%y    年，2 位</li>
+</ul>
+
           
         
       
@@ -387,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/242/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/242/">242</a><span class="page-number current">243</span><a class="page-number" href="/page/244/">244</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/244/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/242/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/242/">242</a><span class="page-number current">243</span><a class="page-number" href="/page/244/">244</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/244/">&gt;</a>
   </nav>
 
 
@@ -433,7 +464,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +475,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

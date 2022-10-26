@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/spring/%E4%BA%8B%E5%8A%A1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/spring/%E4%BA%8B%E5%8A%A1/" itemprop="url">spring的事务支持</a></h1>
+                <a class="post-title-link" href="/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-16/" itemprop="url">utf-16编码</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -356,21 +345,32 @@
       
         
           
-            <h1 id="spring事务的实现方式"><a href="#spring事务的实现方式" class="headerlink" title="spring事务的实现方式"></a>spring事务的实现方式</h1><ol>
-<li>编程式事务管理：在代码中调用beginTransaction()、commit()、rollback()等事务管理相关的方法；又比如通过spring提供的jdbcTemplate管理事务等通过代码编写来控制事务的方式</li>
-<li>基于 TransactionProxyFactoryBean 的声明式事务管理，就是创建一个TransactionProxyFactoryBean类型的代理类，代理实际业务类，代理类完成事务管理</li>
-<li>基于 Aspectj AOP 配置事务，就是配置一个事务管理的aop切面，配置的advice是特殊的事务管理的advice</li>
-<li>基于 @Transactional 的声明式事务管理</li>
+            <h1 id="utf-16概念"><a href="#utf-16概念" class="headerlink" title="utf-16概念"></a>utf-16概念</h1><pre><code>和UTF-8一样，utf-16是unicode的一种实现。</code></pre>
+<h1 id="unicode到utf-16编码的转换"><a href="#unicode到utf-16编码的转换" class="headerlink" title="unicode到utf-16编码的转换"></a>unicode到utf-16编码的转换</h1><table>
+<thead>
+<tr>
+<th>Unicode范围</th>
+<th>UTF-16编码方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U+000~U+FFFF</td>
+<td>2 Byte存储，编码后等于Unicode值</td>
+</tr>
+<tr>
+<td>U+10000~U+10FFFF</td>
+<td>4 Byte存储，先将Unicode值减去（0x10000），得到20bit长的值。再将Unicode分为高10位和低10位。UTF-16编码的高位是2 Byte，高10位Unicode范围为0-0x3FF，将Unicode值加上0XD800，得到高位代理（或称为前导代理，存储高位）；低位也是2 Byte，低十位Unicode范围一样为0~0x3FF，将Unicode值加上0xDC00,得到低位代理（或称为后尾代理，存储低位）</td>
+</tr>
+</tbody></table>
+<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><ul>
+<li>U+0020 -&gt; 0x20</li>
+<li><ol>
+<li>U+12345 - 0x10000 = 0x2345 = 0b 0000 0010 0011 0100 0101</li>
+<li>高位代理 = 0b 0000 0010 00 + 0XD800 = 0XD808</li>
+<li>低位代理 = 0b 11 0100 0101 + 0XDC00 = 0XDF45</li>
+<li>U+12345 -&gt; 0XD808 0XDF45</li>
 </ol>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/myseries/p/10834172.html">https://www.cnblogs.com/myseries/p/10834172.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/donggua3694857/article/details/69858827">https://blog.csdn.net/donggua3694857/article/details/69858827</a></p>
-<h1 id="事务传播"><a href="#事务传播" class="headerlink" title="事务传播"></a>事务传播</h1><ul>
-<li>PROPAGATION_REQUIRED 支持当前事务，如果不存在，就创建一个</li>
-<li>PROPAGATION_SUPPORTED 支持当前事务，如果不存在，就不适用事务</li>
-<li>PROPAGATION_MANDATORY 支持当前事务，如果不存在，就抛出异常</li>
-<li>PROPAGATION_REQUIRES_NEW 如果当前有事务存在，挂起当前事务，创建一个新的事务</li>
-<li>PROPAGATION_NOT_SUPPORTED 以非事务方式运行，如果有事务存在，挂起当前事务</li>
-<li>PROPAGATION_NEVER 以非事务方式运行，如果有事务存在，抛出异常</li>
-<li>PROPAGATION_NESTED 如果当前事务存在，则嵌套事务执行</li>
+</li>
 </ul>
 
           
@@ -411,7 +411,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/162/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/page/164/">164</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/164/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/162/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/page/164/">164</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/164/">&gt;</a>
   </nav>
 
 
@@ -457,7 +457,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -468,7 +468,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

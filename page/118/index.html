@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/database/basic/sql%E8%BF%9E%E6%8E%A5/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/30/database/mysql/engine/transaction/mysql%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/database/basic/sql%E8%BF%9E%E6%8E%A5/" itemprop="url">sql表连接</a></h1>
+                <a class="post-title-link" href="/2022/03/30/database/mysql/engine/transaction/mysql%E4%BA%8B%E5%8A%A1/" itemprop="url">mysql事务</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T19:16:34+08:00">
+                2022-03-30
               </time>
             
 
@@ -306,8 +306,30 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/engine/" itemprop="url" rel="index">
+                    <span itemprop="name">engine</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/engine/transaction/" itemprop="url" rel="index">
+                    <span itemprop="name">transaction</span>
                   </a>
                 </span>
 
@@ -345,16 +367,10 @@
       
         
           
-            <h1 id="sql表连接的含义"><a href="#sql表连接的含义" class="headerlink" title="sql表连接的含义"></a>sql表连接的含义</h1><p>sql查询常把多表关联起来查询，我们把表A的数据设为一个集合、表B的数据设为一个集合，以此为例，理解以下几种表连接：</p>
-<ol>
-<li>(inner) join 内连接就是A和B的交集</li>
-<li>left (outer) join 左连接是A连接B，以A为标杆，即使B没有对应数据也把A记录下来</li>
-<li>right (outer) join 右连接与左连接类似，但方向相反</li>
-<li>full (outer) join 完整外部连接，得到集合A和B的并集，即使对方表没有匹配的数据，本表的数据也会占用一行结果行。注意mysql并不支持full join。</li>
-<li>交叉连接 交叉联接返回左表中的所有行，左表中的每一行与右表中的所有行组合。交叉联接也称作笛卡尔积。</li>
-</ol>
-<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/afirefly/archive/2010/10/08/1845906.html">https://www.cnblogs.com/afirefly/archive/2010/10/08/1845906.html</a></p>
-
+            <h1 id="mysql客户端开启事务的方式"><a href="#mysql客户端开启事务的方式" class="headerlink" title="mysql客户端开启事务的方式"></a>mysql客户端开启事务的方式</h1><h2 id="显式启动事务"><a href="#显式启动事务" class="headerlink" title="显式启动事务"></a>显式启动事务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">begin&#x2F;start transaction;</span><br></pre></td></tr></table></figure>
+<h2 id="修改客户端autocommit值"><a href="#修改客户端autocommit值" class="headerlink" title="修改客户端autocommit值"></a>修改客户端autocommit值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%autocommit%&#39;;</span><br><span class="line">set autocommit&#x3D;0;</span><br><span class="line">show variables like &#39;%autocommit%&#39;;</span><br></pre></td></tr></table></figure>
+<h1 id="隔离级别的查看与设置"><a href="#隔离级别的查看与设置" class="headerlink" title="隔离级别的查看与设置"></a>隔离级别的查看与设置</h1><h2 id="隔离级别的查看"><a href="#隔离级别的查看" class="headerlink" title="隔离级别的查看"></a>隔离级别的查看</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select @@tx_isolation; # 查看当前会话的隔离级别</span><br><span class="line">select @@global.tx_isolation; # 查看全局的隔离级别</span><br></pre></td></tr></table></figure>
+<h2 id="隔离级别的设置"><a href="#隔离级别的设置" class="headerlink" title="隔离级别的设置"></a>隔离级别的设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set session transaction isolation level read committed; # 设置会话的隔离级别</span><br></pre></td></tr></table></figure>
           
         
       
@@ -393,7 +409,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/117/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/117/">117</a><span class="page-number current">118</span><a class="page-number" href="/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/119/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/117/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/117/">117</a><span class="page-number current">118</span><a class="page-number" href="/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/119/">&gt;</a>
   </nav>
 
 
@@ -439,7 +455,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +466,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

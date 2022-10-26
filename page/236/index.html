@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/nginx/nginx%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/tools/nginx/nginx%E5%AE%89%E8%A3%85/" itemprop="url">nginx安装</a></h1>
+                <a class="post-title-link" href="/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" itemprop="url">db2表空间管理</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/categories/database/db2/" itemprop="url" rel="index">
+                    <span itemprop="name">db2</span>
                   </a>
                 </span>
 
@@ -345,21 +345,12 @@
       
         
           
-            <h1 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h1><ol>
-<li>下载解压，进入目录  </li>
-<li>./configure<br>注：常用配置如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;opt&#x2F;nginx&#x2F; \</span><br><span class="line">--conf-path&#x3D;&#x2F;opt&#x2F;nginx&#x2F;etc&#x2F;nginx.conf  \</span><br><span class="line">--user&#x3D;nginx --group&#x3D;nginx  \</span><br><span class="line">--with-http_ssl_module  \</span><br><span class="line"># adds the HTTPS protocol support to an HTTP server</span><br><span class="line">--with-openssl&#x3D;&#x2F;root&#x2F;packages&#x2F;openssl-1.1.1g \</span><br><span class="line">--with-pcre&#x3D;&#x2F;root&#x2F;packages&#x2F;pcre-8.43 \</span><br><span class="line"># sets the path to the sources of the PCRE library. The library distribution (version 4.4 — 8.43) needs to be downloaded from the PCRE site and extracted. </span><br><span class="line"># The library is required for regular expressions support in the location directive and for the ngx_http_rewrite_module module.</span><br><span class="line">--with-zlib&#x3D;&#x2F;root&#x2F;packages&#x2F;zlib-1.2.11 \</span><br><span class="line"># sets the path to the sources of the zlib library. The library distribution (version 1.1.3 — 1.2.11) needs to be downloaded from the zlib site and extracted.</span><br><span class="line"># The library is required for the ngx_http_gzip_module module.</span><br><span class="line">--with-http_stub_status_module  \</span><br><span class="line"># provides access to basic status information</span><br><span class="line">--with-http_gzip_static_module</span><br><span class="line"># enables sending precompressed files with the “.gz” filename extension instead of regular files</span><br></pre></td></tr></table></figure></li>
-<li>sudo make</li>
-<li>sudo make install</li>
-<li>设置开机自启动<br>vi /etc/rc.local<br>增加一行/usr/local/nginx/sbin/nginx</li>
-</ol>
-<h1 id="安装报错和处理"><a href="#安装报错和处理" class="headerlink" title="安装报错和处理"></a>安装报错和处理</h1><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make: *** No rule to make target &#96;build&#39;, needed by &#96;default&#39;.  Stop.</span><br></pre></td></tr></table></figure>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>出现此种情况，是linux系统没有安装先决条件，需要事先安装GCC、PCRE库、zlib库、OpenSSL库。<a target="_blank" rel="noopener" href="http://www.cnblogs.com/zrbfree/p/6419043.html">http://www.cnblogs.com/zrbfree/p/6419043.html</a><br>注意安装之后要重新configure之后才能生效。</p>
-<h1 id="配置nginx为系统服务"><a href="#配置nginx为系统服务" class="headerlink" title="配置nginx为系统服务"></a>配置nginx为系统服务</h1><p>编辑sudo vim /lib/systemd/system/nginx.service，输入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description&#x3D;nginx</span><br><span class="line">After&#x3D;network.target</span><br><span class="line"> </span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;forking</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx</span><br><span class="line">ExecReload&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s reload</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin&#x2F;nginx -s quit</span><br><span class="line">PrivateTmp&#x3D;true</span><br><span class="line"> </span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
-<h1 id="nginx非root启停"><a href="#nginx非root启停" class="headerlink" title="nginx非root启停"></a>nginx非root启停</h1><ol>
-<li>修改prefix目录所属用户和组为需要启停的用户和组<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R :user::group :prefix</span><br></pre></td></tr></table></figure></li>
-<li>修改nginx可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd :bin_path</span><br><span class="line">chown root:root nginx</span><br><span class="line">chmod u+s nginx</span><br></pre></td></tr></table></figure>
-<h2 id="注：s-模式的概念"><a href="#注：s-模式的概念" class="headerlink" title="注：s 模式的概念"></a>注：s 模式的概念</h2>s 模式是指：当文件被执行时， 根据 who 参数指定的用户类型设置文件的 setuid 或者 setgid 权限。通俗地讲，执行文件时将进程的属主或组 ID 设置为这个文件的属主或组 ID。<br>chmod u+s  就是给某个程序的所有者suid权限，可以像root用户那样启动。<br>s 模式只针对 u 和 g 两种文件用户类型。u+s 表示执行文件时将进程的属主 ID 设置为这个文件的属主 ID，g+s 类似，用来设置文件的属组 ID。</li>
+            <h1 id="查看表空间"><a href="#查看表空间" class="headerlink" title="查看表空间"></a>查看表空间</h1><ol>
+<li>查看表空间概况<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES</span><br></pre></td></tr></table></figure></li>
+<li>查看表空间详情<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES SHOW DETAIL</span><br></pre></td></tr></table></figure>
+<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2>删除表报错<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DB21034E  The command was processed as an SQL statement because it was not a </span><br><span class="line">valid Command Line Processor command.  During SQL processing it returned:</span><br><span class="line">SQL0290N  Table space access is not allowed.  SQLSTATE&#x3D;55039</span><br></pre></td></tr></table></figure>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2>表空间状态不正常，为Backup pending<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2>备份数据库或表空间。<br>备份数据库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 backup database xxxxx </span><br></pre></td></tr></table></figure>
+备份表空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 force applications all &amp; db2 backup database xxx tablespace xxx</span><br></pre></td></tr></table></figure></li>
 </ol>
 
           
@@ -400,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/235/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/235/">235</a><span class="page-number current">236</span><a class="page-number" href="/page/237/">237</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/237/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/235/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/235/">235</a><span class="page-number current">236</span><a class="page-number" href="/page/237/">237</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/237/">&gt;</a>
   </nav>
 
 
@@ -446,7 +437,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

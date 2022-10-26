@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/17/language/java/basic/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/10/16/language/java/spring/IOC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/17/language/java/basic/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/" itemprop="url">函数式编程</a></h1>
+                <a class="post-title-link" href="/2022/10/16/language/java/spring/IOC/" itemprop="url">IOC</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-17T21:19:36+08:00">
-                2022-09-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-16T10:47:03+08:00">
+                2022-10-16
               </time>
             
 
@@ -282,6 +282,50 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/java/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,24 +356,25 @@
       
         
           
-            <h1 id="什么是函数式编程"><a href="#什么是函数式编程" class="headerlink" title="什么是函数式编程"></a>什么是函数式编程</h1><p>Java没有函数，但是方法的作用和函数类似。函数式编程就是以函数为核心，可以把一个函数当作另一个函数的入参和返回值的一种编程方式。</p>
-<h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><p>函数式编程起源于早期数学家研究的一套函数变换逻辑，称为λ-Calculus，所以常把函数式编程称为lambda计算。</p>
-<h1 id="函数式编程的使用"><a href="#函数式编程的使用" class="headerlink" title="函数式编程的使用"></a>函数式编程的使用</h1><h2 id="FunctionalInterface"><a href="#FunctionalInterface" class="headerlink" title="FunctionalInterface"></a>FunctionalInterface</h2><p>我们把只定义了一个必须实现类实现的方法的接口（default方法和Object默认方法除外）称为FunctionalInterface，用注解@FunctionalInterface标记。</p>
-<h2 id="lambda表达式的应用"><a href="#lambda表达式的应用" class="headerlink" title="lambda表达式的应用"></a>lambda表达式的应用</h2><p>对于FunctionalInterface作为参数的函数调用，可以用lambda表达式来简化代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以Arrays.sort函数调用为例，它接受Comparator&lt;T&gt;泛型接口的参数</span></span><br><span class="line"><span class="comment">// 原始方法，使用匿名类</span></span><br><span class="line">Arrays.sort(array, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s1.compareTo(s2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 使用lambda表达式</span></span><br><span class="line">Arrays.sort(array, (s1, s2) -&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> s1.compareTo(s2);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 如果方法体只有一行，可以更进一步简化</span></span><br><span class="line">Arrays.sort(array, (s1, s2) -&gt; s1.compareTo(s2));</span><br></pre></td></tr></table></figure>
-<h2 id="方法引用"><a href="#方法引用" class="headerlink" title="方法引用"></a>方法引用</h2><p>除了lambda表达式，也可以使用方法引用，使用方法引用的前提是方法的签名和FunctionalInterface的方法签名相同（即入参和返回值相同）。还是以上面的函数调用为例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">cmp</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> s1.compareTo(s2);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 使用静态方法引用</span></span><br><span class="line">    Arrays.sort(array, Main::cmp);</span><br><span class="line">    <span class="comment">// 使用普通方法引用（实例方法虽然看定义只接受一个参数，但是可以理解为静态方法，只不过第一个参数是实例本身的引用）</span></span><br><span class="line">    Arrays.sort(array, String::compareTo);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>除了静态方法和普通实例方法，构造方法也可以作为引用传入FunctionalInterface所在的参数位置。传入格式类似Person::new，注意构造方法类似于返回一个构造的类的实例。</p>
-<h1 id="Stream"><a href="#Stream" class="headerlink" title="Stream"></a>Stream</h1><h2 id="什么是Stream"><a href="#什么是Stream" class="headerlink" title="什么是Stream"></a>什么是Stream</h2><p>Stream是java8引入的一种特殊的API，它惰性地保存了一个java对象地序列。它最大地特点在于惰性计算，即对Stream地很多操作并不是在实际地数据上操作，而只是定义了一个操作步骤，最终才在某些特定方法地作用下输出结果。由于Stream惰性计算地特点，可以用来表示无穷序列。另外，Stream支持链式操作。</p>
-<h2 id="基本运作流程"><a href="#基本运作流程" class="headerlink" title="基本运作流程"></a>基本运作流程</h2><ol>
-<li>创建Stream</li>
-<li>将stream转换成其它类型的stream，中间存储了转换的规则</li>
-<li>通过惰性计算或者输出集合的方法获取最终想要的结果<h2 id="常用stream转换规则"><a href="#常用stream转换规则" class="headerlink" title="常用stream转换规则"></a>常用stream转换规则</h2></li>
-</ol>
-<ul>
-<li>map 对stream的每个对象进行同样的自定义规则处理，返回的对象构成新的stream</li>
-<li>filter 对stream的每个对象进行布尔判断，只保留结果为true的，构成新的stream</li>
-<li>reduce 对之前计算的结果和当前值进行处理，结果作为下一次迭代的参数进入计算，最终得到的不是新的stream，是聚合计算的结果</li>
+            <h1 id="spring中的bean是线程安全的么"><a href="#spring中的bean是线程安全的么" class="headerlink" title="spring中的bean是线程安全的么"></a>spring中的bean是线程安全的么</h1><p>不是。</p>
+<h1 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h1><ul>
+<li>singleton 默认作用域，单例模式，容器中只有一个该类型bean实例</li>
+<li>prototype 原型模式，每次通过容器获取的bean都是该类的一个新实例</li>
+<li>request 每次请求的时候生成一个新的bean实例，只适用于使用spring的web应用</li>
+<li>session 对于每个http session，生成一个新的bean实例，只适用于使用spring的web应用</li>
+<li>globalSession globalSession is something that is connected to Portlet applications. When your application works in a Portlet container it is built of some amount of portlets. Each portlet has its own session, but if you want to store variables global for all portlets in your application then you should store them in globalSession. This scope doesn’t have any special effect different from the session scope in Servlet based applications. 另外，Portlet支持在spring5中已经被移除，所以globalSession这个scope也相应移除了。</li>
+</ul>
+<h1 id="属性注入报警"><a href="#属性注入报警" class="headerlink" title="属性注入报警"></a>属性注入报警</h1><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>spring（后期版本）不推荐属性注入依赖，使用@Autowired注入会报警。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>spring的思想是，过多的依赖违背了类的单一职责原则。推荐的是必须的依赖项通过构造器注入，可选的依赖项通过setter方法注入。<br>另外通过属性注入，可能导致NPE，因为构造方法的执行优先于@Autowired的注入，构造方法里如果使用了属性注入的属性，但是这时候没有注入，就会导致NPE。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>使用构造器注入必选依赖或者setter方法注入可选依赖，如果想用属性依赖，可以使用@Resource。</p>
+<h3 id="Resource和-Autowired的区别"><a href="#Resource和-Autowired的区别" class="headerlink" title="@Resource和@Autowired的区别"></a>@Resource和@Autowired的区别</h3><ul>
+<li>@Resource由J2EE实现，@Autowired是spring提供的注解</li>
+<li>@Autowired默认按type装配，如果想用name注入需要使用@Qualifier指定；@Resource默认是按name装配，如果按name找不到对应的类，才会按照type装配，但是一旦name指定，就只会按照name装配<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://blog.csdn.net/Tenaciousxl/article/details/125224414">https://blog.csdn.net/Tenaciousxl/article/details/125224414</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/fjzeng/article/details/127191576">https://blog.csdn.net/fjzeng/article/details/127191576</a></li>
+</ul>
+<h1 id="spring无法注入mybatis-mapper报警"><a href="#spring无法注入mybatis-mapper报警" class="headerlink" title="spring无法注入mybatis mapper报警"></a>spring无法注入mybatis mapper报警</h1><h2 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h2><p>一般在service中要使用mapper进行数据库操作，但是mybatis的类spring无法识别自动注入，所以报警</p>
+<h2 id="解决-1"><a href="#解决-1" class="headerlink" title="解决"></a>解决</h2><ul>
+<li>可以在Mapper接口上添加@Component，欺骗spring这是个可以容器化的bean</li>
+<li>使用@Resource替换@Autowired<h2 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="http://t.zoukankan.com/klyjb-p-11050502.html">http://t.zoukankan.com/klyjb-p-11050502.html</a><br><a target="_blank" rel="noopener" href="http://t.zoukankan.com/dongxuelove-p-14186530.html">http://t.zoukankan.com/dongxuelove-p-14186530.html</a></li>
 </ul>
 
           
@@ -370,7 +415,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/18/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/16/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/18/">&gt;</a>
   </nav>
 
 
@@ -416,7 +461,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -427,7 +472,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

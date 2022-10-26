@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/windows%E6%96%87%E4%BB%B6%E5%88%B0linux%E4%B8%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/security/rsa/rsa%E7%9A%84%E5%AF%86%E9%92%A5%E4%BD%8D%E6%95%B0/" itemprop="url">rsa的密钥位数</a></h1>
+                <a class="post-title-link" href="/2021/12/04/system/windows%E6%96%87%E4%BB%B6%E5%88%B0linux%E4%B8%8B%E7%9A%84%E8%BD%AC%E6%8D%A2/" itemprop="url">windows文件到linux下的转换</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/security/rsa/" itemprop="url" rel="index">
-                    <span itemprop="name">rsa</span>
+                  <a href="/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -345,7 +334,12 @@
       
         
           
-            <h1 id="常用的1024位-2048位的rsa密钥长度到底是谁的长度"><a href="#常用的1024位-2048位的rsa密钥长度到底是谁的长度" class="headerlink" title="常用的1024位/2048位的rsa密钥长度到底是谁的长度"></a>常用的1024位/2048位的rsa密钥长度到底是谁的长度</h1><p>rsa有三个重要的大数：公钥指数e、私钥指数d和模值n。我们说的“密钥长度”一般只是指模值的位长度。参考<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zxh2075/article/details/79718285">https://blog.csdn.net/zxh2075/article/details/79718285</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/caidi/p/14794952.html">https://www.cnblogs.com/caidi/p/14794952.html</a></p>
+            <h1 id="案例：bash文件无法执行"><a href="#案例：bash文件无法执行" class="headerlink" title="案例：bash文件无法执行"></a>案例：bash文件无法执行</h1><p>windows下的bash脚本写好后放到linux里运行会报错，原因是windows下写好的脚本格式与linux环境不兼容。<br>处理方式：</p>
+<ol>
+<li>首先用vi命令打开文件</li>
+<li>在vi命令模式中使用 :set ff 命令可以看到文件的格式为 fileformat=dos</li>
+<li>修改文件format为unix :set ff=unix</li>
+</ol>
 
           
         
@@ -385,7 +379,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/286/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/286/">286</a><span class="page-number current">287</span><a class="page-number" href="/page/288/">288</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/288/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/286/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/286/">286</a><span class="page-number current">287</span><a class="page-number" href="/page/288/">288</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/288/">&gt;</a>
   </nav>
 
 
@@ -431,7 +425,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +436,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

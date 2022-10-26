@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/10/tools/zookeeper/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/07/23/database/mysql/mysql%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/10/tools/zookeeper/zookeeper%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" itemprop="url">zookeeper分布式锁</a></h1>
+                <a class="post-title-link" href="/2022/07/23/database/mysql/mysql%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E4%B8%8E%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5/" itemprop="url">mysql用户管理与远程连接</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-23T12:19:58+08:00">
+                2022-07-23
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">zookeeper</span>
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -345,17 +345,33 @@
       
         
           
-            <h1 id="排它锁"><a href="#排它锁" class="headerlink" title="排它锁"></a>排它锁</h1><p>利用zookeeper同级节点的唯一性，不同客户端调用create()接口，最终只有一个客户端能创建成功，没有成功的客户端在创建的目录的上级目录上注册事件监听目录变化，以便重新获取锁。</p>
-<h1 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h1><h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><ol>
-<li>客户端调用 create 方法创建类似定义锁方式的临时顺序节点，临时节点可以这样定义：[hostname]-请求类型W/R-序号。</li>
-<li>客户端调用getChilldren接口来获取所有已创建的子节点。对于读请求，如果自己是序号最小的节点或者所有比自己小的节点都是读请求，就表明共享锁加锁成功，否则需要注册监听事件到比自己小的最后一个写请求目录，观察到该目录被删除之后再执行后续操作。对于写请求，如果自身不是最小的节点就进入等待。<h2 id="java工具包"><a href="#java工具包" class="headerlink" title="java工具包"></a>java工具包</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.curator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>curator-recipes<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>x.x.x<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-curator 的几种锁方案：</li>
-</ol>
+            <h1 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h1><h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> :<span class="keyword">user</span>@:ip IDENTIFIED <span class="keyword">BY</span> :password;</span><br></pre></td></tr></table></figure>
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">user</span> :<span class="keyword">user</span>@:ip;</span><br></pre></td></tr></table></figure>
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 方法一</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">USER</span> :<span class="keyword">user</span>@:ip IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;:password&#x27;</span>;</span><br><span class="line"><span class="comment">-- 方法二</span></span><br><span class="line"><span class="keyword">set</span> password <span class="keyword">for</span> :<span class="keyword">user</span>@:ip <span class="operator">=</span> password(<span class="string">&#x27;:password&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">user</span>, host <span class="keyword">from</span> <span class="keyword">user</span>;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>InterProcessMutex：分布式可重入排它锁</li>
-<li>InterProcessSemaphoreMutex：分布式排它锁</li>
-<li>InterProcessReadWriteLock：分布式读写锁</li>
+<li>:user 用户名，用单引号包围</li>
+<li>:ip 用户可以登录的地址，一般有一下这几种形式：  <ul>
+<li>‘%’ 所有地址</li>
+<li>‘localhost’ 本地</li>
+<li>‘10.0.0.5’ 固定IP地址</li>
+<li>‘10.0.0.%’ 网段地址</li>
 </ul>
+</li>
+<li>:password 密码</li>
+</ul>
+<h1 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h1><h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> :privileges <span class="keyword">ON</span> :db.:obj <span class="keyword">TO</span> :<span class="keyword">user</span>@:ip;</span><br></pre></td></tr></table></figure>
+<h2 id="回收权限"><a href="#回收权限" class="headerlink" title="回收权限"></a>回收权限</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">revoke</span> :privileges <span class="keyword">ON</span> :db.:obj <span class="keyword">from</span> :<span class="keyword">user</span>@:ip;</span><br></pre></td></tr></table></figure>
+<h2 id="查看权限"><a href="#查看权限" class="headerlink" title="查看权限"></a>查看权限</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> grants <span class="keyword">for</span> :<span class="keyword">user</span>@:ip;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>:privileges 授予的权限，ALL代表所有权限，可以有更具体的权限，比如SELECT等</li>
+<li>:db 数据库名</li>
+<li>:obj 数据库对象名</li>
+</ul>
+<h2 id="flush-privileges"><a href="#flush-privileges" class="headerlink" title="flush privileges"></a>flush privileges</h2><p>flush privileges是将mysql相应权限表中的数据同步到内存中去。对于正常的grant/revoke/create user等操作，内存和磁盘中的数据都是同步更新的，所以正常的grant/revoke操作后是不需要flush privileges的。<br>当我们直接用DML语句修改系统权限表(mysql.user、mysql.db、mysql.tables_priv、mysql.columns_priv)时，内存中的权限数组是不会同步更新的，此时我们就需要flush privileges来更新内存权限数据了。</p>
+<p>注意:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;monty&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>   IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;some_pass&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;monty&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;some_pass&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>• 前两个帐户名称都是monty，而且都是拥有所有权限和密码。但是两者的区别在于，第一个帐户（monty@localhost）只能通过本地登录，而第二个账户（monty@%）可以通过任意主机登录。值得注意的是，为了能够使用monty帐户在任何地方进行登录，这两个账户同时存在则是必要的。因为，如果没有本地帐户（monty@localhost），使用monty帐户登录时，那么结果将是monty账户会被当作mysql自动创建的本地匿名帐户来处理。原因则在于，匿名帐户拥有一个比monty@%账户更加具体的host字段值，从而在user表排序的时候会相对出现的更早。</p>
 
           
         
@@ -395,7 +411,7 @@ curator 的几种锁方案：</li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/84/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/86/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/84/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/84/">84</a><span class="page-number current">85</span><a class="page-number" href="/page/86/">86</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/86/">&gt;</a>
   </nav>
 
 
@@ -441,7 +457,7 @@ curator 的几种锁方案：</li>
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +468,7 @@ curator 的几种锁方案：</li>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

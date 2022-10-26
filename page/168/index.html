@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/basic/concurrent/%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/basic/jar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/basic/concurrent/%E7%BA%BF%E7%A8%8B%E4%B8%AD%E6%96%AD/" itemprop="url">线程停止的方法</a></h1>
+                <a class="post-title-link" href="/2022/03/04/language/java/basic/jar/" itemprop="url">jar常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -324,17 +324,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -367,18 +356,20 @@
       
         
           
-            <h1 id="public-final-void-stop"><a href="#public-final-void-stop" class="headerlink" title="public final void stop()"></a>public final void stop()</h1><p>不推荐，作用是使得线程实例戛然而止。</p>
-<h1 id="标志位"><a href="#标志位" class="headerlink" title="标志位"></a>标志位</h1><p>自定义标志位，作为循环判断条件，在外部改变标志位，控制线程执行。</p>
-<h1 id="interupt"><a href="#interupt" class="headerlink" title="interupt()"></a>interupt()</h1><p>相当于内置标志位</p>
-<h2 id="使用情形"><a href="#使用情形" class="headerlink" title="使用情形"></a>使用情形</h2><p>对于线程实例t可以调用interrupt方法，中断线程。有以下几种情形：</p>
-<ol>
-<li>当线程t阻塞于wait/join/sleep这几个方法时，阻塞标记变量会被清除，转而抛出一个InterruptedException异常</li>
-<li>当线程阻塞于一个java.nio.channels.InterruptibleChannel上的I/O操作时，阻塞标记变量会被设置，并且线程收到java.nio.channels.ClosedByInterruptException</li>
-<li>当线程阻塞于一个java.nio.channels.Selector时，阻塞标记变量会被设置，当前select操作直接返回，就如java.nio.channels.Selector#wakeup方法被调用</li>
-<li>其它情形只会设置阻塞标记变量</li>
-</ol>
-<h2 id="public-static-boolean-interrupted"><a href="#public-static-boolean-interrupted" class="headerlink" title="public static boolean interrupted()"></a>public static boolean interrupted()</h2><p>该方法返回当前阻塞标记变量状态，并且清理状态。即第一次返回true之后马上重置为false。</p>
-<h2 id="public-boolean-isInterrupted"><a href="#public-boolean-isInterrupted" class="headerlink" title="public boolean isInterrupted()"></a>public boolean isInterrupted()</h2><p>该方法返回当前阻塞标记变量状态，不会重置状态。</p>
+            <h1 id="jar包是什么"><a href="#jar包是什么" class="headerlink" title="jar包是什么"></a>jar包是什么</h1><p>jar包是zip格式的压缩包，压缩包里面是按照目录组织的.class文件。</p>
+<h1 id="可执行的jar包是什么情况"><a href="#可执行的jar包是什么情况" class="headerlink" title="可执行的jar包是什么情况"></a>可执行的jar包是什么情况</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar a.jar</span><br></pre></td></tr></table></figure>
+<p>如上所示是一种常见的执行java程序的命令，之所以可以这样执行，是因为a.jar中除了必须的组织好的.class文件，还指示了主类即程序入口，这个是由/META-INF/MANIFEST.MF文件的Main-Class配置值项指示的。<br>另外，jar包还可以包含其它jar包，这个时候，就需要在MANIFEST.MF文件里配置classpath了。</p>
+<h1 id="原始jar打包方式"><a href="#原始jar打包方式" class="headerlink" title="原始jar打包方式"></a>原始jar打包方式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Usage: jar &#123;ctxui&#125;[vfmn0PMe] [jar-file] [manifest-file] [entry-point] [-C dir] files ...</span><br><span class="line">jar cvfe a.jar test.Main -C classes&#x2F; .</span><br></pre></td></tr></table></figure>
+<p>说明：cvfe是最常见的选项，代表含义分析别如下：</p>
+<ul>
+<li>-c  create new archive</li>
+<li>-v  generate verbose output on standard output</li>
+<li>-f  specify archive file name</li>
+<li>-e  specify application entry point for stand-alone application bundled into an executable jar file<br>c对应后面的[jar-file]，指要创建的jar文件名，f对应后面的[manifest-file]，指要手动配置MANIFEST.MF文件，e对应后面的[entry-point]，代表程序入口类。[-C dir]指示了打包前要切换的目标路径。最后files指示要打包的.class文件，如果这里是目录的话，会进行递归查找。</li>
+</ul>
+<h1 id="class文件的生成"><a href="#class文件的生成" class="headerlink" title="class文件的生成"></a>class文件的生成</h1><p>如上所示jar包生成，前提是.clsss文件已经生成并且组织好。javac做的工作就是从源码生成.class文件。单文件好说，对一个目录进行生成的话，参考如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find src&#x2F; -name &quot;*.java&quot;|xargs -I &#123;&#125; javac -d classes&#x2F; -cp src&#x2F; &#123;&#125;</span><br></pre></td></tr></table></figure>
+
 
           
         
@@ -418,7 +409,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/167/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/169/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/167/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/167/">167</a><span class="page-number current">168</span><a class="page-number" href="/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/169/">&gt;</a>
   </nav>
 
 
@@ -464,7 +455,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -475,7 +466,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/26/tools/zookeeper/zookeeper%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/10/20/tools/idea/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/26/tools/zookeeper/zookeeper%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">zookeeper常见问题处理</a></h1>
+                <a class="post-title-link" href="/2022/10/20/tools/idea/" itemprop="url">idea参考手册</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-26T15:41:28+08:00">
-                2022-09-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-20T14:34:23+08:00">
+                2022-10-20
               </time>
             
 
@@ -282,6 +282,39 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/compiler/" itemprop="url" rel="index">
+                    <span itemprop="name">compiler</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -312,9 +345,15 @@
       
         
           
-            <h1 id="JVM内存不足"><a href="#JVM内存不足" class="headerlink" title="JVM内存不足"></a>JVM内存不足</h1><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OpenJDK 64-Bit Server VM warning: INFO: os::commit_memory(0x00000000d5550000, 715849728, 0) failed; error&#x3D;&#39;Not enough space&#39; (errno&#x3D;12)</span><br></pre></td></tr></table></figure>
-<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>设置环境变量类似如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JVMFLAGS&#x3D;&quot;-Xms64m -Xmx128m $JVMFLAGS&quot;</span><br></pre></td></tr></table></figure>
+            <h1 id="无法识别为maven项目"><a href="#无法识别为maven项目" class="headerlink" title="无法识别为maven项目"></a>无法识别为maven项目</h1><p>右键pom.xml，点击add as maven project。</p>
+<h1 id="idea支持的java版本不满足项目要求"><a href="#idea支持的java版本不满足项目要求" class="headerlink" title="idea支持的java版本不满足项目要求"></a>idea支持的java版本不满足项目要求</h1><p>升级idea。</p>
+<h1 id="修改terminal的环境变量"><a href="#修改terminal的环境变量" class="headerlink" title="修改terminal的环境变量"></a>修改terminal的环境变量</h1><ol>
+<li>打开terminnal上边框的向下箭头，打开settings</li>
+<li>在Project Settings中 Environment variables中添加环境变量，覆盖系统环境变量<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/413032384">https://zhuanlan.zhihu.com/p/413032384</a></li>
+</ol>
+<h1 id="idea-启动用dockerfile部署出现：Failed-to-deploy-‘vhr-front-Dockerfile-Dockerfile’-Not-connected-to-docker"><a href="#idea-启动用dockerfile部署出现：Failed-to-deploy-‘vhr-front-Dockerfile-Dockerfile’-Not-connected-to-docker" class="headerlink" title="idea 启动用dockerfile部署出现：Failed to deploy ‘vhr-front Dockerfile: Dockerfile’: Not connected to docker"></a>idea 启动用dockerfile部署出现：Failed to deploy ‘vhr-front Dockerfile: Dockerfile’: Not connected to docker</h1><p>需要使用管理员权限打开idea</p>
+<h2 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/modestlin/p/14993176.html">https://www.cnblogs.com/modestlin/p/14993176.html</a></p>
+
           
         
       
@@ -353,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/7/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/7/">&gt;</a>
   </nav>
 
 
@@ -399,7 +438,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -410,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

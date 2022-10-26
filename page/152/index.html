@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/go/effective_go/5/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/security/%E5%9B%BD%E5%AF%86/%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/go/effective_go/5/" itemprop="url">effective go 学习整理五</a></h1>
+                <a class="post-title-link" href="/2022/03/04/security/%E5%9B%BD%E5%AF%86/%E5%9F%BA%E7%A1%80/" itemprop="url">国密算法基础知识</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/go/effective-go/" itemprop="url" rel="index">
-                    <span itemprop="name">effective_go</span>
+                  <a href="/categories/security/%E5%9B%BD%E5%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">国密</span>
                   </a>
                 </span>
 
@@ -356,11 +345,8 @@
       
         
           
-            <h1 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h1><p>go没有异常，都是通过函数返回error进行错误处理，error是一个接口，定义如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> error <span class="keyword">interface</span> &#123;</span><br><span class="line">    Error() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以自定义错误类型，只要实现上述接口。另外对返回的error也可以进行类型判断，从而获取更多错误信息。</p>
-<h1 id="Panic"><a href="#Panic" class="headerlink" title="Panic"></a>Panic</h1><p>不同于error，panic会导致程序终止，一般在初始化检查失败时会使用panic。有时候函数层次很多，可以用panic和recover模拟异常处理，但是即时是这种操作，一般也是在包内范围，对外还是要提供error更好。</p>
-<h2 id="Recover"><a href="#Recover" class="headerlink" title="Recover"></a>Recover</h2><p>recover针对panic以及运行时异常，返回值是panic的传入参数。recover只在defer函数中起作用，在其它地方使用recover，总是返回nil。</p>
+            <h1 id="数学知识储备"><a href="#数学知识储备" class="headerlink" title="数学知识储备"></a>数学知识储备</h1><h2 id="群"><a href="#群" class="headerlink" title="群"></a>群</h2><p><a target="_blank" rel="noopener" href="https://www.mathsisfun.com/sets/groups-introduction.html#:~:text=A%20group%20is%20a%20set%20G%2C%20combined%20with,4%20The%20group%20is%20closed%20under%20the%20operation">https://www.mathsisfun.com/sets/groups-introduction.html#:~:text=A%20group%20is%20a%20set%20G%2C%20combined%20with,4%20The%20group%20is%20closed%20under%20the%20operation</a>.</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.gmssl.cn/gmssl/index.jsp">https://www.gmssl.cn/gmssl/index.jsp</a></p>
 
           
         
@@ -400,7 +386,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/151/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/page/153/">153</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/153/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/151/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/page/153/">153</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/153/">&gt;</a>
   </nav>
 
 
@@ -446,7 +432,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

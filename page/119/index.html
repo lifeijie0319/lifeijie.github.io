@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/30/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
+                <a class="post-title-link" href="/2022/03/30/database/mysql/index/%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/" itemprop="url">联合索引</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-30T10:28:15+08:00">
+                2022-03-30
               </time>
             
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/index/" itemprop="url" rel="index">
+                    <span itemprop="name">index</span>
                   </a>
                 </span>
 
@@ -345,11 +356,10 @@
       
         
           
-            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
-<ul>
-<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
-<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
-</ul>
+            <h1 id="联合索引的存储结构"><a href="#联合索引的存储结构" class="headerlink" title="联合索引的存储结构"></a>联合索引的存储结构</h1><p>联合索引和普通索引同样使用B+树，区别在于联合索引的非叶子节点上的不是一个索引值，而是一个包含联合索引列的有序数据结构，这个顺序与索引定义时列的顺序一致。</p>
+<h1 id="什么是最左匹配原则，为什么有这个原则"><a href="#什么是最左匹配原则，为什么有这个原则" class="headerlink" title="什么是最左匹配原则，为什么有这个原则"></a>什么是最左匹配原则，为什么有这个原则</h1><p>最左匹配原则，即联合索引建立后，使用从左侧开始的连续若干个字段作为查询条件，可以使用该联合索引。<br>为什么，本质上还是因为联合索引的B+树非叶节点上是按照索引定义顺序建立的索引节点，使用最左匹配原则时，实际上这些字段在B+树是有序的，因而可以使用该联合索引。</p>
+<h1 id="联合索引的列顺序"><a href="#联合索引的列顺序" class="headerlink" title="联合索引的列顺序"></a>联合索引的列顺序</h1><p>设计联合索引时，要将离散度大的列放在前面。</p>
+<h1 id="联合索引是否需要包含主键"><a href="#联合索引是否需要包含主键" class="headerlink" title="联合索引是否需要包含主键"></a>联合索引是否需要包含主键</h1><p>innodb的索引默认会包含主键列，所以建立联合索引的时候无需加入主键列。</p>
 
           
         
@@ -389,7 +399,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/118/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><span class="page-number current">119</span><a class="page-number" href="/page/120/">120</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/120/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/118/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><span class="page-number current">119</span><a class="page-number" href="/page/120/">120</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/120/">&gt;</a>
   </nav>
 
 
@@ -435,7 +445,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -446,7 +456,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

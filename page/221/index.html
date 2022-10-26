@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/database/db2/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" itemprop="url">db2表空间管理</a></h1>
+                <a class="post-title-link" href="/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">grep常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,13 +334,16 @@
       
         
           
-            <h1 id="查看表空间"><a href="#查看表空间" class="headerlink" title="查看表空间"></a>查看表空间</h1><ol>
-<li>查看表空间概况<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES</span><br></pre></td></tr></table></figure></li>
-<li>查看表空间详情<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIST TABLESPACES SHOW DETAIL</span><br></pre></td></tr></table></figure>
-<h1 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h1><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h2>删除表报错<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DB21034E  The command was processed as an SQL statement because it was not a </span><br><span class="line">valid Command Line Processor command.  During SQL processing it returned:</span><br><span class="line">SQL0290N  Table space access is not allowed.  SQLSTATE&#x3D;55039</span><br></pre></td></tr></table></figure>
-<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2>表空间状态不正常，为Backup pending<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2>备份数据库或表空间。<br>备份数据库<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 backup database xxxxx </span><br></pre></td></tr></table></figure>
-备份表空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 force applications all &amp; db2 backup database xxx tablespace xxx</span><br></pre></td></tr></table></figure></li>
-</ol>
+            <h1 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h1><p>grep [:options] :expression :file<br>:options 选项<br>:expression 要查找的内容，可以用正则表达式<br>:file 搜索的文件名</p>
+<h1 id="常见options"><a href="#常见options" class="headerlink" title="常见options"></a>常见options</h1><ul>
+<li>-l 只打印文件名，不输出匹配的行内容</li>
+<li>-I 不搜索二进制文件</li>
+<li>-r 递归搜索子目录下的文件</li>
+<li>-n 打印匹配内容在文件中的行数</li>
+<li>–include=GLOB 使用GLOB指定的通配符来匹配文件名</li>
+<li>-l 列出符合匹配的文件名</li>
+<li>-L参数列出不符合匹配的参数名</li>
+</ul>
 
           
         
@@ -391,7 +383,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/220/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/220/">220</a><span class="page-number current">221</span><a class="page-number" href="/page/222/">222</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/222/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/220/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/220/">220</a><span class="page-number current">221</span><a class="page-number" href="/page/222/">222</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/222/">&gt;</a>
   </nav>
 
 
@@ -437,7 +429,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +440,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

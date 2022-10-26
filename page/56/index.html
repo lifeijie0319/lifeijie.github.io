@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/c/scanf%E5%92%8Cprintf/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/tools/VCS/svn/svn%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/c/scanf%E5%92%8Cprintf/" itemprop="url">scanf和printf</a></h1>
+                <a class="post-title-link" href="/2022/09/12/tools/VCS/svn/svn%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85/" itemprop="url">svn离线安装</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c</span>
+                  <a href="/categories/tools/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/VCS/svn/" itemprop="url" rel="index">
+                    <span itemprop="name">svn</span>
                   </a>
                 </span>
 
@@ -345,80 +356,13 @@
       
         
           
-            <h1 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br></pre></td></tr></table></figure>
-<h1 id="scanf格式"><a href="#scanf格式" class="headerlink" title="scanf格式"></a>scanf格式</h1><table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>格式符</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>int</td>
-<td>%d</td>
-</tr>
-<tr>
-<td>long long</td>
-<td>%lld</td>
-</tr>
-<tr>
-<td>float</td>
-<td>%f</td>
-</tr>
-<tr>
-<td>double</td>
-<td>%lf</td>
-</tr>
-<tr>
-<td>char</td>
-<td>%c</td>
-</tr>
-<tr>
-<td>char数组</td>
-<td>%s</td>
-</tr>
-</tbody></table>
-<h2 id="输入注意"><a href="#输入注意" class="headerlink" title="输入注意"></a>输入注意</h2><ol>
-<li>读入char数组时，注意默认是读到末尾’\n’时停止，’\n’并没有被消费，下一次读入，如果想要从新的一行开始，要注意使用getchar()消费掉’\n’</li>
-<li>scanf返回正确读入的参数个数</li>
-</ol>
-<h1 id="printf格式"><a href="#printf格式" class="headerlink" title="printf格式"></a>printf格式</h1><table>
-<thead>
-<tr>
-<th>数据类型</th>
-<th>格式符</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>int</td>
-<td>%d</td>
-</tr>
-<tr>
-<td>long long</td>
-<td>%lld</td>
-</tr>
-<tr>
-<td>float</td>
-<td>%f</td>
-</tr>
-<tr>
-<td>double</td>
-<td>%f</td>
-</tr>
-<tr>
-<td>char</td>
-<td>%c</td>
-</tr>
-<tr>
-<td>char数组</td>
-<td>%s</td>
-</tr>
-</tbody></table>
-<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>printf返回正确输出的参数个数</p>
-<h2 id="输出常用技巧"><a href="#输出常用技巧" class="headerlink" title="输出常用技巧"></a>输出常用技巧</h2><ul>
-<li>%md %md可以使不足m位的int型变量进行右对齐输出，其中高位用空格补齐；如果变量本身超过m位，则保持原样。</li>
-<li>%0md 和%md类似，不同的是高位用0补齐</li>
-<li>%.mf 保留m位小数</li>
+            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jkko123/p/6358461.html">https://www.cnblogs.com/jkko123/p/6358461.html</a></p>
+<h1 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h1><ul>
+<li>1.1 apr</li>
+<li>1.2 apr-util</li>
+<li>1.3 scons：serf的依赖</li>
+<li>1.4 serf：如果没有这个，svn无法解析http和https，出现错误<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn: E170000: Unrecognized URL scheme for &#39;http:&#x2F;&#x2F;10.250.1.5&#x2F;svn&#x2F;src&#x2F;aif&#39;</span><br></pre></td></tr></table></figure></li>
+<li>1.5 sqlite</li>
 </ul>
 
           
@@ -459,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/55/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/57/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/55/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/57/">&gt;</a>
   </nav>
 
 
@@ -505,7 +449,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -516,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

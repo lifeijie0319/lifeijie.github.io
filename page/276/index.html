@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/linux/swap%E7%A9%BA%E9%97%B4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/network/tcp/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/system/linux/swap%E7%A9%BA%E9%97%B4/" itemprop="url">swap空间</a></h1>
+                <a class="post-title-link" href="/2021/12/04/network/tcp/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" itemprop="url">TCP三次握手</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/network/tcp/" itemprop="url" rel="index">
+                    <span itemprop="name">tcp</span>
                   </a>
                 </span>
 
@@ -345,19 +345,17 @@
       
         
           
-            <h1 id="什么是Swap-Swap什么时候会被使用到？"><a href="#什么是Swap-Swap什么时候会被使用到？" class="headerlink" title="什么是Swap?Swap什么时候会被使用到？"></a>什么是Swap?Swap什么时候会被使用到？</h1><p>我们都知道计算机系统在运行的时候会使用到RAM（Random Access Memory），当只有少数应用程序在运行时，系统会使用可用的RAM进行管理。但是如果有很多很多的程序在运行，那么就需要非常大容量RAM，这时候计算机RAM不够，应用程序就会崩溃。当RAM耗尽时，Swap交换空间会被系统使用。当RAM耗尽时，Linux系统使用部分硬盘内存并将其分配给正在运行的应用程序.<br>这听起来非常不错，这意味着如果我们如果分配50GBSwap交换空间，系统或许可以同时运行成百上千的应用程序？是这样么？大错特错！！！你知道的，程序运行速度十分重要；RAM访问数据的大小为纳秒级；SSD访问数据（以微秒为单位），而普通硬盘以毫秒为单位访问数据；这意味着RAM比SSD快1000倍，比普通HDD快100,000倍。如果应用程序过分依赖Swap交换空间，则其性能将下降，因为它无法以与RAM中相同的速度访问数据。<br>因此，完成相同任务可能需要几分钟才能完成任务，而不需要花费1秒钟完成任务。这将使应用程序几乎无用。这被称为计算术语中的颠簸。<br>Swap交换空间只是用来应急的，所以它的分配要适量。</p>
-<h1 id="应该分配多大的Swap交换空间"><a href="#应该分配多大的Swap交换空间" class="headerlink" title="应该分配多大的Swap交换空间"></a>应该分配多大的Swap交换空间</h1><p>现在回到这个最大的问题上，应该给Linux分配多少Swap空间才够。答案是没有一个确切的答案，不过倒是有一些建议，不同的人根据自己的实际情况分配交换空间的大小。<br>如果根据Red Hat的建议，他们建议是分配RAM 20%的换空间，也就是RAM是8GB，分配1.6GB交换空间。<br>CentOS建议如果RAM小于2GB，就分配和RAM同等大小的Swap交换空间。<br>如果RAM大于2GB，就分配2GB交换空间。<br>Ubuntu考虑到系统需要休眠，如果RAM小于1GB，Swap空间至少要和RAM一样大，甚至是要为RAM的两倍大小。如果RAM大于1GB，Swap交换空间应该至少等于RAM大小的平方根，并且最多为RAM大小的两倍。如果要休眠，Swap交换大小应该等于RAM的大小加上RAM大小的平方根。</p>
-<h1 id="查看swap空间"><a href="#查看swap空间" class="headerlink" title="查看swap空间"></a>查看swap空间</h1><p>方法一</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep SwapTotal &#x2F;proc&#x2F;meminfo</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
-<h1 id="增加swap空间"><a href="#增加swap空间" class="headerlink" title="增加swap空间"></a>增加swap空间</h1><ol>
-<li>切换到root用户</li>
-<li>创建swap文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir &#x2F;swap &amp;&amp; cd &#x2F;swap</span><br><span class="line">$ fallocate -l 1G &#x2F;swapfile</span><br><span class="line">$ ls -lh &#x2F;swapfile</span><br></pre></td></tr></table></figure></li>
-<li>激活swap空间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ chmod 600 swapfile</span><br><span class="line">$ mkswap swapfile</span><br><span class="line">$ swapon swapfile</span><br><span class="line">$ free -h</span><br></pre></td></tr></table></figure></li>
-<li>删除swap空间（可选）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ swapoff swapfile</span><br><span class="line">$ rm -rf  swapfile</span><br></pre></td></tr></table></figure></li>
-<li>保持swap空间，重启后仍然生效<br>打开/etc/fstab，添加/swap/swapfile /swap swap defaults 0 0</li>
-</ol>
+            <h1 id="什么是TCP三次握手"><a href="#什么是TCP三次握手" class="headerlink" title="什么是TCP三次握手"></a>什么是TCP三次握手</h1><ul>
+<li>TCP三次握手指的是TCP建立连接的三次通信过程。<h2 id="三次握手的具体描述："><a href="#三次握手的具体描述：" class="headerlink" title="三次握手的具体描述："></a>三次握手的具体描述：</h2></li>
+<li>第一次，客户端向服务端发起建立连接的请求。TCP报文中SYN字段为1，表示报文是一个同步性质的报文。另外TCP报文中会带上一个序列号x。客户端进入SYNC_SENT状态。</li>
+<li>第二次，服务端收到客户端发送的SYN类型的TCP报文后，向客户端返回一个TCP报文，报文同时标记ACK和SYN标志位，代表这个报文兼具确认客户端报文和服务端同步的性质。此时TCP报文中会带上两个序列号，确认序列号x+1和服务端自身的序列号y。服务端此时进入SYNC_RCVD状态。</li>
+<li>第三次，客户端收到服务端的响应报文后，进入ESTABLISHED状态。然后客户端向服务端发送TCP报文，标记ACK标志位。TCP报文中带上的序列号为y+1。服务端收到此报文，进入ESTABLISHED状态。TCP连接建立。<h2 id="TCP报文中的序列号是什么"><a href="#TCP报文中的序列号是什么" class="headerlink" title="TCP报文中的序列号是什么"></a>TCP报文中的序列号是什么</h2>TCP序列号是TCP报文中一方持续增长的序号，因为有了这个序号，报文才是有序传输，这是TCP连接可靠性的基石。举例说明，在网络中，由于网络传输的不可靠，可能导致先发送的报文后到达，如果没有序号，就会导致报文乱序。</li>
+</ul>
+<h1 id="为什么需要三次握手"><a href="#为什么需要三次握手" class="headerlink" title="为什么需要三次握手"></a>为什么需要三次握手</h1><p>显然，确认TCP连接通道畅通至少需要两次，一来一回。</p>
+<h2 id="为什么不是两次"><a href="#为什么不是两次" class="headerlink" title="为什么不是两次"></a>为什么不是两次</h2><ul>
+<li>主要是为了防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。<br>如果两次就建立连接，存在以下的异常情况：假设客户端第一次传输的报文延迟到达，此时客户端通过超时重传并且两次握手正常建立连接。然后服务端收到了同一个客户端由于延迟而后到达的SYN报文，客户端收到服务端响应的报文后比较seq发现这是个已经放弃的SYN请求，就会丢弃。由于两次握手的情况下，服务端是一响应SYN请求就进入ESTABLISHED状态，这样客户端关闭，服务端ESTABLISHED，导致了服务端资源的浪费。<br>那么三次握手怎么避免重复连接的问题？当客户端收到过期SYN请求引起的ACK回传报文时，会发送RST复位报文给服务端，告知其取消连接。</li>
+<li>TCP连接握手本质上是客户端和服务端相互告知各自的ISN(Initial Sequence Number)，两次握手只能确认客户端的ISN被服务端接受存储，服务端没有确认自己的序列号被客户端接受存储。<h2 id="为什么不是四次或者更多"><a href="#为什么不是四次或者更多" class="headerlink" title="为什么不是四次或者更多"></a>为什么不是四次或者更多</h2>在三次连接基本能保证连接通畅的情况下，更多的报文传递是无意义的。</li>
+</ul>
 
           
         
@@ -397,7 +395,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/275/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/275/">275</a><span class="page-number current">276</span><a class="page-number" href="/page/277/">277</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/277/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/275/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/275/">275</a><span class="page-number current">276</span><a class="page-number" href="/page/277/">277</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/277/">&gt;</a>
   </nav>
 
 
@@ -443,7 +441,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +452,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

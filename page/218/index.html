@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/db2/%E7%B4%A2%E5%BC%95/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/nc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/database/db2/%E7%B4%A2%E5%BC%95/" itemprop="url">db2索引</a></h1>
+                <a class="post-title-link" href="/2021/12/04/tools/nc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">nc使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -345,20 +334,9 @@
       
         
           
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p><a target="_blank" rel="noopener" href="https://www.2cto.com/database/201303/196830.html">https://www.2cto.com/database/201303/196830.html</a></p>
-<h1 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE INDEX F_TRAN_STAT_IDX2  ON F+TRAN_STAT(TRAN_TYPE_ID, ACCT_ID, YX_DT, TX_AMT)</span><br></pre></td></tr></table></figure>
-<h1 id="使用递增索引"><a href="#使用递增索引" class="headerlink" title="使用递增索引"></a>使用递增索引</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT NEXTVAL FOR BPAPP.ROLE_ID_SEQ FROM SYSIBM.DUAL;</span><br></pre></td></tr></table></figure>
-<h1 id="索引查看"><a href="#索引查看" class="headerlink" title="索引查看"></a>索引查看</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM SYSCAT.SEQUENCES WHERE SEQNAME&#x3D;&#39;SEQ_001&#39;</span><br></pre></td></tr></table></figure>
-<h1 id="使用db2advis建立索引"><a href="#使用db2advis建立索引" class="headerlink" title="使用db2advis建立索引"></a>使用db2advis建立索引</h1><p>在使用db2advis之前首先要准备执行以下语句，在数据库创建系统使用的相关分析表结构。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;home&#x2F;db2inst1&#x2F;sqllib&#x2F;misc</span><br><span class="line">db2 -tvf EXPLAIN.DDL </span><br></pre></td></tr></table></figure>
-<p>之后可以使用db2advis，示例如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2advis -d dwedb -i loan.sql -c EXPSPACE -m ICP -o loan.out</span><br></pre></td></tr></table></figure>
-<ul>
-<li>-d 数据库名称</li>
-<li>-i 输入的sql文件，建立索引的依据</li>
-<li>-c simulation table space name that is defined only on the catalog node</li>
-<li>-m advise type. Subset of:  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    I - for index selection, </span><br><span class="line">    M - for MQT selection, </span><br><span class="line">    C - for Multi-dimensional Clustering selection,</span><br><span class="line">    P - for partitioning selection,</span><br><span class="line">Default is I</span><br><span class="line">    Example: MICP - for ALL selections.</span><br></pre></td></tr></table></figure></li>
-</ul>
+            <h1 id="nc传文件"><a href="#nc传文件" class="headerlink" title="nc传文件"></a>nc传文件</h1><h2 id="服务端（收文件）"><a href="#服务端（收文件）" class="headerlink" title="服务端（收文件）"></a>服务端（收文件）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc  -l  8889 &gt; recv.txt</span><br></pre></td></tr></table></figure>
+<h2 id="客户端（发文件）"><a href="#客户端（发文件）" class="headerlink" title="客户端（发文件）"></a>客户端（发文件）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc  192.168.XXX.XXX 8889 &lt; send.txt</span><br></pre></td></tr></table></figure>
+<p>【注】 先启动服务端，再启动客户端</p>
 
           
         
@@ -398,7 +376,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/217/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/217/">217</a><span class="page-number current">218</span><a class="page-number" href="/page/219/">219</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/219/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/217/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/217/">217</a><span class="page-number current">218</span><a class="page-number" href="/page/219/">219</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/219/">&gt;</a>
   </nav>
 
 
@@ -444,7 +422,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -455,7 +433,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

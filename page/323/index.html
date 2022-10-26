@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/libs/db/ibm_db/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/basic/email/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/language/python/libs/db/ibm_db/" itemprop="url">ibm_db</a></h1>
+                <a class="post-title-link" href="/2021/12/04/language/python/basic/email/" itemprop="url">email发送和接收</a></h1>
         
 
         <div class="post-meta">
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/libs/db/" itemprop="url" rel="index">
-                    <span itemprop="name">db</span>
+                  <a href="/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -367,9 +356,49 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><p><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html</a></p>
-<h2 id="（一）离线安装"><a href="#（一）离线安装" class="headerlink" title="（一）离线安装"></a>（一）离线安装</h2><p>1、解压linuxx64_odbc_cli.tar.gz（实际上是IBM Data Server Driver for ODBC and CLI），将解压得到的处理driver移动到适当位置<br>2、设置环境变量：<br>export IBM_DB_HOME：文件夹ibm_db-2.0.7所在路径<br>3、解压ibm_db-2.0.7.tar.gz，得到解压后的文件夹ibm_db-2.0.7<br>4、进入文件夹ibm_db-2.0.7，执行<br>python2.7 setup.py build<br>python2.7 setup.py install<br>5、执行python，进入python环境，执行如下指令：<br>import ibm_db<br>没有报错说明包安装成功<br>6、Ensure that the Python driver can access the libdb2.so CLI driver file:<br>For 64-bit Linux and UNIX operating systems other than the AIX operating system, set the LD_LIBRARY_PATH variable to the IBM_DB_HOME/lib64 directory by issuing the export command:<br>export LD_LIBRARY_PATH=IBM_DB_HOME/lib64<br>这一步是设置环境变量，如果包下面没有这个lib64文件夹，可以将clidriver下面的db2profile执行设置环境变量。为了长期使用，可以把执行db2profiel的命令加到.bash_profilel或者.bashrc下面。</p>
-<h1 id="（二）在线安装"><a href="#（二）在线安装" class="headerlink" title="（二）在线安装"></a>（二）在线安装</h1><p>pip install ibm_db</p>
+            <p>参考：<a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432005226355aadb8d4b2f3f42f6b1d6f2c5bd8d5263000#0</a></p>
+<h1 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h1><p>需要手动对发送方邮箱配置SMTP协议，此时可能需要设置客户端授权码，即为登录第三方邮件客户端的专用口令，以下是常用邮箱SMTP端口及登录说明：  </p>
+<table>
+<thead>
+<tr>
+<th>邮箱</th>
+<th>SMTP服务器</th>
+<th>登录口令</th>
+<th>支持加密方式</th>
+<th>对应端口号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>163</td>
+<td>smtp.163.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>126</td>
+<td>smtp.126.com</td>
+<td>个人设置授权码</td>
+<td>明文/SSL加密</td>
+<td>25/465</td>
+</tr>
+<tr>
+<td>QQ</td>
+<td>smtp.qq.com</td>
+<td>系统分配授权码</td>
+<td>明文/SSL加密/TLS加密</td>
+<td>25/465/587</td>
+</tr>
+<tr>
+<td>Gmail</td>
+<td>smtp.gmail.com</td>
+<td>邮箱登录密码</td>
+<td>TLS加密</td>
+<td>587</td>
+</tr>
+</tbody></table>
+<h1 id="2、加密问题"><a href="#2、加密问题" class="headerlink" title="2、加密问题"></a>2、加密问题</h1><p>SMTP协议发送邮件，如果想要加密，有如下几种方式：<br>1）明文传输:　端口号是25；<br>2）SSL加密: 端口号是465，通信过程加密，邮件数据安全；<br>3）TLS加密: 端口号是587，通信过程加密，邮件数据安全，使用正常的smtp端口。对于TLS加密方式需要先建立SSL连接，然后再发送邮件。</p>
+<h1 id="3-遇到的问题"><a href="#3-遇到的问题" class="headerlink" title="3 遇到的问题"></a>3 遇到的问题</h1><p>3.1 使用qq向foxmail发送带附件的邮件时，如果不用加密，程序报错，连接中断。<br>3.2 如果使用POP3收邮件，必须使用ssl加密的方式登录服务器。</p>
 
           
         
@@ -409,7 +438,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/322/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/322/">322</a><span class="page-number current">323</span><a class="page-number" href="/page/324/">324</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/324/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/322/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/322/">322</a><span class="page-number current">323</span><a class="page-number" href="/page/324/">324</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/324/">&gt;</a>
   </nav>
 
 
@@ -455,7 +484,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -466,7 +495,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/tools/k8s/k8s%E5%AF%B9%E8%B1%A1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/software_enginering/sscce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/tools/k8s/k8s%E5%AF%B9%E8%B1%A1/" itemprop="url">k8s对象</a></h1>
+                <a class="post-title-link" href="/2022/03/04/software_enginering/sscce/" itemprop="url">sscce</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/k8s/" itemprop="url" rel="index">
-                    <span itemprop="name">k8s</span>
+                  <a href="/categories/software-enginering/" itemprop="url" rel="index">
+                    <span itemprop="name">software_enginering</span>
                   </a>
                 </span>
 
@@ -345,31 +334,14 @@
       
         
           
-            <h1 id="什么是k8s对象"><a href="#什么是k8s对象" class="headerlink" title="什么是k8s对象"></a>什么是k8s对象</h1><p>kubenetes对象是一种持久化的、用于表示集群状态的实体。</p>
+            <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>Short, Self Contained, Correct (Compilable), Example<br>It is all in the name, really. Take a look at each part. The version prepared for others to see should be:</p>
 <ul>
-<li>一种声明式的意图的记录，一般使用yaml文件描述对象</li>
-<li>k8s集群使用k8s来表示集群的状态</li>
-<li>通过API/kubectl管理k8s对象</li>
+<li>Short (Small) - Minimise bandwidth for the example, do not bore the audience.</li>
+<li>Self Contained - Ensure everything is included, ready to go.</li>
+<li>Correct - Copy, paste, (compile,) see is the aim.</li>
+<li>Example - Displays the problem we are trying to solve.</li>
 </ul>
-<h1 id="k8s对象模型"><a href="#k8s对象模型" class="headerlink" title="k8s对象模型"></a>k8s对象模型</h1><p>k8s对象模型可以比照OOP，yaml文件对比为类，描述了k8s对象创建的格式，包括Kind、Metadata、Spec等域；kubectl的各种操作相当于对象的方法，包括对象的增删改查等；etcd持久化地记录了k8s对象的动态信息。</p>
-<h1 id="metadata属性"><a href="#metadata属性" class="headerlink" title="metadata属性"></a>metadata属性</h1><h2 id="name和uid"><a href="#name和uid" class="headerlink" title="name和uid"></a>name和uid</h2><ul>
-<li>用于唯一标识对象</li>
-<li>可以通过统一格式访问对象，访问路径为/api/{version}/namespaces/{namespace}/{kind}/name</li>
-<li>uid在整个集群的生命周期内都是唯一的<h2 id="namespace"><a href="#namespace" class="headerlink" title="namespace"></a>namespace</h2>将物理集群划分为不同的虚拟集群。内置三个默认的namespaces，即default、kube-system、kube-public。另外，Node和PersistentVolume不属于任何namespace。<h2 id="label"><a href="#label" class="headerlink" title="label"></a>label</h2>label用于建立集群对象之间灵活的、松耦合的多维关联关系。通过label-selector查询和筛选建立对象间的关系。<h2 id="annotations"><a href="#annotations" class="headerlink" title="annotations"></a>annotations</h2>将任意非标识性的元数据附加到对象上</li>
-</ul>
-<h1 id="k8s对象分类"><a href="#k8s对象分类" class="headerlink" title="k8s对象分类"></a>k8s对象分类</h1><h2 id="workload"><a href="#workload" class="headerlink" title="workload"></a>workload</h2><p>Pod/Controllers:Deployment/StatefulSet/DaemonSet/Job…</p>
-<h2 id="discovery-amp-load-balance"><a href="#discovery-amp-load-balance" class="headerlink" title="discovery&amp;load balance"></a>discovery&amp;load balance</h2><p>Service/Endpoint/Ingress…</p>
-<h2 id="config-amp-storage"><a href="#config-amp-storage" class="headerlink" title="config&amp;storage"></a>config&amp;storage</h2><p>ConfigMap/Secret/Volume/PersistentVolumeClain…</p>
-<h2 id="cluster"><a href="#cluster" class="headerlink" title="cluster"></a>cluster</h2><p>Node/Namespace/PersistentVolume/ClusterRole/ClusterRoleBinding/ResourceQuota</p>
-<h1 id="Pod：集群调度基本单元"><a href="#Pod：集群调度基本单元" class="headerlink" title="Pod：集群调度基本单元"></a>Pod：集群调度基本单元</h1><p>一个有特定关系的容器集合</p>
-<h2 id="pod的声明周期"><a href="#pod的声明周期" class="headerlink" title="pod的声明周期"></a>pod的声明周期</h2><p>pod是一个非持久化声明实体。</p>
-<h1 id="Service-与原生应用中的微服务概念一一对应"><a href="#Service-与原生应用中的微服务概念一一对应" class="headerlink" title="Service: 与原生应用中的微服务概念一一对应"></a>Service: 与原生应用中的微服务概念一一对应</h1><p>k8s集群为每个Service分配集群唯一的IP，在集群生命周期内，IP地址不变；在内部dns的支持下，实现服务发现机制。Service通过label selector关联到实际支撑业务运行的pod上，并通过集群内置的负载均衡将服务请求分发到后端pod。通过nodeport或设置loanbalance机制实现集群外部对service的访问。</p>
-<h1 id="Controllers"><a href="#Controllers" class="headerlink" title="Controllers"></a>Controllers</h1><h2 id="ReplicaSet"><a href="#ReplicaSet" class="headerlink" title="ReplicaSet"></a>ReplicaSet</h2><p>用于满足pod的副本数量满足用户的定义。前身是ReplicationController(rc)，相比rc，增加集合式label selector支持。可以独立使用，但一般隐藏于Deploymnet之后。</p>
-<h2 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h2><p>为Pod和ReplicaSet提供了声明式的定义</p>
-<h2 id="StatefulSet"><a href="#StatefulSet" class="headerlink" title="StatefulSet"></a>StatefulSet</h2><p>提供了对有状态的应用的部署和控制的支持</p>
-<h2 id="DaemonSet"><a href="#DaemonSet" class="headerlink" title="DaemonSet"></a>DaemonSet</h2><p>保证每个Node上运行一个Pod副本<br>适用于系统Daemon程序、监控跟踪、日志搜集等</p>
-<h1 id="ConfigMap"><a href="#ConfigMap" class="headerlink" title="ConfigMap"></a>ConfigMap</h1><p>用于向Pod提供非敏感的配置信息</p>
-<h1 id="Secrect"><a href="#Secrect" class="headerlink" title="Secrect"></a>Secrect</h1><p>Secrect解决的是密码、token、密钥等敏感数据的配置问题</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="http://sscce.org/">http://sscce.org/</a></p>
 
           
         
@@ -409,7 +381,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/127/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/127/">127</a><span class="page-number current">128</span><a class="page-number" href="/page/129/">129</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/129/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/127/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/127/">127</a><span class="page-number current">128</span><a class="page-number" href="/page/129/">129</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/129/">&gt;</a>
   </nav>
 
 
@@ -455,7 +427,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -466,7 +438,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

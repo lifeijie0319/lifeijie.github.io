@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/spring/spring%E6%A6%82%E8%BF%B0/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/other/%E7%BC%96%E7%A0%81/unicode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/spring/spring%E6%A6%82%E8%BF%B0/" itemprop="url">spring概述</a></h1>
+                <a class="post-title-link" href="/2022/03/04/other/%E7%BC%96%E7%A0%81/unicode/" itemprop="url">理解unicode</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -356,19 +345,20 @@
       
         
           
-            <h1 id="什么是spring"><a href="#什么是spring" class="headerlink" title="什么是spring"></a>什么是spring</h1><p>Spring是一个轻量级的控制反转(IoC)和面向切面(AOP)的容器框架。</p>
-<h2 id="轻量"><a href="#轻量" class="headerlink" title="轻量"></a>轻量</h2><ol>
-<li>大小，完整的spring框架可以在一个1M多的文件里发布。</li>
-<li>开销小。</li>
-<li>非侵入式，spring引用的类不依赖于spring框架的类。<h2 id="控制反转"><a href="#控制反转" class="headerlink" title="控制反转"></a>控制反转</h2>对象之间的依赖关系不再由应用代码显式创建，而是由spring根据配置和注解自动注入。即A依赖B的关系由原来的A主动创建B变成了由spring框架来注入B，依赖的建立由主动变成被动。<h2 id="面向切面"><a href="#面向切面" class="headerlink" title="面向切面"></a>面向切面</h2>spring提供了面向切面的丰富支持，使得应用本身的逻辑和系统级服务（日志、事务处理等）分离开来，方便复用，降低耦合。<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2>spring管理应用对象的整个生命周期，所以是一个容器。<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2>spring内置了很多功能，并且也容易与其他功能集成，使得开发者能在spring的基础上快速开发应用。</li>
-</ol>
-<h1 id="spring模块"><a href="#spring模块" class="headerlink" title="spring模块"></a>spring模块</h1><ul>
-<li>Core Container: Beans Core Context SpEL</li>
-<li>AOP: Aspects Instruments Messageing</li>
-<li>Web: Web WebSocket Servlet Portlet</li>
-<li>Data Access/Integration: JDBC ORM OXM JMS Transactions</li>
-<li>Test</li>
+            <h1 id="unicode概念"><a href="#unicode概念" class="headerlink" title="unicode概念"></a>unicode概念</h1><pre><code>Unicode（统一码、万国码、单一码）是计算机科学领域里的一项业界标准,包括字符集、编码方案等。Unicode 是为了解决传统的字符编码方案的局限而产生的，它为每种语言中的每个字符设定了统一并且唯一的二进制编码，以满足跨语言、跨平台进行文本转换、处理的要求。1990年开始研发，1994年正式公布。</code></pre>
+<p>简单来说，unicode是一种抽象字符到二进制编码的映射规则。</p>
+<h1 id="unicode基础"><a href="#unicode基础" class="headerlink" title="unicode基础"></a>unicode基础</h1><ul>
+<li>unicode也称为UCS(Universal Multiple-Octet Coded Character Set)</li>
+<li>unicode每个字符对应的编码数字称为code point</li>
+<li>unicode的code point的范围是 0 - 10FFFF.</li>
+<li>一个unicode的code point的写法通常是”U+”接上16进制表示的代码点数字</li>
+<li>unicode的前256个字符和ISO-8859-1（即Latin-1）一样，也就是ASCII</li>
+<li>unicode目前定义了17个plane，列举如下：<figure class="highlight plain"><figcaption><span>planes of 64k code points each</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plane 0 (U+0000 - U+FFFF): Basic Multilingual Plane (BMP, 1.0) frequent characters</span><br><span class="line">plane 1 (U+10000 - U+1FFFF): Supplementary Multilingual Plane (SMP, 3.1) infrequent, non-ideographic characters</span><br><span class="line">plane 2 (U+20000 - U+2FFFF): Supplementary Ideographic Plane (SIP, 3.1) infrequent, ideographic characters</span><br><span class="line">plane 14 (U+E0000 - U+EFFFF): Supplementary Special-purpose Plane (SSP, 3.1)</span><br><span class="line">planes 15 and 16  (U+F0000 - U+10FFFF) : Private use planes (2.0)</span><br></pre></td></tr></table></figure></li>
+<li>开始unicode使用2个字节表示常用的字符，能够表示65536个字符，后来发现不够，就从所有的code point中未使用的部分分割了两块出来，用于扩展，在utf-16中有体现，分割的情况如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">surrogates code points</span><br><span class="line">U+D800 - U+DBFF: 1,024 high surrogates</span><br><span class="line">U+DC00 - U+DFFF: 1,024 low surrogates</span><br><span class="line"></span><br><span class="line">scalar values</span><br><span class="line">U+0000 - U+D7FF</span><br><span class="line">U+E000 - U+10FFFF</span><br></pre></td></tr></table></figure>
+surrogates code points不能出现在数据中</li>
+<li>scalar values在电脑中的表示就是我们实际使用的编码方式，统一称为UTF(Unicode Transformation Format)，常用的有UTF-8/UTF-16/UTF-32等。这些编码方式都能表示所有unicode的scalar values，但是各自表示一个code point的code unit不同。</li>
 </ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf">https://www.unicode.org/notes/tn23/Muller-Slides+Narr.pdf</a></p>
 
           
         
@@ -408,7 +398,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/161/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/161/">161</a><span class="page-number current">162</span><a class="page-number" href="/page/163/">163</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/163/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/161/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/161/">161</a><span class="page-number current">162</span><a class="page-number" href="/page/163/">163</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/163/">&gt;</a>
   </nav>
 
 
@@ -454,7 +444,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -465,7 +455,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

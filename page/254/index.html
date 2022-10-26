@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/mysql/mysql%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/kvm/kvm%E7%A9%BA%E9%97%B4%E6%89%A9%E5%B1%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/database/mysql/mysql%E5%AE%89%E8%A3%85/" itemprop="url">mysql安装</a></h1>
+                <a class="post-title-link" href="/2021/12/04/tools/kvm/kvm%E7%A9%BA%E9%97%B4%E6%89%A9%E5%B1%95/" itemprop="url">kvm空间扩展</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/tools/kvm/" itemprop="url" rel="index">
+                    <span itemprop="name">kvm</span>
                   </a>
                 </span>
 
@@ -345,15 +345,26 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
-<li>centos下使用yum安装<br>sudo yum install -y mysql-server mysql mysql-devel</li>
-</ul>
-<h1 id="二、设置开机自启动"><a href="#二、设置开机自启动" class="headerlink" title="二、设置开机自启动"></a>二、设置开机自启动</h1><p>设置：sudo chkconfig mysqld on<br>查看：chkconfig –list | grep mysqld</p>
-<h1 id="三、启动"><a href="#三、启动" class="headerlink" title="三、启动"></a>三、启动</h1><p>sudo service mysqld start</p>
-<h1 id="四、设置数据库root用户密码"><a href="#四、设置数据库root用户密码" class="headerlink" title="四、设置数据库root用户密码"></a>四、设置数据库root用户密码</h1><p>（一）、新密码：/usr/bin/mysqladmin -u root password ‘new-password’<br>（二）、重设密码：<br>1、mysqladmin -u root -p password ‘new-password’<br>2、# mysql </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; USE mysql; </span><br><span class="line">mysql&gt; UPDATE user SET Password &#x3D; password ( &#39;new-password&#39; ) WHERE User &#x3D; &#39;root&#39;; </span><br><span class="line">mysql&gt; flush privileges; </span><br><span class="line">mysql&gt; quit</span><br></pre></td></tr></table></figure>
-<h1 id="五、mysql的目录设置"><a href="#五、mysql的目录设置" class="headerlink" title="五、mysql的目录设置"></a>五、mysql的目录设置</h1><p>1./etc/my.cnf 这是mysql的主配置文件<br>2./var/lib/mysql mysql数据库的数据库文件存放位置<br>3./var/log mysql数据库的日志输出存放位置</p>
-
+            <h1 id="在线添加硬盘挂载"><a href="#在线添加硬盘挂载" class="headerlink" title="在线添加硬盘挂载"></a>在线添加硬盘挂载</h1><h2 id="创建虚拟硬盘"><a href="#创建虚拟硬盘" class="headerlink" title="创建虚拟硬盘"></a>创建虚拟硬盘</h2><p>命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f qcow2 added_centos7-64.img 100G</span><br></pre></td></tr></table></figure>
+<p>说明：qemu-img是指令，create是创建指令，-f qcow2指定创建的硬盘格式，added_centos7-64.img是创建的虚拟硬盘的文件所在路径，这里是在当前目录，100G指定大小。</p>
+<h2 id="将虚拟硬盘挂载到系统中"><a href="#将虚拟硬盘挂载到系统中" class="headerlink" title="将虚拟硬盘挂载到系统中"></a>将虚拟硬盘挂载到系统中</h2><p>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh attach-disk centos7.0 &#x2F;var&#x2F;lib&#x2F;libvirt&#x2F;images&#x2F;added_centos7-64.img vdb</span><br></pre></td></tr></table></figure>
+<p>说明：virsh attach-disk是挂载虚拟硬盘的指令，centos7.0是当前运行的虚拟机的域名，使用virsh list可以看到。/var/lib/libvirt/images/added_centos7-64.img是虚拟硬盘的根路径，注意不能用相对路径。vdb是硬盘挂载到虚拟机系统中的名称（位置）。</p>
+<h3 id="为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？"><a href="#为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？" class="headerlink" title="为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？"></a>为什么挂载的磁盘在虚拟机中读取的时候发现大小只有0M？</h3><p>因为虽然创建的是qcow2格式的硬盘，但是attach的时候没有指明，系统默认将其当作raw格式来处理，应该再attach命令后加上参数–subdriver=qcow2。</p>
+<h2 id="卸载磁盘"><a href="#卸载磁盘" class="headerlink" title="卸载磁盘"></a>卸载磁盘</h2><p>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh detach-disk centos7.0 vdb</span><br></pre></td></tr></table></figure>
+<p>语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">detach-disk &lt;domain&gt; &lt;target&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="之后参考linux-centos-centos硬盘扩容"><a href="#之后参考linux-centos-centos硬盘扩容" class="headerlink" title="之后参考linux/centos/centos硬盘扩容"></a>之后参考linux/centos/centos硬盘扩容</h2><h1 id="直接修改给虚拟机分配的空间"><a href="#直接修改给虚拟机分配的空间" class="headerlink" title="直接修改给虚拟机分配的空间"></a>直接修改给虚拟机分配的空间</h1><p>方法：直接修改给虚拟机分配的空间，在线分区，加入lvm，合并到原来的逻辑分区。</p>
+<h2 id="在实体机（宿主）上修改分配的空间。"><a href="#在实体机（宿主）上修改分配的空间。" class="headerlink" title="在实体机（宿主）上修改分配的空间。"></a>在实体机（宿主）上修改分配的空间。</h2><p>命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img resize centos7.0.img +50G</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qemu-img: Can&#39;t resize an image which has snapshots</span><br><span class="line">qemu-img: This image does not support resize</span><br></pre></td></tr></table></figure>
+<p>处理 ：删除快照</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh snapshot-delete centos7.0 --current</span><br></pre></td></tr></table></figure>
+<h2 id="开启虚拟机"><a href="#开启虚拟机" class="headerlink" title="开启虚拟机"></a>开启虚拟机</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh start centos7.0</span><br></pre></td></tr></table></figure>
+<h2 id="之后参考linux-centos-centos硬盘扩容-1"><a href="#之后参考linux-centos-centos硬盘扩容-1" class="headerlink" title="之后参考linux/centos/centos硬盘扩容"></a>之后参考linux/centos/centos硬盘扩容</h2>
           
         
       
@@ -392,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/253/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/253/">253</a><span class="page-number current">254</span><a class="page-number" href="/page/255/">255</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/255/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/253/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/253/">253</a><span class="page-number current">254</span><a class="page-number" href="/page/255/">255</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/255/">&gt;</a>
   </nav>
 
 
@@ -438,7 +449,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

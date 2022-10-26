@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/other/%E7%BC%96%E7%A0%81/endianess/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/go/log/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/other/%E7%BC%96%E7%A0%81/endianess/" itemprop="url">endianess</a></h1>
+                <a class="post-title-link" href="/2022/03/04/language/go/log/" itemprop="url">标准库log学习</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">编码</span>
+                  <a href="/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -345,8 +345,13 @@
       
         
           
-            <h1 id="什么是大端小端"><a href="#什么是大端小端" class="headerlink" title="什么是大端小端"></a>什么是大端小端</h1><p>Endianess是多字节数据对象（比如c语言中的int）字节排列的顺序。<br>BE stores the big-end first. 大端即低地址存的是高位的字节。<br>LE stores the little-end first.小端即低地址存的是低位的字节。</p>
-
+            <h1 id="基本设计"><a href="#基本设计" class="headerlink" title="基本设计"></a>基本设计</h1><p>log包定义了Logger类型和一个该类型的std对象，std对象输出到标准输出。</p>
+<h1 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h1><p>prefix和flag是Logger类型的两个属性，用于标识日志头部的一些输出格式。其中prefix是用户自定义的头部，flag确定了一些内置的头部，flag由包内定义的常量进行”或“操作获得。注意其中有个特殊的常量Lmsgprefix，设置了该常量后prefix会从最头部移到实际msg前面，参考如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log.SetFlags(log.Ldate | log.Lmicroseconds | log.Lshortfile | log.Lmsgprefix)</span><br><span class="line">log.SetPrefix(&quot;[TEST] &quot;)</span><br><span class="line">log.Println(&quot;haha..&quot;)</span><br></pre></td></tr></table></figure>
+<p>输出如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2022&#x2F;01&#x2F;04 14:47:49.490832 hello.go:24: [TEST] haha..</span><br></pre></td></tr></table></figure>
+<p>不设置Lmsgprefix时输出是这样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[TEST] 2022&#x2F;01&#x2F;04 15:01:18.727718 hello.go:24: haha..</span><br></pre></td></tr></table></figure>
           
         
       
@@ -385,7 +390,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/142/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/page/144/">144</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/144/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/142/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/page/144/">144</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/144/">&gt;</a>
   </nav>
 
 
@@ -431,7 +436,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +447,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

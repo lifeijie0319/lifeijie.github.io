@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/language/java/jvm/jvm%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90/" itemprop="url">jvm错误日志信号分析</a></h1>
+                <a class="post-title-link" href="/2021/12/04/language/python/Django/django%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url">django基本环境配置</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
+                  <a href="/categories/language/python/Django/" itemprop="url" rel="index">
+                    <span itemprop="name">Django</span>
                   </a>
                 </span>
 
@@ -356,26 +356,15 @@
       
         
           
-            <h1 id="SIGSEGV"><a href="#SIGSEGV" class="headerlink" title="SIGSEGV"></a>SIGSEGV</h1><p>SIGSEGV — Segment Fault. The possible cases of your encountering this error are: </p>
-<ul>
-<li>buffer overflow — usually caused by a pointer reference out of range.</li>
-<li>stack overflow — please keep in mind that the default stack size is 8192K.</li>
-<li>illegal file access — file operations are forbidden on our judge system.</li>
-</ul>
-<h1 id="SIGBUS"><a href="#SIGBUS" class="headerlink" title="SIGBUS:"></a>SIGBUS:</h1><p>导致SIGBUS信号的可能原因: </p>
-<ul>
-<li>硬件故障，不用说，程序猿最常碰上的肯定不是这样的情形。 </li>
-<li>Linux平台上运行malloc()，假设没有足够的RAM。Linux不是让malloc()失败返回。 而是向当前进程分发SIGBUS信号。<br>  注: 对该点执怀疑态度，有机会可自行測试确认当前系统反应。 </li>
-<li>某些架构上訪问数据时有对齐的要求，比方仅仅能从4字节边界上读取一个4字节的 数据类型。IA-32架构没有硬性要求对齐，虽然未对齐的訪问减少运行效率。另外一些架构，比方SPARC、m68k，要求对齐訪问，否则向当前进程分发SIGBUS信号。 </li>
-<li>试图訪问一块无文件内容相应的内存区域，比方超过文件尾的内存区域，或者以前有文件内容相应，如今为还有一进程截断过的内存区域。</li>
-</ul>
-<h1 id="SIGBUS与SIGSEGV信号的一般差别"><a href="#SIGBUS与SIGSEGV信号的一般差别" class="headerlink" title="SIGBUS与SIGSEGV信号的一般差别"></a>SIGBUS与SIGSEGV信号的一般差别</h1><ul>
-<li>SIGBUS(Bus error)意味着指针所相应的地址是有效地址，但总线不能正常使用该指针。一般是未对齐的数据訪问所致。</li>
-<li>SIGSEGV(Segment fault)意味着指针所相应的地址是无效地址。没有物理内存相应该地址。 </li>
-</ul>
-<h1 id="EXCEPTION-ACCESS-VIOLATION"><a href="#EXCEPTION-ACCESS-VIOLATION" class="headerlink" title="EXCEPTION_ACCESS_VIOLATION"></a>EXCEPTION_ACCESS_VIOLATION</h1><p>意味着Java应用Crash的时候，正在运行JVM自己的代码，而不是外部的Java代码或其他类库代码。这种情况很可能是JVM的Bug，但是也不一定。</p>
-<h1 id="EXCEPTION-STACK-OVERFLOW"><a href="#EXCEPTION-STACK-OVERFLOW" class="headerlink" title="EXCEPTION_STACK_OVERFLOW"></a>EXCEPTION_STACK_OVERFLOW</h1><p>意味着这是个栈溢出的错误。</p>
-
+            <h1 id="一、新建项目"><a href="#一、新建项目" class="headerlink" title="一、新建项目"></a>一、新建项目</h1><p>django-admin startproject nanxun_pro</p>
+<h1 id="二、建立app"><a href="#二、建立app" class="headerlink" title="二、建立app"></a>二、建立app</h1><p>cd nanxun_pro/<br>python manage.py startapp nanxun<br>修改配置添加app名字</p>
+<h1 id="三、django连接psql"><a href="#三、django连接psql" class="headerlink" title="三、django连接psql"></a>三、django连接psql</h1><p><a target="_blank" rel="noopener" href="http://luct.blogbus.com/logs/111257414.html">http://luct.blogbus.com/logs/111257414.html</a></p>
+<h2 id="1、修改配置"><a href="#1、修改配置" class="headerlink" title="1、修改配置"></a>1、修改配置</h2><p>默认：<br>修改后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,</span><br><span class="line">        &#39;NAME&#39;: &#39;nanxundb&#39;,</span><br><span class="line">        &#39;USER&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;PASSWORD&#39;: &#39;lifeijie&#39;,</span><br><span class="line">        &#39;HOST&#39;: &#39;localhost&#39;,</span><br><span class="line">        &#39;PORT&#39;: &#39;5432&#39;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装psycopg2，psql在python中运行的中间件。"><a href="#2、安装psycopg2，psql在python中运行的中间件。" class="headerlink" title="2、安装psycopg2，psql在python中运行的中间件。"></a>2、安装psycopg2，psql在python中运行的中间件。</h2><p>pip install psycopg2</p>
+<h2 id="3、初始化数据库，载入django自带的数据模型"><a href="#3、初始化数据库，载入django自带的数据模型" class="headerlink" title="3、初始化数据库，载入django自带的数据模型"></a>3、初始化数据库，载入django自带的数据模型</h2><p>python manage.py migrate</p>
+<h1 id="四、配置admin账户"><a href="#四、配置admin账户" class="headerlink" title="四、配置admin账户"></a>四、配置admin账户</h1><p>python manage.py createsuperuser</p>
+<h1 id="五、创建模板与静态文件目录。"><a href="#五、创建模板与静态文件目录。" class="headerlink" title="五、创建模板与静态文件目录。"></a>五、创建模板与静态文件目录。</h1>
           
         
       
@@ -414,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/307/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><span class="page-number current">308</span><a class="page-number" href="/page/309/">309</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/309/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/307/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/307/">307</a><span class="page-number current">308</span><a class="page-number" href="/page/309/">309</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/309/">&gt;</a>
   </nav>
 
 
@@ -460,7 +449,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -471,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

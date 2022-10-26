@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/python/basic/oop/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/tools/k8s/%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/python/basic/oop/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" itemprop="url">python中单例模式的实现方式</a></h1>
+                <a class="post-title-link" href="/2022/09/12/tools/k8s/%E5%9F%BA%E7%A1%80/" itemprop="url">k8s基础</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/basic/oop/" itemprop="url" rel="index">
-                    <span itemprop="name">oop</span>
+                  <a href="/categories/tools/k8s/" itemprop="url" rel="index">
+                    <span itemprop="name">k8s</span>
                   </a>
                 </span>
 
@@ -367,7 +345,15 @@
       
         
           
-            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/htzy/p/15675677.html">https://www.cnblogs.com/htzy/p/15675677.html</a></p>
+            <h1 id="k8s基础结构"><a href="#k8s基础结构" class="headerlink" title="k8s基础结构"></a>k8s基础结构</h1><p>k8s是主从架构，有master节点和worker节点之分。</p>
+<h2 id="k8s组件"><a href="#k8s组件" class="headerlink" title="k8s组件"></a>k8s组件</h2><ul>
+<li>kube-scheduler：负责调度 pod 到 node 上</li>
+<li>kube-controller-manager：给 controller 创建 pod，管理 node 等</li>
+<li>kube-apiserver: 接收其他组件的请求，执⾏资源的 CRUD，是个⽹关</li>
+<li>kube-proxy: 给到 pod 的流量⽣成转发规则</li>
+<li>kubelet: 负责单节点上的 pod ⽣命周期管理</li>
+</ul>
+<p>其中 kube-scheduler、kube-controller-manager、kube-apiserver 是 运⾏在集群的 master 节点的。kube-proxy、kubelet 是运⾏在所有节点 的(master 节点 + worker 节点)。</p>
 
           
         
@@ -407,7 +393,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/48/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><span class="page-number current">49</span><a class="page-number" href="/page/50/">50</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/50/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/48/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/48/">48</a><span class="page-number current">49</span><a class="page-number" href="/page/50/">50</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/50/">&gt;</a>
   </nav>
 
 
@@ -453,7 +439,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -464,7 +450,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/java/spring/spring%20cloud/nacos/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/tools/VCS/git/git%E4%B8%8B%E8%BD%BDhttps%E5%BA%93%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/java/spring/spring%20cloud/nacos/" itemprop="url">nacos实践</a></h1>
+                <a class="post-title-link" href="/2022/09/12/tools/VCS/git/git%E4%B8%8B%E8%BD%BDhttps%E5%BA%93%E5%A4%B1%E8%B4%A5%E5%A4%84%E7%90%86/" itemprop="url">git下载https库失败</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/tools/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/spring/spring-cloud/" itemprop="url" rel="index">
-                    <span itemprop="name">spring cloud</span>
+                  <a href="/categories/tools/VCS/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -367,9 +356,13 @@
       
         
           
-            <h1 id="常见问题与解决"><a href="#常见问题与解决" class="headerlink" title="常见问题与解决"></a>常见问题与解决</h1><h2 id="nacos单机集群部署异常"><a href="#nacos单机集群部署异常" class="headerlink" title="nacos单机集群部署异常"></a>nacos单机集群部署异常</h2><p>集群预设三个服务端口为8848/8849/8850，除了最开始启动的服务，后续服务均可能启动失败，报端口被占用。本质是由于nacos2.0之后启动服务会连带启动服务端口+1000和服务端口+1001.</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w_e_i_a_i_/article/details/121993518">https://blog.csdn.net/w_e_i_a_i_/article/details/121993518</a></p>
-<h2 id="nacos单机模式无法使用注册ephemeral-false的永久节点"><a href="#nacos单机模式无法使用注册ephemeral-false的永久节点" class="headerlink" title="nacos单机模式无法使用注册ephemeral=false的永久节点"></a>nacos单机模式无法使用注册ephemeral=false的永久节点</h2><h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: com.alibaba.nacos.api.exception.NacosException: failed to req API:&#x2F;nacos&#x2F;v1&#x2F;ns&#x2F;instance after all servers([127.0.0.1:8848]) tried: ErrCode:500, ErrMsg:caused: java.util.concurrent.ExecutionException: com.alibaba.nacos.consistency.exception.ConsistencyException: com.alibaba.nacos.core.distributed.raft.exception.NoLeaderException: The Raft Group [naming_persistent_service_v2] did not find the Leader node;caused: com.alibaba.nacos.consistency.exception.ConsistencyException: com.alibaba.nacos.core.distributed.raft.exception.NoLeaderException: The Raft Group [naming_persistent_service_v2] did not find the Leader node;caused: com.alibaba.nacos.core.distributed.raft.exception.NoLeaderException: The Raft Group [naming_persistent_service_v2] did not find the Leader node;</span><br></pre></td></tr></table></figure>
+            <h1 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h1><h2 id="1-1-场景"><a href="#1-1-场景" class="headerlink" title="1.1 场景"></a>1.1 场景</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: Unable to find remote helper for &#39;https&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-原因"><a href="#1-2-原因" class="headerlink" title="1.2 原因"></a>1.2 原因</h2><p>git编译的时候没有安装curl-devel</p>
+<h2 id="1-3-解决"><a href="#1-3-解决" class="headerlink" title="1.3 解决"></a>1.3 解决</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install curl-devel</span><br><span class="line">cd $git_source_code_path</span><br><span class="line">.&#x2F;configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h1 id="场景二"><a href="#场景二" class="headerlink" title="场景二"></a>场景二</h1><h2 id="1-1-场景-1"><a href="#1-1-场景-1" class="headerlink" title="1.1 场景"></a>1.1 场景</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#39;https:&#x2F;&#x2F;github.com&#x2F;basho&#x2F;node_package.git&#x2F;&#39;: SSL connect error</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-原因-1"><a href="#1-2-原因-1" class="headerlink" title="1.2 原因"></a>1.2 原因</h2><p>ssl版本太低</p>
+<h2 id="1-3-解决-1"><a href="#1-3-解决-1" class="headerlink" title="1.3 解决"></a>1.3 解决</h2><p>更多openssl版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update nss</span><br></pre></td></tr></table></figure>
           
         
       
@@ -408,7 +401,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/50/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><span class="page-number current">51</span><a class="page-number" href="/page/52/">52</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/52/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/50/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><span class="page-number current">51</span><a class="page-number" href="/page/52/">52</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/52/">&gt;</a>
   </nav>
 
 
@@ -454,7 +447,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -465,7 +458,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

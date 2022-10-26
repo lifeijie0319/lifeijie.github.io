@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/riak/install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/tools/nginx/nginx%E5%B9%B3%E6%BB%91%E5%8D%87%E7%BA%A7/" itemprop="url">nginx平滑升级</a></h1>
+                <a class="post-title-link" href="/2021/12/04/database/riak/install/" itemprop="url">riak源码安装</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/categories/database/riak/" itemprop="url" rel="index">
+                    <span itemprop="name">riak</span>
                   </a>
                 </span>
 
@@ -345,18 +345,13 @@
       
         
           
-            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wanghs8/p/11545324.html">https://www.cnblogs.com/wanghs8/p/11545324.html</a></p>
-<h1 id="ngx-http-proxy-connect-module安装与nginx平滑升级"><a href="#ngx-http-proxy-connect-module安装与nginx平滑升级" class="headerlink" title="ngx_http_proxy_connect_module安装与nginx平滑升级"></a>ngx_http_proxy_connect_module安装与nginx平滑升级</h1><ol>
-<li>下载nginx源码和ngx_http_proxy_connect_module，这个项目开源在<a target="_blank" rel="noopener" href="https://github.com/chobits/ngx_http_proxy_connect_module">https://github.com/chobits/ngx_http_proxy_connect_module</a></li>
-<li>将这个模块的补丁打入源码，注意补丁版本<br>打补丁命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch -p1 &lt; &#x2F;path&#x2F;to&#x2F;ngx_http_proxy_connect_module&#x2F;patch&#x2F;proxy_connect.patch</span><br></pre></td></tr></table></figure>
-补丁选择：参考<a target="_blank" rel="noopener" href="https://github.com/chobits/ngx_http_proxy_connect_module#select-patch">https://github.com/chobits/ngx_http_proxy_connect_module#select-patch</a></li>
-<li>重新编译nginx，make注意不要make install</li>
-<li>备份原Nginx二进制文件，将新编译出来的objs目录下的nginx二进制文件拷贝到原来的位置</li>
-<li>nginx -t检查新的nginx是否正常</li>
-<li>使nginx的旧版本停止就收请求，有Nginx新版本接替，且老进程处理完所有请求，关闭所有连接后，停止<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -USR2 &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid&#96;</span><br></pre></td></tr></table></figure>
-查看nginx日志目录会生成一个nginx.pid.oldbin文件，存放旧版本nginx 的pid号</li>
-<li>通过发送WINCH信号（平缓停止worker process）和QUIT信号（平缓停止Nginx服务）停止旧的Nginx服务进程<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kill -WINCH &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid.oldbin&#96; </span><br><span class="line">kill -QUIT &#96;cat &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;nginx.pid.oldbin&#96;</span><br></pre></td></tr></table></figure></li>
-</ol>
+            <h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>sudo yum install gcc gcc-c++ glibc-devel make git pam-devel</p>
+<h1 id="下载解压"><a href="#下载解压" class="headerlink" title="下载解压"></a>下载解压</h1><p>wget <a target="_blank" rel="noopener" href="http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz">http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz</a></p>
+<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>make rel</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p><img src="/blog/images/database/riak/install/1.png"></p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>git版本低，不再被支持。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Please upgrade your git client.</span><br><span class="line">GitHub.com no longer supports git over dumb-http: https:&#x2F;&#x2F;github.com&#x2F;blog&#x2F;809-git-dumb-http-transport-to-be-turned-off-in-90-days</span><br></pre></td></tr></table></figure>
+<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>yum remove当前git，安装新版本git</p>
 
           
         
@@ -396,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/237/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/237/">237</a><span class="page-number current">238</span><a class="page-number" href="/page/239/">239</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/239/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/237/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/237/">237</a><span class="page-number current">238</span><a class="page-number" href="/page/239/">239</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/239/">&gt;</a>
   </nav>
 
 
@@ -442,7 +437,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

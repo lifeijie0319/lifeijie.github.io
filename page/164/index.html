@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/python/basic/concurrent/GIL/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/python/basic/concurrent/GIL/" itemprop="url">python GIL</a></h1>
+                <a class="post-title-link" href="/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-8/" itemprop="url">utf-8编码原理</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/basic/concurrent/" itemprop="url" rel="index">
-                    <span itemprop="name">concurrent</span>
+                  <a href="/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -367,14 +345,40 @@
       
         
           
-            <h1 id="什么是GIL"><a href="#什么是GIL" class="headerlink" title="什么是GIL"></a>什么是GIL</h1><p>GIL(Global Interpreter Lock)，全局解释器锁，是指cpython中，多线程执行时，线程需要先获取GIL，才能被执行。</p>
-<h1 id="为什么说GIL不能利用多核"><a href="#为什么说GIL不能利用多核" class="headerlink" title="为什么说GIL不能利用多核"></a>为什么说GIL不能利用多核</h1><p>在单核处理器中，线程的执行是并发而不是并行的，但是多核使得线程执行可以是真正并行的。但是加了GIL锁之后，多线程的执行又变成了串行，结果退回了原来单核的情况。测试发现，使用c的pthread库开启两个线程，线程中做循环，cpu的使用率可以达到200%，但是python使用threading库开启多线程，cpu的使用率只能达到100%。</p>
-<h1 id="为什么要有GIL"><a href="#为什么要有GIL" class="headerlink" title="为什么要有GIL"></a>为什么要有GIL</h1><p>因为cpython解释器的内存管理不是线程安全的。举个例子，python中的垃圾回收是依靠对象的引用计数。如果两个线程并行（同一时刻）增加对象A的引用计数，那么可能最终A的引用计数只增加了1，导致错误。</p>
-<h1 id="GIL的改进"><a href="#GIL的改进" class="headerlink" title="GIL的改进"></a>GIL的改进</h1><p>python3.2版本之前，定义了一个tick计数器，表示当前线程在释放gil之前连续执行的多少个字节码,tick到达100或者程序碰到io会自动释放GIL。<br>python3.2以后使用时间片来切换线程，时间阈值是0.005秒。并且会动态调整线程的优先级，使得GIL不会被同一个线程长期占用。</p>
-<h1 id="如何应对GIL无法利用多核的缺陷"><a href="#如何应对GIL无法利用多核的缺陷" class="headerlink" title="如何应对GIL无法利用多核的缺陷"></a>如何应对GIL无法利用多核的缺陷</h1><ul>
-<li>使用多进程取代多进程</li>
-<li>对于计算密集型的程序，使用C扩展</li>
+            <h1 id="utf-8概念"><a href="#utf-8概念" class="headerlink" title="utf-8概念"></a>utf-8概念</h1><pre><code>UTF-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，又称万国码。由Ken Thompson于1992年创建。现在已经标准化为RFC 3629。UTF-8用1到6个字节编码Unicode字符。</code></pre>
+<h1 id="unicode到utf-8编码的转换"><a href="#unicode到utf-8编码的转换" class="headerlink" title="unicode到utf-8编码的转换"></a>unicode到utf-8编码的转换</h1><table>
+<thead>
+<tr>
+<th>Unicode码范围</th>
+<th>UTF-8编码方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>U+0000~U+007F</td>
+<td>0????????</td>
+</tr>
+<tr>
+<td>U+0080~U+07FF</td>
+<td>110????? 10??????</td>
+</tr>
+<tr>
+<td>U+0800~U+FFFF</td>
+<td>1110???? 10?????? 10??????</td>
+</tr>
+<tr>
+<td>U+10000~U+10FFFF</td>
+<td>11110??? 10?????? 10?????? 10??????</td>
+</tr>
+</tbody></table>
+<h2 id="转换规则"><a href="#转换规则" class="headerlink" title="转换规则"></a>转换规则</h2><ol>
+<li>判断unicode码值所在范围</li>
+<li>将unicode码值转换成二进制形式，从右往左填充，左边不够补零，超长截断。<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2></li>
+</ol>
+<ul>
+<li>U+0020 = 0b 0000 0000 0010 0000 -&gt; 0b 00100000 = 0x20</li>
+<li>U+A12B = 0b 1010 0001 0010 1011 -&gt; 0b 11101010 10000100 10101011 = 0xEA84AB</li>
 </ul>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>知道utf-8的一个code unit，很容易知道当前code point的起点，如果字节起始位是0，那么这个是个单字节表示的code point，如果起始是10，只要往前寻找不是10开头的字节，不超过三次即可找到，可以根据找到的起始字节确认是多少字节表示的code point。</p>
 
           
         
@@ -414,7 +418,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/163/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><span class="page-number current">164</span><a class="page-number" href="/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/165/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/163/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/163/">163</a><span class="page-number current">164</span><a class="page-number" href="/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/165/">&gt;</a>
   </nav>
 
 
@@ -460,7 +464,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -471,7 +475,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

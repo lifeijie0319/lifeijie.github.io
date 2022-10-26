@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/linux/ubuntu/apt/apt%E8%BD%AF%E4%BB%B6%E6%BA%90/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/libs/db/postgresql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/system/linux/ubuntu/apt/apt%E8%BD%AF%E4%BB%B6%E6%BA%90/" itemprop="url">apt软件源介绍</a></h1>
+                <a class="post-title-link" href="/2021/12/04/language/python/libs/db/postgresql/" itemprop="url">postgresql</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/linux/ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">ubuntu</span>
+                  <a href="/categories/language/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
                   </a>
                 </span>
 
@@ -328,8 +328,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/linux/ubuntu/apt/" itemprop="url" rel="index">
-                    <span itemprop="name">apt</span>
+                  <a href="/categories/language/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
                   </a>
                 </span>
 
@@ -367,20 +367,8 @@
       
         
           
-            <h1 id="apt软件源简介"><a href="#apt软件源简介" class="headerlink" title="apt软件源简介"></a>apt软件源简介</h1><p>apt软件源是一个配置文件，描述了apt获取包信息的网络地址。配置文件的位置是/etc/apt/sources.list</p>
-<h1 id="软件源格式"><a href="#软件源格式" class="headerlink" title="软件源格式"></a>软件源格式</h1><p>整个软件源结构可以分解为四个部分：</p>
-<ul>
-<li>软件包格式，比如deb/deb-src</li>
-<li>软件包服务器地址，比如<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/ubuntu">http://mirrors.aliyun.com/ubuntu</a></li>
-<li>发型版本代号，比如trusty/trusty-updates/trusty-security/trusty-backports/proposed</li>
-<li>软件包分类目录，比如main、restricted、universe、multiuniverse</li>
-</ul>
-<p>第三部分严格来说不算是发行版版本代号，它应该是Ubuntu系统发布之后，在此基础上进行的安全性更新的分类。</p>
-<p>第四部分是按照软件包的自由度来分类的：</p>
-<h2 id="main-主要的"><a href="#main-主要的" class="headerlink" title="main(主要的)"></a>main(主要的)</h2><p>“main”组件包括了自由软件、可以被自由发布的软件和被Ubuntu团队完全支持的软件。其中包括了大多数流行的和稳定的开源软件，当您安装Ubuntu时默认安装的就是这些软件。</p>
-<h2 id="restricted（限制的）"><a href="#restricted（限制的）" class="headerlink" title="restricted（限制的）"></a>restricted（限制的）</h2><p>“restricted”组件是专供普遍用途，而且没有自由软件版权，但依然被Ubuntu团队支持的软件。请注意，因为不能直接修改软件，因而我们可能不能提供完全的技术支持，即便如此，我们还能向实际作者反馈Bug报告。</p>
-<h2 id="universe（宇宙，世界，全人类）"><a href="#universe（宇宙，世界，全人类）" class="headerlink" title="universe（宇宙，世界，全人类）"></a>universe（宇宙，世界，全人类）</h2><p>“universe”组件是整个自由、开源Linux世界的缩影。在“universe”组件中，你可以找到大多数开源软件，以及在开源版权下的软件，所 有这些都是在公共源的基础上建立的。这些软件都是使用“main”中的组件编写的，它们能与“main”组件相安无事地共同运行，但它们没有安全升级的保 障。“universe”组件包含了数以千计的软件。虽然是公共的，用户必须明白它们与稳定的Ubuntu核心的软件的差异和不稳定。multiverse（多元的）–multiverse”组件包含了“不自由”的软件，这意味着这些软件不满足 Ubuntu相对于“main”组件的各种版权政策。当您使用这些软件时，如何调整各种权力以及遵重版权所有者的问题，就完全依靠您自己把握了。 这些软件不被我们支持，而且通常不能被修改和更新，您将自己承担任何风险。 现在，作为以上位置的新增功能，实际上新的软件包都存储在pool目录中</p>
-
+            <h1 id="现象：安装psycopg2出错"><a href="#现象：安装psycopg2出错" class="headerlink" title="现象：安装psycopg2出错"></a>现象：安装psycopg2出错</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: pg_config executable not found</span><br><span class="line">pg_config is in postgresql-dev</span><br></pre></td></tr></table></figure>
+<h1 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libpq-dev python-dev</span><br><span class="line">pip install psycopg2、</span><br></pre></td></tr></table></figure>
           
         
       
@@ -419,7 +407,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/336/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/336/">336</a><span class="page-number current">337</span><a class="page-number" href="/page/338/">338</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/338/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/336/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/336/">336</a><span class="page-number current">337</span><a class="page-number" href="/page/338/">338</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/338/">&gt;</a>
   </nav>
 
 
@@ -465,7 +453,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -476,7 +464,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

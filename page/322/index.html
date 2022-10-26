@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/libs/env/virtualenv/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/linux/centos/yum%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/language/python/libs/env/virtualenv/" itemprop="url">virtualenv</a></h1>
+                <a class="post-title-link" href="/2021/12/04/system/linux/centos/yum%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url">yum基础知识</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/system/" itemprop="url" rel="index">
+                    <span itemprop="name">system</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/system/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/libs/" itemprop="url" rel="index">
-                    <span itemprop="name">libs</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/libs/env/" itemprop="url" rel="index">
-                    <span itemprop="name">env</span>
+                  <a href="/categories/system/linux/centos/" itemprop="url" rel="index">
+                    <span itemprop="name">centos</span>
                   </a>
                 </span>
 
@@ -367,15 +356,15 @@
       
         
           
-            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><ul>
-<li>1、sudo pip install virtualenv</li>
-<li>2、virtualenv wxenv</li>
-</ul>
-<h1 id="二、设置打开终端进入虚拟环境"><a href="#二、设置打开终端进入虚拟环境" class="headerlink" title="二、设置打开终端进入虚拟环境"></a>二、设置打开终端进入虚拟环境</h1><p>vi .bash_profile<br>添加”source wxenv/bin/activate”</p>
-<h1 id="三、windows下安装报错"><a href="#三、windows下安装报错" class="headerlink" title="三、windows下安装报错"></a>三、windows下安装报错</h1><h2 id="1、问题："><a href="#1、问题：" class="headerlink" title="1、问题："></a>1、问题：</h2><p>UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xc0 in position 7: ordinal not in range(128)</p>
-<h2 id="2、原因："><a href="#2、原因：" class="headerlink" title="2、原因："></a>2、原因：</h2><p>pip安装python包会加载当前用户的用户目录，我的用户目录恰好是含有中文的，ascii不能进行编码。</p>
-<h2 id="3、解决："><a href="#3、解决：" class="headerlink" title="3、解决："></a>3、解决：</h2><p>修改python安装目录 Python27\Lib\目录下的mimetypes.py文件。添加如下代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> sys.getdefaultncoding() != <span class="string">&#x27;gbk&#x27;</span>:</span><br><span class="line">    reload(sys)</span><br><span class="line">    sys.setdefaultencoding(<span class="string">&#x27;gbk&#x27;</span>)</span><br></pre></td></tr></table></figure>
+            <h1 id="配置国内yum源"><a href="#配置国内yum源" class="headerlink" title="配置国内yum源"></a>配置国内yum源</h1><ol>
+<li>备份本地yum源配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;etc&#x2F;yum.repos.d&#x2F;</span><br><span class="line">cp CentOS-Base.repo CentOS-Base.repo.bak</span><br></pre></td></tr></table></figure></li>
+<li>获取国内yum源配置文件，替换/etc/yum.repos.d/CentOS-Base.repo，参考：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-7.repo </span><br></pre></td></tr></table></figure></li>
+<li>更新cache<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache </span><br></pre></td></tr></table></figure>
+<h1 id="常用的yum指令"><a href="#常用的yum指令" class="headerlink" title="常用的yum指令"></a>常用的yum指令</h1><h2 id="缓存处理"><a href="#缓存处理" class="headerlink" title="缓存处理"></a>缓存处理</h2>yum会将下载下来的包文件rpm和头文件header存盘在本地机器的硬盘缓存中，yum clean可以对缓存进行清理，常用的clean命令如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean headers: &#x2F;&#x2F; 释放头文件</span><br><span class="line">yum clean packages: &#x2F;&#x2F; 清除包文件</span><br><span class="line">yum clean all: &#x2F;&#x2F; 清除所有</span><br></pre></td></tr></table></figure>
+与之相反，yum makecache可以把服务器的包信息下载到本地缓存起来<h2 id="包的安装与删除"><a href="#包的安装与删除" class="headerlink" title="包的安装与删除"></a>包的安装与删除</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum search package &#x2F;&#x2F; 搜索</span><br><span class="line">yum install package &#x2F;&#x2F; 安装</span><br><span class="line">yum remove package &#x2F;&#x2F; 卸载</span><br></pre></td></tr></table></figure>
+<h2 id="包的更新"><a href="#包的更新" class="headerlink" title="包的更新"></a>包的更新</h2>有两个命令可以对现有的包进行升级，分别是yum update和yum upgrade，后面可以带包名也可以不带，带包名会更新指定的包（未安装的包不更新），不带的话会更新整个系统所有已安装的包。yum upgrade = yum update –obsolete，表示更新后删除旧版本的包。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update [package]</span><br><span class="line">yum upgrade [package]</span><br></pre></td></tr></table></figure></li>
+</ol>
+
           
         
       
@@ -414,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/321/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/321/">321</a><span class="page-number current">322</span><a class="page-number" href="/page/323/">323</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/323/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/321/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/321/">321</a><span class="page-number current">322</span><a class="page-number" href="/page/323/">323</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/323/">&gt;</a>
   </nav>
 
 
@@ -460,7 +449,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -471,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/db2/schema/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/data_structure/B+tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/database/db2/schema/" itemprop="url">db2 schema</a></h1>
+                <a class="post-title-link" href="/2021/12/04/data_structure/B+tree/" itemprop="url">B+树</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/db2/" itemprop="url" rel="index">
-                    <span itemprop="name">db2</span>
+                  <a href="/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
                   </a>
                 </span>
 
@@ -345,16 +334,14 @@
       
         
           
-            <h1 id="创建schema"><a href="#创建schema" class="headerlink" title="创建schema"></a>创建schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE SCHEMA &lt;schema-name&gt; [AUTHORIZATION &lt;schema-owner-name&gt;]</span><br></pre></td></tr></table></figure>
-<h1 id="删除schema"><a href="#删除schema" class="headerlink" title="删除schema"></a>删除schema</h1><p>schema下面没有对象的情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 drop schema wxdemo restrict</span><br></pre></td></tr></table></figure>
-<p>schema下面有对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;call ADMIN_DROP_SCHEMA(&#39;wxdemo&#39;, NULL, &#39;errorschema&#39;, &#39;ERRTABLE&#39;)&quot;</span><br></pre></td></tr></table></figure>
-<h1 id="复制schema"><a href="#复制schema" class="headerlink" title="复制schema"></a>复制schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db2 &quot;CALL SYSPROC.ADMIN_COPY_SCHEMA</span><br><span class="line">(&#39;TONGLIAN&#39;,&#39;WXDEMO&#39;,&#39;COPYNO&#39;,NULL,NULL,NULL,&#39;ERRORSCHEMA&#39;,&#39;ERRORTABLE&#39;);&quot;</span><br></pre></td></tr></table></figure>
-<p>注意：目标schema不能已存在，否则报错。</p>
-<h1 id="查看当前schema"><a href="#查看当前schema" class="headerlink" title="查看当前schema"></a>查看当前schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 values current schema</span><br></pre></td></tr></table></figure>
-<h1 id="查询数据库内的所有schema"><a href="#查询数据库内的所有schema" class="headerlink" title="查询数据库内的所有schema"></a>查询数据库内的所有schema</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from sysibm.sysschemata</span><br></pre></td></tr></table></figure>
-<h1 id="查询schem下面的所有表格"><a href="#查询schem下面的所有表格" class="headerlink" title="查询schem下面的所有表格"></a>查询schem下面的所有表格</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db2 list tables for schema XXX</span><br></pre></td></tr></table></figure>
+            <h1 id="B-树的定义"><a href="#B-树的定义" class="headerlink" title="B+树的定义"></a>B+树的定义</h1><p>B+树的定义有两种，其中一种基本和B树等价，关键字个数比孩子节点数小1；另一种关键字个数和孩子节点数相等。我们按照第一种定义展开学习，这种情况下，B+树在B树的基础上做了如下调整：</p>
+<ul>
+<li>B+树分为两种节点，内部节点（也称索引节点）和叶子节点。根节点可以是内部节点，也可以是叶子节点。</li>
+<li>B+树的内部节点不保存数据，所有数据都保存在叶子节点。</li>
+<li>对于内部节点的一个key，左子树中的所有key值小于它，右子树中的key都大于等于它。内部节点的key值和叶子节点的key值都按升序排列。</li>
+<li>每个叶子节点有相邻叶子节点的指针，叶子节点之间自小而大顺序排列。</li>
+</ul>
+
           
         
       
@@ -393,7 +380,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/211/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/page/213/">213</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/213/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/211/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/211/">211</a><span class="page-number current">212</span><a class="page-number" href="/page/213/">213</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/213/">&gt;</a>
   </nav>
 
 
@@ -439,7 +426,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -450,7 +437,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

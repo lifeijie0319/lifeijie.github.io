@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/25/database/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/10/19/software_enginering/%E7%BC%93%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/25/database/%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" itemprop="url">分库分表</a></h1>
+                <a class="post-title-link" href="/2022/10/19/software_enginering/%E7%BC%93%E5%AD%98/" itemprop="url">缓存技术</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-25T16:10:16+08:00">
-                2022-09-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-19T19:58:36+08:00">
+                2022-10-19
               </time>
             
 
@@ -312,50 +312,14 @@
       
         
           
-            <h1 id="为什么要分库分表"><a href="#为什么要分库分表" class="headerlink" title="为什么要分库分表"></a>为什么要分库分表</h1><p>随着业务增长，数据量增大，关系数据库数据查询的效率下降。为了减轻数据库压力，提升数据库响应速度，可以考虑分库分表。分库分表本质在于数据的拆分，一般分为垂直分表、垂直分库、水平分表、水平分库。</p>
-<h1 id="垂直分表"><a href="#垂直分表" class="headerlink" title="垂直分表"></a>垂直分表</h1><p>垂直分表是按照表的列进行拆分，将不常用的列、字段占用空间大的列拆分出新的表。</p>
-<h2 id="为什么垂直分表能提高数据库查询效率"><a href="#为什么垂直分表能提高数据库查询效率" class="headerlink" title="为什么垂直分表能提高数据库查询效率"></a>为什么垂直分表能提高数据库查询效率</h2><ol>
-<li>大字段本身占用了更多空间，读取相应的字段花费时间更长</li>
-<li>页是数据存储的单位，大字段占用空间大，单页存储的行数少，IO效率低。</li>
-<li>数据库以行为单位缓存数据，没有大字段，缓存数据更多，减少了IO。</li>
-</ol>
-<h1 id="垂直分库"><a href="#垂直分库" class="headerlink" title="垂直分库"></a>垂直分库</h1><p>垂直分库一般是按照业务对耦合性较小的表进行拆分，比如用户表和订单，进一步可以发展成微服务。</p>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><ol>
-<li>需要业务可拆分的前置条件</li>
-<li>业务之间数据关联变得复杂，需要在应用层进行数据连接聚合</li>
-<li>跨库之后分布式事务一致性难以保证</li>
-</ol>
-<h1 id="水平分表"><a href="#水平分表" class="headerlink" title="水平分表"></a>水平分表</h1><p>单表数据量过大，以mysql为例，一般只能较好地处理千万级的数据，再高则查询效率下降明显。此时考虑对单表水平拆分，即创建一些结构相同的表，将数据分散存储。</p>
-<h2 id="表分区"><a href="#表分区" class="headerlink" title="表分区"></a>表分区</h2><p>数据库本身提供了类似分表的技术，称为表分区，创建表时定义表为分区表，在物理层将数据拆分成了不同的分区，mysql分区支持以下类型：</p>
+            <h1 id="什么是缓存"><a href="#什么是缓存" class="headerlink" title="什么是缓存"></a>什么是缓存</h1><p>缓存一般是指查询过的数据记录在缓存层，下一次查询的时候可以通过缓存获取，而不需要查询数据库，这样能减轻数据库的压力。数据进行更新的时候也要同步更新缓存层。</p>
+<h1 id="常见的缓存问题"><a href="#常见的缓存问题" class="headerlink" title="常见的缓存问题"></a>常见的缓存问题</h1><h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><p>当查询一个数据库里不存在的数据时，由于缓存区没有，数据库中也没有，如果收到该数据反复的查询请求（可能被攻击），会导致数据库压力过大。一个解决思路是设置在缓存成设置该数据的空值。</p>
+<h2 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h2><p>热点数据的访问频次高，一旦缓存过期，由于并发会有大量查询请求落到数据库，成为缓存击穿。常见的解决方案如下：</p>
 <ul>
-<li>range</li>
-<li>list list类型分区与range类似，只是其范围是离散的</li>
-<li>hash</li>
-<li>key 前面三种类型要求分区列必须是整型，key只要分区列不是text，blob就行，key类似于hash，但是hash函数是数据库自定义的</li>
+<li>使用互斥锁，即发现缓存过期时不直接去数据库取值，而是先获取互斥锁，重新构建缓存后释放锁，这样等于将并行请求串行化了，瞬间并发能力下降</li>
+<li>逻辑超时实际永不过期，即设置一个逻辑超时时间，这个时间小于实际超时时间，达到逻辑超时时间后就进行缓存的更新（特定的线程去更新）</li>
 </ul>
-<h1 id="水平分库"><a href="#水平分库" class="headerlink" title="水平分库"></a>水平分库</h1><p>水平分库的逻辑和分表相同，但是水平分表使用的是同一个数据库实例，不同的表共用IO、CPU资源，性能受到硬件资源限制。水平分库使得扩充了分表各自的硬件资源，但是也带来了分布式的一些问题。</p>
-<h1 id="水平分片策略"><a href="#水平分片策略" class="headerlink" title="水平分片策略"></a>水平分片策略</h1><h2 id="hash分片"><a href="#hash分片" class="headerlink" title="hash分片"></a>hash分片</h2><p>hash分片就是按照表的关键字进行hash运算之后取模，然后按照结果分配到不同的表中。hash分表的数据分布比较均匀，但是扩容升级困难。</p>
-<h2 id="范围分片"><a href="#范围分片" class="headerlink" title="范围分片"></a>范围分片</h2><p>按照关键字的取值范围进行分片，比如日期，一个月为一个分片。范围分表会有热点问题，即最近的查询都集中在最近一个月的分片中，而历史的分片极少查询。</p>
-<h2 id="hash分片与范围分片结合"><a href="#hash分片与范围分片结合" class="headerlink" title="hash分片与范围分片结合"></a>hash分片与范围分片结合</h2><p>先进行范围分片，比如以日期分组，今年是一组，明年是一组，在同一组内，按照hash分片，将数据均匀地分散到几台数据库上。这样随着时间推移，数据量增长，只需要添加新的分组，扩容简单，有因为hash没有热点问题。</p>
-<h2 id="一致性hash分片"><a href="#一致性hash分片" class="headerlink" title="一致性hash分片"></a>一致性hash分片</h2><p>一致性hash类似于范围分片，只不过分片的依据是hash计算结果。</p>
-<h1 id="分库分表带来的问题"><a href="#分库分表带来的问题" class="headerlink" title="分库分表带来的问题"></a>分库分表带来的问题</h1><p>分库分表会带来很多编程上的复杂性，如果可以，SQL优化、缓存、数据库主从集群应该要优先考虑。</p>
-<h2 id="分布式事务一致性问题"><a href="#分布式事务一致性问题" class="headerlink" title="分布式事务一致性问题"></a>分布式事务一致性问题</h2><p>主要是分库之后，多数据库无法支持事务一致性。有XA协议和两阶段提交支持跨数据库事务，但是性能不高，一般不采用，而是追求最终一致性。</p>
-<h2 id="全局唯一自增主键"><a href="#全局唯一自增主键" class="headerlink" title="全局唯一自增主键"></a>全局唯一自增主键</h2><p>需要引入第三方分布式ID组件，提高了复杂度。</p>
-<h2 id="数据路由"><a href="#数据路由" class="headerlink" title="数据路由"></a>数据路由</h2><p>水平分库分表后，要对数据进行路由，确定数据要落入哪个分区，复杂度提高。</p>
-<h2 id="查询问题"><a href="#查询问题" class="headerlink" title="查询问题"></a>查询问题</h2><p>在水平分库分表中，我们称作为分库分表基准的列为partition key，如果查询时使用的字段不是partition key，查询无法定位分片。常用的方法有：</p>
-<ul>
-<li>映射法：建立映射表，可能作为查询key的列都在这张表中</li>
-<li>基因法：partition key的值由可能查询的列作为基因生成<h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2>不管水平还是垂直拆分，由于数据的离散，需要聚合数据都变得更麻烦，一般都需要应用层改造，通过应用层来聚合整理数据。<h2 id="分页排序"><a href="#分页排序" class="headerlink" title="分页排序"></a>分页排序</h2>这个问题在水平分表分库中比较明显，因为数据分散在不同分片，需要在应用中聚合数据再排序，复杂度提高。<h2 id="hash分片扩容问题"><a href="#hash分片扩容问题" class="headerlink" title="hash分片扩容问题"></a>hash分片扩容问题</h2>对于水平分库，随着业务进一步增长，势必要考虑数据库扩容。采用常用的hash分片，hash映射结果随着数据库实例变动而变动，这会导致原先落在A库的数据现在要落到B库，对历史数据而言，会出现A库有数据，但是应用按照新的映射会去查B库，导致查不到数据的情况。所以每次扩容要进行数据迁移。<h3 id="升级从库法（2主2从-gt-4主4从）"><a href="#升级从库法（2主2从-gt-4主4从）" class="headerlink" title="升级从库法（2主2从-&gt;4主4从）"></a>升级从库法（2主2从-&gt;4主4从）</h3></li>
-</ul>
-<ol>
-<li>应用的数据源地址(0/1)由两个变成(0/1/2/3)个，新增的两个地址2指向原来的0，3指向原来的1.</li>
-<li>先修改应用的地址指向，2指向0的备库，3指向1的备库，然后解除现有主从关系，添加新的备库，新建主从关系。</li>
-<li>删除冗余数据<h3 id="双写迁移法"><a href="#双写迁移法" class="headerlink" title="双写迁移法"></a>双写迁移法</h3></li>
-<li>修改应用，除了按旧有规则写入老库外，还按照新规则写入新库</li>
-<li>将老库的数据按照新规则迁移到新库</li>
-<li>修改应用，解除双写</li>
-</ol>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/425851776">https://zhuanlan.zhihu.com/p/425851776</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fanwenyan/p/16053160.html">https://www.cnblogs.com/fanwenyan/p/16053160.html</a></p>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><p>缓存层大量key值同时过期，导致大量请求落到数据库层，称为缓存雪崩。一个可能的解决方案是设置缓存的超时时间有随机波动。</p>
 
           
         
@@ -395,7 +359,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/10/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/10/">&gt;</a>
   </nav>
 
 
@@ -441,7 +405,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +416,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

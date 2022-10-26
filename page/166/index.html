@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/basic/concurrent/atomic/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/go/concurrent/The%20Go%20Memory%20Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/basic/concurrent/atomic/" itemprop="url">atomic原理</a></h1>
+                <a class="post-title-link" href="/2022/03/04/language/go/concurrent/The%20Go%20Memory%20Model/" itemprop="url">The Go Memory Model摘要</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -317,18 +317,7 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/basic/concurrent/" itemprop="url" rel="index">
+                  <a href="/categories/language/go/concurrent/" itemprop="url" rel="index">
                     <span itemprop="name">concurrent</span>
                   </a>
                 </span>
@@ -367,9 +356,12 @@
       
         
           
-            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3ae7b4e870c5">https://www.jianshu.com/p/3ae7b4e870c5</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/tanga842428/article/details/52765537">https://blog.csdn.net/tanga842428/article/details/52765537</a></p>
-<h1 id="简单理解"><a href="#简单理解" class="headerlink" title="简单理解"></a>简单理解</h1><p>java.util.concurrent.atomic是java内置库，包含一些实现了原子操作的数据类型，用于在多线程中替代synchronized实现部分操作的线程安全。atomic包的原子操作实现使用的是自旋+CAS(Compare And Swap)，本质上是一种乐观锁的实现，其中CAS是由硬件实现的原子操作。</p>
-<h2 id="CAS模拟实现"><a href="#CAS模拟实现" class="headerlink" title="CAS模拟实现"></a>CAS模拟实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimulatedCAS</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> value;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> value;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">compareAndSwap</span><span class="params">(<span class="keyword">int</span> expectedValue, <span class="keyword">int</span> newValue)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">int</span> oldValue = value;  </span><br><span class="line">        <span class="keyword">if</span> (value == expectedValue)  </span><br><span class="line">            value = newValue;  </span><br><span class="line">        <span class="keyword">return</span> oldValue;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <p>在go中，实现同步主要有两个思路，一是使用channel，二是使用sync包的相关方法。</p>
+<h1 id="Locks"><a href="#Locks" class="headerlink" title="Locks"></a>Locks</h1><p>sync.Mutex很好理解，同一时间只有一个线程能拿到锁。sync.RWMutex是互斥读写锁，可以允许同时多个线程读，但是读写互斥，写写互斥。读锁的获取和释放分别是RLock和RUnlock方法，写锁的获取和释放是Lock和Unlock。读锁被持有时，写锁不能被获取，但是当有一个线程尝试获取写锁时，其它的线程也没法获取读锁了，这是为了防止写锁一直获取不到。源码注释如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; If a goroutine holds a RWMutex for reading and another goroutine might</span><br><span class="line">&#x2F;&#x2F; call Lock, no goroutine should expect to be able to acquire a read lock</span><br><span class="line">&#x2F;&#x2F; until the initial read lock is released. In particular, this prohibits</span><br><span class="line">&#x2F;&#x2F; recursive read locking. This is to ensure that the lock eventually becomes</span><br><span class="line">&#x2F;&#x2F; available; a blocked Lock call excludes new readers from acquiring the</span><br><span class="line">&#x2F;&#x2F; lock.</span><br></pre></td></tr></table></figure>
+<h1 id="Once"><a href="#Once" class="headerlink" title="Once"></a>Once</h1><p>多个线程执行Once(f)，只有一个能实际执行f，另一个阻塞直到Once返回，f的执行在Once返回之前。</p>
+<h1 id="Incorrect-synchronization"><a href="#Incorrect-synchronization" class="headerlink" title="Incorrect synchronization"></a>Incorrect synchronization</h1><p>简单说，即两个赋值语句，如果另一个线程确认第二个复制成功，不代表第一个赋值语句执行完成。</p>
+
           
         
       
@@ -408,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/165/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/165/">165</a><span class="page-number current">166</span><a class="page-number" href="/page/167/">167</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/167/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/165/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/165/">165</a><span class="page-number current">166</span><a class="page-number" href="/page/167/">167</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/167/">&gt;</a>
   </nav>
 
 
@@ -454,7 +446,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -465,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

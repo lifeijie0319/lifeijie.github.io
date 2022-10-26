@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/09/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/tools/grep%E5%B8%B8%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">grep常用技巧</a></h1>
+                <a class="post-title-link" href="/2021/12/09/database/mysql/engine/mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E/" itemprop="url">mysql存储引擎</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
-                2021-12-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-09T13:44:58+08:00">
+                2021-12-09
               </time>
             
 
@@ -295,8 +295,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/engine/" itemprop="url" rel="index">
+                    <span itemprop="name">engine</span>
                   </a>
                 </span>
 
@@ -334,15 +356,20 @@
       
         
           
-            <h1 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h1><p>grep [:options] :expression :file<br>:options 选项<br>:expression 要查找的内容，可以用正则表达式<br>:file 搜索的文件名</p>
-<h1 id="常见options"><a href="#常见options" class="headerlink" title="常见options"></a>常见options</h1><ul>
-<li>-l 只打印文件名，不输出匹配的行内容</li>
-<li>-I 不搜索二进制文件</li>
-<li>-r 递归搜索子目录下的文件</li>
-<li>-n 打印匹配内容在文件中的行数</li>
-<li>–include=GLOB 使用GLOB指定的通配符来匹配文件名</li>
-<li>-l 列出符合匹配的文件名</li>
-<li>-L参数列出不符合匹配的参数名</li>
+            <h1 id="存储引擎查看"><a href="#存储引擎查看" class="headerlink" title="存储引擎查看"></a>存储引擎查看</h1><ul>
+<li>查看所有支持的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> engines;</span><br></pre></td></tr></table></figure></li>
+<li>查看默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @<span class="variable">@default</span>_storage_engine;</span><br></pre></td></tr></table></figure></li>
+<li>查看某个库的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">table</span> status <span class="keyword">from</span> :db;</span><br></pre></td></tr></table></figure>
+:db 数据库名</li>
+<li>查看某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_schema, table_name, engine <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema <span class="operator">=</span> :schema <span class="keyword">and</span> table_name <span class="operator">=</span> :<span class="keyword">table</span>;</span><br></pre></td></tr></table></figure>
+或者<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> :<span class="keyword">table</span></span><br></pre></td></tr></table></figure>
+:schema 数据库名<br>:table 表名</li>
+</ul>
+<h1 id="存储引擎修改"><a href="#存储引擎修改" class="headerlink" title="存储引擎修改"></a>存储引擎修改</h1><ul>
+<li>设置默认存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> default_storage_engine<span class="operator">=</span>:engine;</span><br></pre></td></tr></table></figure>
+:engine 存储引擎名称</li>
+<li>修改某个表的存储引擎<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> :schema.:<span class="keyword">table</span> engine[<span class="operator">=</span>]:engine;</span><br></pre></td></tr></table></figure>
+:schema 数据库名<br>:table 表名<br>:engine 引擎名称</li>
 </ul>
 
           
@@ -383,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/200/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/200/">200</a><span class="page-number current">201</span><a class="page-number" href="/page/202/">202</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/202/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/200/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/200/">200</a><span class="page-number current">201</span><a class="page-number" href="/page/202/">202</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/202/">&gt;</a>
   </nav>
 
 
@@ -429,7 +456,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -440,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/tools/k8s/k8s%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/tools/jenkins/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/tools/k8s/k8s%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">k8s常见问题</a></h1>
+                <a class="post-title-link" href="/2022/03/04/tools/jenkins/" itemprop="url">jenkins常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -302,17 +302,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/k8s/" itemprop="url" rel="index">
-                    <span itemprop="name">k8s</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -345,9 +334,7 @@
       
         
           
-            <h1 id="kubectl-get-nodes返回502"><a href="#kubectl-get-nodes返回502" class="headerlink" title="kubectl get nodes返回502"></a>kubectl get nodes返回502</h1><h2 id="报错信息"><a href="#报错信息" class="headerlink" title="报错信息"></a>报错信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[LeoWeb@k8smaster fastdfs-demo-frontend]$ kubectl get nodes</span><br><span class="line">Error from server (InternalError): an error on the server (&quot;&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;502 Bad Gateway&lt;&#x2F;title&gt;&lt;&#x2F;head&gt;\r\n&lt;body bgcolor&#x3D;\&quot;white\&quot;&gt;\r\n&lt;center&gt;&lt;h1&gt;502 Bad Gateway&lt;&#x2F;h1&gt;&lt;&#x2F;center&gt;\r\n&lt;hr&gt;&lt;center&gt;nginx&#x2F;1.12.1&lt;&#x2F;center&gt;\r\n&lt;&#x2F;body&gt;\r\n&lt;&#x2F;html&gt;&quot;) has prevented the request from succeeding</span><br></pre></td></tr></table></figure>
-<h2 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br></pre></td></tr></table></figure>
-<h2 id="部署时ErrImageNeverPull"><a href="#部署时ErrImageNeverPull" class="headerlink" title="部署时ErrImageNeverPull"></a>部署时ErrImageNeverPull</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41535316/article/details/116047617">https://blog.csdn.net/weixin_41535316/article/details/116047617</a></p>
+            <h1 id="JENKINS构建项目过程中：ERROR-MAVEN-JVM-TERMINATED-UNEXPECTEDLY-WITH-EXIT-CODE-137"><a href="#JENKINS构建项目过程中：ERROR-MAVEN-JVM-TERMINATED-UNEXPECTEDLY-WITH-EXIT-CODE-137" class="headerlink" title="JENKINS构建项目过程中：ERROR: MAVEN JVM TERMINATED UNEXPECTEDLY WITH EXIT CODE 137"></a>JENKINS构建项目过程中：ERROR: MAVEN JVM TERMINATED UNEXPECTEDLY WITH EXIT CODE 137</h1><p><a target="_blank" rel="noopener" href="https://www.freesion.com/article/8468228067/">https://www.freesion.com/article/8468228067/</a></p>
 
           
         
@@ -387,7 +374,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/128/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/128/">128</a><span class="page-number current">129</span><a class="page-number" href="/page/130/">130</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/130/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/128/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/128/">128</a><span class="page-number current">129</span><a class="page-number" href="/page/130/">130</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/130/">&gt;</a>
   </nav>
 
 
@@ -433,7 +420,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +431,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

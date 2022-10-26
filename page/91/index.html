@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/10/language/java/database/mybatis/Mybatis/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/05/05/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/10/language/java/database/mybatis/Mybatis/" itemprop="url">Mybatis</a></h1>
+                <a class="post-title-link" href="/2022/05/05/tools/openssl/pkcs%E6%A0%BC%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96/" itemprop="url">pkcs格式的相互转化</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-05T11:24:16+08:00">
+                2022-05-05
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,30 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/database/mybatis/" itemprop="url" rel="index">
-                    <span itemprop="name">mybatis</span>
+                  <a href="/categories/tools/openssl/" itemprop="url" rel="index">
+                    <span itemprop="name">openssl</span>
                   </a>
                 </span>
 
@@ -367,61 +345,14 @@
       
         
           
-            <h1 id="Mybatis语法"><a href="#Mybatis语法" class="headerlink" title="Mybatis语法"></a>Mybatis语法</h1><h2 id="sql中的-和-的区别是什么"><a href="#sql中的-和-的区别是什么" class="headerlink" title="sql中的#{}和 ${}的区别是什么"></a>sql中的#{}和 ${}的区别是什么</h2><p>  #{}是预编译处理，底层会使用PreparedStatement，能够防止sql注入；<br>  ${}是字符串替换</p>
-<h1 id="延迟加载"><a href="#延迟加载" class="headerlink" title="延迟加载"></a>延迟加载</h1><h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><p>Mybatis仅支持association和collection关联对象的延迟加载。association是一对一，collection是一对多。在Mybatis配置文件中可以配置是否开启延迟加载。相关的主要配置项是：</p>
-<ul>
-<li>lazyLoadingEnabled 延迟加载的全局开关，默认false不开启。在特定的关联关系中可以设置 fetchType 属性来覆盖该项的开关状态。</li>
-<li>aggressiveLazyLoading 当开启时，任何方法的调用都会加载该对象的所有属性。否则，每个属性会按需加载。默认false。<h2 id="延迟加载的原理"><a href="#延迟加载的原理" class="headerlink" title="延迟加载的原理"></a>延迟加载的原理</h2>创建目标对象的代理对象，如果获取延迟加载的对象发现是null，就发出预存的sql查询相关数据填充当前对象。<h2 id="延迟加载出现序列化问题"><a href="#延迟加载出现序列化问题" class="headerlink" title="延迟加载出现序列化问题"></a>延迟加载出现序列化问题</h2>使用延迟加载后，常会出现如下错误：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No serializer found for class org.apache.ibatis.executor.loader.javassist.JavassistProxyFactory$EnhancedResultObjectProxyImpl and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS)</span><br></pre></td></tr></table></figure>
-debug观察此时通过dao获取到的结果，是一个代理对象，代理对象包含一个handler属性，该属性不是可以自动序列化的类型。此时，在返回结果进行json序列化的时候抛出异常。有两种常见的处理方式：</li>
-</ul>
-<ol>
-<li>报错的信息建议disable SerializationFeature.FAIL_ON_EMPTY_BEANS，可以通过设置spring.jackson.serialization.FAIL_ON_EMPTY_BEANS=false来处理。背后的原因在于：<br>FAIL_ON_EMPTY_BEANS是com.fasterxml.jackson.databind.SerializationFeature枚举类的一个枚举值，该值的作用是：Feature that determines what happens when no accessors are found for a type (and there are no annotations to indicate it is meant to be serialized). If enabled (default), an exception is thrown to indicate these as non-serializable types; if disabled, they are serialized as empty Objects, i.e. without any properties. 即FAIL_ON_EMPTY_BEANS=true，无法序列化属性时抛出异常，否则将属性值置空处理。</li>
-<li>在被代理的实体类上添加注解@JsonIgnoreProperties(value = “handler”)。<h2 id="懒加载失效"><a href="#懒加载失效" class="headerlink" title="懒加载失效"></a>懒加载失效</h2>使用json序列化的时候，往往会调用方法获取关联数据，使得懒加载失效。（待验证）</li>
-</ol>
-<h1 id="Mybatic和Hibernate的区别"><a href="#Mybatic和Hibernate的区别" class="headerlink" title="Mybatic和Hibernate的区别"></a>Mybatic和Hibernate的区别</h1><table>
-<thead>
-<tr>
-<th>特征</th>
-<th>Mybatis</th>
-<th>Hibernate</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>数据库相关性</td>
-<td>高度相关</td>
-<td>相关度低</td>
-</tr>
-<tr>
-<td>编写灵活性</td>
-<td>高</td>
-<td>低</td>
-</tr>
-<tr>
-<td>自动化</td>
-<td>半自动化，只有数据库数据到对象的映射</td>
-<td>全自动化</td>
-</tr>
-</tbody></table>
-<h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><p>Mybatis自定义插件针对Mybatis四大对象进行拦截，分别是：</p>
-<ul>
-<li>Executor(update, query, flushStatements, commit, rollback, getTransaction, close, isClosed)：拦截执行器的方法(log记录) </li>
-<li>StatementHandler(prepare, parameterize, batch, update, query) ：拦截Sql语法构建的处理 </li>
-<li>ParameterHandler(getParameterObject, setParameters) ：拦截参数的处理 </li>
-<li>ResultSetHandler(handleResultSets, handleOutputParameters) ：拦截结果集的处理<h2 id="自定义插件使用"><a href="#自定义插件使用" class="headerlink" title="自定义插件使用"></a>自定义插件使用</h2></li>
-</ul>
-<ol>
-<li>编写自定义插件类实现Interceptor接口，使用@Signature注解标记插件的作用区域，如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ExamplePlugin.java</span></span><br><span class="line"><span class="meta">@Intercepts(&#123;@Signature(</span></span><br><span class="line"><span class="meta">  type= Executor.class,</span></span><br><span class="line"><span class="meta">  method = &quot;update&quot;,</span></span><br><span class="line"><span class="meta">  args = &#123;MappedStatement.class,Object.class&#125;)&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExamplePlugin</span> <span class="keyword">implements</span> <span class="title">Interceptor</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Properties properties = <span class="keyword">new</span> Properties();</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Invocation invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">    <span class="comment">// implement pre-processing if needed</span></span><br><span class="line">    Object returnObject = invocation.proceed();</span><br><span class="line">    <span class="comment">// implement post-processing if needed</span></span><br><span class="line">    <span class="keyword">return</span> returnObject;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setProperties</span><span class="params">(Properties properties)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.properties = properties;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-@Signature的参数如下：</li>
-</ol>
-<ul>
-<li>type： 拦截的类</li>
-<li>method： 拦截的方法</li>
-<li>args： 方法参数</li>
-</ul>
-<ol start="2">
-<li>在配置文件中添加插件配置，如：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- mybatis-config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">interceptor</span>=<span class="string">&quot;org.mybatis.example.ExamplePlugin&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;someProperty&quot;</span> <span class="attr">value</span>=<span class="string">&quot;100&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h2>分页插件的基本原理是使用Mybatis提供的插件接口，实现自定义插件，在插件的拦截方法内拦截执行的sql，然后重写sql，添加相应的分页参数。<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tonghun/p/7122801.html">https://www.cnblogs.com/tonghun/p/7122801.html</a></li>
-</ol>
+            <h1 id="pkcs格式基本样式"><a href="#pkcs格式基本样式" class="headerlink" title="pkcs格式基本样式"></a>pkcs格式基本样式</h1><h2 id="pkcs1格式"><a href="#pkcs1格式" class="headerlink" title="pkcs1格式"></a>pkcs1格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN RSA PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END RSA PUBLIC KEY----</span><br></pre></td></tr></table></figure>
+<h2 id="pkcs8格式"><a href="#pkcs8格式" class="headerlink" title="pkcs8格式"></a>pkcs8格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN PUBLIC KEY-----</span><br><span class="line">....</span><br><span class="line">-----END PUBLIC KEY-----</span><br></pre></td></tr></table></figure>
+<h1 id="pkcs1和pkcs8格式公钥的相互转化"><a href="#pkcs1和pkcs8格式公钥的相互转化" class="headerlink" title="pkcs1和pkcs8格式公钥的相互转化"></a>pkcs1和pkcs8格式公钥的相互转化</h1><h2 id="pkcs8公钥转pkcs1公钥"><a href="#pkcs8公钥转pkcs1公钥" class="headerlink" title="pkcs8公钥转pkcs1公钥"></a>pkcs8公钥转pkcs1公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -pubin -in public.pem -RSAPublicKey_out</span><br></pre></td></tr></table></figure>
+<h2 id="pkcs1公钥转换为pkcs8公钥"><a href="#pkcs1公钥转换为pkcs8公钥" class="headerlink" title="pkcs1公钥转换为pkcs8公钥"></a>pkcs1公钥转换为pkcs8公钥</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -RSAPublicKey_in -in pub_pkcs1.pem -pubout</span><br></pre></td></tr></table></figure>
+<h1 id="pkcs1和pkcs8格式私钥的相互转化"><a href="#pkcs1和pkcs8格式私钥的相互转化" class="headerlink" title="pkcs1和pkcs8格式私钥的相互转化"></a>pkcs1和pkcs8格式私钥的相互转化</h1><h2 id="PKCS1私钥转换为PKCS8"><a href="#PKCS1私钥转换为PKCS8" class="headerlink" title="PKCS1私钥转换为PKCS8"></a>PKCS1私钥转换为PKCS8</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs8 -topk8 -inform PEM -in private.pem -outform pem -nocrypt -out pkcs8.pem</span><br></pre></td></tr></table></figure>
+<h2 id="PKCS8格式私钥再转换为PKCS1格式"><a href="#PKCS8格式私钥再转换为PKCS1格式" class="headerlink" title="PKCS8格式私钥再转换为PKCS1格式"></a>PKCS8格式私钥再转换为PKCS1格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl rsa -in pkcs8.pem -out pkcs1.pem</span><br></pre></td></tr></table></figure>
+<h1 id="p12即PKCS-12格式的密钥转换成pem格式"><a href="#p12即PKCS-12格式的密钥转换成pem格式" class="headerlink" title="p12即PKCS#12格式的密钥转换成pem格式"></a>p12即PKCS#12格式的密钥转换成pem格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -nocerts -nodes -in 20060400000044502.p12 -out 20060400000044502.pem</span><br></pre></td></tr></table></figure>
+<h1 id="转换常见问题"><a href="#转换常见问题" class="headerlink" title="转换常见问题"></a>转换常见问题</h1><h2 id="bad-end-line"><a href="#bad-end-line" class="headerlink" title="bad end line"></a>bad end line</h2><p>可能是由于底部中划线数量问题引起<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/cwcmcw/article/details/96860400">https://blog.csdn.net/cwcmcw/article/details/96860400</a></p>
 
           
         
@@ -461,7 +392,7 @@ debug观察此时通过dao获取到的结果，是一个代理对象，代理对
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/90/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><span class="page-number current">91</span><a class="page-number" href="/page/92/">92</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/92/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/90/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><span class="page-number current">91</span><a class="page-number" href="/page/92/">92</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/92/">&gt;</a>
   </nav>
 
 
@@ -507,7 +438,7 @@ debug观察此时通过dao获取到的结果，是一个代理对象，代理对
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -518,7 +449,7 @@ debug观察此时通过dao获取到的结果，是一个代理对象，代理对
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/tools/k8s/service/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/web/http%E8%BD%AC%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/tools/k8s/service/" itemprop="url">k8s Service配置</a></h1>
+                <a class="post-title-link" href="/2022/03/04/web/http%E8%BD%AC%E5%8F%91/" itemprop="url">http转发</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/k8s/" itemprop="url" rel="index">
-                    <span itemprop="name">k8s</span>
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
                   </a>
                 </span>
 
@@ -345,7 +334,14 @@
       
         
           
-            <h1 id="yaml配置文件"><a href="#yaml配置文件" class="headerlink" title="yaml配置文件"></a>yaml配置文件</h1><h2 id="port、targetPort、nodePort的区别"><a href="#port、targetPort、nodePort的区别" class="headerlink" title="port、targetPort、nodePort的区别"></a>port、targetPort、nodePort的区别</h2><p>nodePort是外部机器可访问的端口；targetPort是镜像暴露的服务端口；port是k8s集群内部网络中服务之间访问的端口</p>
+            <h1 id="301和302响应码的区别"><a href="#301和302响应码的区别" class="headerlink" title="301和302响应码的区别"></a>301和302响应码的区别</h1><ul>
+<li>301 redirect: 301 代表永久性转移(Permanently Moved)</li>
+<li>302 redirect: 302 代表暂时性转移(Temporarily Moved)</li>
+</ul>
+<h1 id="直接转发和间接转发的区别"><a href="#直接转发和间接转发的区别" class="headerlink" title="直接转发和间接转发的区别"></a>直接转发和间接转发的区别</h1><ul>
+<li>直接转发方式（Forward）客户端只发出一次请求，请求由一个请求资源转（servlet）移到另一个请求资源（servlet）</li>
+<li>间接转发方式（Redirect）实际是两次http请求，服务器端在响应第一次请求的时候，让浏览器再向另外一个URL发出请求，从而达到转发的目的</li>
+</ul>
 
           
         
@@ -385,7 +381,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/130/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/130/">130</a><span class="page-number current">131</span><a class="page-number" href="/page/132/">132</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/132/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/130/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/130/">130</a><span class="page-number current">131</span><a class="page-number" href="/page/132/">132</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/132/">&gt;</a>
   </nav>
 
 
@@ -431,7 +427,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +438,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

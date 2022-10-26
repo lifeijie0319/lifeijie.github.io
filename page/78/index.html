@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/10/database/redis/lua%E8%84%9A%E6%9C%AC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/c/scanf%E5%92%8Cprintf/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/10/database/redis/lua%E8%84%9A%E6%9C%AC/" itemprop="url">redis中使用lua脚本</a></h1>
+                <a class="post-title-link" href="/2022/09/12/language/c/scanf%E5%92%8Cprintf/" itemprop="url">scanf和printf</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T17:04:33+08:00">
+                2022-09-12
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
+                  <a href="/categories/language/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c</span>
                   </a>
                 </span>
 
@@ -345,18 +345,80 @@
       
         
           
-            <h1 id="lua语言"><a href="#lua语言" class="headerlink" title="lua语言"></a>lua语言</h1><p>一个轻量级的、嵌入式的脚本语言。</p>
-<h1 id="为什么要在redis中使用lua脚本"><a href="#为什么要在redis中使用lua脚本" class="headerlink" title="为什么要在redis中使用lua脚本"></a>为什么要在redis中使用lua脚本</h1><p>redis是单线程依次执行指令，lua脚本保证了脚本中的多条指令一起执行成功或都不执行，类似redis事务。因为lua脚本在redis中是一条指令执行，所以隔离性比redis事务更好，redis事务需要多条指令完成，可能在指令之间有其它连接的指令执行。</p>
-<h1 id="在redis中使用lua"><a href="#在redis中使用lua" class="headerlink" title="在redis中使用lua"></a>在redis中使用lua</h1><h2 id="直接写lua脚本"><a href="#直接写lua脚本" class="headerlink" title="直接写lua脚本"></a>直接写lua脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EVAL &quot;redis.call(&#39;SET&#39;,&#39;TestImooc&#39;,&#39;test&#39;)&quot; 0</span><br><span class="line">EVAL &quot;redis.pcall(&#39;SETR&#39;,&#39;TestImooc&#39;,&#39;test&#39;)&quot; 0</span><br></pre></td></tr></table></figure>
-<p>以上脚本类似使用redis直接执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set TestImooc test</span><br></pre></td></tr></table></figure>
-<p>redis.pcall和redis.call的区别在于，redis.pcall会捕捉异常</p>
-<h2 id="使用缓存的lua脚本"><a href="#使用缓存的lua脚本" class="headerlink" title="使用缓存的lua脚本"></a>使用缓存的lua脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script load &quot;return redis.call(&#39;SET&#39;, KEYS[1], ARGV[2])&quot;</span><br></pre></td></tr></table></figure>
-<p>scrip load生成一份redis脚本的缓存，返回该脚本的hash值用以唯一标识该缓存脚本，我们不妨假设该缓存为$lua_script_hash。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">evalsha $lua_script_hash 3 key1 key2 key3 argv1 argv2 argv3 argv4 # 执行缓存脚本</span><br><span class="line">script flush # 清空缓存脚本</span><br><span class="line">script exists $lua_script_hash # 检查缓存脚本是否存在</span><br><span class="line">script kill # 杀死长时间运行阻塞进程的脚本</span><br></pre></td></tr></table></figure>
-<h2 id="客户端直接执行脚本"><a href="#客户端直接执行脚本" class="headerlink" title="客户端直接执行脚本"></a>客户端直接执行脚本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --eval myscript.lua key1 key2 , arg1 arg2 arg3</span><br></pre></td></tr></table></figure>
-<ul>
-<li>–ldb 加上该选项后开启debug调试</li>
+            <h1 id="使用前提"><a href="#使用前提" class="headerlink" title="使用前提"></a>使用前提</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="scanf格式"><a href="#scanf格式" class="headerlink" title="scanf格式"></a>scanf格式</h1><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>格式符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>%d</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>%lld</td>
+</tr>
+<tr>
+<td>float</td>
+<td>%f</td>
+</tr>
+<tr>
+<td>double</td>
+<td>%lf</td>
+</tr>
+<tr>
+<td>char</td>
+<td>%c</td>
+</tr>
+<tr>
+<td>char数组</td>
+<td>%s</td>
+</tr>
+</tbody></table>
+<h2 id="输入注意"><a href="#输入注意" class="headerlink" title="输入注意"></a>输入注意</h2><ol>
+<li>读入char数组时，注意默认是读到末尾’\n’时停止，’\n’并没有被消费，下一次读入，如果想要从新的一行开始，要注意使用getchar()消费掉’\n’</li>
+<li>scanf返回正确读入的参数个数</li>
+</ol>
+<h1 id="printf格式"><a href="#printf格式" class="headerlink" title="printf格式"></a>printf格式</h1><table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>格式符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>%d</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>%lld</td>
+</tr>
+<tr>
+<td>float</td>
+<td>%f</td>
+</tr>
+<tr>
+<td>double</td>
+<td>%f</td>
+</tr>
+<tr>
+<td>char</td>
+<td>%c</td>
+</tr>
+<tr>
+<td>char数组</td>
+<td>%s</td>
+</tr>
+</tbody></table>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>printf返回正确输出的参数个数</p>
+<h2 id="输出常用技巧"><a href="#输出常用技巧" class="headerlink" title="输出常用技巧"></a>输出常用技巧</h2><ul>
+<li>%md %md可以使不足m位的int型变量进行右对齐输出，其中高位用空格补齐；如果变量本身超过m位，则保持原样。</li>
+<li>%0md 和%md类似，不同的是高位用0补齐</li>
+<li>%.mf 保留m位小数</li>
 </ul>
 
           
@@ -397,7 +459,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/77/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><span class="page-number current">78</span><a class="page-number" href="/page/79/">79</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/79/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/77/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/77/">77</a><span class="page-number current">78</span><a class="page-number" href="/page/79/">79</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/79/">&gt;</a>
   </nav>
 
 
@@ -443,7 +505,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +516,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

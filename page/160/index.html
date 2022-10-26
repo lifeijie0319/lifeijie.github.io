@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/spring/IOC/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/other/%E7%BC%96%E7%A0%81/BOM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/spring/IOC/" itemprop="url">IOC</a></h1>
+                <a class="post-title-link" href="/2022/03/04/other/%E7%BC%96%E7%A0%81/BOM/" itemprop="url">BOM(Byte Order Mark) 字节序标记</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
+                  <a href="/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
+                    <span itemprop="name">编码</span>
                   </a>
                 </span>
 
@@ -356,14 +345,9 @@
       
         
           
-            <h1 id="spring中的bean是线程安全的么"><a href="#spring中的bean是线程安全的么" class="headerlink" title="spring中的bean是线程安全的么"></a>spring中的bean是线程安全的么</h1><p>不是。</p>
-<h1 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h1><ul>
-<li>singleton 默认作用域，单例模式，容器中只有一个该类型bean实例</li>
-<li>prototype 原型模式，每次通过容器获取的bean都是该类的一个新实例</li>
-<li>request 每次请求的时候生成一个新的bean实例，只适用于使用spring的web应用</li>
-<li>session 对于每个http session，生成一个新的bean实例，只适用于使用spring的web应用</li>
-<li>globalSession globalSession is something that is connected to Portlet applications. When your application works in a Portlet container it is built of some amount of portlets. Each portlet has its own session, but if you want to store variables global for all portlets in your application then you should store them in globalSession. This scope doesn’t have any special effect different from the session scope in Servlet based applications. 另外，Portlet支持在spring5中已经被移除，所以globalSession这个scope也相应移除了。</li>
-</ul>
+            <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><p>Unicode中有一个叫做”ZERO WIDTH NO-BREAK SPACE”的字符，它的编码是FEFF。Unicode建议传输字节流前，先传输该字符，这样如果接收者收到FEFF，代表这个字节流是Big-Endian的；反之如果接收者收到的是FFFE，代表这个字节流是Little-Endian的。</p>
+<h1 id="BOM和UTF-8"><a href="#BOM和UTF-8" class="headerlink" title="BOM和UTF-8"></a>BOM和UTF-8</h1><p>UTF-8无需BOM来区别字节序，然而BOM可以用来判断编码类型。FEFF在UTF-8中的编码是0xEFBBBF，看到这串编码开头，即可判断字节流是UTF-8编码。</p>
+<h1 id="BOM和UTF-16-UTF-32"><a href="#BOM和UTF-16-UTF-32" class="headerlink" title="BOM和UTF-16/UTF-32"></a>BOM和UTF-16/UTF-32</h1><p>在UTF-16/UTF-32编码中，BOM就是用来表示Endian的，表格如下：<br>编码|表示 (十六进制)<br>|—|—|<br>UTF-16（大端序）|FE FF<br>UTF-16（小端序）|FF FE<br>UTF-32（大端序）|00 00 FE FF<br>UTF-32（小端序）|FF FE 00 00</p>
 
           
         
@@ -403,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/159/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/161/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/159/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/159/">159</a><span class="page-number current">160</span><a class="page-number" href="/page/161/">161</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/161/">&gt;</a>
   </nav>
 
 
@@ -449,7 +433,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -460,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

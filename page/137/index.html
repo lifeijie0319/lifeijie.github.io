@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/security/web/XSS/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/security/web/XSS/" itemprop="url">XSS攻击</a></h1>
+                <a class="post-title-link" href="/2022/03/04/database/basic/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" itemprop="url">聚合函数使用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/security/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
+                  <a href="/categories/database/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -345,8 +345,11 @@
       
         
           
-            <h1 id="什么是XSS攻击"><a href="#什么是XSS攻击" class="headerlink" title="什么是XSS攻击"></a>什么是XSS攻击</h1><p>跨站脚本攻击（CROSS SITE SCRIPT），即XSS，是攻击者在有该漏洞的网站网页中输入恶意的js代码，其它用户访问时，这段代码执行，使得攻击者获取用户的一些信息。</p>
-<h1 id="如何防范XSS攻击"><a href="#如何防范XSS攻击" class="headerlink" title="如何防范XSS攻击"></a>如何防范XSS攻击</h1><p>对输入和URL参数校验过滤，对输出编码。</p>
+            <h1 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h1><p>使用count()可以做数据统计。</p>
+<ul>
+<li>count(*)统计总行数，count(id)统计id不为null的列。</li>
+<li>count()函数可以加条件统计，比如count(year=’2006’ or null)，注意这里or null必须加上，如果不加，表中year!=’2006’的列是返回false，false在count()函数中还是要统计的，加上or null之后，false or null返回的是null，才会不统计。</li>
+</ul>
 
           
         
@@ -386,7 +389,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/136/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/136/">136</a><span class="page-number current">137</span><a class="page-number" href="/page/138/">138</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/138/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/136/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/136/">136</a><span class="page-number current">137</span><a class="page-number" href="/page/138/">138</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/138/">&gt;</a>
   </nav>
 
 
@@ -432,7 +435,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -443,7 +446,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/math/accounting/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/10/11/language/java/spring/%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/math/accounting/%E7%AD%89%E9%A2%9D%E6%9C%AC%E6%81%AF/" itemprop="url">等额本息</a></h1>
+                <a class="post-title-link" href="/2022/10/11/language/java/spring/%E4%BA%8B%E5%8A%A1/" itemprop="url">spring的事务支持</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T17:04:33+08:00">
-                2022-09-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-11T14:37:02+08:00">
+                2022-10-11
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/math/" itemprop="url" rel="index">
-                    <span itemprop="name">math</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/math/accounting/" itemprop="url" rel="index">
-                    <span itemprop="name">accounting</span>
+                  <a href="/categories/language/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/java/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
 
@@ -345,8 +356,23 @@
       
         
           
-            <h1 id="计算公式与推导"><a href="#计算公式与推导" class="headerlink" title="计算公式与推导"></a>计算公式与推导</h1><p>A 本金 X 期款 R 利率<br>第一期剩余本金  A*(1+R)-X<br>第二期剩余本金  (A*(1+R)-X)<em>(1+R) - X = A</em>(1+R)^2 - X((1+R) + 1)<br>第三期剩余本金  (A*(1+R)^2 - X((1+R) + 1))<em>(1+R) - X = A</em>(1+R)^3 - X((1+R)^2 + (1+R) + 1)<br>第四期剩余本金  (A*(1+R)^3 - X((1+R)^2 + (1+R) + 1))<em>(1+R) - X = A</em>(1+R)^4 - X((1+R)^3 + (1+R)^2 + (1+R) + 1)<br>…<br>第N期剩余本金  A*(1+R)^N - X((1+R)^N-1 + … + 1) = A(1+R)^N - X*(1 - (1+R)^N)) / -R = A(1+R)^N + X * (1 - (1+R)^N) / R = 0<br>X = A(1+R)^N *R/ ((1+R)^N - 1)</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.baiozhuntuixing.com/p/103.html">https://www.baiozhuntuixing.com/p/103.html</a><br><a target="_blank" rel="noopener" href="https://www.baiozhuntuixing.com/p/100.html">https://www.baiozhuntuixing.com/p/100.html</a></p>
+            <h1 id="spring事务的实现方式"><a href="#spring事务的实现方式" class="headerlink" title="spring事务的实现方式"></a>spring事务的实现方式</h1><ol>
+<li>编程式事务管理：在代码中调用beginTransaction()、commit()、rollback()等事务管理相关的方法；又比如通过spring提供的jdbcTemplate管理事务等通过代码编写来控制事务的方式</li>
+<li>基于 TransactionProxyFactoryBean 的声明式事务管理，就是创建一个TransactionProxyFactoryBean类型的代理类，代理实际业务类，代理类完成事务管理</li>
+<li>基于 Aspectj AOP 配置事务，就是配置一个事务管理的aop切面，配置的advice是特殊的事务管理的advice</li>
+<li>基于 @Transactional 的声明式事务管理</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/myseries/p/10834172.html">https://www.cnblogs.com/myseries/p/10834172.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/donggua3694857/article/details/69858827">https://blog.csdn.net/donggua3694857/article/details/69858827</a></p>
+<h1 id="事务传播"><a href="#事务传播" class="headerlink" title="事务传播"></a>事务传播</h1><h2 id="什么是事务传播"><a href="#什么是事务传播" class="headerlink" title="什么是事务传播"></a>什么是事务传播</h2><p>一个方法调用另一个被事务管理的方法时，事务的传播方式</p>
+<h2 id="spring事务传播的类型"><a href="#spring事务传播的类型" class="headerlink" title="spring事务传播的类型"></a>spring事务传播的类型</h2><ul>
+<li>PROPAGATION_REQUIRED 支持当前事务，如果不存在，就创建一个</li>
+<li>PROPAGATION_SUPPORTED 支持当前事务，如果不存在，就不使用事务</li>
+<li>PROPAGATION_MANDATORY 支持当前事务，如果不存在，就抛出异常</li>
+<li>PROPAGATION_REQUIRES_NEW 如果当前有事务存在，挂起当前事务，创建一个新的事务</li>
+<li>PROPAGATION_NOT_SUPPORTED 以非事务方式运行，如果有事务存在，挂起当前事务</li>
+<li>PROPAGATION_NEVER 以非事务方式运行，如果有事务存在，抛出异常</li>
+<li>PROPAGATION_NESTED 如果当前事务存在，则嵌套事务执行</li>
+</ul>
 
           
         
@@ -386,7 +412,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/23/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/25/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/23/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><span class="page-number current">24</span><a class="page-number" href="/page/25/">25</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/25/">&gt;</a>
   </nav>
 
 
@@ -432,7 +458,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -443,7 +469,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

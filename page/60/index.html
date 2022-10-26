@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/java/basic/%E5%8F%8D%E5%B0%84/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/java/basic/%E6%B3%A8%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/java/basic/%E5%8F%8D%E5%B0%84/" itemprop="url">java反射</a></h1>
+                <a class="post-title-link" href="/2022/09/12/language/java/basic/%E6%B3%A8%E8%A7%A3/" itemprop="url">注解</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T15:40:33+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T17:04:33+08:00">
                 2022-09-12
               </time>
             
@@ -356,93 +356,49 @@
       
         
           
-            <h1 id="什么是反射"><a href="#什么是反射" class="headerlink" title="什么是反射"></a>什么是反射</h1><h2 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h2><p>类是实例的模板，Class类是普通类的模板，每一个普通类（包括基本数据类型）在JVM中都有一个唯一的关联Class实例。通过Class实例获取对应类的各种信息的过程称为反射。</p>
-<h3 id="获取Class实例的三种方法"><a href="#获取Class实例的三种方法" class="headerlink" title="获取Class实例的三种方法"></a>获取Class实例的三种方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过类直接获取</span></span><br><span class="line">Class cls = String.class;</span><br><span class="line"><span class="comment">// 通过类的实例获取</span></span><br><span class="line">String s = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">Class cls = s.getClass();</span><br><span class="line"><span class="comment">// 通过完整类名获取</span></span><br><span class="line">Class cls = Class.forName(<span class="string">&quot;java.lang.String&quot;</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="动态加载"><a href="#动态加载" class="headerlink" title="动态加载"></a>动态加载</h2><p>JVM中类的加载是动态的，用到某些类才会加载他们。典型例子，Commons Logging总是优先使用Log4j，只有当Log4j不存在时，才使用JDK的logging。基本逻辑代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LogFactory factory = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span> (isClassPresent(<span class="string">&quot;org.apache.logging.log4j.Logger&quot;</span>)) &#123;</span><br><span class="line">    factory = createLog4j();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    factory = createJdkLog();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="java反射机制的意义"><a href="#java反射机制的意义" class="headerlink" title="java反射机制的意义"></a>java反射机制的意义</h1><p>参考：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20157023/answer/1021842505">https://www.zhihu.com/question/20157023/answer/1021842505</a><br>按照上述参考回答，反射的意义有二：</p>
-<ul>
-<li>提高程序的灵活性</li>
-<li>屏蔽掉实现的细节，让使用者更加方便好用</li>
-</ul>
-<p>第一点文章以数据库驱动的动态加载为例说明，但是这里一直有疑惑。为什么不是不同的数据库驱动厂商实现统一接口，而使用者调用接口即可？<br>第二点以springMVC框架的参数自动装载为例说明，到是没有什么疑义。</p>
-<h1 id="常用的反射API"><a href="#常用的反射API" class="headerlink" title="常用的反射API"></a>常用的反射API</h1><h2 id="获取字段"><a href="#获取字段" class="headerlink" title="获取字段"></a>获取字段</h2><ul>
-<li>Field getField(name)：根据字段名获取某个public的field（包括父类）</li>
-<li>Field getDeclaredField(name)：根据字段名获取当前类的某个field（不包括父类）</li>
-<li>Field[] getFields()：获取所有public的field（包括父类）</li>
-<li>Field[] getDeclaredFields()：获取当前类的所有field（不包括父类）<h3 id="获取到Field之后"><a href="#获取到Field之后" class="headerlink" title="获取到Field之后"></a>获取到Field之后</h3>获取到Field之后，可以通过Field获取到字段的各种信息，也可以对字段值进行获取和设置。</li>
-</ul>
-<ol>
-<li>字段信息获取</li>
-</ol>
-<ul>
-<li>getName()：返回字段名称，例如，”name”；</li>
-<li>getType()：返回字段类型，也是一个Class实例，例如，String.class；</li>
-<li>getModifiers()：返回字段的修饰符，它是一个int，不同的bit表示不同的含义。</li>
-</ul>
-<ol start="2">
-<li>字段值获取</li>
-</ol>
-<ul>
-<li>Field.get(Object) 传参为实例</li>
-<li>对于非public的字段，使用Field.setAccessible(true)使得字段可以被访问，后续类似场景带入即可</li>
-</ul>
-<ol start="3">
-<li>字段值设置</li>
-</ol>
-<ul>
-<li>Field.set(Object, Object) 第一个Object参数是指定的实例，第二个Object参数是待修改的值</li>
-</ul>
-<h2 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h2><ul>
-<li>Method getMethod(name, Class…)：获取某个public的Method（包括父类）</li>
-<li>Method getDeclaredMethod(name, Class…)：获取当前类的某个Method（不包括父类）</li>
-<li>Method[] getMethods()：获取所有public的Method（包括父类）</li>
-<li>Method[] getDeclaredMethods()：获取当前类的所有Method（不包括父类）<h3 id="获取到Method之后"><a href="#获取到Method之后" class="headerlink" title="获取到Method之后"></a>获取到Method之后</h3></li>
-</ul>
-<ol>
-<li>方法信息获取</li>
-</ol>
-<ul>
-<li>getName()：返回方法名称，例如：”getScore”；</li>
-<li>getReturnType()：返回方法返回值类型，也是一个Class实例，例如：String.class；</li>
-<li>getParameterTypes()：返回方法的参数类型，是一个Class数组，例如：{String.class, int.class}；</li>
-<li>getModifiers()：返回方法的修饰符，它是一个int，不同的bit表示不同的含义。</li>
-</ul>
-<ol start="2">
-<li>调用方法</li>
-</ol>
-<ul>
-<li>method.invoke(Object, Object…) 第一个参数是实例，后面的参数是方法本身需要的参数</li>
-<li>静态方法只要把第一个参数传入null即可</li>
-<li>非public方法使用Method.setAccessible(true)允许其调用</li>
-<li>通过反射调用方法时，仍然遵循多态原则即即总是调用实际类型的覆写方法</li>
-</ul>
-<h2 id="调用构造方法"><a href="#调用构造方法" class="headerlink" title="调用构造方法"></a>调用构造方法</h2><ul>
-<li>getConstructor(Class…)：获取某个public的Constructor；</li>
-<li>getDeclaredConstructor(Class…)：获取某个Constructor；</li>
-<li>getConstructors()：获取所有public的Constructor；</li>
-<li>getDeclaredConstructors()：获取所有Constructor。<h3 id="获取到Constructor之后"><a href="#获取到Constructor之后" class="headerlink" title="获取到Constructor之后"></a>获取到Constructor之后</h3></li>
-<li>Constructor.newInstance(Object… parameters)实现实例的创建</li>
-<li>通过设置setAccessible(true)来访问非public构造方法</li>
-</ul>
-<h2 id="获取继承关系"><a href="#获取继承关系" class="headerlink" title="获取继承关系"></a>获取继承关系</h2><ul>
-<li>class.getSuperclass(); 获取父类</li>
-<li>class.getInterfaces(); 获取接口</li>
-<li>class.isAssignableFrom(Class<T>); 判断当前class实例是否可以由另一个class向上转型而来</li>
-</ul>
-<h1 id="java反射的应用"><a href="#java反射的应用" class="headerlink" title="java反射的应用"></a>java反射的应用</h1><h1 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h1><p>对类A的访问统一通过类B来进行，我们称B是A的代理，代理类可以对被代理类的访问进行安全控制、功能增强等。比较好的静态代理是面向接口的静态代理，比如A和B实现相同的接口I，接口I以组合的方式结合到B中，调用时实例化B，通过传入A的实例实现A的功能调用以及B的代理功能。</p>
-<ul>
-<li>优点：高内聚松耦合，被代理类（通常是业务类）和代理类（通常是功能类）各自关注各自的功能逻辑，便于代码复用。</li>
-<li>缺点：<ul>
-<li>如果接口的方法很多，代理对每个接口实现的功能一致，会有冗余</li>
-<li>接口变动会导致代理类和被代理类一起变动<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1>当我们希望对一组类进行代理，并且代理希望实现的功能一致，只要这组类都实现了相同的接口，可以通过JDK提供的代理工具来实现。基本步骤如下：</li>
+            <h1 id="什么是注解"><a href="#什么是注解" class="headerlink" title="什么是注解"></a>什么是注解</h1><p>注解是一种放在java源码的类、字段、方法、参数前面的一种特殊标记。</p>
+<h2 id="注解的作用"><a href="#注解的作用" class="headerlink" title="注解的作用"></a>注解的作用</h2><ul>
+<li>被编译器使用，源码变异成class之后消失，比如<ul>
+<li>@Override：让编译器检查该方法是否正确地实现了覆写；</li>
+<li>@SuppressWarnings：告诉编译器忽略此处代码产生的警告。</li>
 </ul>
 </li>
-<li>创建InvocationHandler子类，覆写invoke方法，实现代理核心功能。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">InvocationHandler handler = <span class="keyword">new</span> InvocationHandler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(method);</span><br><span class="line">        <span class="keyword">if</span> (method.getName().equals(<span class="string">&quot;morning&quot;</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Good morning, &quot;</span> + args[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>Proxy.newProxyInstance创建代理类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Hello hello = (Hello) Proxy.newProxyInstance(</span><br><span class="line">Hello.class.getClassLoader(), <span class="comment">// 传入ClassLoader</span></span><br><span class="line"><span class="keyword">new</span> Class[] &#123; Hello.class &#125;, <span class="comment">// 传入要实现的接口</span></span><br><span class="line">handler); <span class="comment">// 传入处理调用方法的InvocationHandler</span></span><br></pre></td></tr></table></figure>
-<h2 id="动态代理原理"><a href="#动态代理原理" class="headerlink" title="动态代理原理"></a>动态代理原理</h2>本质上，动态代理动态生成了一个代理类，代理类继承Proxy，实现了我们传入的接口。代理类通过反射静态获取了所有实现的方法的Method实例，我们称它们为被代理的原始方法，然后对应生成新的方法，新的方法实际都是调用handler，传入的参数依次为本代理类对象，被代理的原始方法，被代理的原始方法的参数。</li>
+<li>由工具处理.class文件使用的注解，有些工具会在加载class文件时动态修改class，实现特殊功能。这类注解会被编译进.class文件，但是加载结束后不会存在于内存中。一般是底层库使用。</li>
+<li>在程序运行期能够读取的注解，加载后存在于JVM，最常用。</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaoluo501395377/p/3383130.html">https://www.cnblogs.com/xiaoluo501395377/p/3383130.html</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gonjan-blog/p/6685611.html">https://www.cnblogs.com/gonjan-blog/p/6685611.html</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/347141071">https://zhuanlan.zhihu.com/p/347141071</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/bohu83/article/details/51124094">https://blog.csdn.net/bohu83/article/details/51124094</a></p>
+<h1 id="定义注解"><a href="#定义注解" class="headerlink" title="定义注解"></a>定义注解</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Report &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">type</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">    <span class="function">String <span class="title">level</span><span class="params">()</span> <span class="keyword">default</span> &quot;info&quot;</span>;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> &quot;&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用@interface定义注解</li>
+<li>定义注解的参数，默认的参数是value</li>
+<li>使用元注解修饰注解<h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2>元注解是修饰注解的注解，常用的java标准库自带的元注解：<h3 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h3>指定注解能够修饰的对象，可选值为：</li>
+</ol>
+<ul>
+<li>类或接口：ElementType.TYPE；</li>
+<li>字段：ElementType.FIELD；</li>
+<li>方法：ElementType.METHOD；</li>
+<li>构造方法：ElementType.CONSTRUCTOR；</li>
+<li>方法参数：ElementType.PARAMETER。<h3 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h3>指定注解的声明周期，可选值如下：</li>
+<li>仅编译期：RetentionPolicy.SOURCE；</li>
+<li>仅class文件：RetentionPolicy.CLASS；</li>
+<li>运行期：RetentionPolicy.RUNTIME。</li>
+</ul>
+<h1 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h1><p>对于注解的使用者，只要在需要的地方添加注解就行。但是注解本身只是一个标记，不会对代码运行产生实际作用，还需要注解的解释者（一般也是注解的定义者，往往由框架实现）来实现注解的逻辑。大致可以分为两个步骤：</p>
+<ol>
+<li>判断注解是否存在，获取注解的类型，参数<br>一般使用反射获取注解</li>
+</ol>
+<ul>
+<li>Class.isAnnotationPresent(Class)</li>
+<li>Field.isAnnotationPresent(Class)</li>
+<li>Method.isAnnotationPresent(Class)</li>
+<li>Constructor.isAnnotationPresent(Class)</li>
+<li>Class.getAnnotation(Class)</li>
+<li>Field.getAnnotation(Class)</li>
+<li>Method.getAnnotation(Class)</li>
+<li>Constructor.getAnnotation(Class)<br>isAnnotationPresent一般返回bool类型，判断注解存在与否。getAnnotation获取注解实例，如果没有返回null，有的话可以进一步获取注解参数。<br>对于参数列表，使用<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Annotation[][] annos = m.getParameterAnnotations();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li>根据获取到的注解，进行逻辑处理</li>
+</ol>
 
           
         
@@ -482,7 +438,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/59/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/61/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/59/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/61/">&gt;</a>
   </nav>
 
 
@@ -528,7 +484,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -539,7 +495,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

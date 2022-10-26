@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/java/basic/oop/OOP/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/go/effective_go/2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/java/basic/oop/OOP/" itemprop="url">OOP常见问题</a></h1>
+                <a class="post-title-link" href="/2022/03/04/language/go/effective_go/2/" itemprop="url">effective go 学习整理二</a></h1>
         
 
         <div class="post-meta">
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/basic/oop/" itemprop="url" rel="index">
-                    <span itemprop="name">oop</span>
+                  <a href="/categories/language/go/effective-go/" itemprop="url" rel="index">
+                    <span itemprop="name">effective_go</span>
                   </a>
                 </span>
 
@@ -367,54 +356,36 @@
       
         
           
-            <h1 id="普通类与抽象类的区别"><a href="#普通类与抽象类的区别" class="headerlink" title="普通类与抽象类的区别"></a>普通类与抽象类的区别</h1><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>成员方法</th>
-<th>实例化</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>普通类</td>
-<td>不能包含抽象方法</td>
-<td>可以实例化</td>
-</tr>
-<tr>
-<td>抽象类</td>
-<td>可以定义抽象方法</td>
-<td>无法实例化</td>
-</tr>
-</tbody></table>
-<h1 id="接口与抽象类的区别"><a href="#接口与抽象类的区别" class="headerlink" title="接口与抽象类的区别"></a>接口与抽象类的区别</h1><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>成员变量</th>
-<th>成员方法</th>
-<th>构造函数</th>
-<th>继承/实现</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>接口</td>
-<td>默认是public static final修饰的</td>
-<td>默认是public abstract修饰的</td>
-<td>不能有构造函数</td>
-<td>implements，一个类可以实现多个接口，实现的时候必须覆写接口的所有方法</td>
-</tr>
-<tr>
-<td>抽象类</td>
-<td>和正常类一样定义</td>
-<td>和普通类一样定义方法，可以额外定义抽象方法</td>
-<td>可以有构造函数</td>
-<td>extends，只能单继承，不用覆写所有方法</td>
-</tr>
-</tbody></table>
-<h1 id="覆写和隐藏"><a href="#覆写和隐藏" class="headerlink" title="覆写和隐藏"></a>覆写和隐藏</h1><ol>
-<li>子类存在与父类签名相同的普通方法，Override父类方法，实际调用的方法取决于实例真实类型。</li>
-<li>子类存在与父类签名相同的静态方法，隐藏父类方法，合理的方式是通过类来调用方法，实际调用的方法取决于类的类型。如果通过实例来调用静态方法（不推荐，一般编译器报警），调用的具体方法取决于引用类型。<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java">https://www.tutorialspoint.com/why-static-methods-of-parent-class-gets-hidden-in-child-class-in-java</a></li>
-</ol>
+            <h1 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h1><h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>new分配内存，初始化微零值，返回该内存的地址。<br>new(T) allocates zeroed storage for a new item of type T and returns its address, a value of type *T.</p>
+<h2 id="Constructors-and-composite-literals-¶"><a href="#Constructors-and-composite-literals-¶" class="headerlink" title="Constructors and composite literals ¶"></a>Constructors and composite literals ¶</h2><p>并不是所有的对象都初始化为零，可以使用组合字面量composite literal来初始化对象，其实不过是多个初始化语句使用{}进行简化而已。如果{}里面是值，初始化的时候{}内部的值要和结构体的域一一对应；如果{}里面是键值对，顺序就不重要，此时没有涉及的键的值为默认零值。组合字面量也可以初始化arrays, slices, and maps，对于arrays, slices，他们的键可以认为是索引，所以有以下的初始化方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a := [...]<span class="keyword">string</span>   &#123;Enone: <span class="string">&quot;no error&quot;</span>, Eio: <span class="string">&quot;Eio&quot;</span>, Einval: <span class="string">&quot;invalid argument&quot;</span>&#125; <span class="comment">// 数组</span></span><br><span class="line">s := []<span class="keyword">string</span>      &#123;Enone: <span class="string">&quot;no error&quot;</span>, Eio: <span class="string">&quot;Eio&quot;</span>, Einval: <span class="string">&quot;invalid argument&quot;</span>&#125; <span class="comment">// 切片</span></span><br></pre></td></tr></table></figure>
+<h2 id="make"><a href="#make" class="headerlink" title="make"></a>make</h2><p>make用于创建slices, maps, and channels，因为这些结构内部都有指向需要初始分配空间的指针。以slice为例，一个slice本身包括指向底层数组的指针，长度和容量，只有这些slice的属性都初始化之后，slice才不是nil。而new只能返回一个新分配的，未初始化的slice的地址。</p>
+<h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><p>go的数组与C有以下几点不同：</p>
+<ul>
+<li>数组是值，将一个数组赋值给另一个数组，会把数组的每个元素一一复制</li>
+<li>如果函数的参数是一个数组，那么函数收到的是数组的副本，不是指向原数组的指针</li>
+<li>数组的大小是数组类型的一部分，[4]int与[5]int是不同的数组。<h2 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h2>如Arrays所说，slice其实是arrays的一个封装，包括指向底层数组的指针，长度和容量。用len来获取slice长度，cap来获取slice的容量，这两个内置函数对nil都返回0。向slice添加元素用append，append接受不定长位置参数，函数标签为func append(slice []T, elements …T) []T。由于go是静态类型语言，这里要实现动态类型T支持，所以需要编译器处理，所以append是内置的函数。如果要在当前slice扩展另一个slice，可以用如下方法：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">y := []<span class="keyword">int</span>&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;</span><br><span class="line">x = <span class="built_in">append</span>(x, y...)</span><br><span class="line">fmt.Println(x)</span><br></pre></td></tr></table></figure>
+<h3 id="二维slice"><a href="#二维slice" class="headerlink" title="二维slice"></a>二维slice</h3>二维Slice有两种实现思路，如果第二维的slice是变长的，那么第二维依次分配，如下：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Allocate the top-level slice.</span></span><br><span class="line">picture := <span class="built_in">make</span>([][]<span class="keyword">uint8</span>, YSize) <span class="comment">// One row per unit of y.</span></span><br><span class="line"><span class="comment">// Loop over the rows, allocating the slice for each row.</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> picture &#123;</span><br><span class="line">	picture[i] = <span class="built_in">make</span>([]<span class="keyword">uint8</span>, XSize)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+如果第二维定长，效率更高的的办法是，一次分配，后续切割该slice，如下：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Allocate the top-level slice, the same as before.</span></span><br><span class="line">picture := <span class="built_in">make</span>([][]<span class="keyword">uint8</span>, YSize) <span class="comment">// One row per unit of y.</span></span><br><span class="line"><span class="comment">// Allocate one large slice to hold all the pixels.</span></span><br><span class="line">pixels := <span class="built_in">make</span>([]<span class="keyword">uint8</span>, XSize*YSize) <span class="comment">// Has type []uint8 even though picture is [][]uint8.</span></span><br><span class="line"><span class="comment">// Loop over the rows, slicing each row from the front of the remaining pixels slice.</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> picture &#123;</span><br><span class="line">	picture[i], pixels = pixels[:XSize], pixels[XSize:]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1>map的key需要是能比较的，slices不能作为key。如果key不存在，获取的结果会是key类型的零值。有时候需要区分key不存在和key存在但是值是零值的情况，可以如下方法：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> seconds <span class="keyword">int</span></span><br><span class="line"><span class="keyword">var</span> ok <span class="keyword">bool</span></span><br><span class="line">seconds, ok = timeZone[tz]</span><br></pre></td></tr></table></figure>
+删除键值对用delete(map, key)</li>
+</ul>
+<h1 id="Printing"><a href="#Printing" class="headerlink" title="Printing"></a>Printing</h1><p>go在fmt包实现了打印的许多方法。以下几行的效果相同：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fmt.Printf(<span class="string">&quot;Hello %d\n&quot;</span>, <span class="number">23</span>)</span><br><span class="line">fmt.Fprint(os.Stdout, <span class="string">&quot;Hello &quot;</span>, <span class="number">23</span>, <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">fmt.Println(<span class="string">&quot;Hello&quot;</span>, <span class="number">23</span>)</span><br><span class="line">fmt.Println(fmt.Sprint(<span class="string">&quot;Hello &quot;</span>, <span class="number">23</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="printf的几个格式"><a href="#printf的几个格式" class="headerlink" title="printf的几个格式"></a>printf的几个格式</h2><ul>
+<li>%d和C不同，在于格式（比如正负、空格）并不是由格式字符串定义，而是根据数据类型确定，比如：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x <span class="keyword">uint64</span> = <span class="number">1</span>&lt;&lt;<span class="number">64</span> - <span class="number">1</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;%d %x; %d %x\n&quot;</span>, x, x, <span class="keyword">int64</span>(x), <span class="keyword">int64</span>(x))</span><br></pre></td></tr></table></figure>
+得到的结果是<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">18446744073709551615 ffffffffffffffff; -1 -1</span><br></pre></td></tr></table></figure></li>
+<li>%v Println和Print其实就是用的%v，可以打印任何对象</li>
+<li>%+v 除了打印值，还会打印键</li>
+<li>%#v 按照完整的go语法打印</li>
+<li>%q 支持string和[]byte</li>
+<li>%x 16进制，支持strings, byte arrays, byte slices, integers</li>
+<li>% x 同上，字节之间有空格</li>
+<li>%T 打印变量类型<h2 id="自定义打印内容"><a href="#自定义打印内容" class="headerlink" title="自定义打印内容"></a>自定义打印内容</h2>Sprintf will only call the String method when it wants a string<br>如果想要控制打印的格式，需要给类型添加String()方法。注意该方法内虽然可以调用Sprintf，但是要注意考虑不要引起循环调用自己的问题。比如：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyString <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m MyString)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;MyString=%s&quot;</span>, m) <span class="comment">// Error: will recur forever.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+可以这样修复：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyString <span class="keyword">string</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m MyString)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;MyString=%s&quot;</span>, <span class="keyword">string</span>(m)) <span class="comment">// OK: note conversion.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Initialization"><a href="#Initialization" class="headerlink" title="Initialization"></a>Initialization</h1><h2 id="Constants"><a href="#Constants" class="headerlink" title="Constants"></a>Constants</h2>常数定义时需要用常量表达式，比如1&lt;&lt;3,而math.Sin(math.Pi/4)这种就不是。常用iota来构造枚举常量，比如：<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ByteSize <span class="keyword">float64</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    _           = <span class="literal">iota</span> <span class="comment">// ignore first value by assigning to blank identifier</span></span><br><span class="line">    KB ByteSize = <span class="number">1</span> &lt;&lt; (<span class="number">10</span> * <span class="literal">iota</span>)</span><br><span class="line">    MB</span><br><span class="line">    GB</span><br><span class="line">    TB</span><br><span class="line">    PB</span><br><span class="line">    EB</span><br><span class="line">    ZB</span><br><span class="line">    YB</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="The-init-function"><a href="#The-init-function" class="headerlink" title="The init function"></a>The init function</h2>每个源文件都可以定义init函数，这个函数在常数初始化-&gt;全局变量初始化之后执行，在此之前import的包都要初始化完毕。</li>
+</ul>
 
           
         
@@ -454,7 +425,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/171/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/173/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/171/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/173/">&gt;</a>
   </nav>
 
 
@@ -500,7 +471,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -511,7 +482,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

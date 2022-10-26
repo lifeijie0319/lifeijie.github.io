@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/linux/ulimit/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/system/linux/ulimit/" itemprop="url">ulimit</a></h1>
+                <a class="post-title-link" href="/2021/12/04/network/ssh/sftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E4%B8%80/" itemprop="url">sftp服务器搭建一</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/network/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
                   </a>
                 </span>
 
@@ -345,20 +345,15 @@
       
         
           
-            <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>ulimt是一个linux自带应用工具，用于控制资源的可用性</p>
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>ulimit  [-HSTabcdefilmnpqrstuvx  [limit]]</p>
-<h2 id="a"><a href="#a" class="headerlink" title="-a"></a>-a</h2><p>-a 显示所有的资源限制参数配置</p>
-<h2 id="H-和-S"><a href="#H-和-S" class="headerlink" title="-H 和 -S"></a>-H 和 -S</h2><p>-H选项和-S选项分别表示对给定资源的硬限制（hard limit）和软限制（soft limit）进行设置。硬限制（hard limit）一旦被设置以后就不能被非root用户修改，软限制（soft limit）可以增长达到硬限制（hard limit）。如果既没有指定-H选项也没有指定-S选项，那么硬限制（hard limit）和软限制（soft limit）都会被设置。limit的值可以是一个数值，也可以是一些特定的值，比如：hard，soft，unlimited，分别代表当前硬件限制、当前软件限制、不限制。</p>
-<h2 id="查看进程打开文件的最大限制"><a href="#查看进程打开文件的最大限制" class="headerlink" title="查看进程打开文件的最大限制"></a>查看进程打开文件的最大限制</h2><h3 id="系统级最大限制"><a href="#系统级最大限制" class="headerlink" title="系统级最大限制"></a>系统级最大限制</h3><p>cat /proc/sys/fs/file-max</p>
-<h3 id="用户级限制"><a href="#用户级限制" class="headerlink" title="用户级限制"></a>用户级限制</h3><p>ulimit -n</p>
-<h2 id="查看进程已经打开的文件数"><a href="#查看进程已经打开的文件数" class="headerlink" title="查看进程已经打开的文件数"></a>查看进程已经打开的文件数</h2><h3 id="查看进程资源限制"><a href="#查看进程资源限制" class="headerlink" title="查看进程资源限制"></a>查看进程资源限制</h3><p>cat /proc/$pid/limits</p>
-<h3 id="查看实际打开文件数"><a href="#查看实际打开文件数" class="headerlink" title="查看实际打开文件数"></a>查看实际打开文件数</h3><p>ls /proc/$pid/fd|wc -l</p>
-<h2 id="修改限制"><a href="#修改限制" class="headerlink" title="修改限制"></a>修改限制</h2><h3 id="临时修改"><a href="#临时修改" class="headerlink" title="临时修改"></a>临时修改</h3><p>ulimit -n $num</p>
-<h3 id="永久修改"><a href="#永久修改" class="headerlink" title="永久修改"></a>永久修改</h3><p>vi /etc/security/limits.conf<br>参考文档内说明配置限制项</p>
-<h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><h2 id="20210510-riak服务异常"><a href="#20210510-riak服务异常" class="headerlink" title="20210510 riak服务异常"></a>20210510 riak服务异常</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><p>客户端连接riak服务端超时。检查发现进程打开的文件数已经超过用户设置的限制50000。另外top命令显示系统cpu资源占用率400%以上。</p>
-<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>修改riak用户的打开文件数限制，增加到65535。重启riak服务。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>riak为什么打开文件数这么多还有待研究。</p>
-
+            <h1 id="1-说明"><a href="#1-说明" class="headerlink" title="1 说明"></a>1 说明</h1><p>sftp是Secure File Transfer Protocol的缩写，安全文件传送协议。可以为传输文件提供一种安全的加密方法。<br>sftp 与 ftp有着几乎一样的语法和功能。SFTP 为 SSH的一部份，和vsftpd一点关系没有，是一种传输档案至 Blogger 伺服器的安全方式。本身没有守护进程，是包含在ssh中，端口也是22</p>
+<h1 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2 搭建"></a>2 搭建</h1><h2 id="2-1-新建用户"><a href="#2-1-新建用户" class="headerlink" title="2.1 新建用户"></a>2.1 新建用户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# userdel ftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# useradd sftpuser</span><br><span class="line">[root@VM_0_7_centos ~]# echo sftpuser|passwd --stdin sftpuser </span><br><span class="line">Changing password for user sftpuser.</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-配置-etc-ssh-sshd-config"><a href="#2-2-配置-etc-ssh-sshd-config" class="headerlink" title="2.2 配置/etc/ssh/sshd_config"></a>2.2 配置/etc/ssh/sshd_config</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># override default of no subsystems</span><br><span class="line">#Subsystem sftp &#x2F;usr&#x2F;libexec&#x2F;openssh&#x2F;sftp-server</span><br><span class="line">Subsystem sftp internal-sftp</span><br><span class="line">Match User sftpuser</span><br><span class="line">ChrootDirectory &#x2F;</span><br><span class="line">ForceCommand internal-sftp</span><br><span class="line">AllowTcpForwarding no </span><br><span class="line">X11Forwarding no</span><br></pre></td></tr></table></figure>
+<p>【注】：</p>
+<ul>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，属主和属组必须是root；</li>
+<li>ChrootDirectory设置的目录权限及其所有的上级文件夹权限，只有属主能拥有写权限，也就是说权限最大设置只能是755</li>
+</ul>
+<h2 id="2-3-重启服务"><a href="#2-3-重启服务" class="headerlink" title="2.3 重启服务"></a>2.3 重启服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM_0_7_centos ~]# systemctl restart sshd</span><br></pre></td></tr></table></figure>
           
         
       
@@ -397,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/276/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/276/">276</a><span class="page-number current">277</span><a class="page-number" href="/page/278/">278</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/278/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/276/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/276/">276</a><span class="page-number current">277</span><a class="page-number" href="/page/278/">278</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/278/">&gt;</a>
   </nav>
 
 
@@ -443,7 +438,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

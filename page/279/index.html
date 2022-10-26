@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/system/linux/%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6%E5%90%8D/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/mysql/engine/Innodb%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/system/linux/%E7%89%B9%E6%AE%8A%E6%96%87%E4%BB%B6%E5%90%8D/" itemprop="url">特殊文件名</a></h1>
+                <a class="post-title-link" href="/2021/12/04/database/mysql/engine/Innodb%E8%AF%A6%E8%A7%A3/" itemprop="url">InnoDB详解</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/" itemprop="url" rel="index">
-                    <span itemprop="name">system</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/system/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/engine/" itemprop="url" rel="index">
+                    <span itemprop="name">engine</span>
                   </a>
                 </span>
 
@@ -345,7 +356,13 @@
       
         
           
-            <h1 id="删除转义字符文件"><a href="#删除转义字符文件" class="headerlink" title="删除转义字符文件"></a>删除转义字符文件</h1><p>linux下有个文件名字是\，要删除改文件，需要使用指令rm \</p>
+            <h1 id="物理存储结构"><a href="#物理存储结构" class="headerlink" title="物理存储结构"></a>物理存储结构</h1><ul>
+<li>ibdata1：系统数据字典信息（统计信息），undo表空间等</li>
+<li>ib_logfile0/ib_logfile1：redo系统日志，事务日志文件</li>
+<li>ibtmp1：临时表空间磁盘空间，存储临时表</li>
+<li>.frm：存储表的列信息</li>
+<li>.ibd：表的数据行与索引</li>
+</ul>
 
           
         
@@ -385,7 +402,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/278/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/278/">278</a><span class="page-number current">279</span><a class="page-number" href="/page/280/">280</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/280/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/278/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/278/">278</a><span class="page-number current">279</span><a class="page-number" href="/page/280/">280</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/280/">&gt;</a>
   </nav>
 
 
@@ -431,7 +448,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +459,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

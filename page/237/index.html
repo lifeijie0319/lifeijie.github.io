@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/postgresql/%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/tools/nginx/nginx%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url">nginx常用指令</a></h1>
+                <a class="post-title-link" href="/2021/12/04/database/postgresql/%E5%AE%89%E8%A3%85/" itemprop="url">postgresql安装与常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/categories/database/postgresql/" itemprop="url" rel="index">
+                    <span itemprop="name">postgresql</span>
                   </a>
                 </span>
 
@@ -345,12 +345,18 @@
       
         
           
-            <h1 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h1><ol>
-<li>./nginx -s quit:此方式停止步骤是待nginx进程处理任务完毕进行停止。</li>
-<li>./nginx -s stop:此方式相当于先查出nginx进程id再使用kill命令强制杀掉进程。</li>
-<li>对 nginx 进行重启相当于先停止再启动，即先执行停止命令再执行启动命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;nginx -s quit</span><br><span class="line">.&#x2F;nginx</span><br></pre></td></tr></table></figure></li>
-<li>./nginx -s reload不停止nginx的情况下重新加载配置文件。</li>
-</ol>
+            <h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p><a target="_blank" rel="noopener" href="https://www.postgresql.org/download/linux/redhat/">https://www.postgresql.org/download/linux/redhat/</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html</a></p>
+<h1 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h1><p>sudo yum install postgresql-server postgresql</p>
+<h1 id="报错与解决"><a href="#报错与解决" class="headerlink" title="报错与解决"></a>报错与解决</h1><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p>现象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;psycopg&#x2F;psycopg.h:30:20: fatal error: Python.h: No such file or directory</span><br><span class="line">     #include &lt;Python.h&gt;</span><br><span class="line">                        ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#39;gcc&#39; failed with exit status 1</span><br></pre></td></tr></table></figure>
+<p>解决：sudo yum install python-devel</p>
+<h2 id="2"><a href="#2" class="headerlink" title="2"></a>2</h2><p>现象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;psycopg&#x2F;psycopg.h:31:22: fatal error: libpq-fe.h: No such file or directory</span><br><span class="line">     #include &lt;libpq-fe.h&gt;</span><br><span class="line">                          ^</span><br><span class="line">    compilation terminated.</span><br><span class="line">    error: command &#39;gcc&#39; failed with exit status 1</span><br></pre></td></tr></table></figure>
+<p>解决：sudo yum install postgresql-devel</p>
+<h2 id="3"><a href="#3" class="headerlink" title="3"></a>3</h2><p>现象：启动postgresql报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">● postgresql-9.2.service - PostgreSQL 9.2 database server</span><br><span class="line">   Loaded: loaded (&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;postgresql-9.2.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: failed (Result: exit-code) since Mon 2017-06-26 21:06:23 CST; 9s ago</span><br><span class="line">  Process: 20274 ExecStartPre&#x3D;&#x2F;usr&#x2F;pgsql-9.2&#x2F;bin&#x2F;postgresql92-check-db-dir $&#123;PGDATA&#125; (code&#x3D;exited, status&#x3D;1&#x2F;FAILURE)</span><br></pre></td></tr></table></figure>
+<p>原因：没有初始化数据库<br>解决：/usr/pgsql-9.2/bin/postgresql92-setup initdb</p>
+<h2 id="4"><a href="#4" class="headerlink" title="4"></a>4</h2><p>现象：Django连接postgresql出错：<br>django.db.utils.OperationalError: FATAL:  Ident authentication failed for user “lifeijie”<br>原因：连接权限受限制<br>解决：<br>（1）在/var/lib/…./pg_hba.conf文件中添加一行：host all all 0.0.0.0/0 trust，其它所有的认证方式改成trust。<br>（2）重启postgresql  </p>
 
           
         
@@ -390,7 +396,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/236/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/236/">236</a><span class="page-number current">237</span><a class="page-number" href="/page/238/">238</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/238/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/236/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/236/">236</a><span class="page-number current">237</span><a class="page-number" href="/page/238/">238</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/238/">&gt;</a>
   </nav>
 
 
@@ -436,7 +442,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +453,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

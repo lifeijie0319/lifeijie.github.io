@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-16/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/tools/docker/docker%E4%BA%A4%E4%BA%92/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/other/%E7%BC%96%E7%A0%81/utf-16/" itemprop="url">utf-16编码</a></h1>
+                <a class="post-title-link" href="/2022/03/04/tools/docker/docker%E4%BA%A4%E4%BA%92/" itemprop="url">docker交互</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/%E7%BC%96%E7%A0%81/" itemprop="url" rel="index">
-                    <span itemprop="name">编码</span>
+                  <a href="/categories/tools/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -345,32 +345,18 @@
       
         
           
-            <h1 id="utf-16概念"><a href="#utf-16概念" class="headerlink" title="utf-16概念"></a>utf-16概念</h1><pre><code>和UTF-8一样，utf-16是unicode的一种实现。</code></pre>
-<h1 id="unicode到utf-16编码的转换"><a href="#unicode到utf-16编码的转换" class="headerlink" title="unicode到utf-16编码的转换"></a>unicode到utf-16编码的转换</h1><table>
-<thead>
-<tr>
-<th>Unicode范围</th>
-<th>UTF-16编码方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>U+000~U+FFFF</td>
-<td>2 Byte存储，编码后等于Unicode值</td>
-</tr>
-<tr>
-<td>U+10000~U+10FFFF</td>
-<td>4 Byte存储，先将Unicode值减去（0x10000），得到20bit长的值。再将Unicode分为高10位和低10位。UTF-16编码的高位是2 Byte，高10位Unicode范围为0-0x3FF，将Unicode值加上0XD800，得到高位代理（或称为前导代理，存储高位）；低位也是2 Byte，低十位Unicode范围一样为0~0x3FF，将Unicode值加上0xDC00,得到低位代理（或称为后尾代理，存储低位）</td>
-</tr>
-</tbody></table>
-<h2 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h2><ul>
-<li>U+0020 -&gt; 0x20</li>
-<li><ol>
-<li>U+12345 - 0x10000 = 0x2345 = 0b 0000 0010 0011 0100 0101</li>
-<li>高位代理 = 0b 0000 0010 00 + 0XD800 = 0XD808</li>
-<li>低位代理 = 0b 11 0100 0101 + 0XDC00 = 0XDF45</li>
-<li>U+12345 -&gt; 0XD808 0XDF45</li>
-</ol>
-</li>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>docker交互一般使用docker exec和doceker attach</p>
+<h1 id="docker-exec"><a href="#docker-exec" class="headerlink" title="docker exec"></a>docker exec</h1><h2 id="进入指令"><a href="#进入指令" class="headerlink" title="进入指令"></a>进入指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec [OPTIONS] CONTAINER COMMAND [ARG...]</span><br></pre></td></tr></table></figure>
+<p>说明：Run a command in a running container</p>
+<h2 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h2><ul>
+<li>一般搭配-it使用，这样才能和容器内交互，否则只是执行命令而已</li>
+<li>使用exit可以退出</li>
+</ul>
+<h1 id="docker-attach"><a href="#docker-attach" class="headerlink" title="docker attach"></a>docker attach</h1><h2 id="进入指令-1"><a href="#进入指令-1" class="headerlink" title="进入指令"></a>进入指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach :container_id</span><br></pre></td></tr></table></figure>
+<p>说明：Attach local standard input, output, and error streams to a running container</p>
+<h2 id="特征-1"><a href="#特征-1" class="headerlink" title="特征"></a>特征</h2><ul>
+<li>如果容器运行在前台，Ctrl+C会导致容器的退出</li>
+<li>只能看一下容器的输出，没法执行啥</li>
 </ul>
 
           
@@ -411,7 +397,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/144/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/146/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/144/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/144/">144</a><span class="page-number current">145</span><a class="page-number" href="/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/146/">&gt;</a>
   </nav>
 
 
@@ -457,7 +443,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -468,7 +454,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

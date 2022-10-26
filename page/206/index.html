@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/software_enginering/%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/c/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/software_enginering/%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4/" itemprop="url">测试基本步骤</a></h1>
+                <a class="post-title-link" href="/2021/12/04/language/c/%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/" itemprop="url">Linux下的静态库与动态库</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:36+08:00">
                 2021-12-04
               </time>
             
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/software-enginering/" itemprop="url" rel="index">
-                    <span itemprop="name">software_enginering</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c</span>
                   </a>
                 </span>
 
@@ -334,11 +345,36 @@
       
         
           
-            <h1 id="测试基本步骤"><a href="#测试基本步骤" class="headerlink" title="测试基本步骤"></a>测试基本步骤</h1><ol>
-<li>确认业务返回的正确性和一致性，对于各个接口的请求和响应参数尤其要确认清楚。</li>
-<li>考虑覆盖成功、失败、在途等多个状态</li>
-<li>有并发需求则需进行压力测试</li>
-</ol>
+            <h1 id="库的理解"><a href="#库的理解" class="headerlink" title="库的理解"></a>库的理解</h1><pre><code>本质上来说，库时一种可执行代码的二进制形式，可以被操作系统载入内存执行。一般分为静态库和动态库两种。</code></pre>
+<h1 id="静态库和动态库的区别"><a href="#静态库和动态库的区别" class="headerlink" title="静态库和动态库的区别"></a>静态库和动态库的区别</h1><h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><pre><code>静态库文件名的命名方式是“libxxx.a”,库名前加”lib”，后缀用”.a”，“xxx”为静态库名。
+动态库的命名方式与静态库类似，前缀相同，为“lib”，后缀变为“.so”。</code></pre>
+<h2 id="链接方式"><a href="#链接方式" class="headerlink" title="链接方式"></a>链接方式</h2><pre><code>静态库的代码是在编译过程中被载入程序中，是将整个函数库的所有数据都整合进了目标代码。
+动态库在编译的时候并没有被编译进目标代码，而是当你的程序执行到相关函数时才调用该函数库里的相应函数。</code></pre>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><pre><code>静态库的优点是在编译后的执行程序不在需要外部的函数库支持，因为所使用的函数都已经被编进去了。缺点是，如果所使用的静态库发生更新改变，你的程序必须重新编译。
+动态库的优点是动态库的改变并不影响你的程序，所以动态函数库升级比较方便。缺点是因为函数库并没有整合进程序，所以程序的运行环境必须提供相应的库</code></pre>
+<h1 id="静态库的生成和使用"><a href="#静态库的生成和使用" class="headerlink" title="静态库的生成和使用"></a>静态库的生成和使用</h1><pre><code>初始文件：time.c时间库函数源文件；time.h时间库函数头文件；test.c主入口文件。
+步骤：
+（1）编写库文件：time.c
+（2）生成.o文件：gcc -c time.c
+（3）生成静态库：ar cr libmytime.a time.o
+注：c：表示创建静态库;r：表示将.o目标文件加入到静态库中；
+（4）编译生成可执行文件：gcc -o test test.c -static -lmytime -L.
+注：如果编译出现/usr/bin/ld: cannot find lc，可能的解决方法是sudo yum install glibc-static
+（5）执行生成的可执行程序：./test</code></pre>
+<h1 id="动态库的生成和使用"><a href="#动态库的生成和使用" class="headerlink" title="动态库的生成和使用"></a>动态库的生成和使用</h1><pre><code>初始文件：同上；
+（1）同上；
+（2）生成.o文件：gcc -fPIC -c time.c
+（3）生成动态库：gcc -shared -fPIC -o libmytime.so time.so
+（4）编译生成可执行文件：gcc -o test2 test.c -lmytime -L.
+注：可以看到，生成的可执行文件比4静态库生成的可执行文件小得多。
+（5）执行生成的可执行程序：./test2
+注：这里执行报错，因为动态库的查找路径一般不包括当前路径。可以在动态库默认搜索路径/usr/lib下添加链接文件，也可以将当前路径加入LD_LIBRARY_PATH环境变量。</code></pre>
+<h1 id="三种使得装载器正确寻找并加载到动态库的方法"><a href="#三种使得装载器正确寻找并加载到动态库的方法" class="headerlink" title="三种使得装载器正确寻找并加载到动态库的方法"></a>三种使得装载器正确寻找并加载到动态库的方法</h1><pre><code>a. 将libx.so移到系统库文件目录下
+b. export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:`pwd`
+c. 使用配置文件告诉系统动态库的路径. 
+vi   /etc/ld.so.conf.d/xxxx.conf
+添加库文件路径</code></pre>
+<h1 id="查看依赖的动态库文件"><a href="#查看依赖的动态库文件" class="headerlink" title="查看依赖的动态库文件"></a>查看依赖的动态库文件</h1><pre><code>ldd xxxx</code></pre>
 
           
         
@@ -378,7 +414,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/205/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/205/">205</a><span class="page-number current">206</span><a class="page-number" href="/page/207/">207</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/207/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/205/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/205/">205</a><span class="page-number current">206</span><a class="page-number" href="/page/207/">207</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/207/">&gt;</a>
   </nav>
 
 
@@ -424,7 +460,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -435,7 +471,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

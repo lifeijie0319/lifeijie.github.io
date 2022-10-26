@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/10/language/java/database/hibernate/hibernate%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/05/26/language/python/libs/env/pip/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/10/language/java/database/hibernate/hibernate%E9%85%8D%E7%BD%AE/" itemprop="url">hibernate配置</a></h1>
+                <a class="post-title-link" href="/2022/05/26/language/python/libs/env/pip/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-05-26T12:01:19+08:00">
+                2022-05-26
               </time>
             
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
+                  <a href="/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -317,8 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/categories/language/python/libs/" itemprop="url" rel="index">
+                    <span itemprop="name">libs</span>
                   </a>
                 </span>
 
@@ -328,8 +328,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/database/hibernate/" itemprop="url" rel="index">
-                    <span itemprop="name">hibernate</span>
+                  <a href="/categories/language/python/libs/env/" itemprop="url" rel="index">
+                    <span itemprop="name">env</span>
                   </a>
                 </span>
 
@@ -367,19 +367,25 @@
       
         
           
-            <h1 id="配置文件位置与命名"><a href="#配置文件位置与命名" class="headerlink" title="配置文件位置与命名"></a>配置文件位置与命名</h1><p>hibernate默认的配置文件是在classpath下的hibernate.cfg.xml</p>
-<h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><h2 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;utf-8&#x27;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">hibernate-configuration</span> <span class="meta-keyword">PUBLIC</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;-//Hibernate/Hibernate Configuration DTD//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- properties --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.username&quot;</span>&gt;</span>root<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.password&quot;</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.driver_class&quot;</span>&gt;</span>com.mysql.cj.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;connection.url&quot;</span>&gt;</span>jdbc:mysql://localhost:3306/imooc<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dialect&quot;</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;show_sql&quot;</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;format_sql&quot;</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.hbm2ddl.auto&quot;</span>&gt;</span>create<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;hibernate.default_schema&quot;</span>&gt;</span>imooc<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- mapping files --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">resource</span>=<span class="string">&quot;hbm.xml&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- cache settings --&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;class-cache class=&quot;org.hibernate.auction.Item&quot; usage=&quot;read-write&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;class-cache class=&quot;org.hibernate.auction.Bid&quot; usage=&quot;read-only&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;collection-cache collection=&quot;org.hibernate.auction.Item.bids&quot; usage=&quot;read-write&quot;/&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="常见配置项解析"><a href="#常见配置项解析" class="headerlink" title="常见配置项解析"></a>常见配置项解析</h2><h3 id="session-factory中的property属性"><a href="#session-factory中的property属性" class="headerlink" title="session-factory中的property属性"></a>session-factory中的property属性</h3><ul>
-<li>show_sql 是否在控制台打印sql</li>
-<li>format_sql 在控制台打印sql是否进行格式化</li>
-<li>hibernate.hbm2ddl.auto 建表策略，常见的选项有：<ul>
-<li>create 每次删表重建</li>
-<li>update 在现有表的基础上进行更新</li>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><h2 id="（一）yum安装"><a href="#（一）yum安装" class="headerlink" title="（一）yum安装"></a>（一）yum安装</h2><p>sudo yum install python-pip<br>报错: 没有可用软件包 pip。<br>错误：无须任何处理<br>解决：sudo yum -y install epel-release</p>
+<h2 id="（二）源码编译安装"><a href="#（二）源码编译安装" class="headerlink" title="（二）源码编译安装"></a>（二）源码编译安装</h2><p>1、下载解压，进入目录<br>2、sudo python2.7 setup.py install<br>报错：<br>pip is configured with locations that require TLS/SSL, however the ssl module in python is not available.<br>原因：没有安装openssl、openssl-devel<br>解决：sudo yum install openssl openssl-devel</p>
+<h1 id="二、修改pip源。"><a href="#二、修改pip源。" class="headerlink" title="二、修改pip源。"></a>二、修改pip源。</h1><h2 id="（一）、全局配置"><a href="#（一）、全局配置" class="headerlink" title="（一）、全局配置"></a>（一）、全局配置</h2><p>linux:<br>修改文件：/etc/pip.conf<br>windows:<br>新建文件：%APPDATA%/pip/pip.conf</p>
+<h2 id="（二）、用户配置"><a href="#（二）、用户配置" class="headerlink" title="（二）、用户配置"></a>（二）、用户配置</h2><p>修改文件：~/.pip/pip.conf</p>
+<h2 id="（三）、文件内容更"><a href="#（三）、文件内容更" class="headerlink" title="（三）、文件内容更"></a>（三）、文件内容更</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url &#x3D; https:&#x2F;&#x2F;pypi.doubanio.com&#x2F;simple&#x2F;</span><br><span class="line">[install]</span><br><span class="line">trusted-host&#x3D;pypi.doubanio.com</span><br><span class="line">disable-pip-version-check &#x3D; true</span><br><span class="line">#取消pip版本检查，排除每次都报最新的pip</span><br></pre></td></tr></table></figure>
+<h2 id="（四）、其它国内源网址"><a href="#（四）、其它国内源网址" class="headerlink" title="（四）、其它国内源网址"></a>（四）、其它国内源网址</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://pypi.v2ex.com/simple/">http://pypi.v2ex.com/simple/</a></li>
+<li><a target="_blank" rel="noopener" href="http://pypi.douban.com/">http://pypi.douban.com/</a>  豆瓣</li>
+<li><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a></li>
+<li><a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a>  清华</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.hustunique.com/">http://pypi.hustunique.com/</a>  华中理工大学</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.sdutlinux.org/">http://pypi.sdutlinux.org/</a>  山东理工大学</li>
+<li><a target="_blank" rel="noopener" href="http://pypi.mirrors.ustc.edu.cn/">http://pypi.mirrors.ustc.edu.cn/</a>  中国科学技术大学</li>
 </ul>
-</li>
-<li>hibernate.default_schema 默认的数据库schema名称</li>
-</ul>
-
+<h1 id="三、常用技巧"><a href="#三、常用技巧" class="headerlink" title="三、常用技巧"></a>三、常用技巧</h1><h2 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>pip install –no-index -f /home/nanxun/packages/ redis-2.10.5-py2.py3-none-any.whl</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>解压后执行python setup.py install</p>
+<h2 id="展示依赖"><a href="#展示依赖" class="headerlink" title="展示依赖"></a>展示依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip show 包名</span><br></pre></td></tr></table></figure>
+<p>可以显示包的直接依赖项，如果需要显示完整的依赖链，可以安装pipdeptree包，然后使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipdeptree -p 包名</span><br></pre></td></tr></table></figure>
           
         
       
@@ -418,7 +424,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/89/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><span class="page-number current">90</span><a class="page-number" href="/page/91/">91</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/91/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/89/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/89/">89</a><span class="page-number current">90</span><a class="page-number" href="/page/91/">91</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/91/">&gt;</a>
   </nav>
 
 
@@ -464,7 +470,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -475,7 +481,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

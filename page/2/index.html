@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/10/02/data_structure/PAT/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/10/21/language/java/spring/spring%20cloud/gateway/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/10/02/data_structure/PAT/" itemprop="url">PAT常用技巧</a></h1>
+                <a class="post-title-link" href="/2022/10/21/language/java/spring/spring%20cloud/gateway/" itemprop="url">springboot gateway常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-02T21:36:37+08:00">
-                2022-10-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-21T14:34:44+08:00">
+                2022-10-21
               </time>
             
 
@@ -312,8 +312,10 @@
       
         
           
-            <h1 id="cout和printf的效率问题"><a href="#cout和printf的效率问题" class="headerlink" title="cout和printf的效率问题"></a>cout和printf的效率问题</h1><p>printf耗时明显比cout短，参考题库A1153，测试点3只有使用printf输出才能不超时。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.codeleading.com/article/60181938095/">https://www.codeleading.com/article/60181938095/</a></p>
+            <h1 id="和spring-MVC的兼容问题"><a href="#和spring-MVC的兼容问题" class="headerlink" title="和spring MVC的兼容问题"></a>和spring MVC的兼容问题</h1><h2 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h2><p>Spring MVC found on classpath, which is incompatible with Spring Cloud Gateway at this time</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>springcloud gateway的内部是通过netty+webflux实现的，webflux实现和springmvc配置依赖冲突</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>gateway应用不要使用spring-boot-starter-web</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_54853503/article/details/124033084">https://blog.csdn.net/m0_54853503/article/details/124033084</a></p>
 
           
         
@@ -353,7 +355,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/">&lt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/3/">&gt;</a>
   </nav>
 
 
@@ -399,7 +401,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -410,7 +412,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

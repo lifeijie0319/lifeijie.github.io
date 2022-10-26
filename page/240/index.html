@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/tools/nginx/nginx%E7%9A%84%E5%87%A0%E4%B8%AAhost%E5%8F%98%E9%87%8F/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/tools/nginx/nginx%E7%9A%84%E5%87%A0%E4%B8%AAhost%E5%8F%98%E9%87%8F/" itemprop="url">nginx反向代理的proxy_set_header与几个host变量</a></h1>
+                <a class="post-title-link" href="/2021/12/04/database/redis/redis%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/" itemprop="url">centos7安装Redis的经历</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/nginx/" itemprop="url" rel="index">
-                    <span itemprop="name">nginx</span>
+                  <a href="/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -345,17 +345,13 @@
       
         
           
-            <h1 id="proxy-set-header"><a href="#proxy-set-header" class="headerlink" title="$proxy_set_header"></a>$proxy_set_header</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Syntax:	proxy_set_header field value;</span><br><span class="line">Default:	proxy_set_header Host $proxy_host;</span><br><span class="line">            proxy_set_header Connection close;</span><br><span class="line">Context:	http, server, location</span><br></pre></td></tr></table></figure>
-<p>Allows redefining or appending fields to the request header passed to the proxied server. The value can contain text, variables, and their combinations. These directives are inherited from the previous configuration level if and only if there are no proxy_set_header directives defined on the current level. By default, only two fields are redefined.<br>If caching is enabled, the header fields “If-Modified-Since”, “If-Unmodified-Since”, “If-None-Match”, “If-Match”, “Range”, and “If-Range” from the original request are not passed to the proxied server.<br>An unchanged “Host” request header field can be passed like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host       $http_host;</span><br></pre></td></tr></table></figure>
-<p>However, if this field is not present in a client request header then nothing will be passed. In such a case it is better to use the $host variable - its value equals the server name in the “Host” request header field or the primary server name if this field is not present:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host       $host;</span><br></pre></td></tr></table></figure>
-<p>In addition, the server name can be passed together with the port of the proxied server:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header Host       $host:$proxy_port;</span><br></pre></td></tr></table></figure>
-<p>If the value of a header field is an empty string then this field will not be passed to a proxied server.</p>
-<h1 id="host"><a href="#host" class="headerlink" title="$host"></a>$host</h1><p>in this order of precedence: host name from the request line, or host name from the “Host” request header field, or the server name matching a request.<br>注：$host不带端口号，取值如上面英文说明，另外参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0850db5af284%E3%80%82%E7%AE%80%E8%80%8C%E8%A8%80%E4%B9%8B%EF%BC%8C%E4%BC%98%E5%85%88%E5%8F%96%E8%AF%B7%E6%B1%82%E8%A1%8C%E9%87%8C%E7%9A%84%E5%9F%9F%E5%90%8D%E6%88%96%E8%80%85ip%EF%BC%88%E5%8F%AF%E4%BB%A5%E5%85%88%E7%94%A8telnet%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%EF%BC%8C%E7%84%B6%E5%90%8E%E6%89%8B%E5%8A%A8%E5%8F%91%E9%80%81http%E6%8A%A5%E6%96%87%EF%BC%8C%E8%AF%B7%E6%B1%82%E8%A1%8C%E9%87%8C%E4%B8%80%E8%88%AC%E4%B8%8D%E7%94%A8%E5%86%99%E5%9F%9F%E5%90%8D%E5%92%8Cip%EF%BC%8C%E5%A6%82%EF%BC%9A%E2%80%9CGET">https://www.jianshu.com/p/0850db5af284。简而言之，优先取请求行里的域名或者ip（可以先用telnet建立连接，然后手动发送http报文，请求行里一般不用写域名和ip，如：“GET</a> /index.php HTTP/1.1”，但也可以带上，如：“GET <a target="_blank" rel="noopener" href="http://www.test.info/index.php">www.test.info/index.php</a> HTTP/1.1”），其次取请求的头部变量Host（HTTP/1.0不支持Host请求头；而在HTTP/1.1中，Host请求头部必须存在），再次取匹配到的server的server_name.  </p>
-<h1 id="proxy-host-and-proxy-port"><a href="#proxy-host-and-proxy-port" class="headerlink" title="$proxy_host and $proxy_port"></a>$proxy_host and $proxy_port</h1><p>The ngx_http_proxy_module module supports embedded variables that can be used to compose headers using the proxy_set_header directive:<br>$proxy_host<br>name and port of a proxied server as specified in the proxy_pass directive;<br>$proxy_port<br>port of a proxied server as specified in the proxy_pass directive, or the protocol’s default port;<br>注：$proxy_host是“proxy_set_header Host ？”的默认值。$proxy_host是$proxy_pass后面的那串字符，如果有端口号，包含端口号。</p>
-<h1 id="http-host"><a href="#http-host" class="headerlink" title="$http_host"></a>$http_host</h1><p>所有请求头里面的key再nginx里面都可以通过小写和下划线来让nginx读取。例如header里面的Host就能转成http_host, user_agent可以转成http_user_agent。$http_host和$proxy_host类似，也可以包含端口号，取决于客户端的请求头中的Host变量。</p>
+            <h1 id="下载编译安装"><a href="#下载编译安装" class="headerlink" title="下载编译安装"></a>下载编译安装</h1><p>1 redis官网下载，解压后进入目录<br>2 make &amp; make install<br>注：make install如果不支持可以手动操作，实际上做了如下动作：</p>
+<ul>
+<li>删除源文件及目标文件以方便后续copy生成可执行文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] rm -f src&#x2F;*.c *.h *.o</span><br></pre></td></tr></table></figure></li>
+<li>copy可执行文件至环境变量目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis] cp src&#x2F;redis-* &#x2F;usr&#x2F;local&#x2F;bin   </span><br></pre></td></tr></table></figure></li>
+<li>copy配置文件至系统配置文件目录,如果是集群安装，文件最好以端口作为文件名称<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost reids] cp redis.conf &#x2F;etc&#x2F;</span><br></pre></td></tr></table></figure>
+<h1 id="配置redis为系统服务"><a href="#配置redis为系统服务" class="headerlink" title="配置redis为系统服务"></a>配置redis为系统服务</h1><h2 id="使用service命令启停"><a href="#使用service命令启停" class="headerlink" title="使用service命令启停"></a>使用service命令启停</h2>可以将redis解压后的目录下的utils/redis_init_script文件拷贝到/etc/init.d/目录下，这个是redis预设的初始化脚本，加好之后就可以用sevice来启停服务了。<h2 id="使用systemd启停"><a href="#使用systemd启停" class="headerlink" title="使用systemd启停"></a>使用systemd启停</h2>编写/usr/lib/systemd/system/redis.service，使用systemd管理服务。redis.service示例如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">#描述信息</span><br><span class="line">Description&#x3D;Redis Server 3.0.4</span><br><span class="line">#启动时机,开机启动最好在网络服务启动后即启动</span><br><span class="line">After&#x3D;network.target</span><br><span class="line">[Service]</span><br><span class="line">#此处为命令行启动redis的命令及参数,可参考官方文档</span><br><span class="line">ExecStart&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-server &#x2F;etc&#x2F;redis.conf --daemonize no  </span><br><span class="line">#停止redis服务器命令</span><br><span class="line">ExecStop&#x3D;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;redis-cli -h 127.0.0.1 -p 6379 shutdown </span><br><span class="line">User&#x3D;redis</span><br><span class="line">#运行reddis用户</span><br><span class="line">Group&#x3D;redis</span><br><span class="line">#所属组</span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target #字符界面下启动</span><br></pre></td></tr></table></figure></li>
+</ul>
 
           
         
@@ -395,7 +391,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/239/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/239/">239</a><span class="page-number current">240</span><a class="page-number" href="/page/241/">241</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/241/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/239/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/239/">239</a><span class="page-number current">240</span><a class="page-number" href="/page/241/">241</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/241/">&gt;</a>
   </nav>
 
 
@@ -441,7 +437,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -452,7 +448,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

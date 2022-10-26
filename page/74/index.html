@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/11/language/python/basic/random/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/python/basic/oop/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/11/language/python/basic/random/" itemprop="url">python random模块</a></h1>
+                <a class="post-title-link" href="/2022/09/12/language/python/basic/oop/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" itemprop="url">python中单例模式的实现方式</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-11T10:54:31+08:00">
-                2022-04-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T17:04:33+08:00">
+                2022-09-12
               </time>
             
 
@@ -324,6 +324,17 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/basic/oop/" itemprop="url" rel="index">
+                    <span itemprop="name">oop</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -356,11 +367,8 @@
       
         
           
-            <h1 id="多进程random不随机问题"><a href="#多进程random不随机问题" class="headerlink" title="多进程random不随机问题"></a>多进程random不随机问题</h1><h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>ForkingTCPServer每次生成新的进程处理请求，在每个进程中使用random.randint方法生成随机数，每次请求返回的random值都是同一个。</p>
-<h2 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h2><p>random是伪随机数，按照种子依次生成伪随机数序列的各项，每次进程启动调用random，用的是相同的种子，所以生成的随机数序列是一样的。如果单独使用python解释器进入交互界面执行，可以发现，不同的进程调用random.randint获取的随机数不同。所以这里推测是由于random模块在主进程导入时确定种子，fork时复制了相同的随机数对象导致。这个推测是下面解决方法三的思路来源。</p>
-<h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p>方法一：使用进程间通信，随机数在公共区域生成，其它进程都从这个进程里面取。<br>方法二：每次调用random.randint，先用random.seed()重置种子。<br>方法三：在Handler的handle方法中import random。</p>
-<p>注：python2有上述问题，python3没有。</p>
-<h1 id="shuffle"><a href="#shuffle" class="headerlink" title="shuffle"></a>shuffle</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shuffle(x, random&#x3D;None) method of random.Random instance</span><br><span class="line">    Shuffle list x in place, and return None.</span><br></pre></td></tr></table></figure>
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/htzy/p/15675677.html">https://www.cnblogs.com/htzy/p/15675677.html</a></p>
+
           
         
       
@@ -399,7 +407,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/73/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/75/">&gt;</a>
   </nav>
 
 
@@ -445,7 +453,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -456,7 +464,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/database/mysql/engine/transaction/experience1/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/go/effective_go/5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/database/mysql/engine/transaction/experience1/" itemprop="url">记一次事务未及时提交导致的bug</a></h1>
+                <a class="post-title-link" href="/2022/03/04/language/go/effective_go/5/" itemprop="url">effective go 学习整理五</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
                   </a>
                 </span>
 
@@ -306,8 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/language/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -317,19 +317,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/mysql/engine/" itemprop="url" rel="index">
-                    <span itemprop="name">engine</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/mysql/engine/transaction/" itemprop="url" rel="index">
-                    <span itemprop="name">transaction</span>
+                  <a href="/categories/language/go/effective-go/" itemprop="url" rel="index">
+                    <span itemprop="name">effective_go</span>
                   </a>
                 </span>
 
@@ -367,15 +356,11 @@
       
         
           
-            <h1 id="背景描述"><a href="#背景描述" class="headerlink" title="背景描述"></a>背景描述</h1><h2 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h2><p>公司维护了一个合同电子签章平台。每次客户端发送合同到平台进行签章。</p>
-<h2 id="技术背景"><a href="#技术背景" class="headerlink" title="技术背景"></a>技术背景</h2><p>数据库使用mysql，合同电子签章平台由tornado搭建，使用aiomysql库访问mysql。签章平台的逻辑是，如果数据库里没查到记录或者记录状态为失败，就发送合同到签章服务提供商进行签章，否则，返回数据库里面的记录状态。</p>
-<h2 id="bug现象"><a href="#bug现象" class="headerlink" title="bug现象"></a>bug现象</h2><p>每天签章几万份合同，有少量合同会出现重复成功签署的奇怪现象。比如合同A到平台请求签章，看到数据库记录签署成功。而后过了几分钟，客户端进行重试（第一次客户端获得的结果是处理中，通过重试确定合同状态），查询sql没有查到上次入库的记录，重新发起签章流程，导致了数据库有了同一合同的第二条成功记录。</p>
-<h1 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h1><ul>
-<li>初步思考是否同一个合同并发请求到签章平台（客户端没有设置轮询间隔），导致同时查询数据库，因为查询没有加排他锁，因而都没有查到记录。但是查看发现即使过了一段时间（足以结束请求，完成提交），仍然有bug现象。</li>
-<li>在github的aiomysql项目托管处的issue里面查到原因，即aiomysql使用连接池的时候，连接关闭实际上是把连接放回连接池，并没有关闭连接，也没有提交事务。而默认模式下，select会自动开启事务，如果事务没有及时提交，会导致下一次使用该连接的时候继续上次的事务。按照mysql的默认可重复读的隔离级别，同一个合同如果上次查询没有记录，这次仍然查不到。  </li>
-<li>那么为什么这个现象是偶发的？因为系统其它地方会有提交操作。那么只要不是同一个连接重复被同一个合同的请求使用到，这个连接的查询事务会被其它各种情况commit掉。</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>非autocommit的模式下，select一般会默认开启事务，而且很容易忽略，一定要注意。之前还有过这样的经历，由于select开启事务没有及时关闭，后面有进行了耗时操作（比如http请求外部服务），导致数据库连接池耗尽。</p>
+            <h1 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h1><p>go没有异常，都是通过函数返回error进行错误处理，error是一个接口，定义如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> error <span class="keyword">interface</span> &#123;</span><br><span class="line">    Error() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以自定义错误类型，只要实现上述接口。另外对返回的error也可以进行类型判断，从而获取更多错误信息。</p>
+<h1 id="Panic"><a href="#Panic" class="headerlink" title="Panic"></a>Panic</h1><p>不同于error，panic会导致程序终止，一般在初始化检查失败时会使用panic。有时候函数层次很多，可以用panic和recover模拟异常处理，但是即时是这种操作，一般也是在包内范围，对外还是要提供error更好。</p>
+<h2 id="Recover"><a href="#Recover" class="headerlink" title="Recover"></a>Recover</h2><p>recover针对panic以及运行时异常，返回值是panic的传入参数。recover只在defer函数中起作用，在其它地方使用recover，总是返回nil。</p>
 
           
         
@@ -415,7 +400,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/174/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/174/">174</a><span class="page-number current">175</span><a class="page-number" href="/page/176/">176</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/176/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/174/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/174/">174</a><span class="page-number current">175</span><a class="page-number" href="/page/176/">176</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/176/">&gt;</a>
   </nav>
 
 
@@ -461,7 +446,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -472,7 +457,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

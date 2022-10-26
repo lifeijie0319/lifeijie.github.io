@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/libs/visual/pygraphviz/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/python/libs/db/ibm_db/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/language/python/libs/visual/pygraphviz/" itemprop="url">pygraphviz安装</a></h1>
+                <a class="post-title-link" href="/2021/12/04/language/python/libs/db/ibm_db/" itemprop="url">ibm_db</a></h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/libs/visual/" itemprop="url" rel="index">
-                    <span itemprop="name">visual</span>
+                  <a href="/categories/language/python/libs/db/" itemprop="url" rel="index">
+                    <span itemprop="name">db</span>
                   </a>
                 </span>
 
@@ -367,12 +367,9 @@
       
         
           
-            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Graphviz 是一个几何图形可视化软件，能够将数据的结构信息表示为抽象图形和网络图的方式。PyGraphviz 主要对数据量大、可任意定制的图形上具有强大优势。</p>
-<h1 id="pygraphviz安装问题"><a href="#pygraphviz安装问题" class="headerlink" title="pygraphviz安装问题"></a>pygraphviz安装问题</h1><h2 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h2><p>python setup.py install</p>
-<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>安装pygraphviz失败</p>
-<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><p>需要先安装graphviz和pygraphviz-devel。因为yum没有配置，所以需要先在官网下载yum源配置文件。之后可以用yum安装。然而yum源安装获取的版本（2.40）与网站提供的版本（2.38）不一致，所以需要先下载rpm包，然后sudo yum localinstall graphviz-devel-2.38.0-1.el7.x86_64.rpm graphviz-2.38.0-1.el7.x86_64.rpm</p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html">http://www.cnblogs.com/rocketfan/archive/2009/09/09/1563628.html</a></p>
-<h2 id="注：在ubuntu下面安装-graphviz"><a href="#注：在ubuntu下面安装-graphviz" class="headerlink" title="注：在ubuntu下面安装 graphviz"></a>注：在ubuntu下面安装 graphviz</h2><p>sudo apt-get install graphviz, graphviz-dev<br>注意graphiviz-dev是pygraphviz所依赖的必须安装。<br>pip install pygraphviz</p>
+            <h1 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h1><p><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html">https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.swg.im.dbclient.python.doc/doc/t0054367.html</a></p>
+<h2 id="（一）离线安装"><a href="#（一）离线安装" class="headerlink" title="（一）离线安装"></a>（一）离线安装</h2><p>1、解压linuxx64_odbc_cli.tar.gz（实际上是IBM Data Server Driver for ODBC and CLI），将解压得到的处理driver移动到适当位置<br>2、设置环境变量：<br>export IBM_DB_HOME：文件夹ibm_db-2.0.7所在路径<br>3、解压ibm_db-2.0.7.tar.gz，得到解压后的文件夹ibm_db-2.0.7<br>4、进入文件夹ibm_db-2.0.7，执行<br>python2.7 setup.py build<br>python2.7 setup.py install<br>5、执行python，进入python环境，执行如下指令：<br>import ibm_db<br>没有报错说明包安装成功<br>6、Ensure that the Python driver can access the libdb2.so CLI driver file:<br>For 64-bit Linux and UNIX operating systems other than the AIX operating system, set the LD_LIBRARY_PATH variable to the IBM_DB_HOME/lib64 directory by issuing the export command:<br>export LD_LIBRARY_PATH=IBM_DB_HOME/lib64<br>这一步是设置环境变量，如果包下面没有这个lib64文件夹，可以将clidriver下面的db2profile执行设置环境变量。为了长期使用，可以把执行db2profiel的命令加到.bash_profilel或者.bashrc下面。</p>
+<h1 id="（二）在线安装"><a href="#（二）在线安装" class="headerlink" title="（二）在线安装"></a>（二）在线安装</h1><p>pip install ibm_db</p>
 
           
         
@@ -412,7 +409,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/333/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/333/">333</a><span class="page-number current">334</span><a class="page-number" href="/page/335/">335</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/335/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/333/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/333/">333</a><span class="page-number current">334</span><a class="page-number" href="/page/335/">335</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/335/">&gt;</a>
   </nav>
 
 
@@ -458,7 +455,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,7 +466,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

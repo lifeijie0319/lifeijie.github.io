@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/language/go/effective_go/4/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/security/%E5%9B%BD%E5%AF%86/sm2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/language/go/effective_go/4/" itemprop="url">effective go 学习整理四</a></h1>
+                <a class="post-title-link" href="/2022/03/04/security/%E5%9B%BD%E5%AF%86/sm2/" itemprop="url">未命名</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/security/" itemprop="url" rel="index">
+                    <span itemprop="name">security</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/go/effective-go/" itemprop="url" rel="index">
-                    <span itemprop="name">effective_go</span>
+                  <a href="/categories/security/%E5%9B%BD%E5%AF%86/" itemprop="url" rel="index">
+                    <span itemprop="name">国密</span>
                   </a>
                 </span>
 
@@ -356,8 +345,7 @@
       
         
           
-            <h1 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h1><p>Do not communicate by sharing memory; instead, share memory by communicating.这是go中并发的思想核心。简单来说，传统的并发控制通过对一个共享对象加锁并进行争用实现，而go的思想是，单线程本身是顺序的，只有两个线程交互的时候，才有并发的问题，而交流的过程就是同步的过程，可以把这种同步理解为unix的pipe。<br>goroutine实现并发，chan实现同步和信号量，两者结合形成go的并发体系。<br>go的并发机制也能用来实现多核并行，关键在于将任务分解到goroutine中，最后通过resultChan来收集结果。</p>
-
+            
           
         
       
@@ -396,7 +384,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/150/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/150/">150</a><span class="page-number current">151</span><a class="page-number" href="/page/152/">152</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/152/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/150/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/150/">150</a><span class="page-number current">151</span><a class="page-number" href="/page/152/">152</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/152/">&gt;</a>
   </nav>
 
 
@@ -442,7 +430,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +441,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

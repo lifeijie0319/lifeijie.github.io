@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/01/data_structure/B-tree/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/10/database/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/01/data_structure/B-tree/" itemprop="url">B-树</a></h1>
+                <a class="post-title-link" href="/2022/04/10/database/redis/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" itemprop="url">redis数据类型</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-01T11:53:34+08:00">
-                2022-04-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:56:37+08:00">
+                2022-04-10
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/data-structure/" itemprop="url" rel="index">
-                    <span itemprop="name">data_structure</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -334,20 +345,14 @@
       
         
           
-            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>B-树是二叉平衡树的推广，是一种多叉平衡树。B-树其实就是B-tree，不是“B减树”。</p>
-<h1 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h1><h2 id="一棵m阶B-tree（m叉树）满足如下特征："><a href="#一棵m阶B-tree（m叉树）满足如下特征：" class="headerlink" title="一棵m阶B-tree（m叉树）满足如下特征："></a>一棵m阶B-tree（m叉树）满足如下特征：</h2><ul>
-<li>树中每个节点最多含有m个孩子</li>
-<li>如果根节点不是叶子节点，则根节点至少包括两个孩子</li>
-<li>除根节点和叶节点外，其他每个节点至少有ceil(m/2)个孩子（ceil()为向上取整）</li>
-<li>所有叶子节点都位于同一层，叶子节点指向子节点的指针为空。</li>
-<li>每个非叶节点包括n个关键字信息(n，P0，K1，P1，K2，P2，……，Kn，Pn)，其中<ul>
-<li>Ki(i=1…n)为关键字，且关键字的顺序按照升序排列</li>
-<li>Pi(i=0…n)为指向子树的指针，满足K(i-1) &lt; P(i-1) &lt; Ki</li>
-<li>ceil(m/2)-1 &lt;= n &lt;= m-1<h2 id="B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）"><a href="#B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）" class="headerlink" title="B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）"></a>B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）</h2>证明如下：<br>假设第i层的节点数是$M_i$，关键字个数是$N_i$，i行第j个节点的关键字数是$N_i^j$。根据节点子树数量与节点关键字数目的关系，$M_i$=$\sum_{j=1}^{N_i}(N_i^j+1)$=M<sub>i-1</sub>+N<sub>i-1</sub>=M<sub>i-2</sub>+N<sub>i-2</sub>+N<sub>i-1</sub>=…=M<sub>1</sub>+N<sub>1</sub>+…+N<sub>i-1</sub>=1+N<br>这里N是指i层以前所有关键字的和。</li>
+            <p>redis支持五种数据类型，分别是string（字符串）、hash（字典）、list（列表）、set（集合）、zset（有序集合）。</p>
+<ul>
+<li>string<br>基本类型，一个键最多存储512M数据。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set a &quot;hello&quot;</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get a</span><br><span class="line">&quot;hello&quot;</span><br></pre></td></tr></table></figure></li>
+<li>hash<br>pyhton里的字典，java里的HashMap。每个 hash 可以存储 2^32 -1 个键值对（40多亿）。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hmset hello_map key1 &quot;lala&quot; key2 14</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; hget hello_map key1</span><br><span class="line">&quot;lala&quot;</span><br><span class="line">127.0.0.1:6379&gt; hget hello_map key2</span><br><span class="line">&quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; HDEL hello_map key1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; HGETALL hello_map</span><br><span class="line">1) &quot;key2&quot;</span><br><span class="line">2) &quot;14&quot;</span><br></pre></td></tr></table></figure></li>
+<li>list<br>双向有序列表<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; lpush hello_list 14</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; lpush hello_list &quot;ddw&quot;</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; lpush hello_list 1.23</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 -1</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">3) &quot;14&quot;</span><br><span class="line">2) &quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 2</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">3) &quot;14&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 1</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">2) &quot;ddw&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 0</span><br><span class="line">1) &quot;1.23&quot;</span><br><span class="line">127.0.0.1:6379&gt; lpop hello_list</span><br><span class="line">&quot;1.23&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange hello_list 0 -1</span><br><span class="line">1) &quot;ddw&quot;</span><br><span class="line">2) &quot;14&quot;</span><br></pre></td></tr></table></figure></li>
+<li>set<br>string无序集合，通过hash实现，增删改查时间复杂度为O(1)。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd hello_set a</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd hello_set a</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; sadd hello_set 13</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; smembers hello_set</span><br><span class="line">1) &quot;13&quot;</span><br><span class="line">2) &quot;a&quot;</span><br></pre></td></tr></table></figure></li>
+<li>zset<br>string有序集合，每个元素会关联一个double类型的分数，可以据此进行排序。<br>示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd hello_zset 0 candy</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset 1 buffer</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset 2 date</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd hello_zset -1 hello</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zrange hello_zset 0 -1</span><br><span class="line">1) &quot;hello&quot;</span><br><span class="line">2) &quot;candy&quot;</span><br><span class="line">3) &quot;buffer&quot;</span><br><span class="line">4) &quot;date&quot;</span><br><span class="line">127.0.0.1:6379&gt; zrangebyscore hello_zset 0 100</span><br><span class="line">1) &quot;candy&quot;</span><br><span class="line">2) &quot;buffer&quot;</span><br><span class="line">3) &quot;date&quot;</span><br><span class="line">127.0.0.1:6379&gt; zscore hello_zset buffer</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure></li>
 </ul>
-</li>
-</ul>
-<h1 id="搜索性能"><a href="#搜索性能" class="headerlink" title="搜索性能"></a>搜索性能</h1><p>B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为空，或已经是叶子结点。<br>B-树的性能总是等价于二分查找（与阶数m值无关），为O($log_2{n}$)，其中n为关键字的总数。</p>
 
           
         
@@ -387,7 +392,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/96/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/98/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/96/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/98/">&gt;</a>
   </nav>
 
 
@@ -433,7 +438,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +449,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

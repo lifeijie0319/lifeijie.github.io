@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/24/tools/zookeeper/zookeeper/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/10/19/language/java/spring/springboot/rabbitmq%E9%80%82%E9%85%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/24/tools/zookeeper/zookeeper/" itemprop="url">zookeeper</a></h1>
+                <a class="post-title-link" href="/2022/10/19/language/java/spring/springboot/rabbitmq%E9%80%82%E9%85%8D/" itemprop="url">rabbitmq适配</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-24T17:06:06+08:00">
-                2022-09-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-10-19T17:14:21+08:00">
+                2022-10-19
               </time>
             
 
@@ -282,39 +282,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/zookeeper/" itemprop="url" rel="index">
-                    <span itemprop="name">zookeeper</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -345,75 +312,19 @@
       
         
           
-            <h1 id="zookeeper是什么"><a href="#zookeeper是什么" class="headerlink" title="zookeeper是什么"></a>zookeeper是什么</h1><p>zookeeper是一个java编写的分布式应用程序协调服务。zookeeper是google chubby的开源实现，是hadoop和hbase的重要组件。</p>
-<h2 id="zookeeper的应用"><a href="#zookeeper的应用" class="headerlink" title="zookeeper的应用"></a>zookeeper的应用</h2><ul>
-<li>配置中心</li>
-<li>命名服务 根据指定名字来获取资源或服务的地址</li>
-<li>分布式锁 包括独占锁和共享锁</li>
-<li>数据发布/订阅</li>
-</ul>
-<h1 id="zookeeper节点"><a href="#zookeeper节点" class="headerlink" title="zookeeper节点"></a>zookeeper节点</h1><p>每个节点在 Zookeeper 中叫做 Znode，并且其有一个唯一的路径标识，类似linux的文件目录体系。</p>
+            <h1 id="rabbitmq消息确认机制"><a href="#rabbitmq消息确认机制" class="headerlink" title="rabbitmq消息确认机制"></a>rabbitmq消息确认机制</h1><h2 id="确认消息正常发送到exchange"><a href="#确认消息正常发送到exchange" class="headerlink" title="确认消息正常发送到exchange"></a>确认消息正常发送到exchange</h2><h3 id="在springboot2-2-0-RELEASE版本之前"><a href="#在springboot2-2-0-RELEASE版本之前" class="headerlink" title="在springboot2.2.0.RELEASE版本之前"></a>在springboot2.2.0.RELEASE版本之前</h3><p>设置springboot.rabbitmq.publisher-confirm=true，然后让rabbitTemplate使用setConfirmCallback设置回调实例，回调实例需要实现RabbitTemplate.ConfirmCallback接口。</p>
+<h3 id="在springboot2-2-0-RELEASE版本之后"><a href="#在springboot2-2-0-RELEASE版本之后" class="headerlink" title="在springboot2.2.0.RELEASE版本之后"></a>在springboot2.2.0.RELEASE版本之后</h3><p>设置spring.rabbitmq.publisher-confirm-type=correlated，其它步骤和原先一致。需要注意，现在该配置值有以下几种情形：</p>
 <ul>
-<li>Znode可以包含数据和子节点</li>
-<li>Znode包含的数据可以有多个版本，如果有多版本数据，查询时要带上版本号</li>
-<li>节点不支持部分读写，必须一次性完整读写</li>
-<li>客户端可以在节点上设置监视器<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2></li>
+<li>NONE 默认值，不启用confirm模式</li>
+<li>CORRELATED 发布消息成功到交换器后会触发回调方法</li>
+<li>SIMPLE 在CORRELATED基础上，还有其它工作，待深入<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><a target="_blank" rel="noopener" href="https://blog.csdn.net/z69183787/article/details/109371628">https://blog.csdn.net/z69183787/article/details/109371628</a></li>
 </ul>
-<ol>
-<li>根据持续时间，Znode可以分为</li>
+<h2 id="确认消息正确路由到queue"><a href="#确认消息正确路由到queue" class="headerlink" title="确认消息正确路由到queue"></a>确认消息正确路由到queue</h2><h3 id="在springboot2-2-0-RELEASE版本之前-1"><a href="#在springboot2-2-0-RELEASE版本之前-1" class="headerlink" title="在springboot2.2.0.RELEASE版本之前"></a>在springboot2.2.0.RELEASE版本之前</h3><p>设置springboot.rabbitmq.publisher-returns=true，然后让rabbitTemplate使用setReturnCallback设置回调实例，回调实例需要实现RabbitTemplate.ReturnCallback接口。</p>
+<h3 id="在springboot2-2-0-RELEASE版本之后-1"><a href="#在springboot2-2-0-RELEASE版本之后-1" class="headerlink" title="在springboot2.2.0.RELEASE版本之后"></a>在springboot2.2.0.RELEASE版本之后</h3><p>设置spring.rabbitmq.publisher-confirm-type=correlated，然后让rabbitTemplate使用setReturnsCallback设置回调实例，回调实例需要实现RabbitTemplate.ReturnsCallback接口。</p>
+<h2 id="消费端手动确认消息"><a href="#消费端手动确认消息" class="headerlink" title="消费端手动确认消息"></a>消费端手动确认消息</h2><ol>
+<li>配置spring.rabbitmq.listener.simple.acknowledge-mode=manual</li>
+<li>在消费者处理函数中使用basicAck/basicNack/basicReject对消息进行确认</li>
 </ol>
-<ul>
-<li>持久节点 persistent 不会因为客户端session结束而消失</li>
-<li>临时节点 ephemeral 不能有子节点</li>
-</ul>
-<ol start="2">
-<li>根据是否有序，Znode可以分为</li>
-</ol>
-<ul>
-<li>顺序节点 sequential</li>
-<li>无序节点 （默认）</li>
-</ul>
-<h1 id="zookeeper的角色"><a href="#zookeeper的角色" class="headerlink" title="zookeeper的角色"></a>zookeeper的角色</h1><ul>
-<li>领导者leader 负责投票的发起和决策，更新系统状态</li>
-<li>跟随者follower 用于接收客户端请求并给客户端返回结果，在选主过程中进行投票</li>
-<li>观察者observer 不参与选举，在不增加选举复杂程度的同时，提升整个办事处集群对读请求的吞吐量</li>
-<li>客户端client 请求发起方</li>
-</ul>
-<h1 id="zookeeper架构"><a href="#zookeeper架构" class="headerlink" title="zookeeper架构"></a>zookeeper架构</h1><h2 id="为什么要有主节点"><a href="#为什么要有主节点" class="headerlink" title="为什么要有主节点"></a>为什么要有主节点</h2><p>有些业务逻辑只要有一台机器执行，其它机器进行共享即可。这样做减少重复计算，提高性能。</p>
-<h2 id="如何保证一致性"><a href="#如何保证一致性" class="headerlink" title="如何保证一致性"></a>如何保证一致性</h2><p>zookeeper依赖zab协议来实现分布式数据一致性，协议有两种模式，分别是恢复模式（选主）和广播模式（同步）。</p>
-<h3 id="广播模式"><a href="#广播模式" class="headerlink" title="广播模式"></a>广播模式</h3><ol>
-<li>client发起写请求到follower</li>
-<li>follower将写请求转发给leader</li>
-<li>leader生成proposal</li>
-<li>leader将proposal发给所有follower</li>
-<li>follower给出正确反馈</li>
-<li>leader向所有follower发起commit</li>
-<li>开始的follower将response给到client<h3 id="恢复模式"><a href="#恢复模式" class="headerlink" title="恢复模式"></a>恢复模式</h3>leader崩溃或者与过半follower失去通信，就会进入崩溃恢复模式。zab恢复模式使用了如下策略：</li>
-</ol>
-<ul>
-<li>选取zxid最大的节点作为新的leader</li>
-<li>新leader将事务日志中尚未提交的事务进行处理</li>
-</ul>
-<h1 id="zookeeper选举"><a href="#zookeeper选举" class="headerlink" title="zookeeper选举"></a>zookeeper选举</h1><h2 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h2><p>每次投票可以用(epoch, zxid, sid)来唯一标识</p>
-<ul>
-<li>epoch 选举轮次，每次选举建立了leader-follower关系之后，都有一个唯一的epoch来标识</li>
-<li>zxid 事务id，用来标识一次服务器状态的更新，和服务器处理客户端写请求相关</li>
-<li>sid 服务器id<h2 id="选举规则（FastLeaderElection算法）"><a href="#选举规则（FastLeaderElection算法）" class="headerlink" title="选举规则（FastLeaderElection算法）"></a>选举规则（FastLeaderElection算法）</h2></li>
-<li>服务器一开始都是looking状态</li>
-<li>每台服务器优先投票给自己，然后广播到其它机器</li>
-<li>收到其它服务器的投票后首先判断epoch:<ol>
-<li>收到的epoch小于自身epoch，返回自己的投票状态给发出广播的服务器</li>
-<li>收到的epoch等于自身epoch，选(zxid, sid)较大的作为选举对象，如果和原来的选举对象不同，那么发出广播</li>
-<li>收到的epoch大于自身的epoch，先更新自身的epoch，再按照相等的情况进行选举</li>
-</ol>
-</li>
-<li>当选举对象的票数大于所有服务器数量的一半后，根据选举结果，更新自身状态为leading或者following</li>
-<li>如果集群内部已有leader，新加入的机器服从已有的结果</li>
-<li>注：zxid指节点的事务id(Zookeeper Transaction Id)，sid(Server Id)是s节点标识id，唯一确定该节点，epoch是逻辑时钟，表示选举的轮次，不是投票的轮次，一个时期的leader对应一个epoch。<h2 id="paxos算法"><a href="#paxos算法" class="headerlink" title="paxos算法"></a>paxos算法</h2>Paxos算法是基于消息传递且具有高度容错特性的一致性算法，是目前公认的解决分布式一致性问题最有效的算法之一，其解决的问题就是在分布式系统中如何就某个值（决议）达成一致。<br>zookeeper选举FastLeaderElection算法其实是标准的Fast Paxos的实现。</li>
-</ul>
-<h1 id="zookeeper集群的节点数为什么要求是奇数"><a href="#zookeeper集群的节点数为什么要求是奇数" class="headerlink" title="zookeeper集群的节点数为什么要求是奇数"></a>zookeeper集群的节点数为什么要求是奇数</h1><h2 id="防止脑裂"><a href="#防止脑裂" class="headerlink" title="防止脑裂"></a>防止脑裂</h2><p>如果一个集群有4个节点，发生网络故障，导致分为两个区域，每个区2个节点，那么两边都无法选举出大于半数节点同意的leader。</p>
-<h2 id="容灾能力"><a href="#容灾能力" class="headerlink" title="容灾能力"></a>容灾能力</h2><p>不管3个节点还是4个节点，最多都只允许一个节点失效，从容灾能力上说，两者是一样的，因此没有必要用4个节点。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1693897375037977921&amp;wfr=spider&amp;for=pc">https://baijiahao.baidu.com/s?id=1693897375037977921&amp;wfr=spider&amp;for=pc</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/yue_2018/article/details/89717010">https://blog.csdn.net/yue_2018/article/details/89717010</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/398856918">https://zhuanlan.zhihu.com/p/398856918</a></p>
 
           
         
@@ -453,7 +364,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/11/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/9/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/11/">&gt;</a>
   </nav>
 
 
@@ -499,7 +410,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -510,7 +421,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

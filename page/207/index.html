@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/other/chrome/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/language/js/js%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/other/chrome/" itemprop="url">chrome知识点</a></h1>
+                <a class="post-title-link" href="/2021/12/04/language/js/js%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" itemprop="url">js的执行顺序</a></h1>
         
 
         <div class="post-meta">
@@ -272,7 +272,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:24+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-12-04T09:39:36+08:00">
                 2021-12-04
               </time>
             
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/categories/language/" itemprop="url" rel="index">
+                    <span itemprop="name">language</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
                   </a>
                 </span>
 
@@ -334,7 +345,32 @@
       
         
           
-            <h1 id="一、console-log"><a href="#一、console-log" class="headerlink" title="一、console.log"></a>一、console.log</h1><p>console.log是异步执行的。<br><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/23429203/">https://stackoverflow.com/questions/23429203/</a> weird-behavior-with-objects-console-log<br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20507212">https://www.zhihu.com/question/20507212</a>  </p>
+            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><pre><code>http://www.cnblogs.com/CBDoctor/p/3745246.html
+http://coolshell.cn/articles/9749.html</code></pre>
+<h1 id="js执行顺序说明"><a href="#js执行顺序说明" class="headerlink" title="js执行顺序说明"></a>js执行顺序说明</h1><pre><code>一、正常情况下，js顺序加载，单线程。
+
+二、要在其他文档元素加载之后执行js，要么把js放在后面，要么用特殊时间监听实现，比如监听body加载完成的onload事件，jQuery的ready事件等等。
+
+三、js使用回调的方式伪造了类似多线程的效果。
+
+四、预编译
+js解析时，并不是完全的严格按照顺序，而是先进行一次预编译。预编译时，首先创建一个当前执行环境下的活动对象。
+JS加载包含预编译和执行两个阶段。 编译阶段会对所有的var变量和function进行扫描，并将var变量初始化为undefined类型，而function则被初始化为函数值。
+到了执行阶段，JS从上面往下面依顺序执行，遇到var变量便进行赋值(因此，在赋值之前进行调用的话会出现错误).遇到函数变量的话会从活动对象中寻找函数
+注意：
+f();                                 // 调用函数，返回值1
+function f()&#123;
+    alert(1);
+&#125;
+但是，如果按下面方式定义函数，则JavaScript解释器会提示语法错误。
+f();                                 // 调用函数，返回语法错误
+var f = function()&#123;
+    alert(1);
+&#125;
+
+五、虽然说，JavaScript是按块执行的，但是不同块都属于同一个全局作用域，也就是说，块之间的变量和函数是可以共享的。
+
+六、注意如果在一个页面中存在多个windows.onload事件处理函数，则只有最后一个才是有效的，为了解决这个问题，可以把所有脚本或调用函数都放在同一个onload事件处理函数中</code></pre>
 
           
         
@@ -374,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/206/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/206/">206</a><span class="page-number current">207</span><a class="page-number" href="/page/208/">208</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/208/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/206/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/206/">206</a><span class="page-number current">207</span><a class="page-number" href="/page/208/">208</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/208/">&gt;</a>
   </nav>
 
 
@@ -420,7 +456,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -431,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

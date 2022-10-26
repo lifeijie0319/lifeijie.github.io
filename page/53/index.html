@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/c/char%E6%95%B0%E7%BB%84/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/database/mysql/mariadb/mariadb5.5%E5%8D%87%E7%BA%A7%E6%88%90mysql5.7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/c/char%E6%95%B0%E7%BB%84/" itemprop="url">char数组</a></h1>
+                <a class="post-title-link" href="/2022/09/12/database/mysql/mariadb/mariadb5.5%E5%8D%87%E7%BA%A7%E6%88%90mysql5.7/" itemprop="url">mariadb5.5升级成mysql5.7</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c</span>
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/mysql/mariadb/" itemprop="url" rel="index">
+                    <span itemprop="name">mariadb</span>
                   </a>
                 </span>
 
@@ -345,12 +356,15 @@
       
         
           
-            <h1 id="char数组赋值的方法"><a href="#char数组赋值的方法" class="headerlink" title="char数组赋值的方法"></a>char数组赋值的方法</h1><h2 id="定义的时候直接用字符串赋值"><a href="#定义的时候直接用字符串赋值" class="headerlink" title="定义的时候直接用字符串赋值"></a>定义的时候直接用字符串赋值</h2><p>char a[10]=”hello”;</p>
-<ul>
-<li>注意：这种方法只能是初始化的时候使用，比如下面是错误示例：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">10</span>];</span><br><span class="line">a = <span class="string">&quot;hello&quot;</span>;</span><br></pre></td></tr></table></figure>
-a是一个指向10个char类型数组的指针，不能重新指向常量字符串<h2 id="循环对每个字符赋值"><a href="#循环对每个字符赋值" class="headerlink" title="循环对每个字符赋值"></a>循环对每个字符赋值</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">10</span>]=&#123;<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">  a[i] = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="使用strycpy"><a href="#使用strycpy" class="headerlink" title="使用strycpy"></a>使用strycpy</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">strcpy</span>(a, <span class="string">&quot;hello&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
+            <h1 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h1><p>参考/database/mysql/mysql数据备份与恢复</p>
+<h1 id="删除mariadb"><a href="#删除mariadb" class="headerlink" title="删除mariadb"></a>删除mariadb</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(base) [root@k8smaster ~]# rpm -qa|grep mariadb</span><br><span class="line">mariadb-libs-5.5.68-1.el7.x86_64</span><br><span class="line">mariadb-5.5.68-1.el7.x86_64</span><br><span class="line">mariadb-server-5.5.68-1.el7.x86_64</span><br><span class="line">(base) [root@k8smaster ~]# yum remove mariadb-*</span><br></pre></td></tr></table></figure>
+<h1 id="下载mysql"><a href="#下载mysql" class="headerlink" title="下载mysql"></a>下载mysql</h1><h2 id="下载安装yum源"><a href="#下载安装yum源" class="headerlink" title="下载安装yum源"></a>下载安装yum源</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql57-community-release-el7-9.noarch.rpm</span><br><span class="line">rpm -ivh mysql57-community-release-el7-9.noarch.rpm</span><br><span class="line">yum update # 是否有必要？</span><br></pre></td></tr></table></figure>
+<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">yum -y install mysql-server</span><br><span class="line"># 启动</span><br><span class="line">systemctl start mysqld</span><br><span class="line"># 查看状态</span><br><span class="line">systemctl status mysqld</span><br><span class="line"># 设置开机启动</span><br><span class="line">systemctl enable mysqld</span><br></pre></td></tr></table></figure>
+<h3 id="安装出现问题"><a href="#安装出现问题" class="headerlink" title="安装出现问题"></a>安装出现问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The GPG keys listed for the &quot;MySQL 5.7 Community Server&quot; repository are already installed but they are not correct for this package.</span><br><span class="line">Check that the correct key URLs are configured for this repository.</span><br></pre></td></tr></table></figure>
+<p>解决：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm --import https:&#x2F;&#x2F;repo.mysql.com&#x2F;RPM-GPG-KEY-mysql-2022</span><br></pre></td></tr></table></figure>
+<p>注：2022是对应年份</p>
+<h1 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h1><p>安装mysql后发现数据库数据没有丢失，无需恢复</p>
 
           
         
@@ -390,7 +404,7 @@ a是一个指向10个char类型数组的指针，不能重新指向常量字符�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/52/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><span class="page-number current">53</span><a class="page-number" href="/page/54/">54</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/54/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/52/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><span class="page-number current">53</span><a class="page-number" href="/page/54/">54</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/54/">&gt;</a>
   </nav>
 
 
@@ -436,7 +450,7 @@ a是一个指向10个char类型数组的指针，不能重新指向常量字符�
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -447,7 +461,7 @@ a是一个指向10个char类型数组的指针，不能重新指向常量字符�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

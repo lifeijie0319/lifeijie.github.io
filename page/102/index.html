@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/22/language/java/j2ee/jsp/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/10/database/mysql/mysql%20binlog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/22/language/java/j2ee/jsp/" itemprop="url">jsp</a></h1>
+                <a class="post-title-link" href="/2022/04/10/database/mysql/mysql%20binlog/" itemprop="url">mysql binlog</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-22T15:40:43+08:00">
-                2022-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
+                2022-04-10
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -306,19 +306,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/j2ee/" itemprop="url" rel="index">
-                    <span itemprop="name">j2ee</span>
+                  <a href="/categories/database/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -356,26 +345,35 @@
       
         
           
-            <h1 id="jsp与servlet的联系与区别"><a href="#jsp与servlet的联系与区别" class="headerlink" title="jsp与servlet的联系与区别"></a>jsp与servlet的联系与区别</h1><p>jsp本质上就是servlet，但是这是web容器编译后的情况，可以认为jsp是一种专门用来渲染页面的被简化的servlet，程序员只需要填入需要的数据，由容器完成后续编译成servlet的工作。<br>|          | jsp                                                            | servlet                         |<br>| ——– | ————————————————————– | ——————————- |<br>| 作用     | 渲染页面                                                       | 业务逻辑处理，提供jsp需要的数据 |<br>| 内置对象 | 通过HttpServletRequest/HttpServletResponse/HttpServlet对象得到 | 无                              |</p>
-<h1 id="jsp的内置对象与作用"><a href="#jsp的内置对象与作用" class="headerlink" title="jsp的内置对象与作用"></a>jsp的内置对象与作用</h1><ul>
-<li>request 客户端请求对象</li>
-<li>response 响应对象</li>
-<li>pageContext 页面上下文，可以引用到request/session/application等作用域</li>
-<li>session 用户会话对象</li>
-<li>application 服务器运行环境对象</li>
-<li>out 输出流对象</li>
-<li>config web应用的配置对象</li>
-<li>page jsp页面本身，相当于类中的this</li>
-<li>exception 封装页面抛出的异常</li>
+            <h1 id="什么是binlog"><a href="#什么是binlog" class="headerlink" title="什么是binlog"></a>什么是binlog</h1><p>mysql的binlog是server层维护的一个二进制日志，用于记录所有的 DDL 和 DML 语句。binlog常用的作用有：</p>
+<ul>
+<li>主从复制</li>
+<li>数据恢复</li>
+<li>增量备份</li>
 </ul>
-<h1 id="jsp的四种作用域"><a href="#jsp的四种作用域" class="headerlink" title="jsp的四种作用域"></a>jsp的四种作用域</h1><ul>
-<li>page 页面相关的对象和属性</li>
-<li>request 请求相关的对象和属性，一个web请求可以跨越多个page</li>
-<li>session 用户与服务器建立的会话相关的对象和属性，跨越request</li>
-<li>application 代表与整个web应用相关的对象和属性，一个全局作用域</li>
+<h1 id="常用相关操作"><a href="#常用相关操作" class="headerlink" title="常用相关操作"></a>常用相关操作</h1><h2 id="开启binlog"><a href="#开启binlog" class="headerlink" title="开启binlog"></a>开启binlog</h2><p>默认binlog不开启，想要开启binlog，必须进行相关配置，一般修改配置文件my.cnf。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 打开binlog</span><br><span class="line">log_bin&#x3D;ON</span><br><span class="line"># binlog日志的基本文件名</span><br><span class="line">log_bin_basename&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin</span><br><span class="line"># binlog文件的索引文件，文本格式，记录了所有binlog的文件路径</span><br><span class="line">log_bin_index&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql-bin.index</span><br></pre></td></tr></table></figure>
+<p>修改配置之后重启mysql服务即可。但是如果是5.7及以上版本的话，重启mysql服务会报错，需要加一个配置server_id=1这样，server_id在集群中是唯一的。验证如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#39;%log_bin%&#39;</span><br></pre></td></tr></table></figure>
+<p>有三种情况，binlog会重新生成新的：</p>
+<ul>
+<li>每次重启会生成新的binlog文件</li>
+<li>当 binlog 文件大小超过 max_binlog_size 变量的值时</li>
+<li>使用 flush logs 命令<h2 id="binlog常见查询命令"><a href="#binlog常见查询命令" class="headerlink" title="binlog常见查询命令"></a>binlog常见查询命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show binary logs; &#x2F;&#x2F;查看binlog文件列表</span><br><span class="line">show master status; &#x2F;&#x2F;查看当前二进制日志文件的状态信息，显示正在写入的二进制文件，及当前position</span><br></pre></td></tr></table></figure>
+<h1 id="binlog的日志格式"><a href="#binlog的日志格式" class="headerlink" title="binlog的日志格式"></a>binlog的日志格式</h1></li>
+<li>STATEMENT：基于SQL语句的复制（statement-based replication, SBR）</li>
+<li>ROW：基于行的复制（row-based replication, RBR）</li>
+<li>MIXED：混合模式复制（mixed-based replication, MBR）</li>
 </ul>
-<h1 id="jsp页面乱码"><a href="#jsp页面乱码" class="headerlink" title="jsp页面乱码"></a>jsp页面乱码</h1><p>在文件头加上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType&#x3D;&quot;text&#x2F;html;charset&#x3D;GBK&quot;%&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="binlog文件查看"><a href="#binlog文件查看" class="headerlink" title="binlog文件查看"></a>binlog文件查看</h1><h2 id="使用mysqlbinlog工具"><a href="#使用mysqlbinlog工具" class="headerlink" title="使用mysqlbinlog工具"></a>使用mysqlbinlog工具</h2><p>mysqlbinlog [options] log_file</p>
+<h2 id="使用mysql命令查询"><a href="#使用mysql命令查询" class="headerlink" title="使用mysql命令查询"></a>使用mysql命令查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SHOW BINLOG EVENTS</span><br><span class="line">            [IN &#39;log_name&#39;] &#x2F;&#x2F;要查询的binlog文件名</span><br><span class="line">            [FROM pos]  </span><br><span class="line">            [LIMIT [offset,] row_count]  </span><br></pre></td></tr></table></figure>
+<h1 id="binlog恢复数据"><a href="#binlog恢复数据" class="headerlink" title="binlog恢复数据"></a>binlog恢复数据</h1><p>使用binlog恢复数据，本质上就是从binlog提取历史的操作记录sql，然后重新执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqlbinlog --start-position&#x3D;:p1 --stop-position&#x3D;:p2 :binlogname &gt; restore.sql</span><br><span class="line">mysql&gt; source &#x2F;var&#x2F;lib&#x2F;mysql&#x2F;restore.sql</span><br></pre></td></tr></table></figure>
+<ul>
+<li>:p1, :p2 binlog中的位置</li>
+<li>binlogname binlog文件名</li>
+</ul>
+
           
         
       
@@ -414,7 +412,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/101/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><span class="page-number current">102</span><a class="page-number" href="/page/103/">103</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/103/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/101/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><span class="page-number current">102</span><a class="page-number" href="/page/103/">103</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/103/">&gt;</a>
   </nav>
 
 
@@ -460,7 +458,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -471,7 +469,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

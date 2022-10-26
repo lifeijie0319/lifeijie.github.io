@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/network/tcp%E5%92%8Cudp%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/07/database/redis/redis%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/network/tcp%E5%92%8Cudp%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">tcp和udp的区别</a></h1>
+                <a class="post-title-link" href="/2022/04/07/database/redis/redis%E5%9F%BA%E7%A1%80/" itemprop="url">redis基础</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-07T09:10:47+08:00">
+                2022-04-07
               </time>
             
 
@@ -295,8 +295,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/redis/" itemprop="url" rel="index">
+                    <span itemprop="name">redis</span>
                   </a>
                 </span>
 
@@ -334,41 +345,49 @@
       
         
           
-            <h1 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h1><table>
+            <h1 id="什么是redis"><a href="#什么是redis" class="headerlink" title="什么是redis"></a>什么是redis</h1><p>一个C语言编写的高性能的key-value内存数据库。</p>
+<h2 id="redis特性"><a href="#redis特性" class="headerlink" title="redis特性"></a>redis特性</h2><ul>
+<li>redis支持多数据库，默认是数据库0，通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select $num</span><br></pre></td></tr></table></figure>
+可以切换数据库，这里$num指数据库序号。</li>
+<li>redis支持事务</li>
+<li>redis支持5种数据类型</li>
+<li>redis支持数据持久化<h1 id="redis的工作模式"><a href="#redis的工作模式" class="headerlink" title="redis的工作模式"></a>redis的工作模式</h1></li>
+<li>单线程 cpu不是redis的瓶颈，redis的瓶颈在于机器内存和网络带宽，单线程容易实现</li>
+<li>reactor模式 采用IO多路复用实现事件处理</li>
+<li>阻塞式 请求只能按顺序依次处理</li>
+</ul>
+<h1 id="redis与memcached对比"><a href="#redis与memcached对比" class="headerlink" title="redis与memcached对比"></a>redis与memcached对比</h1><table>
 <thead>
 <tr>
-<th></th>
-<th>TCP</th>
-<th>UDP</th>
+<th>—</th>
+<th>redis</th>
+<th>memcached</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>建立连接</td>
-<td>是</td>
-<td>否</td>
+<td>数据类型</td>
+<td>丰富的数据类型</td>
+<td>值只能是字符串</td>
 </tr>
 <tr>
-<td>可靠性</td>
-<td>可靠</td>
-<td>不可靠</td>
+<td>速度</td>
+<td>快</td>
+<td>慢</td>
 </tr>
 <tr>
-<td>实时性</td>
-<td>差</td>
-<td>好</td>
-</tr>
-<tr>
-<td>传播模型</td>
-<td>点对点</td>
-<td>一对一/一对多/多对一/多对多</td>
-</tr>
-<tr>
-<td>资源要求</td>
-<td>高</td>
-<td>低</td>
+<td>持久化</td>
+<td>支持</td>
+<td>不支持</td>
 </tr>
 </tbody></table>
-<h1 id="TCP可靠性的实现"><a href="#TCP可靠性的实现" class="headerlink" title="TCP可靠性的实现"></a>TCP可靠性的实现</h1><p>TCP通过校验和，重传控制，序号标识，滑动窗口，确认应答实现可靠传输。如丢包时的重发控制，还可以对次序乱掉的分包进行顺序控制。待深入。</p>
+<h1 id="redis事务"><a href="#redis事务" class="headerlink" title="redis事务"></a>redis事务</h1><p>redis事务和数据库事务不同，redis事务更像是多条命令的打包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch key # 监控变量</span><br><span class="line">multi # 开启事务</span><br><span class="line">... 各种命令入队</span><br><span class="line">exec # 提交事务</span><br><span class="line">discard # 撤销事务</span><br></pre></td></tr></table></figure>
+<ul>
+<li>命令入队过程如果出错（比如使用了不存在的命令），exec提交失败，命令队列不会执行</li>
+<li>命令入队过程正常，exec执行队列中的命令如果出错，不影响继续执行后续命令，不会回滚，所以没有实现原子性</li>
+<li>使用watch在事务开启前监控变量，如果在exec前变量值被其它连接改变，事务提交失败，返回nil。exec之后，连接之前设置的watch都失效。</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/436011931">https://zhuanlan.zhihu.com/p/436011931</a></p>
 
           
         
@@ -408,7 +427,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/112/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/114/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/112/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/114/">&gt;</a>
   </nav>
 
 
@@ -454,7 +473,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -465,7 +484,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

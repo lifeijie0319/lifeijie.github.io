@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/python/basic/datatype/basic/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/math/%E8%B4%A8%E5%9B%A0%E5%AD%90%E5%88%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/python/basic/datatype/basic/" itemprop="url">python数据类型基础</a></h1>
+                <a class="post-title-link" href="/2022/09/12/math/%E8%B4%A8%E5%9B%A0%E5%AD%90%E5%88%86%E8%A7%A3/" itemprop="url">质因子分解的唯一性证明</a></h1>
         
 
         <div class="post-meta">
@@ -295,41 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/basic/" itemprop="url" rel="index">
-                    <span itemprop="name">basic</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/python/basic/datatype/" itemprop="url" rel="index">
-                    <span itemprop="name">datatype</span>
+                  <a href="/categories/math/" itemprop="url" rel="index">
+                    <span itemprop="name">math</span>
                   </a>
                 </span>
 
@@ -367,15 +334,16 @@
       
         
           
-            <h1 id="内置数据类型"><a href="#内置数据类型" class="headerlink" title="内置数据类型"></a>内置数据类型</h1><p>pyhton内置类型包括：</p>
-<ul>
-<li>数字（整型、浮点型、复数、布尔类型）</li>
-<li>字符串</li>
-<li>元组</li>
-<li>列表</li>
-<li>字典</li>
-<li>集合<h2 id="可变类型和不可变类型"><a href="#可变类型和不可变类型" class="headerlink" title="可变类型和不可变类型"></a>可变类型和不可变类型</h2>其中前3种是不可变类型，列表和字典是可变类型。对于不可变类型，改变变量的值等于重新赋值。而对于可变类型，改变变量的值（比如列表、字典增删元素）并没有改变变量的指向。所以可变不可变关键在于变量（引用）指向的值是否可以改变，改变了引用的指向是否改变。</li>
-</ul>
+            <h1 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h1><p>算术基本定理，又称为正整数的唯一分解定理，即：每个大于 1 的自然数，要么本身就是质数，，要么可以写为 2 个或以上的质数的积，而且这些质因子按大小排列之后，写法仅有一种方式。</p>
+<h1 id="存在性"><a href="#存在性" class="headerlink" title="存在性"></a>存在性</h1><p>假设存在大于 1 的自然数不能写成质数的乘积，把最小的那个称为 n。</p>
+<p>自然数可以根据其可除性（是否能表示成两个不是自身的自然数的乘积）分成 3 类：质数、合数和 1。</p>
+<p>首先，按照定义，n 大于 1。<br>其次，n 不是质数，因为质数 p 可以写成质数乘积：p=p，这与假设不相符合。因此，n 只能是合数，但每个合数都可以分解成两个严格小于自身而大于 1 的自然数的积。</p>
+<p>设 n=a×b，其中 a 和 b 都是介于 1 和 n 之间的自然数，因此，按照 n 的定义，由于 n 是大于 1 的自然数而不能写成质数的成绩中最小的数，a 和 b 都可以写成质数的乘积。从而 n=a×b 也可以写成质数的乘积。</p>
+<p>由此产生矛盾。因此大于 1 的自然数必可写成质数的乘积。</p>
+<h1 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a>唯一性</h1><p>By induction on n. n=1 is an empty product of primes. Let n&gt;1. Suppose that the theorem is true for all naturals &lt;n. Let p be the least factor ≠1 of n. p has no smaller factors q≠1, else q|p|n, contra leastness of p. Thus p is prime. By induction n/p has a unique prime factorization which, appended to p, yields a prime factorization of n. We show it unique.</p>
+<p>Consider a second prime factorization of n. It has at least one prime q since n&gt;1. Hence  n=q q2⋯qk=qQ  for qi primes. If p equals one of the q’s then deleting p from the second factorization must leave said unique factorization of n/p. Thus both factorizations of n are the same up to order. Hence if p=q then the proof is complete.</p>
+<p>Otherwise, it suffices to show p equals one of the qi. By leastness of p,  p≠q ⇒ p&lt;q, so  n¯=n−pQ=(q−p)Q  is  0&lt;n¯&lt;n. p|n ⇒ p|n¯, so by induction  n¯/p  has a prime factorization which, appended to p, gives a prime factorization of n¯. By induction q−p has a prime factorization which, appended to Q=q2⋯qk is a second factorization of n¯. By induction both factorizations of n¯ are equal up to order, thus p occurs in said factorization of (q−p)Q, but not in that of q−p, else p | q−p ⇒ p|q, contra p≠q. Thus p must occur in the factorization Q=q2⋯qk. Hence, indeed, p equals one of the qi.   QED</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Dr-Albert-Wensley/articles/unique-decomposition-theorem.html">https://www.cnblogs.com/Dr-Albert-Wensley/articles/unique-decomposition-theorem.html</a><br><a target="_blank" rel="noopener" href="https://math.stackexchange.com/questions/113869/how-can-we-prove-that-among-positive-integers-any-number-can-have-only-one-prime">https://math.stackexchange.com/questions/113869/how-can-we-prove-that-among-positive-integers-any-number-can-have-only-one-prime</a></p>
 
           
         
@@ -415,7 +383,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/44/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/46/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/44/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/46/">&gt;</a>
   </nav>
 
 
@@ -461,7 +429,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -472,7 +440,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

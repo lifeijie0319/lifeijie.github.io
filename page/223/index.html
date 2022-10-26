@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/database/riak/install/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/network/%E9%82%AE%E4%BB%B6%E4%BC%A0%E8%BE%93%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%8D%8F%E8%AE%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/database/riak/install/" itemprop="url">riak源码安装</a></h1>
+                <a class="post-title-link" href="/2021/12/04/network/%E9%82%AE%E4%BB%B6%E4%BC%A0%E8%BE%93%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%8E%E5%8D%8F%E8%AE%AE/" itemprop="url">email传输的过程与协议</a></h1>
         
 
         <div class="post-meta">
@@ -295,19 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/riak/" itemprop="url" rel="index">
-                    <span itemprop="name">riak</span>
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -345,13 +334,8 @@
       
         
           
-            <h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><p>sudo yum install gcc gcc-c++ glibc-devel make git pam-devel</p>
-<h1 id="下载解压"><a href="#下载解压" class="headerlink" title="下载解压"></a>下载解压</h1><p>wget <a target="_blank" rel="noopener" href="http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz">http://s3.amazonaws.com/downloads.basho.com/riak/2.2/2.2.3/riak-2.2.3.tar.gz</a></p>
-<h1 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h1><p>make rel</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p><img src="/blog/images/database/riak/install/1.png"></p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>git版本低，不再被支持。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Please upgrade your git client.</span><br><span class="line">GitHub.com no longer supports git over dumb-http: https:&#x2F;&#x2F;github.com&#x2F;blog&#x2F;809-git-dumb-http-transport-to-be-turned-off-in-90-days</span><br></pre></td></tr></table></figure>
-<h3 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h3><p>yum remove当前git，安装新版本git</p>
+            <h1 id="过程理解"><a href="#过程理解" class="headerlink" title="过程理解"></a>过程理解</h1><p>email传输是现实邮件传输的模拟。普通邮件传输，发送者写好信件，投入本地邮局的邮箱，邮局定时将邮件收走，按照目标地址投放到对应的目标邮局，目标邮局的邮递员根据实际目标地址投送到指定邮箱，最后接受者到邮箱取到信件。在email的世界里，我们用的邮件客户端（比如foxmail）就是邮箱，email服务提供商（比如网易、腾讯）就是邮局。</p>
+<h1 id="邮件传输过程中用到的协议"><a href="#邮件传输过程中用到的协议" class="headerlink" title="邮件传输过程中用到的协议"></a>邮件传输过程中用到的协议</h1><p>我们称邮件客户端为MUA(Mail User Agent)，email服务提供商为MTA(Mail Transfer Agent)。邮件的传输过程为：发件人 -&gt; MUA -&gt; MTA -&gt; MTA -&gt; 若干个MTA -&gt; MDA &lt;- MUA &lt;- 收件人。这里MDA(Mail Delivery Agent)是接受邮件的服务商存放某些邮件的地方，可以理解为一个暂存服务器。<br>发邮件时，MUA和MTA使用的协议就是SMTP：Simple Mail Transfer Protocol，后面的MTA到另一个MTA也是用SMTP协议。<br>收邮件时，MUA和MDA使用的协议有两种：POP：Post Office Protocol，目前版本是3，俗称POP3；IMAP：Internet Message Access Protocol，目前版本是4，优点是不但能取邮件，还可以直接操作MDA上存储的邮件，比如从收件箱移到垃圾箱，等等。</p>
 
           
         
@@ -391,7 +375,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/222/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/222/">222</a><span class="page-number current">223</span><a class="page-number" href="/page/224/">224</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/224/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/222/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/222/">222</a><span class="page-number current">223</span><a class="page-number" href="/page/224/">224</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/224/">&gt;</a>
   </nav>
 
 
@@ -437,7 +421,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -448,7 +432,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

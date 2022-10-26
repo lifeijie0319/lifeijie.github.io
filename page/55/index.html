@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/c/c%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/tools/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/09/12/language/c/c%E6%8C%87%E9%92%88%E5%9F%BA%E7%A1%80/" itemprop="url">c指针基础</a></h1>
+                <a class="post-title-link" href="/2022/09/12/tools/VCS/svn/svn%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" itemprop="url">svn常见问题</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c</span>
+                  <a href="/categories/tools/VCS/" itemprop="url" rel="index">
+                    <span itemprop="name">VCS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/VCS/svn/" itemprop="url" rel="index">
+                    <span itemprop="name">svn</span>
                   </a>
                 </span>
 
@@ -345,9 +356,21 @@
       
         
           
-            <h1 id="什么是指针"><a href="#什么是指针" class="headerlink" title="什么是指针"></a>什么是指针</h1><p>指针是一个usigned类型的存储其它非指针变量地址的数字。指针有类型，只能指向所定义类型的变量。</p>
-<h1 id="指针运算"><a href="#指针运算" class="headerlink" title="指针运算"></a>指针运算</h1><p>指针加减n跨越的是n个指针类型的距离。</p>
-<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p>引用本质上是一个常量指针，在创建时必须初始化，绑定到固定的对象。在使用上，引用类似变量的别名。引用相当于限制了功能的指针，也提高了安全性，比如引用没有空引用，而指针常有空指针问题。</p>
+            <h1 id="一、客户端安装"><a href="#一、客户端安装" class="headerlink" title="一、客户端安装"></a>一、客户端安装</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1、sudo yum install -y subversion</span><br></pre></td></tr></table></figure>
+<h1 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h1><h2 id="1、检出代码"><a href="#1、检出代码" class="headerlink" title="1、检出代码"></a>1、检出代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn co https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br></pre></td></tr></table></figure>
+<p>这样得到的是django_pros文件夹</p>
+<h2 id="2、版本回退"><a href="#2、版本回退" class="headerlink" title="2、版本回退"></a>2、版本回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn merge -r 751:750 https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;</span><br><span class="line">svn ci -m &#39;back to 750 from 751&#39;</span><br></pre></td></tr></table></figure>
+<p>说明：上述版本</p>
+<h2 id="3、将未纳入版本控制的文件夹加入到svn服务器"><a href="#3、将未纳入版本控制的文件夹加入到svn服务器" class="headerlink" title="3、将未纳入版本控制的文件夹加入到svn服务器"></a>3、将未纳入版本控制的文件夹加入到svn服务器</h2><p>语法：svn import PATH URL -m LOG</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn import weixin_inner&#x2F; https:&#x2F;&#x2F;www.yinsho.com&#x2F;svns&#x2F;wechat&#x2F;django_pros&#x2F;weixin_inner&#x2F; -m &#39;create weixin_inner&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="4、删除目录时提示过期"><a href="#4、删除目录时提示过期" class="headerlink" title="4、删除目录时提示过期"></a>4、删除目录时提示过期</h2><p>解决：先update，然后删除</p>
+<h2 id="5、获取当前目录对应的url信息"><a href="#5、获取当前目录对应的url信息" class="headerlink" title="5、获取当前目录对应的url信息"></a>5、获取当前目录对应的url信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn info | grep URL</span><br></pre></td></tr></table></figure>
+<h2 id="6、解除目录版本控制"><a href="#6、解除目录版本控制" class="headerlink" title="6、解除目录版本控制"></a>6、解除目录版本控制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name &#39;.svn&#39;|xargs rm -rf</span><br></pre></td></tr></table></figure>
+<p>找到.svn目录，删除该目录即可</p>
+<h2 id="7、撤销目录的add状态"><a href="#7、撤销目录的add状态" class="headerlink" title="7、撤销目录的add状态"></a>7、撤销目录的add状态</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert --recursive doc&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="8、打包时忽略svn版本控制文件"><a href="#8、打包时忽略svn版本控制文件" class="headerlink" title="8、打包时忽略svn版本控制文件"></a>8、打包时忽略svn版本控制文件</h2><p>加参数–exclude-vcs</p>
+<h1 id="三、svn版本号的困惑"><a href="#三、svn版本号的困惑" class="headerlink" title="三、svn版本号的困惑"></a>三、svn版本号的困惑</h1><p><a target="_blank" rel="noopener" href="http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html">http://www.blogjava.net/tinysun/archive/2012/08/23/386100.html</a></p>
+<h1 id="四、svn冲突与解决"><a href="#四、svn冲突与解决" class="headerlink" title="四、svn冲突与解决"></a>四、svn冲突与解决</h1><p><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_640531380102vyr1.html">http://blog.sina.com.cn/s/blog_640531380102vyr1.html</a></p>
 
           
         
@@ -387,7 +410,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/54/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/56/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/54/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/page/56/">56</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/56/">&gt;</a>
   </nav>
 
 
@@ -433,7 +456,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +467,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

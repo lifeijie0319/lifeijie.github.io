@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/10/language/java/jvm/jvm%E5%9F%BA%E7%A1%80/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/07/12/tools/tar/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/04/10/language/java/jvm/jvm%E5%9F%BA%E7%A1%80/" itemprop="url">jvm组成</a></h1>
+                <a class="post-title-link" href="/2022/07/12/tools/tar/" itemprop="url">tar常用技巧</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-10T11:54:45+08:00">
-                2022-04-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-12T09:21:20+08:00">
+                2022-07-12
               </time>
             
 
@@ -295,30 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/java/jvm/" itemprop="url" rel="index">
-                    <span itemprop="name">jvm</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -356,45 +334,12 @@
       
         
           
-            <h1 id="jvm的组成"><a href="#jvm的组成" class="headerlink" title="jvm的组成"></a>jvm的组成</h1><p>类加载器将代码转化成字节码，加载到内存运行时数据区，执行引擎将字节码翻译成机器指令，这个过程中常常需要调用其它语言的本地库接口。</p>
-<h2 id="类加载器-ClassLoader"><a href="#类加载器-ClassLoader" class="headerlink" title="类加载器(ClassLoader)"></a>类加载器(ClassLoader)</h2><h3 id="类加载的步骤"><a href="#类加载的步骤" class="headerlink" title="类加载的步骤"></a>类加载的步骤</h3><ol>
-<li>加载：根据查找路径找到相应的class文件导入</li>
-<li>检查：检查class文件的正确性</li>
-<li>准备：给类中的静态变量分配内存空间</li>
-<li>解析：将常量池中的符号引用（字符标识）替换为直接引用（内存地址）</li>
-<li>初始化：对静态变量和静态代码块执行初始化工作<br>（2、3、4步骤也被统称为链接过程）<h3 id="类加载器的分类"><a href="#类加载器的分类" class="headerlink" title="类加载器的分类"></a>类加载器的分类</h3></li>
-</ol>
-<ul>
-<li>启动类加载器(Bootstrap ClassLoader)<br>这个类加载器负责放在<JAVA_HOME>\lib目录中的，或者被-Xbootclasspath参数所指定的路径中的，并且是虚拟机识别的类库。用户无法直接使用。</li>
-<li>扩展类加载器(Extension ClassLoader)<br>负责<JAVA_HOME>\lib\ext目录中的，或者被java.ext.dirs系统变量所指定的路径中的所有类库。用户可以直接使用。</li>
-<li>应用程序加载器(Application ClassLoader)<br>负责用户路径（ClassPath）所指定的类库。用户可以直接使用。如果用户没有自己定义类加载器，默认使用这个。</li>
-<li>自定义类加载器(User ClassLoader)<h3 id="双亲委派模式"><a href="#双亲委派模式" class="headerlink" title="双亲委派模式"></a>双亲委派模式</h3>同一个类被不同的类加载器加载，会被识别为两个不同的类对象（类的唯一标识是类加载器+类名），类的重复加载不但造成资源浪费，而且引起歧义和安全问题。双亲委派机制是解决该问题的一个方法，该机制规定：在加载class对象时，类加载器会首先去尝试父级类加载器中加载，如果父级类加载器加器反馈无法加载这个类，类加载器才会尝试自己去加载。<h2 id="运行时数据区-Runtime-Data-Area"><a href="#运行时数据区-Runtime-Data-Area" class="headerlink" title="运行时数据区(Runtime Data Area)"></a>运行时数据区(Runtime Data Area)</h2><h3 id="线程隔离的部分"><a href="#线程隔离的部分" class="headerlink" title="线程隔离的部分"></a>线程隔离的部分</h3></li>
-<li>程序计数器</li>
-<li>虚拟机栈（日常说的栈）</li>
-<li>本地方法栈（native方法用的栈）<h3 id="线程共享的部分"><a href="#线程共享的部分" class="headerlink" title="线程共享的部分"></a>线程共享的部分</h3></li>
-<li>方法区</li>
-<li>堆<h3 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h3><table>
-<thead>
-<tr>
-<th>—</th>
-<th>堆</th>
-<th>栈</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>存储元素</td>
-<td>类实例</td>
-<td>局部变量</td>
-</tr>
-<tr>
-<td>回收机制</td>
-<td>由垃圾回收机制不定时回收</td>
-<td>变量生命周期结束自动释放</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<h2 id="执行引擎-Execution-Engine"><a href="#执行引擎-Execution-Engine" class="headerlink" title="执行引擎(Execution Engine)"></a>执行引擎(Execution Engine)</h2><h2 id="本地库接口-Native-Interface"><a href="#本地库接口-Native-Interface" class="headerlink" title="本地库接口(Native Interface)"></a>本地库接口(Native Interface)</h2>
+            <h1 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-c: 建立压缩档案</span><br><span class="line">-x：解压</span><br><span class="line">-t：查看内容</span><br></pre></td></tr></table></figure>
+<p>tar -tf :tarfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">:tarfile tar打包文件</span><br><span class="line">-r：向压缩归档文件末尾追加文件</span><br><span class="line">-u：更新原压缩包中的文件</span><br><span class="line">-z：有gzip属性的</span><br><span class="line">-j：有bz2属性的</span><br><span class="line">-Z：有compress属性的</span><br><span class="line">-v：显示所有过程</span><br><span class="line">-O：将文件解开到标准输出</span><br></pre></td></tr></table></figure>
+<h1 id="tar-xz处理"><a href="#tar-xz处理" class="headerlink" title="tar.xz处理"></a>tar.xz处理</h1><p>习惯了 tar czvf 或 tar xzvf 的人可能碰到 tar.xz也会想用单一命令搞定解压或压缩。其实不行 tar里面没有征对xz格式的参数比如 z是针对 gzip，j是针对 bzip2。  </p>
+<h2 id="创建tar-xz文件"><a href="#创建tar-xz文件" class="headerlink" title="创建tar.xz文件"></a>创建tar.xz文件</h2><p>只要先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz<br>解压tar.xz文件：先 xz -d xxx.tar.xz 将 xxx.tar.xz解压成 xxx.tar 然后，再用 tar xvf xxx.tar来解包。</p>
+
           
         
       
@@ -433,7 +378,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/86/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/86/">86</a><span class="page-number current">87</span><a class="page-number" href="/page/88/">88</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/88/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/86/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/86/">86</a><span class="page-number current">87</span><a class="page-number" href="/page/88/">88</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/88/">&gt;</a>
   </nav>
 
 
@@ -479,7 +424,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -490,7 +435,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

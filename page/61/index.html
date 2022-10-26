@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/08/03/language/c/c%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A71/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/09/12/language/python/basic/memory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/08/03/language/c/c%E6%8C%87%E9%92%88%E6%8A%80%E5%B7%A71/" itemprop="url">c指针技巧</a></h1>
+                <a class="post-title-link" href="/2022/09/12/language/python/basic/memory/" itemprop="url">python内存相关问题</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-08-03T15:59:27+08:00">
-                2022-08-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-12T17:04:33+08:00">
+                2022-09-12
               </time>
             
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/c/" itemprop="url" rel="index">
-                    <span itemprop="name">c</span>
+                  <a href="/categories/language/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/language/python/basic/" itemprop="url" rel="index">
+                    <span itemprop="name">basic</span>
                   </a>
                 </span>
 
@@ -345,7 +356,10 @@
       
         
           
-            <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> *hobby;</span><br><span class="line">&#125; StuInfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    StuInfo *info;</span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">&#125; Stu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Stu stu;</span><br><span class="line">    <span class="keyword">char</span> *name;</span><br><span class="line">&#125; Teacher;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    StuInfo info;</span><br><span class="line">    info.hobby = <span class="string">&quot;chess&quot;</span>;</span><br><span class="line">    Stu st = &#123;&amp;info, <span class="string">&quot;张飒&quot;</span>&#125;;</span><br><span class="line">    Teacher th = &#123;st, <span class="string">&quot;王五&quot;</span>&#125;;</span><br><span class="line">    <span class="keyword">void</span> *p = &amp;th;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, (*((StuInfo**)p))-&gt;hobby);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * (StuInfo**)p将p设置为StuInfo类型的二级指针。</span></span><br><span class="line"><span class="comment">     * 在上述基础上，*操作实际上是从th的地址转换为th的头部地址，我们用q来指代这个地址。</span></span><br><span class="line"><span class="comment">     * th的头部是Stu类型的stu，而stu的头部是StuInfo类型的指针，所以q现在实际上是th头部的stu的头部的info指针。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            <h1 id="当退出Python时，是否释放全部内存"><a href="#当退出Python时，是否释放全部内存" class="headerlink" title="当退出Python时，是否释放全部内存"></a>当退出Python时，是否释放全部内存</h1><p>循环引用其它对象或引用自全局命名空间的对象的模块，在Python退出时并非完全释放。另外，也不会释放C库保留的内存部分。<br>但是一般来说，进程退出时，操作系统会释放进程所有内存。<br>另外，有资料显示，循环引用的回收已经是解决了的。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://rushter.com/blog/python-garbage-collector/">https://rushter.com/blog/python-garbage-collector/</a></p>
+<h1 id="什么是monkey-patch"><a href="#什么是monkey-patch" class="headerlink" title="什么是monkey patch"></a>什么是monkey patch</h1><p>指在运行期间动态修改类或模块。</p>
+
           
         
       
@@ -384,7 +398,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/60/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/62/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/60/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/page/62/">62</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/62/">&gt;</a>
   </nav>
 
 
@@ -430,7 +444,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -441,7 +455,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

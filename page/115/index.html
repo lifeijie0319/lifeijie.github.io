@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/03/04/web/session%E4%B8%8Ecookie/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2022/04/01/data_structure/B-tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2022/03/04/web/session%E4%B8%8Ecookie/" itemprop="url">session与cookie</a></h1>
+                <a class="post-title-link" href="/2022/04/01/data_structure/B-tree/" itemprop="url">B-树</a></h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-03-04T17:56:19+08:00">
-                2022-03-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-01T11:53:34+08:00">
+                2022-04-01
               </time>
             
 
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web/" itemprop="url" rel="index">
-                    <span itemprop="name">web</span>
+                  <a href="/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
                   </a>
                 </span>
 
@@ -334,13 +334,20 @@
       
         
           
-            <h1 id="session是什么"><a href="#session是什么" class="headerlink" title="session是什么"></a>session是什么</h1><p>由于http请求是无状态的，即用户的下一个请求和上一个请求在服务器看来没有联系。为了建立这种联系，服务端建立了一种跟踪用户的机制，就是seesion。每个用户对应一个session，记录了用户相关的信息，可以跨越用户的多个http请求。<br>seesion其实类似一个map，每个用户有独立的session_id，对应的value就是用户session的存储内容。<br>session有多种实现，可以存在内存、文件、数据库、第三方集群中等。</p>
-<h1 id="cookie是什么"><a href="#cookie是什么" class="headerlink" title="cookie是什么"></a>cookie是什么</h1><p>虽然服务器有了登记每个用户信息跨越请求的session机制，但是http请求和session的联系并没有建立，这就是cookie的建立原因。cookie可以认为是用户在客户端建立的session，其中存储最关键的信息是session_id，永固初次请求服务端建立服务端seesion的时候，cookie要保存服务端返回的session_id。http请求每次都会带上cookie，所以每次服务端都能找到对应的seesion。<br>cookie的另一个功能是方便用户。比如一个网站的登录界面，因为cookie存储了用户的信息，所以第二次登录的时候可以使用cookie自动填好相关信息，简化了用户操作。</p>
-<h1 id="如果客户端禁用cookie，session是否还能使用"><a href="#如果客户端禁用cookie，session是否还能使用" class="headerlink" title="如果客户端禁用cookie，session是否还能使用"></a>如果客户端禁用cookie，session是否还能使用</h1><p>本质上就是客户端要每次都传递seesion_id给服务端，可能的方案有；</p>
-<ul>
-<li>URL重写 每次在url后面田间seession_id参数</li>
-<li>手动调用传递seession_id</li>
+            <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>B-树是二叉平衡树的推广，是一种多叉平衡树。B-树其实就是B-tree，不是“B减树”。</p>
+<h1 id="基本特征"><a href="#基本特征" class="headerlink" title="基本特征"></a>基本特征</h1><h2 id="一棵m阶B-tree（m叉树）满足如下特征："><a href="#一棵m阶B-tree（m叉树）满足如下特征：" class="headerlink" title="一棵m阶B-tree（m叉树）满足如下特征："></a>一棵m阶B-tree（m叉树）满足如下特征：</h2><ul>
+<li>树中每个节点最多含有m个孩子</li>
+<li>如果根节点不是叶子节点，则根节点至少包括两个孩子</li>
+<li>除根节点和叶节点外，其他每个节点至少有ceil(m/2)个孩子（ceil()为向上取整）</li>
+<li>所有叶子节点都位于同一层，叶子节点指向子节点的指针为空。</li>
+<li>每个非叶节点包括n个关键字信息(n，P0，K1，P1，K2，P2，……，Kn，Pn)，其中<ul>
+<li>Ki(i=1…n)为关键字，且关键字的顺序按照升序排列</li>
+<li>Pi(i=0…n)为指向子树的指针，满足K(i-1) &lt; P(i-1) &lt; Ki</li>
+<li>ceil(m/2)-1 &lt;= n &lt;= m-1<h2 id="B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）"><a href="#B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）" class="headerlink" title="B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）"></a>B树的叶子节点的个数是所有关键字个数的总和加一（这里的叶子节点是指底层的空节点）</h2>证明如下：<br>假设第i层的节点数是$M_i$，关键字个数是$N_i$，i行第j个节点的关键字数是$N_i^j$。根据节点子树数量与节点关键字数目的关系，$M_i$=$\sum_{j=1}^{N_i}(N_i^j+1)$=M<sub>i-1</sub>+N<sub>i-1</sub>=M<sub>i-2</sub>+N<sub>i-2</sub>+N<sub>i-1</sub>=…=M<sub>1</sub>+N<sub>1</sub>+…+N<sub>i-1</sub>=1+N<br>这里N是指i层以前所有关键字的和。</li>
 </ul>
+</li>
+</ul>
+<h1 id="搜索性能"><a href="#搜索性能" class="headerlink" title="搜索性能"></a>搜索性能</h1><p>B-树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为空，或已经是叶子结点。<br>B-树的性能总是等价于二分查找（与阶数m值无关），为O($log_2{n}$)，其中n为关键字的总数。</p>
 
           
         
@@ -380,7 +387,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/114/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/116/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/114/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/116/">&gt;</a>
   </nav>
 
 
@@ -426,7 +433,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -437,7 +444,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>

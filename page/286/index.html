@@ -241,7 +241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="https://lifeijie0319.github.io/2021/12/04/network/ssh/NAT/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/12/04/security/dh/dh%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" itemprop="url">dh交换算法原理</a></h1>
+                <a class="post-title-link" href="/2021/12/04/network/ssh/NAT/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" itemprop="url">内网穿透</a></h1>
         
 
         <div class="post-meta">
@@ -295,8 +295,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/security/" itemprop="url" rel="index">
-                    <span itemprop="name">security</span>
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
                   </a>
                 </span>
 
@@ -306,8 +306,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/security/dh/" itemprop="url" rel="index">
-                    <span itemprop="name">dh</span>
+                  <a href="/categories/network/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/ssh/NAT/" itemprop="url" rel="index">
+                    <span itemprop="name">NAT</span>
                   </a>
                 </span>
 
@@ -345,9 +356,14 @@
       
         
           
-            <h1 id="交换过程描述"><a href="#交换过程描述" class="headerlink" title="交换过程描述"></a>交换过程描述</h1><p>甲乙双方按照dh算法交换密钥。<br>首先，甲生成随机数x，底数为d，一个大素数p，根据算法生成A = d ^ x % p。之后甲将d、p、A传递给乙。<br>乙收到后生成随机数y，计算B = d ^ y % p, C1 = A ^ y % p，将B传回给甲。<br>甲收到B后计算C2 = B ^ x % p。<br>C1和C2就是协商得到的密钥。可以证明C1=C2。</p>
-<h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><p>按照上述过程描述，欲证C1 = C2，C1 = A ^ y % p = (d ^ x % p) ^ y % p，C2 = (d ^ y % p) ^ x % p。<br>假设d ^ x = pn + a，则<br>C1 = (d ^ x % p) ^ y % p = a ^ y % p = (d ^ x - pn) ^ y % p<br>根据二项式定理，得到C1 = d ^ (xy) % p，同理，C2 = d ^ (xy) % p = C1。</p>
-<h1 id="算法的可靠性"><a href="#算法的可靠性" class="headerlink" title="算法的可靠性"></a>算法的可靠性</h1><p>由交换过程可以知道，攻击者可以拿到d、p、A、B，要破解算法，关键要拿到x、y。以x为例，A = d ^ x % p，现在就是已知其它三个变量求x。已知在数学上，当p很大时，很难计算x（有限群的离散对数问题），这就保证了该算法的可靠性。</p>
+            <h1 id="内网穿透的应用场景"><a href="#内网穿透的应用场景" class="headerlink" title="内网穿透的应用场景"></a>内网穿透的应用场景</h1><ol>
+<li>内网的网站，需要外网访问，需要将端口暴露出来。</li>
+<li>微信开发，微信需要访问服务器，需要将端口暴露出来。</li>
+<li>想在外网访问自己在内网的机器，需要将ssh端口暴露出来。</li>
+</ol>
+<h1 id="ngrok"><a href="#ngrok" class="headerlink" title="ngrok"></a>ngrok</h1><p>ngrok 是一个反向代理，通过在公共端点和本地运行的 Web 服务器之间建立一个安全的通道，实现内网主机的服务可以暴露给外网。ngrok 可捕获和分析所有通道上的流量，便于后期分析和重放，所以ngrok可以很方便地协助服务端程序测试。</p>
+<h1 id="sunny-ngrok"><a href="#sunny-ngrok" class="headerlink" title="sunny-ngrok"></a>sunny-ngrok</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>Sunny-Ngrok同样是ngrok二次开发的内网穿透工具，支持http,https协议，同时支持更丰富的系统和语言：linux、win、mac、openwrt、 python、php等。</p>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2 使用"></a>2 使用</h2><p>2.1 <a target="_blank" rel="noopener" href="https://www.ngrok.cc/%E7%99%BB%E5%BD%95%EF%BC%8C%E6%B3%A8%E5%86%8C%E8%B4%A6%E5%8F%B7%EF%BC%8C%E5%BC%80%E9%80%9A%E9%9A%A7%E9%81%93">https://www.ngrok.cc/登录，注册账号，开通隧道</a><br>注意隧道名称自定义，远程端口即映射到外面的端口，本地端口指目标机器的源端口。<br>2.2 下载客户端，启动<br>比如linux下是： ./sunny clientid $隧道ID<br>2.3 外网连接，比如ssh<br>ssh -p $远程端口 $username@$注册隧道域名</p>
 
           
         
@@ -387,7 +403,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/285/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/285/">285</a><span class="page-number current">286</span><a class="page-number" href="/page/287/">287</a><span class="space">&hellip;</span><a class="page-number" href="/page/340/">340</a><a class="extend next" rel="next" href="/page/287/">&gt;</a>
+    <a class="extend prev" rel="prev" href="/page/285/">&lt;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/285/">285</a><span class="page-number current">286</span><a class="page-number" href="/page/287/">287</a><span class="space">&hellip;</span><a class="page-number" href="/page/354/">354</a><a class="extend next" rel="next" href="/page/287/">&gt;</a>
   </nav>
 
 
@@ -433,7 +449,7 @@
               
                 <a href="/archives/%7C%7Carchive">
               
-                  <span class="site-state-item-count">340</span>
+                  <span class="site-state-item-count">354</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +460,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
